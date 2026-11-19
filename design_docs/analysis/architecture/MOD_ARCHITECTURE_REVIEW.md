@@ -1,0 +1,55 @@
+# MOD architecture review
+
+Covers MOD-001 through MOD-016 in the [feature catalog](../systems/MOD_FEATURE_CATALOG.md). This is static inspection of the local DFU 1.1.1 Release snapshot. Source paths are relative to Assets. See the [repository overview](../00_REPOSITORY_OVERVIEW.md) for revision limits.
+
+## Existing architecture
+
+### Discovery, package identity and dependency resolution · MOD-001–003, 016
+
+Game/Addons/ModSupport/ModManager.cs discovers Unity AssetBundles and supports editor virtual mods. ModInfo supplies package metadata, including a GUID. Mod and ModLoaderInterfaceWindow expose enabled state and priority. CheckModDependencies reports missing, disabled, misordered and version-incompatible dependencies. AutoSortMods separately builds dependency edges for non-peer dependencies and assigns priorities after topological sort. The sort includes resolved optional targets and does not filter the edge query by target enabled state. Validation, in contrast, skips absent or disabled optional targets. This is a confirmed difference in the inputs to ordering and validation. Its effect on a configured package set needs fixtures.
+
+CreateModEditorWindow reads manifests and builds bundles for selected Unity targets. ModAssemblyBuilder, ModDependenciesEditorWindow and ModSettingsEditorWindow provide focused authoring tools. Keep shared manifest validation and dependency diagnostics. Virtual mods are convenient for iteration but need parity checks against packaged builds, especially for platform assets and entry-point discovery. Unity bundles and assembly tooling are engine-specific delivery mechanisms.
+
+### Executable extensions and lifecycle · MOD-004–005
+
+Mod.CompileSourceToAssemblies loads precompiled bytes with Assembly.Load and compiles remaining source through ModManager. FindModLoaders inspects types and methods for Invoke metadata and constructs entry-point descriptions. ModManager invokes entry points with InitParams at Start and Game states, then unsubscribes from state changes after Game. This gives extensions explicit setup opportunities. It also ties package lifecycle to menu/game transitions. Start calls Init and loaders whenever that branch receives a Start state before unsubscription. Verify failure and repeated-state behavior before relying on once-only initialization.
+
+InvokeModLoaders logs TargetInvocationException and continues. It has no rollback for registry changes made before the exception. UnloadAssetBundle unloads Unity assets, while assembly loading and callback registrations have separate lifetimes. The inspected bundle unload does not establish code unload or subscription cleanup. In-process mod code runs with host access. Treat this as a trust boundary if executable extensions are supported. Compilation, reflection and bundle load time have not been profiled.
+
+### Content overrides and world variants · MOD-006–009
+
+TryGetAsset searches enabled mods in reverse order and returns the first usable typed asset. Its clone parameter distinguishes cached/shared access, cloning and direct loading. Mod.GetAsset, LoadAllAssetsFromBundle and UnloadAssetBundle make ownership and caching relevant to callers. Preserve ordered lookup and avoid invalidating a resource still in use. Profile representative bundles before adding eager loading or eviction.
+
+Scripts/Utility/AssetInjection/TextAssetReader.cs distinguishes replacement, aggregation and merge. TryRead checks loose paths before a mod basename lookup. Merge iterates enabled providers and can match records before applying updates. CSV localization uses a different source order, as detailed in the [DATA review](DATA_ARCHITECTURE_REVIEW.md). Mesh, texture, sound and video replacement helpers add format-specific rules. WorldDataReplacement and WorldDataVariants select overrides and maintain mutable location/block/building variants. Variant lookups can depend on the last location checked. SAVE restores variant data before world placement. Preserve distinct policies for whole-resource replacement, collection additions and record patches, with visible provenance and stable world context.
+
+### Gameplay and UI registries · MOD-010–013
+
+FormulaHelper.RegisterOverride resolves provider priority and validates the effective signature when invoked. PlayerActivate registers model/flat callbacks and also supports component activation. A single hit can reach both paths. ItemHelper exposes item types and use delegates, while EntityEffectBroker exposes keyed effect templates and spell offers. QuestListsManager registers packs and QuestMachine selects the first matching action pattern. FactionFile, GuildManager, Services and UIWindowFactory register custom data, behavior or presentation classes.
+
+These owner-specific hooks are valuable because each domain can enforce its own contract. Confirmed differences include priority-based replacement for formulas, ordered matching for quest verbs and constructor-based UI replacement. There is no basis for assuming a single conflict policy across registries. Registration checks should catch wrong signatures, missing constructors and duplicate keys before gameplay. Define whether each hook replaces, extends or merely observes. See the [RULE](RULE_ARCHITECTURE_REVIEW.md), [MOVE](MOVE_ARCHITECTURE_REVIEW.md), [QUEST](QUEST_ARCHITECTURE_REVIEW.md) and [UI](UI_ARCHITECTURE_REVIEW.md) reviews for individual call paths.
+
+### Settings, localization and persistence · MOD-014–015
+
+Mod.LoadSettings calls the registered callback with the settings and change metadata and throws if the callback has not been set. ModSettings, ModSettingsWindow and PresetPicker provide typed reads and authoring/UI support. Mod.Localize separates display text from config keys. Keep schema validation, defaults and live application distinct. Test removed keys and invalid preset values.
+
+IHasModSaveData provides payload type, capture, initialization and restore hooks. Scripts/Game/Serialization/SaveLoadManager.cs names sidecars from Mod.FileName, despite separate GUID metadata. Renaming the package can therefore change where its payload is sought. A missing sidecar invokes NewSaveData. Individual failures are caught, allowing core saves and loads to continue. On overwrite, a failed mod write can leave the previous payload in place beside newer core state. See the [SAVE review](SAVE_ARCHITECTURE_REVIEW.md). Define whether to preserve, skip or reject unavailable payloads, especially when other gameplay records reference mod content.
+
+## Proposed recommendations
+
+| ID and features | Existing evidence and assessment | Proposed architecture and benefit | Alternatives and trade-offs | Complexity, impact, timing, priority, confidence and status |
+| --- | --- | --- | --- | --- |
+| MOD-AR-01 · MOD-001–003, 016 | ModManager validates and sorts with different optional dependency inputs. Packaging and virtual discovery are Unity-specific. | Validate a manifest with stable package ID, version and dependencies. Resolve enabled order before applying content, with deterministic ties and explicit optional/peer semantics. Report the resolved plan and reuse validation in authoring tools. | Keep user order as a preference among valid orders. Automatic sorting helps dependencies but can change replacement winners. Retain simple version requirements until richer ranges are needed. | Medium · DATA, CORE, DEV, SAVE · establish package identity and ordering early · Critical · high source confidence · Proposed |
+| MOD-AR-02 · MOD-004–005, 010–013 | Assemblies and attributed loaders run in-process, with state callbacks and exception logging. Failed setup can leave partial registrations. | Start with data packages and a small set of trusted executable hooks if needed. Define explicit registration and activation phases with owner validation and failure outcomes. Scope callbacks to a session and require restart for executable changes until unload semantics are demonstrated. | In-process extensions are powerful but share host access and lifecycle. A restricted scripting runtime limits capabilities but adds tooling and compatibility work. Defer it until requirements justify it. | Large · CORE, MOD consumers, DEV, UI · define trust and lifecycle early, defer executable API breadth · Critical · high structural confidence · Proposed |
+| MOD-AR-03 · MOD-006–009 | Asset lookup and patch consumers use different source identities and orders. World variant context is partly implicit. | Resolve content by namespaced key under named replacement, append or merge rules. Expose provider and conflict diagnostics. Track shared versus owned resources and pass world variant context explicitly. | Global last-wins rules are easy to explain but cannot express record merges and pack additions. Share resolution and diagnostics, keeping policy with each content domain. | Large · DATA, AV, WORLD, LOC, SAVE, DEV · establish before replacement support · Critical · high structural confidence · Proposed |
+| MOD-AR-04 · MOD-010–014 | Registries use different priority, validation and constructor rules. Settings apply through mod callbacks. | Publish a small versioned extension surface with typed owner hooks and preflight validation. Include provider identity and conflict outcome. Apply validated settings through explicit change callbacks. | Owner-specific registration is simpler than a universal registry. Add common helpers only for repeated validation or diagnostics. | Medium · RULE, MOVE, ITEM, MAGIC, QUEST, FACT, UI, DEV · define semantics early, add hooks with demand · Recommended · high structural confidence · Proposed |
+| MOD-AR-05 · MOD-001, 009, 014–015 | Filename-keyed payloads can lose association on rename. Sidecar failures are isolated but can leave mismatched generations. | Use stable package IDs and versioned payloads in a committed save generation. Record missing, migrated and skipped payloads. Validate or reconcile cross-package references before resuming. | Optional opaque preservation helps reinstalling a package but adds storage and lifecycle questions. Explicitly discard data only under a defined recovery policy. | Medium · SAVE, DATA, WORLD, ITEM, MAGIC, QUEST, UI · establish before public mod saves · Critical · high source confidence · Proposed |
+
+## Comparison
+
+| Concern | DFU | Proposed Godot design |
+| --- | --- | --- |
+| Packages and startup | Unity bundles, user order, state-driven loaders | Validated package plan with explicit registration and activation |
+| Content and hooks | Asset search and owner-specific registries | Namespaced provenance and typed owner policies |
+| Settings and persistence | Mod callbacks and filename-derived save sidecars | Validated settings and versioned payloads keyed by package identity |
+
+Verify dependency cycles and optional peers, packaged versus virtual lookup, repeated lifecycle events, partially failing registration, conflicting providers, bundle unload, missing mod data and renamed packages. Profile startup and asset residency before optimizing. No runtime, profiling or compatibility fixtures were executed.

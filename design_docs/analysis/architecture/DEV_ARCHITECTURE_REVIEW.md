@@ -1,0 +1,47 @@
+# DEV architecture review
+
+Covers DEV-001 through DEV-014 in the [feature catalog](../systems/DEV_FEATURE_CATALOG.md). Evidence comes from static inspection of the local DFU 1.1.1 Release snapshot. Paths are relative to the source root. See the [repository overview](../00_REPOSITORY_OVERVIEW.md) for revision limits.
+
+## Existing architecture
+
+### Diagnostics and evidence · DEV-001–005
+
+Assets/Scripts/DaggerfallUnityApplication.cs installs a Unity log handler, rotates the previous log and auto-flushes a StreamWriter. Rotation has a catch, but File.CreateText is outside that recovery block. The bounded history is useful for startup failures. The open-failure path and cost of flushing each entry need platform fixtures. GenerateDiagLog.PrintInfo provides a separate installation report, called from the ARENA2 setup path. Keep installation diagnostics usable before game initialization and make output failures visible through a fallback sink.
+
+Assets/Game/Addons/UnityConsole/Console/Scripts/ConsoleCommandsDatabase.cs keeps a process-wide, case-insensitive command dictionary. RegisterCommand replaces an existing key by assignment. ExecuteCommand catches the missing-command exception and otherwise invokes the delegate. Silent replacement is confirmed. Other handler exceptions can escape this method, although callers may handle them. Usage and description fields provide a useful discovery surface. Game commands such as guild and automap actions depend on live context. A developer command should have an explicit readiness and mutation policy.
+
+Assets/Scripts/Game/UserInterface/HUDQuestDebugger.cs presents quest state. QuestMachine.StoreQuestException keeps bounded recent exception records, and SaveLoadManager.SaveGame writes them separately. Keep source and quest instance context in fault reports. Treat diagnostic capture as optional so it cannot invalidate a usable save. PrintScreenManager follows an input binding and writes screenshot bytes. SaveGame separately captures a preview. Both depend on frame rendering. Their timing and output ownership differ, so only share encoding and path handling where semantics agree. See the [CORE](CORE_ARCHITECTURE_REVIEW.md) and [SAVE](SAVE_ARCHITECTURE_REVIEW.md) reviews.
+
+### Runtime fixtures and demonstrations · DEV-006–007
+
+Assets/Scripts/Game/SetupDemoEnemy.cs configures enemy settings and aligns the actor to ground. SetupDemoEnemyEditor exposes authoring controls. Reusing the production enemy path is useful for visual and behavior checks. Geometry, scene bindings and engine lifecycle remain fixture inputs. DemoFLCWindow and DemoClassQuestionsWindow exercise specific content and interfaces. StartGameBehaviour.StartVoid offers worldless entry but still performs session and presentation work. JuggleAction is a demonstration extension, with its registration commented out in QuestMachine. These are usable seams for interactive diagnostics. The inspected paths do not establish automated assertions or isolation between runs.
+
+### Inspection, export and authoring · DEV-008–013
+
+- **Inspection and export (008–009).** Assets/Scripts/Editor/SaveExplorerWindow.cs uses SaveGames and SaveTree to browse classic slots and export record bytes. TextRecordViewerWindow, JSONExporterWindow, DaggerfallCareerViewerWindow, FontExporterWindow and AtlasEditorWindow inspect or export separate content domains. Reusing production readers is a strength. UI callbacks couple many operations to Unity Editor state. JSONExporterWindow writes directly to output paths. Validation and write outcomes can be exercised independently if export logic accepts explicit source and destination.
+- **Location editing (010–012).** Location, interior, dungeon and StreamingWorld inspectors apply runtime layout/position operations in editor contexts. RmbBlockEditorWindow loads, saves JSON and exports selected objects. WorldDataEditor and its helpers expose object positions and action record fields for buildings and dungeons. These tools allow inspection against actual geometry. A validated export boundary should catch missing record references or malformed action links before runtime. Round-trip parity between editors, runtime readers and replacement resolution remains open.
+- **Localization and packaging (013).** DaggerfallStringTableImporter converts classic token data into translation tables. CreateModEditorWindow and ModAssemblyBuilder build platform-specific Unity packages. Preserve author feedback and clear source/target attribution. The toolkit embeds engine settings and package outputs, so Godot authoring would need adapters for those operations. See the [DATA](DATA_ARCHITECTURE_REVIEW.md), [LOC](LOC_ARCHITECTURE_REVIEW.md) and [MOD](MOD_ARCHITECTURE_REVIEW.md) reviews.
+
+### Automated coverage · DEV-014
+
+Packages/manifest.json declares Unity Test Framework. Packages/com.unity.postprocessing/Tests contains editor and runtime test assemblies, and PostProcessingRuntimeTests includes profile operations. The named test file and assembly search found these package tests. This is evidence for package-level testing. It does not establish the extent of gameplay automation or external CI. Keep pure rule, compatibility and engine integration checks distinct so failures identify the owning boundary. No tests were run for this review.
+
+## Proposed recommendations
+
+| ID and features | Existing evidence and assessment | Proposed architecture and benefit | Alternatives and trade-offs | Complexity, impact, timing, priority, confidence and status |
+| --- | --- | --- | --- | --- |
+| DEV-AR-01 · DEV-001–002, 004–005 | LogHandler rotates files but opens outside its recovery block. Installation, quest and screenshot evidence have different lifetimes. | Keep an early diagnostic sink with fallback on storage failure and bounded retention. Attach operation, feature and stable instance context to failures. Treat captures and previews as optional outputs with their own results. | Plain logs are easy to inspect. Structured fields help filtering and fixtures, but a separate telemetry stack is unnecessary. Tune flush and capture costs only after measurement. | Medium · CORE, SAVE, QUEST, UI, AV, DATA · establish early · Recommended · high source confidence · Proposed |
+| DEV-AR-02 · DEV-003–004, 007 | ConsoleCommandsDatabase replaces duplicate names and invokes delegates against live state. Quest debugging already exposes domain-specific context. | Keep a small developer command registry with explicit duplicate, readiness and error rules. Separate inspection from mutations in the command contract. Route mutations through production operations and expose debug state through owner queries. | A direct callback remains sufficient for local tools. Typed arguments are useful for repeatable commands but need parsing metadata. Defer scripting until multiple workflows need it. | Medium · CORE, QUEST, FACT, MOD, UI · define command boundaries early, expand with demand · Recommended · high static confidence · Proposed |
+| DEV-AR-03 · DEV-006–007, 014 | Demo setup and worldless entry provide manual fixtures, while inspected test assemblies are post-processing package tests. Gameplay coverage remains unverified. | Build a small deterministic fixture layer with explicit seed, clock and data inputs. Use pure assertions for formulas and format conversion, headless owner checks for lifecycle and persistence, and rendered scenes for geometry or presentation behavior. Reset session state between cases. | Keep interactive demos for exploration. A broad generic harness adds upkeep. Begin with one fixture per high-risk boundary, including a restore failure, an enemy encounter and a quest transition. | Medium to large · CORE, RULE, SAVE, QUEST, COMBAT, NPC, LOC, AV · establish early · Critical · high structural confidence, limited coverage confidence · Proposed |
+| DEV-AR-04 · DEV-008–013 | Editor windows reuse production readers but mix UI, conversion, export and engine build actions. Direct file writes and format-specific flows need validation fixtures. | Extract reusable read, validate and export operations with explicit paths and structured results. Keep inspector views and engine packaging as adapters. Check round trips and stable references before publishing mod data. | A CLI helps batch validation and CI. Editor-only controls remain simpler for geometry editing. Share format logic and defer CLI commands until repeated workflows justify them. | Large · DATA, LOC, WORLD, MOD, SAVE, AV · establish export formats and validation early, defer specialized tooling · Recommended · high structural confidence · Proposed |
+
+## Comparison
+
+| Concern | DFU | Proposed Godot design |
+| --- | --- | --- |
+| Diagnostics | Startup log, reports and feature-specific evidence | Bounded diagnostics with fallback and explicit capture results |
+| Runtime tooling | Global console registry, debugger and demo entry points | Validated commands and reproducible fixtures through owner operations |
+| Authoring | Unity editor windows combine inspection and export | Shared format validation with editor and packaging adapters |
+| Tests | Inspected embedded package test assemblies | Layered rules, persistence, integration and rendered checks |
+
+Verify unwritable log paths, duplicate and failing commands, quest fault retention, capture timing, fixture isolation, editor export/import round trips and packaged validation. No editor, runtime, profiling or test execution was performed.

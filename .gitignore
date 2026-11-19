@@ -1,0 +1,5 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+/base_data_files/
+/reference_material/

@@ -1,0 +1,36 @@
+# Implementation readiness
+
+**All 12 register decisions are approved. The second audit confirms 64 READY, 0 BLOCKED and 0 NEEDS REVISION planning statuses.** Their implementation prerequisites still govern dispatch. Execution awaits authorization. The [second audit](PRE_IMPLEMENTATION_AUDIT_2.md) records the current result; the [first audit](PRE_IMPLEMENTATION_AUDIT.md) retains the historical baseline. The [architecture register](../analysis/architecture/ARCHITECTURAL_DECISIONS.md#approved-decisions) governs cross-system policies and the [gameplay log](../design/GAMEPLAY_DECISIONS.md) governs approved behavior.
+
+## Per-task review
+
+Every [task card](TASK_BACKLOG.md) records planning and execution readiness separately, along with feature approvals, architecture references, direct prerequisites, interface decisions and acceptance scenarios. READY requires a verifiable task with resolved essentials. BLOCKED indicates a required design choice. NEEDS REVISION indicates a substantive defect in the handoff document. Execution also depends on completed implementation prerequisites, available fixtures and authorization.
+
+| Check | Current result | Evidence needed to clear the gate |
+| --- | --- | --- |
+| Approved gameplay | Recorded for every assigned feature | Keep the approval IDs and review any conditional behavior or scope change against the owning specification. |
+| Architecture decisions | GAD-01 through GAD-12 approved | Apply the linked decisions. Record any additional system-specific selection that materially affects the handoff. |
+| Dependencies | Direct task edges identified and checked for cycles | Verify enabled runtime peers, fixture compatibility and prerequisite completion for the dispatch scope. |
+| Interfaces | Owner, result, scope and failure handoffs defined on revised cards | Implement concrete APIs against these contracts and verify real consumers at named integration gates. |
+| Acceptance | Observable scenarios identified on cards | Freeze applicable fixture inputs and exact expected outcomes, including tolerances, supported builds or data variants when relevant. |
+| Verification | Automated and manual scenarios outlined | Name the production entry point, required fixture, and where evidence will be recorded. |
+| Essential choices | Reviewed and selected within each approved task scope | Record concrete engineering parameters, dependency builds and fixture vectors alongside implementation. Escalate a material conflict with approved behavior. |
+
+## Implementation sequence
+
+The user approved **GDScript for the main game, UI and tools**, with **C++ GDExtensions for native adapters**, on 2026-11-18. IMP-001 bootstraps the standard Godot 4.7.2 project with this language split. Luau restricted mods and trusted GDScript retain their separate approved runtime contracts.
+
+1. With authorization, begin IMP-001's minimum project entry and storage/settings shell using the approved Windows contract and isolated startup fixtures.
+2. Deliver IMP-002 and IMP-003 after IMP-001. Their session and verification interfaces then support real data/package preparation.
+3. Follow the verified dependency waves in the second audit. Implement broad cards through their approved independently testable increments.
+4. At M2, run the actual movement/combat/loot/save loop and the separate rendered timing/preview checks.
+5. At M3, verify the approved opening queue/exterior tutorial, actual economy initialization, quest reward/fault retry and restore against real owners.
+6. At M4/M5, close named later-provider assertions and required Windows exports. Preserve all approved conditional capability and authoring scope.
+
+## Acceptance and execution gates
+
+- All direct task edges are acyclic. Named staged joint checks remain required even where the providers develop separately.
+- Approved schemas and formulas govern behavior. Pin actual source vectors, measured profiles, API representations and library builds with their implementation evidence.
+- The cards' controlled-provider scenarios verify contracts. Milestones additionally require the actual enabled producers and consumers.
+- Source-data availability, installed build tools and explicit authorization govern execution. No prerequisite implementation or exported capability has been claimed complete.
+- If implementation reveals a material conflict with an approved gameplay or architecture contract, record the concrete conflict and resolve it before changing policy.
