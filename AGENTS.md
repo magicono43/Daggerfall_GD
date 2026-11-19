@@ -33,6 +33,15 @@ Start with the assigned `design_docs/development/tasks/IMP-NNN.md`. Read its lin
 4. Reuse shared validators and owner contracts. Follow verified dependency waves instead of numeric IMP order. Keep named joint checks open until real providers pass.
 5. Pin new libraries, build options and relevant licenses/provenance. Verify Windows export compatibility where required. Preserve approved media/mod runtime selections. Explain a material dependency or toolchain change before adopting it.
 
+## Git workflow
+
+- The user reviews changes, creates commits, and pushes through GitHub Desktop. Leave changes uncommitted unless explicitly instructed otherwise.
+- Use Git status, diffs, and history to understand existing work and verify your changes.
+- Do not commit, push, switch branches, merge, rebase, or change remotes without explicit authorization.
+- Preserve existing user changes. Never discard or overwrite unrelated work.
+- Keep classic data, reference material, generated caches, credentials, and machine-specific files out of commits.
+- Report changed files, validation results, and remaining issues for the user's review.
+
 ## Verification and completion
 
 - Run the task's automated and manual checks through production interfaces with disposable storage. Control seed, clock and input where relevant.

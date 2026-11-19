@@ -1,6 +1,6 @@
 # Implementation backlog
 
-64 implementation task specifications cover the 432 feature records with logged approval. All 64 are planning READY following the [second audit](PRE_IMPLEMENTATION_AUDIT_2.md). Execution awaits authorization and each task's delivered prerequisites. The [first audit](PRE_IMPLEMENTATION_AUDIT.md) retains the historical baseline findings. [Implementation readiness](IMPLEMENTATION_READINESS.md) defines the release-to-agent gate.
+64 implementation task specifications cover the 432 feature records with logged approval. All 64 are planning READY following the [second audit](PRE_IMPLEMENTATION_AUDIT_2.md). Execution awaits authorization and each task's delivered prerequisites. The [first audit](../archive/PRE_IMPLEMENTATION_AUDIT.md) retains the historical baseline findings. [Implementation readiness](IMPLEMENTATION_READINESS.md) defines the release-to-agent gate.
 
 | Task | Objective area | Milestone | Planning readiness |
 | --- | --- | --- | --- |

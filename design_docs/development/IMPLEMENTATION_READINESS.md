@@ -1,6 +1,6 @@
 # Implementation readiness
 
-**All 12 register decisions are approved. The second audit confirms 64 READY, 0 BLOCKED and 0 NEEDS REVISION planning statuses.** Their implementation prerequisites still govern dispatch. Execution awaits authorization. The [second audit](PRE_IMPLEMENTATION_AUDIT_2.md) records the current result; the [first audit](PRE_IMPLEMENTATION_AUDIT.md) retains the historical baseline. The [architecture register](../analysis/architecture/ARCHITECTURAL_DECISIONS.md#approved-decisions) governs cross-system policies and the [gameplay log](../design/GAMEPLAY_DECISIONS.md) governs approved behavior.
+**All 12 register decisions are approved. The second audit confirms 64 READY, 0 BLOCKED and 0 NEEDS REVISION planning statuses.** Their implementation prerequisites still govern dispatch. Execution awaits authorization. The [second audit](PRE_IMPLEMENTATION_AUDIT_2.md) records the current result; the [first audit](../archive/PRE_IMPLEMENTATION_AUDIT.md) retains the historical baseline. The [architecture register](../analysis/architecture/ARCHITECTURAL_DECISIONS.md#approved-decisions) governs cross-system policies and the [gameplay log](../design/GAMEPLAY_DECISIONS.md) governs approved behavior.
 
 ## Per-task review
 
@@ -18,7 +18,7 @@ Every [task card](TASK_BACKLOG.md) records planning and execution readiness sepa
 
 ## Implementation sequence
 
-The user approved **GDScript for the main game, UI and tools**, with **C++ GDExtensions for native adapters**, on 2026-11-18. IMP-001 bootstraps the standard Godot 4.7.2 project with this language split. Luau restricted mods and trusted GDScript retain their separate approved runtime contracts.
+The user approved **GDScript for the main game, UI and tools**, with **C++ GDExtensions for native adapters**, on 2026-11-18. The repository now contains the generated Godot 4.7.2 project at `main_project/project.godot`. IMP-001 extends it with the startup entry point and storage/settings shell using this language split; project creation alone does not complete IMP-001. Luau restricted mods and trusted GDScript retain their separate approved runtime contracts.
 
 1. With authorization, begin IMP-001's minimum project entry and storage/settings shell using the approved Windows contract and isolated startup fixtures.
 2. Deliver IMP-002 and IMP-003 after IMP-001. Their session and verification interfaces then support real data/package preparation.

@@ -8,7 +8,7 @@ Reviewed 2026-11-18 after the user reviewed all 64 IMP cards and approved their 
 
 This is a static documentation assessment. No recreation code, engine export, gameplay or acceptance suite was executed. READY means the card's behavior, owner handoff, verification approach and staged integration are sufficiently defined to begin its implementation. Concrete API names, fixture record selections, dependency versions, measured parameters and platform verification remain implementation deliverables where explicitly assigned.
 
-The [first audit](PRE_IMPLEMENTATION_AUDIT.md) remains historical. Current statuses appear in [the backlog](TASK_BACKLOG.md) and [implementation readiness](IMPLEMENTATION_READINESS.md).
+The [first audit](../archive/PRE_IMPLEMENTATION_AUDIT.md) remains historical. Current statuses appear in [the backlog](TASK_BACKLOG.md) and [implementation readiness](IMPLEMENTATION_READINESS.md).
 
 ## Verified scope and consistency
 
