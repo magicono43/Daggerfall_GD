@@ -1,4 +1,11 @@
-# MOD package, profile and dependency contract — IMP-005 increments 1–2
+# MOD package, profile and dependency contracts — IMP-005
+
+Increment 3 now supplies the separate
+[DATA/menu publication contract](../data/DEFINITION_PUBLICATION.md). Validated
+dependency planning is still distinct from candidate definitions, persistence and
+actual menu commitment. The earlier increment boundaries below retain their scope;
+the real DATA pipeline is no longer absent, while normal domain adapters and
+executable/SAVE integrations remain unavailable until their owners deliver them.
 
 `StartupController.mods` is an application-owned `mod_configuration.gd`, created
 after CORE has selected and leased its storage root. It reads only that root's
@@ -128,23 +135,23 @@ they are never quietly reset. Lease ownership remains CORE's process-held lease.
 
 Launch selects a stored `last_successful` only if its profile still exists,
 otherwise Default. Save, selection and discovery never advance this history.
-The actual successful-menu history writer/lock must join increment 3's CORE menu
-commit boundary. No first-increment operation can pretend that success occurred.
+The successful-menu history writer/lock now joins increment 3's checked CORE menu
+commit boundary. No discovery/profile-only operation can pretend entry occurred.
 
 ## Deferred interfaces and acceptance gates
 
 `selection()` projects saved/pending profiles, eligible sources, unresolved
 duplicates, run skips and discovery outcome. `dependency_ready` reflects the real
-planner; `data_ready` remains false. No candidate definition publication exists yet.
-The production startup provider continues to report unavailable content support.
+planner; `data_ready` becomes true only at the checked menu commit. See the linked
+publication contract for candidate preparation and required adapter availability.
 The normal setup UI exposes this increment before actual main-menu entry even
 when classic-source setup still needs repair. Profile persistence is independent
 of that source selection. Rescan/edit actions are absent after actual menu entry.
 
-Increment 2 delivers the planner below. Increment 3 must consume that real plan,
-domain adapter schemas and bounded initial DATA
-fixtures; validate/persist Continue choices; publish at actual menu entry; lock
-plan/definitions and record successful-profile history. SAVE-017, IMP-007–010
+Increment 2 delivers the planner below. Increment 3 consumes that real plan,
+adapter schemas and bounded initial DATA fixtures, validates/persists Continue
+choices and publishes/locks at actual menu entry with successful-profile history.
+SAVE-017, IMP-007–010
 schemas, export sharing and IMP-050/051 executable registration/lifecycle remain
 owner integrations. An executable capability is metadata here, never a claim of
 data-only compatibility or executable readiness. M1 remains open.
@@ -259,10 +266,11 @@ bind their dependent contributions/hooks to these checked relationship results
 before activation. The fixtures verify admission denial, not execution of future
 hooks or real domain contributions. No executable provider is activated here.
 
-CORE startup now validates the real MOD plan after classic-reader readiness and
-before package publication. Invalid plans return dependency recovery. Valid plans
-reach the stock unavailable DATA publication provider, retaining the planner
-projection in recovery. The pre-menu Validate and Continue button uses this normal
-route. It cannot persist unsaved edits implicitly, publish definitions, enter the
-menu, update successful-profile history or establish a run lock. Those operations
-and Save/Continue choices remain increment 3, with its separate acceptance gate.
+CORE startup validates the real MOD plan after classic-reader readiness and before
+definition preparation. Invalid plans return dependency recovery. Valid plans
+reach DATA's real candidate pipeline; absent domain adapters remain a truthful
+unavailable result. Validate and Continue uses the checked increment-3 transaction
+and its explicit unsaved-profile choices. Planning alone never persists edits,
+publishes definitions, enters the menu, updates history or establishes a run lock.
+Once locked, MOD rejects selection/profile/rescan/suppression edits and returns
+the retained active plan/package metadata through title and character transitions.

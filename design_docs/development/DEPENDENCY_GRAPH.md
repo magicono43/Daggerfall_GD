@@ -1,5 +1,11 @@
 # Implementation dependencies
 
+2026-11-20, increment-3 update: user acceptance/authorization cleared the separate
+increment-2 gate. IMP-005's definition publication/menu lock is now implemented
+with [execution evidence](evidence/IMP-005-increment-3-2026-11-20.md), pending final
+user acceptance. Existing dependency edges remain unchanged and are not declared
+cleared yet; M1 still retains real domain/executable/SAVE integration obligations.
+
 2026-11-20, increment-2 update: the user accepted IMP-005 increment 1 and authorized
 dependency planning, now implemented with
 [separate evidence](evidence/IMP-005-increment-2-2026-11-20.md). No dependency edge

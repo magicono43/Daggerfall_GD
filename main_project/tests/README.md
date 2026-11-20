@@ -182,6 +182,66 @@ publication provider while classic reader identity is retained. No controlled
 downstream success is installed. Hook/contribution tests exercise admission
 interfaces only; actual DATA/executable integrations remain with later owners.
 
+## IMP-005 increment 3 — real definition publication
+
+The user accepted increment 2 and authorized this increment on 2026-11-20.
+From the repository root, run the independent commands sequentially:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario publication -Fixture publication-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Scenario publication -Fixture publication-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -ClassicSource C:/Games/Daggerfall/arena2 -DefinitionPublication
+./main_project/tools/verify_startup_export.ps1 -Configuration release -ClassicSource C:/Games/Daggerfall/arena2 -DefinitionPublication
+```
+
+`-Suite publication` also selects it. Each export invocation selects one of
+`-ModDiscovery`, `-DependencyPlanning`, `-DefinitionPublication`. No engine/native
+pin, compiler or runtime changed. Existing scenario selections/inventories remain.
+Required source/fixture/control unavailability remains incomplete, never skipped.
+
+Fixed inventories: **111 headless / 117 rendered**, plus **8** fresh-process
+assertions per mode. Fixtures register trusted `fixture.records` and add-only
+`fixture.limited` schemas before classic preparation. A real required ARCH3D BSA
+declaration participates in the composed classic manifest. These schemas are
+bounded verification content, not IMP-007–010 production domains. Real CORE,
+MOD discovery/planning, DATA definition publication and classic readers use the
+normal startup/menu route; no successful DATA/menu result is replaced by a mock.
+CHAR/WORLD preparation and CORE load-entry preparation are controlled only for
+the named post-publication session-lifetime checks, not real SAVE compatibility.
+
+Generated `pub.a` folder and `pub.b` ZIP declare real contribution paths, versions,
+capabilities and dependency order. Adapter-declared shipped fixtures, mod add/
+replace/patch files and active-root Overrides verify deterministic precedence,
+same-basename and same-local-ID separation, GAD-01 origin retention, field winners,
+list/nested/null rules, whole-contribution late rejection, explicit omission and
+remaining reference validation. Missing/unreadable/invalid/ambiguous paths,
+unsupported operations/executable capabilities, stale candidates/omissions,
+clean repeated builds and suppressed integration DATA admission are covered.
+All writable fixtures live in fresh leased disposable CORE storage, with isolated
+engine/project copies and retained reports. Source READ guards/hashes cover
+both engine processes; no player Mods/profile or classic data is changed.
+
+Publication/menu/profile failure injections preserve committed profiles, pending
+edits and unpublished DATA, and cannot lock the run. Reentrant mutation/preparation/
+Continue reject during the reserved menu transaction. Separate CORE contexts
+verify Save and Continue versus Continue for This Run. The actual menu publishes
+the exact validated state, advances profile history only in that transaction and
+locks configuration. Two controlled characters plus a controlled CORE load entry
+retain plan/definition/reader identities through title return. Locked Setup does
+not unlock. Fresh-process checks restore saved state, drop run-only enablement,
+remain editable, and adopt a previously edited loose override only after restart.
+
+Rendered stock buttons receive focused Enter press/release across frames. Retained
+PNGs show `publication-rejection`, `publication-unsaved` and the actual
+`publication-main-menu`; agent visual inspection checks readable paths, recovery
+choices and title entry. This is scripted rendered verification, not a human
+playtest or real character/save restore. No executable mod runs. Normal builds
+without real domain adapters still report unavailable instead of successful empty
+definitions. SAVE-017 and later schemas/executable providers remain open, and
+bounded publication success does not mark all of M1 complete.
+
+See the [publication contract](../scripts/data/DEFINITION_PUBLICATION.md).
+
 ## IMP-004 classic-source registration
 
 Run sequentially from the repository root, with the real source supplied locally:

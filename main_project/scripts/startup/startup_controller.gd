@@ -17,6 +17,10 @@ var transition_busy := false
 var menu_entered := false
 var warnings: Array[String] = []
 var mods: RefCounted
+var prepared_content: Dictionary = {}
+
+func real_content_pipeline() -> bool:
+	return providers.has_method("uses_definition_pipeline") and providers.uses_definition_pipeline()
 
 func start(inputs: Dictionary, fallback := false, reset := false) -> Dictionary:
 	launch = inputs.duplicate(true)
@@ -53,18 +57,29 @@ func stored_path(path: String) -> String:
 	return normalized
 
 func check_content() -> Dictionary:
+	if menu_entered and real_content_pipeline():
+		return set_route("optional_setup", {"ok": true, "detail": "The active package plan and definitions remain locked."})
 	var requested: String = settings.effective["startup/classic_path"]
-	var classic: Dictionary = providers.check_classic(resolved_path(requested))
+	# MOD/DATA rebuilds do not reconstruct even temporary classic indexes. Explicit
+	# folder selections still validate through select_folder; active sources do not switch.
+	var reuse_classic: bool = real_content_pipeline() and not active_source.is_empty() and providers.classic.ready()
+	var classic: Dictionary = {"ok": true, "source": active_source, "stage": "active", "ready": true} if reuse_classic else providers.check_classic(resolved_path(requested))
 	if not classic.get("ok", false):
 		return set_route("mandatory_setup", classic)
-	if providers.has_method("activate_classic"):
+	if providers.has_method("activate_classic") and not reuse_classic:
 		var activated: Dictionary = providers.activate_classic(classic)
 		if not activated.ok:
 			return set_route("mandatory_setup", activated)
 		active_source = classic.source
 	var plan: Dictionary = published.get("plan", {}) if menu_entered else (mods.validate_dependencies() if mods != null else {})
 	if not plan.is_empty() and not plan.ok:
+		prepared_content.clear()
 		return set_route("package_recovery", {"ok": false, "source": "dependencies", "reason": "Repair the package dependency configuration before continuing.", "plan": plan})
+	if real_content_pipeline():
+		prepared_content = providers.prepare_content(mods)
+		if not prepared_content.ok:
+			return set_route("package_recovery", prepared_content)
+		return set_route("optional_setup", prepared_content) if settings.effective["startup/show_setup"] or mods.dirty() else continue_to_menu("run")
 	var packages: Dictionary = published if menu_entered else providers.publish_packages(classic)
 	if not packages.get("ok", false):
 		packages.plan = plan.duplicate(true)
@@ -104,11 +119,13 @@ func select_folder(candidate: String) -> Dictionary:
 	settings.effective["startup/classic_path"] = settings.value(settings.accepted, "startup/classic_path")
 	return check_content()
 
-func continue_to_menu() -> Dictionary:
+func continue_to_menu(profile_choice := "") -> Dictionary:
 	if route == "main_menu":
 		return result.duplicate(true)
 	if transition_busy:
 		return {"ok": false, "kind": "busy", "route": route}
+	if real_content_pipeline() and not menu_entered:
+		return commit_content_menu(profile_choice)
 	if published.is_empty() or active_source.is_empty():
 		return set_route("mandatory_setup", {"ok": false, "reason": "Required content is not published."})
 	transition_busy = true
@@ -118,6 +135,45 @@ func continue_to_menu() -> Dictionary:
 		return set_route("menu_recovery", opened)
 	menu_entered = true
 	return set_route("main_menu", {"ok": true})
+
+func commit_content_menu(profile_choice: String) -> Dictionary:
+	if active_source.is_empty() or not providers.classic.ready():
+		return set_route("mandatory_setup", {"ok": false, "reason": "Required classic readers are not ready."})
+	if not profile_choice.is_empty() and profile_choice not in ["save", "run"]:
+		return set_route("optional_setup", {"ok": false, "reason": "Unknown profile continuation choice."})
+	prepared_content = providers.prepare_content(mods) # Always rebuild from clean defaults.
+	if not prepared_content.ok:
+		return set_route("package_recovery", prepared_content)
+	if mods.dirty() and profile_choice not in ["save", "run"]:
+		return set_route("optional_setup", {"ok": false, "kind": "unsaved_profile", "reason": "Save and Continue, or Continue for This Run?", "choices": ["save", "run"]})
+	transition_busy = true
+	mods.entry_busy = true
+	var reserved: Dictionary = providers.definitions.reserve_commit(prepared_content.ticket, mods)
+	if not reserved.ok:
+		mods.entry_busy = false
+		transition_busy = false
+		return set_route("package_recovery", reserved)
+	var opened: Dictionary = providers.open_menu()
+	if not opened.get("ok", false):
+		providers.definitions.release_commit()
+		mods.entry_busy = false
+		transition_busy = false
+		return set_route("menu_recovery", opened)
+	var saved: Dictionary = mods.commit_entry_profile(profile_choice == "save")
+	if not saved.ok:
+		providers.definitions.release_commit()
+		mods.entry_busy = false
+		transition_busy = false
+		return set_route("package_recovery", saved)
+	# Synchronous checked boundary: no further I/O/callbacks can reject publication.
+	var content: Dictionary = providers.definitions.commit(prepared_content.ticket)
+	mods.lock_configuration(content.plan, content.packages)
+	published = content.duplicate(true)
+	published.mods = content.packages.values().map(func(package: Dictionary): return {"id": package.id, "version": package.version})
+	logger.mods_established(published.mods)
+	menu_entered = true
+	transition_busy = false
+	return set_route("main_menu", {"ok": true, "configuration_id": content.ticket})
 
 func open_setup() -> Dictionary:
 	return set_route("optional_setup" if menu_entered else "mandatory_setup", {})

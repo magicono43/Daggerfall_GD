@@ -1,5 +1,13 @@
 # Implementation backlog
 
+**Execution update, 2026-11-20, increment 3:** The user accepted IMP-005 increment 2
+and authorized definition publication. All assigned increment implementations are
+now delivered with [increment-3 evidence](evidence/IMP-005-increment-3-2026-11-20.md),
+pending final user acceptance. Real MOD/DATA publication and menu
+locking run with bounded schema adapters; production domain/executable/SAVE owners
+and full M1 acceptance remain open. No downstream edge is marked cleared before
+final IMP-005 acceptance, and no other IMP has begun. Earlier updates retain history.
+
 **Execution update, 2026-11-20, increment 2:** The user accepted IMP-005 increment 1
 and authorized dependency planning. Increment 2 is implemented and its verification
 and acceptance disposition are recorded in

@@ -18,6 +18,13 @@ Every [task card](TASK_BACKLOG.md) records planning and execution readiness sepa
 
 ## Implementation sequence
 
+**Execution update, 2026-11-20, increment 3:** IMP-005 increments 1/2 are accepted;
+the authorized publication increment is implemented and independently checked
+([evidence](evidence/IMP-005-increment-3-2026-11-20.md)). Its final acceptance remains
+pending. Real candidate/publication/menu locks use bounded adapters, not invented
+production schemas; M1 and later domain/executable/SAVE gates remain open. No
+dependent prerequisite is marked delivered before final task acceptance.
+
 **Execution update, 2026-11-20, increment 2:** IMP-005 increment 1 is user-accepted;
 the separately authorized dependency planner is implemented
 ([evidence](evidence/IMP-005-increment-2-2026-11-20.md)). Increment 3 requires

@@ -88,7 +88,7 @@ func show() -> void:
 				var text: String = {"toggle": "Disable" if row.enabled else "Enable", "up": "Move up", "down": "Move down", "remove": "Remove from pending profile", "skip": "Skip for this run", "restore": "Restore for this run"}[action]
 				shell.button(text + " · " + row.id, func(): run(func(): return owner.edit(row.id, action)), actions)
 	show_dependencies()
-	shell.label("Definition publication is unavailable in this increment. A valid dependency plan or saved profile cannot enter the main menu.", 16)
+	show_content()
 
 func show_dependencies() -> void:
 	var plan: Dictionary = owner.validate_dependencies()
@@ -114,4 +114,26 @@ func show_dependencies() -> void:
 		shell.label("Sort preview · " + " → ".join(preview.order), 20)
 		shell.button("Accept Sort Preview", func(): run(func(): return owner.accept_sort_preview(preview.id)))
 		shell.button("Dismiss Sort Preview", func(): run(func(): return owner.dismiss_sort_preview(preview.id)))
-	shell.button("Validate and Continue", func(): shell.controller.check_content(); shell.render())
+	shell.button("Validate and Continue", func(): shell.controller.continue_to_menu(); shell.render())
+
+func show_content() -> void:
+	var controller = shell.controller
+	if not controller.real_content_pipeline():
+		return
+	shell.label("Definitions · validate before entry", 24)
+	var candidate: Dictionary = controller.prepared_content
+	for issue: Dictionary in candidate.get("issues", []):
+		shell.label("%s\n%s: %s" % [issue.source, issue.kind, issue.reason], 16)
+		if issue.omittable:
+			shell.button("Omit contribution " + issue.token.left(8) + " for this run", func():
+				var omitted: Dictionary = controller.providers.definitions.omit(issue.token, candidate.ticket, owner)
+				if omitted.ok:
+					controller.check_content()
+				else:
+					controller.result = omitted
+				shell.render())
+	if controller.result.get("kind") == "unsaved_profile":
+		shell.button("Save and Continue", func(): controller.continue_to_menu("save"); shell.render())
+		shell.button("Continue for This Run", func(): controller.continue_to_menu("run"); shell.render())
+	shell.button("Rebuild Definitions", func(): controller.check_content(); shell.render())
+	shell.label("Entry requires valid dependencies, required content and references. The actual main menu locks this plan for the application run.", 16)

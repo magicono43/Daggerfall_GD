@@ -33,6 +33,8 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
+	if fixture.get("mode") in ["publication", "publication_reload"]:
+		preload("res://tests/publication_fixture.gd").configure(self, fixture)
 	controller.start(inputs)
 	registered_logger = controller.logger
 	OS.add_logger(registered_logger)
@@ -238,9 +240,13 @@ func run_fixture() -> void:
 		script_path = "res://tests/dependency_cases.gd"
 	elif fixture.get("mode") == "planning_reload":
 		script_path = "res://tests/dependency_reload_cases.gd"
+	elif fixture.get("mode") == "publication":
+		script_path = "res://tests/publication_cases.gd"
+	elif fixture.get("mode") == "publication_reload":
+		script_path = "res://tests/publication_reload_cases.gd"
 	var suite = load(script_path).new()
 	var checks: Dictionary = await suite.run(self, fixture)
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["mods_reload", "planning_reload"] else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["mods_reload", "planning_reload", "publication_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

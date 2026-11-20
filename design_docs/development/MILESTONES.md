@@ -4,6 +4,14 @@ The [backlog](TASK_BACKLOG.md) lists the work associated with each integration g
 
 ## M1
 
+2026-11-20, increment-3 update: real CORE/MOD/DATA definition publication and actual
+menu locking are verified with real classic readers and bounded schema adapters
+([evidence](evidence/IMP-005-increment-3-2026-11-20.md)). IMP-005 awaits final user
+acceptance. **M1 remains open:** bounded schemas do not deliver later text/media/
+authored/world/dungeon schemas, actual character/restore, executable registration
+or SAVE compatibility. Controlled character/load preparation qualifies retention
+interfaces only, not real gameplay/restore readiness.
+
 2026-11-20, increment-2 update: IMP-005 increment 1 is user-accepted and its
 authorized dependency planner now validates real selected packages, previews
 deterministic order and rejects dependencies/cycles before the existing unavailable

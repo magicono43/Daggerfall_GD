@@ -2,8 +2,33 @@ class_name StartupProviderBoundary
 extends RefCounted
 ## DATA access has application lifetime; IMP-005 publication remains independent.
 var classic := preload("res://scripts/data/classic_access.gd").new()
+var definitions := preload("res://scripts/data/definition_registry.gd").new()
+var faults: Dictionary = {} # Controlled failure-only fixture seam.
+var before_menu := Callable()
+var classic_preparations := 0 # Diagnostic count of explicit source preparation requests.
+
+func uses_definition_pipeline() -> bool:
+	return true
+
+func register_content_adapter(adapter: RefCounted, root: String, files: Array) -> Dictionary:
+	if classic.ready() or classic.prepared_count() > 0:
+		return {"ok": false, "reason": "Content adapters and required classic sources must register before reader preparation."}
+	var checked := definitions.validate_adapter(adapter)
+	if not checked.ok:
+		return checked
+	var declaration: Dictionary = adapter.declaration()
+	var sources: Array = declaration.get("classic_sources", [])
+	if not sources.is_empty():
+		var capability: String = "content-" + str(declaration.id)
+		if not classic.register_adapter(capability, sources) or not classic.enable_capability(capability):
+			return {"ok": false, "reason": "Required classic-source declaration cannot be satisfied by the registered reader contract."}
+	return definitions.register_adapter(adapter, root, files)
+
+func prepare_content(mods: RefCounted) -> Dictionary:
+	return definitions.prepare(mods)
 
 func check_classic(candidate: String) -> Dictionary:
+	classic_preparations += 1
 	return classic.prepare(candidate)
 
 func activate_classic(checked: Dictionary) -> Dictionary:
@@ -13,10 +38,16 @@ func discard_classic_candidate() -> void:
 	classic.discard_prepared()
 
 func dispose() -> void:
+	before_menu = Callable()
+	definitions.dispose()
 	classic.dispose()
 
 func publish_packages(_classic: Dictionary) -> Dictionary:
-	return {"ok": false, "source": "packages", "reason": "Content package preparation is unavailable in this build. Content support is required to continue."}
+	return {"ok": false, "source": "packages", "kind": "commit_required", "reason": "Direct publication is unavailable. Prepare definitions with a validated MOD plan and commit through actual menu entry."}
 
 func open_menu() -> Dictionary:
+	if before_menu.is_valid():
+		before_menu.call()
+	if faults.has("menu"):
+		return {"ok": false, "reason": "Controlled menu creation failure."}
 	return {"ok": true}

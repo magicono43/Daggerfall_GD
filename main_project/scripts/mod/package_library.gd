@@ -245,7 +245,7 @@ func read_bytes(candidate: Dictionary, relative: String) -> Dictionary:
 				if name.to_lower() == component:
 					matches.append(name)
 			if matches.size() != 1:
-				return {"ok": false, "path": path, "reason": "Package path is missing or ambiguous."}
+				return {"ok": false, "kind": "missing" if matches.is_empty() else "invalid_path", "path": path, "reason": "Package path is missing or ambiguous."}
 			path = path.path_join(matches[0])
 			state = adapter.platform("inspect", path)
 			if not state.ok or state.detail in ["link", "missing"]:
@@ -257,7 +257,7 @@ func read_bytes(candidate: Dictionary, relative: String) -> Dictionary:
 			file.close()
 			if error == OK:
 				return {"ok": true, "bytes": bytes, "source": candidate.source.duplicate(true), "relative_path": normalized.path}
-	return {"ok": false, "path": path, "reason": "Package file is missing or unreadable."}
+	return {"ok": false, "kind": "unreadable" if candidate.format == "folder" else "missing", "path": path, "reason": "Package file is missing or unreadable."}
 
 static func valid_id(value: Variant) -> bool:
 	if not value is String or value.is_empty() or value.length() > 128:

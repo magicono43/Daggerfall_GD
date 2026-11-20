@@ -4,7 +4,8 @@ param(
     [string]$Templates = "$env:APPDATA/Godot/export_templates/4.7.2.stable",
     [string]$ClassicSource = '',
     [switch]$ModDiscovery,
-    [switch]$DependencyPlanning
+    [switch]$DependencyPlanning,
+    [switch]$DefinitionPublication
 )
 $ErrorActionPreference = 'Stop'
 . "$PSScriptRoot/mod_fixture.ps1"
@@ -16,9 +17,9 @@ New-Item -ItemType Directory -Force $build | Out-Null
 $priorRoaming = $env:APPDATA
 $priorLocal = $env:LOCALAPPDATA
 $report = @{ ok = $false; status = 'incomplete'; configuration = $Configuration; classic_source = $ClassicSource
-    fixture = $(if ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
+    fixture = $(if ($DefinitionPublication) {'publication-v1'} elseif ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
     reproduction = @{ command = './main_project/tools/verify_startup_export.ps1'; arguments = @{
-        Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; Godot = $Godot; Templates = $Templates } } }
+        Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Godot = $Godot; Templates = $Templates } } }
 function Copy-ExportResources([string]$Source, [string]$Destination) {
     New-Item -ItemType Directory -Force $Destination | Out-Null
     foreach ($entry in Get-ChildItem -LiteralPath $Source) {
@@ -31,8 +32,8 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
     }
 }
 try {
-if (($ModDiscovery -or $DependencyPlanning) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
-if ($ModDiscovery -and $DependencyPlanning) { throw 'Select one mod increment per export invocation' }
+if (($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
+if (@($ModDiscovery,$DependencyPlanning,$DefinitionPublication | Where-Object { $_ }).Count -gt 1) { throw 'Select one mod increment per export invocation' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -80,14 +81,18 @@ foreach ($mode in @('headless','rendered')) {
         $fixture.mode = 'planning'
         $fixture.fixture = 'planning-v1'
     }
+    if ($DefinitionPublication) {
+        $fixture.mode = 'publication'
+        $fixture.fixture = 'publication-v1'
+    }
     $fixture |
         ConvertTo-Json | Set-Content "$sandbox/fixture.json"
     $arguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/fixture.json")
     if ($mode -eq 'headless') { $arguments = @('--headless') + $arguments }
     & "$build/Startup.console.exe" @arguments *> "$run/$mode.log"
     $engineExit = $LASTEXITCODE
-    if (($ModDiscovery -or $DependencyPlanning) -and $engineExit -eq 0) {
-        $fixture.mode = if ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
+    if (($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication) -and $engineExit -eq 0) {
+        $fixture.mode = if ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
         $fixture | ConvertTo-Json -Depth 10 | Set-Content "$sandbox/reload-fixture.json"
         $reloadArguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/reload-fixture.json")
         if ($mode -eq 'headless') { $reloadArguments = @('--headless') + $reloadArguments }
@@ -122,11 +127,11 @@ foreach ($mode in @('headless','rendered')) {
         $after[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
-    $expected = if ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    $expected = if ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
     if ($ClassicSource -and $result.count -ne $expected) { throw 'Incomplete owner export result' }
     $checks += @{ scenario = "exported-$mode"; actual = 'pass'; assertions = $result.count; process_exit = $engineExit
         source_before = $before; source_after = $after; result = "$sandbox/result.json" }
-    if ($ModDiscovery -or $DependencyPlanning) { $checks[-1].reload = @{ assertions = 8; process_exit = $reloadExit; result = "$sandbox/reload-result.json" } }
+    if ($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication) { $checks[-1].reload = @{ assertions = 8; process_exit = $reloadExit; result = "$sandbox/reload-result.json" } }
     $report.checks = $checks
 }
 $report.ok = $true

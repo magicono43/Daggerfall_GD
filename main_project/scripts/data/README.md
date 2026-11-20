@@ -1,5 +1,12 @@
 # Classic access — IMP-004
 
+IMP-005 increment 3 adds the separate
+[definition candidate/publication contract](DEFINITION_PUBLICATION.md). It shares
+this application's lifetime but never replaces classic readers during a pre-menu
+MOD rebuild. Domain adapters must register their real required sources before
+reader preparation. Normal production domain schemas remain unavailable; isolated
+bounded adapters verify the real pipeline and menu commit without inventing them.
+
 `StartupProviderBoundary.classic` owns one `classic_access.gd` registry for the
 application. CORE's character/menu lifecycle does not own or dispose it. The
 startup shell disposes it before releasing the storage lease at process shutdown.
@@ -48,8 +55,10 @@ not changing the format label or accepting opaque presence alone.
 
 Videos are absent from this startup manifest: their absence causes no startup
 warnings. Playback owners retain their approved missing/unplayable-media policy.
-IMP-005 package publication still returns unavailable in production. Passing DATA
-does not create a package configuration or authorize gameplay/session readiness.
+IMP-005 now has a separate real definition-publication pipeline; normal production
+domain adapters are still unavailable until their owners deliver them. Passing
+classic DATA alone does not create a package configuration or authorize gameplay/
+session readiness. Bounded schema fixtures qualify the publication mechanism only.
 
 ## Supported structural checks
 
