@@ -51,6 +51,11 @@ func check_content() -> Dictionary:
 	var classic: Dictionary = providers.check_classic(resolved_path(requested))
 	if not classic.get("ok", false):
 		return set_route("mandatory_setup", classic)
+	if providers.has_method("activate_classic"):
+		var activated: Dictionary = providers.activate_classic(classic)
+		if not activated.ok:
+			return set_route("mandatory_setup", activated)
+		active_source = classic.source
 	var packages: Dictionary = published if menu_entered else providers.publish_packages(classic)
 	if not packages.get("ok", false):
 		return set_route("package_recovery", packages)
@@ -66,11 +71,25 @@ func select_folder(candidate: String) -> Dictionary:
 	var checked: Dictionary = providers.check_classic(candidate)
 	if not checked.get("ok", false):
 		return set_route("optional_setup" if menu_entered else "mandatory_setup", checked)
+	var previous := settings.clone(settings.accepted)
 	var saved := settings.apply({"startup/classic_path": stored_path(checked.source)})
 	if not saved.ok:
+		# Source selection is transactional, unlike ordinary accepted-unsaved preferences.
+		settings.accepted = previous
+		saved.pending = settings.pending()
+		saved.application = "rejected_source_selection"
+		if providers.has_method("discard_classic_candidate"):
+			providers.discard_classic_candidate()
 		return set_route("optional_setup" if menu_entered else "settings_recovery", saved)
-	if menu_entered and checked.source != active_source:
-		return set_route("optional_setup", {"ok": true, "detail": "Saved; source change pending application restart. Current source retained."})
+	if (menu_entered or (providers.has_method("activate_classic") and not active_source.is_empty())) and checked.source != active_source:
+		if providers.has_method("discard_classic_candidate"):
+			providers.discard_classic_candidate()
+		return set_route("optional_setup" if menu_entered else "package_recovery", {"ok": true, "detail": "Saved; source change pending application restart. Current source retained."})
+	if providers.has_method("activate_classic"):
+		var activated: Dictionary = providers.activate_classic(checked)
+		if not activated.ok:
+			return set_route("mandatory_setup", activated)
+		active_source = checked.source
 	# Initial source may activate after validation and persistence, before any menu.
 	settings.effective["startup/classic_path"] = settings.value(settings.accepted, "startup/classic_path")
 	return check_content()

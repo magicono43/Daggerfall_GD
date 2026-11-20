@@ -83,6 +83,63 @@ cover different boundaries and are not full shared-suite exports.
 
 ## Retained owner fixture documentation
 
+## IMP-004 classic-source registration
+
+Run sequentially from the repository root, with the real source supplied locally:
+
+```powershell
+pwsh -NoProfile -File ./main_project/tools/verify_headless.ps1 -Scenario classic -Fixture classic-v1 -ClassicSource C:/Games/Daggerfall
+pwsh -NoProfile -File ./main_project/tools/verify_rendered.ps1 -Scenario classic -Fixture classic-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+`-Suite classic` also selects this scenario. `m1` retains the original three
+scenarios and `m1-v1` fixture; run the additional `classic-v1` scenario explicitly.
+There is no machine-specific source default. ARENA2 and its immediate parent are
+accepted; the runner records the invocation and actual selected root separately.
+A missing/unavailable real fixture produces incomplete/exit 2, never a skipped
+pass. Seed/clock/input overrides remain unsupported/incomplete: this fixture uses
+fixed filesystem/owner inputs and no game RNG or clock.
+
+The fixed terminal inventory is **97 headless / 100 rendered** assertions. Reports
+retain source-file hashes before/after, raw record ordinal and stored identity,
+payload SHA-256/offset/length, supported directory types, counts as observations,
+validation timing, source build hashes and production storage/process identity.
+Counts, hashes and original payload values are evidence, not validation rules.
+Windows parent-process READ handles sharing only READ deny source write opens
+during the engine check. Required-source access succeeds under that restriction;
+the production reader opens exclusively `FileAccess.READ`. A separate disposable
+valid BSA is locked with `FileShare.None` to exercise an actual unreadable file.
+Source guards and the unreadable lock are disposed in `finally`.
+
+Fixtures are generated only inside the isolated run: numeric/named and duplicate
+indexes; zero/changed populations; extra unrelated files; missing/empty/truncated/
+unsupported sources; out-of-bounds extents; validation-to-initialization mutation;
+repeated cleanup/retry; post-initialization disappearance/length changes. They
+exercise unpublished access, differentiated failures, stale publication tickets,
+undeclared enabled capabilities, canceled/invalid selections, initial and later
+settings-write failure, and pending-until-restart reader retention. CORE's delivered
+lifecycle checks two controlled character/menu transitions against real DATA
+reader identity. CHAR/WORLD preparation remains explicitly controlled.
+
+Rendered checks use the real setup FileDialog's `dir_selected` signal for invalid
+and supported sources across frame boundaries, and capture combined mandatory
+setup failures and valid-DATA/stock-package recovery. This is scripted UI and
+agent visual inspection, not a human Windows folder-navigation playtest.
+Stock IMP-005 rejection is asserted before an explicitly test-only package-success
+provider is installed for settings/lifetime interface cases. No controlled result
+counts as a real MOD/DATA M1 publication pass. See the
+[manifest/access contract](../scripts/data/README.md) and
+[execution evidence](../../design_docs/development/evidence/IMP-004-2026-11-19.md).
+
+The export wrapper retains its existing startup smoke mode without `-ClassicSource`.
+With that argument it runs the same complete classic scenario independently in
+headless and rendered exported processes, checks terminal inventories/script
+errors/source hashes, and retains results. Export/import now use a disposable
+project copy as well as isolated game/engine roots. Windows native storage code
+and build pins remain unchanged; process qualification is still separate.
+
 ## IMP-002 session and input gates
 
 After building the existing native storage adapter, independently run from the
@@ -144,9 +201,10 @@ explicit development opt-in to player storage, still requiring the same lease.
 
 `controlled_startup_provider.gd` returns bounded success/failure results for
 classic source, package publication and menu creation. It is not a classic-data
-validator or package implementation. The default production boundary reports
-IMP-004/005 unavailable and cannot reach menu readiness without real providers.
-No classic assets are read or modified by these fixtures.
+validator or package implementation. The default production boundary now supplies
+real IMP-004 DATA validation/readers; IMP-005 publication remains unavailable and
+cannot reach menu readiness without its real provider. These retained controlled
+startup fixtures do not read classic assets; the separate classic scenario does.
 
 Rendered checks save recovery PNGs and drive mouse events through Retry, explicit
 fallback, Settings/Setup, staged editing, Apply and Cancel. Inspect PNGs for layout;

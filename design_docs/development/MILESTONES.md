@@ -16,6 +16,16 @@ increment is now delivered ([evidence](evidence/IMP-002-2026-11-19.md)); its rea
 character/restore/input/window/playback/owner integrations remain open. Exported startup success does
 not establish executable-mod runtime feasibility.
 
+2026-11-19: IMP-004's foundation source/reader increment is delivered and verified
+against a real selected installation ([evidence](evidence/IMP-004-2026-11-19.md)).
+Real DATA failure and valid-DATA/stock-package recovery run through startup in
+headless/rendered and Windows exports. **M1 remains open:** IMP-005 still reports
+unavailable in production, and controlled downstream successes qualify interfaces
+only. Enabled text/media/definition/world/dungeon adapters must contribute their
+real required sources, schemas and checks with IMP-007/008/009/010/061. Foundation
+raw-container readiness does not close their feature acceptance or real consumer
+recovery/service-loss obligations.
+
 ## M2
 
 **Playable room and native save.** Use the approved DEV-014 fixture approach with an interior or dungeon room, a controllable actor, one supported opponent, a loot outcome and a native save. Drive setup through production scene, placement, attack and persistence requests. Verify input handoff at pause, movement/collision, attack commitment, loot conservation, successful restore and rejected load preserving the active session. Run enemy placement/combat and restore preservation through the headless gate where applicable. Run rendered checks for reach, timing, scene transitions and thumbnail agreement where required. Keep content and test state isolated.

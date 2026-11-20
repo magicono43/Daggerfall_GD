@@ -31,6 +31,13 @@ IMP-004, IMP-006 and IMP-011 now have all listed prerequisites delivered; each
 requires authorization. IMP-022 still requires IMP-017. Staged real-provider
 verification and M1 DATA/MOD integration remain open. No dependency edge changed.
 
+IMP-004's explicitly authorized Windows foundation reader increment is delivered
+on 2026-11-19 ([evidence](evidence/IMP-004-2026-11-19.md)). Its edge clears for
+IMP-005, which also has IMP-002 delivered and is now fully prerequisite-cleared.
+IMP-006/011 remain prerequisite-cleared. Real IMP-005 publication and later enabled
+adapter/schema/owner gates remain open. No dependency edge changed and no next
+task is authorized by this handoff.
+
 | Task | Must complete first |
 | --- | --- |
 | [IMP-001](tasks/IMP-001.md) | Interface and fixture gates only |

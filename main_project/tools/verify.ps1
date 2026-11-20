@@ -3,6 +3,7 @@ param(
     [string]$Suite = 'm1',
     [string[]]$Scenario = @(),
     [string]$Fixture = 'm1-v1',
+    [string]$ClassicSource = '',
     [Nullable[long]]$Seed,
     [Nullable[double]]$Clock,
     [string]$InputSequence = '',
@@ -25,9 +26,9 @@ New-Item -ItemType Directory -Force $run | Out-Null
 $priorRoaming = $env:APPDATA
 $priorLocal = $env:LOCALAPPDATA
 $report = [ordered]@{ schema = 1; mode = $Mode; suite = $Suite; fixture = $Fixture; root = $run
-    status = 'incomplete'; scenarios = @(); inputs = @{ seed = $Seed; clock = $Clock; input_sequence = $InputSequence }
+    status = 'incomplete'; scenarios = @(); classic_source = $ClassicSource; inputs = @{ seed = $Seed; clock = $Clock; input_sequence = $InputSequence }
     engine = $null; executable = $engineExecutable; runtime_project = $runtimeProject; build = @{}; reproduction = @{ command = "./main_project/tools/verify_$Mode.ps1"; arguments = @{
-        Suite = $Suite; Scenario = $Scenario; Fixture = $Fixture; Seed = $Seed; Clock = $Clock; InputSequence = $InputSequence; Godot = $Godot; TimeoutSeconds = $TimeoutSeconds } } }
+        Suite = $Suite; Scenario = $Scenario; Fixture = $Fixture; ClassicSource = $ClassicSource; Seed = $Seed; Clock = $Clock; InputSequence = $InputSequence; Godot = $Godot; TimeoutSeconds = $TimeoutSeconds } } }
 
 # Only this helper owns child lifetime. No shell-built command or unrelated process kill.
 function Invoke-Engine([string[]]$EngineArguments, [string]$Directory, [string]$Name) {
@@ -99,11 +100,11 @@ try {
         $item = [ordered]@{ scenario = $id; fixture = $Fixture; root = $caseRoot; inputs = $report.inputs
             status = 'incomplete'; reason = ''; process_exit = $null; result = $null }
         $report.scenarios += $item
-        if ($id -notin @('qualification','startup','session')) {
+        if ($id -notin @('qualification','startup','session','classic')) {
             $item.reason = 'Required scenario unavailable; real owner/provider not registered'
             continue
         }
-        if ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')) {
+        if (($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -ne 'classic' -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
             $item.reason = 'Fixture unavailable for selected scenario'
             continue
         }
@@ -115,11 +116,47 @@ try {
         $env:APPDATA = "$caseRoot/engine-roaming"
         $env:LOCALAPPDATA = "$caseRoot/engine-local"
         New-Item -ItemType Directory -Force $env:APPDATA,$env:LOCALAPPDATA | Out-Null
+        $classicLock = $null
+        $sourceReadGuards = @()
+        $sourceBefore = @{}
+        $unreadable = "$caseRoot/locked/ARENA2"
+        if ($id -eq 'classic') {
+            if (!$ClassicSource -or !(Test-Path -LiteralPath $ClassicSource -PathType Container)) {
+                $item.reason = 'Explicit available -ClassicSource is required'; continue
+            }
+            $selectedRoot = [IO.Path]::GetFullPath($ClassicSource)
+            if ((Split-Path $selectedRoot -Leaf) -ine 'ARENA2') { $selectedRoot = Join-Path $selectedRoot 'ARENA2' }
+            $item.selected_source = $selectedRoot
+            foreach ($name in @('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND')) {
+                $sourceBefore[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
+                $sourceReadGuards += [IO.File]::Open((Join-Path $selectedRoot $name), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
+            }
+            $item.source_access_guard = 'Windows read handles sharing READ only held across child: source write opens denied'
+            New-Item -ItemType Directory -Force $unreadable | Out-Null
+            foreach ($name in @('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND')) {
+                # Valid one-record numeric BSA; never copy or alter classic inputs.
+                [IO.File]::WriteAllBytes("$unreadable/$name", [byte[]]@(1,0,0,2,42,232,3,0,0,1,0,0,0))
+            }
+            $classicLock = [IO.File]::Open("$unreadable/ARCH3D.BSA", [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::None)
+        }
         @{ sandbox = $caseRoot.Replace('\','/'); mode = $(if ($id -eq 'startup') { 'suite' } else { $id })
-            fixture = $Fixture; inputs = $report.inputs } | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/fixture.json"
+            fixture = $Fixture; inputs = $report.inputs; classic_source = $(if ($id -eq 'classic') { $selectedRoot.Replace('\','/') } else { '' }); unreadable_root = $unreadable.Replace('\','/') } | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/fixture.json"
         $arguments = @('--path',$runtimeProject,'--max-fps','60','--quit-after','1800','--',"--startup-fixture=$caseRoot/fixture.json")
         if ($Mode -eq 'headless') { $arguments = @('--headless') + $arguments }
-        $outcome = Invoke-Engine $arguments $caseRoot 'console'
+        try { $outcome = Invoke-Engine $arguments $caseRoot 'console' }
+        finally {
+            if ($null -ne $classicLock) { $classicLock.Dispose() }
+            foreach ($guard in $sourceReadGuards) { $guard.Dispose() }
+            $sourceReadGuards = @()
+        }
+        if ($id -eq 'classic') {
+            $item.source_before = $sourceBefore
+            $item.source_after = @{}
+            foreach ($name in $sourceBefore.Keys) {
+                $item.source_after[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
+                if ($item.source_after[$name] -ne $sourceBefore[$name]) { throw 'Classic source changed during verification' }
+            }
+        }
         $item.process_exit = $outcome.exit
         if ($outcome.timed_out -or !(Test-Path "$caseRoot/result.json")) {
             $item.reason = 'Timed out, crashed or missing terminal report'
@@ -129,7 +166,7 @@ try {
             $item.reason = 'Malformed terminal report'; continue
         }
         $item.result = $result
-        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263 } } else { @{ qualification = 3; startup = 92; session = 264 } }
+        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263; classic = 97 } } else { @{ qualification = 3; startup = 92; session = 264; classic = 100 } }
         $item.expected_assertions = $expectedCounts[$id]
         $scriptErrors = Select-String -Path "$caseRoot/console.*.log" -Pattern 'SCRIPT ERROR:' -Quiet
         if ($scriptErrors -contains $true) {
@@ -154,6 +191,8 @@ try {
     $report.status = 'incomplete'
     $report.error = $_.Exception.Message
 } finally {
+    if ($null -ne $classicLock) { $classicLock.Dispose() }
+    foreach ($guard in $sourceReadGuards) { $guard.Dispose() }
     $env:APPDATA = $priorRoaming
     $env:LOCALAPPDATA = $priorLocal
     $report | ConvertTo-Json -Depth 40 | Set-Content "$run/report.json"

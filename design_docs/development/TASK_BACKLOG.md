@@ -8,9 +8,11 @@ complete with task-local headless/rendered, process and export evidence
 open. IMP-002's authorized session/modal shell increment is also complete
 ([report](evidence/IMP-002-2026-11-19.md)); its real-provider gates remain open.
 IMP-003's authorized M1 verification increment is complete
-([report](evidence/IMP-003-2026-11-19.md)). IMP-004, IMP-006 and IMP-011 now have
-all listed prerequisites delivered and await authorization. IMP-022 retains
-IMP-017. All named real-provider gates remain open.
+([report](evidence/IMP-003-2026-11-19.md)). IMP-004's authorized Windows foundation
+reader increment is complete ([report](evidence/IMP-004-2026-11-19.md)), clearing
+all prerequisites for IMP-005. IMP-005, IMP-006 and IMP-011 await authorization.
+IMP-022 retains IMP-017. Real package publication and later enabled adapter/owner
+gates remain open; no other task was begun.
 Planning READY counts do not imply implementation completion.
 
 | Task | Objective area | Milestone | Planning readiness |

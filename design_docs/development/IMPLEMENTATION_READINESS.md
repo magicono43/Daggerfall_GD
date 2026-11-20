@@ -24,9 +24,12 @@ checks and open real-provider integrations. IMP-002's explicitly authorized
 session/modal shell increment is now complete; its
 [evidence](evidence/IMP-002-2026-11-19.md) records independent local suites and
 remaining real-provider obligations. IMP-003's authorized shared verification
-increment is complete ([evidence](evidence/IMP-003-2026-11-19.md)). IMP-004,
-IMP-006 and IMP-011 now have all listed prerequisites delivered and await
-authorization; IMP-022 still requires IMP-017. No subsequent task was begun.
+increment is complete ([evidence](evidence/IMP-003-2026-11-19.md)). IMP-004's
+authorized Windows foundation reader increment is complete
+([evidence](evidence/IMP-004-2026-11-19.md)). IMP-005, IMP-006 and IMP-011 now have
+all listed prerequisites delivered and await authorization; IMP-022 still requires
+IMP-017. Real package publication and later enabled adapters remain open.
+No subsequent task was begun.
 
 The user approved **GDScript for the main game, UI and tools**, with **C++ GDExtensions for native adapters**, on 2026-11-18. IMP-001 extended the existing Godot 4.7.2 project at `main_project/project.godot` with the startup entry point and storage/settings shell using this language split; project creation alone did not complete IMP-001. Luau restricted mods and trusted GDScript retain their separate approved runtime contracts.
 

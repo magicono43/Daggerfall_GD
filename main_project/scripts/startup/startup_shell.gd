@@ -128,6 +128,8 @@ func render() -> void:
 	update_logging_warning()
 	if not controller.storage.context.is_empty():
 		label("Storage: %s\n%s" % [controller.storage.context.mode, controller.storage.context.root], 15)
+	if not controller.active_source.is_empty():
+		label("Active classic source: " + controller.active_source, 15)
 	for text: String in controller.warnings:
 		label(text)
 	var result := controller.result
@@ -224,6 +226,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/session_cases.gd"
 	elif fixture.get("mode") == "qualification":
 		script_path = "res://tests/verification_cases.gd"
+	elif fixture.get("mode") == "classic":
+		script_path = "res://tests/classic_cases.gd"
 	var suite = load(script_path).new()
 	var checks: Dictionary = await suite.run(self, fixture)
 	var target := str(fixture.sandbox).path_join("result.json")
@@ -235,6 +239,8 @@ func run_fixture() -> void:
 func _exit_tree() -> void:
 	if session_shell != null:
 		session_shell.dispose()
+	if controller.providers.has_method("dispose"):
+		controller.providers.dispose()
 	if registered_logger != null:
 		OS.remove_logger(registered_logger)
 		registered_logger.stop("Process shutdown")
