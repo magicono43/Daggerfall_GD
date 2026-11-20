@@ -128,7 +128,7 @@ func render() -> void:
 	if core.cleanup_blocked():
 		host.label("Cleanup incomplete. New sessions remain blocked.")
 		host.button("Retry Cleanup", func(): core.retry_cleanup(); schedule_render())
-		host.button("Quit", request_quit)
+		host.essential_button("quit", request_quit)
 		return
 	if core.busy():
 		var operation_ticket := core.ticket()
@@ -138,16 +138,16 @@ func render() -> void:
 			host.button("Keep Playing", func(): core.confirm(operation_ticket, false))
 			host.button("Discard and Continue", func(): core.confirm(operation_ticket, true))
 		elif state.phase == "preflight":
-			host.button("Cancel", func(): core.cancel(operation_ticket))
+			host.essential_button("cancel", func(): core.cancel(operation_ticket))
 		else:
 			host.label("Replacement has started. Wait for completion or recovery.")
-		host.button("Quit", request_quit)
+		host.essential_button("quit", request_quit)
 		return
 	if state.application == "recovery":
 		host.label("Session unavailable. Safe recovery required.")
-		host.button("Retry", func(): request(str(core.last_intent.get("mode", "new")), core.last_intent.get("selection", {})))
+		host.essential_button("retry", func(): request(str(core.last_intent.get("mode", "new")), core.last_intent.get("selection", {})))
 		host.button("Return to Main Menu", func(): core.recover_menu())
-		host.button("Return to Setup", return_to_setup)
+		host.essential_button("return_setup", return_to_setup)
 	elif state.session.is_empty():
 		host.label("Main menu ready.")
 		host.button("New Game", func(): request("new"))
@@ -168,7 +168,7 @@ func render() -> void:
 			host.label("Sound and music controls are unavailable in this build.", 15)
 			host.button("Settings", func(): windows.open("settings", state.session))
 			host.button("Return to Title", func(): request("return"))
-			host.button("Return to Setup", return_to_setup)
+			host.essential_button("return_setup", return_to_setup)
 		elif top.window == "settings":
 			render_settings(top)
 		elif top.window == "discard_settings":
@@ -191,7 +191,7 @@ func render() -> void:
 			var prompt := preload("res://scripts/session/session_prompt.gd").new()
 			host.panel.add_child(prompt)
 			prompt.bind(windows, top, _prompt_owners[top.id])
-	host.button("Quit", request_quit)
+	host.essential_button("quit", request_quit)
 	restore_focus()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
@@ -298,5 +298,5 @@ func render_quit() -> void:
 			host.button("Quit after cleanup failure", func(): host.get_tree().quit())
 		"preferences":
 			host.label("Preferences could not be saved. Quitting without saving may lose accepted changes.")
-			host.button("Retry", advance_shutdown)
+			host.essential_button("retry", advance_shutdown)
 			host.button("Quit Without Saving Preferences", func(): host.get_tree().quit())

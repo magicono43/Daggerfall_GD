@@ -1,5 +1,11 @@
 # Milestones and validation checkpoints
 
+**IMP-007 increment 1, 2026-11-20:** Explicitly authorized; production catalogs,
+CSV patches, fallback/provenance and bundled essential labels implemented and
+verified ([evidence](evidence/IMP-007-increment-1-2026-11-20.md)).
+User acceptance is required before increment 2. Parent task/M1 and later
+IMP-030/056/real-owner gates stay open; no dependent edge clears yet.
+
 **Final IMP-006 acceptance, 2026-11-20:** The user confirmed increment 3 complete;
 all three assigned increments are accepted ([evidence](evidence/IMP-006-increment-3-2026-11-20.md)).
 IMP-014 now has all listed prerequisites delivered. IMP-016/017/032 clear their

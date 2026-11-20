@@ -146,7 +146,7 @@ func show_content() -> void:
 					controller.result = omitted
 				shell.render())
 	if controller.result.get("kind") == "unsaved_profile":
-		shell.button("Save and Continue", func(): controller.continue_to_menu("save"); shell.render())
-		shell.button("Continue for This Run", func(): controller.continue_to_menu("run"); shell.render())
+		shell.essential_button("save_continue", func(): controller.continue_to_menu("save"); shell.render())
+		shell.essential_button("run_continue", func(): controller.continue_to_menu("run"); shell.render())
 	shell.button("Rebuild Definitions", func(): controller.check_content(); shell.render())
 	shell.label("Entry requires valid dependencies, required content and references. The actual main menu locks this plan for the application run.", 16)

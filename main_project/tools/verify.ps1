@@ -77,8 +77,8 @@ try {
     $report.build.source_revision = (& git -C $project rev-parse HEAD)
     $report.build.working_tree = @(& git -C $project status --short)
     $report.build.sources = @{}
-    foreach ($source in Get-ChildItem "$project/scripts","$project/tests","$project/tools","$project/config","$project/native/storage" -File -Recurse |
-        Where-Object { $_.FullName -notmatch '[\\/](\.runs|\.toolchain|bin|\.zig-cache|zig-out)[\\/]' -and $_.Extension -in @('.gd','.ps1','.cpp','.ini','.gdextension','.json','.txt') }) {
+    foreach ($source in Get-ChildItem "$project/scripts","$project/tests","$project/tools","$project/config","$project/content","$project/native/storage" -File -Recurse |
+        Where-Object { $_.FullName -notmatch '[\\/](\.runs|\.toolchain|bin|\.zig-cache|zig-out)[\\/]' -and $_.Extension -in @('.gd','.ps1','.cpp','.ini','.gdextension','.json','.txt','.csv','.import') }) {
         $report.build.sources[[IO.Path]::GetRelativePath($project,$source.FullName)] = (Get-FileHash $source.FullName -Algorithm SHA256).Hash
     }
     Copy-VerificationResources $project $runtimeProject
@@ -103,11 +103,11 @@ try {
         $item = [ordered]@{ scenario = $id; fixture = $Fixture; root = $caseRoot; inputs = $report.inputs
             status = 'incomplete'; reason = ''; process_exit = $null; result = $null }
         $report.scenarios += $item
-        if ($id -notin @('qualification','startup','session','formula','formula-fault','randomness-session','randomness','classic','mods','planning','publication')) {
+        if ($id -notin @('qualification','startup','session','formula','formula-fault','randomness-session','randomness','classic','mods','planning','publication','text')) {
             $item.reason = 'Required scenario unavailable; real owner/provider not registered'
             continue
         }
-        if (($id -eq 'formula' -and $Fixture -ne 'formula-v1') -or ($id -eq 'formula-fault' -and $Fixture -notin @('formula-v1','formula-extra-error-v1')) -or ($id -eq 'randomness-session' -and $Fixture -ne 'randomness-session-v1') -or ($id -eq 'randomness' -and $Fixture -ne 'randomness-v1') -or ($id -eq 'publication' -and $Fixture -ne 'publication-v1') -or ($id -eq 'planning' -and $Fixture -ne 'planning-v1') -or ($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('formula','formula-fault','randomness-session','randomness','classic','mods','planning','publication') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
+        if (($id -eq 'text' -and $Fixture -ne 'text-v1') -or ($id -eq 'formula' -and $Fixture -ne 'formula-v1') -or ($id -eq 'formula-fault' -and $Fixture -notin @('formula-v1','formula-extra-error-v1')) -or ($id -eq 'randomness-session' -and $Fixture -ne 'randomness-session-v1') -or ($id -eq 'randomness' -and $Fixture -ne 'randomness-v1') -or ($id -eq 'publication' -and $Fixture -ne 'publication-v1') -or ($id -eq 'planning' -and $Fixture -ne 'planning-v1') -or ($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('formula','formula-fault','randomness-session','randomness','classic','mods','planning','publication','text') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
             $item.reason = 'Fixture unavailable for selected scenario'
             continue
         }
@@ -124,7 +124,7 @@ try {
         $sourceReadGuards = @()
         $sourceBefore = @{}
         $unreadable = "$caseRoot/locked/ARENA2"
-        if ($id -in @('classic','mods','planning','publication','formula','formula-fault')) {
+        if ($id -in @('classic','mods','planning','publication','text','formula','formula-fault')) {
             if (!$ClassicSource -or !(Test-Path -LiteralPath $ClassicSource -PathType Container)) {
                 $item.reason = 'Explicit available -ClassicSource is required'; continue
             }
@@ -145,7 +145,7 @@ try {
         }
         if ($id -eq 'mods') { $modLock = New-ModFixture $caseRoot }
         @{ sandbox = $caseRoot.Replace('\','/'); mode = $(if ($id -eq 'startup') { 'suite' } else { $id })
-            fixture = $Fixture; inputs = $report.inputs; classic_source = $(if ($id -in @('classic','mods','planning','publication','formula','formula-fault')) { $selectedRoot.Replace('\','/') } else { '' }); unreadable_root = $unreadable.Replace('\','/') } | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/fixture.json"
+            fixture = $Fixture; inputs = $report.inputs; classic_source = $(if ($id -in @('classic','mods','planning','publication','text','formula','formula-fault')) { $selectedRoot.Replace('\','/') } else { '' }); unreadable_root = $unreadable.Replace('\','/') } | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/fixture.json"
         $arguments = @('--path',$runtimeProject,'--max-fps','60','--quit-after','1800','--',"--startup-fixture=$caseRoot/fixture.json")
         if ($Mode -eq 'headless') { $arguments = @('--headless') + $arguments }
         try {
@@ -166,7 +166,7 @@ try {
             foreach ($guard in $sourceReadGuards) { $guard.Dispose() }
             $sourceReadGuards = @()
         }
-        if ($id -in @('classic','mods','planning','publication','formula','formula-fault')) {
+        if ($id -in @('classic','mods','planning','publication','text','formula','formula-fault')) {
             $item.source_before = $sourceBefore
             $item.source_after = @{}
             foreach ($name in $sourceBefore.Keys) {
@@ -198,7 +198,7 @@ try {
             }
             if ($reloadOutcome.exit -ne 0) { $item.reason = 'Fresh process exited unsuccessfully'; continue }
         }
-        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263; formula = 82; 'formula-fault' = 18; randomness = 108; 'randomness-session' = 115; classic = 97; mods = 119; planning = 87; publication = 111 } } else { @{ qualification = 3; startup = 92; session = 264; formula = 84; 'formula-fault' = 18; randomness = 108; 'randomness-session' = 116; classic = 100; mods = 136; planning = 101; publication = 117 } }
+        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263; formula = 82; 'formula-fault' = 18; randomness = 108; 'randomness-session' = 115; classic = 97; mods = 119; planning = 87; publication = 111; text = 121 } } else { @{ qualification = 3; startup = 92; session = 264; formula = 84; 'formula-fault' = 18; randomness = 108; 'randomness-session' = 116; classic = 100; mods = 136; planning = 101; publication = 117; text = 127 } }
         $item.expected_assertions = $expectedCounts[$id]
         $scriptErrors = @(Get-Item "$caseRoot/console.*.log" | ForEach-Object FullName)
         if (!(Test-ScriptDiagnostics $scriptErrors $id $result)) {

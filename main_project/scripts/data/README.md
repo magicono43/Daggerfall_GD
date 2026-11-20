@@ -1,5 +1,11 @@
 # Classic access — IMP-004
 
+IMP-007 increment 1 now supplies [production text catalogs](TEXT_CATALOGS.md),
+CSV intake and bundled recovery labels through the separate DATA publication
+pipeline. Classic access remains BSA-only: TEXT.RSC registration/decoding awaits
+accepted increment 1 and authorized increment 2. Earlier text-unavailable notes
+below describe the IMP-004 foundation inventory.
+
 IMP-005 increment 3 adds the separate
 [definition candidate/publication contract](DEFINITION_PUBLICATION.md). It shares
 this application's lifetime but never replaces classic readers during a pre-menu

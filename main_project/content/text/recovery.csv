@@ -1,0 +1,12 @@
+schema,codec,collection,locale,key,operation,base,optional,essential,placeholders,suppress,value
+text-catalog-v1,text-token-v1,recovery,en,retry,add,en,false,true,,false,Retry
+text-catalog-v1,text-token-v1,recovery,en,quit,add,en,false,true,,false,Quit
+text-catalog-v1,text-token-v1,recovery,en,choose_folder,add,en,false,true,,false,Choose Folder
+text-catalog-v1,text-token-v1,recovery,en,continue,add,en,false,true,,false,Continue
+text-catalog-v1,text-token-v1,recovery,en,cancel,add,en,false,true,,false,Cancel
+text-catalog-v1,text-token-v1,recovery,en,return_setup,add,en,false,true,,false,Return to Setup
+text-catalog-v1,text-token-v1,recovery,en,standard_storage,add,en,false,true,,false,Use standard storage for this launch
+text-catalog-v1,text-token-v1,recovery,en,reset_settings,add,en,false,true,,false,Preserve original and reset to defaults
+text-catalog-v1,text-token-v1,recovery,en,save_continue,add,en,false,true,,false,Save and Continue
+text-catalog-v1,text-token-v1,recovery,en,run_continue,add,en,false,true,,false,Continue for This Run
+text-catalog-v1,text-token-v1,recovery,en,retry_save,add,en,false,true,,false,Retry saving preferences

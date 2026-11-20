@@ -1,5 +1,14 @@
 # Definition publication — IMP-005 increment 3
 
+IMP-007 increment 1 adds the production `text.catalogs` adapter and
+[`text-csv-v1` intake](TEXT_CATALOGS.md). `.csv` contributions dispatch to that
+registered reader; existing JSON schemas/operations are unchanged. The normal
+shell registers bundled text explicitly before preparation. Adapter-owned bundled
+contributions are shipped-tier bytes read from the PCK; filesystem declarations
+continue to use the checked physical transport below. The earlier absence-of-
+production-schema statements describe the IMP-005 delivery, not current text
+readiness. Text availability does not establish later media/world/gameplay schemas.
+
 `StartupProviderBoundary.definitions` owns `definition_registry.gd` for the
 application. CORE owns the menu-entry transaction; MOD owns the selected plan and
 profiles. This service does not decode classic records, implement a game domain,
@@ -27,6 +36,10 @@ Adapter interface:
 | `validate_record(id, value)` | Empty string on valid complete value, otherwise reason |
 | `patch_record(previous, fields)` | `{ok:true,value:complete_record}` or `{ok:false,reason}`; explicit null/nested/list policy belongs here |
 | `validate_references(resources)` | Array of failures with source/reason; may identify introducing contribution token and whether it may be explicitly omitted |
+
+`json_envelopes` defaults to true for existing adapters. The production text
+adapter explicitly declares false: even an empty JSON envelope cannot reset a
+CSV catalog or bypass entry validation. Its versioned CSV reader owns operations.
 
 Adapter declarations and validators/patch callbacks are synchronous and pure over
 their supplied data copies; they must not yield or submit MOD/CORE state changes.

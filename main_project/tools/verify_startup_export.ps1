@@ -6,6 +6,7 @@ param(
     [switch]$ModDiscovery,
     [switch]$DependencyPlanning,
     [switch]$DefinitionPublication,
+    [switch]$TextCatalog,
     [switch]$Randomness,
     [switch]$RandomnessSession,
     [switch]$Formula,
@@ -38,9 +39,10 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
     }
 }
 try {
+if ($TextCatalog) { $report.fixture = 'text-v1'; $report.reproduction.arguments.TextCatalog = $true }
 if ($FormulaExtraError -and !$FormulaFault) { throw 'Additional formula errors require the explicit fault scenario' }
-if (($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
-if (@($ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
+if (($TextCatalog -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
+if (@($TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -91,6 +93,10 @@ foreach ($mode in @('headless','rendered')) {
     if ($DefinitionPublication) {
         $fixture.mode = 'publication'
         $fixture.fixture = 'publication-v1'
+    }
+    if ($TextCatalog) {
+        $fixture.mode = 'text'
+        $fixture.fixture = 'text-v1'
     }
     if ($Randomness) {
         if ($ClassicSource) { throw 'Numeric randomness does not use a classic content source' }
@@ -151,7 +157,7 @@ foreach ($mode in @('headless','rendered')) {
         $after[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
-    $expected = if ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    $expected = if ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
     $formulaExpected = if ($FormulaFault) { 18 } elseif ($mode -eq 'headless') { 82 } else { 84 }
     if (($Formula -or $FormulaFault) -and $result.count -ne $formulaExpected) { throw 'Incomplete formula export inventory' }
     $sessionExpected = if ($mode -eq 'headless') { 115 } else { 116 }

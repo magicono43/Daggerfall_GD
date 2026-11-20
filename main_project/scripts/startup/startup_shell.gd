@@ -33,6 +33,12 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
+	if fixture.is_empty() or fixture.get("mode") == "text":
+		var registered: Dictionary = controller.providers.register_bundled_text()
+		if not registered.ok:
+			label("Bundled text registration failed: " + registered.reason)
+			essential_button("quit", func(): session_shell.request_quit())
+			return
 	if fixture.get("mode") in ["publication", "publication_reload"]:
 		preload("res://tests/publication_fixture.gd").configure(self, fixture)
 	if fixture.get("mode") in ["formula","formula-fault"]:
@@ -51,7 +57,7 @@ func launch_inputs() -> Dictionary:
 	if not standard.ok:
 		label("Storage adapter unavailable", 30)
 		label(standard.detail)
-		button("Quit", func(): session_shell.request_quit())
+		essential_button("quit", func(): session_shell.request_quit())
 		return {}
 	var executable := OS.get_executable_path().get_base_dir()
 	# Editor executable directories are shared engine installations. Never use their
@@ -111,6 +117,16 @@ func button(text: String, action: Callable, container: Node = null) -> void:
 			action.call())
 	(panel if container == null else container).add_child(item)
 
+func essential_button(key: String, action: Callable, container: Node = null) -> void:
+	var catalogs = preload("res://scripts/data/text_catalog.gd")
+	var resolved: Dictionary = catalogs.lookup(controller.providers.get("definitions"), "recovery", key)
+	# Essential catalog keys have no context references. Draw their validated
+	# literal runs, so escaped braces remain literal rather than exposing syntax.
+	var text := ""
+	for token: Dictionary in resolved.tokens:
+		text += "\n" if token.kind == "line_break" else str(token.get("text", ""))
+	button(text, action, container)
+
 func retry(fallback := false, reset := false) -> void:
 	controller.start(inputs, fallback, reset)
 	render()
@@ -143,21 +159,21 @@ func render() -> void:
 	match route:
 		"storage_recovery":
 			label("Each storage location has its own data. Switching does not move saves.")
-			button("Retry", retry)
+			essential_button("retry", retry)
 			if result.get("choices", []).has("Use standard storage"):
-				button("Use standard storage for this launch", func(): retry(true))
+				essential_button("standard_storage", func(): retry(true))
 		"settings_recovery":
 			if result.get("kind") == "incompatible":
-				button("Preserve original and reset to defaults", func(): retry(false, true))
+				essential_button("reset_settings", func(): retry(false, true))
 			elif result.get("kind") != "installation_error":
-				button("Retry", retry)
+				essential_button("retry", retry)
 		"mandatory_setup", "optional_setup", "package_recovery":
 			label("Select ARENA2 or its immediate parent folder. Classic data remains read-only.")
-			button("Choose Folder", choose_folder)
-			button("Retry", func(): controller.check_content(); render())
+			essential_button("choose_folder", choose_folder)
+			essential_button("retry", func(): controller.check_content(); render())
 			if route == "optional_setup":
-				button("Continue", func(): controller.continue_to_menu(); render())
-				button("Cancel", func(): controller.cancel_setup(); render())
+				essential_button("continue", func(): controller.continue_to_menu(); render())
+				essential_button("cancel", func(): controller.cancel_setup(); render())
 			if controller.settings != null and controller.settings.accepted != null:
 				var check := CheckBox.new()
 				check.text = "Show setup at startup (takes effect next launch)"
@@ -167,7 +183,7 @@ func render() -> void:
 					var saved := controller.settings.apply({"startup/show_setup": check.button_pressed})
 					controller.result = {"detail": "Saved; pending next launch." if saved.ok else "Accepted, not saved. Retry saving preferences."}
 					render())
-				button("Retry saving preferences", func():
+				essential_button("retry_save", func():
 					var saved := controller.settings.save_accepted()
 					controller.result = {"detail": "Saved." if saved.ok else "Accepted, not saved."}
 					render())
@@ -175,11 +191,11 @@ func render() -> void:
 			label("Main menu ready.")
 			button("Settings / Setup", func(): controller.open_setup(); render())
 		"menu_recovery":
-			button("Retry", func(): controller.continue_to_menu(); render())
-			button("Return to Setup", func(): controller.open_setup(); render())
+			essential_button("retry", func(): controller.continue_to_menu(); render())
+			essential_button("return_setup", func(): controller.open_setup(); render())
 	if controller.mods != null and not controller.menu_entered:
 		preload("res://scripts/mod/mod_setup_view.gd").new(self, controller.mods).show()
-	button("Quit", func(): session_shell.request_quit())
+	essential_button("quit", func(): session_shell.request_quit())
 
 func advance_shutdown() -> void:
 	session_shell.advance_shutdown()
@@ -246,6 +262,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/randomness_cases.gd"
 	elif fixture.get("mode") == "formula":
 		script_path = "res://tests/formula_cases.gd"
+	elif fixture.get("mode") == "text":
+		script_path = "res://tests/text_cases.gd"
 	elif fixture.get("mode") == "formula-fault":
 		script_path = "res://tests/formula_fault_cases.gd"
 	elif fixture.get("mode") == "randomness-session":

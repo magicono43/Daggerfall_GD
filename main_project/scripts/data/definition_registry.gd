@@ -108,8 +108,8 @@ func source_entries(storage: StartupStorageAdapter, provider: String, root: Stri
 		var relative: String = item if item is String else str(item.get("file", "")) if item is Dictionary else ""
 		var normalized := Paths.relative_path(relative)
 		var source := {"provider": provider, "root": root, "file": relative, "version": str(mods.available()[provider].version) if mods != null else "builtin"}
-		if not normalized.ok or relative.get_extension().to_lower() != "json":
-			result.append({"source": source, "read": failure("invalid_path", root, "Contributions must be package-relative JSON files.")})
+		if not normalized.ok or relative.get_extension().to_lower() not in ["json", "csv"]:
+			result.append({"source": source, "read": failure("invalid_path", root, "Contributions must be package-relative JSON or versioned CSV files.")})
 			continue
 		if seen.has(normalized.path):
 			result.append({"source": source, "read": failure("ambiguous_path", root, "Ambiguous normalized contribution path: " + normalized.path)})
@@ -158,6 +158,9 @@ func prepare(mods: RefCounted) -> Dictionary:
 	domains.sort()
 	for domain: String in domains:
 		var registered: Dictionary = _adapters[domain]
+		if registered.adapter.has_method("bundled_contributions"):
+			for bundled: Dictionary in registered.adapter.bundled_contributions():
+				entries.append({"source":{"provider":"@shipped/" + str(registered.declaration.id),"root":"res://content/text","file":bundled.file,"version":"text-catalog-v1"},"read":{"ok":true,"bytes":bundled.bytes}})
 		entries.append_array(source_entries(mods.adapter, "@shipped/" + str(registered.declaration.id), registered.root, registered.files))
 	var capabilities: Array = []
 	for domain: String in domains:
@@ -220,6 +223,11 @@ func prepare(mods: RefCounted) -> Dictionary:
 	return projection()
 
 func apply_contribution(base: Dictionary, bytes: PackedByteArray, source: Dictionary) -> Dictionary:
+	if str(source.get("file", "")).get_extension().to_lower() == "csv":
+		for registered: Dictionary in _adapters.values():
+			if registered.declaration.get("formats", []).has("text-csv-v1") and registered.adapter.has_method("apply_csv"):
+				return registered.adapter.apply_csv(base, bytes, source.duplicate(true))
+		return failure("reader_unavailable", JSON.stringify(source), "No registered text-csv-v1 reader.")
 	var text := bytes.get_string_from_utf8()
 	var json := JSON.new()
 	if text.to_utf8_buffer() != bytes or (not text.is_empty() and text.unicode_at(0) == 0xfeff) or json.parse(text) != OK or not json.data is Dictionary:
@@ -230,6 +238,8 @@ func apply_contribution(base: Dictionary, bytes: PackedByteArray, source: Dictio
 	if not _adapters.has(domain) or not path.ok or not contribution.get("entries") is Array:
 		return failure("invalid", JSON.stringify(source), "Contribution needs a registered domain, normalized path and entries array.")
 	var registered: Dictionary = _adapters[domain]
+	if not registered.declaration.get("json_envelopes", true):
+		return failure("invalid", JSON.stringify(source), "This domain requires its versioned reader; JSON envelopes are unsupported.")
 	var operation: String = str(contribution.get("operation", ""))
 	if not registered.declaration.operations.has(operation):
 		return failure("invalid", JSON.stringify(source), "Operation is not supported by this adapter: " + operation)

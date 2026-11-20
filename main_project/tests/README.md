@@ -538,3 +538,42 @@ Rendered setup drives the real omission button with focus, scrolling and Enter
 press/release and retains `formula-recovery.png` and `formula-menu.png`. Formula
 lock/selection survives actual CORE controlled return, new character and load;
 these are not native CHAR/WORLD/SAVE restore or executable-mod acceptance.
+
+## IMP-007 increment 1 — catalog lookup and CSV patches
+
+From the repository root, invoke sequentially with Godot 4.7.2 and the existing
+built Windows storage adapter:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario text -Fixture text-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Scenario text -Fixture text-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -TextCatalog -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -TextCatalog -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+`-Suite text` is equivalent. `IMP-007-catalog-v1` freezes `text-catalog-v1`,
+`text-csv-v1`, `text-token-v1`, with **121 headless / 127 rendered** assertions.
+Explicit available classic source is required for actual production startup/menu
+integration; no TEXT.RSC bytes are read in this increment. Unsupported seed/clock/
+input overrides, missing input/results, script errors and unfinished inventories
+remain incomplete. Existing diagnostic qualification is unchanged.
+
+The fixture uses leased disposable roots and real MOD discovery/order, CSV DATA
+candidates, source omission/rebuild and CORE actual menu entry. It tests English,
+synthetic exact `zz-Test`, non-English base retention, reordered/missing/blank/
+malformed references, optional/essential fallback, complete UTF-8/CSV parsing,
+whole-file rejection, source/row provenance, two ordered packages and final loose
+override, read projection copies and run locks. Live CORE/RULE sources use 32 zero
+material bytes and a controlled owner with one retained quest result: lookup
+leaves its nonzero counts and unapplied facts unchanged. This is not real QUEST,
+CHAR, reward delivery, SAVE or macro integration.
+
+Rendered output captures asset-independent recovery, scrolled Quit, and the actual
+committed menu. Inspect those images in addition to assertions. Export runs test
+the bundled raw CSV through PCK FileAccess and the matching terminal inventories.
+Font roles, Unicode shaping, pending-choice locale switching, TEXT.RSC decoding and
+authoring codec/import/mod preferences retain later increment gates. Synthetic
+catalog presence does not advertise a supported language.
+
+See [the concrete contract](../scripts/data/TEXT_CATALOGS.md) and
+[execution evidence](../../design_docs/development/evidence/IMP-007-increment-1-2026-11-20.md).
