@@ -1,5 +1,14 @@
 # Milestones and validation checkpoints
 
+**Final IMP-006 acceptance, 2026-11-20:** The user confirmed increment 3 complete;
+all three assigned increments are accepted ([evidence](evidence/IMP-006-increment-3-2026-11-20.md)).
+IMP-014 now has all listed prerequisites delivered. IMP-016/017/032 clear their
+IMP-006 edge and retain other prerequisites. IMP-007 was already cleared by
+IMP-005. Its requested handoff prompt is preparation, not implementation
+authorization. No next IMP is started; remaining real-owner/M1/executable/SAVE
+gates and the documented release limits are unchanged. Earlier notes are historical.
+
+
 **IMP-006 increment 3, 2026-11-20:** The user accepted increment 2 and authorized
 the bounded formula registry. All three assigned increments are implemented and
 verified; [increment-3 evidence](evidence/IMP-006-increment-3-2026-11-20.md) records
