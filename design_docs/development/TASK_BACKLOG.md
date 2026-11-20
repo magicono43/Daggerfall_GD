@@ -1,5 +1,12 @@
 # Implementation backlog
 
+**IMP-006 increment 1, 2026-11-20:** Numeric implementation verified;
+awaits user acceptance; see [execution evidence](evidence/IMP-006-increment-1-2026-11-20.md).
+The separate acceptance gates for lifecycle and formula dispatch remain binding.
+IMP-006 is not fully delivered and no dependent prerequisite edge clears.
+Earlier authorization/readiness statements below retain historical context.
+
+
 **Final IMP-005 acceptance, 2026-11-20:** The user accepted the complete assigned
 task, increment 3 included ([evidence](evidence/IMP-005-increment-3-2026-11-20.md)).
 IMP-007/008/009/010 are fully prerequisite-cleared; IMP-028/050 clear only their

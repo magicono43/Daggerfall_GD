@@ -1,0 +1,154 @@
+{
+  "derivations": [
+    {
+      "material": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "purpose": "combat",
+      "state": "6bae6a012be00f4a",
+      "sequence": "6f7bf6c20d16cdbe",
+      "outputs": [
+        "1c01cd52",
+        "bef693fb",
+        "591aef4f",
+        "a5905607",
+        "b28e16d0",
+        "ff36fa60"
+      ]
+    },
+    {
+      "material": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "purpose": "progression",
+      "state": "d8679f8a4d1e5cab",
+      "sequence": "680c0cb19dfbc079",
+      "outputs": [
+        "120a6a91",
+        "560b46e5",
+        "d9507932",
+        "a2f659f8",
+        "7475a781",
+        "ed39a1f6"
+      ]
+    },
+    {
+      "material": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "purpose": "loot",
+      "state": "9ca5eb1002ab97fd",
+      "sequence": "540123c1234c8581",
+      "outputs": [
+        "f6a0af9d",
+        "5f8e6be1",
+        "a02ea795",
+        "b3568f91",
+        "519f891c",
+        "d3fb9814"
+      ]
+    },
+    {
+      "material": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "purpose": "quest",
+      "state": "e578f40cce6d3b05",
+      "sequence": "38f16e43bf0018a2",
+      "outputs": [
+        "2e2ed626",
+        "417e75a8",
+        "aab0a0b6",
+        "11517511",
+        "127f9458",
+        "cfb31161"
+      ]
+    },
+    {
+      "material": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "purpose": "combat",
+      "state": "fde695b5dd4961bc",
+      "sequence": "49c4cd00d7147eb5",
+      "outputs": [
+        "812c2430",
+        "1f0b2da5",
+        "5b57f553",
+        "b352d8e5",
+        "3d97378e",
+        "10af8a7d"
+      ]
+    },
+    {
+      "material": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "purpose": "progression",
+      "state": "5e7cc501d060c9b7",
+      "sequence": "1ac7ad63f2375120",
+      "outputs": [
+        "9ae0cc01",
+        "a743281d",
+        "f570962d",
+        "1881fcc9",
+        "c8956a75",
+        "bbe06469"
+      ]
+    },
+    {
+      "material": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "purpose": "loot",
+      "state": "37bd48eab6e22a58",
+      "sequence": "7d96d141d8fbf71e",
+      "outputs": [
+        "13cd248e",
+        "149424d0",
+        "e031cbeb",
+        "a8729093",
+        "914648ef",
+        "c314333b"
+      ]
+    },
+    {
+      "material": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "purpose": "quest",
+      "state": "9c6360afacc498f0",
+      "sequence": "54c87aa85b8ef88d",
+      "outputs": [
+        "f3fdef29",
+        "e5b23135",
+        "888a4b4d",
+        "42ef7199",
+        "7bf7fbeb",
+        "8a4767d4"
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "state": "0000000000000000",
+      "sequence": "0000000000000000",
+      "outputs": [
+        "e4c14788",
+        "379c6516",
+        "5c4ab3bb",
+        "601d23e0",
+        "1c382b8c",
+        "d1faab16"
+      ]
+    },
+    {
+      "state": "ffffffffffffffff",
+      "sequence": "ffffffffffffffff",
+      "outputs": [
+        "2675c047",
+        "7779a837",
+        "a145aa13",
+        "5f6be726",
+        "523c44c5",
+        "75a406d6"
+      ]
+    },
+    {
+      "state": "8000000000000000",
+      "sequence": "8000000000000000",
+      "outputs": [
+        "4708e4c1",
+        "6516339c",
+        "b3bb5e4a",
+        "23e0641d",
+        "3b8c1c38",
+        "eb16d1fa"
+      ]
+    }
+  ]
+}

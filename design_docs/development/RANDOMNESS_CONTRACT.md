@@ -51,3 +51,21 @@ Project derivation fixtures use M = 32 zero bytes. Values below were calculated 
 Use a controlled raw source containing 0, 95, 96, 199 for bound 100. The first bounded result is 96 after three raw requests, and the next is 99 after one. Verify invalid bounds leave source state intact and guaranteed percentile checks still consume one logical draw. Interleave any number of combat draws and compare the other three streams against their untouched vectors.
 
 Classic compatibility retains RULE-002's separate generator, seed and mapping. Domain owners retain assigned results, attempt identity, eligibility and draw ordering. The selected algorithm alone provides no guarantee of identical outcomes after gameplay order or content changes.
+
+## Implementation status — 2026-11-20
+
+IMP-006 increment 1 implements the numeric contract in
+[the RULE interface](../../main_project/scripts/rule/README.md), with actual
+Godot 4.7.2 vectors under scenario `randomness` / fixture `randomness-v1`.
+Unsigned state is represented by four little-endian 16-bit limbs. PCG raw outputs
+use signed-64 host integers for the complete unsigned-32 domain. Classic ranges
+support signed-32 endpoints with positive signed-32 widths, preserve remainder
+mapping and reject overflow before drawing. The low-32 recurrence is equivalent
+for every observable classic raw output; no original DOS parity is claimed.
+The factory supplies explicit fixture material or checked OS entropy;
+there is no automatic session lifecycle integration in this increment.
+
+The three-increment acceptance sequence remains binding. Numeric delivery does
+not establish CORE successful-load initialization, owner retention, formula-hook
+publication or executable provider readiness. See
+[increment evidence](evidence/IMP-006-increment-1-2026-11-20.md).

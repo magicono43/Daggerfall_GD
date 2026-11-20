@@ -31,6 +31,33 @@ $report = [ordered]@{ schema = 1; mode = $Mode; suite = $Suite; fixture = $Fixtu
     engine = $null; executable = $engineExecutable; runtime_project = $runtimeProject; build = @{}; reproduction = @{ command = "./main_project/tools/verify_$Mode.ps1"; arguments = @{
         Suite = $Suite; Scenario = $Scenario; Fixture = $Fixture; ClassicSource = $ClassicSource; Seed = $Seed; Clock = $Clock; InputSequence = $InputSequence; Godot = $Godot; TimeoutSeconds = $TimeoutSeconds } } }
 
+# Compare JSON structures recursively, preserving legacy numeric equality (9 == 9.0)
+# and case-sensitive strings. PowerShell collection comparison is not deep equality.
+function Test-AssertionValue($Expected, $Actual) {
+    if ($null -eq $Expected -or $null -eq $Actual) { return $null -eq $Expected -and $null -eq $Actual }
+    if ($Expected -is [Array] -or $Actual -is [Array]) {
+        if ($Expected -isnot [Array] -or $Actual -isnot [Array] -or $Expected.Count -ne $Actual.Count) { return $false }
+        for ($i = 0; $i -lt $Expected.Count; $i++) {
+            if (!(Test-AssertionValue $Expected[$i] $Actual[$i])) { return $false }
+        }
+        return $true
+    }
+    if ($Expected -is [pscustomobject] -or $Actual -is [pscustomobject]) {
+        if ($Expected -isnot [pscustomobject] -or $Actual -isnot [pscustomobject]) { return $false }
+        $names = @($Expected.PSObject.Properties.Name)
+        if ($names.Count -ne @($Actual.PSObject.Properties.Name).Count) { return $false }
+        foreach ($name in $names) {
+            $property = $Actual.PSObject.Properties[$name]
+            if ($null -eq $property -or !(Test-AssertionValue $Expected.$name $property.Value)) { return $false }
+        }
+        return $true
+    }
+    if ($Expected -is [string] -or $Actual -is [string]) {
+        return $Expected -is [string] -and $Actual -is [string] -and $Expected -ceq $Actual
+    }
+    return $Expected -ceq $Actual
+}
+
 # Only this helper owns child lifetime. No shell-built command or unrelated process kill.
 function Invoke-Engine([string[]]$EngineArguments, [string]$Directory, [string]$Name) {
     $quoted = @($EngineArguments | ForEach-Object { '"' + $_.Replace('"','\"') + '"' })
@@ -77,7 +104,7 @@ try {
     $report.build.working_tree = @(& git -C $project status --short)
     $report.build.sources = @{}
     foreach ($source in Get-ChildItem "$project/scripts","$project/tests","$project/tools","$project/config","$project/native/storage" -File -Recurse |
-        Where-Object { $_.FullName -notmatch '[\\/](\.runs|\.toolchain|bin|\.zig-cache|zig-out)[\\/]' -and $_.Extension -in @('.gd','.ps1','.cpp','.ini','.gdextension') }) {
+        Where-Object { $_.FullName -notmatch '[\\/](\.runs|\.toolchain|bin|\.zig-cache|zig-out)[\\/]' -and $_.Extension -in @('.gd','.ps1','.cpp','.ini','.gdextension','.json','.txt') }) {
         $report.build.sources[[IO.Path]::GetRelativePath($project,$source.FullName)] = (Get-FileHash $source.FullName -Algorithm SHA256).Hash
     }
     Copy-VerificationResources $project $runtimeProject
@@ -102,16 +129,16 @@ try {
         $item = [ordered]@{ scenario = $id; fixture = $Fixture; root = $caseRoot; inputs = $report.inputs
             status = 'incomplete'; reason = ''; process_exit = $null; result = $null }
         $report.scenarios += $item
-        if ($id -notin @('qualification','startup','session','classic','mods','planning','publication')) {
+        if ($id -notin @('qualification','startup','session','randomness','classic','mods','planning','publication')) {
             $item.reason = 'Required scenario unavailable; real owner/provider not registered'
             continue
         }
-        if (($id -eq 'publication' -and $Fixture -ne 'publication-v1') -or ($id -eq 'planning' -and $Fixture -ne 'planning-v1') -or ($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('classic','mods','planning','publication') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
+        if (($id -eq 'randomness' -and $Fixture -ne 'randomness-v1') -or ($id -eq 'publication' -and $Fixture -ne 'publication-v1') -or ($id -eq 'planning' -and $Fixture -ne 'planning-v1') -or ($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('randomness','classic','mods','planning','publication') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
             $item.reason = 'Fixture unavailable for selected scenario'
             continue
         }
         if ($null -ne $Seed -or $null -ne $Clock -or $InputSequence -ne '') {
-            $item.reason = 'Selected M1 scenarios use fixed owner vectors and consume no RNG or game clock; explicit controls require a future owner scenario'
+            $item.reason = 'Selected fixture uses fixed owner inputs; explicit seed/clock/input overrides are unsupported for this selection'
             continue
         }
         # Fresh process AND roots reset all session/static state between scenarios.
@@ -191,12 +218,12 @@ try {
                 ((Select-String -Path "$caseRoot/reload-console.*.log" -Pattern 'SCRIPT ERROR:' -Quiet) -contains $true)) {
                 $item.reason = 'Fresh-process restore incomplete'; continue
             }
-            if (!$reloadResult.ok -or @($reloadResult.checks | Where-Object { $_.expected -cne $_.actual }).Count -gt 0) {
+            if (!$reloadResult.ok -or @($reloadResult.checks | Where-Object { !(Test-AssertionValue $_.expected $_.actual) }).Count -gt 0) {
                 $item.status = 'failed'; $item.reason = 'Fresh-process restore assertion failure'; continue
             }
             if ($reloadOutcome.exit -ne 0) { $item.reason = 'Fresh process exited unsuccessfully'; continue }
         }
-        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263; classic = 97; mods = 119; planning = 87; publication = 111 } } else { @{ qualification = 3; startup = 92; session = 264; classic = 100; mods = 136; planning = 101; publication = 117 } }
+        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263; randomness = 108; classic = 97; mods = 119; planning = 87; publication = 111 } } else { @{ qualification = 3; startup = 92; session = 264; randomness = 108; classic = 100; mods = 136; planning = 101; publication = 117 } }
         $item.expected_assertions = $expectedCounts[$id]
         $scriptErrors = Select-String -Path "$caseRoot/console.*.log" -Pattern 'SCRIPT ERROR:' -Quiet
         if ($scriptErrors -contains $true) {
@@ -206,7 +233,7 @@ try {
             ($Mode -eq 'rendered' -and $result.display -eq 'headless')) {
             $item.reason = 'Incomplete report or unavailable renderer'; continue
         }
-        $failed = @($result.checks | Where-Object { $_.expected -cne $_.actual })
+        $failed = @($result.checks | Where-Object { !(Test-AssertionValue $_.expected $_.actual) })
         # Legacy assertions report pass/FAIL; qualification reports typed expected/actual.
         if (!$result.ok -or $failed.Count -gt 0) {
             $item.status = 'failed'; $item.reason = 'Assertion failure'

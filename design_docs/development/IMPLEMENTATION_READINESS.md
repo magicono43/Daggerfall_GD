@@ -1,5 +1,12 @@
 # Implementation readiness
 
+**IMP-006 increment 1, 2026-11-20:** Numeric implementation verified;
+awaits user acceptance; see [execution evidence](evidence/IMP-006-increment-1-2026-11-20.md).
+The separate acceptance gates for lifecycle and formula dispatch remain binding.
+IMP-006 is not fully delivered and no dependent prerequisite edge clears.
+Earlier authorization/readiness statements below retain historical context.
+
+
 **All 12 register decisions are approved. The second audit confirms 64 READY, 0 BLOCKED and 0 NEEDS REVISION planning statuses.** Their implementation prerequisites still govern dispatch. Execution is tracked per task below; subsequent work requires authorization. The [second audit](PRE_IMPLEMENTATION_AUDIT_2.md) records the planning result; the [first audit](../archive/PRE_IMPLEMENTATION_AUDIT.md) retains the historical baseline. The [architecture register](../analysis/architecture/ARCHITECTURAL_DECISIONS.md#approved-decisions) governs cross-system policies and the [gameplay log](../design/GAMEPLAY_DECISIONS.md) governs approved behavior.
 
 ## Per-task review

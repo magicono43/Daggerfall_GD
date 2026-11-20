@@ -1,5 +1,12 @@
 # Implementation dependencies
 
+**IMP-006 increment 1, 2026-11-20:** Numeric implementation verified;
+awaits user acceptance; see [execution evidence](evidence/IMP-006-increment-1-2026-11-20.md).
+The separate acceptance gates for lifecycle and formula dispatch remain binding.
+IMP-006 is not fully delivered and no dependent prerequisite edge clears.
+Earlier authorization/readiness statements below retain historical context.
+
+
 2026-11-20, final IMP-005 acceptance: all assigned increments are user-accepted
 ([evidence](evidence/IMP-005-increment-3-2026-11-20.md)). Its edge clears for
 IMP-007/008/009/010/028/050. IMP-007/008/009/010 now have all listed prerequisites

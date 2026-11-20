@@ -240,6 +240,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/dependency_cases.gd"
 	elif fixture.get("mode") == "planning_reload":
 		script_path = "res://tests/dependency_reload_cases.gd"
+	elif fixture.get("mode") == "randomness":
+		script_path = "res://tests/randomness_cases.gd"
 	elif fixture.get("mode") == "publication":
 		script_path = "res://tests/publication_cases.gd"
 	elif fixture.get("mode") == "publication_reload":

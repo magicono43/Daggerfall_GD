@@ -1,5 +1,12 @@
 # Milestones and validation checkpoints
 
+**IMP-006 increment 1, 2026-11-20:** Numeric implementation verified;
+awaits user acceptance; see [execution evidence](evidence/IMP-006-increment-1-2026-11-20.md).
+The separate acceptance gates for lifecycle and formula dispatch remain binding.
+IMP-006 is not fully delivered and no dependent prerequisite edge clears.
+Earlier authorization/readiness statements below retain historical context.
+
+
 The [backlog](TASK_BACKLOG.md) lists the work associated with each integration gate. A milestone passes when its required scenarios pass in the target build and the evidence is recorded. Feature criteria outside the slice stay open until the named integration work runs. The [second audit](PRE_IMPLEMENTATION_AUDIT_2.md) confirms the revised boundaries. IMP-037 supplies M3's approved minimum economy/property initialization before IMP-036 startup.
 
 ## M1

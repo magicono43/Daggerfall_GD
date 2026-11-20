@@ -392,3 +392,39 @@ IMP-005 MOD/DATA results. IMP-003 adoption is delivered. Later owners must
 exercise actual SAVE/MOD writable consumers, session lifetimes, preference
 application/rollback and display confirmation. No real-provider milestone gate is
 closed by these controlled fixtures.
+
+## IMP-006 increment 1 — numeric sources
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario randomness -Fixture randomness-v1
+```
+
+`-Suite randomness` selects the same scenario. `IMP-006-numeric-v1` has a fixed
+108-assertion terminal inventory, identical in headless/rendered mode; no UI or
+frame behavior is added. Pure numeric vectors require no separate rendered UI.
+The source interface and exact fixed material/seed inputs are documented in
+`../scripts/rule/README.md`; additional unsigned/material vectors are pinned in
+`randomness_vectors.json`. Structured arrays/dictionaries use recursive value comparison, retaining numeric
+equality for 9 and 9.0 and preserving the expected/actual evidence.
+Build manifests now also hash JSON vectors and license text inputs.
+
+The fixture uses explicit material (zero, bytes 00..1f and all ff), PCG 42/54 and
+unsigned seed endpoints, classic seeds 0/1/4294967295, controlled rejection raw
+0/95/96/199, and exhaustive percentile boundary checks. No clock or input is used.
+Scalar `-Seed`, `-Clock` and `-InputSequence` overrides remain incomplete rather
+than replacing these fixed multi-seed vectors. OS entropy is checked for successful
+32-byte delivery, never for uniqueness; missing/short material follows the same
+explicit failure validator with no fallback. No player/session source is touched.
+Classic RNG is separate from scenario `classic`, which still verifies DATA readers.
+Session/load retention and formula hooks remain unavailable until increments 2/3.
+
+Windows numeric exports use the existing wrapper with an explicit owner selection:
+
+```powershell
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -Randomness
+./main_project/tools/verify_startup_export.ps1 -Configuration release -Randomness
+```
+
+Each independently exports the copied project and runs the fixed 108 assertions
+in headless and rendered executables, preserving export/storage/native pins.
+The export includes both attribution licenses and pinned JSON numeric vectors.

@@ -5,7 +5,8 @@ param(
     [string]$ClassicSource = '',
     [switch]$ModDiscovery,
     [switch]$DependencyPlanning,
-    [switch]$DefinitionPublication
+    [switch]$DefinitionPublication,
+    [switch]$Randomness
 )
 $ErrorActionPreference = 'Stop'
 . "$PSScriptRoot/mod_fixture.ps1"
@@ -17,9 +18,9 @@ New-Item -ItemType Directory -Force $build | Out-Null
 $priorRoaming = $env:APPDATA
 $priorLocal = $env:LOCALAPPDATA
 $report = @{ ok = $false; status = 'incomplete'; configuration = $Configuration; classic_source = $ClassicSource
-    fixture = $(if ($DefinitionPublication) {'publication-v1'} elseif ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
+    fixture = $(if ($Randomness) {'randomness-v1'} elseif ($DefinitionPublication) {'publication-v1'} elseif ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
     reproduction = @{ command = './main_project/tools/verify_startup_export.ps1'; arguments = @{
-        Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Godot = $Godot; Templates = $Templates } } }
+        Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; Godot = $Godot; Templates = $Templates } } }
 function Copy-ExportResources([string]$Source, [string]$Destination) {
     New-Item -ItemType Directory -Force $Destination | Out-Null
     foreach ($entry in Get-ChildItem -LiteralPath $Source) {
@@ -33,7 +34,7 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
 }
 try {
 if (($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
-if (@($ModDiscovery,$DependencyPlanning,$DefinitionPublication | Where-Object { $_ }).Count -gt 1) { throw 'Select one mod increment per export invocation' }
+if (@($ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -85,6 +86,10 @@ foreach ($mode in @('headless','rendered')) {
         $fixture.mode = 'publication'
         $fixture.fixture = 'publication-v1'
     }
+    if ($Randomness) {
+        if ($ClassicSource) { throw 'Numeric randomness does not use a classic content source' }
+        $fixture = @{ sandbox = $sandbox.Replace('\','/'); mode = 'randomness'; fixture = 'randomness-v1'; inputs = @{} }
+    }
     $fixture |
         ConvertTo-Json | Set-Content "$sandbox/fixture.json"
     $arguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/fixture.json")
@@ -93,7 +98,11 @@ foreach ($mode in @('headless','rendered')) {
     $engineExit = $LASTEXITCODE
     if (($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication) -and $engineExit -eq 0) {
         $fixture.mode = if ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
-        $fixture | ConvertTo-Json -Depth 10 | Set-Content "$sandbox/reload-fixture.json"
+        if ($Randomness) {
+        if ($ClassicSource) { throw 'Numeric randomness does not use a classic content source' }
+        $fixture = @{ sandbox = $sandbox.Replace('\','/'); mode = 'randomness'; fixture = 'randomness-v1'; inputs = @{} }
+    }
+    $fixture | ConvertTo-Json -Depth 10 | Set-Content "$sandbox/reload-fixture.json"
         $reloadArguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/reload-fixture.json")
         if ($mode -eq 'headless') { $reloadArguments = @('--headless') + $reloadArguments }
         & "$build/Startup.console.exe" @reloadArguments *> "$run/$mode-reload.log"
@@ -128,6 +137,7 @@ foreach ($mode in @('headless','rendered')) {
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
     $expected = if ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    if ($Randomness -and $result.count -ne 108) { throw 'Incomplete numeric export inventory' }
     if ($ClassicSource -and $result.count -ne $expected) { throw 'Incomplete owner export result' }
     $checks += @{ scenario = "exported-$mode"; actual = 'pass'; assertions = $result.count; process_exit = $engineExit
         source_before = $before; source_after = $after; result = "$sandbox/result.json" }
