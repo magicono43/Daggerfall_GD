@@ -8,6 +8,9 @@ var faults: Dictionary = {} # Controlled failure-only fixture seam.
 var before_menu := Callable()
 var classic_preparations := 0 # Diagnostic count of explicit source preparation requests.
 
+func enable_structured_text() -> bool:
+	return classic.register_adapter("classic-text-v1", [{"file":"TEXT.RSC","format":"text-rsc-v1"}]) and classic.enable_capability("classic-text-v1")
+
 func register_bundled_text() -> Dictionary:
 	# Catalogs need no classic source; bundled intake also works from an exported PCK.
 	return register_content_adapter(preload("res://scripts/data/text_catalog.gd").new(), "", [])

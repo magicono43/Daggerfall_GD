@@ -33,10 +33,15 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
-	if fixture.is_empty() or fixture.get("mode") == "text":
+	if fixture.is_empty() or fixture.get("mode") in ["text", "structured-text"]:
 		var registered: Dictionary = controller.providers.register_bundled_text()
 		if not registered.ok:
 			label("Bundled text registration failed: " + registered.reason)
+			essential_button("quit", func(): session_shell.request_quit())
+			return
+	if fixture.is_empty() or fixture.get("mode") == "structured-text":
+		if not controller.providers.enable_structured_text():
+			label("Required structured text reader registration failed.")
 			essential_button("quit", func(): session_shell.request_quit())
 			return
 	if fixture.get("mode") in ["publication", "publication_reload"]:
@@ -264,6 +269,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/formula_cases.gd"
 	elif fixture.get("mode") == "text":
 		script_path = "res://tests/text_cases.gd"
+	elif fixture.get("mode") == "structured-text":
+		script_path = "res://tests/structured_text_cases.gd"
 	elif fixture.get("mode") == "formula-fault":
 		script_path = "res://tests/formula_fault_cases.gd"
 	elif fixture.get("mode") == "randomness-session":

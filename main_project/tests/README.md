@@ -577,3 +577,46 @@ catalog presence does not advertise a supported language.
 
 See [the concrete contract](../scripts/data/TEXT_CATALOGS.md) and
 [execution evidence](../../design_docs/development/evidence/IMP-007-increment-1-2026-11-20.md).
+
+## IMP-007 increment 2 — structured classic text
+
+Invoke independently and sequentially from the repository root:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario structured-text -Fixture structured-text-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Scenario structured-text -Fixture structured-text-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -StructuredText -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -StructuredText -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+`-Suite structured-text` is equivalent. `IMP-007-structured-v1` freezes reader
+`text-rsc-v1` and binary profile `classic-controls-v1`, retaining `text-token-v1`.
+Fixed terminal inventories: **284 headless / 294 rendered**. They include all
+121/127 original catalog assertions through the actual five-source production
+composition. The original `text` / `text-v1` scenario and `-TextCatalog` exports
+retain exactly **121/127**, with their original four-source scope.
+
+Explicit available classic input is required. Only this enabled text scenario
+adds TEXT.RSC to the wrapper's Windows READ-only sharing guards and before/after
+hashes. Missing input, seed/clock/input overrides, missing/truncated reports,
+unexpected engine/script diagnostics and unsupported explicit controls do not
+count as passing records. Existing narrow formula-error qualification is unchanged.
+
+Checks cover real records 25/11/1200/1201, explicit key mappings and required
+control signatures, source byte/token positions, meaningful spaces/literal escapes,
+line/page/input/font/position/layout controls, exact binary structural codec bytes,
+empty authored variants, malformed/unsupported records and directory extents,
+source loss before initialization and after publication, cleanup/retry/interruption,
+stale tickets, active-source retention and restart-only replacement. Separate
+controlled gameplay owners use real CORE/RULE handles: text inspection/refresh and
+isolated literal sample expansion consume zero draws or mutations. MOD dependency
+order, CSV omission/rebuild and actual CORE menu locking remain real integrations.
+
+Rendered fixtures retain recovery, scrolled Quit, committed menu and
+`structured-sample.png`. Inspect saved PNGs. The sample is a fixture inspector
+showing a one-pass explicit literal `%gii` substitution and an input-position
+marker. It neither submits an answer nor implements a general gameplay renderer.
+Fonts/live switching, production macro expansion (IMP-030), editable translation
+codec/import (increment 4/IMP-056), book edition anchors and real gameplay/SAVE
+providers retain their named gates. See [the concrete contract](../scripts/data/STRUCTURED_TEXT.md)
+and [execution evidence](../../design_docs/development/evidence/IMP-007-increment-2-2026-11-20.md).

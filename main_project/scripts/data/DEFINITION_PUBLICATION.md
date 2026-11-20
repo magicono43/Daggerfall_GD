@@ -23,7 +23,8 @@ startup provider. Registration enables that adapter for this startup. Each domai
 has one owner. Required classic sources join `classic.register_adapter` and
 `enable_capability` before any reader initializes; unsupported formats reject
 registration instead of being relabeled as supported. The delivered classic
-registry supports `bsa-v1` only. Later owners must supply real checked readers for
+registry supports `bsa-v1` and IMP-007 increment 2's real `text-rsc-v1`.
+See [structured text](STRUCTURED_TEXT.md). Later owners must supply real checked readers for
 their formats. Late registrations reject without switching/reconstructing active
 classic indexes. Adapter callbacks are trusted application GDScript, never loaded
 from a package.

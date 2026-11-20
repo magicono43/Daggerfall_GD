@@ -1,6 +1,7 @@
 extends RefCounted
 ## Application-owned registry. Validation, prepared readers and active access differ.
 const BsaReader = preload("res://scripts/data/bsa_reader.gd")
+const TextReader = preload("res://scripts/data/text_rsc_reader.gd")
 var _declarations: Dictionary = {}
 var _enabled: Array[String] = ["classic-containers-v1"]
 var _active: Dictionary = {}
@@ -23,7 +24,7 @@ func register_adapter(id: String, sources: Array) -> bool:
 		return false
 	for entry: Dictionary in sources:
 		var file := str(entry.get("file", ""))
-		if file.is_empty() or file.get_file() != file or file.contains("\\") or entry.get("format") != "bsa-v1":
+		if file.is_empty() or file.get_file() != file or file.contains("\\") or entry.get("format") not in ["bsa-v1", TextReader.VERSION]:
 			return false # Other formats require their actual owner implementation.
 	_declarations[id] = sources.duplicate(true)
 	return true
@@ -44,6 +45,8 @@ func manifest() -> Dictionary:
 			var name := str(entry.file).to_upper()
 			if not entries.has(name):
 				entries[name] = {"file": name, "format": entry.format, "adapters": []}
+			elif entries[name].format != entry.format:
+				return {"ok":false,"kind":"capability_unavailable","reason":"Conflicting reader formats for required source: " + name}
 			entries[name].adapters.append(id)
 	return {"ok": true, "entries": entries.values()}
 
@@ -90,8 +93,8 @@ func validate(candidate: String) -> Dictionary:
 	var failures: Array = []
 	var checks: Array = []
 	for entry: Dictionary in declared.entries:
-		var reader := BsaReader.new()
-		var checked := reader.initialize(str(resolved.source).path_join(entry.file))
+		var reader: RefCounted = TextReader.new() if entry.format == TextReader.VERSION else BsaReader.new()
+		var checked: Dictionary = reader.initialize(str(resolved.source).path_join(entry.file))
 		reader.close()
 		checked.manifest_entry = entry.duplicate(true)
 		checks.append(checked)
@@ -122,8 +125,8 @@ func initialize_readers(validated: Dictionary) -> Dictionary:
 		return {"ok": true, "source": _active_source, "ready": true, "ticket": 0, "stage": "active"}
 	var failures: Array = []
 	for entry: Dictionary in checked.manifest:
-		var reader := BsaReader.new()
-		var initialized := reader.initialize(str(checked.source).path_join(entry.file))
+		var reader: RefCounted = TextReader.new() if entry.format == TextReader.VERSION else BsaReader.new()
+		var initialized: Dictionary = reader.initialize(str(checked.source).path_join(entry.file))
 		if initialized.ok:
 			_prepared[entry.file] = reader
 		else:

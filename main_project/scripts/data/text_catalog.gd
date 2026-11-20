@@ -99,7 +99,7 @@ func apply_csv(base: Dictionary, bytes: PackedByteArray, source: Dictionary) -> 
 		working[resource_key] = resource
 	return {"ok":true,"resources":working}
 
-static func lookup(registry: RefCounted, collection: String, key: String, selected := "en", fallback := "") -> Dictionary:
+static func lookup(registry: RefCounted, collection: String, key: String, selected := "en", fallback := "", required_controls: Variant = null) -> Dictionary:
 	var query: Dictionary = registry.query(DOMAIN,collection,key) if registry != null else {"ok":false,"kind":"before_readiness","source":"bundled recovery"}
 	var context := {"collection":collection,"key":key,"locale":selected,"source":{},"attempts":[],"diagnostics":[]}
 	var required: Array = []
@@ -115,6 +115,9 @@ static func lookup(registry: RefCounted, collection: String, key: String, select
 				continue
 			context.attempts.append(locale)
 			var entry: Dictionary = record.value.entries.get(locale,{})
+			if entry.get("usable",false) and required_controls is Array and not Tokens.require_structure(entry.tokens,required_controls).ok:
+				context.diagnostics.append({"locale":locale,"source":entry.winner,"reason":"Required ordered structure is absent or incompatible.","position":0,"kind":"required_structure"})
+				continue
 			if entry.get("usable",false):
 				context.merge({"kind":"suppressed" if entry.suppressed else "selected" if locale == selected else "base","text":entry.text,"tokens":entry.tokens.duplicate(true),"winner":entry.winner.duplicate(true),"entry_contributors":entry.contributors.duplicate(true),"resolved_locale":locale,"ok":true})
 				return context
@@ -123,10 +126,10 @@ static func lookup(registry: RefCounted, collection: String, key: String, select
 		context.diagnostics.append(query.duplicate(true))
 	if not fallback.strip_edges().is_empty():
 		var syntax := Tokens.parse(fallback,required)
-		if syntax.ok:
+		if syntax.ok and (not required_controls is Array or Tokens.require_structure(syntax.tokens,required_controls).ok):
 			context.merge({"ok":true,"kind":"source","text":fallback,"tokens":syntax.tokens})
 			return context
-		context.diagnostics.append(syntax)
+		context.diagnostics.append(Tokens.require_structure(syntax.tokens,required_controls) if syntax.ok and required_controls is Array else syntax)
 	if collection == "recovery" and RECOVERY.has(key):
 		context.merge({"ok":true,"kind":"essential_fallback","text":RECOVERY[key],"tokens":[{"kind":"text","text":RECOVERY[key]}]})
 	else:

@@ -1,9 +1,19 @@
 # Implementation readiness
 
+**IMP-007 increment 2, 2026-11-20:** Explicitly authorized after increment-1
+acceptance. Real required TEXT.RSC access, checked structured controls/variants,
+explicit source mappings and pure read/selection boundaries are implemented and verified;
+see [execution evidence](evidence/IMP-007-increment-2-2026-11-20.md).
+Increment 2 awaits user acceptance and explicit continuation before increment 3.
+Parent IMP-007/M1 and later real-owner/IMP-030/056 gates remain open; no dependent
+edge clears and no other IMP is started. Earlier handoff-only notes retain history.
+
 **IMP-007 increment 1, 2026-11-20:** Explicitly authorized; production catalogs,
 CSV patches, fallback/provenance and bundled essential labels implemented and
 verified ([evidence](evidence/IMP-007-increment-1-2026-11-20.md)).
-User acceptance is required before increment 2. Parent task/M1 and later
+The user accepted increment 1 on 2026-11-20 and requested an
+[increment-2 handoff](handoffs/IMP-007-INCREMENT-2-PROMPT.txt) for another chat.
+No increment-2 implementation began here. Parent task/M1 and later
 IMP-030/056/real-owner gates stay open; no dependent edge clears yet.
 
 **Final IMP-006 acceptance, 2026-11-20:** The user confirmed increment 3 complete;

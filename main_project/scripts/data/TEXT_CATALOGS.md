@@ -1,5 +1,12 @@
 # Text catalogs — IMP-007 increment 1
 
+Increment 2 adds [structured classic text](STRUCTURED_TEXT.md) through a distinct
+real reader and an extension of the shared token representation. Existing catalog
+grammar/identities and CSV semantics remain frozen. `lookup` now optionally accepts
+an exact requester-owned required-control signature; incompatible locale entries
+continue selected/base/source fallback without reviving overwritten values. The
+earlier increment-1-only scope statements below retain their delivery history.
+
 DATA owns `text_catalog.gd`, `text_csv.gd` and `text_tokens.gd`. The normal startup
 shell explicitly calls `StartupProviderBoundary.register_bundled_text()` before
 source preparation. This registers the real `text.catalogs` domain in the existing

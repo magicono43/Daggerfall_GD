@@ -2,16 +2,18 @@
 
 IMP-007 increment 1 now supplies [production text catalogs](TEXT_CATALOGS.md),
 CSV intake and bundled recovery labels through the separate DATA publication
-pipeline. Classic access remains BSA-only: TEXT.RSC registration/decoding awaits
-accepted increment 1 and authorized increment 2. Earlier text-unavailable notes
+pipeline. Increment 2 adds the real [TEXT.RSC reader and structured profile](STRUCTURED_TEXT.md).
+Normal startup enables a fifth required source; legacy fixture compositions keep
+their explicit capability scopes. Earlier text-unavailable notes
 below describe the IMP-004 foundation inventory.
 
 IMP-005 increment 3 adds the separate
 [definition candidate/publication contract](DEFINITION_PUBLICATION.md). It shares
 this application's lifetime but never replaces classic readers during a pre-menu
 MOD rebuild. Domain adapters must register their real required sources before
-reader preparation. Normal production domain schemas remain unavailable; isolated
-bounded adapters verify the real pipeline and menu commit without inventing them.
+reader preparation. The production text catalog schema is delivered; remaining
+media/world schemas retain their owner gates. Isolated bounded adapters continue
+to verify the pipeline without inventing those domains.
 
 `StartupProviderBoundary.classic` owns one `classic_access.gd` registry for the
 application. CORE's character/menu lifecycle does not own or dispose it. The
@@ -34,14 +36,15 @@ requires these four source-level adapters using the common `bsa-v1` reader:
 
 This is an explicit **foundation container inventory**, not the complete eventual
 game manifest. The enabled production consumer is the startup required-reader
-gate; raw container requests are the delivered DATA interface. There are currently
-no enabled text, media decoding, authored-definition or world-layout consumers.
+gate; raw container requests are the delivered DATA interface. Normal startup now
+also enables IMP-007's real text reader and catalogs. Media/world consumers remain
+with their later owners.
 The four initialized containers are mandatory, not optional substitutes for those
 later capabilities. The registry composes/deduplicates declarations of enabled
 capabilities and retains their adapter IDs in each manifest entry.
 
 Before initialization, owners use `register_adapter(id, sources)` and
-`enable_capability(id)`. The former currently accepts only implemented `bsa-v1`
+`enable_capability(id)`. The former currently accepts implemented `bsa-v1` and `text-rsc-v1`
 checks; unsupported formats are rejected. Enabling an undeclared capability fails
 manifest composition with `capability_unavailable`, including when a caller has
 not supplied an implementation. Registration/enabling after preparation or
