@@ -4,6 +4,12 @@ The [backlog](TASK_BACKLOG.md) lists the work associated with each integration g
 
 ## M1
 
+2026-11-20, final IMP-005 acceptance: the user accepted all assigned increments,
+including actual definition publication/menu locking with bounded schemas. This
+delivers IMP-005's task prerequisite; it does not certify later real domain,
+character/restore, executable or SAVE providers or close all of M1. See the
+[accepted evidence](evidence/IMP-005-increment-3-2026-11-20.md).
+
 2026-11-20, increment-3 update: real CORE/MOD/DATA definition publication and actual
 menu locking are verified with real classic readers and bounded schema adapters
 ([evidence](evidence/IMP-005-increment-3-2026-11-20.md)). IMP-005 awaits final user

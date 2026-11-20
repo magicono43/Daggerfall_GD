@@ -18,6 +18,12 @@ Every [task card](TASK_BACKLOG.md) records planning and execution readiness sepa
 
 ## Implementation sequence
 
+**Final IMP-005 acceptance, 2026-11-20:** All three assigned increments are
+user-accepted. IMP-007/008/009/010 are fully prerequisite-cleared; IMP-028/050 retain
+their other prerequisites. IMP-006 already cleared IMP-003 and awaits explicit
+implementation authorization. Providing an IMP-006 handoff prompt does not begin
+that task. M1 and the documented later domain/executable/SAVE gates remain open.
+
 **Execution update, 2026-11-20, increment 3:** IMP-005 increments 1/2 are accepted;
 the authorized publication increment is implemented and independently checked
 ([evidence](evidence/IMP-005-increment-3-2026-11-20.md)). Its final acceptance remains

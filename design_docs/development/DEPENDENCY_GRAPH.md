@@ -1,5 +1,13 @@
 # Implementation dependencies
 
+2026-11-20, final IMP-005 acceptance: all assigned increments are user-accepted
+([evidence](evidence/IMP-005-increment-3-2026-11-20.md)). Its edge clears for
+IMP-007/008/009/010/028/050. IMP-007/008/009/010 now have all listed prerequisites
+delivered. IMP-028 still requires IMP-009/014; IMP-050 still requires IMP-028.
+IMP-006 was already cleared by IMP-003 and is not dependent on IMP-005. All new
+tasks still require implementation authorization; none was begun. Edges and
+remaining M1/domain/executable/SAVE gates are unchanged.
+
 2026-11-20, increment-3 update: user acceptance/authorization cleared the separate
 increment-2 gate. IMP-005's definition publication/menu lock is now implemented
 with [execution evidence](evidence/IMP-005-increment-3-2026-11-20.md), pending final

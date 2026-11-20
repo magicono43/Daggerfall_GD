@@ -1,5 +1,12 @@
 # Implementation backlog
 
+**Final IMP-005 acceptance, 2026-11-20:** The user accepted the complete assigned
+task, increment 3 included ([evidence](evidence/IMP-005-increment-3-2026-11-20.md)).
+IMP-007/008/009/010 are fully prerequisite-cleared; IMP-028/050 clear only their
+IMP-005 edge. IMP-006 already has its IMP-003 prerequisite delivered and awaits
+authorization. No next task was begun. M1 and later real-owner gates remain open;
+earlier pending-acceptance updates below retain their original handoff context.
+
 **Execution update, 2026-11-20, increment 3:** The user accepted IMP-005 increment 2
 and authorized definition publication. All assigned increment implementations are
 now delivered with [increment-3 evidence](evidence/IMP-005-increment-3-2026-11-20.md),
