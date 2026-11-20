@@ -34,6 +34,8 @@ func start(inputs: Dictionary, fallback := false, reset := false) -> Dictionary:
 			warnings = warnings.filter(func(text: String): return not text.begins_with("Optional logs"))
 	if settings == null:
 		settings = Settings.new(storage.adapter, checked.context.settings)
+		if providers.get("presentation") != null:
+			providers.presentation.declare_settings(settings)
 	checked = settings.initialize(reset)
 	if not checked.ok:
 		return set_route("settings_recovery", checked)
@@ -178,6 +180,8 @@ func commit_content_menu(profile_choice: String) -> Dictionary:
 	# Synchronous checked boundary: no further I/O/callbacks can reject publication.
 	var content: Dictionary = providers.definitions.commit(prepared_content.ticket)
 	content.formulas = providers.formulas.commit(prepared_content.formula_ticket)
+	if providers.presentation != null:
+		providers.presentation.commit(prepared_content.ticket,providers.definitions,settings)
 	mods.lock_configuration(content.plan, content.packages)
 	published = content.duplicate(true)
 	published.mods = content.packages.values().map(func(package: Dictionary): return {"id": package.id, "version": package.version})

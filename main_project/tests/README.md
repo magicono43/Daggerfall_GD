@@ -620,3 +620,52 @@ Fonts/live switching, production macro expansion (IMP-030), editable translation
 codec/import (increment 4/IMP-056), book edition anchors and real gameplay/SAVE
 providers retain their named gates. See [the concrete contract](../scripts/data/STRUCTURED_TEXT.md)
 and [execution evidence](../../design_docs/development/evidence/IMP-007-increment-2-2026-11-20.md).
+
+## IMP-007 increment 3 — fonts and live language switching
+
+Run independently and sequentially from the repository root:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario locale-fonts -Fixture locale-fonts-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Scenario locale-fonts -Fixture locale-fonts-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -LocaleFonts -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -LocaleFonts -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+`-Suite locale-fonts` is equivalent. Fixed primary inventories are **419 headless /
+441 rendered**, fixture `IMP-007-locale-fonts-v1`; each mode/build also launches a
+fresh process with **10** `IMP-007-locale-fonts-relaunch-v1` assertions. Schemas:
+`locale-fonts-v1`, `text-presentation-v1`, `text-layout-v1`. All accepted 284/294
+structured checks are included; original `text` 121/127 and `structured-text`
+284/294 scenarios and their export selections remain independent and unchanged.
+
+The suite uses the real CORE settings ConfigFile clone/value/apply/persistence
+interfaces, MOD plans, definition candidates/menu commitment, font compilation,
+window gates, prompt and LineEdit. A separately leased controller verifies cycle
+rejection, whole-file explicit omission/rebuild, real profile commitment and
+nondefault locale persistence. A genuinely new process reloads that root, adopts
+the repaired pack at restart and restores matching catalogs/fonts/effective locale.
+The live prompt checks fixed zero seed material, retained nonzero RNG counts and
+controlled gameplay facts; it does not qualify real QUEST/CHAR/WORLD/SAVE owners.
+
+Inspect retained `text-independent-recovery.png`, `text-independent-quit.png`,
+`locale-pending-choice.png`, `locale-shaping.png` and `locale-book-reflow.png`.
+Rendered assertions separately verify focus, matching font/size and real Label
+line counts against TextParagraph metrics, wrapping without clipping, combining
+clusters, Hebrew visual order and Arabic contextual ligatures. The exact strings,
+font hashes, shaped glyph arrays and actual metrics are in `result.json` and
+[the contract](../scripts/data/LOCALE_FONTS.md). No second supported language,
+production books/bookmarks or Windows IME qualification is claimed.
+
+The harness now rejects unrelated native `ERROR:` diagnostics as well as script
+errors. Only the existing exact Windows certificate-store environmental diagnostic
+and the narrowly qualified formula parser error are permitted. The existing
+startup corruption fixture separately qualifies exactly three damaged-active and
+one damaged-backup parse diagnostics by path, wording and parser source/line; no
+other ConfigFile errors are permitted. Formula source,
+line, count and script checks remain in place. Missing inputs/reports, crashes,
+unfinished inventories, unexpected errors and unsupported seed/clock/input overrides
+remain incomplete. Original classic sources are guarded READ-only and hashed before
+and after each run, including TEXT.RSC for this explicitly composed scenario.
+
+See [increment-3 evidence](../../design_docs/development/evidence/IMP-007-increment-3-2026-11-20.md).

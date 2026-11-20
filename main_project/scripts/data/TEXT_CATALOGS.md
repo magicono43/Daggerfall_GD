@@ -1,5 +1,10 @@
 # Text catalogs — IMP-007 increment 1
 
+Increment 3 now supplies [font resolution and live language switching](LOCALE_FONTS.md),
+including the pre-initialize CORE locale declaration, production Apply/Cancel and
+in-place pending-prompt refresh. Earlier increment-only statements below preserve
+delivery history; catalog/CSV/token identities and precedence remain unchanged.
+
 Increment 2 adds [structured classic text](STRUCTURED_TEXT.md) through a distinct
 real reader and an extension of the shared token representation. Existing catalog
 grammar/identities and CSV semantics remain frozen. `lookup` now optionally accepts

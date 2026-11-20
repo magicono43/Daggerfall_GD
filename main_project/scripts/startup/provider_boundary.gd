@@ -7,6 +7,13 @@ var formulas := preload("res://scripts/rule/formula_registry.gd").new()
 var faults: Dictionary = {} # Controlled failure-only fixture seam.
 var before_menu := Callable()
 var classic_preparations := 0 # Diagnostic count of explicit source preparation requests.
+var presentation: RefCounted # Explicitly enabled; legacy compositions keep their inventory.
+
+func enable_locale_fonts() -> Dictionary:
+	var registered := register_content_adapter(preload("res://scripts/data/locale_fonts.gd").new(),"",[])
+	if registered.ok:
+		presentation = preload("res://scripts/session/text_presentation.gd").new()
+	return registered
 
 func enable_structured_text() -> bool:
 	return classic.register_adapter("classic-text-v1", [{"file":"TEXT.RSC","format":"text-rsc-v1"}]) and classic.enable_capability("classic-text-v1")
@@ -39,6 +46,10 @@ func prepare_content(mods: RefCounted) -> Dictionary:
 		return content
 	if not hooks.ok:
 		return {"ok":false,"kind":"formula_preflight","source":"formula_hooks","reason":"Repair or explicitly omit invalid formula contributions before entry.","formulas":hooks}
+	if presentation != null:
+		var fonts: Dictionary = presentation.prepare(content.resources,content.ticket)
+		if not fonts.ok:
+			return fonts
 	content.formula_ticket = hooks.ticket
 	content.formulas = hooks
 	return content
@@ -55,6 +66,8 @@ func discard_classic_candidate() -> void:
 
 func dispose() -> void:
 	before_menu = Callable()
+	if presentation != null:
+		presentation.dispose()
 	definitions.dispose()
 	formulas.dispose()
 	classic.dispose()

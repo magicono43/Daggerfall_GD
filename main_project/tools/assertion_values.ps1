@@ -28,6 +28,30 @@ function Test-AssertionValue($Expected, $Actual) {
 # The pinned fault fixture must match every captured parser/VM error and log site.
 # Release compiles out the VM access check; the parser failure remains observable.
 function Test-ScriptDiagnostics([string[]]$Logs, [string]$Scenario, $Result) {
+    # Existing startup recovery deliberately parses three damaged active files
+    # and one damaged backup. Qualify only that fixture's exact four diagnostics.
+    $configLines = @()
+    if ($Scenario -ceq 'startup' -and $Result.fixture -ceq 'IMP-001-startup-v1' -and
+        $Result.corrupt_config_profile -ceq 'startup-corrupt-config-v1') {
+        $configPath = [string]$Result.corrupt_config_path
+        if (!$configPath.EndsWith('/cases/settings-owner/settings.ini')) { return $false }
+        $prefix = 'ERROR: ConfigFile parse error at '
+        $suffix = ':0: Unexpected EOF while parsing simple tag.'
+        $activeLine = $prefix + $configPath + $suffix
+        $backupLine = $prefix + $configPath + '.backup' + $suffix
+        $configLines = @(Select-String -Path $Logs -Pattern '^ERROR: ConfigFile parse error at ' -CaseSensitive)
+        if ($configLines.Count -ne 4 -or @($configLines | Where-Object Line -CEQ $activeLine).Count -ne 3 -or
+            @($configLines | Where-Object Line -CEQ $backupLine).Count -ne 1 -or
+            @(Select-String -Path $Logs -SimpleMatch 'at: _parse (core/io/config_file.cpp:293)').Count -ne 4) { return $false }
+    }
+    # The known Windows certificate-store diagnostic is environmental. Every
+    # other native error must match the exact corruption or formula qualification.
+    $nativeErrors = @(Select-String -Path $Logs -Pattern '^ERROR: ' -CaseSensitive | Where-Object {
+        $_.Line -cne 'ERROR: Failed to read the root certificate store.' -and
+        !($configLines.Line -ccontains $_.Line) -and
+        !($Scenario -ceq 'formula-fault' -and $_.Line -ceq "ERROR: Parse JSON failed. Error at line 0: Expected '}'")
+    })
+    if ($nativeErrors.Count -ne 0) { return $false }
     $lines = @(Select-String -Path $Logs -Pattern '^SCRIPT ERROR: ' -CaseSensitive)
     if ($Scenario -cne 'formula-fault') { return $lines.Count -eq 0 }
     if ($Result.fixture -cne 'IMP-006-formula-fault-v1' -or $Result.contract -cne 'integer-formula-v1' -or $Result.debug_build -isnot [bool]) { return $false }

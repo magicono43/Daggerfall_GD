@@ -1,10 +1,20 @@
 # Milestones and validation checkpoints
 
+**IMP-007 increment 3, 2026-11-20:** Explicitly authorized after increment-2
+acceptance (`dae3a56`). Fonts and live locale presentation are implemented and
+verified (419 headless / 441 rendered; 10 relaunch assertions per mode/build;
+Windows debug/release exports and affected regressions pass). See [execution evidence](evidence/IMP-007-increment-3-2026-11-20.md).
+Increment 3 awaits user acceptance; increment 4 remains unauthorized. Parent
+IMP-007/M1, IMP-030/056 and real-owner gates remain open. No dependent edge or
+other IMP is cleared/begun. Earlier acceptance/handoff notes retain history.
+
 **IMP-007 increment 2, 2026-11-20:** Explicitly authorized after increment-1
 acceptance. Real required TEXT.RSC access, checked structured controls/variants,
 explicit source mappings and pure read/selection boundaries are implemented and verified;
 see [execution evidence](evidence/IMP-007-increment-2-2026-11-20.md).
-Increment 2 awaits user acceptance and explicit continuation before increment 3.
+The user accepted increment 2 on 2026-11-20; implementation is committed at `dae3a56`.
+An [increment-3 handoff](handoffs/IMP-007-INCREMENT-3-PROMPT.txt) was prepared for another chat;
+no increment-3 implementation begins here. Increment 4 retains its acceptance gate.
 Parent IMP-007/M1 and later real-owner/IMP-030/056 gates remain open; no dependent
 edge clears and no other IMP is started. Earlier handoff-only notes retain history.
 

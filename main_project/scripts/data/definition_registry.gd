@@ -160,7 +160,7 @@ func prepare(mods: RefCounted) -> Dictionary:
 		var registered: Dictionary = _adapters[domain]
 		if registered.adapter.has_method("bundled_contributions"):
 			for bundled: Dictionary in registered.adapter.bundled_contributions():
-				entries.append({"source":{"provider":"@shipped/" + str(registered.declaration.id),"root":"res://content/text","file":bundled.file,"version":"text-catalog-v1"},"read":{"ok":true,"bytes":bundled.bytes}})
+				entries.append({"source":{"provider":"@shipped/" + str(registered.declaration.id),"root":bundled.get("root","res://content/text"),"file":bundled.file,"version":bundled.get("version","text-catalog-v1")},"read":{"ok":true,"bytes":bundled.bytes}})
 		entries.append_array(source_entries(mods.adapter, "@shipped/" + str(registered.declaration.id), registered.root, registered.files))
 	var capabilities: Array = []
 	for domain: String in domains:
@@ -238,6 +238,10 @@ func apply_contribution(base: Dictionary, bytes: PackedByteArray, source: Dictio
 	if not _adapters.has(domain) or not path.ok or not contribution.get("entries") is Array:
 		return failure("invalid", JSON.stringify(source), "Contribution needs a registered domain, normalized path and entries array.")
 	var registered: Dictionary = _adapters[domain]
+	if registered.adapter.has_method("validate_resource_path"):
+		var reason: String = registered.adapter.validate_resource_path(path.path)
+		if not reason.is_empty():
+			return failure("invalid", JSON.stringify(source), reason)
 	if not registered.declaration.get("json_envelopes", true):
 		return failure("invalid", JSON.stringify(source), "This domain requires its versioned reader; JSON envelopes are unsupported.")
 	var operation: String = str(contribution.get("operation", ""))

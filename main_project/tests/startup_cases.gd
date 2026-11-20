@@ -8,6 +8,7 @@ const Provider = preload("res://tests/controlled_startup_provider.gd")
 var checks: Array[Dictionary] = []
 var base: String
 var shell: Control
+var exercised_corrupt_config := false
 
 func check(name: String, passed: bool, detail := "") -> void:
 	checks.append({"scenario": name, "expected": "pass", "actual": "pass" if passed else "FAIL", "detail": detail})
@@ -78,7 +79,9 @@ func report() -> Dictionary:
 	for item: Dictionary in checks:
 		passed = passed and item.actual == "pass"
 	return {"ok": passed, "fixture": "IMP-001-startup-v1", "engine": Engine.get_version_info(),
-		"display": DisplayServer.get_name(), "checks": checks, "count": checks.size()}
+		"display": DisplayServer.get_name(), "checks": checks, "count": checks.size(),
+		"corrupt_config_profile":"startup-corrupt-config-v1" if exercised_corrupt_config else "",
+		"corrupt_config_path":base.path_join("settings-owner/settings.ini") if exercised_corrupt_config else ""}
 
 func storage_cases() -> void:
 	var owner := Storage.new()
@@ -131,6 +134,7 @@ func storage_cases() -> void:
 		check("required probe failure " + operation, not result.ok and result.operation == operation)
 
 func settings_cases() -> void:
+	exercised_corrupt_config = true
 	var adapter := Adapter.new()
 	var directory := base.path_join("settings-owner")
 	DirAccess.make_dir_recursive_absolute(directory)

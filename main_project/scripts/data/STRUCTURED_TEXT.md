@@ -1,5 +1,11 @@
 # Structured classic text — IMP-007 increment 2
 
+Increment 3's [font/layout contract](LOCALE_FONTS.md) adds actual-font reflow and
+live prompt refresh. It requires an explicit caller mapping for classic font IDs;
+position/unselected variant/unexpanded controls reject unsupported presentation.
+Binary decode success remains separate from renderer capability. No authoring
+codec/import or production macro expansion has been added.
+
 Frozen catalog/CSV/token identities remain `text-catalog-v1`, `text-csv-v1`,
 `text-token-v1`. The checked binary profile is **classic-controls-v1**, reader
 **text-rsc-v1**, projection **structured-text-v1**. This extends the shared token

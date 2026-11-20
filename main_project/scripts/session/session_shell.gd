@@ -190,8 +190,10 @@ func render() -> void:
 		elif top.window == "prompt":
 			var prompt := preload("res://scripts/session/session_prompt.gd").new()
 			host.panel.add_child(prompt)
-			prompt.bind(windows, top, _prompt_owners[top.id])
+			prompt.bind(windows, top, _prompt_owners[top.id],host.controller.providers.get("presentation"))
 	host.essential_button("quit", request_quit)
+	if host.controller.providers.get("presentation") != null:
+		host.show_language_settings()
 	restore_focus()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 

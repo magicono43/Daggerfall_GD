@@ -159,3 +159,10 @@ watcher or immutable snapshot guarantee; same-length external edits can affect
 returned bytes, and require restart to be supported. Consumers own recovery.
 Required-service loss remains CORE-005's integration obligation; an isolated raw
 record failure does not itself implement a session recovery policy.
+
+## IMP-007 increment 3
+
+See [LOCALE_FONTS.md](LOCALE_FONTS.md) for `text.fonts:installed`, pinned bundled
+resources, checked fallback graphs, application lifetime and live presentation.
+Normal startup explicitly composes fonts with the accepted text/reader adapters;
+legacy fixtures retain their declared inventories. Text catalogs remain real CSV.

@@ -8,6 +8,7 @@ param(
     [switch]$DefinitionPublication,
     [switch]$TextCatalog,
     [switch]$StructuredText,
+    [switch]$LocaleFonts,
     [switch]$Randomness,
     [switch]$RandomnessSession,
     [switch]$Formula,
@@ -40,11 +41,12 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
     }
 }
 try {
+if ($LocaleFonts) { $report.fixture = 'locale-fonts-v1'; $report.reproduction.arguments.LocaleFonts = $true }
 if ($StructuredText) { $report.fixture = 'structured-text-v1'; $report.reproduction.arguments.StructuredText = $true }
 if ($TextCatalog) { $report.fixture = 'text-v1'; $report.reproduction.arguments.TextCatalog = $true }
 if ($FormulaExtraError -and !$FormulaFault) { throw 'Additional formula errors require the explicit fault scenario' }
-if (($StructuredText -or $TextCatalog -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
-if (@($StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
+if (($LocaleFonts -or $StructuredText -or $TextCatalog -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
+if (@($LocaleFonts,$StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -54,9 +56,9 @@ $exportOption = "--export-$Configuration"
 Copy-ExportResources $project $runtimeProject
 & $Godot --headless --path $runtimeProject --import --quit-after 60 *> "$run/import.log"
 if ($LASTEXITCODE -ne 0) { throw 'Export project import failed' }
-if (Select-String -Path "$run/import.log" -Pattern 'SCRIPT ERROR:' -Quiet) { throw 'Export import script error' }
+if (!(Test-ScriptDiagnostics @("$run/import.log") '' $null)) { throw 'Export import unexpected engine error' }
 & $Godot --headless --path $runtimeProject $exportOption 'Windows Desktop' "$build/Startup.exe" *> "$run/export.log"
-if ($LASTEXITCODE -ne 0 -or !(Test-Path "$build/Startup.exe")) {
+if ($LASTEXITCODE -ne 0 -or !(Test-Path "$build/Startup.exe") -or !(Test-ScriptDiagnostics @("$run/export.log") '' $null)) {
     Get-Content "$run/export.log" -Tail 30
     throw "Windows export failed: $run"
 }
@@ -74,7 +76,7 @@ foreach ($mode in @('headless','rendered')) {
         if ((Split-Path $selectedRoot -Leaf) -ine 'ARENA2') { $selectedRoot = Join-Path $selectedRoot 'ARENA2' }
         $lockedRoot = "$sandbox/locked/ARENA2"
         New-Item -ItemType Directory -Force $lockedRoot | Out-Null
-        foreach ($name in (@('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($StructuredText) { @('TEXT.RSC') } else { @() }))) {
+        foreach ($name in (@('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($StructuredText -or $LocaleFonts) { @('TEXT.RSC') } else { @() }))) {
             $before[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
             $guards += [IO.File]::Open((Join-Path $selectedRoot $name), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
             [IO.File]::WriteAllBytes("$lockedRoot/$name", [byte[]]@(1,0,0,2,42,232,3,0,0,1,0,0,0))
@@ -97,6 +99,7 @@ foreach ($mode in @('headless','rendered')) {
         $fixture.fixture = 'publication-v1'
     }
     if ($StructuredText) { $fixture.mode = 'structured-text'; $fixture.fixture = 'structured-text-v1' }
+    if ($LocaleFonts) { $fixture.mode = 'locale-fonts'; $fixture.fixture = 'locale-fonts-v1' }
     if ($TextCatalog) {
         $fixture.mode = 'text'
         $fixture.fixture = 'text-v1'
@@ -119,19 +122,21 @@ foreach ($mode in @('headless','rendered')) {
     if ($mode -eq 'headless') { $arguments = @('--headless') + $arguments }
     & "$build/Startup.console.exe" @arguments *> "$run/$mode.log"
     $engineExit = $LASTEXITCODE
-    if (($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) -and $engineExit -eq 0) {
-        $fixture.mode = if ($RandomnessSession) { 'randomness-session_reload' } elseif ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
+    if (($LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) -and $engineExit -eq 0) {
+        $fixture.mode = if ($LocaleFonts) { 'locale-fonts_reload' } elseif ($RandomnessSession) { 'randomness-session_reload' } elseif ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
+        if ($LocaleFonts) { $fixture.sandbox = "$sandbox/relaunch".Replace('\','/') }
         $fixture | ConvertTo-Json -Depth 10 | Set-Content "$sandbox/reload-fixture.json"
         $reloadArguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/reload-fixture.json")
         if ($mode -eq 'headless') { $reloadArguments = @('--headless') + $reloadArguments }
         & "$build/Startup.console.exe" @reloadArguments *> "$run/$mode-reload.log"
         $reloadExit = $LASTEXITCODE
-        if (!(Test-Path "$sandbox/reload-result.json")) { throw 'Missing exported fresh-process result' }
-        $reloadResult = Get-Content "$sandbox/reload-result.json" -Raw | ConvertFrom-Json
-        $reloadExpected = if ($RandomnessSession) { 15 } else { 8 }
+        $reloadReport = if ($LocaleFonts) { "$sandbox/relaunch/reload-result.json" } else { "$sandbox/reload-result.json" }
+        if (!(Test-Path $reloadReport)) { throw 'Missing exported fresh-process result' }
+        $reloadResult = Get-Content $reloadReport -Raw | ConvertFrom-Json
+        $reloadExpected = if ($LocaleFonts) { 10 } elseif ($RandomnessSession) { 15 } else { 8 }
         if ($null -eq $reloadResult.ok -or $reloadResult.count -ne $reloadExpected -or $reloadResult.checks.Count -ne $reloadExpected -or !$reloadResult.engine -or
             ($mode -eq 'rendered' -and $reloadResult.display -eq 'headless') -or
-            (Select-String -Path "$run/$mode-reload.log" -Pattern 'SCRIPT ERROR:' -Quiet)) { throw 'Exported fresh-process restore incomplete' }
+            !(Test-ScriptDiagnostics @("$run/$mode-reload.log") '' $reloadResult)) { throw 'Exported fresh-process restore incomplete' }
         if (!$reloadResult.ok -or @($reloadResult.checks | Where-Object { !(Test-AssertionValue $_.expected $_.actual) }).Count -gt 0) {
             $report.status = 'failed'; throw 'Exported fresh-process assertion failure'
         }
@@ -160,7 +165,7 @@ foreach ($mode in @('headless','rendered')) {
         $after[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
-    $expected = if ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    $expected = if ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
     $formulaExpected = if ($FormulaFault) { 18 } elseif ($mode -eq 'headless') { 82 } else { 84 }
     if (($Formula -or $FormulaFault) -and $result.count -ne $formulaExpected) { throw 'Incomplete formula export inventory' }
     $sessionExpected = if ($mode -eq 'headless') { 115 } else { 116 }
@@ -169,7 +174,7 @@ foreach ($mode in @('headless','rendered')) {
     if ($ClassicSource -and !$Formula -and !$FormulaFault -and $result.count -ne $expected) { throw 'Incomplete owner export result' }
     $checks += @{ scenario = "exported-$mode"; actual = 'pass'; assertions = $result.count; process_exit = $engineExit
         source_before = $before; source_after = $after; result = "$sandbox/result.json" }
-    if ($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) { $checks[-1].reload = @{ assertions = $reloadExpected; process_exit = $reloadExit; result = "$sandbox/reload-result.json" } }
+    if ($LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) { $checks[-1].reload = @{ assertions = $reloadExpected; process_exit = $reloadExit; result = $reloadReport } }
     $report.checks = $checks
 }
 $report.ok = $true

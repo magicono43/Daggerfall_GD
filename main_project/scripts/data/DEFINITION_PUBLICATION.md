@@ -1,5 +1,13 @@
 # Definition publication — IMP-005 increment 3
 
+IMP-007 increment 3 adds the real [font adapter](LOCALE_FONTS.md). Optional trusted
+`validate_resource_path(path) -> String` rejects domain-specific logical paths
+before mutation. Bundled contributions may supply explicit root/version metadata;
+the prior catalog defaults are unchanged. Fonts compile after successful candidate
+validation and before menu reservation; committed font assignment is synchronous
+and adds no fallible work after the durable profile step. Existing order,
+whole-file omission, provenance and main-menu locks remain authoritative.
+
 IMP-007 increment 1 adds the production `text.catalogs` adapter and
 [`text-csv-v1` intake](TEXT_CATALOGS.md). `.csv` contributions dispatch to that
 registered reader; existing JSON schemas/operations are unchanged. The normal

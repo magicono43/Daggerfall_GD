@@ -10,6 +10,9 @@ var registered_logger: StartupLaunchLogger
 var logging_status: Label
 var session_shell: RefCounted
 var render_generation := 0
+var locale_editor: OptionButton
+var locale_status: Label
+var locale_notice: Label
 
 func _ready() -> void:
 	get_tree().auto_accept_quit = false
@@ -23,6 +26,12 @@ func _ready() -> void:
 	for side in ["left", "top", "right", "bottom"]:
 		margin.add_theme_constant_override("margin_" + side, 36)
 	add_child(margin)
+	# This resource is independent of startup, classic data and DATA publication.
+	var recovery := preload("res://scripts/data/locale_fonts.gd").load_font({"bundled":"recovery-sans","sha256":preload("res://scripts/data/locale_fonts.gd").HASHES["recovery-sans"]})
+	var recovery_theme := Theme.new()
+	recovery_theme.default_font = recovery
+	recovery_theme.default_font_size = 18
+	theme = recovery_theme
 	panel = VBoxContainer.new()
 	panel.add_theme_constant_override("separation", 14)
 	var scroll := ScrollContainer.new()
@@ -33,13 +42,20 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
-	if fixture.is_empty() or fixture.get("mode") in ["text", "structured-text"]:
+	if fixture.is_empty() or fixture.get("mode") in ["text", "structured-text", "locale-fonts", "locale-fonts_reload"]:
 		var registered: Dictionary = controller.providers.register_bundled_text()
 		if not registered.ok:
 			label("Bundled text registration failed: " + registered.reason)
 			essential_button("quit", func(): session_shell.request_quit())
 			return
-	if fixture.is_empty() or fixture.get("mode") == "structured-text":
+	if fixture.is_empty() or fixture.get("mode") in ["locale-fonts", "locale-fonts_reload"]:
+		var registered: Dictionary = controller.providers.enable_locale_fonts()
+		if not registered.ok:
+			label("Bundled font registration failed: " + registered.reason)
+			essential_button("quit", func(): session_shell.request_quit())
+			return
+		controller.providers.presentation.changed.connect(refresh_language_controls)
+	if fixture.is_empty() or fixture.get("mode") in ["structured-text", "locale-fonts", "locale-fonts_reload"]:
 		if not controller.providers.enable_structured_text():
 			label("Required structured text reader registration failed.")
 			essential_button("quit", func(): session_shell.request_quit())
@@ -110,11 +126,23 @@ func label(text: String, size := 18) -> void:
 	item.text = text
 	item.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	item.add_theme_font_size_override("font_size", size)
+	item.autowrap_trim_flags = 0
+	if controller.providers.get("presentation") != null:
+		var role := "title" if size >= 24 else "small-ui" if size <= 15 else "body"
+		item.set_meta("font_role",role)
+		item.add_theme_font_override("font",controller.providers.presentation.font(role))
 	panel.add_child(item)
 
 func button(text: String, action: Callable, container: Node = null) -> void:
 	var item := Button.new()
 	item.text = text
+	item.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	item.clip_text = false
+	item.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
+	if container is HBoxContainer:
+		# Wrapped controls have no text-derived minimum width. Share the row's
+		# available width instead of collapsing MOD/profile actions to padding.
+		item.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	item.custom_minimum_size.y = 40
 	var generation := render_generation
 	item.pressed.connect(func():
@@ -123,6 +151,13 @@ func button(text: String, action: Callable, container: Node = null) -> void:
 	(panel if container == null else container).add_child(item)
 
 func essential_button(key: String, action: Callable, container: Node = null) -> void:
+	if controller.providers.get("presentation") != null:
+		var readable: Dictionary = controller.providers.presentation.essential(key)
+		button(readable.text,action,container)
+		var parent: Node = panel if container == null else container
+		parent.get_child(parent.get_child_count() - 1).add_theme_font_override("font",readable.font)
+		parent.get_child(parent.get_child_count() - 1).set_meta("essential_key",key)
+		return
 	var catalogs = preload("res://scripts/data/text_catalog.gd")
 	var resolved: Dictionary = catalogs.lookup(controller.providers.get("definitions"), "recovery", key)
 	# Essential catalog keys have no context references. Draw their validated
@@ -137,6 +172,9 @@ func retry(fallback := false, reset := false) -> void:
 	render()
 
 func render() -> void:
+	if controller.providers.get("presentation") != null:
+		# Initial font activation occurs after the checked menu transaction returns.
+		theme.default_font = controller.providers.presentation.font()
 	session_shell._render_pending = false
 	session_shell.synchronize_startup()
 	if controller.route == "main_menu" or not session_shell.quit_phase.is_empty():
@@ -201,6 +239,61 @@ func render() -> void:
 	if controller.mods != null and not controller.menu_entered:
 		preload("res://scripts/mod/mod_setup_view.gd").new(self, controller.mods).show()
 	essential_button("quit", func(): session_shell.request_quit())
+	if controller.providers.get("presentation") != null and controller.menu_entered:
+		show_language_settings()
+
+func show_language_settings() -> void:
+	var owner: RefCounted = controller.providers.presentation
+	label("Language (live presentation). Requested: %s; effective: %s" % [controller.settings.value(controller.settings.accepted,"presentation/locale"),owner.locale])
+	locale_status = panel.get_child(panel.get_child_count() - 1)
+	label(owner.notice)
+	locale_notice = panel.get_child(panel.get_child_count() - 1)
+	locale_notice.visible = not owner.notice.is_empty()
+	locale_editor = OptionButton.new()
+	for id: String in owner.available():
+		locale_editor.add_item(id)
+		if id == owner.locale:
+			locale_editor.select(locale_editor.item_count - 1)
+	panel.add_child(locale_editor)
+	button("Apply language", apply_language)
+	button("Cancel language edit", cancel_language)
+	button("Retry saving language", func():
+		var saved := controller.settings.save_accepted()
+		label("Saved." if saved.ok else "Applied, not saved. Retry saving language."))
+
+func apply_language() -> Dictionary:
+	var selected := locale_editor.get_item_text(locale_editor.selected)
+	var saved := controller.settings.apply({"presentation/locale":selected},controller.providers.presentation.apply)
+	update_language_status()
+	label("Language rejected; previous presentation retained." if not saved.rejected.is_empty() else "Applied and saved." if saved.ok else "Applied, not saved. Retry saving language.")
+	return saved
+
+func update_language_status() -> void:
+	if is_instance_valid(locale_status):
+		locale_status.text = "Language (live presentation). Requested: %s; effective: %s" % [controller.settings.value(controller.settings.accepted,"presentation/locale"),controller.providers.presentation.locale]
+	if is_instance_valid(locale_notice):
+		locale_notice.text = controller.providers.presentation.notice
+		locale_notice.visible = not locale_notice.text.is_empty()
+
+func cancel_language() -> void:
+	for index in locale_editor.item_count:
+		if locale_editor.get_item_text(index) == controller.providers.presentation.locale:
+			locale_editor.select(index)
+
+func refresh_language_controls() -> void:
+	# Runs synchronously with prompt commit, before the next layout/draw pass.
+	theme.default_font = controller.providers.presentation.font()
+	refresh_language_children(panel)
+
+func refresh_language_children(parent: Node) -> void:
+	for child in parent.get_children():
+		if child.has_meta("font_role"):
+			child.add_theme_font_override("font",controller.providers.presentation.font(child.get_meta("font_role")))
+		if child.has_meta("essential_key"):
+			var readable: Dictionary = controller.providers.presentation.essential(child.get_meta("essential_key"))
+			child.text = readable.text
+			child.add_theme_font_override("font",readable.font)
+		refresh_language_children(child)
 
 func advance_shutdown() -> void:
 	session_shell.advance_shutdown()
@@ -271,6 +364,10 @@ func run_fixture() -> void:
 		script_path = "res://tests/text_cases.gd"
 	elif fixture.get("mode") == "structured-text":
 		script_path = "res://tests/structured_text_cases.gd"
+	elif fixture.get("mode") == "locale-fonts":
+		script_path = "res://tests/locale_font_cases.gd"
+	elif fixture.get("mode") == "locale-fonts_reload":
+		script_path = "res://tests/locale_font_reload_cases.gd"
 	elif fixture.get("mode") == "formula-fault":
 		script_path = "res://tests/formula_fault_cases.gd"
 	elif fixture.get("mode") == "randomness-session":
@@ -283,7 +380,7 @@ func run_fixture() -> void:
 		script_path = "res://tests/publication_reload_cases.gd"
 	var suite = load(script_path).new()
 	var checks: Dictionary = await suite.run(self, fixture)
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["mods_reload", "planning_reload", "publication_reload", "randomness-session_reload"] else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

@@ -1,5 +1,14 @@
 # Session shell interfaces
 
+IMP-007 increment 3 supplies [application font/locale presentation](../data/LOCALE_FONTS.md).
+The real prompt can bind stable `text_ref` / response-keyed `label_refs` to DATA
+lookups. It stages matching text/font/metrics and updates active controls in place,
+preserving input composition ownership, focus, caret, draft, variant/answer and
+window/session/operation identity. Stale/covered/retired plans and active IME
+composition reject a switch. Refresh never submits responses or invokes gameplay.
+The stock shell exposes live language Apply/Cancel and persistence retry; English
+is the only offered language and synthetic `zz-Test` remains test-only.
+
 The existing startup scene owns `SessionShell`, `SessionLifecycle` and
 `SessionWindowStack`. Storage/settings/logging remain application-owned by the
 existing startup controller. CORE projects checked startup routing and requires
