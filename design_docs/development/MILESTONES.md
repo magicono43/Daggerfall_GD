@@ -9,7 +9,9 @@ The [backlog](TASK_BACKLOG.md) lists the work associated with each integration g
 2026-11-19: IMP-001's startup increment passed its task-local Windows checks
 ([evidence](evidence/IMP-001-2026-11-19.md)). **M1 remains open.** Controlled classic,
 package and menu outcomes do not complete the real IMP-004/005 routing/publication
-run or IMP-003 shared harness. IMP-002's assigned controlled-provider session/modal
+run. IMP-003's shared harness is now delivered and independently qualified
+([evidence](evidence/IMP-003-2026-11-19.md)); staged M2/M3 real-provider scenarios
+remain unavailable and required when requested. IMP-002's assigned controlled-provider session/modal
 increment is now delivered ([evidence](evidence/IMP-002-2026-11-19.md)); its real
 character/restore/input/window/playback/owner integrations remain open. Exported startup success does
 not establish executable-mod runtime feasibility.

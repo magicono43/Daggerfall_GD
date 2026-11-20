@@ -1,4 +1,87 @@
-# Task-local verification
+# Shared verification — IMP-003 / DEV-014
+
+Use PowerShell 7 (verified host 7.6.9). Build the pinned native adapter first
+(`../native/storage/README.md`). From the
+repository root, independently invoke:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Suite m1 -Fixture m1-v1
+./main_project/tools/verify_rendered.ps1 -Suite m1 -Fixture m1-v1
+```
+
+`m1` selects `qualification`, `startup`, and `session`. Select one with
+`-Scenario session` or `-Suite session`; PowerShell also accepts an array such as
+`-Scenario @('startup','session')`. Each scenario gets its own process, fresh
+startup storage seam and engine APPDATA/LOCALAPPDATA roots. The process retains
+the production native lease until normal shell disposal/process exit. Environment
+values are restored in `finally`; reports are retained, never cleaned on exit.
+The runner copies current game resources and the built native adapter into the
+run's disposable `project/`, excluding prior evidence, toolchains and caches.
+Import and launch use that copy's existing normal scene, isolating `.godot` as
+well as engine user state. Scenario roots live inside that copy's `tests/.runs/`
+to preserve the production fixture-path guard. Source code remains authoritative
+in `main_project/`; the copy is retained evidence, not a second source project.
+When `-Godot` names the Windows console launcher, its paired engine executable
+is used directly when available; the report records the actual executable. This
+keeps process/stream lifetime and timeout ownership with the engine itself.
+Import has a 60-iteration bound in addition to the wall-time bound; scenario
+result inventories and script-error checks still decide whether checks finished.
+Invoke these commands sequentially. Concurrent Windows editor imports were not
+reliable in qualification and are unsupported; timeouts remain incomplete.
+Isolated caches/roots preserve evidence even for rejected overlapping attempts.
+
+Qualification and deliberately unavailable scenarios:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario qualification -Fixture m1-v1
+./main_project/tools/verify_rendered.ps1 -Scenario qualification -Fixture m1-v1
+./main_project/tools/verify_headless.ps1 -Scenario qualification -Fixture assert-fail-v1
+./main_project/tools/verify_rendered.ps1 -Scenario qualification -Fixture assert-fail-v1
+./main_project/tools/verify_headless.ps1 -Scenario native-failed-restore -Fixture m1-v1
+./main_project/tools/verify_rendered.ps1 -Scenario native-failed-restore -Fixture m1-v1
+./main_project/tools/qualify_verification.ps1
+```
+
+Exit codes are 0 passed, 1 assertion failure, 2 incomplete. `assert-fail-v1`
+asserts expected integer 1 against actual 0. Its scenario result is **failed**;
+only the separate qualification check expects that failure. The qualification
+command checks both process exit codes and report contents for all six cases.
+Unknown suites/scenarios/fixtures are required and incomplete, never skipped to
+green. `native-failed-restore`, `enemy-placement-combat` (M2),
+`quest-fault-retry` (M3), and rule/conversion vectors await real owner registration.
+Controlled session preparation tests do not count as real native restore.
+
+The commands accept `-Godot`, `-TimeoutSeconds` (default 120 per child), and
+`-Seed`, `-Clock`, `-InputSequence`. Current M1 scenarios use bounded fixed
+vectors, explicit eligible-time deltas and deliberate input batches inside the
+adopted owner fixtures, and consume no RNG/game clock. Explicit overrides return
+incomplete until a scenario implements those controls; they are never silently
+accepted or applied as production defaults. Owner scenarios must document units,
+input schema and supported overrides when registered. The harness qualification
+does not implement a replacement RNG, time owner or gameplay dispatcher.
+
+`tests/.runs/verification-<mode>-<guid>/report.json` identifies selected scenarios,
+fixture, inputs, unique roots, engine version, native/project/source SHA-256s,
+Git revision/dirty status, per-scenario engine exit and aggregate status. Its
+`reproduction.command` and structured `arguments` reproduce the selection with
+fresh storage. Nested owner results retain stable owner fixture identities and
+all assertions; PNGs and logs are beside each scenario's fixture/result files.
+The fixed v1 assertion inventories are checked to reject truncated results.
+Missing/malformed reports, script errors, timeouts, crashes and wrong renderer
+cannot pass. Timeout termination targets only the runner's child process tree.
+Version/import/native prerequisites fail incomplete and retain their diagnostics.
+No particular CI service is required; launch either entry script with `pwsh -File`
+and consume its process exit and printed report path.
+
+Existing `verify_startup.ps1` and `verify_session.ps1` remain compatible local
+invocations. The shared runner adopts their underlying GDScript fixtures through
+the same normal startup scene, without calling their wrappers or duplicating
+owner behavior. Prefer the shared entry points for routine gates. The separate
+`verify_storage_processes.ps1` and `verify_startup_export.ps1` remain required for
+native process/alias/interruption or exported startup changes respectively; they
+cover different boundaries and are not full shared-suite exports.
+
+## Retained owner fixture documentation
 
 ## IMP-002 session and input gates
 
@@ -21,7 +104,8 @@ interruption and normal title/pause/settings/prompt/exit-recovery controls.
 Rendered buttons receive deliberate Enter press/release through Godot input;
 headless buttons emit their production pressed signal. Text drafts and simulation
 deltas are controlled directly. This is not real character/restore/playback/input
-provider qualification, physical IME/controller testing or the IMP-003 harness.
+provider qualification or physical IME/controller testing. IMP-003 adopts these
+fixtures through the shared commands above.
 The fixture's 0.1-second cadence and two-consumer work allowance are not defaults.
 The final shutdown write-failure case intentionally retains its injection until
 report publication/test exit; it does not claim a successful orderly save exit.
@@ -30,7 +114,7 @@ See [IMP-002 evidence](../../design_docs/development/evidence/IMP-002-2026-11-19
 ## IMP-001 startup
 
 These fixtures exercise the normal `startup.tscn` entry and its production owner
-requests. They are not the IMP-003 shared verification harness. Build the native
+requests and are now adopted by the IMP-003 shared runner. Build the native
 adapter first; see `../native/storage/README.md`.
 
 From the repository root, on Windows with Godot 4.7.2:
@@ -87,7 +171,7 @@ an unavailable Windows root-certificate store before game startup; this task doe
 not use networking. Neither diagnostic is counted as a failed fixture assertion.
 
 Still required at M1: run the same startup routes with real IMP-004 DATA and
-IMP-005 MOD/DATA results and integrate these cases into IMP-003. Later owners must
+IMP-005 MOD/DATA results. IMP-003 adoption is delivered. Later owners must
 exercise actual SAVE/MOD writable consumers, session lifetimes, preference
 application/rollback and display confirmation. No real-provider milestone gate is
 closed by these controlled fixtures.

@@ -7,8 +7,10 @@ complete with task-local headless/rendered, process and export evidence
 ([report](evidence/IMP-001-2026-11-19.md)). Its real-provider M1 integration remains
 open. IMP-002's authorized session/modal shell increment is also complete
 ([report](evidence/IMP-002-2026-11-19.md)); its real-provider gates remain open.
-IMP-003 has all prerequisites delivered and awaits authorization. IMP-002's edges
-are delivered to its dependents, which retain their other prerequisite gates.
+IMP-003's authorized M1 verification increment is complete
+([report](evidence/IMP-003-2026-11-19.md)). IMP-004, IMP-006 and IMP-011 now have
+all listed prerequisites delivered and await authorization. IMP-022 retains
+IMP-017. All named real-provider gates remain open.
 Planning READY counts do not imply implementation completion.
 
 | Task | Objective area | Milestone | Planning readiness |

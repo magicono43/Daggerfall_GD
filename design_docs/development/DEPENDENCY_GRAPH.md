@@ -20,10 +20,16 @@ all other prerequisites remain open; dispatch still requires authorization.
 
 IMP-002's assigned session/modal shell increment is also delivered on 2026-11-19
 ([evidence](evidence/IMP-002-2026-11-19.md)). That prerequisite is cleared for
-IMP-005/011/014/024/013/022/052; their other edges remain open. IMP-003 already has
-all prerequisites delivered and still requires authorization. No other dependent
-becomes fully dispatchable from IMP-002 alone. Named real-provider checks remain
+IMP-005/011/014/024/013/022/052. At that delivery, IMP-003 had all prerequisites
+delivered and awaited authorization. No other dependent became fully
+dispatchable from IMP-002 alone. Named real-provider checks remain
 open, and the dependency edges below are unchanged.
+
+IMP-003's authorized M1 verification increment is delivered on 2026-11-19
+([evidence](evidence/IMP-003-2026-11-19.md)). Its edge clears for IMP-004/006/011/022.
+IMP-004, IMP-006 and IMP-011 now have all listed prerequisites delivered; each
+requires authorization. IMP-022 still requires IMP-017. Staged real-provider
+verification and M1 DATA/MOD integration remain open. No dependency edge changed.
 
 | Task | Must complete first |
 | --- | --- |

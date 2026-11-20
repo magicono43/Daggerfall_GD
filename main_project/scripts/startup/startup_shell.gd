@@ -219,7 +219,12 @@ func update_logging_warning() -> void:
 		logging_status.visible = not logging_status.text.is_empty()
 
 func run_fixture() -> void:
-	var suite = load("res://tests/session_cases.gd" if fixture.get("mode") == "session" else "res://tests/startup_cases.gd").new()
+	var script_path := "res://tests/startup_cases.gd"
+	if fixture.get("mode") == "session":
+		script_path = "res://tests/session_cases.gd"
+	elif fixture.get("mode") == "qualification":
+		script_path = "res://tests/verification_cases.gd"
+	var suite = load(script_path).new()
 	var checks: Dictionary = await suite.run(self, fixture)
 	var target := str(fixture.sandbox).path_join("result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
