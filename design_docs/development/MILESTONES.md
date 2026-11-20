@@ -4,6 +4,13 @@ The [backlog](TASK_BACKLOG.md) lists the work associated with each integration g
 
 ## M1
 
+2026-11-20, increment-2 update: IMP-005 increment 1 is user-accepted and its
+authorized dependency planner now validates real selected packages, previews
+deterministic order and rejects dependencies/cycles before the existing unavailable
+DATA publication boundary ([evidence](evidence/IMP-005-increment-2-2026-11-20.md)).
+M1 remains open. Actual menu publication/locking, DATA schemas and later executable
+and SAVE integrations retain their separate gates; increment 3 has not begun.
+
 2026-11-20: IMP-005 increment 1 implements real package discovery, explicit
 duplicate decisions and root-scoped profiles through setup
 ([evidence](evidence/IMP-005-2026-11-20.md)). It awaits user acceptance before

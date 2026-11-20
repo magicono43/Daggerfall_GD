@@ -1,5 +1,13 @@
 # Implementation backlog
 
+**Execution update, 2026-11-20, increment 2:** The user accepted IMP-005 increment 1
+and authorized dependency planning. Increment 2 is implemented and its verification
+and acceptance disposition are recorded in
+[the execution evidence](evidence/IMP-005-increment-2-2026-11-20.md). Increment 3
+remains unauthorized; DATA publication and M1 remain open. IMP-005's dependent
+edges are not cleared, and no other IMP was begun. Earlier dated notes below
+retain their original handoff disposition.
+
 64 implementation task specifications cover the 432 feature records with logged approval. All 64 are planning READY following the [second audit](PRE_IMPLEMENTATION_AUDIT_2.md). Execution awaits authorization and each task's delivered prerequisites. The [first audit](../archive/PRE_IMPLEMENTATION_AUDIT.md) retains the historical baseline findings. [Implementation readiness](IMPLEMENTATION_READINESS.md) defines the release-to-agent gate.
 
 **Execution update, 2026-11-19:** IMP-001's authorized Windows startup increment is

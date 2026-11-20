@@ -1,4 +1,4 @@
-# MOD package and profile contract — IMP-005 increment 1
+# MOD package, profile and dependency contract — IMP-005 increments 1–2
 
 `StartupController.mods` is an application-owned `mod_configuration.gd`, created
 after CORE has selected and leased its storage root. It reads only that root's
@@ -55,7 +55,7 @@ and optional `min` / `max` version strings. Optional `capabilities` is an array
 of stable identifier strings. Discovery validates declaration shape and retains
 the original values, including executable capabilities. It does not compare
 versions, activate integrations or claim required executables are available.
-Version ordering/prerelease comparison and capability admission are later gates.
+Version comparison is defined below. Capability admission remains a later gate.
 
 Candidates contain stable `id`, display `name`, `version`, `format` (`zip` or
 `folder`), absolute source `path`, owner/format/path provenance, dependencies,
@@ -134,18 +134,135 @@ commit boundary. No first-increment operation can pretend that success occurred.
 ## Deferred interfaces and acceptance gates
 
 `selection()` projects saved/pending profiles, eligible sources, unresolved
-duplicates, run skips and discovery outcome. `dependency_ready` and `data_ready`
-are explicitly false. No planner or candidate definition publication exists yet.
+duplicates, run skips and discovery outcome. `dependency_ready` reflects the real
+planner; `data_ready` remains false. No candidate definition publication exists yet.
 The production startup provider continues to report unavailable content support.
 The normal setup UI exposes this increment before actual main-menu entry even
 when classic-source setup still needs repair. Profile persistence is independent
 of that source selection. Rescan/edit actions are absent after actual menu entry.
 
-Increment 2 must consume the selected enabled copies, validate required/optional/
-presence-only constraints and provide an accepted deterministic preview. Increment
-3 must consume that real plan, domain adapter schemas and bounded initial DATA
+Increment 2 delivers the planner below. Increment 3 must consume that real plan,
+domain adapter schemas and bounded initial DATA
 fixtures; validate/persist Continue choices; publish at actual menu entry; lock
 plan/definitions and record successful-profile history. SAVE-017, IMP-007–010
 schemas, export sharing and IMP-050/051 executable registration/lifecycle remain
 owner integrations. An executable capability is metadata here, never a claim of
 data-only compatibility or executable readiness. M1 remains open.
+
+## Dependency planning — increment 2
+
+`dependency_planner.gd.build(planning_input())` is pure MOD logic over validated
+discovery metadata. The configuration owner supplies selected eligible copies,
+enabled preferred rows, explicit run skips/duplicate skips, root outcome and
+profile-scoped optional suppressions. No dependency facts are derived until all
+duplicate choices and root recovery are resolved. Missing enabled IDs block
+unless explicitly skipped; a root-level run-empty discovery choice does not
+silently remove enabled profile entries or waive required dependencies.
+
+Disabled or run-skipped dependents impose no constraints. Each enabled dependent's
+declared provider is checked against eligible copies and the enabled set. Required
+missing, disabled or incompatible providers produce blocking diagnostics with
+dependent/provider IDs, source provenance, installed version, requested range and
+reason. A compatible disabled provider is offered for explicit enablement only.
+`enable_dependency(key, expected_revision)` sets that provider enabled, restores
+its explicit run skip if needed, leaves other package enablement unchanged and
+revalidates, including the provider's own prerequisites. An incompatible provider
+cannot be enabled through this action. Ordinary profile enablement remains an
+explicit separate request and can create an unfinished configuration.
+
+Missing/disabled optional integrations are inactive without warnings. Enabled
+incompatible optional integrations warn, stay inactive and add no edges. Compatible
+enabled optional integrations are active unless suppressed. Presence-only
+relationships still check availability/version but add no ordering edge, including
+self-presence relationships. Every ordered active declaration adds a constraint
+from provider to dependent; parallel declarations share a graph edge while
+retaining separate relationship records. Required parallel edges cannot be
+removed by suppressing an optional declaration.
+
+### Version comparison
+
+Keep increment 1's accepted manifest syntax. Compare core decimal components
+numerically without integer conversion/overflow; build metadata after `+` does
+not affect precedence. A release sorts after its same-core prerelease. Compare
+dot-separated prerelease identifiers left to right: ASCII digits-only identifiers
+compare numerically and sort before nonnumeric identifiers; other identifiers
+compare case-sensitively by ASCII lexical order. Equal shared identifiers put
+the shorter list first. Numeric prerelease leading zeros accepted by the original
+manifest syntax compare by numeric value (`01` equals `1`); this is explicit
+compatibility with the delivered syntax, not a new strict SemVer rejection rule.
+Hyphens inside nonnumeric identifiers are ordinary ASCII characters, not signs.
+Minimum is inclusive; maximum is exclusive. Empty/inverted ranges accept no
+version. Prereleases have no extra exclusion rule: only the declared bounds apply.
+
+### Validation, cycles and deterministic previews
+
+`validate_dependencies()` returns value-only copies of `ok`, `revision`, profile,
+current active `order`, blocking `errors`, optional `warnings`, relationship
+`integrations`, active `constraints`, complete closed `cycles`, optional cycle
+relationship keys `suppressible`, `sortable` and `proposed_order`; DATA readiness
+is always false. `ok` is dependency validity only. It is not publication or menu
+readiness. Invalid manual order produces `order` errors. Structural failures or
+cycles prohibit previews; ordering errors alone can be repaired by sorting.
+
+Cycles use provider-first graph arrows. For each graph constraint, a deterministic
+breadth-first return-path search identifies participation in a cycle, including
+self-cycles. Closed paths are rotated to the lexically smallest ID and deduplicated;
+neighbors and reported paths have deterministic ordering. This reports full paths
+and every participating optional edge, without claiming to enumerate the
+exponentially many possible simple cycles in a dense graph. A remaining cycle
+continues to block after any suppression.
+
+Validation and sorting consume the exact same active constraints. Stable Kahn
+sorting chooses the earliest preferred currently eligible zero-indegree ID at
+each step. It preserves preference where constraints permit, with no claim of a
+global minimum-inversion optimizer. `request_sort_preview()` retains an owner-held
+proposal ticket with serial, configuration revision, profile and full canonical
+input fingerprint. It never changes a pending order or enables a package.
+Repetition replaces the prior ticket; old tickets cannot apply. The UI shows
+the complete proposed active order and explicit Accept/Dismiss controls.
+
+`accept_sort_preview(id)` verifies the retained ticket and current inputs, edits
+only pending entries and revalidates. Enabled active slots receive the proposed
+IDs while disabled/missing/run-skipped slots retain position. Discovery-only rows
+are materialized as disabled pending entries on this explicit edit. Saved state
+changes only via Save Profile. Dismissal preserves pending state. Repeated or
+obsolete acceptance rejects without mutation. Profile/selection/order/run-skip/
+duplicate edits, root choices, rescan and suppression changes invalidate previews
+and consumer revisions; even an equivalent rescan requires a fresh preview.
+Saving identical pending plan inputs does not invalidate their preview.
+
+### Optional integration admission and run lifetime
+
+A relationship key is `<dependent package ID>:<zero-based declaration index>`.
+Its binding digest includes dependent installed source path, ID, version, exact
+declaration and index. This distinguishes repeated declarations and rejects a
+suppression inherited by a different source/declaration. Keys are plan-local
+references, not persistent GAD-01 definition identities.
+
+`suppress_optional(key, expected_revision)` admits only an optional ordered edge
+participating in a current cycle. Required and unrelated optional declarations
+cannot be suppressed. It records the matching binding for this profile/run and
+revalidates. `restore_optional(key)` removes the omission and revalidates. Equivalent
+rescans preserve matching suppressions; changed bindings become inactive as
+suppression decisions and the new declarations are validated normally. Switching
+profiles retains each profile's own run decisions; creating/duplicating a profile
+does not inherit those decisions. Save Profile never serializes them; restart
+clears them and rebuilds constraints from declarations.
+
+Each relationship projection retains `active`, reason, declaration and provisional
+`contributions_allowed` / `hooks_allowed` flags. These flags are meaningful only
+in an `ok` plan. Consumers use `integration_allowed(key, consumer,
+expected_revision)` (`consumer` is `contributions` or `hooks`), which denies
+obsolete revisions, invalid plans, unknown relationships/consumer kinds and
+inactive/suppressed integrations. DATA and executable-registration owners must
+bind their dependent contributions/hooks to these checked relationship results
+before activation. The fixtures verify admission denial, not execution of future
+hooks or real domain contributions. No executable provider is activated here.
+
+CORE startup now validates the real MOD plan after classic-reader readiness and
+before package publication. Invalid plans return dependency recovery. Valid plans
+reach the stock unavailable DATA publication provider, retaining the planner
+projection in recovery. The pre-menu Validate and Continue button uses this normal
+route. It cannot persist unsaved edits implicitly, publish definitions, enter the
+menu, update successful-profile history or establish a run lock. Those operations
+and Save/Continue choices remain increment 3, with its separate acceptance gate.

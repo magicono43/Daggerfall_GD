@@ -1,6 +1,7 @@
 extends RefCounted
 ## MOD owns committed profiles, independent drafts and explicit run-only choices.
 const Library = preload("res://scripts/mod/package_library.gd")
+const Planner = preload("res://scripts/mod/dependency_planner.gd")
 var adapter: StartupStorageAdapter
 var root := ""
 var path := ""
@@ -13,6 +14,14 @@ var discovery: Dictionary = {}
 var without_mods := false
 var locked := false
 var status: Dictionary = {}
+var revision := 0
+var preview_serial := 0
+var sort_preview: Dictionary = {}
+var suppressions: Dictionary = {} # Profile -> declaration key -> source-bound digest.
+
+func invalidate_plan() -> void:
+	revision += 1
+	sort_preview.clear()
 
 func _init(storage: StartupStorageAdapter, storage_root: String) -> void:
 	adapter = storage
@@ -96,6 +105,7 @@ func persist(next: Dictionary) -> Dictionary:
 func rescan() -> Dictionary:
 	if locked:
 		return failure("Configuration is locked until application restart.")
+	invalidate_plan()
 	without_mods = false
 	discovery = Library.new(adapter).scan(root.path_join("Mods"))
 	# Discard stale decisions even if a temporarily unique candidate later duplicates.
@@ -109,6 +119,7 @@ func continue_without_mods() -> Dictionary:
 	if locked or discovery.get("ok", true):
 		return failure("Continue without mods is available only for a failed discovery root.")
 	without_mods = true
+	invalidate_plan()
 	return {"ok": true, "kind": "run_only_empty_library", "reason": "Discovery omitted for this run. Dependency, DATA and SAVE checks are still required."}
 
 func grouped() -> Dictionary:
@@ -140,6 +151,7 @@ func choose_copy(id: String, source: String, expected_set: Array) -> Dictionary:
 	if not allowed:
 		return failure("Choose a listed copy or explicitly skip this ID.")
 	choices[id] = {"set": expected_set.duplicate(true), "path": source.to_lower()}
+	invalidate_plan()
 	var next := committed.duplicate(true)
 	next.choices = choices.duplicate(true)
 	return persist(next) # Pending choice remains usable if persistence fails.
@@ -195,6 +207,7 @@ func select_profile(id: String) -> Dictionary:
 	if locked or not committed.get("profiles", {}).has(id):
 		return failure("Profile is unavailable or configuration is locked.")
 	selected = id # Drafts are retained per profile, never implicitly saved/discarded.
+	invalidate_plan()
 	return {"ok": true}
 
 func edit(id: String, action: String) -> Dictionary:
@@ -224,11 +237,13 @@ func edit(id: String, action: String) -> Dictionary:
 			elif action == "restore":
 				omitted.erase(id)
 			skips[selected] = omitted
+			invalidate_plan()
 			return {"ok": true}
 		_: return failure("Unknown selection action.")
 	var draft := pending()
 	draft.entries = entries
 	drafts[selected] = draft
+	invalidate_plan()
 	return {"ok": true}
 
 func save_profile() -> Dictionary:
@@ -277,8 +292,126 @@ func manage(action: String, name := "", confirmed := false) -> Dictionary:
 		if action == "delete":
 			drafts.erase(selected)
 			skips.erase(selected)
+			suppressions.erase(selected)
 		selected = target
+		invalidate_plan()
 	return saved
+
+func planning_input() -> Dictionary:
+	var duplicate_skips: Array[String] = []
+	for id: String in choices:
+		if choices[id].path.is_empty() and not unresolved().has(id):
+			duplicate_skips.append(id)
+	return {"available": available(), "rows": rows(), "unresolved_duplicates": unresolved(),
+		"duplicate_skips": duplicate_skips, "suppressions": suppressions.get(selected, {}).duplicate(true),
+		"discovery_ok": not committed.is_empty() and (discovery.get("ok", false) or without_mods)}
+
+func validate_dependencies() -> Dictionary:
+	var plan := Planner.new().build(planning_input())
+	plan.revision = revision
+	plan.profile = selected
+	plan.data_ready = false
+	return plan
+
+func request_sort_preview() -> Dictionary:
+	if locked:
+		return failure("Configuration is locked.")
+	var plan := validate_dependencies()
+	if not plan.sortable:
+		sort_preview.clear()
+		return {"ok": false, "reason": "Resolve missing providers, duplicate choices and cycles before sorting.", "plan": plan}
+	preview_serial += 1
+	sort_preview = {"ok": true, "id": preview_serial, "revision": revision, "profile": selected,
+		"input": JSON.stringify(planning_input()), "order": plan.proposed_order.duplicate()}
+	return sort_preview.duplicate(true)
+
+func accept_sort_preview(id: int) -> Dictionary:
+	if locked or sort_preview.is_empty() or sort_preview.id != id or sort_preview.revision != revision or sort_preview.profile != selected or sort_preview.input != JSON.stringify(planning_input()):
+		return failure("Sort preview is stale or unavailable. Request a new preview.")
+	var proposed: Array = sort_preview.order.duplicate()
+	var entries := rows()
+	var position := 0
+	var by_id := {}
+	for entry: Dictionary in entries:
+		entry.erase("available")
+		entry.erase("skipped")
+		by_id[entry.id] = entry.duplicate(true)
+	for index in entries.size():
+		if proposed.has(entries[index].id):
+			entries[index] = by_id[proposed[position]].duplicate(true)
+			position += 1
+	var draft := pending()
+	draft.entries = entries
+	drafts[selected] = draft
+	invalidate_plan()
+	return validate_dependencies()
+
+func dismiss_sort_preview(id: int) -> Dictionary:
+	if sort_preview.is_empty() or sort_preview.id != id:
+		return failure("Sort preview is stale or unavailable.")
+	sort_preview.clear()
+	return {"ok": true}
+
+func enable_dependency(key: String, expected_revision: int) -> Dictionary:
+	if locked or expected_revision != revision:
+		return failure("Dependency result is stale or configuration is locked.")
+	var plan := validate_dependencies()
+	for integration: Dictionary in plan.integrations:
+		if integration.key != key or integration.optional or integration.reason != "disabled":
+			continue
+		var eligible := available()
+		if not Planner.compatible(eligible[integration.provider].version, integration.declaration):
+			return failure("Installed provider is incompatible; explicit enablement was not applied.")
+		var draft := pending()
+		var entries := rows()
+		for entry: Dictionary in entries:
+			entry.erase("available")
+			entry.erase("skipped")
+			if entry.id == integration.provider:
+				entry.enabled = true
+		draft.entries = entries
+		drafts[selected] = draft
+		var omitted: Array = skips.get(selected, []).duplicate()
+		omitted.erase(integration.provider)
+		skips[selected] = omitted
+		invalidate_plan()
+		return validate_dependencies()
+	return failure("No compatible disabled required provider was offered for this relationship.")
+
+func suppress_optional(key: String, expected_revision: int) -> Dictionary:
+	if locked or expected_revision != revision:
+		return failure("Dependency result is stale or configuration is locked.")
+	var plan := validate_dependencies()
+	if not plan.suppressible.has(key):
+		return failure("Only an optional integration participating in an ordering cycle can be suppressed.")
+	for integration: Dictionary in plan.integrations:
+		if integration.key == key and integration.optional:
+			var profile_suppressions: Dictionary = suppressions.get(selected, {}).duplicate(true)
+			profile_suppressions[key] = integration.binding
+			suppressions[selected] = profile_suppressions
+			invalidate_plan()
+			return validate_dependencies()
+	return failure("Optional integration is unavailable.")
+
+func restore_optional(key: String) -> Dictionary:
+	if locked:
+		return failure("Configuration is locked.")
+	var profile_suppressions: Dictionary = suppressions.get(selected, {}).duplicate(true)
+	profile_suppressions.erase(key)
+	suppressions[selected] = profile_suppressions
+	invalidate_plan()
+	return validate_dependencies()
+
+func integration_allowed(key: String, consumer: String, expected_revision: int) -> bool:
+	if expected_revision != revision or consumer not in ["contributions", "hooks"]:
+		return false
+	var plan := validate_dependencies()
+	if not plan.ok:
+		return false
+	for integration: Dictionary in plan.integrations:
+		if integration.key == key:
+			return integration[consumer + "_allowed"]
+	return false
 
 func selection() -> Dictionary:
 	if committed.is_empty():
@@ -286,7 +419,7 @@ func selection() -> Dictionary:
 	return {"profile": selected, "pending": pending(), "saved": committed.profiles[selected].duplicate(true),
 		"available": available(), "unresolved_duplicates": unresolved(), "run_skips": skips.get(selected, []).duplicate(),
 		"discovery_ok": discovery.get("ok", false) or without_mods, "without_mods": without_mods,
-		"dependency_ready": false, "data_ready": false, "locked": locked}
+		"dependency_ready": validate_dependencies().ok, "data_ready": false, "locked": locked}
 
 func read_package_file(id: String, relative: String) -> Dictionary:
 	var eligible := available()

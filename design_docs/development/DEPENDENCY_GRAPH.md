@@ -1,5 +1,11 @@
 # Implementation dependencies
 
+2026-11-20, increment-2 update: the user accepted IMP-005 increment 1 and authorized
+dependency planning, now implemented with
+[separate evidence](evidence/IMP-005-increment-2-2026-11-20.md). No dependency edge
+changes: increment 3/publication is not authorized or delivered. IMP-005 is not
+complete and no downstream prerequisite clears from these partial increments.
+
 2026-11-20: IMP-005's authorized discovery/selection increment is implemented
 ([evidence](evidence/IMP-005-2026-11-20.md)), pending user acceptance. Planning and
 publication increments retain their separate gates. IMP-005 is not delivered as

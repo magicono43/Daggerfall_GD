@@ -255,7 +255,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("no main-menu readiness fabricated", false, controller.menu_entered)
 	check("Continue rejected before real publication", false, controller.continue_to_menu().get("ok", true))
 	check("unsuccessful entry cannot advance profile history", history_before, owner.committed.last_successful)
-	check("dependency and DATA readiness remain false", [false, false], [owner.selection().dependency_ready, owner.selection().data_ready])
+	check("planning is independent of DATA readiness", [owner.validate_dependencies().ok, false], [owner.selection().dependency_ready, owner.selection().data_ready])
 	# CORE storage modes use separate libraries and profile files, each under a lease.
 	for mode: String in ["standard", "portable", "fallback"]:
 		var base := sandbox.path_join("mode-" + mode)
@@ -344,4 +344,4 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		ok = ok and item.expected == item.actual
 	return {"ok": ok, "checks": checks, "count": checks.size(), "engine": Engine.get_version_info(), "display": DisplayServer.get_name(),
 		"fixture": fixture.fixture, "inputs": fixture.inputs, "source": fixture.classic_source, "packages": owner.discovery,
-		"profile": owner.selection(), "downstream": "Real CORE storage, MOD and classic DATA readers; dependency planning, definition publication and SAVE compatibility unavailable. No controlled success provider."}
+		"profile": owner.selection(), "downstream": "Real CORE storage, MOD selection/planning and classic DATA readers; definition publication and SAVE compatibility unavailable. No controlled success provider."}

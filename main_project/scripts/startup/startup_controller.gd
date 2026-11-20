@@ -62,8 +62,12 @@ func check_content() -> Dictionary:
 		if not activated.ok:
 			return set_route("mandatory_setup", activated)
 		active_source = classic.source
+	var plan: Dictionary = published.get("plan", {}) if menu_entered else (mods.validate_dependencies() if mods != null else {})
+	if not plan.is_empty() and not plan.ok:
+		return set_route("package_recovery", {"ok": false, "source": "dependencies", "reason": "Repair the package dependency configuration before continuing.", "plan": plan})
 	var packages: Dictionary = published if menu_entered else providers.publish_packages(classic)
 	if not packages.get("ok", false):
+		packages.plan = plan.duplicate(true)
 		return set_route("package_recovery", packages)
 	# Publication is accepted only after provider success. No failed candidate leaks.
 	published = packages.duplicate(true)

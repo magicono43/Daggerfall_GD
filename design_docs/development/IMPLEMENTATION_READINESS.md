@@ -18,6 +18,12 @@ Every [task card](TASK_BACKLOG.md) records planning and execution readiness sepa
 
 ## Implementation sequence
 
+**Execution update, 2026-11-20, increment 2:** IMP-005 increment 1 is user-accepted;
+the separately authorized dependency planner is implemented
+([evidence](evidence/IMP-005-increment-2-2026-11-20.md)). Increment 3 requires
+another acceptance/continuation gate. Planning success is not DATA publication or
+actual menu entry; M1 and full IMP-005 delivery remain open. No other task begins.
+
 **Execution update, 2026-11-19:** The authorized IMP-001 startup increment is
 complete; [execution evidence](evidence/IMP-001-2026-11-19.md) records the Windows
 checks and open real-provider integrations. IMP-002's explicitly authorized

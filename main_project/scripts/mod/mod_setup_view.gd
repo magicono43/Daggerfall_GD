@@ -87,4 +87,31 @@ func show() -> void:
 			for action: String in ["toggle", "up", "down", "remove", "restore" if row.skipped else "skip"]:
 				var text: String = {"toggle": "Disable" if row.enabled else "Enable", "up": "Move up", "down": "Move down", "remove": "Remove from pending profile", "skip": "Skip for this run", "restore": "Restore for this run"}[action]
 				shell.button(text + " · " + row.id, func(): run(func(): return owner.edit(row.id, action)), actions)
-	shell.label("Dependency planning and definition publication are unavailable in this increment. Saving or selecting a profile cannot enter the main menu.", 16)
+	show_dependencies()
+	shell.label("Definition publication is unavailable in this increment. A valid dependency plan or saved profile cannot enter the main menu.", 16)
+
+func show_dependencies() -> void:
+	var plan: Dictionary = owner.validate_dependencies()
+	shell.label("Dependencies · " + ("valid pending plan" if plan.ok else "needs attention"), 24)
+	for issue: Dictionary in plan.errors:
+		shell.label("%s → %s: %s" % [issue.dependent, issue.provider, issue.reason], 16)
+		if issue.has("declaration"):
+			shell.label("Installed: %s · requested: %s" % [issue.installed_version, JSON.stringify(issue.declaration)], 15)
+		if issue.get("can_enable", false):
+			shell.button("Enable required provider " + issue.provider, func(): run(func(): return owner.enable_dependency(issue.key, plan.revision)))
+	for issue: Dictionary in plan.warnings:
+		shell.label("Warning · %s → %s: %s · installed %s · %s" % [issue.dependent, issue.provider, issue.reason, issue.installed_version, JSON.stringify(issue.declaration)], 16)
+	for integration: Dictionary in plan.integrations:
+		if integration.optional and not integration.active:
+			shell.label("Inactive integration %s → %s: %s" % [integration.dependent, integration.provider, integration.reason], 16)
+		if plan.suppressible.has(integration.key):
+			shell.button("Suppress optional integration " + integration.key + " for this run", func(): run(func(): return owner.suppress_optional(integration.key, plan.revision)))
+		if integration.reason == "suppressed_for_run":
+			shell.button("Restore optional integration " + integration.key, func(): run(func(): return owner.restore_optional(integration.key)))
+	shell.button("Preview Auto-sort", func(): run(owner.request_sort_preview))
+	if not owner.sort_preview.is_empty():
+		var preview: Dictionary = owner.sort_preview.duplicate(true)
+		shell.label("Sort preview · " + " → ".join(preview.order), 20)
+		shell.button("Accept Sort Preview", func(): run(func(): return owner.accept_sort_preview(preview.id)))
+		shell.button("Dismiss Sort Preview", func(): run(func(): return owner.dismiss_sort_preview(preview.id)))
+	shell.button("Validate and Continue", func(): shell.controller.check_content(); shell.render())

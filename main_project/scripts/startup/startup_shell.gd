@@ -234,9 +234,13 @@ func run_fixture() -> void:
 		script_path = "res://tests/mod_cases.gd"
 	elif fixture.get("mode") == "mods_reload":
 		script_path = "res://tests/mod_reload_cases.gd"
+	elif fixture.get("mode") == "planning":
+		script_path = "res://tests/dependency_cases.gd"
+	elif fixture.get("mode") == "planning_reload":
+		script_path = "res://tests/dependency_reload_cases.gd"
 	var suite = load(script_path).new()
 	var checks: Dictionary = await suite.run(self, fixture)
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") == "mods_reload" else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["mods_reload", "planning_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

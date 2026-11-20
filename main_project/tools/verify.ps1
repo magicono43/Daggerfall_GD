@@ -102,11 +102,11 @@ try {
         $item = [ordered]@{ scenario = $id; fixture = $Fixture; root = $caseRoot; inputs = $report.inputs
             status = 'incomplete'; reason = ''; process_exit = $null; result = $null }
         $report.scenarios += $item
-        if ($id -notin @('qualification','startup','session','classic','mods')) {
+        if ($id -notin @('qualification','startup','session','classic','mods','planning')) {
             $item.reason = 'Required scenario unavailable; real owner/provider not registered'
             continue
         }
-        if (($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('classic','mods') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
+        if (($id -eq 'planning' -and $Fixture -ne 'planning-v1') -or ($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('classic','mods','planning') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
             $item.reason = 'Fixture unavailable for selected scenario'
             continue
         }
@@ -123,7 +123,7 @@ try {
         $sourceReadGuards = @()
         $sourceBefore = @{}
         $unreadable = "$caseRoot/locked/ARENA2"
-        if ($id -in @('classic','mods')) {
+        if ($id -in @('classic','mods','planning')) {
             if (!$ClassicSource -or !(Test-Path -LiteralPath $ClassicSource -PathType Container)) {
                 $item.reason = 'Explicit available -ClassicSource is required'; continue
             }
@@ -144,14 +144,14 @@ try {
         }
         if ($id -eq 'mods') { $modLock = New-ModFixture $caseRoot }
         @{ sandbox = $caseRoot.Replace('\','/'); mode = $(if ($id -eq 'startup') { 'suite' } else { $id })
-            fixture = $Fixture; inputs = $report.inputs; classic_source = $(if ($id -in @('classic','mods')) { $selectedRoot.Replace('\','/') } else { '' }); unreadable_root = $unreadable.Replace('\','/') } | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/fixture.json"
+            fixture = $Fixture; inputs = $report.inputs; classic_source = $(if ($id -in @('classic','mods','planning')) { $selectedRoot.Replace('\','/') } else { '' }); unreadable_root = $unreadable.Replace('\','/') } | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/fixture.json"
         $arguments = @('--path',$runtimeProject,'--max-fps','60','--quit-after','1800','--',"--startup-fixture=$caseRoot/fixture.json")
         if ($Mode -eq 'headless') { $arguments = @('--headless') + $arguments }
         try {
             $outcome = Invoke-Engine $arguments $caseRoot 'console'
-            if ($id -eq 'mods' -and $outcome.exit -eq 0) {
+            if ($id -in @('mods','planning') -and $outcome.exit -eq 0) {
                 $reloadFixture = Get-Content "$caseRoot/fixture.json" -Raw | ConvertFrom-Json
-                $reloadFixture.mode = 'mods_reload'
+                $reloadFixture.mode = $id + '_reload'
                 $reloadFixture | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/reload-fixture.json"
                 $reloadArguments = @('--path',$runtimeProject,'--max-fps','60','--quit-after','1800','--',"--startup-fixture=$caseRoot/reload-fixture.json")
                 if ($Mode -eq 'headless') { $reloadArguments = @('--headless') + $reloadArguments }
@@ -165,7 +165,7 @@ try {
             foreach ($guard in $sourceReadGuards) { $guard.Dispose() }
             $sourceReadGuards = @()
         }
-        if ($id -in @('classic','mods')) {
+        if ($id -in @('classic','mods','planning')) {
             $item.source_before = $sourceBefore
             $item.source_after = @{}
             foreach ($name in $sourceBefore.Keys) {
@@ -182,7 +182,7 @@ try {
             $item.reason = 'Malformed terminal report'; continue
         }
         $item.result = $result
-        if ($id -eq 'mods') {
+        if ($id -in @('mods','planning') -and $result.ok) {
             if (!(Test-Path "$caseRoot/reload-result.json")) { $item.reason = 'Missing fresh-process terminal result'; continue }
             $reloadResult = Get-Content "$caseRoot/reload-result.json" -Raw | ConvertFrom-Json
             $item.reload_result = $reloadResult
@@ -196,7 +196,7 @@ try {
             }
             if ($reloadOutcome.exit -ne 0) { $item.reason = 'Fresh process exited unsuccessfully'; continue }
         }
-        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263; classic = 97; mods = 119 } } else { @{ qualification = 3; startup = 92; session = 264; classic = 100; mods = 136 } }
+        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263; classic = 97; mods = 119; planning = 87 } } else { @{ qualification = 3; startup = 92; session = 264; classic = 100; mods = 136; planning = 101 } }
         $item.expected_assertions = $expectedCounts[$id]
         $scriptErrors = Select-String -Path "$caseRoot/console.*.log" -Pattern 'SCRIPT ERROR:' -Quiet
         if ($scriptErrors -contains $true) {

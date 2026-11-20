@@ -127,12 +127,60 @@ the stock view bound to a separately CORE-selected leased fixture root. PNGs
 `mods-root-recovery` are retained for visual inspection. This is scripted rendered
 verification, not a human keyboard/folder-navigation playtest or ACL experiment.
 
-Real classic DATA readers reach the stock unavailable dependency/publication
-gate; no controlled downstream success provider is installed in this scenario.
-No sort preview or actual main-menu publication/lock is asserted: those require
-separately authorized increments 2 and 3. SAVE compatibility, executable activation
+Real classic DATA readers now pass through the delivered dependency planner to
+the stock unavailable definition-publication gate; no controlled downstream
+success provider is installed in this scenario. No sort preview or actual
+main-menu publication/lock is asserted by this increment-1 scenario: planning
+checks have their own increment-2 selection below, and publication remains gated.
+SAVE compatibility, executable activation
 and exported asset-reference semantics retain their later real-owner gates.
 See the [package/profile contract](../scripts/mod/README.md).
+
+## IMP-005 increment 2 — dependency planning
+
+User accepted increment 1 and authorized increment 2 on 2026-11-20. Run these
+commands sequentially; retain the existing Godot/native build pins:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario planning -Fixture planning-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Scenario planning -Fixture planning-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -ClassicSource C:/Games/Daggerfall/arena2 -DependencyPlanning
+./main_project/tools/verify_startup_export.ps1 -Configuration release -ClassicSource C:/Games/Daggerfall/arena2 -DependencyPlanning
+```
+
+`-Suite planning` is also supported. Original M1/classic/mods selections and
+fixed inventories remain registered. `-DependencyPlanning` and `-ModDiscovery`
+are separate export selections; do not combine them. Explicit real source input
+is required. Each invocation uses disposable CORE storage, process-held leases,
+engine/project isolation and retained structured reports. Classic READ guards
+and before/after hashes cover both first and fresh engine processes. Seed/clock/
+input overrides remain unsupported/incomplete; this fixture uses fixed vectors.
+
+Fixed inventories: **87 headless / 101 rendered**, plus **8** checks in an
+independent fresh engine process on the same disposable storage. The fixture
+generates A (`plan.a`) and C (`plan.c`) folders and B (`plan.b`) ZIP, rewrites
+manifest declarations/versions and explicitly rescans. Profiles are created through
+MOD requests. Covers provider-first chains, missing/disabled/incompatible required
+providers, explicit enablement and newly exposed prerequisites, inclusive lower/
+exclusive upper bounds, prereleases/build metadata/large decimal versions,
+inactive optional relationships and warnings, presence-only constraints, stable
+sort/dismissal/acceptance and stale/repeated tickets, required/self/multiple cycles,
+optional cycle suppression, changed source-declaration bindings and revision-bound
+contribution/hook admission. No package code or future domain schema is executed.
+
+The first process leaves a saved cycle with an explicitly suppressed optional
+edge, then makes unsaved selection/run-skip changes. The second process restores
+saved enablement, discards run choices, revalidates the cycle and remains editable
+in real dependency recovery. Neither process claims actual menu publication.
+
+Rendered tests focus/scroll stock buttons, inject Enter press/release across
+frames and retain `planning-preview.png`, `planning-cycle.png` and
+`planning-suppressed.png` for visual inspection. Preview dismissal and acceptance,
+explicit provider enablement, optional suppression and Validate and Continue use
+the normal pre-menu UI. A valid real plan still stops at the unavailable DATA
+publication provider while classic reader identity is retained. No controlled
+downstream success is installed. Hook/contribution tests exercise admission
+interfaces only; actual DATA/executable integrations remain with later owners.
 
 ## IMP-004 classic-source registration
 
