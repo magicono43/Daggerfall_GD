@@ -88,3 +88,24 @@ reroll or duplicate application. These are controlled owner/restore interface
 checks, not production CHAR/ITEM/QUEST/WORLD or native SAVE compatibility.
 No universal attempt history or automatic rollback is introduced. Formula dispatch
 remains increment 3, requiring separate user acceptance/authorization.
+
+## Formula dispatch completion scope — IMP-006 increment 3, 2026-11-20
+
+The user accepted increment 2 and authorized the remaining bounded dispatch
+increment. [FORMULA_DISPATCH.md](../../main_project/scripts/rule/FORMULA_DISPATCH.md)
+records integer-formula-v1, the fixture-only hook, MOD identity/order eligibility,
+clean candidate validation/omission, actual menu publication lock and checked
+single invocation. No production gameplay formula inventory or executable package
+activation is introduced. RNG algorithms, material derivation and source/owner
+retention policies from the accepted increments are unchanged.
+
+Pure hook callbacks receive no random source or session Objects and consume no
+live gameplay draws. CORE validates current consumer/application/session bindings;
+the invoker captures plain owner operation context and rechecks it after execution.
+Errors stop the operation and gate recovery without fallback or diagnostic reruns.
+Actual engine-aborted callbacks are verified in debug, always-observable engine
+execution errors in release, and out-of-domain results separately. Release VM
+checks can compile out; silent within-domain semantic errors are not detectable
+and are not claimed caught. Expected fault diagnostics are tightly qualified;
+additional/unmatched errors remain incomplete. See
+[increment-3 evidence](evidence/IMP-006-increment-3-2026-11-20.md).

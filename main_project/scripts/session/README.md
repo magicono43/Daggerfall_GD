@@ -102,3 +102,20 @@ Owners retain results/application flags under their own contracts; technical
 redelivery reuses them. Controlled `retained-owner-v1` tests are not CHAR/WORLD
 or native SAVE support. The stock provider still rejects unavailable real entry
 and restore. Formula hooks/executable providers remain outside this increment.
+
+## Formula consumer bindings — IMP-006 increment 3
+
+`SessionShell` binds `core.formulas` to the application registry owned by the normal
+startup provider. Ready session services may declare `formula_hooks` and must
+implement a pure `formula_operation_current(Dictionary) -> bool` owner predicate.
+CORE validates published-hook availability and actual consumer identity, retains
+weak bindings and clears them at retirement. Formula admission also requires
+current scope, ready/safe state and no lifecycle busy/publication/finishing phase.
+Application registry identity is distinct from session and owner operation IDs.
+
+The invoker rechecks context after its one synchronous pure-integer callback.
+Callback errors, invalid results and context invalidation stop the affected
+operation and use existing CORE service-loss recovery; they cannot select another
+provider. The registry remains locked through return/new/load. Owner predicates
+and operation retention remain trusted owner contracts, not a universal action
+system. See [the formula contract](../rule/FORMULA_DISPATCH.md).

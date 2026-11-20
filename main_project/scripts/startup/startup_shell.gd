@@ -35,6 +35,8 @@ func _ready() -> void:
 		return
 	if fixture.get("mode") in ["publication", "publication_reload"]:
 		preload("res://tests/publication_fixture.gd").configure(self, fixture)
+	if fixture.get("mode") in ["formula","formula-fault"]:
+		preload("res://tests/formula_fixture.gd").configure(self,fixture)
 	controller.start(inputs)
 	registered_logger = controller.logger
 	OS.add_logger(registered_logger)
@@ -242,6 +244,10 @@ func run_fixture() -> void:
 		script_path = "res://tests/dependency_reload_cases.gd"
 	elif fixture.get("mode") == "randomness":
 		script_path = "res://tests/randomness_cases.gd"
+	elif fixture.get("mode") == "formula":
+		script_path = "res://tests/formula_cases.gd"
+	elif fixture.get("mode") == "formula-fault":
+		script_path = "res://tests/formula_fault_cases.gd"
 	elif fixture.get("mode") == "randomness-session":
 		script_path = "res://tests/random_session_cases.gd"
 	elif fixture.get("mode") == "randomness-session_reload":

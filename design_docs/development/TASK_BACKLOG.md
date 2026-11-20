@@ -1,5 +1,14 @@
 # Implementation backlog
 
+**IMP-006 increment 3, 2026-11-20:** The user accepted increment 2 and authorized
+the bounded formula registry. All three assigned increments are implemented and
+verified; [increment-3 evidence](evidence/IMP-006-increment-3-2026-11-20.md) records
+real MOD/DATA/CORE integration, controlled providers, checks and release limits.
+Final IMP-006 acceptance is pending. No dependent edge clears and no next IMP is
+started. Production hook/executable/SAVE and named M1 real-owner gates remain open.
+Earlier increment handoffs below retain their recorded acceptance context.
+
+
 **IMP-006 increment 2, 2026-11-20:** The user accepted increment 1 and authorized
 increment 2. Session isolation/lifetime and controlled retained-result integration
 are implemented and verified; see [execution evidence](evidence/IMP-006-increment-2-2026-11-20.md).

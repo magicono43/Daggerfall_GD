@@ -7,7 +7,10 @@ param(
     [switch]$DependencyPlanning,
     [switch]$DefinitionPublication,
     [switch]$Randomness,
-    [switch]$RandomnessSession
+    [switch]$RandomnessSession,
+    [switch]$Formula,
+    [switch]$FormulaFault,
+    [switch]$FormulaExtraError
 )
 $ErrorActionPreference = 'Stop'
 . "$PSScriptRoot/mod_fixture.ps1"
@@ -20,9 +23,9 @@ New-Item -ItemType Directory -Force $build | Out-Null
 $priorRoaming = $env:APPDATA
 $priorLocal = $env:LOCALAPPDATA
 $report = @{ ok = $false; status = 'incomplete'; configuration = $Configuration; classic_source = $ClassicSource
-    fixture = $(if ($RandomnessSession) {'randomness-session-v1'} elseif ($Randomness) {'randomness-v1'} elseif ($DefinitionPublication) {'publication-v1'} elseif ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
+    fixture = $(if ($FormulaExtraError) {'formula-extra-error-v1'} elseif ($Formula -or $FormulaFault) {'formula-v1'} elseif ($RandomnessSession) {'randomness-session-v1'} elseif ($Randomness) {'randomness-v1'} elseif ($DefinitionPublication) {'publication-v1'} elseif ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
     reproduction = @{ command = './main_project/tools/verify_startup_export.ps1'; arguments = @{
-        Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; RandomnessSession = [bool]$RandomnessSession; Godot = $Godot; Templates = $Templates } } }
+        Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; RandomnessSession = [bool]$RandomnessSession; Formula = [bool]$Formula; FormulaFault = [bool]$FormulaFault; FormulaExtraError = [bool]$FormulaExtraError; Godot = $Godot; Templates = $Templates } } }
 function Copy-ExportResources([string]$Source, [string]$Destination) {
     New-Item -ItemType Directory -Force $Destination | Out-Null
     foreach ($entry in Get-ChildItem -LiteralPath $Source) {
@@ -35,8 +38,9 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
     }
 }
 try {
-if (($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
-if (@($ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
+if ($FormulaExtraError -and !$FormulaFault) { throw 'Additional formula errors require the explicit fault scenario' }
+if (($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
+if (@($ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -96,6 +100,10 @@ foreach ($mode in @('headless','rendered')) {
         if ($ClassicSource) { throw 'Session randomness does not use a classic content source' }
         $fixture = @{ sandbox = $sandbox.Replace('\','/'); mode = 'randomness-session'; fixture = 'randomness-session-v1'; inputs = @{} }
     }
+    if ($Formula -or $FormulaFault) {
+        $fixture.mode = if ($FormulaFault) { 'formula-fault' } else { 'formula' }
+        $fixture.fixture = if ($FormulaExtraError) { 'formula-extra-error-v1' } else { 'formula-v1' }
+    }
     $fixture |
         ConvertTo-Json | Set-Content "$sandbox/fixture.json"
     $arguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/fixture.json")
@@ -129,9 +137,13 @@ foreach ($mode in @('headless','rendered')) {
         throw "Exported startup failed: $mode; $run"
     }
     $result = Get-Content "$sandbox/result.json" -Raw | ConvertFrom-Json
+    $report.engine = $result.engine
+    $report.native_sha256 = (Get-FileHash "$project/native/storage/bin/storage_windows.dll" ).Hash
+    $report.executable_sha256 = (Get-FileHash "$build/Startup.exe" ).Hash
     if ($null -eq $result.ok -or !$result.engine -or $result.checks.Count -ne $result.count -or
         ($mode -eq 'rendered' -and $result.display -eq 'headless')) { throw 'Incomplete exported terminal report' }
-    if (Select-String -Path "$run/$mode.log" -Pattern 'SCRIPT ERROR:' -Quiet) { throw 'Exported script error' }
+    $diagnosticScenario = if ($FormulaFault) { 'formula-fault' } else { '' }
+    if (!(Test-ScriptDiagnostics @("$run/$mode.log") $diagnosticScenario $result)) { throw 'Exported unexpected or unmatched script error' }
     if (!$result.ok -or @($result.checks | Where-Object { !(Test-AssertionValue $_.expected $_.actual) }).Count -gt 0) { $report.status = 'failed'; throw "Exported startup assertions failed: $mode; $run" }
     if ($engineExit -ne 0) { throw 'Export process exited unsuccessfully' }
     $after = @{}
@@ -140,10 +152,12 @@ foreach ($mode in @('headless','rendered')) {
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
     $expected = if ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    $formulaExpected = if ($FormulaFault) { 18 } elseif ($mode -eq 'headless') { 82 } else { 84 }
+    if (($Formula -or $FormulaFault) -and $result.count -ne $formulaExpected) { throw 'Incomplete formula export inventory' }
     $sessionExpected = if ($mode -eq 'headless') { 115 } else { 116 }
     if ($RandomnessSession -and $result.count -ne $sessionExpected) { throw 'Incomplete session random export inventory' }
     if ($Randomness -and $result.count -ne 108) { throw 'Incomplete numeric export inventory' }
-    if ($ClassicSource -and $result.count -ne $expected) { throw 'Incomplete owner export result' }
+    if ($ClassicSource -and !$Formula -and !$FormulaFault -and $result.count -ne $expected) { throw 'Incomplete owner export result' }
     $checks += @{ scenario = "exported-$mode"; actual = 'pass'; assertions = $result.count; process_exit = $engineExit
         source_before = $before; source_after = $after; result = "$sandbox/result.json" }
     if ($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) { $checks[-1].reload = @{ assertions = $reloadExpected; process_exit = $reloadExit; result = "$sandbox/reload-result.json" } }

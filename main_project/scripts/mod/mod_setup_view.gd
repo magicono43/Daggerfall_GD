@@ -122,6 +122,19 @@ func show_content() -> void:
 		return
 	shell.label("Definitions · validate before entry", 24)
 	var candidate: Dictionary = controller.prepared_content
+	var hooks: Dictionary = candidate.get("formulas",{})
+	var offered: Dictionary = {}
+	for issue: Dictionary in hooks.get("issues",[]):
+		shell.label("Formula configuration · %s · %s\n%s" % [issue.provider,issue.hook,issue.reason],16)
+		if not issue.provider.is_empty() and not offered.has(issue.provider):
+			offered[issue.provider] = true
+			shell.button("Omit formula contribution " + issue.provider + " for this run",func():
+				var omitted: Dictionary = controller.providers.formulas.omit(issue.provider,hooks.ticket,owner)
+				if omitted.ok:
+					controller.check_content()
+				else:
+					controller.result = omitted
+				shell.render())
 	for issue: Dictionary in candidate.get("issues", []):
 		shell.label("%s\n%s: %s" % [issue.source, issue.kind, issue.reason], 16)
 		if issue.omittable:

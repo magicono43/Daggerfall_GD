@@ -474,3 +474,67 @@ deterministic numeric/session assertions use the dedicated fixed-material suites
 The shared `assertion_values.ps1` handles empty JSON objects as well as nested
 arrays and numeric equality, and is reused by shared/export runners. Existing
 pass/fail/incomplete qualification and inventories remain unchanged.
+
+## IMP-006 increment 3 — formula selection and invocation
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario formula -Fixture formula-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Scenario formula -Fixture formula-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_headless.ps1 -Scenario formula-fault -Fixture formula-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Scenario formula-fault -Fixture formula-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/qualify_formula_errors.ps1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -Formula -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -Formula -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -FormulaFault -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -FormulaFault -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+`-Suite formula` / `-Suite formula-fault` select the same scenarios. Owner fixtures
+are `IMP-006-formula-v1` (**82 headless / 84 rendered**) and
+`IMP-006-formula-fault-v1` (**18** in each mode/build). The original inventories
+and qualification pass/fail/missing scenarios remain unchanged. Source guards and
+before/after hashes retain read-only classic data access. No executable package
+code is activated: selected MOD IDs/order/version/integration eligibility and DATA
+publication are real, while the hook, methods and session consumers are controlled.
+
+[FORMULA_DISPATCH.md](../scripts/rule/FORMULA_DISPATCH.md) declares exact hook bounds,
+known outputs, metadata checks, whole-provider omission, actual menu locking,
+captured owner-operation binding, runtime recovery and engine limitations.
+Pure hooks consume no gameplay RNG; CORE fixture sessions explicitly use 32 zero
+material bytes. Hook input 7 gives built-in 14 and replacement B 207; replacement
+A's declared calculation is 107 and selection after explicit B omission is checked.
+Invalid input 1001 is rejected before invocation. An explicit returned 1000001
+produces `invalid_result` without engine errors; an execution error returning a
+valid-looking 0 produces `callback_error` and applies no value. Scalar seed/clock/
+input overrides remain incomplete for these fixed multi-case fixtures.
+
+There is no GDScript try/catch mechanism here. A scoped Logger checks actual engine
+errors around one invocation and never suppresses console diagnostics. Some VM
+access checks compile out of release templates. The fault fixture therefore uses
+an always-observable native JSON parse failure; editor/debug additionally abort
+on access to the failed result. The original Dictionary-only release test remained
+incomplete and is not proof of release VM error detection. Silent within-domain
+semantic mistakes cannot be detected by this mechanism and are not claimed covered.
+
+The fault gate verifies the exact parser diagnostic/source/line in every build,
+and its paired script abort in debug builds. All other script errors, import
+errors, unmatched/missing/additional diagnostics, crashes and truncated inventories
+remain incomplete. `formula-extra-error-v1`, selected only with `formula-fault`,
+adds an error outside invocation and must return incomplete/exit 2 even though the
+owner assertions finish. The qualification command launches both modes with
+normal/extra-error fixtures and checks actual exits and error/report inventories.
+For the release native-only path, the deliberate negative export selection is:
+
+```powershell
+./main_project/tools/verify_startup_export.ps1 -Configuration release -FormulaFault -FormulaExtraError -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+It is expected **incomplete/exit 2**, never a passing export. Its nested owner
+result still has 18 successful assertions; the extra unscoped native error is why
+it cannot qualify. Final evidence records a direct PowerShell child exit and
+observed diagnostic counts. No generic allow-errors flag exists.
+
+Rendered setup drives the real omission button with focus, scrolling and Enter
+press/release and retains `formula-recovery.png` and `formula-menu.png`. Formula
+lock/selection survives actual CORE controlled return, new character and load;
+these are not native CHAR/WORLD/SAVE restore or executable-mod acceptance.

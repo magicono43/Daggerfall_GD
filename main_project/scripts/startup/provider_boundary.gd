@@ -3,6 +3,7 @@ extends RefCounted
 ## DATA access has application lifetime; IMP-005 publication remains independent.
 var classic := preload("res://scripts/data/classic_access.gd").new()
 var definitions := preload("res://scripts/data/definition_registry.gd").new()
+var formulas := preload("res://scripts/rule/formula_registry.gd").new()
 var faults: Dictionary = {} # Controlled failure-only fixture seam.
 var before_menu := Callable()
 var classic_preparations := 0 # Diagnostic count of explicit source preparation requests.
@@ -25,7 +26,15 @@ func register_content_adapter(adapter: RefCounted, root: String, files: Array) -
 	return definitions.register_adapter(adapter, root, files)
 
 func prepare_content(mods: RefCounted) -> Dictionary:
-	return definitions.prepare(mods)
+	var hooks: Dictionary = formulas.prepare(mods)
+	var content: Dictionary = definitions.prepare(mods)
+	if not content.ok:
+		return content
+	if not hooks.ok:
+		return {"ok":false,"kind":"formula_preflight","source":"formula_hooks","reason":"Repair or explicitly omit invalid formula contributions before entry.","formulas":hooks}
+	content.formula_ticket = hooks.ticket
+	content.formulas = hooks
+	return content
 
 func check_classic(candidate: String) -> Dictionary:
 	classic_preparations += 1
@@ -40,6 +49,7 @@ func discard_classic_candidate() -> void:
 func dispose() -> void:
 	before_menu = Callable()
 	definitions.dispose()
+	formulas.dispose()
 	classic.dispose()
 
 func publish_packages(_classic: Dictionary) -> Dictionary:

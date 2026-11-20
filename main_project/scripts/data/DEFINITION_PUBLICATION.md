@@ -200,3 +200,20 @@ context through its later compatibility integration. No `save_compatible` succes
 is fabricated, and CORE's real SAVE/CHAR/WORLD providers remain unavailable.
 IMP-007–010/061 schemas and IMP-050/051 executable activation are still required
 from their owners. Passing bounded schemas does not close all M1 requirements.
+
+## Formula publication participant — IMP-006 increment 3
+
+The same startup provider now owns RULE's formula registry. Formula preflight uses
+the real MOD plan before DATA validation; actual menu entry reserves both exact
+candidate tickets. Menu/profile failure releases both reservations. After the
+existing durable profile/history step, DATA and formulas publish by assignment
+and MOD locks to that plan before CORE exposes the actual menu. Empty registries
+lock too. No callback/I/O is added after the durable step. Returning to title/setup,
+loading or changing preferences cannot replace the registry.
+
+Formula failures have a separate explicit provider-level omission unit and clean
+rebuild. This does not omit a DATA file or disable a package. MOD dependencies,
+remaining registrations and DATA candidates revalidate on Continue/rebuild.
+Invalid plans discard obsolete formula candidates. The initial hook has no DATA
+formula-reference schema; real dependent owner schemas remain later integration.
+See [RULE's concrete formula contract](../rule/FORMULA_DISPATCH.md).

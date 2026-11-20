@@ -274,3 +274,18 @@ and its explicit unsaved-profile choices. Planning alone never persists edits,
 publishes definitions, enters the menu, updates history or establishes a run lock.
 Once locked, MOD rejects selection/profile/rescan/suppression edits and returns
 the retained active plan/package metadata through title and character transitions.
+
+## Controlled formula identity/order — IMP-006 increment 3
+
+`formula_provider(id, expected_version, integration)` attests that the exact selected
+enabled package/version appears in the current valid resolved MOD order. An
+integration key must pass existing `hooks_allowed` eligibility. RULE uses this
+read-only result for preflight before selecting the last valid replacement in
+that order. It does not use registration arrival order or a separate priority.
+
+This boundary does not load package scripts or admit executable providers. The
+initial Callables are application-supplied controlled fixtures; actual executable
+capability admission, trust, runtime cleanup and sandboxing remain IMP-050/051.
+Explicit omission removes a provider's entire formula-hook contribution for the
+run and revalidates; it does not silently disable its package or bypass its other
+requirements. Registry registration/winners lock with the actual menu entry.

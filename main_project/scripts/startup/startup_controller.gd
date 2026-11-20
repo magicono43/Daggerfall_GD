@@ -74,6 +74,8 @@ func check_content() -> Dictionary:
 	var plan: Dictionary = published.get("plan", {}) if menu_entered else (mods.validate_dependencies() if mods != null else {})
 	if not plan.is_empty() and not plan.ok:
 		prepared_content.clear()
+		if real_content_pipeline():
+			providers.formulas.discard_candidate()
 		return set_route("package_recovery", {"ok": false, "source": "dependencies", "reason": "Repair the package dependency configuration before continuing.", "plan": plan})
 	if real_content_pipeline():
 		prepared_content = providers.prepare_content(mods)
@@ -153,20 +155,29 @@ func commit_content_menu(profile_choice: String) -> Dictionary:
 		mods.entry_busy = false
 		transition_busy = false
 		return set_route("package_recovery", reserved)
+	var hooks_reserved: Dictionary = providers.formulas.reserve_commit(prepared_content.formula_ticket,mods)
+	if not hooks_reserved.ok:
+		providers.definitions.release_commit()
+		mods.entry_busy = false
+		transition_busy = false
+		return set_route("package_recovery",hooks_reserved)
 	var opened: Dictionary = providers.open_menu()
 	if not opened.get("ok", false):
 		providers.definitions.release_commit()
+		providers.formulas.release_commit()
 		mods.entry_busy = false
 		transition_busy = false
 		return set_route("menu_recovery", opened)
 	var saved: Dictionary = mods.commit_entry_profile(profile_choice == "save")
 	if not saved.ok:
 		providers.definitions.release_commit()
+		providers.formulas.release_commit()
 		mods.entry_busy = false
 		transition_busy = false
 		return set_route("package_recovery", saved)
 	# Synchronous checked boundary: no further I/O/callbacks can reject publication.
 	var content: Dictionary = providers.definitions.commit(prepared_content.ticket)
+	content.formulas = providers.formulas.commit(prepared_content.formula_ticket)
 	mods.lock_configuration(content.plan, content.packages)
 	published = content.duplicate(true)
 	published.mods = content.packages.values().map(func(package: Dictionary): return {"id": package.id, "version": package.version})

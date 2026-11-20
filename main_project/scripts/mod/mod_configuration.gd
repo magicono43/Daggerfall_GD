@@ -420,6 +420,17 @@ func integration_allowed(key: String, consumer: String, expected_revision: int) 
 			return integration[consumer + "_allowed"]
 	return false
 
+func formula_provider(id: String, version: String, integration: String = "") -> Dictionary:
+	# Identity/order eligibility only. Trusted controlled Callables do not activate
+	# package executables; real executable admission remains IMP-050/051.
+	var plan := validate_dependencies()
+	var packages := available()
+	if not plan.ok or id not in plan.order or not packages.has(id) or packages[id].version != version:
+		return failure("Formula provider is not the selected enabled package/version in the valid MOD plan.")
+	if not integration.is_empty() and not integration_allowed(integration,"hooks",revision):
+		return failure("Formula provider integration is not eligible for hooks.")
+	return {"ok":true,"package":packages[id].duplicate(true),"revision":revision,"order":plan.order.duplicate()}
+
 func selection() -> Dictionary:
 	if committed.is_empty():
 		return {"ok": false, "reason": "Profiles are unavailable.", "dependency_ready": false, "data_ready": false}

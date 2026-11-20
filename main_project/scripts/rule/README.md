@@ -149,3 +149,13 @@ uses OS entropy; reports capture that material and assert initialization/counter
 boundaries, never uniqueness or changed rolls. Fixed multi-material inputs do not
 accept scalar seed/clock/input overrides. Increment 3 formula dispatch remains
 behind separate user acceptance and authorization.
+
+## Formula dispatch — IMP-006 increment 3
+
+The application-owned `formula_registry.gd` now supplies the bounded pure integer
+replacement interface and checked invocation. See [FORMULA_DISPATCH.md](FORMULA_DISPATCH.md)
+for exact inputs/outputs, signatures, MOD eligibility/order, explicit omission,
+menu reservation/lock, CORE/owner context, recovery and engine-error limitations.
+Only the isolated fixture declares `fixture.integer`; no production gameplay hook
+inventory or executable provider activation is introduced. Increments 1/2 remain
+accepted and their numeric/session contracts are unchanged.

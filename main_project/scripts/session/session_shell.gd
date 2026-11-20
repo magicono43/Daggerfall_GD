@@ -19,6 +19,7 @@ var _synchronizing_startup := false
 
 func _init(shell: Control) -> void:
 	host = shell
+	core.formulas = host.controller.providers.formulas
 	core.state_changed.connect(func(_old: Dictionary, _new: Dictionary, _reason: String): schedule_render())
 	core.terminal.connect(func(result: Dictionary):
 		message = str(result.reason) if result.kind == "Failed" else ""
