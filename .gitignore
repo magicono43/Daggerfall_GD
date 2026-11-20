@@ -3,3 +3,9 @@
 /android/
 /base_data_files/
 /reference_material/
+main_project/tools/.toolchain/
+main_project/tests/.runs/
+main_project/native/storage/bin/
+main_project/native/storage/.zig-cache/
+main_project/native/storage/zig-out/
+/main_project/PortableAppdata/

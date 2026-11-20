@@ -2,6 +2,12 @@
 
 64 implementation task specifications cover the 432 feature records with logged approval. All 64 are planning READY following the [second audit](PRE_IMPLEMENTATION_AUDIT_2.md). Execution awaits authorization and each task's delivered prerequisites. The [first audit](../archive/PRE_IMPLEMENTATION_AUDIT.md) retains the historical baseline findings. [Implementation readiness](IMPLEMENTATION_READINESS.md) defines the release-to-agent gate.
 
+**Execution update, 2026-11-19:** IMP-001's authorized Windows startup increment is
+complete with task-local headless/rendered, process and export evidence
+([report](evidence/IMP-001-2026-11-19.md)). Its real-provider M1 integration remains
+open. IMP-002 and IMP-003 have this prerequisite delivered and await their own
+authorization. Planning READY counts do not imply implementation completion.
+
 | Task | Objective area | Milestone | Planning readiness |
 | --- | --- | --- | --- |
 | [IMP-001](tasks/IMP-001.md) | Storage, settings and startup recovery | [M1](MILESTONES.md#m1) | READY |

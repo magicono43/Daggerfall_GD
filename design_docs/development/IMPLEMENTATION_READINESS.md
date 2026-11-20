@@ -1,6 +1,6 @@
 # Implementation readiness
 
-**All 12 register decisions are approved. The second audit confirms 64 READY, 0 BLOCKED and 0 NEEDS REVISION planning statuses.** Their implementation prerequisites still govern dispatch. Execution awaits authorization. The [second audit](PRE_IMPLEMENTATION_AUDIT_2.md) records the current result; the [first audit](../archive/PRE_IMPLEMENTATION_AUDIT.md) retains the historical baseline. The [architecture register](../analysis/architecture/ARCHITECTURAL_DECISIONS.md#approved-decisions) governs cross-system policies and the [gameplay log](../design/GAMEPLAY_DECISIONS.md) governs approved behavior.
+**All 12 register decisions are approved. The second audit confirms 64 READY, 0 BLOCKED and 0 NEEDS REVISION planning statuses.** Their implementation prerequisites still govern dispatch. Execution is tracked per task below; subsequent work requires authorization. The [second audit](PRE_IMPLEMENTATION_AUDIT_2.md) records the planning result; the [first audit](../archive/PRE_IMPLEMENTATION_AUDIT.md) retains the historical baseline. The [architecture register](../analysis/architecture/ARCHITECTURAL_DECISIONS.md#approved-decisions) governs cross-system policies and the [gameplay log](../design/GAMEPLAY_DECISIONS.md) governs approved behavior.
 
 ## Per-task review
 
@@ -18,9 +18,15 @@ Every [task card](TASK_BACKLOG.md) records planning and execution readiness sepa
 
 ## Implementation sequence
 
-The user approved **GDScript for the main game, UI and tools**, with **C++ GDExtensions for native adapters**, on 2026-11-18. The repository now contains the generated Godot 4.7.2 project at `main_project/project.godot`. IMP-001 extends it with the startup entry point and storage/settings shell using this language split; project creation alone does not complete IMP-001. Luau restricted mods and trusted GDScript retain their separate approved runtime contracts.
+**Execution update, 2026-11-19:** The authorized IMP-001 startup increment is
+complete; [execution evidence](evidence/IMP-001-2026-11-19.md) records the Windows
+checks and open real-provider integrations. IMP-002 and IMP-003 may be authorized
+next. Later tasks retain their listed prerequisite gates. No subsequent task has
+been authorized by the IMP-001 instruction.
 
-1. With authorization, begin IMP-001's minimum project entry and storage/settings shell using the approved Windows contract and isolated startup fixtures.
+The user approved **GDScript for the main game, UI and tools**, with **C++ GDExtensions for native adapters**, on 2026-11-18. IMP-001 extended the existing Godot 4.7.2 project at `main_project/project.godot` with the startup entry point and storage/settings shell using this language split; project creation alone did not complete IMP-001. Luau restricted mods and trusted GDScript retain their separate approved runtime contracts.
+
+1. IMP-001's minimum project entry and storage/settings shell is delivered using the approved Windows contract and isolated startup fixtures; retain its real-provider M1 checks.
 2. Deliver IMP-002 and IMP-003 after IMP-001. Their session and verification interfaces then support real data/package preparation.
 3. Follow the verified dependency waves in the second audit. Implement broad cards through their approved independently testable increments.
 4. At M2, run the actual movement/combat/loot/save loop and the separate rendered timing/preview checks.
@@ -32,5 +38,5 @@ The user approved **GDScript for the main game, UI and tools**, with **C++ GDExt
 - All direct task edges are acyclic. Named staged joint checks remain required even where the providers develop separately.
 - Approved schemas and formulas govern behavior. Pin actual source vectors, measured profiles, API representations and library builds with their implementation evidence.
 - The cards' controlled-provider scenarios verify contracts. Milestones additionally require the actual enabled producers and consumers.
-- Source-data availability, installed build tools and explicit authorization govern execution. No prerequisite implementation or exported capability has been claimed complete.
+- Source-data availability, installed build tools and explicit authorization govern execution. Only IMP-001's recorded startup increment and exported startup checks are claimed complete; other implementations and exported capabilities retain their gates.
 - If implementation reveals a material conflict with an approved gameplay or architecture contract, record the concrete conflict and resolve it before changing policy.

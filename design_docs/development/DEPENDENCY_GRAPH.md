@@ -13,6 +13,11 @@ flowchart LR
 
 ## Direct task prerequisites
 
+Execution update, 2026-11-19: IMP-001's assigned Windows startup increment is
+delivered ([evidence](evidence/IMP-001-2026-11-19.md)), clearing that prerequisite
+for IMP-002/003. Edges are retained for traceability. M1 real-provider checks and
+all other prerequisites remain open; dispatch still requires authorization.
+
 | Task | Must complete first |
 | --- | --- |
 | [IMP-001](tasks/IMP-001.md) | Interface and fixture gates only |
