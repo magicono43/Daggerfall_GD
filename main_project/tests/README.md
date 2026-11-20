@@ -428,3 +428,49 @@ Windows numeric exports use the existing wrapper with an explicit owner selectio
 Each independently exports the copied project and runs the fixed 108 assertions
 in headless and rendered executables, preserving export/storage/native pins.
 The export includes both attribution licenses and pinned JSON numeric vectors.
+
+## IMP-006 increment 2 — session isolation and retained outcomes
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario randomness-session -Fixture randomness-session-v1
+./main_project/tools/verify_rendered.ps1 -Scenario randomness-session -Fixture randomness-session-v1
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -RandomnessSession
+./main_project/tools/verify_startup_export.ps1 -Configuration release -RandomnessSession
+```
+
+`-Suite randomness-session` is equivalent. Fixed inventories are 115 headless /
+116 rendered plus **15** assertions in a second engine process, using the same
+disposable leased storage. Missing/truncated second-process results cannot pass.
+No real classic source is required. The original `classic` scenario remains DATA
+reader verification; `randomness` retains its accepted 108 numeric assertions.
+
+Owner fixtures are `IMP-006-session-v1`, `IMP-006-session-restore-v1` and controlled
+`retained-owner-v1`. New/load requests use actual CORE lifecycle/ticket/readiness
+interfaces and accepted production RNGs. Explicit material is 32 zero bytes or
+32 ff bytes, including deliberate repeated identical load material. Interleaving
+27 combat raw requests with six raw requests each for progression/loot/quest
+matches pinned purpose vectors. The queued entropy seam also forces missing
+material and reentrant cancellation without touching a surviving source.
+
+The stock New Game/Pause/Settings/Apply/Resume/Return to Title paths use CORE's
+normal OS entropy acquisition. Reports retain both stock initialization materials,
+exact operation/session contexts, every draw count and expected/actual check.
+Rendered mode uses deliberate Enter press/release across real frames and retains
+`rng-session.png`. Inspection, local preview sources, ordinary preference changes,
+pause frames and controlled scene-object replacement leave live state intact.
+Owners still authorize draws and obey simulation/approved UI activity eligibility.
+
+A controlled owner snapshots assigned text, pending results and separate applied/
+acknowledged flags into `retained-owner.json`, exclusively inside the disposable
+fixture root. The second process restores those facts through a controlled mode
+provider and real CORE successful-load handoff. This is fixture transport, **not**
+a production save format, real CHAR/WORLD restore or SAVE-017 compatibility.
+Actual native restore remains an unavailable required scenario when selected.
+
+Scalar seed/clock/input overrides remain explicitly incomplete for this fixed
+multi-material suite. It uses no game clock. The established M1 session fixtures
+now exercise default CORE entropy initialization but consume no gameplay draws;
+deterministic numeric/session assertions use the dedicated fixed-material suites.
+The shared `assertion_values.ps1` handles empty JSON objects as well as nested
+arrays and numeric equality, and is reused by shared/export runners. Existing
+pass/fail/incomplete qualification and inventories remain unchanged.

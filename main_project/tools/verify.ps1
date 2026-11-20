@@ -12,6 +12,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 . "$PSScriptRoot/mod_fixture.ps1"
+. "$PSScriptRoot/assertion_values.ps1"
 $project = [IO.Path]::GetFullPath("$PSScriptRoot/..")
 $run = "$project/tests/.runs/verification-$Mode-$([Guid]::NewGuid().ToString('N'))"
 $runtimeProject = "$run/project"
@@ -30,33 +31,6 @@ $report = [ordered]@{ schema = 1; mode = $Mode; suite = $Suite; fixture = $Fixtu
     status = 'incomplete'; scenarios = @(); classic_source = $ClassicSource; inputs = @{ seed = $Seed; clock = $Clock; input_sequence = $InputSequence }
     engine = $null; executable = $engineExecutable; runtime_project = $runtimeProject; build = @{}; reproduction = @{ command = "./main_project/tools/verify_$Mode.ps1"; arguments = @{
         Suite = $Suite; Scenario = $Scenario; Fixture = $Fixture; ClassicSource = $ClassicSource; Seed = $Seed; Clock = $Clock; InputSequence = $InputSequence; Godot = $Godot; TimeoutSeconds = $TimeoutSeconds } } }
-
-# Compare JSON structures recursively, preserving legacy numeric equality (9 == 9.0)
-# and case-sensitive strings. PowerShell collection comparison is not deep equality.
-function Test-AssertionValue($Expected, $Actual) {
-    if ($null -eq $Expected -or $null -eq $Actual) { return $null -eq $Expected -and $null -eq $Actual }
-    if ($Expected -is [Array] -or $Actual -is [Array]) {
-        if ($Expected -isnot [Array] -or $Actual -isnot [Array] -or $Expected.Count -ne $Actual.Count) { return $false }
-        for ($i = 0; $i -lt $Expected.Count; $i++) {
-            if (!(Test-AssertionValue $Expected[$i] $Actual[$i])) { return $false }
-        }
-        return $true
-    }
-    if ($Expected -is [pscustomobject] -or $Actual -is [pscustomobject]) {
-        if ($Expected -isnot [pscustomobject] -or $Actual -isnot [pscustomobject]) { return $false }
-        $names = @($Expected.PSObject.Properties.Name)
-        if ($names.Count -ne @($Actual.PSObject.Properties.Name).Count) { return $false }
-        foreach ($name in $names) {
-            $property = $Actual.PSObject.Properties[$name]
-            if ($null -eq $property -or !(Test-AssertionValue $Expected.$name $property.Value)) { return $false }
-        }
-        return $true
-    }
-    if ($Expected -is [string] -or $Actual -is [string]) {
-        return $Expected -is [string] -and $Actual -is [string] -and $Expected -ceq $Actual
-    }
-    return $Expected -ceq $Actual
-}
 
 # Only this helper owns child lifetime. No shell-built command or unrelated process kill.
 function Invoke-Engine([string[]]$EngineArguments, [string]$Directory, [string]$Name) {
@@ -129,11 +103,11 @@ try {
         $item = [ordered]@{ scenario = $id; fixture = $Fixture; root = $caseRoot; inputs = $report.inputs
             status = 'incomplete'; reason = ''; process_exit = $null; result = $null }
         $report.scenarios += $item
-        if ($id -notin @('qualification','startup','session','randomness','classic','mods','planning','publication')) {
+        if ($id -notin @('qualification','startup','session','randomness-session','randomness','classic','mods','planning','publication')) {
             $item.reason = 'Required scenario unavailable; real owner/provider not registered'
             continue
         }
-        if (($id -eq 'randomness' -and $Fixture -ne 'randomness-v1') -or ($id -eq 'publication' -and $Fixture -ne 'publication-v1') -or ($id -eq 'planning' -and $Fixture -ne 'planning-v1') -or ($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('randomness','classic','mods','planning','publication') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
+        if (($id -eq 'randomness-session' -and $Fixture -ne 'randomness-session-v1') -or ($id -eq 'randomness' -and $Fixture -ne 'randomness-v1') -or ($id -eq 'publication' -and $Fixture -ne 'publication-v1') -or ($id -eq 'planning' -and $Fixture -ne 'planning-v1') -or ($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('randomness-session','randomness','classic','mods','planning','publication') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
             $item.reason = 'Fixture unavailable for selected scenario'
             continue
         }
@@ -176,7 +150,7 @@ try {
         if ($Mode -eq 'headless') { $arguments = @('--headless') + $arguments }
         try {
             $outcome = Invoke-Engine $arguments $caseRoot 'console'
-            if ($id -in @('mods','planning','publication') -and $outcome.exit -eq 0) {
+            if ($id -in @('mods','planning','publication','randomness-session') -and $outcome.exit -eq 0) {
                 $reloadFixture = Get-Content "$caseRoot/fixture.json" -Raw | ConvertFrom-Json
                 $reloadFixture.mode = $id + '_reload'
                 $reloadFixture | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/reload-fixture.json"
@@ -209,11 +183,12 @@ try {
             $item.reason = 'Malformed terminal report'; continue
         }
         $item.result = $result
-        if ($id -in @('mods','planning','publication') -and $result.ok) {
+        if ($id -in @('mods','planning','publication','randomness-session') -and $result.ok) {
             if (!(Test-Path "$caseRoot/reload-result.json")) { $item.reason = 'Missing fresh-process terminal result'; continue }
             $reloadResult = Get-Content "$caseRoot/reload-result.json" -Raw | ConvertFrom-Json
             $item.reload_result = $reloadResult
-            if ($reloadOutcome.timed_out -or $null -eq $reloadResult.ok -or $reloadResult.count -ne 8 -or $reloadResult.checks.Count -ne 8 -or
+            $reloadExpected = if ($id -eq 'randomness-session') { 15 } else { 8 }
+            if ($reloadOutcome.timed_out -or $null -eq $reloadResult.ok -or $reloadResult.count -ne $reloadExpected -or $reloadResult.checks.Count -ne $reloadExpected -or
                 !$reloadResult.engine -or ($Mode -eq 'rendered' -and $reloadResult.display -eq 'headless') -or
                 ((Select-String -Path "$caseRoot/reload-console.*.log" -Pattern 'SCRIPT ERROR:' -Quiet) -contains $true)) {
                 $item.reason = 'Fresh-process restore incomplete'; continue
@@ -223,7 +198,7 @@ try {
             }
             if ($reloadOutcome.exit -ne 0) { $item.reason = 'Fresh process exited unsuccessfully'; continue }
         }
-        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263; randomness = 108; classic = 97; mods = 119; planning = 87; publication = 111 } } else { @{ qualification = 3; startup = 92; session = 264; randomness = 108; classic = 100; mods = 136; planning = 101; publication = 117 } }
+        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263; randomness = 108; 'randomness-session' = 115; classic = 97; mods = 119; planning = 87; publication = 111 } } else { @{ qualification = 3; startup = 92; session = 264; randomness = 108; 'randomness-session' = 116; classic = 100; mods = 136; planning = 101; publication = 117 } }
         $item.expected_assertions = $expectedCounts[$id]
         $scriptErrors = Select-String -Path "$caseRoot/console.*.log" -Pattern 'SCRIPT ERROR:' -Quiet
         if ($scriptErrors -contains $true) {

@@ -71,3 +71,34 @@ On application exit call `SessionShell.dispose()` to disconnect owned callbacks;
 normal session retirement disposes its UI scopes earlier. See the
 [execution evidence](../../../design_docs/development/evidence/IMP-002-2026-11-19.md)
 for verified outcomes and all remaining owner integrations.
+
+## RULE session sources — IMP-006 increment 2
+
+CORE now owns the `randomness` participant for each lifecycle instance. New/load
+preflight prepares independent candidates; successful readiness activates them
+before ready/restored publication. Cancellation/failure discards candidates,
+retirement revokes outgoing capabilities and disposal clears all remaining state.
+See the [RULE interface](../rule/README.md#session-lifetime--imp-006-increment-2)
+for ordering, errors and owner responsibilities.
+
+Readiness service declarations may add `random_purposes: ["combat", ...]` for
+explicit ready session-lifetime consumers. The existing binding validator still
+runs first. RULE then validates these declarations before activation; malformed,
+duplicate/unknown or location-scoped purpose bindings reject readiness and use
+normal incomplete-session cleanup. Empty declarations retain no draw authority.
+The owner calls `core.randomness.source(current_scope, self, purpose)`; every
+returned handle is checked again per draw. Session or operation tickets cannot
+be replaced by a fresh ticket when completing stale work.
+
+The optional `SessionLifecycle.new(material_provider)` seam is trusted fixture
+construction only. The default is the existing OS entropy implementation. The
+factory takes a copied preparation ticket and new/load mode and returns the
+checked material result. Reentrant cancellation invalidates preparation before
+its result can publish. Ordinary session request intents do not accept raw source
+Objects or material byte arrays, preserving the existing plain-value boundary.
+
+The source handle is not an attempt authorization or consequence coordinator.
+Owners retain results/application flags under their own contracts; technical
+redelivery reuses them. Controlled `retained-owner-v1` tests are not CHAR/WORLD
+or native SAVE support. The stock provider still rejects unavailable real entry
+and restore. Formula hooks/executable providers remain outside this increment.

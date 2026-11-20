@@ -1,5 +1,13 @@
 # Implementation backlog
 
+**IMP-006 increment 2, 2026-11-20:** The user accepted increment 1 and authorized
+increment 2. Session isolation/lifetime and controlled retained-result integration
+are implemented and verified; see [execution evidence](evidence/IMP-006-increment-2-2026-11-20.md).
+Increment 2 awaits user acceptance. Increment 3 is not started. IMP-006 remains
+partially delivered; no dependent prerequisite edge or real-owner/M1 gate clears.
+Earlier handoff notes below retain their original acceptance context.
+
+
 **IMP-006 increment 1, 2026-11-20:** Numeric implementation verified;
 awaits user acceptance; see [execution evidence](evidence/IMP-006-increment-1-2026-11-20.md).
 The separate acceptance gates for lifecycle and formula dispatch remain binding.

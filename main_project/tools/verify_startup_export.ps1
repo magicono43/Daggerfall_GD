@@ -6,10 +6,12 @@ param(
     [switch]$ModDiscovery,
     [switch]$DependencyPlanning,
     [switch]$DefinitionPublication,
-    [switch]$Randomness
+    [switch]$Randomness,
+    [switch]$RandomnessSession
 )
 $ErrorActionPreference = 'Stop'
 . "$PSScriptRoot/mod_fixture.ps1"
+. "$PSScriptRoot/assertion_values.ps1"
 $project = [IO.Path]::GetFullPath("$PSScriptRoot/..")
 $run = "$project/tests/.runs/export-$([Guid]::NewGuid().ToString('N'))"
 $build = "$run/build"
@@ -18,9 +20,9 @@ New-Item -ItemType Directory -Force $build | Out-Null
 $priorRoaming = $env:APPDATA
 $priorLocal = $env:LOCALAPPDATA
 $report = @{ ok = $false; status = 'incomplete'; configuration = $Configuration; classic_source = $ClassicSource
-    fixture = $(if ($Randomness) {'randomness-v1'} elseif ($DefinitionPublication) {'publication-v1'} elseif ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
+    fixture = $(if ($RandomnessSession) {'randomness-session-v1'} elseif ($Randomness) {'randomness-v1'} elseif ($DefinitionPublication) {'publication-v1'} elseif ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
     reproduction = @{ command = './main_project/tools/verify_startup_export.ps1'; arguments = @{
-        Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; Godot = $Godot; Templates = $Templates } } }
+        Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; RandomnessSession = [bool]$RandomnessSession; Godot = $Godot; Templates = $Templates } } }
 function Copy-ExportResources([string]$Source, [string]$Destination) {
     New-Item -ItemType Directory -Force $Destination | Out-Null
     foreach ($entry in Get-ChildItem -LiteralPath $Source) {
@@ -34,7 +36,7 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
 }
 try {
 if (($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
-if (@($ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
+if (@($ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -90,29 +92,30 @@ foreach ($mode in @('headless','rendered')) {
         if ($ClassicSource) { throw 'Numeric randomness does not use a classic content source' }
         $fixture = @{ sandbox = $sandbox.Replace('\','/'); mode = 'randomness'; fixture = 'randomness-v1'; inputs = @{} }
     }
+    if ($RandomnessSession) {
+        if ($ClassicSource) { throw 'Session randomness does not use a classic content source' }
+        $fixture = @{ sandbox = $sandbox.Replace('\','/'); mode = 'randomness-session'; fixture = 'randomness-session-v1'; inputs = @{} }
+    }
     $fixture |
         ConvertTo-Json | Set-Content "$sandbox/fixture.json"
     $arguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/fixture.json")
     if ($mode -eq 'headless') { $arguments = @('--headless') + $arguments }
     & "$build/Startup.console.exe" @arguments *> "$run/$mode.log"
     $engineExit = $LASTEXITCODE
-    if (($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication) -and $engineExit -eq 0) {
-        $fixture.mode = if ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
-        if ($Randomness) {
-        if ($ClassicSource) { throw 'Numeric randomness does not use a classic content source' }
-        $fixture = @{ sandbox = $sandbox.Replace('\','/'); mode = 'randomness'; fixture = 'randomness-v1'; inputs = @{} }
-    }
-    $fixture | ConvertTo-Json -Depth 10 | Set-Content "$sandbox/reload-fixture.json"
+    if (($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) -and $engineExit -eq 0) {
+        $fixture.mode = if ($RandomnessSession) { 'randomness-session_reload' } elseif ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
+        $fixture | ConvertTo-Json -Depth 10 | Set-Content "$sandbox/reload-fixture.json"
         $reloadArguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/reload-fixture.json")
         if ($mode -eq 'headless') { $reloadArguments = @('--headless') + $reloadArguments }
         & "$build/Startup.console.exe" @reloadArguments *> "$run/$mode-reload.log"
         $reloadExit = $LASTEXITCODE
         if (!(Test-Path "$sandbox/reload-result.json")) { throw 'Missing exported fresh-process result' }
         $reloadResult = Get-Content "$sandbox/reload-result.json" -Raw | ConvertFrom-Json
-        if ($null -eq $reloadResult.ok -or $reloadResult.count -ne 8 -or $reloadResult.checks.Count -ne 8 -or !$reloadResult.engine -or
+        $reloadExpected = if ($RandomnessSession) { 15 } else { 8 }
+        if ($null -eq $reloadResult.ok -or $reloadResult.count -ne $reloadExpected -or $reloadResult.checks.Count -ne $reloadExpected -or !$reloadResult.engine -or
             ($mode -eq 'rendered' -and $reloadResult.display -eq 'headless') -or
             (Select-String -Path "$run/$mode-reload.log" -Pattern 'SCRIPT ERROR:' -Quiet)) { throw 'Exported fresh-process restore incomplete' }
-        if (!$reloadResult.ok -or @($reloadResult.checks | Where-Object { $_.expected -cne $_.actual }).Count -gt 0) {
+        if (!$reloadResult.ok -or @($reloadResult.checks | Where-Object { !(Test-AssertionValue $_.expected $_.actual) }).Count -gt 0) {
             $report.status = 'failed'; throw 'Exported fresh-process assertion failure'
         }
         if ($reloadExit -ne 0) { throw 'Exported fresh process exited unsuccessfully' }
@@ -129,7 +132,7 @@ foreach ($mode in @('headless','rendered')) {
     if ($null -eq $result.ok -or !$result.engine -or $result.checks.Count -ne $result.count -or
         ($mode -eq 'rendered' -and $result.display -eq 'headless')) { throw 'Incomplete exported terminal report' }
     if (Select-String -Path "$run/$mode.log" -Pattern 'SCRIPT ERROR:' -Quiet) { throw 'Exported script error' }
-    if (!$result.ok) { $report.status = 'failed'; throw "Exported startup assertions failed: $mode; $run" }
+    if (!$result.ok -or @($result.checks | Where-Object { !(Test-AssertionValue $_.expected $_.actual) }).Count -gt 0) { $report.status = 'failed'; throw "Exported startup assertions failed: $mode; $run" }
     if ($engineExit -ne 0) { throw 'Export process exited unsuccessfully' }
     $after = @{}
     foreach ($name in $before.Keys) {
@@ -137,11 +140,13 @@ foreach ($mode in @('headless','rendered')) {
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
     $expected = if ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    $sessionExpected = if ($mode -eq 'headless') { 115 } else { 116 }
+    if ($RandomnessSession -and $result.count -ne $sessionExpected) { throw 'Incomplete session random export inventory' }
     if ($Randomness -and $result.count -ne 108) { throw 'Incomplete numeric export inventory' }
     if ($ClassicSource -and $result.count -ne $expected) { throw 'Incomplete owner export result' }
     $checks += @{ scenario = "exported-$mode"; actual = 'pass'; assertions = $result.count; process_exit = $engineExit
         source_before = $before; source_after = $after; result = "$sandbox/result.json" }
-    if ($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication) { $checks[-1].reload = @{ assertions = 8; process_exit = $reloadExit; result = "$sandbox/reload-result.json" } }
+    if ($ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) { $checks[-1].reload = @{ assertions = $reloadExpected; process_exit = $reloadExit; result = "$sandbox/reload-result.json" } }
     $report.checks = $checks
 }
 $report.ok = $true

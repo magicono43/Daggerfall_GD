@@ -8,6 +8,7 @@ signal retiring(scope: String)
 signal diagnostic(reason: String)
 const Gates = preload("res://scripts/session/session_gates.gd")
 var gates := Gates.new()
+var randomness: RefCounted
 var provider: RefCounted = preload("res://scripts/session/session_provider.gd").new()
 var _state := {"application": "startup", "session": "", "status": "absent", "ready": false, "baseline_ready": false, "operation": "", "phase": "idle", "version": 0}
 var _operation: Dictionary = {}
@@ -24,6 +25,9 @@ var _death_authority: RefCounted
 var _cleanup_serial := 0
 var _startup_ready := false
 var _finishing := false
+
+func _init(material_provider: Callable = Callable()) -> void:
+	randomness = preload("res://scripts/rule/session_randomness.gd").new(gates, material_provider)
 
 func snapshot() -> Dictionary:
 	var view := _state.duplicate(true)
@@ -75,6 +79,7 @@ func request(intent: Dictionary) -> Dictionary:
 	_operation = {"intent": captured, "generation": _serial, "scope": _state.session, "prepared": {}}
 	last_intent = captured.duplicate(true)
 	_receipts[id] = {"intent": captured, "result": {"kind": "pending", "id": id}}
+	randomness.suspend_operation(true)
 	_operation_hold = gates.acquire("operation:" + id, "", ["simulation", "input"])
 	_commit({"operation": id, "phase": "preflight"}, "request admitted")
 	if not busy() or _operation.intent.id != id or _state.phase != "preflight":
@@ -83,6 +88,14 @@ func request(intent: Dictionary) -> Dictionary:
 		_finish("Succeeded", "Already at menu; unchanged.")
 		return _receipts[id].result.duplicate(true)
 	var current := ticket()
+	if mode in ["new", "load"]:
+		_operation.random_ticket = current.duplicate(true)
+		var initialized: Dictionary = randomness.prepare(current, mode)
+		if not _matches(current, "preflight"):
+			return _receipts[id].result.duplicate(true)
+		if not initialized.ok:
+			complete_preflight(current, initialized)
+			return _receipts[id].result.duplicate(true)
 	var checked: Dictionary = {"ok": true} if mode in ["return", "death", "shutdown"] else provider.prepare(current, captured.duplicate(true))
 	if not checked.get("pending", false):
 		complete_preflight(current, checked)
@@ -147,6 +160,7 @@ func _cleanup_scope(scope: String, purpose: String) -> void:
 	_cleanup = {"scope": scope, "purpose": purpose, "ticket": cleanup_ticket.duplicate(true), "awaiting": true}
 	if not scope.is_empty():
 		_commit({"status": "ending", "ready": false}, "scope retiring")
+		randomness.retire(scope)
 		retiring.emit(scope) # UI disconnects and retires session-owned requests first.
 		gates.retire(scope)
 	var checked: Dictionary = provider.cleanup(cleanup_ticket.duplicate(true), scope)
@@ -237,6 +251,12 @@ func complete_readiness(value: Dictionary, result: Dictionary) -> bool:
 		_commit({"ready": false, "phase": "replacement"}, result.get("reason", checked.get("reason", "Required readiness failed.")))
 		_cleanup_scope(_state.session, "failure")
 		return true
+	var activated: Dictionary = randomness.activate(_operation.random_ticket, _state.session, result.services)
+	if not activated.ok:
+		_commit({"ready": false, "phase": "replacement"}, activated.reason)
+		_cleanup_scope(_state.session, "failure")
+		return true
+	randomness.suspend_operation(false)
 	_death_authority = result.get("death_authority")
 	_commit({"status": "alive", "ready": true, "phase": "ready"}, "session ready", "session_restored" if _operation.intent.mode == "load" else "new_session_ready")
 	_finish("Succeeded", "Required readiness completed.")
@@ -354,9 +374,11 @@ func recover_menu() -> bool:
 func _finish(kind: String, reason: String, unsafe_cleanup := false) -> void:
 	_finishing = true
 	var id: String = _operation.intent.id
+	randomness.discard(_operation.get("random_ticket", {}))
 	var result := {"kind": kind, "id": id, "reason": reason, "session": _state.session}
 	_receipts[id].result = result.duplicate(true)
 	_operation.clear()
+	randomness.suspend_operation(false)
 	gates.release(_operation_hold, "operation:" + id)
 	_commit({"operation": "", "phase": "cleanup_failed" if unsafe_cleanup else "idle"}, reason)
 	_finishing = false
@@ -364,6 +386,7 @@ func _finish(kind: String, reason: String, unsafe_cleanup := false) -> void:
 
 func dispose() -> void:
 	# Application/test owner invokes after scopes end; break owned subscriptions.
+	randomness.dispose()
 	for event: Signal in [state_changed, milestone, terminal, retiring, diagnostic, gates.changed]:
 		for connection: Dictionary in event.get_connections():
 			event.disconnect(connection.callable)

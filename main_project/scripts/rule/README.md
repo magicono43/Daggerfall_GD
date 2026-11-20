@@ -63,3 +63,89 @@ No clock or input is used. Seed/clock/input overrides remain explicitly incomple
 this fixed multi-seed suite cannot reinterpret a scalar seed as its fixture material.
 Session ownership, successful-load preparation, retained-result integration and
 formula dispatch remain gated increments 2/3; no later owner gate closes here.
+
+## Session lifetime — IMP-006 increment 2
+
+CORE's `SessionLifecycle` owns `randomness` (`session_randomness.gd`, interface
+`session-rng-v1`). The earlier increment-1-only notes above retain their delivery
+scope; the normal CORE path now initializes sources. `Core.new()` uses the accepted
+OS entropy boundary. The optional constructor material-provider Callable is an
+explicit trusted fixture seam, fixed at construction, returning `{ok, material}`
+for a copied CORE ticket and entry mode. Wrong/short/missing material fails without
+fallback. This is not a player seed setting or a configuration refresh mechanism.
+
+The normal ordering is:
+
+1. Admit CORE's existing new/load operation and suspend live source access.
+2. Independently prepare all four candidate sources under the exact operation
+   ticket. This happens before the mode provider's prepare; entropy failure leaves
+   any surviving session intact and does not invoke the restore provider.
+3. CORE retains the outgoing session during cancellable preflight/confirmation.
+   Candidate sources cannot be acquired or drawn. Cancel/failure discards them.
+4. At replacement, revoke outgoing handles before retirement subscribers and
+   provider cleanup. Baseline/readiness owners restore retained facts while the
+   replacement stays gated. Candidate sources remain unavailable to gameplay.
+5. After real readiness/binding validation, validate the new consumer declarations,
+   activate all four sources together and then publish ready/restored. Readiness
+   observers see initialized sources. Duplicate/stale completions cannot activate.
+
+`core.randomness.source(scope, consumer_object, purpose)` returns a checked handle.
+The provider's readiness service inventory must explicitly list `random_purposes`
+(e.g. `["progression"]`) on a ready session-lifetime owner. No declaration means
+no source capability. Unknown/duplicate purposes, malformed declarations and
+location-lifetime consumers reject readiness. Consumer identity is the actual
+provider Object, held weakly, not a caller-supplied owner name. UI/AV/inspection
+objects cannot obtain sources merely by naming a gameplay purpose. This is a
+trusted in-process interface, not executable-mod sandboxing or hook registration.
+
+Each handle rechecks consumer identity, purpose, scope, session epoch, CORE
+readiness/safety, disposal and lifecycle-operation suspension on **every** raw or
+bounded request. Held references cannot follow a later session. A successful
+bounded request increments the underlying stream's logical count once, preserving
+increment-1 rejection semantics; percentile uses the same handle interface.
+Handle counters count deliveries through that handle; `snapshot().sources` reports
+the actual stream counters across all of its consumers/handles.
+
+Source availability does not authorize an attempt. Domain owners still check
+simulation eligibility (or their specifically approved UI-driven generation rule),
+choose ordering and retain/apply results. Pause holds preserve the sources rather
+than reseeding; this participant does not invent a global ban on owner-authorized
+UI generation while paused. Nothing here starts a simulation loop. Owners sharing
+a purpose must establish their approved synchronous draw order; there is no
+callback race ordering, per-actor stream subdivision or automatic draw rollback.
+
+Pauses, menu layers, preferences and ordinary scene/location work do not invoke
+source preparation/activation. Sources stay in the application-composed CORE
+session owner. Actual WORLD/LOC transitions must retain that owner; the controlled
+fixture's scene-object replacement is not a real world streaming qualification.
+Title return, character replacement, death/shutdown retirement and application
+disposal revoke sources. A failed post-replacement restore cannot expose its
+candidate; it follows CORE's existing cleanup/recovery policy without promising
+that an already retired outgoing session survives.
+
+`snapshot()` is a detached value projection: contract, epoch, scope, preparation
+context, material hex and per-purpose raw/logical counts; no source, callback or
+provider reference is exposed. Inspection and mutation of the returned copy do
+not draw or reseed. Captured material supports local DEV reproduction. It is not
+ordinary SAVE RNG continuation state, a global gameplay log or a save schema.
+Seeded diagnostic/preview generation uses separately derived isolated sources.
+
+Retained-result verification uses `tests/controlled_random_owner.gd`, fixture
+`retained-owner-v1`. This controlled owner defines legitimate reward attempts,
+retains each resolved percentile, commits its fixture balance/application once,
+and acknowledges delivery separately. Before-commit interruption applies nothing;
+after-commit interruption retains the applied flag; retries reuse the result and
+cannot repeat consequences. Fixture-only snapshot/restore retains assigned text,
+pending resolutions and applied/acknowledged flags across successful load and a
+fresh engine process, even when the fixture's default name changes. RULE contains
+no universal retained-action registry. Actual CHAR/ITEM/QUEST/SAVE owners must
+implement their own facts, identity, retention, settlement and compatibility.
+
+Scenario `randomness-session`, fixture `randomness-session-v1`, has fixed 115
+headless / 116 rendered assertions plus 15 fresh-process restoration assertions.
+The controlled CORE factory uses zero and all-ff material; interleaved gameplay
+vectors are compared with the pinned purpose vectors. The actual stock UI CORE
+uses OS entropy; reports capture that material and assert initialization/counter
+boundaries, never uniqueness or changed rolls. Fixed multi-material inputs do not
+accept scalar seed/clock/input overrides. Increment 3 formula dispatch remains
+behind separate user acceptance and authorization.

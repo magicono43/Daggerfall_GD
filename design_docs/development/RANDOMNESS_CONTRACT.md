@@ -69,3 +69,22 @@ The three-increment acceptance sequence remains binding. Numeric delivery does
 not establish CORE successful-load initialization, owner retention, formula-hook
 publication or executable provider readiness. See
 [increment evidence](evidence/IMP-006-increment-1-2026-11-20.md).
+
+## Session integration — IMP-006 increment 2, 2026-11-20
+
+The user accepted increment 1 and authorized increment 2 on 2026-11-20. CORE now
+prepares ticketed candidate sources independently during new/load preflight and
+activates them only after successful readiness/binding validation. Outgoing sources
+are retained through rejected/cancelled preflight, preserved through pause/menu/
+preference and ordinary scene work, and revoked when their session retires.
+Per-draw consumer/scope/epoch/readiness checks reject obsolete handles. See
+[the concrete lifecycle interface](../../main_project/scripts/rule/README.md#session-lifetime--imp-006-increment-2).
+
+The fixed `randomness-session-v1` fixture verifies declared-purpose interleaving,
+load candidate isolation, repeated fresh initialization (including identical
+fixture material), stale completion rejection and controlled owner result retention.
+A second process restores fixture facts and resumes outstanding delivery without
+reroll or duplicate application. These are controlled owner/restore interface
+checks, not production CHAR/ITEM/QUEST/WORLD or native SAVE compatibility.
+No universal attempt history or automatic rollback is introduced. Formula dispatch
+remains increment 3, requiring separate user acceptance/authorization.
