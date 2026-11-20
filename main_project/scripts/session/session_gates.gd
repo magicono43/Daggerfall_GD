@@ -1,0 +1,52 @@
+class_name SessionGates
+extends RefCounted
+## CORE-owned requester tokens. Empty scope is application lifetime.
+signal changed
+var _holds: Dictionary = {}
+var _next := 0
+var session := ""
+var ready := false
+var safe := true
+var intended_rate := 1.0
+var hud_preference := true
+var hud_bound := false
+
+func acquire(owner: String, scope: String, channels: Array) -> int:
+	_next += 1
+	_holds[_next] = {"owner": owner, "scope": scope, "channels": channels.duplicate()}
+	changed.emit()
+	return _next
+
+func release(token: int, owner: String) -> bool:
+	if not _holds.has(token) or _holds[token].owner != owner:
+		return false
+	_holds.erase(token)
+	changed.emit()
+	return true
+
+func retire(scope: String) -> void:
+	for token in _holds.keys():
+		if _holds[token].scope == scope:
+			_holds.erase(token)
+	changed.emit()
+
+func blocked(channel: String) -> bool:
+	for hold: Dictionary in _holds.values():
+		if (hold.scope.is_empty() or hold.scope == session) and hold.channels.has(channel):
+			return true
+	return false
+
+func simulation() -> bool:
+	return ready and safe and not session.is_empty() and not blocked("simulation")
+
+func gameplay_input() -> bool:
+	return ready and safe and not session.is_empty() and not blocked("input")
+
+func presentation() -> bool:
+	return not blocked("presentation")
+
+func hud_visible() -> bool:
+	return hud_preference and hud_bound and not session.is_empty() and not blocked("hud")
+
+func effective_rate() -> float:
+	return intended_rate if simulation() else 0.0

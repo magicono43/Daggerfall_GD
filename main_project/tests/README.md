@@ -1,4 +1,33 @@
-# IMP-001 task-local verification
+# Task-local verification
+
+## IMP-002 session and input gates
+
+After building the existing native storage adapter, independently run from the
+repository root:
+
+```powershell
+./main_project/tools/verify_session.ps1 -Mode headless
+./main_project/tools/verify_session.ps1 -Mode rendered
+```
+
+These use the normal startup scene and explicitly selected controlled providers.
+Each run creates fresh game and engine roots under `tests/.runs/session-*`, with
+JSON assertion/build/input evidence and separate rendered PNGs. The runner fails
+on a missing report or any failed assertion. It restores APPDATA/LOCALAPPDATA.
+The suite covers busy/cancel/replacement/unsafe-cleanup, obsolete callbacks,
+independent holds, modal/response identity, notification reentrancy, cadence
+interruption and normal title/pause/settings/prompt/exit-recovery controls.
+
+Rendered buttons receive deliberate Enter press/release through Godot input;
+headless buttons emit their production pressed signal. Text drafts and simulation
+deltas are controlled directly. This is not real character/restore/playback/input
+provider qualification, physical IME/controller testing or the IMP-003 harness.
+The fixture's 0.1-second cadence and two-consumer work allowance are not defaults.
+The final shutdown write-failure case intentionally retains its injection until
+report publication/test exit; it does not claim a successful orderly save exit.
+See [IMP-002 evidence](../../design_docs/development/evidence/IMP-002-2026-11-19.md).
+
+## IMP-001 startup
 
 These fixtures exercise the normal `startup.tscn` entry and its production owner
 requests. They are not the IMP-003 shared verification harness. Build the native

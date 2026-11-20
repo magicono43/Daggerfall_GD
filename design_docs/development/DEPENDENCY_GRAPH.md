@@ -18,6 +18,13 @@ delivered ([evidence](evidence/IMP-001-2026-11-19.md)), clearing that prerequisi
 for IMP-002/003. Edges are retained for traceability. M1 real-provider checks and
 all other prerequisites remain open; dispatch still requires authorization.
 
+IMP-002's assigned session/modal shell increment is also delivered on 2026-11-19
+([evidence](evidence/IMP-002-2026-11-19.md)). That prerequisite is cleared for
+IMP-005/011/014/024/013/022/052; their other edges remain open. IMP-003 already has
+all prerequisites delivered and still requires authorization. No other dependent
+becomes fully dispatchable from IMP-002 alone. Named real-provider checks remain
+open, and the dependency edges below are unchanged.
+
 | Task | Must complete first |
 | --- | --- |
 | [IMP-001](tasks/IMP-001.md) | Interface and fixture gates only |

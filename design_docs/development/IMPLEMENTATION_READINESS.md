@@ -20,14 +20,17 @@ Every [task card](TASK_BACKLOG.md) records planning and execution readiness sepa
 
 **Execution update, 2026-11-19:** The authorized IMP-001 startup increment is
 complete; [execution evidence](evidence/IMP-001-2026-11-19.md) records the Windows
-checks and open real-provider integrations. IMP-002 and IMP-003 may be authorized
-next. Later tasks retain their listed prerequisite gates. No subsequent task has
-been authorized by the IMP-001 instruction.
+checks and open real-provider integrations. IMP-002's explicitly authorized
+session/modal shell increment is now complete; its
+[evidence](evidence/IMP-002-2026-11-19.md) records independent local suites and
+remaining real-provider obligations. IMP-003 remains fully prerequisite-cleared
+and may be authorized next. IMP-002's dependents retain their other listed
+prerequisites. No subsequent task has been authorized or begun.
 
 The user approved **GDScript for the main game, UI and tools**, with **C++ GDExtensions for native adapters**, on 2026-11-18. IMP-001 extended the existing Godot 4.7.2 project at `main_project/project.godot` with the startup entry point and storage/settings shell using this language split; project creation alone did not complete IMP-001. Luau restricted mods and trusted GDScript retain their separate approved runtime contracts.
 
 1. IMP-001's minimum project entry and storage/settings shell is delivered using the approved Windows contract and isolated startup fixtures; retain its real-provider M1 checks.
-2. Deliver IMP-002 and IMP-003 after IMP-001. Their session and verification interfaces then support real data/package preparation.
+2. IMP-002's session/modal shell is delivered after IMP-001; retain its named real-provider checks. Deliver IMP-003's shared verification harness next when authorized. Together these interfaces support real data/package preparation.
 3. Follow the verified dependency waves in the second audit. Implement broad cards through their approved independently testable increments.
 4. At M2, run the actual movement/combat/loot/save loop and the separate rendered timing/preview checks.
 5. At M3, verify the approved opening queue/exterior tutorial, actual economy initialization, quest reward/fault retry and restore against real owners.

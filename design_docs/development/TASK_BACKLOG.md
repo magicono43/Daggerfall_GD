@@ -5,8 +5,11 @@
 **Execution update, 2026-11-19:** IMP-001's authorized Windows startup increment is
 complete with task-local headless/rendered, process and export evidence
 ([report](evidence/IMP-001-2026-11-19.md)). Its real-provider M1 integration remains
-open. IMP-002 and IMP-003 have this prerequisite delivered and await their own
-authorization. Planning READY counts do not imply implementation completion.
+open. IMP-002's authorized session/modal shell increment is also complete
+([report](evidence/IMP-002-2026-11-19.md)); its real-provider gates remain open.
+IMP-003 has all prerequisites delivered and awaits authorization. IMP-002's edges
+are delivered to its dependents, which retain their other prerequisite gates.
+Planning READY counts do not imply implementation completion.
 
 | Task | Objective area | Milestone | Planning readiness |
 | --- | --- | --- | --- |

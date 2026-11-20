@@ -8,8 +8,12 @@ var picker: FileDialog
 var fixture: Dictionary = {}
 var registered_logger: StartupLaunchLogger
 var logging_status: Label
+var session_shell: RefCounted
+var render_generation := 0
 
 func _ready() -> void:
+	get_tree().auto_accept_quit = false
+	session_shell = preload("res://scripts/session/session_shell.gd").new(self)
 	var background := ColorRect.new()
 	background.color = Color("17212a")
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -43,7 +47,7 @@ func launch_inputs() -> Dictionary:
 	if not standard.ok:
 		label("Storage adapter unavailable", 30)
 		label(standard.detail)
-		button("Quit", func(): get_tree().quit())
+		button("Quit", func(): session_shell.request_quit())
 		return {}
 	var executable := OS.get_executable_path().get_base_dir()
 	# Editor executable directories are shared engine installations. Never use their
@@ -81,6 +85,7 @@ func launch_inputs() -> Dictionary:
 	return launch_context
 
 func clear() -> void:
+	render_generation += 1
 	for child in panel.get_children():
 		panel.remove_child(child)
 		child.queue_free()
@@ -96,7 +101,10 @@ func button(text: String, action: Callable) -> void:
 	var item := Button.new()
 	item.text = text
 	item.custom_minimum_size.y = 40
-	item.pressed.connect(action)
+	var generation := render_generation
+	item.pressed.connect(func():
+		if generation == render_generation:
+			action.call())
 	panel.add_child(item)
 
 func retry(fallback := false, reset := false) -> void:
@@ -104,6 +112,12 @@ func retry(fallback := false, reset := false) -> void:
 	render()
 
 func render() -> void:
+	session_shell._render_pending = false
+	session_shell.synchronize_startup()
+	if controller.route == "main_menu" or not session_shell.quit_phase.is_empty():
+		session_shell.render()
+		call_deferred("restore_session_focus", render_generation)
+		return
 	clear()
 	label("Daggerfall GD · Startup", 30)
 	var route := controller.route
@@ -157,7 +171,29 @@ func render() -> void:
 		"menu_recovery":
 			button("Retry", func(): controller.continue_to_menu(); render())
 			button("Return to Setup", func(): controller.open_setup(); render())
-	button("Quit", func(): get_tree().quit())
+	button("Quit", func(): session_shell.request_quit())
+
+func advance_shutdown() -> void:
+	session_shell.advance_shutdown()
+
+func restore_session_focus(generation: int) -> void:
+	if generation == render_generation:
+		session_shell.restore_focus()
+
+func _notification(what: int) -> void:
+	if session_shell == null:
+		return
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		session_shell.request_quit()
+	elif what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		session_shell.focus_changed(false)
+	elif what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		session_shell.focus_changed(true)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.keycode == KEY_ESCAPE:
+		session_shell.windows.capture("options", event.pressed, event.echo)
+		get_viewport().set_input_as_handled()
 
 func choose_folder() -> void:
 	if picker != null:
@@ -172,6 +208,10 @@ func choose_folder() -> void:
 
 func _process(_delta: float) -> void:
 	update_logging_warning()
+	if session_shell != null:
+		var dispatched: Dictionary = session_shell.windows.dispatch()
+		if dispatched.get("action") == "options" and dispatched.kind == "dispatch":
+			session_shell.options()
 
 func update_logging_warning() -> void:
 	if is_instance_valid(logging_status):
@@ -179,7 +219,7 @@ func update_logging_warning() -> void:
 		logging_status.visible = not logging_status.text.is_empty()
 
 func run_fixture() -> void:
-	var suite = load("res://tests/startup_cases.gd").new()
+	var suite = load("res://tests/session_cases.gd" if fixture.get("mode") == "session" else "res://tests/startup_cases.gd").new()
 	var checks: Dictionary = await suite.run(self, fixture)
 	var target := str(fixture.sandbox).path_join("result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
@@ -188,6 +228,8 @@ func run_fixture() -> void:
 	get_tree().quit(0 if checks.ok else 1)
 
 func _exit_tree() -> void:
+	if session_shell != null:
+		session_shell.dispose()
 	if registered_logger != null:
 		OS.remove_logger(registered_logger)
 		registered_logger.stop("Process shutdown")
