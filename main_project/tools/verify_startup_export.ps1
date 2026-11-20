@@ -2,9 +2,11 @@ param(
 	[ValidateSet('debug','release')][string]$Configuration = 'debug',
     [string]$Godot = 'C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe',
     [string]$Templates = "$env:APPDATA/Godot/export_templates/4.7.2.stable",
-    [string]$ClassicSource = ''
+    [string]$ClassicSource = '',
+    [switch]$ModDiscovery
 )
 $ErrorActionPreference = 'Stop'
+. "$PSScriptRoot/mod_fixture.ps1"
 $project = [IO.Path]::GetFullPath("$PSScriptRoot/..")
 $run = "$project/tests/.runs/export-$([Guid]::NewGuid().ToString('N'))"
 $build = "$run/build"
@@ -13,9 +15,9 @@ New-Item -ItemType Directory -Force $build | Out-Null
 $priorRoaming = $env:APPDATA
 $priorLocal = $env:LOCALAPPDATA
 $report = @{ ok = $false; status = 'incomplete'; configuration = $Configuration; classic_source = $ClassicSource
-    fixture = $(if ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
+    fixture = $(if ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
     reproduction = @{ command = './main_project/tools/verify_startup_export.ps1'; arguments = @{
-        Configuration = $Configuration; ClassicSource = $ClassicSource; Godot = $Godot; Templates = $Templates } } }
+        Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; Godot = $Godot; Templates = $Templates } } }
 function Copy-ExportResources([string]$Source, [string]$Destination) {
     New-Item -ItemType Directory -Force $Destination | Out-Null
     foreach ($entry in Get-ChildItem -LiteralPath $Source) {
@@ -28,6 +30,7 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
     }
 }
 try {
+if ($ModDiscovery -and !$ClassicSource) { throw '-ModDiscovery requires an explicit real -ClassicSource' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -37,6 +40,7 @@ $exportOption = "--export-$Configuration"
 Copy-ExportResources $project $runtimeProject
 & $Godot --headless --path $runtimeProject --import --quit-after 60 *> "$run/import.log"
 if ($LASTEXITCODE -ne 0) { throw 'Export project import failed' }
+if (Select-String -Path "$run/import.log" -Pattern 'SCRIPT ERROR:' -Quiet) { throw 'Export import script error' }
 & $Godot --headless --path $runtimeProject $exportOption 'Windows Desktop' "$build/Startup.exe" *> "$run/export.log"
 if ($LASTEXITCODE -ne 0 -or !(Test-Path "$build/Startup.exe")) {
     Get-Content "$run/export.log" -Tail 30
@@ -50,6 +54,7 @@ foreach ($mode in @('headless','rendered')) {
     $guards = @()
     $before = @{}
     $classicLock = $null
+    $modLock = $null
     if ($ClassicSource) {
         $selectedRoot = [IO.Path]::GetFullPath($ClassicSource)
         if ((Split-Path $selectedRoot -Leaf) -ine 'ARENA2') { $selectedRoot = Join-Path $selectedRoot 'ARENA2' }
@@ -64,15 +69,38 @@ foreach ($mode in @('headless','rendered')) {
         $fixture = @{ sandbox = $sandbox.Replace('\','/'); mode = 'classic'; fixture = 'classic-v1'; inputs = @{}
             classic_source = $selectedRoot.Replace('\','/'); unreadable_root = $lockedRoot.Replace('\','/') }
     }
+    if ($ModDiscovery) {
+        $fixture.mode = 'mods'
+        $fixture.fixture = 'mods-v1'
+        $modLock = New-ModFixture $sandbox
+    }
     $fixture |
         ConvertTo-Json | Set-Content "$sandbox/fixture.json"
     $arguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/fixture.json")
     if ($mode -eq 'headless') { $arguments = @('--headless') + $arguments }
     & "$build/Startup.console.exe" @arguments *> "$run/$mode.log"
     $engineExit = $LASTEXITCODE
+    if ($ModDiscovery -and $engineExit -eq 0) {
+        $fixture.mode = 'mods_reload'
+        $fixture | ConvertTo-Json -Depth 10 | Set-Content "$sandbox/reload-fixture.json"
+        $reloadArguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/reload-fixture.json")
+        if ($mode -eq 'headless') { $reloadArguments = @('--headless') + $reloadArguments }
+        & "$build/Startup.console.exe" @reloadArguments *> "$run/$mode-reload.log"
+        $reloadExit = $LASTEXITCODE
+        if (!(Test-Path "$sandbox/reload-result.json")) { throw 'Missing exported fresh-process result' }
+        $reloadResult = Get-Content "$sandbox/reload-result.json" -Raw | ConvertFrom-Json
+        if ($null -eq $reloadResult.ok -or $reloadResult.count -ne 8 -or $reloadResult.checks.Count -ne 8 -or !$reloadResult.engine -or
+            ($mode -eq 'rendered' -and $reloadResult.display -eq 'headless') -or
+            (Select-String -Path "$run/$mode-reload.log" -Pattern 'SCRIPT ERROR:' -Quiet)) { throw 'Exported fresh-process restore incomplete' }
+        if (!$reloadResult.ok -or @($reloadResult.checks | Where-Object { $_.expected -cne $_.actual }).Count -gt 0) {
+            $report.status = 'failed'; throw 'Exported fresh-process assertion failure'
+        }
+        if ($reloadExit -ne 0) { throw 'Exported fresh process exited unsuccessfully' }
+    }
     foreach ($guard in $guards) { $guard.Dispose() }
     $guards = @()
     if ($null -ne $classicLock) { $classicLock.Dispose() }
+    if ($null -ne $modLock) { $modLock.Dispose() }
     if (!(Test-Path "$sandbox/result.json")) {
         Get-Content "$run/$mode.log" -Tail 30
         throw "Exported startup failed: $mode; $run"
@@ -88,9 +116,11 @@ foreach ($mode in @('headless','rendered')) {
         $after[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
-    if ($ClassicSource -and $result.count -ne $(if ($mode -eq 'headless') {97} else {100})) { throw 'Incomplete classic export result' }
+    $expected = if ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    if ($ClassicSource -and $result.count -ne $expected) { throw 'Incomplete owner export result' }
     $checks += @{ scenario = "exported-$mode"; actual = 'pass'; assertions = $result.count; process_exit = $engineExit
         source_before = $before; source_after = $after; result = "$sandbox/result.json" }
+    if ($ModDiscovery) { $checks[-1].reload = @{ assertions = 8; process_exit = $reloadExit; result = "$sandbox/reload-result.json" } }
     $report.checks = $checks
 }
 $report.ok = $true
@@ -103,6 +133,7 @@ Write-Output "Windows $Configuration export PASS: headless and rendered startup;
     $report.error = $_.Exception.Message
     Write-Output "Windows $Configuration export $($report.status): $run/result.json"
 } finally {
+    if ($null -ne $modLock) { $modLock.Dispose() }
     foreach ($guard in $guards) { $guard.Dispose() }
     if ($null -ne $classicLock) { $classicLock.Dispose() }
     $env:APPDATA = $priorRoaming

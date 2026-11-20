@@ -40,6 +40,12 @@ inside the extracted toolchain. The compiler is build-only, not a game runtime.
 
 ## Semantics and limits
 
+IMP-005 increment 1 adds read-only `inspect`: `GetFileAttributesW` classifies
+missing/file/directory/reparse-point paths; ordinary files are checked with
+`GetFileInformationByHandle` for hard links. Reparse points and multiply linked
+files return `link`; access failures retain Windows errors. MOD owns discovery,
+containment decisions and recovery. The same pinned build/ABI/dependencies apply.
+
 `WindowsStorageLease.invoke(operation, source, destination)` returns a tagged
 string (`ok|...`, `in_use|...`, `io|...`). The GDScript adapter converts it to
 checked results with operation, path and diagnostic details.

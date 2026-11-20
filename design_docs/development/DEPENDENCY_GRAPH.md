@@ -1,5 +1,10 @@
 # Implementation dependencies
 
+2026-11-20: IMP-005's authorized discovery/selection increment is implemented
+([evidence](evidence/IMP-005-2026-11-20.md)), pending user acceptance. Planning and
+publication increments retain their separate gates. IMP-005 is not delivered as
+a whole; no downstream edge is cleared. Existing dependency edges are unchanged.
+
 An arrow runs from prerequisite to dependent. The milestone diagram groups work. Every direct task edge is listed below. The [detailed dependency ledger](../analysis/04_DETAILED_DEPENDENCIES.md) records runtime and content relationships that may be reciprocal. A task edge blocks an implementation handoff. A runtime peer can be integrated later under an approved contract and fixture when the relevant milestone permits it.
 
 ```mermaid

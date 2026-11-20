@@ -55,6 +55,26 @@ static std::string failure(DWORD error) {
         + "Windows error " + std::to_string(error) + ": " + detail;
 }
 static std::string invoke(StorageLease *lease, const std::string &op, const std::string &a, const std::string &b) {
+    if (op == "inspect") {
+        DWORD attributes = GetFileAttributesW(wide(a).c_str());
+        if (attributes == INVALID_FILE_ATTRIBUTES) {
+            DWORD error = GetLastError();
+            if (error == ERROR_FILE_NOT_FOUND || error == ERROR_PATH_NOT_FOUND) return "ok|missing";
+            return failure(error);
+        }
+        if (attributes & FILE_ATTRIBUTE_REPARSE_POINT) return "ok|link";
+        if (!(attributes & FILE_ATTRIBUTE_DIRECTORY)) {
+            HANDLE file = CreateFileW(wide(a).c_str(), FILE_READ_ATTRIBUTES,
+                FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, nullptr, OPEN_EXISTING, 0, nullptr);
+            if (file == INVALID_HANDLE_VALUE) return failure(GetLastError());
+            BY_HANDLE_FILE_INFORMATION info = {};
+            BOOL checked = GetFileInformationByHandle(file, &info);
+            DWORD error = GetLastError(); CloseHandle(file);
+            if (!checked) return failure(error);
+            if (info.nNumberOfLinks > 1) return "ok|link";
+        }
+        return attributes & FILE_ATTRIBUTE_DIRECTORY ? "ok|directory" : "ok|file";
+    }
     if (op == "per_user") {
         wchar_t path[MAX_PATH];
         HRESULT hr = SHGetFolderPathW(nullptr, CSIDL_LOCAL_APPDATA, nullptr, SHGFP_TYPE_CURRENT, path);

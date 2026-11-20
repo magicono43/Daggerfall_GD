@@ -31,6 +31,12 @@ all listed prerequisites delivered and await authorization; IMP-022 still requir
 IMP-017. Real package publication and later enabled adapters remain open.
 No subsequent task was begun.
 
+**Execution update, 2026-11-20:** IMP-005 increment 1 is authorized and implemented
+([evidence](evidence/IMP-005-2026-11-20.md)); acceptance is pending. Discovery,
+duplicate decisions and profiles are distinct from the still-unavailable planner
+and DATA publication. Increment 2 requires acceptance/continuation authorization;
+increment 3 retains its own gate. IMP-005's downstream edges and M1 remain open.
+
 The user approved **GDScript for the main game, UI and tools**, with **C++ GDExtensions for native adapters**, on 2026-11-18. IMP-001 extended the existing Godot 4.7.2 project at `main_project/project.godot` with the startup entry point and storage/settings shell using this language split; project creation alone did not complete IMP-001. Luau restricted mods and trusted GDScript retain their separate approved runtime contracts.
 
 1. IMP-001's minimum project entry and storage/settings shell is delivered using the approved Windows contract and isolated startup fixtures; retain its real-provider M1 checks.

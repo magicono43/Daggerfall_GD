@@ -97,7 +97,7 @@ func label(text: String, size := 18) -> void:
 	item.add_theme_font_size_override("font_size", size)
 	panel.add_child(item)
 
-func button(text: String, action: Callable) -> void:
+func button(text: String, action: Callable, container: Node = null) -> void:
 	var item := Button.new()
 	item.text = text
 	item.custom_minimum_size.y = 40
@@ -105,7 +105,7 @@ func button(text: String, action: Callable) -> void:
 	item.pressed.connect(func():
 		if generation == render_generation:
 			action.call())
-	panel.add_child(item)
+	(panel if container == null else container).add_child(item)
 
 func retry(fallback := false, reset := false) -> void:
 	controller.start(inputs, fallback, reset)
@@ -173,6 +173,8 @@ func render() -> void:
 		"menu_recovery":
 			button("Retry", func(): controller.continue_to_menu(); render())
 			button("Return to Setup", func(): controller.open_setup(); render())
+	if controller.mods != null and not controller.menu_entered:
+		preload("res://scripts/mod/mod_setup_view.gd").new(self, controller.mods).show()
 	button("Quit", func(): session_shell.request_quit())
 
 func advance_shutdown() -> void:
@@ -228,9 +230,13 @@ func run_fixture() -> void:
 		script_path = "res://tests/verification_cases.gd"
 	elif fixture.get("mode") == "classic":
 		script_path = "res://tests/classic_cases.gd"
+	elif fixture.get("mode") == "mods":
+		script_path = "res://tests/mod_cases.gd"
+	elif fixture.get("mode") == "mods_reload":
+		script_path = "res://tests/mod_reload_cases.gd"
 	var suite = load(script_path).new()
 	var checks: Dictionary = await suite.run(self, fixture)
-	var target := str(fixture.sandbox).path_join("result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") == "mods_reload" else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

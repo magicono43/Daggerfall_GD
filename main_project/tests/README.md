@@ -83,6 +83,57 @@ cover different boundaries and are not full shared-suite exports.
 
 ## Retained owner fixture documentation
 
+## IMP-005 increment 1 — discovery and selection
+
+Build the unchanged pinned toolchain with `./main_project/tools/build_storage.ps1`
+first. Sequential Windows commands from the repository root:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario mods -Fixture mods-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Scenario mods -Fixture mods-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -ClassicSource C:/Games/Daggerfall/arena2 -ModDiscovery
+./main_project/tools/verify_startup_export.ps1 -Configuration release -ClassicSource C:/Games/Daggerfall/arena2 -ModDiscovery
+```
+
+`-Suite mods` also selects the scenario. The original `m1` selection/inventories
+are preserved. The explicit available classic source is required; omission is
+incomplete/exit 2. It uses the existing source READ guards and before/after hashes.
+The new native `inspect` operation requires rebuilding the existing DLL; no new
+library/runtime or compiler pin is introduced. Import script errors now stop the
+shared runner before attempting scenarios.
+
+Fixed first-process inventories: **119 headless / 136 rendered**, plus **8**
+fresh-launch assertions in a separate engine process using the same disposable
+storage. Reports retain both terminal results and process exits. Restore verifies
+saved selection, fresh editable configuration, persisted duplicate decisions,
+discarded unsaved drafts/run omissions and a newly installed disabled ID.
+No player storage or installed classic data is a writable fixture.
+
+`mods-v1` generates `fixture.a` folder 1.0.0; `fixture.b` ZIP 1.0.0 with declared
+dependency on A and data/executable capability metadata; and A-copy versions
+1.0.0/1.1.0/1.2.0 for duplicate-set transitions. `fixture.fresh` is installed just
+before the fresh process. Malformed, wrapped, escaping, normalized-collision,
+symlink, linked-folder/hard-link, invalid-field, invalid-UTF-8/BOM/oversize and
+Windows exclusively locked ZIP vectors are generated independently. Root-is-file,
+missing-root, standard/portable/explicit fallback, damaged/unfinished stores and
+failed stage/replacement tests use real CORE-selected disposable storage leases.
+
+Rendered cases focus and scroll stock buttons, inject Enter press/release across
+frames, and exercise rescan, profile create/rename/duplicate/enable/save, canceled
+and confirmed deletion, duplicate skip and root Retry/run-empty recovery.
+Text entry and dialog response signals are controlled. Root recovery presents
+the stock view bound to a separately CORE-selected leased fixture root. PNGs
+`mods-selection`, `mods-profile`, `mods-duplicate`, `mods-skip` and
+`mods-root-recovery` are retained for visual inspection. This is scripted rendered
+verification, not a human keyboard/folder-navigation playtest or ACL experiment.
+
+Real classic DATA readers reach the stock unavailable dependency/publication
+gate; no controlled downstream success provider is installed in this scenario.
+No sort preview or actual main-menu publication/lock is asserted: those require
+separately authorized increments 2 and 3. SAVE compatibility, executable activation
+and exported asset-reference semantics retain their later real-owner gates.
+See the [package/profile contract](../scripts/mod/README.md).
+
 ## IMP-004 classic-source registration
 
 Run sequentially from the repository root, with the real source supplied locally:

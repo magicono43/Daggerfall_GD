@@ -15,6 +15,13 @@ IMP-022 retains IMP-017. Real package publication and later enabled adapter/owne
 gates remain open; no other task was begun.
 Planning READY counts do not imply implementation completion.
 
+**Execution update, 2026-11-20:** IMP-005 increment 1 was explicitly authorized
+and implements discovery/duplicate selection/profiles through normal setup
+([evidence](evidence/IMP-005-2026-11-20.md)). User acceptance is required before
+increment 2; dependency planning and DATA publication remain undelivered. IMP-005
+is not complete and no dependent task edge clears yet. IMP-006/011 still require
+their own authorization; no other task was begun.
+
 | Task | Objective area | Milestone | Planning readiness |
 | --- | --- | --- | --- |
 | [IMP-001](tasks/IMP-001.md) | Storage, settings and startup recovery | [M1](MILESTONES.md#m1) | READY |

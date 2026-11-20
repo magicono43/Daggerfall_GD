@@ -4,6 +4,13 @@ The [backlog](TASK_BACKLOG.md) lists the work associated with each integration g
 
 ## M1
 
+2026-11-20: IMP-005 increment 1 implements real package discovery, explicit
+duplicate decisions and root-scoped profiles through setup
+([evidence](evidence/IMP-005-2026-11-20.md)). It awaits user acceptance before
+dependency planning. DATA definition publication, validated Continue, actual
+menu-entry history/locking and the joint real MOD/DATA gate remain open. Discovery
+or saved profiles are not a successful publication or M1 acceptance.
+
 **Foundation and recovery.** Pin the Godot 4.7.2 verification environment and specify the startup, session, content and fixture interfaces under the approved architecture. Exercise a cold start, missing or invalid classic data, settings recovery and data-only publication. Independently invoke the headless and rendered suites, record build and fixture identity, and prove isolation from ordinary player saves. Review exported executable-runtime candidates early enough to inform package registration.
 
 2026-11-19: IMP-001's startup increment passed its task-local Windows checks

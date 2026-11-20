@@ -16,6 +16,7 @@ var published: Dictionary = {}
 var transition_busy := false
 var menu_entered := false
 var warnings: Array[String] = []
+var mods: RefCounted
 
 func start(inputs: Dictionary, fallback := false, reset := false) -> Dictionary:
 	launch = inputs.duplicate(true)
@@ -34,6 +35,11 @@ func start(inputs: Dictionary, fallback := false, reset := false) -> Dictionary:
 		return set_route("settings_recovery", checked)
 	if checked.kind == "recovered" and not warnings.has(checked.detail):
 		warnings.append(checked.detail)
+	if mods == null:
+		mods = preload("res://scripts/mod/mod_configuration.gd").new(storage.adapter, storage.context.root)
+		var initialized: Dictionary = mods.initialize()
+		if initialized.ok:
+			mods.rescan()
 	return check_content()
 
 func resolved_path(path: String) -> String:
