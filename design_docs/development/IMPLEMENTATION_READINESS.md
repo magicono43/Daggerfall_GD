@@ -1,12 +1,22 @@
 # Implementation readiness
 
+**IMP-007 increment 4, 2026-11-20:** The user explicitly authorized translation
+codec/import and mod preferences only. Implementation and required verification pass; user acceptance remains pending. See [increment-4 execution
+evidence](evidence/IMP-007-increment-4-2026-11-20.md). Increments 1–3 and their accepted
+commits remain recorded below. Parent IMP-007/M1, IMP-030/056 and real-owner gates
+remain open; no downstream prerequisite edge or another task is started/cleared.
+
+
 **IMP-007 increment 3, 2026-11-20:** Explicitly authorized after increment-2
 acceptance (`dae3a56`). Fonts and live locale presentation are implemented and
 verified (419 headless / 441 rendered; 10 relaunch assertions per mode/build;
 Windows debug/release exports and affected regressions pass). See [execution evidence](evidence/IMP-007-increment-3-2026-11-20.md).
-Increment 3 awaits user acceptance; increment 4 remains unauthorized. Parent
-IMP-007/M1, IMP-030/056 and real-owner gates remain open. No dependent edge or
-other IMP is cleared/begun. Earlier acceptance/handoff notes retain history.
+The user accepted increment 3 on 2026-11-20; implementation is committed at
+`849d125`. An [increment-4 handoff](handoffs/IMP-007-INCREMENT-4-PROMPT.txt)
+was prepared for another chat; implementation begins only when the user issues
+that request. No increment-4 implementation begins here. Parent IMP-007/M1,
+IMP-030/056 and real-owner gates remain open. No dependent edge or other IMP is
+cleared/begun. Earlier acceptance/handoff notes retain history.
 
 **IMP-007 increment 2, 2026-11-20:** Explicitly authorized after increment-1
 acceptance. Real required TEXT.RSC access, checked structured controls/variants,

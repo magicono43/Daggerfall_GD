@@ -3,7 +3,8 @@
 IMP-007 increment 1 adds real versioned CSV entries to manifest `content` and
 loose DATA intake under [TEXT_CATALOGS.md](../data/TEXT_CATALOGS.md). MOD still
 owns package identity/order and checked reads; no CSV activates package code or
-changes profiles/preferences. Mod preference editing remains IMP-007 increment 4.
+changes profiles/preferences. Increment 4 now supplies the separate application
+[preference definition/store/editor contract](PREFERENCES.md).
 
 Increment 3 now supplies the separate
 [DATA/menu publication contract](../data/DEFINITION_PUBLICATION.md). Validated

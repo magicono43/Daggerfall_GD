@@ -5,6 +5,10 @@ signal state_changed(previous: Dictionary, current: Dictionary, reason: String)
 signal milestone(name: String, context: Dictionary)
 signal terminal(result: Dictionary)
 signal retiring(scope: String)
+var preferences: RefCounted
+
+func preferences_boundary_current(value: Dictionary) -> bool:
+	return not _operation.is_empty() and _matches(value, "initializing") and _state.phase == "initializing"
 signal diagnostic(reason: String)
 const Gates = preload("res://scripts/session/session_gates.gd")
 var gates := Gates.new()
@@ -264,6 +268,12 @@ func complete_readiness(value: Dictionary, result: Dictionary) -> bool:
 		_commit({"ready": false, "phase": "replacement"}, activated.reason)
 		_cleanup_scope(_state.session, "failure")
 		return true
+	if preferences != null:
+		var preference_result: Dictionary = preferences.activate("next_session", self, value)
+		if not preference_result.ok:
+			_commit({"ready":false,"phase":"replacement"}, "Required preference boundary consumer rejected activation.")
+			_cleanup_scope(_state.session, "failure")
+			return true
 	_formula_bindings = formula_bindings.bindings
 	randomness.suspend_operation(false)
 	_death_authority = result.get("death_authority")
@@ -427,6 +437,7 @@ func dispose() -> void:
 	randomness.dispose()
 	_formula_bindings.clear()
 	formulas = null
+	preferences = null
 	for event: Signal in [state_changed, milestone, terminal, retiring, diagnostic, gates.changed]:
 		for connection: Dictionary in event.get_connections():
 			event.disconnect(connection.callable)

@@ -1,5 +1,9 @@
 # Classic access — IMP-004
 
+IMP-007 increment 4 adds the separate [editable codec/import operation](TRANSLATION_AUTHORING.md)
+and [application mod preferences](../mod/PREFERENCES.md). Neither changes active
+classic readers or bypasses DATA/MOD's menu publication lock.
+
 IMP-007 increment 1 now supplies [production text catalogs](TEXT_CATALOGS.md),
 CSV intake and bundled recovery labels through the separate DATA publication
 pipeline. Increment 2 adds the real [TEXT.RSC reader and structured profile](STRUCTURED_TEXT.md).

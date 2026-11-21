@@ -57,6 +57,9 @@ func schedule_render() -> void:
 		host.call_deferred("render")
 
 func synchronize_startup() -> void:
+	if host.controller.providers.get("preferences") != null and core.preferences == null:
+		core.preferences = host.controller.providers.preferences
+		core.preferences.register_boundary("next_session", core)
 	if _startup_route != host.controller.route:
 		_synchronizing_startup = true
 		if core.startup_route_changed(host.controller.route):
@@ -192,6 +195,9 @@ func render() -> void:
 			host.panel.add_child(prompt)
 			prompt.bind(windows, top, _prompt_owners[top.id],host.controller.providers.get("presentation"))
 	host.essential_button("quit", request_quit)
+	if host.controller.providers.get("preferences") != null:
+		host.button("Mod Preferences", host.open_preferences)
+		host.button("Translation Import / Export", host.open_authoring)
 	if host.controller.providers.get("presentation") != null:
 		host.show_language_settings()
 	restore_focus()
@@ -277,7 +283,10 @@ func advance_shutdown() -> void:
 				core.confirm(core.ticket(), true)
 	else:
 		quit_phase = "preferences"
-		if host.controller.settings == null or host.controller.settings.save_accepted().ok:
+		var saved: bool = host.controller.settings == null or host.controller.settings.save_accepted().ok
+		if saved and host.controller.providers.get("preferences") != null:
+			saved = host.controller.providers.preferences.save_all()
+		if saved:
 			quit_phase = "ready"
 			host.get_tree().quit()
 	schedule_render()

@@ -3,6 +3,7 @@ extends RefCounted
 const Csv = preload("res://scripts/data/text_csv.gd")
 const Tokens = preload("res://scripts/data/text_tokens.gd")
 const Paths = preload("res://scripts/mod/package_library.gd")
+const Author = preload("res://scripts/data/text_author.gd")
 const SCHEMA := "text-catalog-v1"
 const DOMAIN := "text.catalogs"
 const HEADER := ["schema","codec","collection","locale","key","operation","base","optional","essential","placeholders","suppress","value"]
@@ -36,6 +37,19 @@ static func locale_id(value: String) -> bool:
 			return false
 	return true
 
+## Recovery buttons are literal label consumers, not general structured renderers.
+## Unsupported required controls recover the complete independent English label.
+static func essential_literal(resolved: Dictionary, key: String) -> String:
+	var text := ""
+	for token: Dictionary in resolved.get("tokens", []):
+		if token.kind == "text":
+			text += token.text
+		elif token.kind == "line_break":
+			text += "\n"
+		elif token.kind != "record_end":
+			return RECOVERY.get(key, "<Missing essential label>")
+	return text if not text.strip_edges().is_empty() else RECOVERY.get(key, "<Missing essential label>")
+
 func reject(reason: String, source: Dictionary, row: int, line: int) -> Dictionary:
 	return {"ok":false,"kind":"invalid_catalog","source":source.duplicate(true),"row":row,"line":line,"reason":"Row %d (line %d): %s" % [row,line,reason]}
 
@@ -55,7 +69,7 @@ func apply_csv(base: Dictionary, bytes: PackedByteArray, source: Dictionary) -> 
 		var entry := {}
 		for column in HEADER.size():
 			entry[HEADER[column]] = row.fields[column]
-		if entry.schema != SCHEMA or entry.codec != Tokens.VERSION or not Paths.valid_id(entry.collection) or not Tokens.identifier(entry.key) or not locale_id(entry.locale) or not locale_id(entry.base) or entry.operation not in ["add","replace"] or entry.optional not in ["true","false"] or entry.essential not in ["true","false"] or entry.suppress not in ["true","false"]:
+		if entry.schema != SCHEMA or entry.codec not in [Tokens.VERSION, Author.VERSION] or not Paths.valid_id(entry.collection) or not Tokens.identifier(entry.key) or not locale_id(entry.locale) or not locale_id(entry.base) or entry.operation not in ["add","replace"] or entry.optional not in ["true","false"] or entry.essential not in ["true","false"] or entry.suppress not in ["true","false"]:
 			return reject("Unsupported schema/codec, identity, boolean or operation.",source,index + 1,row.line)
 		var target: String = entry.collection + "/" + entry.locale + "/" + entry.key
 		if seen.has(target):
@@ -85,12 +99,12 @@ func apply_csv(base: Dictionary, bytes: PackedByteArray, source: Dictionary) -> 
 			prior = {"identity":{"domain":DOMAIN,"collection":entry.collection,"key":entry.key,"package":source.provider,"local":entry.collection + "#" + entry.key,"record":entry.key},"origin":provenance.duplicate(true),"contributors":[],"winner":{},"value":{"base":entry.base,"optional":optional,"essential":essential,"required":required,"entries":{}}}
 		elif prior.value.base != entry.base or prior.value.optional != optional or prior.value.essential != essential or prior.value.required != required:
 			return reject("Original key base/requirements/classification are immutable.",source,index + 1,row.line)
-		var syntax := Tokens.parse(entry.value,required)
+		var syntax: Dictionary = Author.decode(entry.value,required,JSON.stringify(source),entry.key) if entry.codec == Author.VERSION else Tokens.parse(entry.value,required)
 		var usable: bool = suppression or (not entry.value.strip_edges().is_empty() and syntax.ok)
 		var diagnosis: String = "" if usable else "Blank entry." if entry.value.strip_edges().is_empty() else syntax.reason
 		var contributions: Array = prior.value.entries.get(entry.locale,{}).get("contributors",[]).duplicate(true)
 		contributions.append(provenance)
-		prior.value.entries[entry.locale] = {"text":entry.value,"suppressed":suppression,"usable":usable,"diagnostic":diagnosis,"position":syntax.get("position",-1),"tokens":syntax.get("tokens",[]),"winner":provenance,"contributors":contributions}
+		prior.value.entries[entry.locale] = {"text":entry.value,"suppressed":suppression,"usable":usable,"diagnostic":diagnosis,"position":syntax.get("position",-1),"tokens":syntax.get("tokens",[]),"variant_ids":syntax.get("variant_ids",[]),"winner":provenance,"contributors":contributions}
 		prior.contributors.append(provenance)
 		prior.winner = provenance
 		resource.records[entry.key] = prior
@@ -119,7 +133,7 @@ static func lookup(registry: RefCounted, collection: String, key: String, select
 				context.diagnostics.append({"locale":locale,"source":entry.winner,"reason":"Required ordered structure is absent or incompatible.","position":0,"kind":"required_structure"})
 				continue
 			if entry.get("usable",false):
-				context.merge({"kind":"suppressed" if entry.suppressed else "selected" if locale == selected else "base","text":entry.text,"tokens":entry.tokens.duplicate(true),"winner":entry.winner.duplicate(true),"entry_contributors":entry.contributors.duplicate(true),"resolved_locale":locale,"ok":true})
+				context.merge({"kind":"suppressed" if entry.suppressed else "selected" if locale == selected else "base","text":entry.text,"tokens":entry.tokens.duplicate(true),"variant_ids":entry.get("variant_ids", []).duplicate(true),"winner":entry.winner.duplicate(true),"entry_contributors":entry.contributors.duplicate(true),"resolved_locale":locale,"ok":true})
 				return context
 			context.diagnostics.append({"locale":locale,"source":entry.get("winner",{}),"reason":entry.get("diagnostic","Locale entry missing."),"position":entry.get("position",-1)})
 	else:

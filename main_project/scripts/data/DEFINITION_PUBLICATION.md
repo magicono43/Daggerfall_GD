@@ -239,3 +239,12 @@ remaining registrations and DATA candidates revalidate on Continue/rebuild.
 Invalid plans discard obsolete formula candidates. The initial hook has no DATA
 formula-reference schema; real dependent owner schemas remain later integration.
 See [RULE's concrete formula contract](../rule/FORMULA_DISPATCH.md).
+
+## IMP-007 increment 4 composition
+
+The separately enabled application preference adapter/store/editor now joins the
+same checked menu transaction; see [MOD/PREFERENCES.md](../mod/PREFERENCES.md).
+The [translation authoring operation](TRANSLATION_AUTHORING.md) publishes only
+separate authoring generations and never calls this registry's prepare/commit APIs
+or bypasses the active MOD/DATA lock. Runtime author CSV uses an explicit new codec
+column under the accepted real-CSV transport; existing brace syntax is unchanged.

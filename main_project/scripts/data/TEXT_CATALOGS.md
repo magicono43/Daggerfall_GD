@@ -1,5 +1,10 @@
 # Text catalogs — IMP-007 increment 1
 
+Increment 4 adds explicitly selected `text-author-v1` values under the unchanged
+CSV header/catalog schema. See [TRANSLATION_AUTHORING.md](TRANSLATION_AUTHORING.md).
+The original `text-token-v1` brace grammar is unchanged; structured author values
+retain explicit variant IDs in the entry and lookup projections.
+
 Increment 3 now supplies [font resolution and live language switching](LOCALE_FONTS.md),
 including the pre-initialize CORE locale declaration, production Apply/Cancel and
 in-place pending-prompt refresh. Earlier increment-only statements below preserve

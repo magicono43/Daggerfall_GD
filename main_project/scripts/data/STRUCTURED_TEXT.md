@@ -3,8 +3,9 @@
 Increment 3's [font/layout contract](LOCALE_FONTS.md) adds actual-font reflow and
 live prompt refresh. It requires an explicit caller mapping for classic font IDs;
 position/unselected variant/unexpanded controls reject unsupported presentation.
-Binary decode success remains separate from renderer capability. No authoring
-codec/import or production macro expansion has been added.
+Binary decode success remains separate from renderer capability. Increment 4's
+[authoring codec/import](TRANSLATION_AUTHORING.md) is a separate explicitly selected
+adapter. Production macro expansion remains IMP-030.
 
 Frozen catalog/CSV/token identities remain `text-catalog-v1`, `text-csv-v1`,
 `text-token-v1`. The checked binary profile is **classic-controls-v1**, reader

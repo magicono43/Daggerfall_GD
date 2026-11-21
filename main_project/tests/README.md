@@ -669,3 +669,66 @@ remain incomplete. Original classic sources are guarded READ-only and hashed bef
 and after each run, including TEXT.RSC for this explicitly composed scenario.
 
 See [increment-3 evidence](../../design_docs/development/evidence/IMP-007-increment-3-2026-11-20.md).
+
+## IMP-007 increment 4 — translation codec and mod preferences
+
+Invoke independently and sequentially from the repository root:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario translation-preferences -Fixture translation-preferences-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Scenario translation-preferences -Fixture translation-preferences-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -TranslationPreferences -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -TranslationPreferences -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+`-Suite translation-preferences` is equivalent. Fixed complete primary inventories
+are **149 headless / 164 rendered**, fixture `IMP-007-translation-preferences-v1`.
+Each mode/build also starts a genuinely fresh process with **10** assertions,
+`IMP-007-translation-preferences-relaunch-v1`. Versioned contracts are
+[text-author-v1 / translation-import-v1](../scripts/data/TRANSLATION_AUTHORING.md)
+and [mod-preferences-v1](../scripts/mod/PREFERENCES.md). The existing text 121/127,
+structured-text 284/294, locale-fonts 419/441 plus 10 fresh-process inventories and
+`-TextCatalog`, `-StructuredText`, `-LocaleFonts` Windows selections remain separate.
+
+The fixture uses disposable leased application roots, guarded read-only explicit
+classic input, real MOD discovery/profile selection, DATA/menu publication, CORE
+ConfigFile validation/application/publication and actual window/font/layout UI.
+Source record 25 round-trips through binary/authoring codecs without losing bytes;
+Unicode/whitespace/escaping/operands/variant identities/editorial wrapping and
+explicit multiline sample values have separate structural assertions. No percent,
+brace or inserted markup is recursively expanded. Unsupported renderer controls
+reject; essential literal controls retain complete independent recovery labels.
+
+Import checks exercise actual preview/selection/commit/reopen, no-write unchanged
+reimport, source reorder, selected/unselected replacements, retained changed source
+and placeholders/structure, orphan work, ambiguous mapping/rename, invalid selected
+operations, obsolete previews, pointer publication failure/retry and fresh-process
+recovery that ignores flushed but unpublished generations and `.staged` pointers.
+Fault injection is controlled at the native publication boundary; it is not a claim
+to have simulated arbitrary hardware/power failures. One generation pointer governs
+the complete CSV/mapping/review operation; no partial selected success is reported.
+
+Preferences cover two real profiles sharing a mod store, independently leased root
+separation, two-mod reset isolation, partial presets, confirmation/cancel/reset,
+whole-group constraints, rejecting consumers, live success with failed save/retry,
+restart-dominant mixed groups, real CORE next-session readiness with a controlled
+provider, controlled next-location scope/generation, repeated/stale callbacks,
+consumer recreation, unknown compatible data, incompatible version preservation,
+controlled load, real fresh-process persistence and retained unapplied owner facts.
+Controlled CORE/RULE sources use 32 zero bytes and one retained gameplay result;
+authoring leaves RNG counts and that owner's facts unchanged.
+
+Rendered fixtures open the normal production editors, apply the real locale setting
+with a staged LineEdit and pending reset confirmation, preserve caret/focus/draft,
+exercise export/preview/select/durable commit/pure sample, and capture actual fonts
+and wrapped labels. Inspect `translation-preferences-editor.png`,
+`translation-preferences-reset.png`, and `translation-import-preview.png` in each
+rendered run and Windows build. Frames settle before readback/scroll capture.
+
+English remains the only offered locale; `zz-Test` is synthetic verification content.
+The location authority, mod consumers and gameplay/load owners are controlled;
+real QUEST/CHAR/WORLD/SAVE/executable mods, real location integration, full IMP-056
+authoring, IMP-030 production macros, production books/IME/languages and M1 acceptance
+remain separate gates. Source access, original diagnostic qualification, unsupported
+overrides, missing/truncated results, crashes and unrelated engine errors retain
+existing pass/fail/incomplete behavior.

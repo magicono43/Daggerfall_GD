@@ -103,11 +103,11 @@ try {
         $item = [ordered]@{ scenario = $id; fixture = $Fixture; root = $caseRoot; inputs = $report.inputs
             status = 'incomplete'; reason = ''; process_exit = $null; result = $null }
         $report.scenarios += $item
-        if ($id -notin @('qualification','startup','session','formula','formula-fault','randomness-session','randomness','classic','mods','planning','publication','text','structured-text','locale-fonts')) {
+        if ($id -notin @('qualification','startup','session','formula','formula-fault','randomness-session','randomness','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences')) {
             $item.reason = 'Required scenario unavailable; real owner/provider not registered'
             continue
         }
-        if (($id -eq 'locale-fonts' -and $Fixture -ne 'locale-fonts-v1') -or ($id -eq 'structured-text' -and $Fixture -ne 'structured-text-v1') -or ($id -eq 'text' -and $Fixture -ne 'text-v1') -or ($id -eq 'formula' -and $Fixture -ne 'formula-v1') -or ($id -eq 'formula-fault' -and $Fixture -notin @('formula-v1','formula-extra-error-v1')) -or ($id -eq 'randomness-session' -and $Fixture -ne 'randomness-session-v1') -or ($id -eq 'randomness' -and $Fixture -ne 'randomness-v1') -or ($id -eq 'publication' -and $Fixture -ne 'publication-v1') -or ($id -eq 'planning' -and $Fixture -ne 'planning-v1') -or ($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('formula','formula-fault','randomness-session','randomness','classic','mods','planning','publication','text','structured-text','locale-fonts') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
+        if (($id -eq 'translation-preferences' -and $Fixture -ne 'translation-preferences-v1') -or ($id -eq 'locale-fonts' -and $Fixture -ne 'locale-fonts-v1') -or ($id -eq 'structured-text' -and $Fixture -ne 'structured-text-v1') -or ($id -eq 'text' -and $Fixture -ne 'text-v1') -or ($id -eq 'formula' -and $Fixture -ne 'formula-v1') -or ($id -eq 'formula-fault' -and $Fixture -notin @('formula-v1','formula-extra-error-v1')) -or ($id -eq 'randomness-session' -and $Fixture -ne 'randomness-session-v1') -or ($id -eq 'randomness' -and $Fixture -ne 'randomness-v1') -or ($id -eq 'publication' -and $Fixture -ne 'publication-v1') -or ($id -eq 'planning' -and $Fixture -ne 'planning-v1') -or ($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('formula','formula-fault','randomness-session','randomness','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
             $item.reason = 'Fixture unavailable for selected scenario'
             continue
         }
@@ -124,14 +124,14 @@ try {
         $sourceReadGuards = @()
         $sourceBefore = @{}
         $unreadable = "$caseRoot/locked/ARENA2"
-        if ($id -in @('classic','mods','planning','publication','text','structured-text','locale-fonts','formula','formula-fault')) {
+        if ($id -in @('classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences','formula','formula-fault')) {
             if (!$ClassicSource -or !(Test-Path -LiteralPath $ClassicSource -PathType Container)) {
                 $item.reason = 'Explicit available -ClassicSource is required'; continue
             }
             $selectedRoot = [IO.Path]::GetFullPath($ClassicSource)
             if ((Split-Path $selectedRoot -Leaf) -ine 'ARENA2') { $selectedRoot = Join-Path $selectedRoot 'ARENA2' }
             $item.selected_source = $selectedRoot
-            foreach ($name in (@('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($id -in @('structured-text','locale-fonts')) { @('TEXT.RSC') } else { @() }))) {
+            foreach ($name in (@('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($id -in @('structured-text','locale-fonts','translation-preferences')) { @('TEXT.RSC') } else { @() }))) {
                 $sourceBefore[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
                 $sourceReadGuards += [IO.File]::Open((Join-Path $selectedRoot $name), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
             }
@@ -145,12 +145,12 @@ try {
         }
         if ($id -eq 'mods') { $modLock = New-ModFixture $caseRoot }
         @{ sandbox = $caseRoot.Replace('\','/'); mode = $(if ($id -eq 'startup') { 'suite' } else { $id })
-            fixture = $Fixture; inputs = $report.inputs; classic_source = $(if ($id -in @('classic','mods','planning','publication','text','structured-text','locale-fonts','formula','formula-fault')) { $selectedRoot.Replace('\','/') } else { '' }); unreadable_root = $unreadable.Replace('\','/') } | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/fixture.json"
+            fixture = $Fixture; inputs = $report.inputs; classic_source = $(if ($id -in @('classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences','formula','formula-fault')) { $selectedRoot.Replace('\','/') } else { '' }); unreadable_root = $unreadable.Replace('\','/') } | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/fixture.json"
         $arguments = @('--path',$runtimeProject,'--max-fps','60','--quit-after','1800','--',"--startup-fixture=$caseRoot/fixture.json")
         if ($Mode -eq 'headless') { $arguments = @('--headless') + $arguments }
         try {
             $outcome = Invoke-Engine $arguments $caseRoot 'console'
-            if ($id -in @('mods','planning','publication','randomness-session','locale-fonts') -and $outcome.exit -eq 0) {
+            if ($id -in @('mods','planning','publication','randomness-session','locale-fonts','translation-preferences') -and $outcome.exit -eq 0) {
                 $reloadFixture = Get-Content "$caseRoot/fixture.json" -Raw | ConvertFrom-Json
                 $reloadFixture.mode = $id + '_reload'
                 if ($id -eq 'locale-fonts') { $reloadFixture.sandbox = "$caseRoot/relaunch".Replace('\','/') }
@@ -167,7 +167,7 @@ try {
             foreach ($guard in $sourceReadGuards) { $guard.Dispose() }
             $sourceReadGuards = @()
         }
-        if ($id -in @('classic','mods','planning','publication','text','structured-text','locale-fonts','formula','formula-fault')) {
+        if ($id -in @('classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences','formula','formula-fault')) {
             $item.source_before = $sourceBefore
             $item.source_after = @{}
             foreach ($name in $sourceBefore.Keys) {
@@ -184,12 +184,12 @@ try {
             $item.reason = 'Malformed terminal report'; continue
         }
         $item.result = $result
-        if ($id -in @('mods','planning','publication','randomness-session','locale-fonts') -and $result.ok) {
+        if ($id -in @('mods','planning','publication','randomness-session','locale-fonts','translation-preferences') -and $result.ok) {
             $reloadReport = if ($id -eq 'locale-fonts') { "$caseRoot/relaunch/reload-result.json" } else { "$caseRoot/reload-result.json" }
             if (!(Test-Path $reloadReport)) { $item.reason = 'Missing fresh-process terminal result'; continue }
             $reloadResult = Get-Content $reloadReport -Raw | ConvertFrom-Json
             $item.reload_result = $reloadResult
-            $reloadExpected = if ($id -eq 'locale-fonts') { 10 } elseif ($id -eq 'randomness-session') { 15 } else { 8 }
+            $reloadExpected = if ($id -in @('locale-fonts','translation-preferences')) { 10 } elseif ($id -eq 'randomness-session') { 15 } else { 8 }
             if ($reloadOutcome.timed_out -or $null -eq $reloadResult.ok -or $reloadResult.count -ne $reloadExpected -or $reloadResult.checks.Count -ne $reloadExpected -or
                 !$reloadResult.engine -or ($Mode -eq 'rendered' -and $reloadResult.display -eq 'headless') -or
                 !(Test-ScriptDiagnostics @((Get-Item "$caseRoot/reload-console.*.log").FullName) '' $reloadResult)) {
@@ -200,7 +200,7 @@ try {
             }
             if ($reloadOutcome.exit -ne 0) { $item.reason = 'Fresh process exited unsuccessfully'; continue }
         }
-        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263; formula = 82; 'formula-fault' = 18; randomness = 108; 'randomness-session' = 115; classic = 97; mods = 119; planning = 87; publication = 111; text = 121; 'structured-text' = 284; 'locale-fonts' = 419 } } else { @{ qualification = 3; startup = 92; session = 264; formula = 84; 'formula-fault' = 18; randomness = 108; 'randomness-session' = 116; classic = 100; mods = 136; planning = 101; publication = 117; text = 127; 'structured-text' = 294; 'locale-fonts' = 441 } }
+        $expectedCounts = if ($Mode -eq 'headless') { @{ qualification = 2; startup = 84; session = 263; formula = 82; 'formula-fault' = 18; randomness = 108; 'randomness-session' = 115; classic = 97; mods = 119; planning = 87; publication = 111; text = 121; 'structured-text' = 284; 'locale-fonts' = 419; 'translation-preferences' = 149 } } else { @{ qualification = 3; startup = 92; session = 264; formula = 84; 'formula-fault' = 18; randomness = 108; 'randomness-session' = 116; classic = 100; mods = 136; planning = 101; publication = 117; text = 127; 'structured-text' = 294; 'locale-fonts' = 441; 'translation-preferences' = 164 } }
         $item.expected_assertions = $expectedCounts[$id]
         $scriptErrors = @(Get-Item "$caseRoot/console.*.log" | ForEach-Object FullName)
         if (!(Test-ScriptDiagnostics $scriptErrors $id $result)) {

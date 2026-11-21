@@ -146,7 +146,7 @@ func literal(text: String, role := "body", selected := "", essential_key := "", 
 
 func essential(key: String) -> Dictionary:
 	var resolved := Catalog.lookup(_registry,"recovery",key,locale)
-	var result := literal(resolved.text,"body","",key,{"collection":"recovery","key":key,"source":resolved.source})
+	var result := literal(Catalog.essential_literal(resolved,key),"body","",key,{"collection":"recovery","key":key,"source":resolved.source})
 	result.lookup = resolved
 	return result
 

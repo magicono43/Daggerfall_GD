@@ -128,3 +128,19 @@ operation and use existing CORE service-loss recovery; they cannot select anothe
 provider. The registry remains locked through return/new/load. Owner predicates
 and operation retention remain trusted owner contracts, not a universal action
 system. See [the formula contract](../rule/FORMULA_DISPATCH.md).
+
+## IMP-007 increment 4
+
+[Mod preferences](../mod/PREFERENCES.md) have application lifetime. SessionShell
+binds the application owner to CORE; successful new/load readiness activates only
+eligible next-session groups using the original lifecycle ticket, before ready
+publication. Failure uses ordinary incomplete-session cleanup. Character restore
+cannot replace the application store. Location authority remains an explicit
+future provider boundary with controlled verification here. Recreated consumers
+receive effective values while deferred saved requests remain pending.
+
+The two bounded editors open ordinary window-stack layers with requester-owned
+gates. Preference locale plans retain their binding-time window context; Escape
+closes the editor before routing to underlying navigation. Font/label refresh keeps
+controls/draft/focus/confirmation stable. No owner answer, choice, RNG draw or
+session/location replacement is created by preview/presentation.

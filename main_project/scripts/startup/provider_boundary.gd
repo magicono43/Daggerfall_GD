@@ -8,6 +8,14 @@ var faults: Dictionary = {} # Controlled failure-only fixture seam.
 var before_menu := Callable()
 var classic_preparations := 0 # Diagnostic count of explicit source preparation requests.
 var presentation: RefCounted # Explicitly enabled; legacy compositions keep their inventory.
+var preferences: RefCounted
+var _preference_stores: Dictionary = {}
+
+func enable_mod_preferences() -> Dictionary:
+	var registered := register_content_adapter(preload("res://scripts/mod/preference_definitions.gd").new(), "", [])
+	if registered.ok:
+		preferences = preload("res://scripts/mod/preferences.gd").new()
+	return registered
 
 func enable_locale_fonts() -> Dictionary:
 	var registered := register_content_adapter(preload("res://scripts/data/locale_fonts.gd").new(),"",[])
@@ -51,8 +59,18 @@ func prepare_content(mods: RefCounted) -> Dictionary:
 		if not fonts.ok:
 			return fonts
 	content.formula_ticket = hooks.ticket
+	if preferences != null:
+		var prepared: Dictionary = preferences.prepare(content.resources, mods.adapter, mods.root.path_join("settings/mod_preferences"))
+		if not prepared.ok:
+			return prepared
+		_preference_stores = prepared.stores
 	content.formulas = hooks
 	return content
+
+func commit_preferences() -> void:
+	if preferences != null:
+		preferences.commit(_preference_stores)
+		_preference_stores = {}
 
 func check_classic(candidate: String) -> Dictionary:
 	classic_preparations += 1

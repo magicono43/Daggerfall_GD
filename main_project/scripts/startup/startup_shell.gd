@@ -13,6 +13,8 @@ var render_generation := 0
 var locale_editor: OptionButton
 var locale_status: Label
 var locale_notice: Label
+var preference_view: Control
+var authoring_view: Control
 
 func _ready() -> void:
 	get_tree().auto_accept_quit = false
@@ -42,20 +44,25 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
-	if fixture.is_empty() or fixture.get("mode") in ["text", "structured-text", "locale-fonts", "locale-fonts_reload"]:
+	if fixture.is_empty() or fixture.get("mode") in ["translation-preferences", "translation-preferences_reload"]:
+		var registered: Dictionary = controller.providers.enable_mod_preferences()
+		if not registered.ok:
+			label(registered.reason)
+			return
+	if fixture.is_empty() or fixture.get("mode") in ["text", "structured-text", "locale-fonts", "locale-fonts_reload", "translation-preferences", "translation-preferences_reload"]:
 		var registered: Dictionary = controller.providers.register_bundled_text()
 		if not registered.ok:
 			label("Bundled text registration failed: " + registered.reason)
 			essential_button("quit", func(): session_shell.request_quit())
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["locale-fonts", "locale-fonts_reload"]:
+	if fixture.is_empty() or fixture.get("mode") in ["locale-fonts", "locale-fonts_reload", "translation-preferences", "translation-preferences_reload"]:
 		var registered: Dictionary = controller.providers.enable_locale_fonts()
 		if not registered.ok:
 			label("Bundled font registration failed: " + registered.reason)
 			essential_button("quit", func(): session_shell.request_quit())
 			return
 		controller.providers.presentation.changed.connect(refresh_language_controls)
-	if fixture.is_empty() or fixture.get("mode") in ["structured-text", "locale-fonts", "locale-fonts_reload"]:
+	if fixture.is_empty() or fixture.get("mode") in ["structured-text", "locale-fonts", "locale-fonts_reload", "translation-preferences", "translation-preferences_reload"]:
 		if not controller.providers.enable_structured_text():
 			label("Required structured text reader registration failed.")
 			essential_button("quit", func(): session_shell.request_quit())
@@ -162,16 +169,15 @@ func essential_button(key: String, action: Callable, container: Node = null) -> 
 	var resolved: Dictionary = catalogs.lookup(controller.providers.get("definitions"), "recovery", key)
 	# Essential catalog keys have no context references. Draw their validated
 	# literal runs, so escaped braces remain literal rather than exposing syntax.
-	var text := ""
-	for token: Dictionary in resolved.tokens:
-		text += "\n" if token.kind == "line_break" else str(token.get("text", ""))
-	button(text, action, container)
+	button(catalogs.essential_literal(resolved,key), action, container)
 
 func retry(fallback := false, reset := false) -> void:
 	controller.start(inputs, fallback, reset)
 	render()
 
 func render() -> void:
+	if is_instance_valid(preference_view) or is_instance_valid(authoring_view):
+		return # Modal editors retain their controls, draft, confirmation and focus.
 	if controller.providers.get("presentation") != null:
 		# Initial font activation occurs after the checked menu transaction returns.
 		theme.default_font = controller.providers.presentation.font()
@@ -241,6 +247,23 @@ func render() -> void:
 	essential_button("quit", func(): session_shell.request_quit())
 	if controller.providers.get("presentation") != null and controller.menu_entered:
 		show_language_settings()
+	if controller.menu_entered and controller.providers.get("preferences") != null:
+		button("Mod Preferences", open_preferences)
+		button("Translation Import / Export", open_authoring)
+
+func open_preferences() -> void:
+	if is_instance_valid(preference_view) or is_instance_valid(authoring_view):
+		return
+	preference_view = preload("res://scripts/mod/preferences_view.gd").new()
+	add_child(preference_view)
+	preference_view.bind(self, controller.providers.preferences, controller.providers.presentation)
+
+func open_authoring() -> void:
+	if is_instance_valid(preference_view) or is_instance_valid(authoring_view):
+		return
+	authoring_view = preload("res://scripts/data/translation_view.gd").new()
+	add_child(authoring_view)
+	authoring_view.bind(self)
 
 func show_language_settings() -> void:
 	var owner: RefCounted = controller.providers.presentation
@@ -306,6 +329,7 @@ func _notification(what: int) -> void:
 	if session_shell == null:
 		return
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		close_editor()
 		session_shell.request_quit()
 	elif what == NOTIFICATION_APPLICATION_FOCUS_OUT:
 		session_shell.focus_changed(false)
@@ -314,6 +338,11 @@ func _notification(what: int) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_ESCAPE:
+		if is_instance_valid(preference_view) or is_instance_valid(authoring_view):
+			if event.pressed and not event.echo:
+				close_editor()
+			get_viewport().set_input_as_handled()
+			return
 		session_shell.windows.capture("options", event.pressed, event.echo)
 		get_viewport().set_input_as_handled()
 
@@ -333,7 +362,17 @@ func _process(_delta: float) -> void:
 	if session_shell != null:
 		var dispatched: Dictionary = session_shell.windows.dispatch()
 		if dispatched.get("action") == "options" and dispatched.kind == "dispatch":
-			session_shell.options()
+			if not close_editor():
+				session_shell.options()
+
+func close_editor() -> bool:
+	if is_instance_valid(preference_view):
+		preference_view.close()
+		return true
+	if is_instance_valid(authoring_view):
+		authoring_view.close()
+		return true
+	return false
 
 func update_logging_warning() -> void:
 	if is_instance_valid(logging_status):
@@ -364,6 +403,10 @@ func run_fixture() -> void:
 		script_path = "res://tests/text_cases.gd"
 	elif fixture.get("mode") == "structured-text":
 		script_path = "res://tests/structured_text_cases.gd"
+	elif fixture.get("mode") == "translation-preferences_reload":
+		script_path = "res://tests/translation_preference_reload_cases.gd"
+	elif fixture.get("mode") == "translation-preferences":
+		script_path = "res://tests/translation_preference_cases.gd"
 	elif fixture.get("mode") == "locale-fonts":
 		script_path = "res://tests/locale_font_cases.gd"
 	elif fixture.get("mode") == "locale-fonts_reload":
@@ -380,7 +423,7 @@ func run_fixture() -> void:
 		script_path = "res://tests/publication_reload_cases.gd"
 	var suite = load(script_path).new()
 	var checks: Dictionary = await suite.run(self, fixture)
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload"] else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()
