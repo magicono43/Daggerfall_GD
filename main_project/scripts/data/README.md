@@ -1,5 +1,13 @@
 # Classic access — IMP-004
 
+IMP-008 increment 1 adds the versioned [classic media decoder contract](MEDIA_DECODERS.md):
+real source-space meshes, bounded image/texture/palette readers, classic PCM,
+HMI sequence/SMF conversion and VID frame/audio/timing data. Required loose media
+sources explicitly opt in through the startup provider before reader preparation.
+The normal foundation/TEXT.RSC manifest and optional-video policy are unchanged.
+Earlier raw-only media statements below describe IMP-004, not the new adapters.
+Replacement resolution, caches and native playback retain later increment gates.
+
 IMP-007 increment 4 adds the separate [editable codec/import operation](TRANSLATION_AUTHORING.md)
 and [application mod preferences](../mod/PREFERENCES.md). Neither changes active
 classic readers or bypasses DATA/MOD's menu publication lock.

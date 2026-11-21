@@ -2,6 +2,14 @@
 
 Reviewed 2026-11-18 for IMP-008. Direct PNG textures and WAV audio with optional authoring tools are user-approved. Windows is the first verification target. This inventory specifies acceptance targets. Exported Godot 4.7.2 verification is pending.
 
+IMP-008 increment 1 implementation now has a concrete, bounded
+[classic source/decoded-data/AV inspection contract](../../main_project/scripts/data/MEDIA_DECODERS.md).
+Its execution evidence records actual Windows structural/inspection checks and
+unsupported subformats separately from the parent feature and native acceptance.
+Replacement/cache and FluidSynth/FFmpeg integrations are not delivered by classic
+decoding. The selected playback backends below remain binding; the historical
+table's earlier open-backend wording does not reopen their selection.
+
 ## Replacement profiles
 
 | Asset | Initial profile | Required checks |

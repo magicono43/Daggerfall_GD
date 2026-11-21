@@ -69,7 +69,7 @@ func _read_index() -> Dictionary:
 		if not _index.has(key):
 			_index[key] = []
 		_index[key].append(ordinal)
-		_records.append({"offset": offset, "size": size, "identity": key})
+		_records.append({"offset": offset, "size": size, "identity": key, "ordinal": ordinal})
 		offset += size
 	if _file.get_error() != OK:
 		return failure("source_unavailable", "Index read failed: %s" % error_string(_file.get_error()))
@@ -113,4 +113,4 @@ func read_record(record: Variant) -> Dictionary:
 	file.close()
 	if bytes.size() != entry.size or error != OK:
 		return failure("source_unavailable", "Record read was incomplete.", record)
-	return {"ok": true, "kind": "ready", "source": _path, "record": record, "identity": entry.identity, "offset": entry.offset, "bytes": bytes}
+	return {"ok": true, "kind": "ready", "source": _path, "record": record, "identity": entry.identity, "ordinal": entry.ordinal, "offset": entry.offset, "bytes": bytes}

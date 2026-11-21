@@ -25,6 +25,17 @@ function Test-AssertionValue($Expected, $Actual) {
     return $Expected -ceq $Actual
 }
 
+# Frozen IDs supplement assertion counts for the new classic media selection.
+function Test-MediaInventory($Result, [string]$Mode) {
+    $inventory = Get-Content -LiteralPath "$PSScriptRoot/../tests/media_inventory.json" -Raw | ConvertFrom-Json
+    if ($inventory.schema -cne 'classic-media-inventory-v1' -or $Result.fixture -cne $inventory.fixture) { return $false }
+    $expected = @($inventory.$Mode)
+    $actual = @($Result.checks.scenario)
+    return $expected.Count -gt 0 -and $actual.Count -eq $expected.Count -and
+        @($actual | Select-Object -Unique).Count -eq $actual.Count -and
+        @(Compare-Object -ReferenceObject $expected -DifferenceObject $actual -CaseSensitive).Count -eq 0
+}
+
 # The pinned fault fixture must match every captured parser/VM error and log site.
 # Release compiles out the VM access check; the parser failure remains observable.
 function Test-ScriptDiagnostics([string[]]$Logs, [string]$Scenario, $Result) {

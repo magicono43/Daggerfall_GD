@@ -1,5 +1,33 @@
 # Shared verification — IMP-003 / DEV-014
 
+IMP-008 increment 1 adds independent `media` / `media-v1` selection:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario media -Fixture media-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Scenario media -Fixture media-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -ClassicSource C:/Games/Daggerfall/arena2 -ClassicMedia
+./main_project/tools/verify_startup_export.ps1 -Configuration release -ClassicSource C:/Games/Daggerfall/arena2 -ClassicMedia
+```
+
+Pass the actual available source explicitly; the path above records the verified
+installation, not a production default. `media_inventory.json` freezes the exact
+119 headless / 136 rendered terminal IDs under `classic-media-inventory-v1`, with
+duplicate/missing/changed inventories rejected in independent and export wrappers.
+Every required source is hashed and held with read-only Windows sharing throughout
+the child run, then rehashed. The bounded real AV consumer saves model/contact-sheet/
+VID PNGs and a decoded WAV and checks independent material/nested-texture/cursor
+state. All synthetic files live in the normal leased disposable root. Required
+missing sources/results and unexpected script/native diagnostics cannot pass.
+
+See [MEDIA_DECODERS.md](../scripts/data/MEDIA_DECODERS.md) for supported/rejected
+format inventory, source/engine conversion and HMI timing provenance. No classic
+payload is shipped as a fixture; tiny golden vectors are hand-authored. Required
+real gates use ARCH3D model44005 (physical0), SND classic3 (physical0), MIDI.BSA
+D1.HMI, TEXTURE.002/024/321, INVE00I0.IMG, APAINT.CIF, BUTTONS.RCI, ART_PAL.COL and
+ANIM0011.VID. Normal source composition is unchanged. This selection certifies
+structural/inspection adapters, not replacement/cache/native playback, original
+HMI driver-clock equivalence or later room/music/cinematic providers.
+
 Use PowerShell 7 (verified host 7.6.9). Build the pinned native adapter first
 (`../native/storage/README.md`). From the
 repository root, independently invoke:

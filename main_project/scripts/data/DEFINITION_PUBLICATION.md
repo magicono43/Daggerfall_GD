@@ -1,5 +1,11 @@
 # Definition publication — IMP-005 increment 3
 
+IMP-008 increment 1 extends the separate classic reader registry with checked
+loose image/texture/palette/VID formats and typed mesh/sound/HMI decoding, described
+in [MEDIA_DECODERS.md](MEDIA_DECODERS.md). It adds no replacement contribution
+schema, package export resolution or cache publication. Existing DATA/MOD menu
+preparation, durable-profile ordering, omissions and run-long lock are unchanged.
+
 IMP-007 increment 3 adds the real [font adapter](LOCALE_FONTS.md). Optional trusted
 `validate_resource_path(path) -> String` rejects domain-specific logical paths
 before mutation. Bundled contributions may supply explicit root/version metadata;

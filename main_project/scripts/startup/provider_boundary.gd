@@ -11,6 +11,11 @@ var presentation: RefCounted # Explicitly enabled; legacy compositions keep thei
 var preferences: RefCounted
 var _preference_stores: Dictionary = {}
 
+func enable_classic_media(required_sources: Array) -> bool:
+	# Required sources are an explicit consumer declaration, never directory discovery.
+	# Optional startup videos are not declared here by the normal shell.
+	return classic.register_adapter("classic-media-v1",required_sources) and classic.enable_capability("classic-media-v1")
+
 func enable_mod_preferences() -> Dictionary:
 	var registered := register_content_adapter(preload("res://scripts/mod/preference_definitions.gd").new(), "", [])
 	if registered.ok:

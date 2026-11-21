@@ -1,11 +1,20 @@
 # Milestones and validation checkpoints
 
-**IMP-007 increment 4, 2026-11-20:** The user explicitly authorized translation
-codec/import and mod preferences only. Implementation and required verification pass; user acceptance remains pending. See [increment-4 execution
-evidence](evidence/IMP-007-increment-4-2026-11-20.md). Increments 1–3 and their accepted
-commits remain recorded below. Parent IMP-007/M1, IMP-030/056 and real-owner gates
-remain open; no downstream prerequisite edge or another task is started/cleared.
+**IMP-008 increment 1 execution, 2026-11-20:** The user issued the prepared handoff
+and explicitly authorized classic adapters only. The bounded supported inventory
+is implemented (119 headless / 136 rendered media checks; debug/release media
+exports pass); affected regression/export audit and harness qualification pass. See [execution evidence](evidence/IMP-008-increment-1-2026-11-20.md).
+User acceptance remains pending. Replacement/cache/native playback and shared
+feature/real-owner/M1 gates remain open; no downstream edge is cleared.
 
+**IMP-007 increment 4 acceptance / IMP-008 handoff, 2026-11-20:** The user accepted
+increment 4 (commit `4df2656`); all four IMP-007 delivery increments are user-accepted.
+See [execution/acceptance evidence](evidence/IMP-007-increment-4-2026-11-20.md).
+The [IMP-008 classic-adapter handoff](handoffs/IMP-008-INCREMENT-1-PROMPT.txt) was
+prepared for another chat and authorizes its first increment only when issued by
+the user. Preparing it starts no implementation here. IMP-008's accepted IMP-005
+prerequisite remains unchanged. Parent shared-feature/real-owner/M1 gates remain
+open; no dependent prerequisite edge is automatically cleared by this update.
 
 **IMP-007 increment 3, 2026-11-20:** Explicitly authorized after increment-2
 acceptance (`dae3a56`). Fonts and live locale presentation are implemented and

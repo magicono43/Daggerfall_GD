@@ -10,6 +10,7 @@ param(
     [switch]$StructuredText,
     [switch]$LocaleFonts,
     [switch]$TranslationPreferences,
+    [switch]$ClassicMedia,
     [switch]$Randomness,
     [switch]$RandomnessSession,
     [switch]$Formula,
@@ -42,6 +43,8 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
     }
 }
 try {
+if ($ClassicMedia) { $report.fixture = 'media-v1'; $report.reproduction.arguments.ClassicMedia = $true }
+if ($ClassicMedia -and !$ClassicSource) { throw 'Classic media checks require an explicit real -ClassicSource' }
 if ($TranslationPreferences) { $report.fixture = 'translation-preferences-v1'; $report.reproduction.arguments.TranslationPreferences = $true }
 if ($LocaleFonts) { $report.fixture = 'locale-fonts-v1'; $report.reproduction.arguments.LocaleFonts = $true }
 if ($StructuredText) { $report.fixture = 'structured-text-v1'; $report.reproduction.arguments.StructuredText = $true }
@@ -78,7 +81,7 @@ foreach ($mode in @('headless','rendered')) {
         if ((Split-Path $selectedRoot -Leaf) -ine 'ARENA2') { $selectedRoot = Join-Path $selectedRoot 'ARENA2' }
         $lockedRoot = "$sandbox/locked/ARENA2"
         New-Item -ItemType Directory -Force $lockedRoot | Out-Null
-        foreach ($name in (@('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($TranslationPreferences -or $StructuredText -or $LocaleFonts) { @('TEXT.RSC') } else { @() }))) {
+        foreach ($name in (@('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($ClassicMedia) { @('MIDI.BSA','TEXTURE.321','TEXTURE.024','TEXTURE.002','INVE00I0.IMG','APAINT.CIF','BUTTONS.RCI','ART_PAL.COL','ANIM0011.VID') } else { @() }) + $(if ($TranslationPreferences -or $StructuredText -or $LocaleFonts) { @('TEXT.RSC') } else { @() }))) {
             $before[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
             $guards += [IO.File]::Open((Join-Path $selectedRoot $name), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
             [IO.File]::WriteAllBytes("$lockedRoot/$name", [byte[]]@(1,0,0,2,42,232,3,0,0,1,0,0,0))
@@ -103,6 +106,7 @@ foreach ($mode in @('headless','rendered')) {
     if ($StructuredText) { $fixture.mode = 'structured-text'; $fixture.fixture = 'structured-text-v1' }
     if ($LocaleFonts) { $fixture.mode = 'locale-fonts'; $fixture.fixture = 'locale-fonts-v1' }
     if ($TranslationPreferences) { $fixture.mode = 'translation-preferences'; $fixture.fixture = 'translation-preferences-v1' }
+    if ($ClassicMedia) { $fixture.mode = 'media'; $fixture.fixture = 'media-v1' }
     if ($TextCatalog) {
         $fixture.mode = 'text'
         $fixture.fixture = 'text-v1'
@@ -155,6 +159,7 @@ foreach ($mode in @('headless','rendered')) {
     }
     $result = Get-Content "$sandbox/result.json" -Raw | ConvertFrom-Json
     $report.engine = $result.engine
+    if ($ClassicMedia -and !(Test-MediaInventory $result $mode)) { throw 'Incomplete or changed exported media terminal inventory' }
     $report.native_sha256 = (Get-FileHash "$project/native/storage/bin/storage_windows.dll" ).Hash
     $report.executable_sha256 = (Get-FileHash "$build/Startup.exe" ).Hash
     if ($null -eq $result.ok -or !$result.engine -or $result.checks.Count -ne $result.count -or
@@ -168,7 +173,7 @@ foreach ($mode in @('headless','rendered')) {
         $after[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
-    $expected = if ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    $expected = if ($ClassicMedia) { if ($mode -eq 'headless') {119} else {136} } elseif ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
     $formulaExpected = if ($FormulaFault) { 18 } elseif ($mode -eq 'headless') { 82 } else { 84 }
     if (($Formula -or $FormulaFault) -and $result.count -ne $formulaExpected) { throw 'Incomplete formula export inventory' }
     $sessionExpected = if ($mode -eq 'headless') { 115 } else { 116 }

@@ -387,6 +387,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/verification_cases.gd"
 	elif fixture.get("mode") == "classic":
 		script_path = "res://tests/classic_cases.gd"
+	elif fixture.get("mode") == "media":
+		script_path = "res://tests/media_cases.gd"
 	elif fixture.get("mode") == "mods":
 		script_path = "res://tests/mod_cases.gd"
 	elif fixture.get("mode") == "mods_reload":
