@@ -8,4 +8,7 @@ main_project/tests/.runs/
 main_project/native/storage/bin/
 main_project/native/storage/.zig-cache/
 main_project/native/storage/zig-out/
+main_project/native/media/bin/
+main_project/native/media/.zig-cache/
+main_project/content/media/banks/*.sf2
 /main_project/PortableAppdata/

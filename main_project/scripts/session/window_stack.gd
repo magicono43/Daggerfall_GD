@@ -56,6 +56,21 @@ func close(id: String, force := false) -> Dictionary:
 	_boundary()
 	return {"kind": "applied"}
 
+func retire_layer(id: String, scope: String) -> Dictionary:
+	# An externally retired cinematic may be below a newer independent window.
+	# Remove only its original layer/gate; never close the newer top context.
+	if _handoff: return {"kind":"busy"}
+	for index in _layers.size():
+		var layer: Dictionary = _layers[index]
+		if layer.id != id: continue
+		if layer.scope != scope: return {"kind":"stale"}
+		_layers.remove_at(index)
+		if _pending_response.get("id")==id: _pending_response.clear()
+		core.gates.release(layer.token,layer.id)
+		_boundary()
+		return {"kind":"applied"}
+	return {"kind":"stale"}
+
 func respond(id: String, response: String, owner: Callable) -> Dictionary:
 	if _layers.is_empty() or _layers.back().id != id:
 		return {"kind": "stale"}

@@ -46,9 +46,37 @@ function Test-MediaInventory($Result, [string]$Mode) {
         @(Compare-Object -ReferenceObject $expected -DifferenceObject $actual -CaseSensitive).Count -eq 0
 }
 
+function Get-NativeExpectedCount([string]$Mode) {
+    $inventory = Get-Content -LiteralPath "$PSScriptRoot/../tests/native_inventory.json" -Raw | ConvertFrom-Json
+    if ($inventory.schema -cne 'native-media-inventory-v1' -or $Mode -notin @('headless','rendered','reload')) { throw 'Native inventory unavailable' }
+    return @($inventory.$Mode).Count
+}
+
+function Test-NativeInventory($Result, [string]$Mode) {
+    $inventory = Get-Content -LiteralPath "$PSScriptRoot/../tests/native_inventory.json" -Raw | ConvertFrom-Json
+    if ($inventory.schema -cne 'native-media-inventory-v1' -or $Result.fixture -cne $inventory.fixture) { return $false }
+    $expected = @($inventory.$Mode)
+    $actual = @($Result.checks.scenario)
+    return $expected.Count -gt 0 -and $actual.Count -eq $expected.Count -and
+        @($actual | Select-Object -Unique).Count -eq $actual.Count -and
+        @(Compare-Object -ReferenceObject $expected -DifferenceObject $actual -CaseSensitive).Count -eq 0
+}
+
+function Test-NativeFaultInventory($Result, [string]$Selection) {
+    $inventory = Get-Content -LiteralPath "$PSScriptRoot/../tests/native_fault_inventory.json" -Raw | ConvertFrom-Json
+    if ($inventory.schema -cne 'native-media-fault-inventory-v1' -or $Selection -notin @('banks','libraries')) { return $false }
+    $expected = @($inventory.$Selection.ids)
+    $actual = @($Result.checks.scenario)
+    return $Result.fixture -ceq $inventory.$Selection.fixture -and $expected.Count -gt 0 -and $actual.Count -eq $expected.Count -and
+        @($actual | Select-Object -Unique).Count -eq $actual.Count -and
+        @(Compare-Object -ReferenceObject $expected -DifferenceObject $actual -CaseSensitive).Count -eq 0
+}
+
 # The pinned fault fixture must match every captured parser/VM error and log site.
 # Release compiles out the VM access check; the parser failure remains observable.
 function Test-ScriptDiagnostics([string[]]$Logs, [string]$Scenario, $Result) {
+    if (@(Select-String -Path $Logs -Pattern 'ObjectDB.*leaked|resources still in use at exit|Leaked instance:').Count -gt 0) { return $false }
+    if ($Scenario -in @('native','native-libraries') -and @(Select-String -Path $Logs -Pattern '^WARNING: |^fluidsynth|^\[[^\]]+ @ [^\]]+\]').Count -gt 0) { return $false }
     # Existing startup recovery deliberately parses three damaged active files
     # and one damaged backup. Qualify only that fixture's exact four diagnostics.
     $configLines = @()

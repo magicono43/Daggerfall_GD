@@ -162,3 +162,19 @@ controls. No per-asset toggle, implicit package disable or post-menu rebuild exi
 The normal CORE durable-write failure/retry, run/save choice and run-long lock
 remain authoritative. Real WORLD/SAVE/native consumers and downstream room,
 collision, automap, spatial audio, music/cinematic assembly gates remain open.
+
+## Increment 3 native extension
+
+`native_media.gd` now validates MIDI/SF2/WebM/MP4 through the project native
+adapter. The earlier unavailable-backend statements describe increment 2; its
+preserved four failure assertions explicitly select an unavailable provider.
+Actual native success uses a separate versioned inventory. Native cache identity
+includes the actual runtime DLL identities/configuration, decoder version and
+source/profile inputs. MIDI bank selection is captured by each playback instance.
+Provider/export isolation, checked reads, preview tickets and publication ordering
+remain the same owners' contracts. A selected invalid bank fails before menu
+commit; recording-only admission does not require a native MIDI bank.
+
+See [the bounded playback contract](../av/NATIVE_PLAYBACK.md) and
+[native build and provenance](../../native/media/README.md). Real WORLD/SAVE,
+room/spatial playback and full requester assembly gates remain open.

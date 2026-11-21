@@ -803,3 +803,44 @@ See [the concrete supported/rejected resource contract](../scripts/data/MEDIA_RE
 and [execution evidence](../../design_docs/development/evidence/IMP-008-increment-2-2026-11-20.md).
 MIDI/SF2/general WebM/MP4 explicitly report backend-unavailable here. Real room,
 spatial audio, music/cinematic, WORLD/SAVE/native and M1 integrations stay open.
+
+### IMP-008 increment 3: native media
+
+Build the pinned native dependencies with `tools/fetch_media_dependencies.ps1`
+and `tools/build_media.ps1` before clean-checkout import/export. Run independently:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario native -Fixture native-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 240
+./main_project/tools/verify_rendered.ps1 -Scenario native -Fixture native-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 240
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -NativeMedia -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -NativeMedia -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/qualify_native_inventory.ps1
+```
+
+`native_inventory.json` freezes 344 headless / 374 rendered / 11 reload IDs.
+The ten supported clips use project-authored colors, bitmap timestamps and PCM
+click formulas. The 1280×720 anamorphic clip verifies SAR 3:4 and AAC 44100 Hz;
+the full-range clip verifies BT.709 range conversion. Two valid unsupported files
+remain negative fixtures. `tools/create_native_fixtures.gd` regenerates source
+formulas, encoded assets, hashes and shipped export/target declarations; the
+pinned FFmpeg CLI is authoring-only. Decoding tests compare against independent
+events, sample positions, colors, timestamps and click formulas.
+
+Run `-Scenario native-libraries -Fixture native-libraries-v1` and
+`-Scenario native-banks -Fixture native-banks-v1` separately in both wrappers,
+with the same explicit classic source. Their frozen fault inventories contain
+48 DLL/ABI/manifest checks and 16 physical default-bank checks. The native export
+selection also exercises the six DLL faults and two physical PCK-bank faults in
+fresh copies of each actual debug/release layout in headless and rendered modes.
+The PCK fixture verifies the original bank SHA-256 before renaming its directory
+entry or corrupting its payload and updating the container checksum. The original
+qualified export is unchanged; only the disposable copies are mutated.
+
+Captures and decoded listening WAVs live in the disposable scenario root. Inspect
+the timestamp, color regions and fitted aspect, and listen to `stock-d1-default.wav`.
+Reports retain actual capabilities/build hashes, Windows process memory, native
+queue bytes/decode time, engine underruns, source guards and before/after hashes.
+Unavailable outputs/renderers, missing/duplicate/unknown IDs, worker/mixer leaks
+and unexpected script/native diagnostics fail qualification. The earlier
+replacement inventory remains unchanged and explicitly tests an unavailable
+native provider in its former unsupported-backend assertions.

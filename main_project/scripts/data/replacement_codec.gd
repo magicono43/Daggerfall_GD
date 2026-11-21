@@ -1,6 +1,7 @@
 extends RefCounted
 ## Non-native, byte-checked profiles. No filename dispatch or package code loading.
 const VERSION = "replacement-codec-v1"
+const Native = preload("res://scripts/data/native_media.gd")
 
 static func fail(kind: String, reason: String) -> Dictionary:
 	return {"ok":false,"kind":kind,"reason":reason,"converter":VERSION}
@@ -13,7 +14,14 @@ static func decode(bytes: PackedByteArray, profile: String, expected: String) ->
 		"pcm-wav-v1": value = wav(bytes) if expected == "audio" else fail("wrong_type", "WAV requires audio type.")
 		"vorbis-v1": value = vorbis(bytes) if expected == "audio" else fail("wrong_type", "Vorbis requires audio type.")
 		"static-glb-v1": value = load("res://scripts/data/replacement_glb.gd").decode(bytes) if expected == "model" else fail("wrong_type", "GLB requires model type.")
-		"midi-v1", "sf2-v1", "webm-v1", "mp4-v1": value = fail("backend_unavailable", "Native admission/playback is unavailable in increment 2: " + profile)
+		"midi-v1", "sf2-v1", "webm-v1", "mp4-v1":
+			if Native.force_unavailable or Native.adapter() == null:
+				value = fail("backend_unavailable","Project native media capability is unavailable: "+profile)
+			elif expected != {"midi-v1":"midi","sf2-v1":"bank","webm-v1":"video","mp4-v1":"video"}[profile]:
+				value = fail("wrong_type","Native profile/type mismatch: "+profile)
+			elif profile == "midi-v1": value = Native.midi(bytes)
+			elif profile == "sf2-v1": value = Native.bank(bytes)
+			else: value = Native.video(bytes,profile)
 		_: value = fail("unsupported", "Unsupported declared profile: " + profile)
 	value.converter = value.get("converter",VERSION)
 	return value

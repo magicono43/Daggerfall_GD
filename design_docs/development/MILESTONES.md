@@ -1,5 +1,20 @@
 # Milestones and validation checkpoints
 
+**IMP-008 increment 3 execution, 2026-11-21:** Native media and bounded consumers
+are implemented and pass Windows export/fault/regression verification. See
+[execution evidence](evidence/IMP-008-increment-3-2026-11-21.md). Independent native
+checks do not close real IMP-024/035, WORLD/SAVE, parent IMP-008 or M1 acceptance.
+Increment acceptance remains with the user after final review.
+
+**IMP-008 increment 2 accepted / increment 3 handoff, 2026-11-21:** The user
+explicitly accepted increment 2, committed at `09f6d2a`, and requested the
+[increment-3 prompt](handoffs/IMP-008-INCREMENT-3-PROMPT.txt) for another chat.
+See [acceptance evidence](evidence/IMP-008-increment-2-2026-11-20.md). Preparing
+the prompt starts no implementation; issuing it authorizes increment 3 only.
+Parent/shared-feature, unsupported-profile, native playback and real-owner/M1
+gates remain open; no downstream prerequisite edge is automatically cleared.
+The earlier execution and pending-acceptance notes below are historical.
+
 **IMP-008 increment 2 execution, 2026-11-20:** The user issued the increment-2
 handoff, authorizing only non-native media replacement/export resolution,
 resource ownership/cache and pre-menu Content Diagnostics. The implementation

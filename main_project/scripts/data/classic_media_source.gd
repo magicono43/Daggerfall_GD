@@ -75,3 +75,11 @@ func read_record(address: Variant) -> Dictionary:
 
 func inventory() -> Dictionary:
 	return {"source":_path,"reader_id":get_instance_id(),"format":_format,"file_bytes":_length,"open_mode":"READ"}
+
+func video_source() -> Dictionary:
+	if not _initialized or _format != "classic-vid-v1": return _failure("before_readiness","An active declared VID reader is required.")
+	var loaded := _load()
+	if loaded.ok:
+		loaded.source = _path
+		loaded.converter = Vid.VERSION
+	return loaded

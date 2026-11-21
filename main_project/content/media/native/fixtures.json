@@ -1,0 +1,160 @@
+{
+	"aspect": 1.33333333333333,
+	"author": "Project-authored geometric colors, bitmap timestamps and PCM click formula; no classic payloads.",
+	"click_samples": [
+		0,
+		48000,
+		96000,
+		144000,
+		192000,
+		240000,
+		288000,
+		336000,
+		384000,
+		432000
+	],
+	"clips": [
+		{
+			"audio": "vorbis",
+			"file": "vp8-vorbis.bytes",
+			"id": "vp8-vorbis",
+			"profile": "webm-v1",
+			"sha256": "6c6bd7683a876ed350670b44f439caa99f43431e3e676876bd4ad6e575073860",
+			"video": "vp8"
+		},
+		{
+			"audio": "opus",
+			"file": "vp8-opus.bytes",
+			"id": "vp8-opus",
+			"profile": "webm-v1",
+			"sha256": "1e5a61713a243c8f1462cb885c13b916d7523e5d2d52dcee7291523904bd54e3",
+			"video": "vp8"
+		},
+		{
+			"audio": "",
+			"file": "vp8-none.bytes",
+			"id": "vp8-none",
+			"profile": "webm-v1",
+			"sha256": "8c18d7392365280eb142ca2189d37d3fdfbfc66429bb41d21da98b2e69e66006",
+			"video": "vp8"
+		},
+		{
+			"audio": "vorbis",
+			"file": "vp9-vorbis.bytes",
+			"id": "vp9-vorbis",
+			"profile": "webm-v1",
+			"sha256": "537e62fd5f4d5f96974a695b1434c4f75993e9d67b67568761659bd70223b061",
+			"video": "vp9"
+		},
+		{
+			"audio": "opus",
+			"file": "vp9-opus.bytes",
+			"id": "vp9-opus",
+			"profile": "webm-v1",
+			"sha256": "cef7a5f532b55c3b041b0720a8205f7f556d75ecce5ece9c4a0a8f221f658886",
+			"video": "vp9"
+		},
+		{
+			"audio": "",
+			"file": "vp9-none.bytes",
+			"id": "vp9-none",
+			"profile": "webm-v1",
+			"sha256": "4d11532422b5846f74d3d1a9a4282f9194aab50cb74b102de7d33de601a40ea2",
+			"video": "vp9"
+		},
+		{
+			"audio": "aac",
+			"file": "h264-aac.bytes",
+			"id": "h264-aac",
+			"profile": "mp4-v1",
+			"sha256": "ba484dd2435a014ec247531cb9e9909ba0edb78e10fd6951d9720d2f3e94e529",
+			"video": "h264"
+		},
+		{
+			"audio": "",
+			"file": "h264-none.bytes",
+			"id": "h264-none",
+			"profile": "mp4-v1",
+			"sha256": "490f6c96badc4ac84561a8eca39c00750d8e93eadac36dcb22b97c4bed4b23b5",
+			"video": "h264"
+		},
+		{
+			"audio": "aac",
+			"color": "bt709-limited",
+			"file": "h264-anamorphic.bytes",
+			"height": 720,
+			"id": "h264-anamorphic",
+			"profile": "mp4-v1",
+			"sha256": "27f1a6bb70e789c1c18d52ed1dad26aa69ace8e7c4138ee1db6ab232e4b0dcdf",
+			"video": "h264",
+			"width": 1280
+		},
+		{
+			"audio": "",
+			"color": "bt709-full",
+			"file": "vp9-full.bytes",
+			"height": 144,
+			"id": "vp9-full",
+			"profile": "webm-v1",
+			"sha256": "2d32188fbe1064b53fa882e925bc924a0b8d81f4e364fbe0872bdeb9a4480f94",
+			"video": "vp9",
+			"width": 192
+		}
+	],
+	"color": "bt709-limited",
+	"corners_rgb": [
+		[
+			255,
+			0,
+			0
+		],
+		[
+			0,
+			255,
+			0
+		],
+		[
+			0,
+			0,
+			255
+		],
+		[
+			255,
+			255,
+			255
+		]
+	],
+	"fps": 30,
+	"frames": 300,
+	"height": 144,
+	"sample_rate": 48000,
+	"schema": "native-fixtures-v1",
+	"seconds": 10,
+	"source_rgb_sha256": "74f4a4947fa9afcbb03f7f2eac5b60fe72078502ff7e73c859dea63a1b66e7af",
+	"source_wav_sha256": "464c62232c7e1c380b17951f5095713a5a185b056e770e93c247a418c9d95a48",
+	"unsupported": [
+		{
+			"audio": "",
+			"color": "bt709-limited",
+			"file": "unsupported-mpeg4.bytes",
+			"height": 144,
+			"id": "unsupported-mpeg4",
+			"profile": "mp4-v1",
+			"sha256": "86115677631571b43355243ebb75e9cc0019c26aa5d9c480a2f6629b87c03879",
+			"video": "mpeg4",
+			"width": 192
+		},
+		{
+			"audio": "",
+			"color": "bt709-limited",
+			"file": "unsupported-matroska.bytes",
+			"height": 144,
+			"id": "unsupported-matroska",
+			"profile": "webm-v1",
+			"sha256": "6f5d34cbd1c1d41834bb707527e1c54c1ce281ec6be587dfb15cb30a225ee2df",
+			"video": "vp8",
+			"width": 192
+		}
+	],
+	"width": 192
+}

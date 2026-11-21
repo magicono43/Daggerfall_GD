@@ -1,0 +1,151 @@
+{
+	"domain": "media.assets",
+	"entries": [
+		{
+			"id": "asset.native.song",
+			"value": {
+				"asset": {
+					"key": "native-midi",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "midi"
+			}
+		},
+		{
+			"id": "asset.native.recording",
+			"value": {
+				"asset": {
+					"key": "native-recording",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "audio"
+			}
+		},
+		{
+			"id": "asset.native.vp8-vorbis",
+			"value": {
+				"asset": {
+					"key": "native-vp8-vorbis",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "asset.native.vp8-opus",
+			"value": {
+				"asset": {
+					"key": "native-vp8-opus",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "asset.native.vp8-none",
+			"value": {
+				"asset": {
+					"key": "native-vp8-none",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "asset.native.vp9-vorbis",
+			"value": {
+				"asset": {
+					"key": "native-vp9-vorbis",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "asset.native.vp9-opus",
+			"value": {
+				"asset": {
+					"key": "native-vp9-opus",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "asset.native.vp9-none",
+			"value": {
+				"asset": {
+					"key": "native-vp9-none",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "asset.native.h264-aac",
+			"value": {
+				"asset": {
+					"key": "native-h264-aac",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "asset.native.h264-none",
+			"value": {
+				"asset": {
+					"key": "native-h264-none",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "asset.native.h264-anamorphic",
+			"value": {
+				"asset": {
+					"key": "native-h264-anamorphic",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "asset.native.vp9-full",
+			"value": {
+				"asset": {
+					"key": "native-vp9-full",
+					"provider": "@shipped/media-assets"
+				},
+				"kind": "target",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		}
+	],
+	"operation": "add",
+	"path": "targets"
+}

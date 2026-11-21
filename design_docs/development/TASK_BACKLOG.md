@@ -1,5 +1,19 @@
 # Implementation backlog
 
+**IMP-008 increment 3 execution, 2026-11-21:** The issued handoff authorized the
+native MIDI/SF2/video adapters and bounded consumers, now implemented and
+Windows-verified; user review/acceptance is pending. See [execution evidence](evidence/IMP-008-increment-3-2026-11-21.md).
+No subsequent IMP began; user acceptance, parent/M1 and real-owner gates stay open.
+
+**IMP-008 increment 2 accepted / increment 3 handoff, 2026-11-21:** The user
+explicitly accepted increment 2, committed at `09f6d2a`, and requested the
+[increment-3 prompt](handoffs/IMP-008-INCREMENT-3-PROMPT.txt) for another chat.
+See [acceptance evidence](evidence/IMP-008-increment-2-2026-11-20.md). Preparing
+the prompt starts no implementation; issuing it authorizes increment 3 only.
+Parent/shared-feature, unsupported-profile, native playback and real-owner/M1
+gates remain open; no downstream prerequisite edge is automatically cleared.
+The earlier execution and pending-acceptance notes below are historical.
+
 **IMP-008 increment 2 execution, 2026-11-20:** The user issued the increment-2
 handoff, authorizing only non-native media replacement/export resolution,
 resource ownership/cache and pre-menu Content Diagnostics. The implementation

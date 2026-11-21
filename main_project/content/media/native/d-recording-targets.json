@@ -1,0 +1,1 @@
+{"domain":"media.assets","path":"targets","operation":"add","entries":[{"id":"asset.native.recording","value":{"schema":"media-declarations-v1","kind":"target","type":"audio","asset":{"provider":"@shipped/media-assets","key":"native-recording"}}}]}

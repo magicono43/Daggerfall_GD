@@ -81,7 +81,8 @@ func patch_record(previous: Dictionary, fields: Dictionary) -> Dictionary:
 	return {"ok":true,"value":value}
 
 func _descriptor(value: Dictionary, fields: Dictionary, id: String) -> String:
-	return JSON.stringify([_context,id,value,fields.get("file",{}),Codec.VERSION,Engine.get_version_info().hash]).sha256_text()
+	var backend: Variant = Codec.Native.capabilities() if value.get("profile") in ["midi-v1","sf2-v1","webm-v1","mp4-v1"] else "engine"
+	return JSON.stringify([_context,id,value,fields.get("file",{}),Codec.VERSION,Engine.get_version_info().hash,backend]).sha256_text()
 
 func _read(source: Dictionary, file: String) -> Dictionary:
 	if str(source.provider).begins_with("@shipped/"):
@@ -122,6 +123,7 @@ func validate_source_record(id: String, value: Dictionary, fields: Dictionary, p
 	var digest := hash.finish().hex_encode()
 	var key := JSON.stringify([descriptor,digest,decoded.get("converter"),decoded.get("frame","")]).sha256_text()
 	decoded.provenance = {"provider":fields.file.provider,"source":fields.file.duplicate(true),"file":value.file,"profile":value.profile,"sha256":digest,"converter":decoded.converter,"generation":_generation,"cache_key":key}
+	if decoded.has("backend"): decoded.provenance.backend = decoded.backend
 	_cache[key] = decoded
 	_source_keys[descriptor] = key
 	measurements.source_bytes += loaded.bytes.size()
@@ -199,7 +201,7 @@ func resolve(target: String, expected: String, ticket := -1) -> Dictionary:
 	var original: Dictionary = baseline.call() # Never called for an invalid selected replacement.
 	original.target = canonical
 	original.resolution = "baseline"
-	original.provider = "classic"
+	original.provider = original.get("provider","classic")
 	return original
 
 func diagnostics() -> Dictionary:
@@ -212,6 +214,22 @@ func diagnostics() -> Dictionary:
 			else: result = _export(str(resource.path).trim_prefix("exports/"),id,value.type,id)
 			rows[resource.path+"#"+id] = {"generation":_generation,"converter":Codec.VERSION,"source":result.get("provenance",{}).duplicate(true),"reason":result.get("reason","")}
 	return rows
+
+func has_midi_exports() -> bool:
+	for resource: Dictionary in _records.values():
+		for record: Dictionary in resource.records.values():
+			if record.value.kind == "export" and record.value.type == "midi": return true
+	return false
+
+func bank_exports() -> Array:
+	var result: Array = []
+	for resource: Dictionary in _records.values():
+		if not str(resource.path).begins_with("exports/"): continue
+		for id: String in resource.records:
+			if resource.records[id].value.type == "bank":
+				var provider: String = str(resource.path).trim_prefix("exports/")
+				result.append({"label":provider+" / "+id,"provider":provider,"key":id})
+	return result
 
 func dispose() -> void:
 	_cache.clear()

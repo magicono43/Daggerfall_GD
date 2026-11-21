@@ -6,7 +6,7 @@ const VERSION = "classic-vid-v1"
 func failure(reason: String, position: int, kind := "malformed_or_unsupported") -> Dictionary:
 	return {"ok":false,"kind":kind,"reason":reason,"position":position,"converter":VERSION}
 
-func decode(bytes: PackedByteArray, requested_frame: int) -> Dictionary:
+func decode(bytes: PackedByteArray, requested_frame: int, publish := Callable()) -> Dictionary:
 	var cursor := Cursor.new(bytes)
 	if not cursor.has(16) or cursor.take(3).get_string_from_ascii() != "VID": return failure("Truncated/invalid VID header.",0)
 	var unknown_1 := cursor.u16()
@@ -17,7 +17,7 @@ func decode(bytes: PackedByteArray, requested_frame: int) -> Dictionary:
 	var unknown_2 := cursor.u16()
 	if unknown_1 != 512 or unknown_2 != 14: return failure("Unsupported VID header profile.",3)
 	if frames == 0 or width == 0 or height == 0 or width * height > bytes.size() * 127: return failure("Invalid VID dimensions/frame count.",5)
-	if requested_frame < 0 or requested_frame >= frames: return failure("VID frame absent.",5,"record_not_found")
+	if (requested_frame < 0 and not publish.is_valid()) or requested_frame >= frames: return failure("VID frame absent.",5,"record_not_found")
 	if cursor.u8() != 2: return failure("VID header must be followed by palette.",15)
 	var colors := _palette(cursor)
 	if not cursor.reason.is_empty(): return failure(cursor.reason,cursor.position)
@@ -30,11 +30,16 @@ func decode(bytes: PackedByteArray, requested_frame: int) -> Dictionary:
 	var started := false
 	var audio_chunks: Array[Dictionary] = []
 	var wanted: Dictionary = {}
+	var presented_samples := 0
 	while cursor.position < cursor.limit and cursor.reason.is_empty():
 		var at := cursor.position
 		var type := cursor.u8()
 		if type == 0: continue
 		if type == 20:
+			if publish.is_valid():
+				if frame+1!=frames: return failure("VID ended before its declared frame count.",at)
+				if not audio_chunks.is_empty(): return failure("Streaming VID profile does not admit audio after the final image.",at)
+				return {"ok":true,"frames":frame+1,"sample_frames":presented_samples,"terminal_position":at}
 			if wanted.is_empty(): return failure("VID ended before requested declared frame.",at)
 			wanted.audio_chunks = audio_chunks
 			wanted.sequence_audio_samples = audio_sample
@@ -80,12 +85,20 @@ func decode(bytes: PackedByteArray, requested_frame: int) -> Dictionary:
 		if not cursor.reason.is_empty(): return failure(cursor.reason,cursor.position)
 		frame += 1
 		if frame >= frames: return failure("VID contains more image frames than its declared profile.",at)
-		if frame != requested_frame: continue
+		if frame != requested_frame and not publish.is_valid(): continue
 		wanted = {"ok":true,"domain":"video_frame","converter":VERSION,"frame":frame,"frame_count":frames,
 			"width":width,"height":height,"indices":pixels,"palette_rgb":colors,"position":at,"block_type":type,
 			"global_delay_source":global_delay,"frame_delay_source":delay,"sample_rate_hz":11025,"channels":1,
 			"audio_encoding":"pcm-u8","audio":audio,"audio_start_sample":audio_start,"audio_end_sample":audio_sample,
 			"audio_chunks":audio_chunks,"timing_profile":"source-audio-samples-v1","timing_patch":"none","orientation":"row-major-top-left"}
+		if publish.is_valid():
+			wanted.presentation_sample = presented_samples
+			# The accepted source-audio-samples profile uses the exact current block
+			# length. Raw delay fields remain metadata; there is no 740-sample floor.
+			presented_samples += audio.size()
+			if not publish.call(wanted.duplicate(true)): return failure("Playback scope cancelled.",at,"cancelled")
+			audio_chunks.clear()
+			continue
 		# Earlier frame requests return a self-contained prefix. The last frame
 		# also reads to the terminal block, preserving trailing audio chunks.
 		if frame < frames - 1: return wanted

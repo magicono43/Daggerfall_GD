@@ -1,0 +1,268 @@
+{
+  "schema": "native-media-windows-imports-v1",
+  "binaries": [
+    {
+      "file": "avcodec-62.dll",
+      "sha256": "b73de3e72de25186c921dcc2cc4399a9e3196b022e0309b9da9e53b0d170f5ca",
+      "imports": [
+        "ADVAPI32.dll",
+        "bcrypt.dll",
+        "d2d1.dll",
+        "DNSAPI.dll",
+        "DWrite.dll",
+        "GDI32.dll",
+        "IPHLPAPI.DLL",
+        "KERNEL32.dll",
+        "MSIMG32.dll",
+        "api-ms-win-crt-conio-l1-1-0.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-multibyte-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-process-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "ntdll.dll",
+        "ole32.dll",
+        "RPCRT4.dll",
+        "SHELL32.dll",
+        "SHLWAPI.dll",
+        "api-ms-win-core-synch-l1-2-0.dll",
+        "USER32.dll",
+        "USERENV.dll",
+        "USP10.dll",
+        "WS2_32.dll",
+        "bcryptprimitives.dll",
+        "kernel32.dll",
+        "kernel32.dll",
+        "ntdll.dll",
+        "ws2_32.dll",
+        "avutil-60.dll",
+        "swresample-6.dll"
+      ]
+    },
+    {
+      "file": "avformat-62.dll",
+      "sha256": "5e08b7c4073187ea172215d667d335885b604a724856a7bdf736378343bdb70d",
+      "imports": [
+        "ADVAPI32.dll",
+        "bcrypt.dll",
+        "CRYPT32.dll",
+        "GDI32.dll",
+        "IPHLPAPI.DLL",
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "ncrypt.dll",
+        "ntdll.dll",
+        "RPCRT4.dll",
+        "Secur32.dll",
+        "SHELL32.dll",
+        "USER32.dll",
+        "USP10.dll",
+        "WS2_32.dll",
+        "kernel32.dll",
+        "avcodec-62.dll",
+        "avutil-60.dll"
+      ]
+    },
+    {
+      "file": "avutil-60.dll",
+      "sha256": "4fe6682eeac1cdfc8c699637bdd04cee8312d03f2d3794cb4436230dd14bddda",
+      "imports": [
+        "ADVAPI32.dll",
+        "bcrypt.dll",
+        "CFGMGR32.dll",
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "ole32.dll",
+        "USER32.dll"
+      ]
+    },
+    {
+      "file": "libfluidsynth-3.dll",
+      "sha256": "a7c6d9945c32249614216aabc47b5a064d306dca81c54e26e4930d776cdecf3d",
+      "imports": [
+        "DSOUND.dll",
+        "WINMM.dll",
+        "ole32.dll",
+        "WS2_32.dll",
+        "libinstpatch-2.dll",
+        "libglib-2.0-0.dll",
+        "libgthread-2.0-0.dll",
+        "sndfile.dll",
+        "libgobject-2.0-0.dll",
+        "SDL3.dll",
+        "KERNEL32.dll",
+        "USER32.dll"
+      ]
+    },
+    {
+      "file": "libglib-2.0-0.dll",
+      "sha256": "0c3720b588874fc3c60f66b486c4172c4976c56b0b0f04908f730d7215c93400",
+      "imports": [
+        "libintl-8.dll",
+        "ADVAPI32.dll",
+        "KERNEL32.dll",
+        "msvcrt.dll",
+        "msvcrt.dll",
+        "ole32.dll",
+        "SHELL32.dll",
+        "USER32.dll",
+        "WS2_32.dll"
+      ]
+    },
+    {
+      "file": "libgobject-2.0-0.dll",
+      "sha256": "28ca3fe5392dce2e8c48b6157baa9da31f88ebb7103dc2ce7feeca7d5a3b17ca",
+      "imports": [
+        "libglib-2.0-0.dll",
+        "libgthread-2.0-0.dll",
+        "KERNEL32.dll",
+        "msvcrt.dll"
+      ]
+    },
+    {
+      "file": "libgthread-2.0-0.dll",
+      "sha256": "f49aabf9d780bcaae8f72870a2f2a6817e987efd115aaee6c9442d401ab4bb34",
+      "imports": [
+        "libglib-2.0-0.dll",
+        "KERNEL32.dll",
+        "msvcrt.dll",
+        "USER32.dll"
+      ]
+    },
+    {
+      "file": "libinstpatch-2.dll",
+      "sha256": "3f46c2a0151e1fff951b38797ae1e0c5e0a0b13826a4c2f1ba99fc253a26214b",
+      "imports": [
+        "libgobject-2.0-0.dll",
+        "libgthread-2.0-0.dll",
+        "libglib-2.0-0.dll",
+        "sndfile.dll",
+        "KERNEL32.dll"
+      ]
+    },
+    {
+      "file": "libintl-8.dll",
+      "sha256": "7cf5a705c825e082d8e7b57d113ebcba897a9421f465a7e43ad610b89a359b14",
+      "imports": [
+        "ADVAPI32.dll",
+        "KERNEL32.dll",
+        "msvcrt.dll",
+        "msvcrt.dll"
+      ]
+    },
+    {
+      "file": "media_windows.dll",
+      "sha256": "da957edc878fff0116a3aa461ce1be62a7aeb36ef8151db1fd13303a950101d2",
+      "imports": [
+        "bcrypt.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "KERNEL32.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-multibyte-l1-1-0.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll"
+      ]
+    },
+    {
+      "file": "SDL3.dll",
+      "sha256": "2dfe1c60557c3e054ddda61bf7f29fdfd462c10faddf04dc6864961f43960df6",
+      "imports": [
+        "SETUPAPI.dll",
+        "WINMM.dll",
+        "IMM32.dll",
+        "VERSION.dll",
+        "KERNEL32.dll",
+        "USER32.dll",
+        "GDI32.dll",
+        "ADVAPI32.dll",
+        "SHELL32.dll",
+        "ole32.dll",
+        "OLEAUT32.dll"
+      ]
+    },
+    {
+      "file": "sndfile.dll",
+      "sha256": "4e3bd2de8e1485110eaebef8e1239471f73d608773831c323bf528e05645655e",
+      "imports": [
+        "KERNEL32.dll"
+      ]
+    },
+    {
+      "file": "swresample-6.dll",
+      "sha256": "b4ff013d1baf6bd7f7fb0d823bc61e98b9ad5ce2409c79b16a25bcfd57ca1d87",
+      "imports": [
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "avutil-60.dll"
+      ]
+    },
+    {
+      "file": "swscale-9.dll",
+      "sha256": "3d459670f04e73d878561c5a13dc67aa967dda8682bc21a872a45da11d21037a",
+      "imports": [
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "avutil-60.dll"
+      ]
+    }
+  ]
+}

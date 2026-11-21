@@ -1,0 +1,205 @@
+{
+  "schema": "libsndfile-static-provenance-v1",
+  "binary_archive": "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2-win64.zip",
+  "binary_archive_sha256": "2173935c0c1ed13cf627951d34483f9d405ead2eb473190461c42ba220643a3f",
+  "binary_sha256": "4e3bd2de8e1485110eaebef8e1239471f73d608773831c323bf528e05645655e",
+  "evidence": "DLL identical to the FluidSynth bundle. Embedded FLAC 1.4.2, Opus 1.4, Vorbis 1.3.7, LAME3.100. The mpg123 embedded source-directory prefix 5dd550e06f matches the exact SHA512 archive in the retained vcpkg port. Other retained port versions match embedded codec versions; this is source provenance, not a claim to reproduce the upstream manual MSVC build bit-for-bit.",
+  "sources": [
+    {
+      "port": "libogg",
+      "recipe_reference": "microsoft/vcpkg tag 2023.08.09",
+      "files": [
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/libogg/vcpkg.json",
+          "sha256": "4d651ca89f0f8d155e659450304e65c168febe7cee7739b30eccda7ac70ebebb"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/libogg/portfile.cmake",
+          "sha256": "6da25d70a617bd4c7fd18cb2a8acd8d40c1fcc671846195a02ef2dc74a6b463e"
+        }
+      ],
+      "version": "1.3.5"
+    },
+    {
+      "port": "libvorbis",
+      "recipe_reference": "microsoft/vcpkg tag 2023.08.09",
+      "files": [
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/libvorbis/vcpkg.json",
+          "sha256": "e067e87e4aa9c77ab05a7a14231903029b57904d40ab059a77404a95747eab0d"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/libvorbis/portfile.cmake",
+          "sha256": "9254f0a53afb2936ccc58750ce72d0ab7cc7b6ff0a4a6a403f826cf091c701e9"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/libvorbis/0002-Fixup-pkgconfig-libs.patch",
+          "sha256": "01267e7be79a1a6034c2fea8f1221e3d44c71ac6995be1a76fe2bb9872954659"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/libvorbis/0001-Dont-export-vorbisenc-functions.patch",
+          "sha256": "f0166ffd98153f2b04124caae3b5e6ee9f98a3204c5419e0a7a7690fea44590f"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/libvorbis/0003-def-mingw-compat.patch",
+          "sha256": "44c998bdbc4bc8f581d25fbe81d006b68c243485eec826caf1716ad335a7f888"
+        }
+      ],
+      "version": "1.3.7"
+    },
+    {
+      "port": "libflac",
+      "recipe_reference": "microsoft/vcpkg tag 2023.08.09",
+      "files": [
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/libflac/vcpkg.json",
+          "sha256": "5b79d7c27f3418ff7e9b0c86344a1e4d9fe739d360f4ca775f9b4c4373084460"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/libflac/portfile.cmake",
+          "sha256": "86b7cd24ce56150e837f16bb81a20844da8904dd434e9b50e953cd3d27875f6d"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/libflac/uwp-library-console.patch",
+          "sha256": "ea99f21e55b15e9cdf24a40236ebe94e1a018b6bc767e7a329799cb59691232c"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/libflac/fix-compile-options.patch",
+          "sha256": "02e10f5f2ac9f3ed601c8ca74454b33cccabdc833e4f72ec2a73887e3d066873"
+        }
+      ],
+      "version": "1.4.2"
+    },
+    {
+      "port": "opus",
+      "recipe_reference": "microsoft/vcpkg tag 2023.08.09",
+      "files": [
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/opus/vcpkg.json",
+          "sha256": "d3772440189e139715328ab3da1ceda1b184edd9eb56ff622f155a066e5b976d"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/opus/portfile.cmake",
+          "sha256": "7308032f0c764c3dc78b5f5fb05f4fd1cc33805691c5af90d744417dfeab9360"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/opus/fix-pkgconfig-version.patch",
+          "sha256": "b1998186940daff04e5c332fbb7f27f756cf5c2227f6e8c3f37f2fb2e8222286"
+        }
+      ],
+      "version": "1.4"
+    },
+    {
+      "port": "mpg123",
+      "recipe_reference": "microsoft/vcpkg tag 2023.08.09",
+      "files": [
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/mpg123/vcpkg.json",
+          "sha256": "7470118d9b5fed9cfef325f83626bc75b6af9a7e1ff4f1878daf5d9f408c983e"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/mpg123/portfile.cmake",
+          "sha256": "5637c1bb401781f712d709ba5fbf6234a3f3b04554f597ab8771b2063bf2e53b"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/mpg123/fix-m1-build.patch",
+          "sha256": "95bc594037f888b34ac13017b957e5014a9653f62259fa4351a41ad35e00c0ef"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/mpg123/fix-modulejack.patch",
+          "sha256": "46edf5b094919852541d5e7e54ed5ee1cfb9daffe43437cf86c80041b41d7f39"
+        }
+      ],
+      "version": "1.31.3"
+    },
+    {
+      "port": "mp3lame",
+      "recipe_reference": "microsoft/vcpkg tag 2023.08.09",
+      "files": [
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/mp3lame/vcpkg.json",
+          "sha256": "48614661ade7f6000cbb4cbd32278833c09890dfadfa58e732b240ba9e96579d"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/mp3lame/portfile.cmake",
+          "sha256": "4094685391d0a2d158dfa8e322547f0e6b5624c98c6722d604af9f83af46bf9a"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/mp3lame/add-macos-universal-config.patch",
+          "sha256": "e50e5bd9a3a41b6374f45b8fdbe7bce062f967cafd1e5c7090735953fbc2f8fa"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/mp3lame/00001-msvc-upgrade-solution-up-to-vc11.patch",
+          "sha256": "a75204e3f5c8d94deba46101794b1ed08e373a8de7935e13e8a9cad5803f7291"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/microsoft/vcpkg/2023.08.09/ports/mp3lame/remove_lame_init_old_from_symbol_list.patch",
+          "sha256": "ae9d1ca1781a329fe1fa932752eba9617b5a1ee98c1975759e18b18c3b482db5"
+        }
+      ],
+      "version": "3.100"
+    },
+    {
+      "notice": "ogg-1.3.5-COPYING.txt",
+      "url": "https://raw.githubusercontent.com/xiph/ogg/v1.3.5/COPYING",
+      "sha256": "d2ab5758336489da61c12cc5bb757da5339c4ae9001f9bb0562b4370249af814"
+    },
+    {
+      "notice": "vorbis-1.3.7-COPYING.txt",
+      "url": "https://raw.githubusercontent.com/xiph/vorbis/v1.3.7/COPYING",
+      "sha256": "ec1815db59fcd302846df949d7424876cb2e2dc5ed1606c5fb0b36787b1cf43a"
+    },
+    {
+      "notice": "FLAC-1.4.2-COPYING.Xiph.txt",
+      "url": "https://raw.githubusercontent.com/xiph/flac/1.4.2/COPYING.Xiph",
+      "sha256": "6e58d3036f05e2a0d58af854c12a505ddbe75011d71a598a2170987f3b15408d"
+    },
+    {
+      "notice": "opus-1.4-COPYING.txt",
+      "url": "https://raw.githubusercontent.com/xiph/opus/v1.4/COPYING",
+      "sha256": "8338ce8d922bb4416ce3dd1e5680173332435e3f0755007ac7801ccd674fe682"
+    },
+    {
+      "notice": "opus-1.4-AUTHORS.txt",
+      "url": "https://raw.githubusercontent.com/xiph/opus/v1.4/AUTHORS",
+      "sha256": "f9fd849e652219ce98e008303370b352d37663d0ffb27b8dc514ad93c9c7438b"
+    },
+    {
+      "archive": "libsndfile-1.2.2.tar.xz",
+      "url": "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz",
+      "sha256": "3799ca9924d3125038880367bf1468e53a1b7e3686a934f098b7e1d286cdb80e",
+      "sha512": "a6e3ea3ac5d91befaa99f6a31a3fac44e7b7c11f1de4698167317a461d5a19a2651d47486a920b34400f18367b4f6173bf0c1c9ba80eb682cece1b5beee352a0"
+    },
+    {
+      "notice": "libsndfile-1.2.2_src_G72x_README.txt",
+      "source": "libsndfile-1.2.2/src/G72x/README",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "notice": "libsndfile-1.2.2_src_GSM610_COPYRIGHT.txt",
+      "source": "libsndfile-1.2.2/src/GSM610/COPYRIGHT",
+      "sha256": "1bbe7119b1bcd1489e0f36cb95b8902f7f0ceec9a2f3a67394bc9f4709a4e0a7"
+    },
+    {
+      "notice": "libsndfile-1.2.2_COPYING.txt",
+      "source": "libsndfile-1.2.2/COPYING",
+      "sha256": "ad01ea5cd2755f6048383c8d54c88459cd6fcb17757c5c8892f8c5ea060f6140"
+    },
+    {
+      "archive": "mpg123-1.31.3.tar.bz2",
+      "url": "https://www.mpg123.de/download/mpg123-1.31.3.tar.bz2",
+      "sha256": "1ca77d3a69a5ff845b7a0536f783fee554e1041139a6b978f6afe14f5814ad1a",
+      "sha512": "5dd550e06f5d0d432cac1b7e546215e56378b44588c1a98031498473211e08bc4228de45be41f7ba764f7f6c0eb752a6501235bcc3712c9a8d8852ae3c607d98"
+    },
+    {
+      "notice": "mpg123-1.31.3_COPYING.txt",
+      "source": "mpg123-1.31.3/COPYING",
+      "sha256": "c22482728a634a8dfdb4ff72a96d4c1ed64cd8f3e79335c401751ac591609366"
+    },
+    {
+      "notice": "mpg123-1.31.3_doc_LICENSE.txt",
+      "source": "mpg123-1.31.3/doc/LICENSE",
+      "sha256": "cca79ea6fc0a7715e52450df2d86311f990e85067dd13f4d7f5a88d4fd23a07c"
+    }
+  ]
+}

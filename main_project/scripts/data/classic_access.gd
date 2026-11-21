@@ -204,6 +204,11 @@ func decode_model(record: Variant) -> Dictionary:
 func decode_sequence(record: Variant) -> Dictionary:
 	return HmiDecoder.new().decode(read_record("MIDI.BSA",record))
 
+func video_source(file: String) -> Dictionary:
+	if not ready() or not _active.has(file.to_upper()) or not _active[file.to_upper()].has_method("video_source"):
+		return {"ok":false,"kind":"source_unavailable","reason":"An active, explicitly declared VID source is required."}
+	return _active[file.to_upper()].video_source()
+
 func dispose() -> void:
 	discard_prepared()
 	for reader: RefCounted in _active.values():

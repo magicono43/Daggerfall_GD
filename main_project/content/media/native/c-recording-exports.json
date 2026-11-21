@@ -1,0 +1,1 @@
+{"domain":"media.assets","path":"exports","operation":"add","entries":[{"id":"native-recording","value":{"schema":"media-declarations-v1","kind":"export","type":"audio","file":"clicks.wav.bytes","profile":"pcm-wav-v1"}}]}

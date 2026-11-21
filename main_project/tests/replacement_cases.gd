@@ -294,8 +294,10 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("original profile draft retained","media.b",media.resolve("sound.3","audio",candidate.ticket).target_record.winner.provider)
 	put_bytes(loose_root.path_join("media/corners.png"),PackedByteArray([0]))
 	check("loose bytes retained until restart",true,rebuild().ok)
+	Codec.Native.force_unavailable = true # Preserve v1 unavailable-provider coverage explicitly.
 	for profile: String in ["midi-v1","sf2-v1","webm-v1","mp4-v1"]:
 		check(profile+" backend unavailable","backend_unavailable",Codec.decode(PackedByteArray([1]),profile,"video").kind)
+	Codec.Native.force_unavailable = false
 	check("wrong media type explicit","wrong_type",Codec.decode(FileAccess.get_file_as_bytes(Fixture.ROOT+"/corners.png.bytes"),"png-v1","audio").kind)
 	check("truncated WAV rejected",false,Codec.wav(FileAccess.get_file_as_bytes(Fixture.ROOT+"/pcm-16-2-44100.wav.bytes").slice(0,30)).ok)
 	check("truncated GLB rejected",false,Codec.decode(FileAccess.get_file_as_bytes(Fixture.ROOT+"/triangle.glb.bytes").slice(0,80),"static-glb-v1","model").ok)

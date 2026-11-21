@@ -1,0 +1,37 @@
+{
+  "adapter_compiler": "Zig 0.13.0 x86_64-windows-gnu C++17",
+  "schema": "native-media-compiler-runtime-v1",
+  "gcc_exception_source": "https://raw.githubusercontent.com/gcc-mirror/gcc/releases/gcc-16.2.0/COPYING.RUNTIME",
+  "gcc_exception_version": "3.1",
+  "notices": [
+    {
+      "sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+      "file": "notices/GCC_RUNTIME_EXCEPTION.txt"
+    },
+    {
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "file": "notices/GPL3.txt"
+    },
+    {
+      "sha256": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b",
+      "file": "notices/LLVM_LIBCXX_LICENSE.txt"
+    },
+    {
+      "sha256": "e2b35be49f7284a45b7baca8fc7b3ab7440e7902392b2528a457816b5bb2a15c",
+      "file": "notices/LLVM_LIBCXXABI_LICENSE.txt"
+    },
+    {
+      "sha256": "b5efebcaca80879234098e52d1725e6d9eb8fb96a19fce625d39184b705f7b6d",
+      "file": "notices/LLVM_LIBUNWIND_LICENSE.txt"
+    },
+    {
+      "sha256": "5c537d6853e005298a285d508cff9ac7192cea23576c840d485b2b586a7ff177",
+      "file": "notices/ZIG_LICENSE.txt"
+    },
+    {
+      "sha256": "99a69660981156c21336fdb5661f89341b013c94e4bf9e1c7467b4745718397f",
+      "file": "notices/ZIG_MINGW_COPYING.txt"
+    }
+  ],
+  "ffmpeg_compiler": "GCC 16.2.0 / crosstool-NG 1.29.0.36_fbb6372"
+}

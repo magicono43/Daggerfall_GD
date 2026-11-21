@@ -40,6 +40,15 @@ static func show(shell: Control) -> void:
 		line(rows,report.reason)
 	else:
 		line(rows,"Profile %s · candidate %d · revision %d · %s" % [report.profile,report.ticket,report.revision,"valid" if report.valid else "needs attention"],22)
+		if shell.controller.providers.media != null:
+			var caps := preload("res://scripts/data/native_media.gd").capabilities()
+			line(rows,"Native MIDI: %s · video: %s" % [str(caps.get("midi",false)),str(caps.get("video",false))])
+			line(rows,"FluidSynth %s · FFmpeg %s\n%s\n%s" % [caps.get("fluid_version","unavailable"),caps.get("ffmpeg_build","unavailable"),caps.get("midi_reason",""),caps.get("video_reason","")])
+			line(rows,"Bundled default bank pin: GeneralUser GS 2.0.3 · "+preload("res://scripts/data/native_media.gd").BANK_HASH)
+			var banks: RefCounted = shell.controller.providers.media_preferences
+			var bank: Dictionary = banks.capture(report.ticket)
+			line(rows,"MIDI bank ready: "+JSON.stringify(bank.get("identity",{})) if bank.ok else "MIDI bank unavailable: "+bank.get("reason",""))
+			if not banks.last_issue.is_empty(): line(rows,banks.last_issue)
 		for issue: Dictionary in report.issues: line(rows,"%s\n%s: %s" % [issue.source,issue.kind,issue.reason])
 		for resource: Dictionary in report.resources.values():
 			line(rows,resource.domain+" / "+resource.path,20)

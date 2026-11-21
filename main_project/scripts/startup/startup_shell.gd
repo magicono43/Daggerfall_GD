@@ -44,7 +44,7 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
-	if fixture.is_empty() or fixture.get("mode") in ["replacements","replacements_reload"]:
+	if fixture.is_empty() or fixture.get("mode") in ["replacements","replacements_reload","native","native_reload","native-library"]:
 		var registered: Dictionary = controller.providers.enable_media_replacements()
 		if not registered.ok:
 			label("Media adapter registration failed: " + registered.reason)
@@ -76,6 +76,10 @@ func _ready() -> void:
 		preload("res://tests/publication_fixture.gd").configure(self, fixture)
 	if fixture.get("mode") in ["replacements","replacements_reload"]:
 		preload("res://tests/replacement_fixture.gd").configure(self)
+	if fixture.get("mode") in ["native","native_reload"]:
+		preload("res://tests/native_fixture.gd").configure(self)
+	if fixture.get("mode") == "native-library":
+		preload("res://tests/native_library_fixture.gd").configure(self)
 	if fixture.get("mode") in ["formula","formula-fault"]:
 		preload("res://tests/formula_fixture.gd").configure(self,fixture)
 	controller.start(inputs)
@@ -328,6 +332,9 @@ func refresh_language_children(parent: Node) -> void:
 func advance_shutdown() -> void:
 	session_shell.advance_shutdown()
 
+func settle_media_shutdown() -> void:
+	await session_shell.settle_media_shutdown()
+
 func restore_session_focus(generation: int) -> void:
 	if generation == render_generation:
 		session_shell.restore_focus()
@@ -400,6 +407,12 @@ func run_fixture() -> void:
 		script_path = "res://tests/replacement_cases.gd"
 	elif fixture.get("mode") == "replacements_reload":
 		script_path = "res://tests/replacement_reload_cases.gd"
+	elif fixture.get("mode") == "native":
+		script_path = "res://tests/native_cases.gd"
+	elif fixture.get("mode") == "native_reload":
+		script_path = "res://tests/native_reload_cases.gd"
+	elif fixture.get("mode") == "native-library":
+		script_path = "res://tests/native_library_cases.gd"
 	elif fixture.get("mode") == "mods":
 		script_path = "res://tests/mod_cases.gd"
 	elif fixture.get("mode") == "mods_reload":
@@ -435,8 +448,17 @@ func run_fixture() -> void:
 	elif fixture.get("mode") == "publication_reload":
 		script_path = "res://tests/publication_reload_cases.gd"
 	var suite = load(script_path).new()
-	var checks: Dictionary = await suite.run(self, fixture)
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload"] else "result.json")
+	var returned: Variant = await suite.run(self, fixture)
+	# A failed fixture script must still terminate the owned process. Its original
+	# diagnostics remain visible and a zero-count failure can never satisfy an
+	# inventory; do not cascade into another nil access and wait for timeout.
+	var checks: Dictionary = returned if returned is Dictionary and returned.has("ok") else {"ok":false,"kind":"incomplete","checks":[],"count":0,"engine":Engine.get_version_info(),"display":DisplayServer.get_name(),"fixture":fixture.get("fixture",""),"inputs":fixture.get("inputs",{})}
+	if fixture.get("mode") in ["native","native-library"] and session_shell.music_playback != null:
+		var video_cleanup: Dictionary = await session_shell.video_playback.shutdown()
+		var music_cleanup: Dictionary = await session_shell.music_playback.shutdown()
+		checks.native_cleanup = {"ok":video_cleanup.ok and music_cleanup.ok,"video":video_cleanup,"music":music_cleanup}
+		checks.ok = checks.ok and checks.native_cleanup.ok
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

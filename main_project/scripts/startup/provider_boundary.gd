@@ -10,12 +10,16 @@ var classic_preparations := 0 # Diagnostic count of explicit source preparation 
 var presentation: RefCounted # Explicitly enabled; legacy compositions keep their inventory.
 var preferences: RefCounted
 var media: RefCounted
+var media_preferences: RefCounted
 var _preference_stores: Dictionary = {}
 
 func enable_media_replacements() -> Dictionary:
 	var candidate := preload("res://scripts/data/media_replacements.gd").new()
 	var registered := register_content_adapter(candidate,"",[])
-	if registered.ok: media = candidate
+	if registered.ok:
+		media = candidate
+		media_preferences = preload("res://scripts/av/media_preferences.gd").new()
+		media_preferences.media = candidate
 	return registered
 
 func enable_classic_media(required_sources: Array) -> bool:
@@ -71,6 +75,9 @@ func prepare_content(mods: RefCounted) -> Dictionary:
 		if not fonts.ok:
 			return fonts
 	content.formula_ticket = hooks.ticket
+	if media_preferences != null and media.has_midi_exports():
+		var bank: Dictionary = media_preferences.capture(content.ticket)
+		if not bank.ok: return {"ok":false,"kind":bank.kind,"source":"midi-bank","reason":bank.reason}
 	if preferences != null:
 		var prepared: Dictionary = preferences.prepare(content.resources, mods.adapter, mods.root.path_join("settings/mod_preferences"))
 		if not prepared.ok:
@@ -97,6 +104,7 @@ func discard_classic_candidate() -> void:
 func dispose() -> void:
 	before_menu = Callable()
 	if media != null: media.dispose()
+	if media_preferences != null: media_preferences.dispose()
 	if presentation != null:
 		presentation.dispose()
 	definitions.dispose()

@@ -16,6 +16,10 @@ var _render_pending := false
 var _prompt_owners: Dictionary = {}
 var _startup_route := ""
 var _synchronizing_startup := false
+var music_playback: Node
+var video_playback: Control
+var ambience_requests := preload("res://scripts/av/ambience_requests.gd").new()
+var _media_shutdown_started := false
 
 func _init(shell: Control) -> void:
 	host = shell
@@ -57,6 +61,21 @@ func schedule_render() -> void:
 		host.call_deferred("render")
 
 func synchronize_startup() -> void:
+	if host.controller.providers.get("media") != null and music_playback == null:
+		music_playback = preload("res://scripts/av/music_playback.gd").new()
+		music_playback.media = host.controller.providers.media
+		music_playback.core = core
+		music_playback.preferences = host.controller.providers.media_preferences
+		host.add_child(music_playback)
+		core.retiring.connect(music_playback.retire_scope)
+		video_playback = preload("res://scripts/av/video_playback.gd").new()
+		video_playback.media = host.controller.providers.media
+		video_playback.core = core
+		video_playback.windows = windows
+		video_playback.preferences = host.controller.providers.media_preferences
+		video_playback.ambience = ambience_requests
+		host.add_child(video_playback)
+		core.retiring.connect(video_playback.retire_scope)
 	if host.controller.providers.get("preferences") != null and core.preferences == null:
 		core.preferences = host.controller.providers.preferences
 		core.preferences.register_boundary("next_session", core)
@@ -83,6 +102,8 @@ func return_to_setup() -> void:
 			setup_pending = false
 
 func dispose() -> void:
+	if is_instance_valid(video_playback): video_playback.free()
+	if is_instance_valid(music_playback): music_playback.free()
 	_prompt_owners.clear()
 	for connection: Dictionary in windows.changed.get_connections():
 		windows.changed.disconnect(connection.callable)
@@ -201,7 +222,7 @@ func render() -> void:
 	if host.controller.providers.get("presentation") != null:
 		host.show_language_settings()
 	restore_focus()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN if windows.top().get("data",{}).get("cursor")=="hidden" else Input.MOUSE_MODE_VISIBLE
 
 func restore_focus() -> void:
 	# Stock safe initial focus; restored identity is independent of the old Control.
@@ -246,6 +267,33 @@ func render_settings(top: Dictionary) -> void:
 	host.button("Retry Save", func():
 		message = "Saved." if host.controller.settings.save_accepted().ok else "Accepted but not saved."
 		schedule_render())
+	var banks: RefCounted = host.controller.providers.get("media_preferences")
+	if banks != null:
+		host.label("MIDI instrument bank (applies to the next playback)")
+		var selector := OptionButton.new()
+		var choices: Array = banks.choices()
+		var current := str(host.controller.settings.effective.get(banks.SETTING,""))
+		for index in choices.size():
+			selector.add_item(choices[index].label)
+			var reference := "" if choices[index].provider.is_empty() else JSON.stringify({"provider":choices[index].provider,"key":choices[index].key})
+			if reference==current: selector.select(index)
+		host.panel.add_child(selector)
+		host.button("Apply MIDI Bank",func():
+			var choice: Dictionary = choices[selector.selected]
+			var checked: Dictionary = banks.select_bank(choice.provider,choice.key)
+			message = "Bank selected for the next MIDI request." if checked.ok else checked.get("reason","Accepted bank preference is unsaved; Retry Save.")
+			schedule_render())
+		host.label("Cinematic skip input (startup and death always accept any fresh press)")
+		var skip_selector := OptionButton.new()
+		var skip_values := ["authored","any","skip","back"]
+		for value: String in skip_values:
+			skip_selector.add_item(value.capitalize())
+			if value==host.controller.settings.effective.get(banks.SKIP_SETTING,"authored"): skip_selector.select(skip_selector.item_count-1)
+		host.panel.add_child(skip_selector)
+		host.button("Apply Cinematic Skip",func():
+			var checked: Dictionary = host.controller.settings.apply({banks.SKIP_SETTING:skip_values[skip_selector.selected]})
+			message = "Cinematic skip preference saved." if checked.ok else "Accepted but unsaved; Retry Save."
+			schedule_render())
 	host.button("Cancel / Back", func():
 		if windows.close(top.id).kind == "blocked":
 			windows.open("discard_settings", core.snapshot().session, {"required_choice": true}))
@@ -286,14 +334,40 @@ func advance_shutdown() -> void:
 		var saved: bool = host.controller.settings == null or host.controller.settings.save_accepted().ok
 		if saved and host.controller.providers.get("preferences") != null:
 			saved = host.controller.providers.preferences.save_all()
-		if saved:
-			quit_phase = "ready"
-			host.get_tree().quit()
+		if saved: finish_quit()
 	schedule_render()
+
+func finish_quit() -> void:
+	if is_instance_valid(music_playback):
+		if not _media_shutdown_started:
+			_media_shutdown_started = true
+			quit_phase = "media_cleanup"
+			host.call_deferred("settle_media_shutdown")
+	else:
+		quit_phase = "ready"
+		host.get_tree().quit()
+
+func settle_media_shutdown() -> void:
+	var video_checked := {"ok":true}
+	if is_instance_valid(video_playback): video_checked = await video_playback.shutdown()
+	var checked: Dictionary = await music_playback.shutdown()
+	if checked.ok and video_checked.ok:
+		quit_phase = "ready"
+		host.get_tree().quit()
+	else:
+		_media_shutdown_started = false
+		quit_phase = "media_cleanup_failed"
+		message = checked.reason if not checked.ok else video_checked.reason
+		schedule_render()
 
 func render_quit() -> void:
 	host.label("Quit · " + quit_phase, 24)
 	match quit_phase:
+		"media_cleanup":
+			host.label("Releasing media playback.")
+		"media_cleanup_failed":
+			host.label(message)
+			host.button("Retry Media Cleanup",advance_shutdown)
 		"waiting":
 			host.label("Finishing current operation. No write or replacement will be forcibly interrupted.")
 			host.button("Cancel Quit", cancel_quit)
@@ -306,8 +380,8 @@ func render_quit() -> void:
 		"cleanup_failed":
 			host.label("Cleanup failed. Quit does not mean cleanup succeeded.")
 			host.button("Retry Cleanup", func(): core.retry_cleanup(); advance_shutdown())
-			host.button("Quit after cleanup failure", func(): host.get_tree().quit())
+			host.button("Quit after cleanup failure", finish_quit)
 		"preferences":
 			host.label("Preferences could not be saved. Quitting without saving may lose accepted changes.")
 			host.essential_button("retry", advance_shutdown)
-			host.button("Quit Without Saving Preferences", func(): host.get_tree().quit())
+			host.button("Quit Without Saving Preferences", finish_quit)

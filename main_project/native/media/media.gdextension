@@ -1,0 +1,26 @@
+[configuration]
+entry_symbol = "media_library_init"
+compatibility_minimum = "4.5"
+reloadable = false
+
+[libraries]
+windows.debug.x86_64 = "res://native/media/bin/media_windows.dll"
+windows.release.x86_64 = "res://native/media/bin/media_windows.dll"
+
+[dependencies]
+windows.x86_64 = {
+"res://native/media/bin/media-runtime.sha256": "",
+"res://native/media/bin/libfluidsynth-3.dll": "",
+"res://native/media/bin/libglib-2.0-0.dll": "",
+"res://native/media/bin/libgobject-2.0-0.dll": "",
+"res://native/media/bin/libgthread-2.0-0.dll": "",
+"res://native/media/bin/libinstpatch-2.dll": "",
+"res://native/media/bin/libintl-8.dll": "",
+"res://native/media/bin/SDL3.dll": "",
+"res://native/media/bin/sndfile.dll": "",
+"res://native/media/bin/avformat-62.dll": "",
+"res://native/media/bin/avcodec-62.dll": "",
+"res://native/media/bin/avutil-60.dll": "",
+"res://native/media/bin/swscale-9.dll": "",
+"res://native/media/bin/swresample-6.dll": ""
+}

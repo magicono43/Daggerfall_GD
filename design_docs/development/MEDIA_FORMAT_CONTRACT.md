@@ -68,3 +68,34 @@ The default SF2 bank is an implementation asset selection under AV-012. Its mani
 ## Required fixture matrix
 
 Run successful structural decoding and rejected/truncated-input cases for every profile. Test a known-orientation textured triangle, PNG alpha and palette, WAV sample extrema, stereo channel separation, MIDI tempo change, video aspect and independent playback instances. Assert source attribution, invalid-selected versus absent behavior, candidate cache invalidation and independent mutable material resources. Separate headless adapter assertions from rendered/audio playback checks under IMP-003.
+
+## IMP-008 increment-3 concrete implementation
+
+The Windows implementation now uses the project-owned typed C++ GDExtension in
+`main_project/native/media`, with FluidSynth 2.4.7 and the pinned FFmpeg
+`n8.1.3-39-g660b5aa7db-20261121` LGPL-shared build. The dependency lock records
+archive/DLL hashes, compiler/ABI selections and actual library versions. Notices,
+enabled decoder/demuxer lists, PE import closure, source revisions and build
+recipes are retained alongside it and accompany verified exports. The accepted
+storage GDExtension ABI is unchanged; no machine-wide package is installed.
+
+The application default is pinned GeneralUser GS 2.0.3, with its complete license
+and the author's sample-origin caveat retained. Native admission enumerates all
+128 GM melodic programs and GM percussion and synthesizes the actual accepted D1
+HMI conversion. A project-authored sine SF2 remains only an alternate fixture.
+
+The concrete checked profiles and lifecycle APIs are documented in
+[native playback](../../main_project/scripts/av/NATIVE_PLAYBACK.md) and
+[native build/provenance](../../main_project/native/media/README.md). Modern
+fixtures cover all required codec combinations, video-only, BT.709 limited/full,
+1280×720 with SAR 3:4 and 44.1 kHz AAC resampling. Actual MIDI callback positions,
+independent cursors, source PTS, decoded colors/PCM clicks, framed presentation,
+scoped input and worker/mixer disposal have separate versioned inventories.
+
+Increment-2 unavailable-backend checks are preserved as explicit controlled
+unavailable-provider cases; their accepted counts are unchanged. Native success
+and physical DLL/bank faults use separate inventories and independent headless,
+rendered and debug/release export selections. See
+[increment-3 evidence](evidence/IMP-008-increment-3-2026-11-21.md).
+These bounded consumers do not close real IMP-024/035, WORLD/SAVE, parent IMP-008
+or M1 integration/acceptance gates.

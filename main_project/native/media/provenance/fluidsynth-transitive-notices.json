@@ -1,0 +1,23 @@
+[
+  {
+    "source_tree": "5ae9936f267f14c296182cbf1786d8a96f2c7f41",
+    "source": "glib/pcre/COPYING",
+    "url": "https://api.github.com/repos/GNOME/glib/git/blobs/58eed01b61d19d7a33d8dad05d5ffaf7fbcf9385",
+    "sha256": "17abe1dbb92b21ab173cf9757dd57b0b15cd8d863b2ccdef635fdbef03077fb0",
+    "git_blob": "58eed01b61d19d7a33d8dad05d5ffaf7fbcf9385"
+  },
+  {
+    "source_tree": "dd283ceb46d76b75128fcd52615454aa44de9496",
+    "source": "gettext-runtime/intl/COPYING.LIB-2.1",
+    "url": "https://api.github.com/repos/autotools-mirror/gettext/git/blobs/c2c87d69256345eb6a287aaac5645fc6185ea885",
+    "sha256": "3fe5361f24b7c49ba12911c08f5a33f9cb18871d95d9fb881f5b8a4793e04288",
+    "git_blob": "c2c87d69256345eb6a287aaac5645fc6185ea885"
+  },
+  {
+    "source_tree": "dd283ceb46d76b75128fcd52615454aa44de9496",
+    "source": "gettext-runtime/intl/libgnuintl.h.in",
+    "url": "https://api.github.com/repos/autotools-mirror/gettext/git/blobs/4176b44b77f8dc89cbfbc53e200a42bc929d484d",
+    "sha256": "1f45b4ce033432e2d089f458be74f130bdc588809f39d90402c131ab2d2fd9a8",
+    "git_blob": "4176b44b77f8dc89cbfbc53e200a42bc929d484d"
+  }
+]

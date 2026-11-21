@@ -1,0 +1,137 @@
+{
+	"domain": "media.assets",
+	"entries": [
+		{
+			"id": "native-midi",
+			"value": {
+				"file": "sequence.mid.bytes",
+				"kind": "export",
+				"profile": "midi-v1",
+				"schema": "media-declarations-v1",
+				"type": "midi"
+			}
+		},
+		{
+			"id": "native-bank",
+			"value": {
+				"file": "sine.sf2.bytes",
+				"kind": "export",
+				"profile": "sf2-v1",
+				"schema": "media-declarations-v1",
+				"type": "bank"
+			}
+		},
+		{
+			"id": "native-recording",
+			"value": {
+				"file": "clicks.wav.bytes",
+				"kind": "export",
+				"profile": "pcm-wav-v1",
+				"schema": "media-declarations-v1",
+				"type": "audio"
+			}
+		},
+		{
+			"id": "native-vp8-vorbis",
+			"value": {
+				"file": "vp8-vorbis.bytes",
+				"kind": "export",
+				"profile": "webm-v1",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "native-vp8-opus",
+			"value": {
+				"file": "vp8-opus.bytes",
+				"kind": "export",
+				"profile": "webm-v1",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "native-vp8-none",
+			"value": {
+				"file": "vp8-none.bytes",
+				"kind": "export",
+				"profile": "webm-v1",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "native-vp9-vorbis",
+			"value": {
+				"file": "vp9-vorbis.bytes",
+				"kind": "export",
+				"profile": "webm-v1",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "native-vp9-opus",
+			"value": {
+				"file": "vp9-opus.bytes",
+				"kind": "export",
+				"profile": "webm-v1",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "native-vp9-none",
+			"value": {
+				"file": "vp9-none.bytes",
+				"kind": "export",
+				"profile": "webm-v1",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "native-h264-aac",
+			"value": {
+				"file": "h264-aac.bytes",
+				"kind": "export",
+				"profile": "mp4-v1",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "native-h264-none",
+			"value": {
+				"file": "h264-none.bytes",
+				"kind": "export",
+				"profile": "mp4-v1",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "native-h264-anamorphic",
+			"value": {
+				"file": "h264-anamorphic.bytes",
+				"kind": "export",
+				"profile": "mp4-v1",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		},
+		{
+			"id": "native-vp9-full",
+			"value": {
+				"file": "vp9-full.bytes",
+				"kind": "export",
+				"profile": "webm-v1",
+				"schema": "media-declarations-v1",
+				"type": "video"
+			}
+		}
+	],
+	"operation": "add",
+	"path": "exports"
+}

@@ -36,6 +36,8 @@ func start(inputs: Dictionary, fallback := false, reset := false) -> Dictionary:
 		settings = Settings.new(storage.adapter, checked.context.settings)
 		if providers.get("presentation") != null:
 			providers.presentation.declare_settings(settings)
+		if providers.get("media_preferences") != null:
+			providers.media_preferences.declare_settings(settings)
 	checked = settings.initialize(reset)
 	if not checked.ok:
 		return set_route("settings_recovery", checked)
