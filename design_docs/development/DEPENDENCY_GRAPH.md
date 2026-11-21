@@ -1,5 +1,14 @@
 # Implementation dependencies
 
+**IMP-008 assigned implementation accepted / IMP-009 handoff, 2026-11-21:** All
+three approved IMP-008 implementation increments are delivered and user-accepted
+([evidence](evidence/IMP-008-increment-3-2026-11-21.md)). Its assigned prerequisite
+delivery is available to dependent tasks; all their other prerequisites and real
+integration checks still apply. No downstream task is automatically authorized
+or fully accepted. IMP-009's listed dependency remains IMP-005, already accepted;
+its [increment-1 handoff](handoffs/IMP-009-INCREMENT-1-PROMPT.txt) is preparation
+only until issued. The dependency edges below are unchanged.
+
 **Final IMP-006 acceptance, 2026-11-20:** The user confirmed increment 3 complete;
 all three assigned increments are accepted ([evidence](evidence/IMP-006-increment-3-2026-11-20.md)).
 IMP-014 now has all listed prerequisites delivered. IMP-016/017/032 clear their

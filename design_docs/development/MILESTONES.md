@@ -1,5 +1,14 @@
 # Milestones and validation checkpoints
 
+**IMP-008 increment 3 accepted / IMP-009 handoff, 2026-11-21:** All three approved
+media implementation increments are user-accepted, including native media at
+`7d88e99` ([evidence](evidence/IMP-008-increment-3-2026-11-21.md)). No further
+assigned IMP-008 increment is outstanding. Real IMP-013/024/035, WORLD/SAVE,
+shared-feature and M1 acceptance gates remain open. The
+[IMP-009 increment-1 prompt](handoffs/IMP-009-INCREMENT-1-PROMPT.txt) is prepared;
+its IMP-005 prerequisite is accepted. No IMP-009 implementation starts here.
+Earlier pending-acceptance notes below are historical.
+
 **IMP-008 increment 3 execution, 2026-11-21:** Native media and bounded consumers
 are implemented and pass Windows export/fault/regression verification. See
 [execution evidence](evidence/IMP-008-increment-3-2026-11-21.md). Independent native

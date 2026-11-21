@@ -1,5 +1,14 @@
 # Implementation readiness
 
+**IMP-008 increment 3 accepted / IMP-009 handoff, 2026-11-21:** The user accepted
+increment 3 (`7d88e99`); all three approved media implementation increments are
+now delivered and user-accepted. See [accepted evidence](evidence/IMP-008-increment-3-2026-11-21.md).
+The assigned implementation is complete; later real-owner/shared-feature/M1
+checks remain open. IMP-009 requires accepted IMP-005, not those later media
+integrations. Its [increment-1 prompt](handoffs/IMP-009-INCREMENT-1-PROMPT.txt)
+starts only actor/character input readers when issued; no implementation starts
+with this handoff preparation. Earlier pending-acceptance notes are historical.
+
 **IMP-008 increment 3 execution, 2026-11-21:** The handoff was issued and native
 MIDI/SF2/video implementation is Windows-verified and awaits user review. Independent
 344/374 native inventories plus 11 reload checks, debug/release exports, DLL/PCK-bank

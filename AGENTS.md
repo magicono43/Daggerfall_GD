@@ -49,6 +49,7 @@ Start with the assigned `design_docs/development/tasks/IMP-NNN.md`. Read its lin
 - Assert rejected, interrupted, repeated and restored outcomes as specified. Record fixture/build identity, expected/actual results, and unavailable or skipped checks.
 - Controlled providers verify interfaces. Milestone acceptance requires the named real integrations. Never mark unverified functionality complete or count an unavailable required check as passing.
 - Report implemented scope, verification evidence, remaining integration obligations and blockers.
+- Keep `.runs` small: after verification, preserve compact reports/logs and necessary reviewed captures, then remove disposable copied projects, exports, dependency copies and caches. A report reference does not justify retaining its entire build. Retain a full build only for an active, concrete debugging/review need, with a recorded expiry; review total retention above 2 GiB. Follow [RUN_ARTIFACT_CLEANUP.md](design_docs/development/RUN_ARTIFACT_CLEANUP.md), protect unique inputs and active roots, and record cleanup.
 
 ## Documentation and clarification
 

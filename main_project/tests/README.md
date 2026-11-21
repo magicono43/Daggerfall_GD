@@ -1,5 +1,12 @@
 # Shared verification — IMP-003 / DEV-014
 
+For safe cleanup of accumulated disposable runs, follow
+[RUN_ARTIFACT_CLEANUP.md](../../design_docs/development/RUN_ARTIFACT_CLEANUP.md).
+Preserve compact reports/logs and necessary captures, not entire copied projects
+or exports just because an evidence document references the run. Remove disposable
+builds/caches after verification; review total retention above 2 GiB. Runners
+currently retain their outputs on exit, so agents must perform this maintenance.
+
 IMP-008 increment 1 adds independent `media` / `media-v1` selection:
 
 ```powershell

@@ -97,5 +97,7 @@ unavailable-provider cases; their accepted counts are unchanged. Native success
 and physical DLL/bank faults use separate inventories and independent headless,
 rendered and debug/release export selections. See
 [increment-3 evidence](evidence/IMP-008-increment-3-2026-11-21.md).
-These bounded consumers do not close real IMP-024/035, WORLD/SAVE, parent IMP-008
-or M1 integration/acceptance gates.
+The user accepted increment 3 on 2026-11-21; all three approved IMP-008
+implementation increments are now delivered and accepted. These bounded consumers
+do not close real IMP-013/024/035, WORLD/SAVE, shared-feature or M1 integration gates.
+The earlier pending-verification statements retain the original planning context.

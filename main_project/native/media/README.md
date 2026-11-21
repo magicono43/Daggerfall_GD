@@ -1,7 +1,8 @@
 # Windows native media boundary — IMP-008 increment 3
 
-Implemented and Windows-verified for the concrete increment-3 inventories.
-User review/acceptance and the named real-owner/IMP-008/M1 gates remain open.
+Implemented, Windows-verified and user-accepted on 2026-11-21 for the concrete
+increment-3 inventories. All three approved IMP-008 implementation increments
+are accepted; named real-owner/shared-feature and M1 integration gates remain open.
 
 The project-owned C++ extension uses the existing vendored official Godot C ABI
 header, while leaving `WindowsStorageLease` unchanged. Its typed Variant interface
