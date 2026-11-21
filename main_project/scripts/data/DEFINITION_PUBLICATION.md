@@ -1,5 +1,14 @@
 # Definition publication — IMP-005 increment 3
 
+IMP-008 increment 2 adds the trusted [media source/preparation hooks](MEDIA_REPLACEMENTS.md)
+within this same transaction. Every selected export's actual bytes validate before
+reference validation/history; source-qualified resources prepare synchronously.
+Media-only canonicalization and provider-qualified logical export paths preserve
+the common whole-file/provenance/omission rules. Final DATA publication invokes no
+adapter callback; CORE assigns prepared media after the durable step. With this
+adapter enabled, checked `Overrides/media/` payloads are retained separately from
+JSON contributions at first intake. Other loose intake remains unchanged.
+
 IMP-008 increment 1 extends the separate classic reader registry with checked
 loose image/texture/palette/VID formats and typed mesh/sound/HMI decoding, described
 in [MEDIA_DECODERS.md](MEDIA_DECODERS.md). It adds no replacement contribution

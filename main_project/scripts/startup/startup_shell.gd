@@ -44,6 +44,11 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
+	if fixture.is_empty() or fixture.get("mode") in ["replacements","replacements_reload"]:
+		var registered: Dictionary = controller.providers.enable_media_replacements()
+		if not registered.ok:
+			label("Media adapter registration failed: " + registered.reason)
+			return
 	if fixture.is_empty() or fixture.get("mode") in ["translation-preferences", "translation-preferences_reload"]:
 		var registered: Dictionary = controller.providers.enable_mod_preferences()
 		if not registered.ok:
@@ -69,6 +74,8 @@ func _ready() -> void:
 			return
 	if fixture.get("mode") in ["publication", "publication_reload"]:
 		preload("res://tests/publication_fixture.gd").configure(self, fixture)
+	if fixture.get("mode") in ["replacements","replacements_reload"]:
+		preload("res://tests/replacement_fixture.gd").configure(self)
 	if fixture.get("mode") in ["formula","formula-fault"]:
 		preload("res://tests/formula_fixture.gd").configure(self,fixture)
 	controller.start(inputs)
@@ -389,6 +396,10 @@ func run_fixture() -> void:
 		script_path = "res://tests/classic_cases.gd"
 	elif fixture.get("mode") == "media":
 		script_path = "res://tests/media_cases.gd"
+	elif fixture.get("mode") == "replacements":
+		script_path = "res://tests/replacement_cases.gd"
+	elif fixture.get("mode") == "replacements_reload":
+		script_path = "res://tests/replacement_reload_cases.gd"
 	elif fixture.get("mode") == "mods":
 		script_path = "res://tests/mod_cases.gd"
 	elif fixture.get("mode") == "mods_reload":
@@ -425,7 +436,7 @@ func run_fixture() -> void:
 		script_path = "res://tests/publication_reload_cases.gd"
 	var suite = load(script_path).new()
 	var checks: Dictionary = await suite.run(self, fixture)
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload"] else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

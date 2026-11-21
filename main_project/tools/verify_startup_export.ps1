@@ -11,6 +11,7 @@ param(
     [switch]$LocaleFonts,
     [switch]$TranslationPreferences,
     [switch]$ClassicMedia,
+    [switch]$MediaReplacements,
     [switch]$Randomness,
     [switch]$RandomnessSession,
     [switch]$Formula,
@@ -43,6 +44,7 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
     }
 }
 try {
+if ($MediaReplacements) { $report.fixture = 'replacements-v1'; $report.reproduction.arguments.MediaReplacements = $true }
 if ($ClassicMedia) { $report.fixture = 'media-v1'; $report.reproduction.arguments.ClassicMedia = $true }
 if ($ClassicMedia -and !$ClassicSource) { throw 'Classic media checks require an explicit real -ClassicSource' }
 if ($TranslationPreferences) { $report.fixture = 'translation-preferences-v1'; $report.reproduction.arguments.TranslationPreferences = $true }
@@ -50,8 +52,8 @@ if ($LocaleFonts) { $report.fixture = 'locale-fonts-v1'; $report.reproduction.ar
 if ($StructuredText) { $report.fixture = 'structured-text-v1'; $report.reproduction.arguments.StructuredText = $true }
 if ($TextCatalog) { $report.fixture = 'text-v1'; $report.reproduction.arguments.TextCatalog = $true }
 if ($FormulaExtraError -and !$FormulaFault) { throw 'Additional formula errors require the explicit fault scenario' }
-if (($TranslationPreferences -or $LocaleFonts -or $StructuredText -or $TextCatalog -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
-if (@($TranslationPreferences,$LocaleFonts,$StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
+if (($MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $StructuredText -or $TextCatalog -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
+if (@($MediaReplacements,$ClassicMedia,$TranslationPreferences,$LocaleFonts,$StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -106,6 +108,7 @@ foreach ($mode in @('headless','rendered')) {
     if ($StructuredText) { $fixture.mode = 'structured-text'; $fixture.fixture = 'structured-text-v1' }
     if ($LocaleFonts) { $fixture.mode = 'locale-fonts'; $fixture.fixture = 'locale-fonts-v1' }
     if ($TranslationPreferences) { $fixture.mode = 'translation-preferences'; $fixture.fixture = 'translation-preferences-v1' }
+    if ($MediaReplacements) { $fixture.mode = 'replacements'; $fixture.fixture = 'replacements-v1' }
     if ($ClassicMedia) { $fixture.mode = 'media'; $fixture.fixture = 'media-v1' }
     if ($TextCatalog) {
         $fixture.mode = 'text'
@@ -129,8 +132,8 @@ foreach ($mode in @('headless','rendered')) {
     if ($mode -eq 'headless') { $arguments = @('--headless') + $arguments }
     & "$build/Startup.console.exe" @arguments *> "$run/$mode.log"
     $engineExit = $LASTEXITCODE
-    if (($TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) -and $engineExit -eq 0) {
-        $fixture.mode = if ($TranslationPreferences) { 'translation-preferences_reload' } elseif ($LocaleFonts) { 'locale-fonts_reload' } elseif ($RandomnessSession) { 'randomness-session_reload' } elseif ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
+    if (($MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) -and $engineExit -eq 0) {
+        $fixture.mode = if ($MediaReplacements) { 'replacements_reload' } elseif ($TranslationPreferences) { 'translation-preferences_reload' } elseif ($LocaleFonts) { 'locale-fonts_reload' } elseif ($RandomnessSession) { 'randomness-session_reload' } elseif ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
         if ($LocaleFonts) { $fixture.sandbox = "$sandbox/relaunch".Replace('\','/') }
         $fixture | ConvertTo-Json -Depth 10 | Set-Content "$sandbox/reload-fixture.json"
         $reloadArguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/reload-fixture.json")
@@ -140,7 +143,8 @@ foreach ($mode in @('headless','rendered')) {
         $reloadReport = if ($LocaleFonts) { "$sandbox/relaunch/reload-result.json" } else { "$sandbox/reload-result.json" }
         if (!(Test-Path $reloadReport)) { throw 'Missing exported fresh-process result' }
         $reloadResult = Get-Content $reloadReport -Raw | ConvertFrom-Json
-        $reloadExpected = if ($TranslationPreferences -or $LocaleFonts) { 10 } elseif ($RandomnessSession) { 15 } else { 8 }
+        if ($MediaReplacements -and !(Test-ReplacementInventory $reloadResult 'reload')) { throw 'Incomplete exported replacement reload terminal inventory' }
+        $reloadExpected = if ($MediaReplacements -or $TranslationPreferences -or $LocaleFonts) { 10 } elseif ($RandomnessSession) { 15 } else { 8 }
         if ($null -eq $reloadResult.ok -or $reloadResult.count -ne $reloadExpected -or $reloadResult.checks.Count -ne $reloadExpected -or !$reloadResult.engine -or
             ($mode -eq 'rendered' -and $reloadResult.display -eq 'headless') -or
             !(Test-ScriptDiagnostics @("$run/$mode-reload.log") '' $reloadResult)) { throw 'Exported fresh-process restore incomplete' }
@@ -159,6 +163,7 @@ foreach ($mode in @('headless','rendered')) {
     }
     $result = Get-Content "$sandbox/result.json" -Raw | ConvertFrom-Json
     $report.engine = $result.engine
+    if ($MediaReplacements -and !(Test-ReplacementInventory $result $mode)) { throw 'Incomplete exported replacement terminal inventory' }
     if ($ClassicMedia -and !(Test-MediaInventory $result $mode)) { throw 'Incomplete or changed exported media terminal inventory' }
     $report.native_sha256 = (Get-FileHash "$project/native/storage/bin/storage_windows.dll" ).Hash
     $report.executable_sha256 = (Get-FileHash "$build/Startup.exe" ).Hash
@@ -173,7 +178,7 @@ foreach ($mode in @('headless','rendered')) {
         $after[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
-    $expected = if ($ClassicMedia) { if ($mode -eq 'headless') {119} else {136} } elseif ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    $expected = if ($MediaReplacements) { if ($mode -eq 'headless') {168} else {173} } elseif ($ClassicMedia) { if ($mode -eq 'headless') {119} else {136} } elseif ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
     $formulaExpected = if ($FormulaFault) { 18 } elseif ($mode -eq 'headless') { 82 } else { 84 }
     if (($Formula -or $FormulaFault) -and $result.count -ne $formulaExpected) { throw 'Incomplete formula export inventory' }
     $sessionExpected = if ($mode -eq 'headless') { 115 } else { 116 }
@@ -182,7 +187,7 @@ foreach ($mode in @('headless','rendered')) {
     if ($ClassicSource -and !$Formula -and !$FormulaFault -and $result.count -ne $expected) { throw 'Incomplete owner export result' }
     $checks += @{ scenario = "exported-$mode"; actual = 'pass'; assertions = $result.count; process_exit = $engineExit
         source_before = $before; source_after = $after; result = "$sandbox/result.json" }
-    if ($TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) { $checks[-1].reload = @{ assertions = $reloadExpected; process_exit = $reloadExit; result = $reloadReport } }
+    if ($MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) { $checks[-1].reload = @{ assertions = $reloadExpected; process_exit = $reloadExit; result = $reloadReport } }
     $report.checks = $checks
 }
 $report.ok = $true

@@ -121,6 +121,8 @@ func show_content() -> void:
 	if not controller.real_content_pipeline():
 		return
 	shell.label("Definitions · validate before entry", 24)
+	if not owner.locked:
+		shell.button("Content Diagnostics", func(): preload("res://scripts/mod/content_diagnostics.gd").show(shell))
 	var candidate: Dictionary = controller.prepared_content
 	var hooks: Dictionary = candidate.get("formulas",{})
 	var offered: Dictionary = {}

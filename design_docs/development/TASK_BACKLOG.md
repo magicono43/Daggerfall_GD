@@ -1,5 +1,22 @@
 # Implementation backlog
 
+**IMP-008 increment 2 execution, 2026-11-20:** The user issued the increment-2
+handoff, authorizing only non-native media replacement/export resolution,
+resource ownership/cache and pre-menu Content Diagnostics. The implementation
+and verification completed on 2026-11-21 are recorded in [execution evidence](evidence/IMP-008-increment-2-2026-11-20.md)
+and the [concrete contract](../../main_project/scripts/data/MEDIA_REPLACEMENTS.md).
+User review/acceptance remains pending. Native playback/increment 3 has not begun;
+no parent/shared-feature/downstream prerequisite or real-owner/M1 gate clears.
+The earlier handoff and acceptance notes below remain historical.
+
+**IMP-008 increment 1 accepted / increment 2 handoff, 2026-11-20:** The user
+explicitly accepted increment 1, committed at `0cd8d56`, and requested the
+[increment-2 prompt](handoffs/IMP-008-INCREMENT-2-PROMPT.txt) for another chat.
+See [acceptance evidence](evidence/IMP-008-increment-1-2026-11-20.md). Preparing the
+prompt starts no implementation; issuing it authorizes increment 2 only.
+Parent/shared-feature, unsupported-format, native playback and real-owner/M1
+gates remain open; no downstream prerequisite edge is automatically cleared.
+
 **IMP-008 increment 1 execution, 2026-11-20:** The user issued the prepared handoff
 and explicitly authorized classic adapters only. The bounded supported inventory
 is implemented (119 headless / 136 rendered media checks; debug/release media

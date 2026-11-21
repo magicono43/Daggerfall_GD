@@ -183,6 +183,8 @@ func commit_content_menu(profile_choice: String) -> Dictionary:
 	if providers.presentation != null:
 		providers.presentation.commit(prepared_content.ticket,providers.definitions,settings)
 	providers.commit_preferences()
+	if providers.media != null:
+		providers.media.commit_candidate()
 	mods.lock_configuration(content.plan, content.packages)
 	published = content.duplicate(true)
 	published.mods = content.packages.values().map(func(package: Dictionary): return {"id": package.id, "version": package.version})

@@ -145,6 +145,9 @@ func prepare(mods: RefCounted) -> Dictionary:
 	_started = true
 	_serial += 1
 	_candidate.clear()
+	for registered: Dictionary in _adapters.values():
+		if registered.adapter.has_method("begin_candidate"):
+			registered.adapter.begin_candidate(mods, _serial, self)
 	var plan: Dictionary = mods.validate_dependencies()
 	if not plan.ok:
 		return failure("dependencies", "packages", "A validated MOD plan is required.")
@@ -180,7 +183,19 @@ func prepare(mods: RefCounted) -> Dictionary:
 		var catalog := collect_loose(mods.adapter, loose_root)
 		if not catalog.ok:
 			catalog.reason += " Repair loose overrides and restart; live adoption is unsupported."
-		_loose = {"ok": catalog.ok, "entries": source_entries(mods.adapter, "@loose", loose_root, catalog.files) if catalog.ok else [], "failure": catalog}
+		var declarations: Array = []
+		var media := {}
+		if catalog.ok:
+			for file: String in catalog.files:
+				var normalized := Paths.relative_path(file)
+				if _adapters.has("media.assets") and normalized.ok and normalized.path.begins_with("media/") and normalized.path.get_extension() in ["png","wav","ogg","glb","mid","sf2","webm","mp4"]:
+					if media.has(normalized.path):
+						catalog = failure("ambiguous_path",loose_root,"Ambiguous normalized loose media path; repair and restart: " + normalized.path)
+						break
+					media[normalized.path] = read_file(mods.adapter,loose_root,file)
+				else:
+					declarations.append(file)
+		_loose = {"ok": catalog.ok, "entries": source_entries(mods.adapter, "@loose", loose_root, declarations) if catalog.ok else [], "media":media, "failure": catalog}
 	if not _loose.ok:
 		return _loose.failure.duplicate(true)
 	entries.append_array(_loose.entries.duplicate(true))
@@ -220,6 +235,9 @@ func prepare(mods: RefCounted) -> Dictionary:
 		"reason": "Definition validation failed; fix/remove or explicitly omit a listed contribution." if not issues.is_empty() else "Definitions validated; actual menu entry is still required."}
 	for id: String in plan.order:
 		_candidate.packages[id] = eligible[id].duplicate(true)
+	for registered: Dictionary in _adapters.values():
+		if registered.adapter.has_method("finish_candidate"):
+			registered.adapter.finish_candidate(resources, issues.is_empty())
 	return projection()
 
 func apply_contribution(base: Dictionary, bytes: PackedByteArray, source: Dictionary) -> Dictionary:
@@ -247,14 +265,20 @@ func apply_contribution(base: Dictionary, bytes: PackedByteArray, source: Dictio
 	var operation: String = str(contribution.get("operation", ""))
 	if not registered.declaration.operations.has(operation):
 		return failure("invalid", JSON.stringify(source), "Operation is not supported by this adapter: " + operation)
-	var key := domain + ":" + str(path.path)
+	var logical_path: String = path.path
+	if registered.adapter.has_method("resource_path"):
+		logical_path = registered.adapter.resource_path(logical_path,source.duplicate(true))
+	var key := domain + ":" + logical_path
 	var working := base.duplicate(true)
-	var previous: Dictionary = working.get(key, {"domain": domain, "path": path.path, "records": {}, "contributors": [], "winner": {}}).duplicate(true)
+	var previous: Dictionary = working.get(key, {"domain": domain, "path": logical_path, "records": {}, "contributors": [], "winner": {}}).duplicate(true)
 	var target: Dictionary = previous.duplicate(true)
 	if operation == "replace":
 		target.records = {}
 	var seen := {}
 	for entry in contribution.entries:
+		entry = entry.duplicate(true) if entry is Dictionary else entry
+		if entry is Dictionary and entry.get("id") is String and entry.get("value") is Dictionary and registered.adapter.has_method("record_id"):
+			entry.id = registered.adapter.record_id(entry.id,entry.value,logical_path)
 		if not entry is Dictionary or not entry.get("id") is String or not Paths.valid_id(entry.id) or not entry.get("value") is Dictionary or (operation != "patch" and seen.has(entry.id)):
 			return failure("invalid", key, "Entries require stable IDs/object values; add/replace IDs must be unique; deletion is unsupported.")
 		seen[entry.id] = true
@@ -275,6 +299,10 @@ func apply_contribution(base: Dictionary, bytes: PackedByteArray, source: Dictio
 		var fields: Dictionary = prior.fields.duplicate(true) if operation == "patch" else {}
 		for field: String in entry.value:
 			fields[field] = source.duplicate(true)
+		if registered.adapter.has_method("validate_source_record"):
+			var prepared: Dictionary = registered.adapter.validate_source_record(entry.id,value.duplicate(true),fields.duplicate(true),logical_path,source.duplicate(true),identity.duplicate(true))
+			if not prepared.ok:
+				return prepared
 		var contributors: Array = prior.contributors.duplicate(true) if exists else []
 		contributors.append(source.duplicate(true))
 		target.records[entry.id] = {"identity": identity, "value": value, "fields": fields, "contributors": contributors, "winner": source.duplicate(true)}
@@ -324,6 +352,11 @@ func commit(ticket: int) -> Dictionary:
 
 func projection() -> Dictionary:
 	return _candidate.duplicate(true)
+
+func read_loose_media(file: String) -> Dictionary:
+	var normalized := Paths.relative_path(file)
+	if not normalized.ok: return failure("invalid_path",file,"Unsupported loose media path.")
+	return _loose.get("media",{}).get(normalized.path,failure("missing",file,"Loose media was absent at initial intake; restart required.")).duplicate(true)
 
 func active() -> Dictionary:
 	return _active.duplicate(true)

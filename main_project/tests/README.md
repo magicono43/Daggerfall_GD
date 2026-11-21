@@ -760,3 +760,46 @@ authoring, IMP-030 production macros, production books/IME/languages and M1 acce
 remain separate gates. Source access, original diagnostic qualification, unsupported
 overrides, missing/truncated results, crashes and unrelated engine errors retain
 existing pass/fail/incomplete behavior.
+## IMP-008 increment 2 — media replacement scenario
+
+`-Suite replacements -Fixture replacements-v1 -ClassicSource <explicit ARENA2>`
+selects the independent scenario in either `verify_headless.ps1` or
+`verify_rendered.ps1`. `verify_startup_export.ps1 -MediaReplacements` selects the
+same scenario in a Windows debug/release PCK export; pass the explicit classic
+source. One export scenario per invocation is enforced. The selected shipped
+transport is raw JSON/`.bytes` under `res://content/media/verification/`, explicitly
+included in the PCK. Actual folder/ZIP replacement payloads use direct PNG/WAV
+files through MOD reads; loose media is retained under `Overrides/media/`.
+
+`replacement_inventory.json` freezes **168 headless / 173 rendered** primary IDs
+and **10 fresh-process** IDs. `qualify_replacement_inventory.ps1` verifies 15
+complete/missing/duplicate/unknown/wrong-fixture vectors across all three lists.
+The wrappers additionally reject missing reports/inputs, mismatched counts,
+crashes, unmatched engine/script errors and unavailable renderers. Existing media
+119/136, text 121/127, structured text 284/294, locale/fonts 419/441 + 10 reload,
+and translation/preferences 149/164 + 10 reload remain independent selections.
+
+Production requests cover known PNG palette/alpha/corners; PCM unsigned8/signed16,
+mono/stereo, exact channel/sample values and 22050/44100/48000 Hz; GLB source and
+engine geometry, transforms, material dependencies and nested mutation; Vorbis
+codec/rate/granule/duration, actual engine mix amplitude/end and independent audio
+instances; folder/ZIP/shipped/loose precedence, canonical aliases, direct-provider
+isolation, invalid earlier/selected contributions, late reads, duplicate exports,
+unsupported/wrong/truncated profiles, current/stale omission and required references.
+Order/profile changes rebuild winner/cache/diagnostics; retained resources survive
+rejection. Actual CORE menu persistence failure/interruption/retry and locks plus
+fresh-process saved-profile and loose-byte adoption run in isolated leased roots.
+
+Inspect `replacement-model.png`, `replacement-preview.png`,
+`content-diagnostics.png` and `replacement-recovery.png` in each rendered run/build.
+The diagnostics button is exercised with actual setup input. The visual camera is
+inspection-only, never a WORLD/MOVE conversion. The dummy headless renderer does
+not qualify node presentation; headless audio finite end uses explicit real
+AudioStreamPlayback mixing rather than assuming dummy audio-driver progress.
+Record an actual human listening observation for the half-second Vorbis tone;
+the user confirmed a clean brief tone in the increment-2 execution chat.
+
+See [the concrete supported/rejected resource contract](../scripts/data/MEDIA_REPLACEMENTS.md)
+and [execution evidence](../../design_docs/development/evidence/IMP-008-increment-2-2026-11-20.md).
+MIDI/SF2/general WebM/MP4 explicitly report backend-unavailable here. Real room,
+spatial audio, music/cinematic, WORLD/SAVE/native and M1 integrations stay open.

@@ -1,5 +1,12 @@
 # MOD package, profile and dependency contracts — IMP-005
 
+IMP-008 increment 2 adds real [media exports/replacements](../data/MEDIA_REPLACEMENTS.md)
+through checked `content` declarations, not previously retained manifest metadata.
+The pre-menu Content Diagnostics button shows the actual rebuilt candidate and
+its contributors/field winners. MOD's `discovery_generation` changes only on an
+explicit rescan and distinguishes media payload source adoption from order/profile
+edits. Existing dependency/profile/save/run-only/main-menu lock rules remain intact.
+
 IMP-007 increment 1 adds real versioned CSV entries to manifest `content` and
 loose DATA intake under [TEXT_CATALOGS.md](../data/TEXT_CATALOGS.md). MOD still
 owns package identity/order and checked reads; no CSV activates package code or

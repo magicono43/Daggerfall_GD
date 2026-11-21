@@ -9,7 +9,14 @@ var before_menu := Callable()
 var classic_preparations := 0 # Diagnostic count of explicit source preparation requests.
 var presentation: RefCounted # Explicitly enabled; legacy compositions keep their inventory.
 var preferences: RefCounted
+var media: RefCounted
 var _preference_stores: Dictionary = {}
+
+func enable_media_replacements() -> Dictionary:
+	var candidate := preload("res://scripts/data/media_replacements.gd").new()
+	var registered := register_content_adapter(candidate,"",[])
+	if registered.ok: media = candidate
+	return registered
 
 func enable_classic_media(required_sources: Array) -> bool:
 	# Required sources are an explicit consumer declaration, never directory discovery.
@@ -89,6 +96,7 @@ func discard_classic_candidate() -> void:
 
 func dispose() -> void:
 	before_menu = Callable()
+	if media != null: media.dispose()
 	if presentation != null:
 		presentation.dispose()
 	definitions.dispose()

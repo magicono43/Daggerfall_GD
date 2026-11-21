@@ -1,0 +1,177 @@
+{
+  "domain": "media.assets",
+  "path": "exports",
+  "operation": "add",
+  "entries": [
+    {
+      "id": "corners",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "image",
+        "file": "corners.png.bytes",
+        "profile": "png-v1"
+      }
+    },
+    {
+      "id": "palette",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "image",
+        "file": "palette.png.bytes",
+        "profile": "png-v1"
+      }
+    },
+    {
+      "id": "triangle",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "model",
+        "file": "triangle.glb.bytes",
+        "profile": "static-glb-v1"
+      }
+    },
+    {
+      "id": "tone",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "tone.ogg.bytes",
+        "profile": "vorbis-v1"
+      }
+    },
+    {
+      "id": "pcm-8-1-22050",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-8-1-22050.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "pcm-8-1-44100",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-8-1-44100.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "pcm-8-1-48000",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-8-1-48000.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "pcm-8-2-22050",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-8-2-22050.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "pcm-8-2-44100",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-8-2-44100.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "pcm-8-2-48000",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-8-2-48000.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "pcm-16-1-22050",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-16-1-22050.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "pcm-16-1-44100",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-16-1-44100.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "pcm-16-1-48000",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-16-1-48000.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "pcm-16-2-22050",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-16-2-22050.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "pcm-16-2-44100",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-16-2-44100.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "pcm-16-2-48000",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "audio",
+        "file": "pcm-16-2-48000.wav.bytes",
+        "profile": "pcm-wav-v1"
+      }
+    },
+    {
+      "id": "rgb",
+      "value": {
+        "schema": "media-declarations-v1",
+        "kind": "export",
+        "type": "image",
+        "file": "rgb.png.bytes",
+        "profile": "png-v1"
+      }
+    }
+  ]
+}

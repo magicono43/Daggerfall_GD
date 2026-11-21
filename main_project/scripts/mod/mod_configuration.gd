@@ -18,6 +18,7 @@ var _active_plan: Dictionary = {}
 var _active_packages: Dictionary = {}
 var status: Dictionary = {}
 var revision := 0
+var discovery_generation := 0 # Explicit rescan, distinct from plan/profile edits.
 var preview_serial := 0
 var sort_preview: Dictionary = {}
 var suppressions: Dictionary = {} # Profile -> declaration key -> source-bound digest.
@@ -110,6 +111,7 @@ func rescan() -> Dictionary:
 		return failure("Configuration is locked until application restart.")
 	invalidate_plan()
 	without_mods = false
+	discovery_generation += 1
 	discovery = Library.new(adapter).scan(root.path_join("Mods"))
 	# Discard stale decisions even if a temporarily unique candidate later duplicates.
 	var groups := grouped()

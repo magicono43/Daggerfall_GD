@@ -1,5 +1,9 @@
 # Classic media — IMP-008 increment 1
 
+The separately delivered [increment-2 media replacement contract](MEDIA_REPLACEMENTS.md)
+adds logical/package export selection and engine resources without broadening
+this accepted classic inventory, source-space units or HMI/VID timing policy.
+
 Versioned DATA values: `decoded-media-v1`. Source decoders are application GDScript,
 not native playback adapters. No library, compiler, backend, default sound bank,
 cache budget, package resolver or gameplay/world conversion is added.

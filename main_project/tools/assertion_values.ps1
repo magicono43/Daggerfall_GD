@@ -26,6 +26,16 @@ function Test-AssertionValue($Expected, $Actual) {
 }
 
 # Frozen IDs supplement assertion counts for the new classic media selection.
+function Test-ReplacementInventory($Result, [string]$Mode) {
+    $inventory = Get-Content -LiteralPath "$PSScriptRoot/../tests/replacement_inventory.json" -Raw | ConvertFrom-Json
+    if ($inventory.schema -cne 'media-replacement-inventory-v1' -or $Result.fixture -cne $inventory.fixture) { return $false }
+    $expected = @($inventory.$Mode)
+    $actual = @($Result.checks.scenario)
+    return $expected.Count -gt 0 -and $actual.Count -eq $expected.Count -and
+        @($actual | Select-Object -Unique).Count -eq $actual.Count -and
+        @(Compare-Object -ReferenceObject $expected -DifferenceObject $actual -CaseSensitive).Count -eq 0
+}
+
 function Test-MediaInventory($Result, [string]$Mode) {
     $inventory = Get-Content -LiteralPath "$PSScriptRoot/../tests/media_inventory.json" -Raw | ConvertFrom-Json
     if ($inventory.schema -cne 'classic-media-inventory-v1' -or $Result.fixture -cne $inventory.fixture) { return $false }

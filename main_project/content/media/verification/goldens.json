@@ -1,0 +1,82 @@
+{
+  "schema": "replacement-goldens-v1",
+  "license": "CC0-1.0; project-authored synthetic media",
+  "authoring": {
+    "SoundFile": "0.13.1",
+    "libsndfile": "1.2.2"
+  },
+  "expected": {
+    "corners_rgba": [
+      [
+        255,
+        0,
+        0,
+        255
+      ],
+      [
+        0,
+        255,
+        0,
+        128
+      ],
+      [
+        0,
+        0,
+        255,
+        255
+      ],
+      [
+        255,
+        255,
+        255,
+        0
+      ]
+    ],
+    "triangle_source_positions": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ],
+    "triangle_godot_indices": [
+      0,
+      2,
+      1
+    ],
+    "tone_frames": 22050,
+    "tone_rate": 44100,
+    "tone_seconds": 0.5
+  },
+  "sha256": {
+    "corners.png.bytes": "39886660ae78af5af63ad680eeb7be78300c69f9743063e185f68a01aa2d04f4",
+    "float.wav.bytes": "d7692cc6ba015b97f19995b60ab016ffe1a6d1f2766d51a4e3a0b2c667996148",
+    "gray16.png.bytes": "7ebaff23e0a0ff4f188e562167ccc28572b01149215bfaeb4c0b30212712cd31",
+    "palette.png.bytes": "c6606d3cdb18636f77cdab313008e1b5d4ddf6dd70fff46cba4afa6c775786b2",
+    "pcm-16-1-22050.wav.bytes": "e845faf8550ebff3e34e47013d6da8ec41405cec78c9772594a140b73f5c4e9e",
+    "pcm-16-1-44100.wav.bytes": "fe9c944453d76ddbf246579c90fcd7528bbda5562093032116559b89acc13fe6",
+    "pcm-16-1-48000.wav.bytes": "f9b396a5cac85075b19498f158d0afabb14ab0fb54d847003051020c4a07a378",
+    "pcm-16-2-22050.wav.bytes": "1eb85436ccf6a3f39f594f67ee22eb422b7c2f11cf90d804456141ac8ebf5dbf",
+    "pcm-16-2-44100.wav.bytes": "e15847a7efa3d283f701ef9c9d965d275eba002b27c4186445cf2ff8333149a6",
+    "pcm-16-2-48000.wav.bytes": "513a4522289c48e04ec042ce2b2d4e8bcb55dbb0fa58edd608a2d2e4f605af14",
+    "pcm-8-1-22050.wav.bytes": "26a8de338f2b801028087574c367d9a2a1f46f883292e5e5f93885568170c7d8",
+    "pcm-8-1-44100.wav.bytes": "32c996dc5875e0da40d232dc3a49453769296a3a530f26bbef65deab32fa5ecf",
+    "pcm-8-1-48000.wav.bytes": "109d58ad20781a32c3d0ad54d22824935c49cc25ba52fa4edfc85713ff32c9be",
+    "pcm-8-2-22050.wav.bytes": "3cd180d4d25d73ff473be90e58189395d78c2a177a0612e8af2134e274185023",
+    "pcm-8-2-44100.wav.bytes": "49288840a8ada16445afbae644d101df4d2c93e8eb52b44d9f77a3c9a1a50b06",
+    "pcm-8-2-48000.wav.bytes": "6cd208fc49a042957213b4e5ee3435aedd69d38b619f1503d5ff93d31c6568b1",
+    "tone.ogg.bytes": "9b53d6df0101c9add76d11e2d2a3421282c0569568ad65f83a69eb16ecd47fb2",
+    "triangle.glb.bytes": "cebcfc9afecea051291d97c53be378f81e360f4c2da64faca428ebff31c6853a",
+    "rgb.png.bytes": "e6d66889131220f931fddfb05730d647a0992456c63ae0a8154b4ae32ff219ef"
+  }
+}

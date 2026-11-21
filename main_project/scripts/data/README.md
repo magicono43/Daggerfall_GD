@@ -1,5 +1,9 @@
 # Classic access — IMP-004
 
+IMP-008 increment 2 supplies [media replacements/resources/diagnostics](MEDIA_REPLACEMENTS.md)
+through the existing DATA/MOD menu transaction. It leaves these classic readers,
+declared source requirements, supported subformats and restart rules intact.
+
 IMP-008 increment 1 adds the versioned [classic media decoder contract](MEDIA_DECODERS.md):
 real source-space meshes, bounded image/texture/palette readers, classic PCM,
 HMI sequence/SMF conversion and VID frame/audio/timing data. Required loose media

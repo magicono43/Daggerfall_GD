@@ -1,5 +1,13 @@
 # Media format and verification contract
 
+IMP-008 increment 2 now has a concrete, versioned
+[non-native replacement/export/resource contract](../../main_project/scripts/data/MEDIA_REPLACEMENTS.md).
+Its [execution evidence](evidence/IMP-008-increment-2-2026-11-20.md) distinguishes actual
+Windows non-native support from explicit native backend-unavailable gates. The
+initial table below remains the parent acceptance scope, not a claim that every
+optional GLB/PNG/container feature is supported. MIDI/SF2 and general WebM/MP4
+playback remain separately authorized increment 3.
+
 Reviewed 2026-11-18 for IMP-008. Direct PNG textures and WAV audio with optional authoring tools are user-approved. Windows is the first verification target. This inventory specifies acceptance targets. Exported Godot 4.7.2 verification is pending.
 
 IMP-008 increment 1 implementation now has a concrete, bounded

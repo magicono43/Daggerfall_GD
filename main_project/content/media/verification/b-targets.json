@@ -1,0 +1,1 @@
+{"domain":"media.assets","path":"targets","operation":"add","entries":[{"id":"classic.sound.3","value":{"schema":"media-declarations-v1","kind":"target","type":"audio","asset":{"provider":"@shipped/media-assets","key":"pcm-16-2-44100"}}}]}
