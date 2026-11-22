@@ -44,6 +44,11 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
+	if fixture.is_empty() or fixture.get("mode") == "actor-inputs":
+		var registered: Dictionary = controller.providers.enable_actor_inputs()
+		if not registered.ok:
+			label("Actor input registration failed: " + registered.reason)
+			return
 	if fixture.is_empty() or fixture.get("mode") in ["replacements","replacements_reload","native","native_reload","native-library"]:
 		var registered: Dictionary = controller.providers.enable_media_replacements()
 		if not registered.ok:
@@ -429,6 +434,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/text_cases.gd"
 	elif fixture.get("mode") == "structured-text":
 		script_path = "res://tests/structured_text_cases.gd"
+	elif fixture.get("mode") == "actor-inputs":
+		script_path = "res://tests/actor_input_cases.gd"
 	elif fixture.get("mode") == "translation-preferences_reload":
 		script_path = "res://tests/translation_preference_reload_cases.gd"
 	elif fixture.get("mode") == "translation-preferences":

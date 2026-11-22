@@ -1,5 +1,17 @@
 # Classic access — IMP-004
 
+IMP-009 increment 1 adds [actor/character structural input readers](ACTOR_INPUTS.md)
+and domain `actor.inputs` through the existing pre-menu transaction. Normal startup
+declares their real sources before preparation. Known stock flat conflicts now
+load as diagnostic records while ambiguous lookups fail. CLASS18 is retained as
+City Watch source data with unsupported skill interpretation still gated.
+The user-approved narrow DFU ampersand correction now admits all 18 real BIOGs;
+correction provenance is retained and all actual effect commands are unchanged.
+MONSTER career bytes likewise remain source metadata rather than player-skill
+or complete-actor semantics. The real selected installation is structurally qualified.
+Structural definitions never authorize real CHAR/NPC/effect use. Later authored
+reader groups and their real-owner integration gates remain open.
+
 IMP-008 increment 2 supplies [media replacements/resources/diagnostics](MEDIA_REPLACEMENTS.md)
 through the existing DATA/MOD menu transaction. It leaves these classic readers,
 declared source requirements, supported subformats and restart rules intact.

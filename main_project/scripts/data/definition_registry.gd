@@ -163,7 +163,7 @@ func prepare(mods: RefCounted) -> Dictionary:
 		var registered: Dictionary = _adapters[domain]
 		if registered.adapter.has_method("bundled_contributions"):
 			for bundled: Dictionary in registered.adapter.bundled_contributions():
-				entries.append({"source":{"provider":"@shipped/" + str(registered.declaration.id),"root":bundled.get("root","res://content/text"),"file":bundled.file,"version":bundled.get("version","text-catalog-v1")},"read":{"ok":true,"bytes":bundled.bytes}})
+				entries.append({"source":{"provider":"@shipped/" + str(registered.declaration.id),"root":bundled.get("root","res://content/text"),"file":bundled.file,"version":bundled.get("version","text-catalog-v1")},"read":bundled.get("read",{"ok":true,"bytes":bundled.get("bytes",PackedByteArray())})})
 		entries.append_array(source_entries(mods.adapter, "@shipped/" + str(registered.declaration.id), registered.root, registered.files))
 	var capabilities: Array = []
 	for domain: String in domains:
@@ -217,7 +217,9 @@ func prepare(mods: RefCounted) -> Dictionary:
 		entry.source.token = token
 		var applied: Dictionary = apply_contribution(resources, read.bytes, entry.source) if read.ok else read
 		if not applied.ok:
-			issues.append(failure(applied.get("kind", "invalid"), JSON.stringify(entry.source), applied.reason, token, omittable))
+			var issue := failure(applied.get("kind", "invalid"), JSON.stringify(entry.source), applied.reason, token, omittable)
+			if applied.has("schema"): issue.input_failure = applied.duplicate(true)
+			issues.append(issue)
 		else:
 			resources = applied.resources
 	for domain: String in domains:
@@ -228,7 +230,10 @@ func prepare(mods: RefCounted) -> Dictionary:
 				issues.append(failure("missing", domain + ":" + required, "Required logical resource is missing; omission cannot bypass it."))
 		var references: Array = registered.adapter.validate_references(resources.duplicate(true))
 		for reference: Dictionary in references:
-			issues.append(failure("references", str(reference.get("source", domain)), str(reference.reason), str(reference.get("token", "")), bool(reference.get("omittable", false))))
+			var issue := failure("references", str(reference.get("source", domain)), str(reference.reason), str(reference.get("token", "")), bool(reference.get("omittable", false)))
+			for context: String in ["target","provider"]:
+				if reference.has(context): issue[context] = reference[context].duplicate(true) if reference[context] is Dictionary else reference[context]
+			issues.append(issue)
 	_candidate = {"ok": issues.is_empty(), "ticket": _serial, "revision": mods.revision, "profile": mods.selected,
 		"input": JSON.stringify(mods.planning_input()), "plan": plan.duplicate(true), "packages": {}, "resources": resources,
 		"issues": issues, "omitted": omitted, "inactive": inactive, "source": "packages", "stage": "candidate", "ready": false,

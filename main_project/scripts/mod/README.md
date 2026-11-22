@@ -1,5 +1,10 @@
 # MOD package, profile and dependency contracts — IMP-005
 
+IMP-009 increment 1 adds [actor/character input contributions](../data/ACTOR_INPUTS.md)
+under capability `data.actor-inputs-v1`. The same checked folder/ZIP and loose
+intake, explicit omissions, candidate tickets and run-long locks apply. This adds
+no executable activation or gameplay semantic provider.
+
 IMP-008 increment 2 adds real [media exports/replacements](../data/MEDIA_REPLACEMENTS.md)
 through checked `content` declarations, not previously retained manifest metadata.
 The pre-menu Content Diagnostics button shows the actual rebuilt candidate and

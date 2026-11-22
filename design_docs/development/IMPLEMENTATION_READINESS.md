@@ -1,5 +1,34 @@
 # Implementation readiness
 
+**BIOG correction authorized, 2026-11-21:** The user explicitly approved adopting
+DFU's removal of the 12 observed standalone ampersand markers, without unrelated
+biography changes. The correction is a source annotation, not an executable effect.
+The complete selected installation now passes structural preparation/publication;
+real-owner/semantic and M1 gates remain open. Increment 1 awaits final review;
+parent IMP-009 and increments 2/3 are not complete. See
+[BIOG/source qualification evidence](evidence/IMP-009-increment-1-biog-2026-11-21.md).
+Earlier source-blocking notes are historical.
+
+
+**Source-gate clarification, 2026-11-21:** The user clarified that duplicate flat
+mappings must remain rejected without making the whole source file unavailable.
+Known stock conflicts are now fingerprint-pinned diagnostic records, never
+arbitrary winners. CLASS18 is preserved as City Watch source data with unresolved
+skill interpretation, not rejected as a mandatory playable class. BIOG ampersand
+interpretation remains blocking. See [follow-up evidence](evidence/IMP-009-increment-1-source-gates-2026-11-21.md).
+Parent completion and real-owner/M1 gates remain open; earlier handoff notes are historical.
+
+
+**IMP-009 increment 1 execution, 2026-11-21:** Actor/character structural readers
+and existing DATA/MOD/CORE publication integration are implemented for review.
+See [execution evidence](evidence/IMP-009-increment-1-2026-11-21.md). The selected
+installation retains blocking flat ambiguity and unsupported class/BIOG inputs;
+the user chose to leave the flat ambiguity blocking. Positive adapter/publication
+checks use an explicit bounded compatible fixture. Real CHAR/NPC/effect, IMP-015/016,
+SAVE and M1 gates remain open. No increment 2/3, parent completion or downstream
+prerequisite acceptance is claimed. Earlier handoff preparation notes are historical.
+
+
 **IMP-008 increment 3 accepted / IMP-009 handoff, 2026-11-21:** The user accepted
 increment 3 (`7d88e99`); all three approved media implementation increments are
 now delivered and user-accepted. See [accepted evidence](evidence/IMP-008-increment-3-2026-11-21.md).

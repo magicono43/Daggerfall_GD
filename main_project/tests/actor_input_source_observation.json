@@ -1,0 +1,241 @@
+{
+  "reference_biog00": {
+    "sha256": "47f8b260cfcd7494e0eb414abe1c6378cf75949b5388068d523b057cede01fc1",
+    "path": "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/StreamingAssets/BIOGs/BIOG00T0.TXT",
+    "bytes": 2976
+  },
+  "authenticity": "Observed selected installation; no claim that BIOG text is original Bethesda ARENA2 content",
+  "schema": "actor-input-source-observation-v1",
+  "selected_source": "C:/Games/Daggerfall/arena2",
+  "files": [
+    {
+      "sha256": "b0f0f695fd8e71556f247505dbeb14262399041ea1569f62c1b836a30fdf63c9",
+      "file": "FLATS.CFG",
+      "bytes": 8738
+    },
+    {
+      "sha256": "fcb88bf1bea9845675255c19f838deb414b63fb2df7c6977ab10f21155b6e90f",
+      "file": "MONSTER.BSA",
+      "bytes": 27136
+    },
+    {
+      "sha256": "ca488cf262931d38788f9eae24d5d3f0d22591181b190c04b2093772cc054905",
+      "file": "PAINT.DAT",
+      "bytes": 7200
+    },
+    {
+      "sha256": "96a90efbab3f6586d581038ef56cb873b168ec86c289823bf704f79372567c8b",
+      "file": "BIO.DAT",
+      "bytes": 1727
+    },
+    {
+      "sha256": "be68beedc4f12bef56a25b409b94a2d267f6c0ab574f88ed160b7ff54c49c870",
+      "file": "CLASS00.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "61451b004fab69c6286601e86c5b9536fc209eeb4692b57d3ac5d00d56641a8b",
+      "file": "CLASS01.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "31ddbd67a9a0b2e1fb6df78762864974e4d03a8dae6f0540eccd9cc04cf95075",
+      "file": "CLASS02.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "0fb6bbbd90bcf6561903f1c2dd22e04ab72fb3f81630f32cca4d1f640958beba",
+      "file": "CLASS03.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "e6988b484f7672221ecdbd347e3547e2c7de28c50143027293af954bf3d457a0",
+      "file": "CLASS04.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "05def9f51313766880dbf92b4fe75559357df78fb65edeb5932cafb1bf4ec188",
+      "file": "CLASS05.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "2793378bb3d86c00d7cbeb1935d52b0fdc0e83f96c1a42b0547bee5b60823504",
+      "file": "CLASS06.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "a636f60219779f3e2957959bd1541fb22df9526a76d8bbe44dc7eb27c17007a2",
+      "file": "CLASS07.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "65f042c357110586e8a33df7e53a30de8ac4291e3726991c7680a2226a58e826",
+      "file": "CLASS08.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "6fd9161e884a74b1a2d6010876e190637c90ee9f1fe73c6e3378dca6774d9937",
+      "file": "CLASS09.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "2f7c57085af4542b4a9579e9a8924d3332ccb59d18b991be49ed1e7e44a7d37f",
+      "file": "CLASS10.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "57bd796553a5fa251f885652f28fe5e3ccd0818130e067954346eb24f2f38082",
+      "file": "CLASS11.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "99c1b6d177a73fc29d12f91b9bb1cad949b7710043df11d114386b0b7dcfb4e0",
+      "file": "CLASS12.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "1f519564f535cc74f17384639020a01bc3b2097b9654a6dd694d6ad1f0754bcf",
+      "file": "CLASS13.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "550567bbb9ba7aa37aa7d53092f2e5d27096ecfe1b9fe7acd9560ea8a9891765",
+      "file": "CLASS14.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "88ffd4f642aea3fa5e75fea8cab02f6d0bc6a2ec90efde4a09ab24895a4920b6",
+      "file": "CLASS15.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "0bcc15434b887eae2f1f209a7cd6f9eb6779cff5052f532072ce84f52dce78ff",
+      "file": "CLASS16.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "a136c8d540f265d64bf7d514eb8140bb6ecc2bb751f2660f0cf3cf676098b82e",
+      "file": "CLASS17.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "04cc7047081d7da7b7697484cc23cd214e1a69d9cc310ac211aed798f23f09f0",
+      "file": "CLASS18.CFG",
+      "bytes": 74
+    },
+    {
+      "sha256": "870c8ffd350b18a2944bd6b79bcb6d2e6f97843a5604503e0d145797fb62b397",
+      "file": "BIOG00T0.TXT",
+      "bytes": 3198
+    },
+    {
+      "sha256": "c6dfbb827b6e614f408ae61e313a33f06496ccb1b3cd5370dadd379f06bffc88",
+      "file": "BIOG01T0.TXT",
+      "bytes": 3331
+    },
+    {
+      "sha256": "c0cccf03ea4f169b2d58940db01cb0b9e9720dcfeef6734fc6fcf6ef58e6a6da",
+      "file": "BIOG02T0.TXT",
+      "bytes": 3126
+    },
+    {
+      "sha256": "8789b14f45dc2b522fca4dabb4ae99af0b9c8ce17e543567dd93bf1502b405da",
+      "file": "BIOG03T0.TXT",
+      "bytes": 3167
+    },
+    {
+      "sha256": "4c95fd6371eb57f96c23ef38aaea4abc737a18184f6203512572136fe0f49c59",
+      "file": "BIOG04T0.TXT",
+      "bytes": 3191
+    },
+    {
+      "sha256": "438df773064d7f04dc6bf92560f02a791db5302a9c9e808fd4acf7c5a82d8686",
+      "file": "BIOG05T0.TXT",
+      "bytes": 3357
+    },
+    {
+      "sha256": "8d264b4d4ebe78b23f6c161627638ecf06dcafc9ca82a9d745d24f9a7c30c8dd",
+      "file": "BIOG06T0.TXT",
+      "bytes": 3128
+    },
+    {
+      "sha256": "4dddd34d08fb8db69ae539c93357892ad41a6f4f1f7fe7f9236889ca5bd2fd0e",
+      "file": "BIOG07T0.TXT",
+      "bytes": 3033
+    },
+    {
+      "sha256": "79930e83b8d9e0aa54332e3695ee9d4d1e2ccfc767bee2c4ba16ec4d6c18deb8",
+      "file": "BIOG08T0.TXT",
+      "bytes": 2982
+    },
+    {
+      "sha256": "4d837c0a25717b55f81c0ab0f82979333baa49998bebf87ed86793e49b5fd615",
+      "file": "BIOG09T0.TXT",
+      "bytes": 3130
+    },
+    {
+      "sha256": "8abcbf2f9b27905fd72f8d67ccdee57bff4b1d16a020f416d3d4b46cb1ffc1d8",
+      "file": "BIOG10T0.TXT",
+      "bytes": 2952
+    },
+    {
+      "sha256": "edc4f51d0cba9d7494ceb6dfa4ce6b9d6ae6acd4e27a43ed63c74c2df1cbd150",
+      "file": "BIOG11T0.TXT",
+      "bytes": 3093
+    },
+    {
+      "sha256": "2f5fa90f97c37d97e3ce31a79f9cda6209848ec7cf5b09c1fd018f2ae0122a18",
+      "file": "BIOG12T0.TXT",
+      "bytes": 3240
+    },
+    {
+      "sha256": "0217bc55bd80caad63d1bf081d6cfd0a4e7918a1b5c1896f3593077c65b86bd5",
+      "file": "BIOG13T0.TXT",
+      "bytes": 2959
+    },
+    {
+      "sha256": "1552a38273f754117f89f4ca9ecf81b355511dad1065347028e47de83395392d",
+      "file": "BIOG14T0.TXT",
+      "bytes": 3615
+    },
+    {
+      "sha256": "b968e5c5152fca0914a35ff0bb8b956024e3efb4170023667a233176fc710f09",
+      "file": "BIOG15T0.TXT",
+      "bytes": 3211
+    },
+    {
+      "sha256": "8ed04afa6a7b67a1f2e08f247e9bce36f4037fe604730a8a78e84e9863056f1a",
+      "file": "BIOG16T0.TXT",
+      "bytes": 3146
+    },
+    {
+      "sha256": "a4a2034e8bad59504167380e25b9cca30110c37139e8d66bf38f6e3810fbdf1d",
+      "file": "BIOG17T0.TXT",
+      "bytes": 3087
+    }
+  ],
+  "observed": "2026-11-21",
+  "required_rejections": {
+    "biography": "Unsupported standalone ampersand commands, including BIOG01T0.TXT line 217",
+    "class18": "Skill byte 35 is Count rather than a valid skill under the selected vocabulary",
+    "flat": "Conflicting 178/1 records, packed mapping 22785"
+  },
+  "source_gate_amendment": {
+    "initial_required_rejections_are_historical": true,
+    "evidence": "design_docs/development/evidence/IMP-009-increment-1-source-gates-2026-11-21.md",
+    "class18": "City Watch source retained under career-source-v1; not a playable class; strict skill interpretation still unsupported",
+    "date": "2026-11-21",
+    "remaining_known_startup_blocker": "BIOG standalone ampersand interpretation",
+    "flat": "Known original conflict groups accepted as non-resolving source diagnostics; ambiguous lookup still rejected"
+  },
+  "biog_correction_approval": {
+    "user_authorized": "Assume the DFU correction for the observed standalone ampersands",
+    "profile": "biog-dfu-ampersand-v1",
+    "date": "2026-11-21",
+    "structural_selected_source_qualified": true,
+    "count": 12,
+    "monster_source_note": "ENEMY005.CFG raw skill byte 40 preserved under career-source-v1; not treated as a valid player skill",
+    "evidence": "design_docs/development/evidence/IMP-009-increment-1-biog-2026-11-21.md",
+    "scope": "Only remove recognized markers from executable effect input, retaining raw line/position annotations; no DFU reward/equipment/balance changes"
+  }
+}

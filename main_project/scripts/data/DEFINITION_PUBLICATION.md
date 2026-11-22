@@ -1,5 +1,12 @@
 # Definition publication — IMP-005 increment 3
 
+IMP-009 increment 1 adds [actor input schemas/readers](ACTOR_INPUTS.md) without
+another registry. A trusted bundled contribution may return a checked `read`
+failure instead of bytes; actor source diagnoses retain their source/record
+context as `input_failure`. Reference issues can retain explicit `target` and
+`provider`. Successful structural publication remains separate from unavailable
+real CHAR/NPC/effect validation and cannot authorize gameplay use.
+
 IMP-008 increment 2 adds the trusted [media source/preparation hooks](MEDIA_REPLACEMENTS.md)
 within this same transaction. Every selected export's actual bytes validate before
 reference validation/history; source-qualified resources prepare synchronously.

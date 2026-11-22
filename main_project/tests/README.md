@@ -1,5 +1,25 @@
 # Shared verification — IMP-003 / DEV-014
 
+IMP-009 increment 1 uses `actor-inputs` / `actor-inputs-v1`:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Suite actor-inputs -Fixture actor-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Suite actor-inputs -Fixture actor-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -ActorInputs -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -ActorInputs -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+`actor_input_inventory.json` freezes 236 headless / 238 rendered assertion IDs.
+The 41 selected actor inputs and four foundation sources are guarded READ-only
+and hashed before/after each child. `actor_input_source_observation.json` records
+the observed input inventory without classic payloads. Successful publication now
+uses the complete actual selected installation, with the explicitly approved
+ampersand correction and retained source-only career/flat conflict diagnostics.
+Missing-source and malformed-input probes remain independently rejected.
+No real CHAR/NPC/effect semantics or M1 readiness is certified.
+See [ACTOR_INPUTS.md](../scripts/data/ACTOR_INPUTS.md) and the
+[current BIOG/source evidence](../../design_docs/development/evidence/IMP-009-increment-1-biog-2026-11-21.md).
+
 For safe cleanup of accumulated disposable runs, follow
 [RUN_ARTIFACT_CLEANUP.md](../../design_docs/development/RUN_ARTIFACT_CLEANUP.md).
 Preserve compact reports/logs and necessary captures, not entire copied projects

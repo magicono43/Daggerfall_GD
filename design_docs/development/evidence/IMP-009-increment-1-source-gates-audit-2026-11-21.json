@@ -1,0 +1,190 @@
+{
+  "schema": "imp009-increment1-audit-v1",
+  "status": "all-listed-adapter-checks-passed",
+  "exports": [
+    {
+      "report": "main_project/tests/.runs/export-a3681a79e0604d2dae5d86010fcef9aa/result.json",
+      "guarded_sources": 45,
+      "source_unchanged": true,
+      "pck_sha256": "ef57b388eb46189ced5165ee80480bb42613c28247c6a140c16993b88f724671",
+      "final_source_hashes_match": true,
+      "status": "passed",
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "rendered": 170,
+      "headless": 168,
+      "configuration": "debug"
+    },
+    {
+      "report": "main_project/tests/.runs/export-40b098cf7a1c471087041ba2950e412e/result.json",
+      "guarded_sources": 45,
+      "source_unchanged": true,
+      "pck_sha256": "39fbfe316ab36a62321752cbb63513a2518e1c56573653e79ed94d2023911c18",
+      "final_source_hashes_match": true,
+      "status": "passed",
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "rendered": 170,
+      "headless": 168,
+      "configuration": "release"
+    }
+  ],
+  "cases": [
+    {
+      "report": "main_project/tests/.runs/verification-headless-75bcf0c668e342329af4fbef69d4bd69/report.json",
+      "actual": 168,
+      "source_unchanged": true,
+      "reload_assertions": 0,
+      "guarded_sources": 45,
+      "status": "passed",
+      "case": "actor-headless",
+      "fixture": "actor-inputs-v1",
+      "expected": 168
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-9e072c46f646496f82887aaa290c0303/report.json",
+      "actual": 170,
+      "source_unchanged": true,
+      "reload_assertions": 0,
+      "guarded_sources": 45,
+      "status": "passed",
+      "case": "actor-rendered",
+      "fixture": "actor-inputs-v1",
+      "expected": 170
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-66b90e590a194e548284c332bbf654da/report.json",
+      "actual": 97,
+      "source_unchanged": true,
+      "reload_assertions": 0,
+      "guarded_sources": 4,
+      "status": "passed",
+      "case": "classic-headless",
+      "fixture": "classic-v1",
+      "expected": 97
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-f19ceb3089ac457c9617caef463d9c02/report.json",
+      "actual": 100,
+      "source_unchanged": true,
+      "reload_assertions": 0,
+      "guarded_sources": 4,
+      "status": "passed",
+      "case": "classic-rendered",
+      "fixture": "classic-v1",
+      "expected": 100
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-3f43adedd75742feb52e92fc8dc3c9b7/report.json",
+      "actual": 111,
+      "source_unchanged": true,
+      "reload_assertions": 8,
+      "guarded_sources": 4,
+      "status": "passed",
+      "case": "publication-headless",
+      "fixture": "publication-v1",
+      "expected": 111
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-b6ad813a262d4f3499b81f40b4ab5d98/report.json",
+      "actual": 117,
+      "source_unchanged": true,
+      "reload_assertions": 8,
+      "guarded_sources": 4,
+      "status": "passed",
+      "case": "publication-rendered",
+      "fixture": "publication-v1",
+      "expected": 117
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-8cac5ab121574c808e42774d49855366/report.json",
+      "actual": 121,
+      "source_unchanged": true,
+      "reload_assertions": 0,
+      "guarded_sources": 4,
+      "status": "passed",
+      "case": "text-headless",
+      "fixture": "text-v1",
+      "expected": 121
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-e4e8c3779e524eb6925311b50657f27f/report.json",
+      "actual": 127,
+      "source_unchanged": true,
+      "reload_assertions": 0,
+      "guarded_sources": 4,
+      "status": "passed",
+      "case": "text-rendered",
+      "fixture": "text-v1",
+      "expected": 127
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-7bfa4ea6094c45eead9b497864ee02d3/report.json",
+      "actual": 168,
+      "source_unchanged": true,
+      "reload_assertions": 10,
+      "guarded_sources": 4,
+      "status": "passed",
+      "case": "replacements-headless",
+      "fixture": "replacements-v1",
+      "expected": 168
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-ad1319705cf54015aa9638378deb7d7d/report.json",
+      "actual": 173,
+      "source_unchanged": true,
+      "reload_assertions": 10,
+      "guarded_sources": 4,
+      "status": "passed",
+      "case": "replacements-rendered",
+      "fixture": "replacements-v1",
+      "expected": 173
+    }
+  ],
+  "definition_source_hashes": {
+    "scripts/data/actor_source_reader.gd": "fa18b865865b9d273b4f589f7ceaf512c7d61e000080af9cc4c1cd17e19a775a",
+    "tests/actor_input_cases.gd": "d5ec7892b84cbbcf5e29d042a846577d39fde10177a267585704dcd6a3a1e7ab",
+    "content/actors/profile.json": "14729a3273053a7ac98f552856589acc3ebc395722cd55865d9059bf3dcd9a9d",
+    "export_presets.cfg": "67d53d689174c0d190cd35101a0d262464d53bb7e5a25611ba3e6e1dca799bc7",
+    "scripts/data/definition_registry.gd": "68b272ca9c00411f204d1e1c76be0ebfe53782aa96f8d8e10eecacc97a8de9cc",
+    "scripts/data/actor_inputs.gd": "5f0e47c05ba5892982ed04f1579dae16a4568b64f08c70c814f805869acfe75a",
+    "scripts/startup/provider_boundary.gd": "ae594f4369b7b23f3969fd39907d164f0b23b48ec14e87e4c0b56150a4951dbc",
+    "scripts/data/classic_access.gd": "a5dc53f160dd4e9c53546178086189c0f82d1650e89b21d4e6a32423f207492f",
+    "scripts/startup/startup_shell.gd": "b97f51b96aedafc38d0d75891bcabb2188379f438de3356dcc8311b0df2ee2eb",
+    "scripts/data/actor_input_formats.gd": "4f89fdc5e643bcd471538c41b3586e7d24b70b7b8655fa5760333223f9356680"
+  },
+  "real_owner_semantics": "unavailable",
+  "open_gates": [
+    "Remaining BIOG unsupported input qualification; unique flat conflict mappings still unavailable",
+    "Real CHAR/NPC validation and construction at IMP-015/016",
+    "Effect target resolution, legality and application",
+    "Custom-class biography selection and preview/random policy",
+    "SAVE compatibility and restore",
+    "IMP-009 increments 2/3 and full M1 acceptance"
+  ],
+  "user_decision": "Accept known flat source conflicts without a winner; preserve CLASS18 City Watch as source-only input",
+  "fixture": "actor-inputs-v1",
+  "selected_installation_qualified": false,
+  "date": "2026-11-21",
+  "engine": {
+    "build": "official",
+    "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "hex": 263938,
+    "major": 4,
+    "minor": 7,
+    "patch": 2,
+    "status": "stable",
+    "string": "4.7.2-stable (official)",
+    "timestamp": 0
+  },
+  "completed_builds_retention": "Remove all after qualification; preserve reports/logs/captures",
+  "starting_revision": "e792ed99a20cb9ce90ba4044c694938f837d67c9",
+  "cleanup": {
+    "remaining_runs_files": 56469,
+    "remaining_runs_bytes": 1090977639,
+    "remaining_reparse_points": [],
+    "bytes_removed": 2591157376.0,
+    "remaining_build_payloads": [],
+    "files_removed": 10827.0,
+    "completed_builds_retained": 0,
+    "schema": "imp009-source-gates-cleanup-v1"
+  }
+}

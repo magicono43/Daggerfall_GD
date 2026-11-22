@@ -10,6 +10,7 @@ param(
     [switch]$StructuredText,
     [switch]$LocaleFonts,
     [switch]$TranslationPreferences,
+    [switch]$ActorInputs,
     [switch]$ClassicMedia,
     [switch]$MediaReplacements,
     [switch]$NativeMedia,
@@ -22,6 +23,7 @@ param(
 $ErrorActionPreference = 'Stop'
 . "$PSScriptRoot/mod_fixture.ps1"
 . "$PSScriptRoot/assertion_values.ps1"
+. "$PSScriptRoot/actor_fixture.ps1"
 function Invoke-IsolatedExport([string]$Executable,[string[]]$EngineArguments,[string]$Log) {
     $priorPath = $env:PATH
     try {
@@ -53,6 +55,7 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
     }
 }
 try {
+if ($ActorInputs) { $report.fixture = 'actor-inputs-v1'; $report.reproduction.arguments.ActorInputs = $true }
 if ($NativeMedia) { $report.fixture = 'native-v1'; $report.reproduction.arguments.NativeMedia = $true }
 if ($MediaReplacements) { $report.fixture = 'replacements-v1'; $report.reproduction.arguments.MediaReplacements = $true }
 if ($ClassicMedia) { $report.fixture = 'media-v1'; $report.reproduction.arguments.ClassicMedia = $true }
@@ -62,8 +65,8 @@ if ($LocaleFonts) { $report.fixture = 'locale-fonts-v1'; $report.reproduction.ar
 if ($StructuredText) { $report.fixture = 'structured-text-v1'; $report.reproduction.arguments.StructuredText = $true }
 if ($TextCatalog) { $report.fixture = 'text-v1'; $report.reproduction.arguments.TextCatalog = $true }
 if ($FormulaExtraError -and !$FormulaFault) { throw 'Additional formula errors require the explicit fault scenario' }
-if (($NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $StructuredText -or $TextCatalog -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
-if (@($NativeMedia,$MediaReplacements,$ClassicMedia,$TranslationPreferences,$LocaleFonts,$StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
+if (($ActorInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $StructuredText -or $TextCatalog -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
+if (@($ActorInputs,$NativeMedia,$MediaReplacements,$ClassicMedia,$TranslationPreferences,$LocaleFonts,$StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -100,7 +103,7 @@ foreach ($mode in @('headless','rendered')) {
         if ((Split-Path $selectedRoot -Leaf) -ine 'ARENA2') { $selectedRoot = Join-Path $selectedRoot 'ARENA2' }
         $lockedRoot = "$sandbox/locked/ARENA2"
         New-Item -ItemType Directory -Force $lockedRoot | Out-Null
-        foreach ($name in (@('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($ClassicMedia -or $NativeMedia) { @('MIDI.BSA','TEXTURE.321','TEXTURE.024','TEXTURE.002','INVE00I0.IMG','APAINT.CIF','BUTTONS.RCI','ART_PAL.COL','ANIM0011.VID') } else { @() }) + $(if ($TranslationPreferences -or $StructuredText -or $LocaleFonts) { @('TEXT.RSC') } else { @() }))) {
+        foreach ($name in ($(if ($ActorInputs) { Get-ActorSourceNames } else { @() }) + @('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($ClassicMedia -or $NativeMedia) { @('MIDI.BSA','TEXTURE.321','TEXTURE.024','TEXTURE.002','INVE00I0.IMG','APAINT.CIF','BUTTONS.RCI','ART_PAL.COL','ANIM0011.VID') } else { @() }) + $(if ($TranslationPreferences -or $StructuredText -or $LocaleFonts) { @('TEXT.RSC') } else { @() }))) {
             $before[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
             $guards += [IO.File]::Open((Join-Path $selectedRoot $name), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
             [IO.File]::WriteAllBytes("$lockedRoot/$name", [byte[]]@(1,0,0,2,42,232,3,0,0,1,0,0,0))
@@ -122,6 +125,7 @@ foreach ($mode in @('headless','rendered')) {
         $fixture.mode = 'publication'
         $fixture.fixture = 'publication-v1'
     }
+    if ($ActorInputs) { $fixture.mode = 'actor-inputs'; $fixture.fixture = 'actor-inputs-v1' }
     if ($StructuredText) { $fixture.mode = 'structured-text'; $fixture.fixture = 'structured-text-v1' }
     if ($LocaleFonts) { $fixture.mode = 'locale-fonts'; $fixture.fixture = 'locale-fonts-v1' }
     if ($TranslationPreferences) { $fixture.mode = 'translation-preferences'; $fixture.fixture = 'translation-preferences-v1' }
@@ -181,6 +185,7 @@ foreach ($mode in @('headless','rendered')) {
     }
     $result = Get-Content "$sandbox/result.json" -Raw | ConvertFrom-Json
     $report.engine = $result.engine
+    if ($ActorInputs -and !(Test-ActorInventory $result $mode)) { throw 'Incomplete exported actor input assertion inventory' }
     if ($NativeMedia -and !(Test-NativeInventory $result $mode)) { throw 'Incomplete exported native terminal inventory' }
     if ($MediaReplacements -and !(Test-ReplacementInventory $result $mode)) { throw 'Incomplete exported replacement terminal inventory' }
     if ($ClassicMedia -and !(Test-MediaInventory $result $mode)) { throw 'Incomplete or changed exported media terminal inventory' }
@@ -197,7 +202,7 @@ foreach ($mode in @('headless','rendered')) {
         $after[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
-    $expected = if ($NativeMedia) { Get-NativeExpectedCount $mode } elseif ($MediaReplacements) { if ($mode -eq 'headless') {168} else {173} } elseif ($ClassicMedia) { if ($mode -eq 'headless') {119} else {136} } elseif ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    $expected = if ($ActorInputs) { if ($mode -eq 'headless') {236} else {238} } elseif ($NativeMedia) { Get-NativeExpectedCount $mode } elseif ($MediaReplacements) { if ($mode -eq 'headless') {168} else {173} } elseif ($ClassicMedia) { if ($mode -eq 'headless') {119} else {136} } elseif ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
     $formulaExpected = if ($FormulaFault) { 18 } elseif ($mode -eq 'headless') { 82 } else { 84 }
     if (($Formula -or $FormulaFault) -and $result.count -ne $formulaExpected) { throw 'Incomplete formula export inventory' }
     $sessionExpected = if ($mode -eq 'headless') { 115 } else { 116 }

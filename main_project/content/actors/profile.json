@@ -1,0 +1,9 @@
+{
+  "domain": "actor.inputs",
+  "path": "catalog",
+  "operation": "add",
+  "entries": [{"id": "format-profile", "value": {
+    "schema": "actor-inputs-v1", "kind": "profile", "references": [],
+    "data": {"formats": ["flats-cfg-v1", "career-cfg-v1", "paint-dat-v1", "bio-dat-v1", "biog-text-v1", "career-source-v1"], "semantic_ready": false}
+  }}]
+}
