@@ -1,5 +1,10 @@
 # Implementation readiness
 
+**IMP-010 increment 1 implemented/verified, 2026-11-22:** Geographic records await
+user acceptance. See [execution evidence](evidence/IMP-010-increment-1-2026-11-22.md).
+The sole prerequisite IMP-005 is accepted. Parent IMP-010, layouts/variants and
+real-owner/physics/SAVE/M1 gates remain open. Earlier handoff-only notes are historical.
+
 **IMP-009 reader delivery accepted / IMP-010 handoff, 2026-11-22:** The user
 accepted increment 3, committed at `b33fa5a` (`Implementation Task 009, Part 3
 Completed, 11-22-2026`). All three assigned IMP-009 reader increments are now

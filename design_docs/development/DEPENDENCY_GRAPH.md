@@ -1,5 +1,11 @@
 # Implementation dependencies
 
+**IMP-010 increment-1 execution, 2026-11-22:** The issued handoff authorizes only
+geographic records. Accepted IMP-005 is the sole listed prerequisite; adjacent
+accepted IMP-009 readers are composed/regressed without adding a prerequisite
+edge. See [evidence](evidence/IMP-010-increment-1-2026-11-22.md). Increment 1 is verified and awaits
+user acceptance; no parent-task or downstream integration edge is closed.
+
 **IMP-009 reader delivery accepted / IMP-010 handoff, 2026-11-22:** The user
 accepted increment 3, committed at `b33fa5a` (`Implementation Task 009, Part 3
 Completed, 11-22-2026`). All three assigned IMP-009 reader increments are now

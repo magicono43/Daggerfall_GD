@@ -44,17 +44,22 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
-	if fixture.is_empty() or fixture.get("mode") == "faction-quest-inputs":
+	if fixture.is_empty() or fixture.get("mode") == "geography-inputs":
+		var registered: Dictionary = controller.providers.enable_geography_inputs()
+		if not registered.ok:
+			label("Geographic registration failed: " + registered.reason)
+			return
+	if fixture.is_empty() or fixture.get("mode") in ["faction-quest-inputs","geography-inputs"]:
 		var registered: Dictionary = controller.providers.enable_faction_quest_inputs()
 		if not registered.ok:
 			label("Faction/quest input registration failed: " + registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["item-spell-inputs","faction-quest-inputs"]:
+	if fixture.is_empty() or fixture.get("mode") in ["item-spell-inputs","faction-quest-inputs","geography-inputs"]:
 		var registered: Dictionary = controller.providers.enable_item_spell_inputs()
 		if not registered.ok:
 			label("Item/spell input registration failed: " + registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["actor-inputs","item-spell-inputs","faction-quest-inputs"]:
+	if fixture.is_empty() or fixture.get("mode") in ["actor-inputs","item-spell-inputs","faction-quest-inputs","geography-inputs"]:
 		var registered: Dictionary = controller.providers.enable_actor_inputs()
 		if not registered.ok:
 			label("Actor input registration failed: " + registered.reason)
@@ -448,6 +453,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/actor_input_cases.gd"
 	elif fixture.get("mode") == "item-spell-inputs":
 		script_path = "res://tests/item_spell_cases.gd"
+	elif fixture.get("mode") == "geography-inputs":
+		script_path = "res://tests/geography_cases.gd"
 	elif fixture.get("mode") == "faction-quest-inputs":
 		script_path = "res://tests/faction_quest_cases.gd"
 	elif fixture.get("mode") == "translation-preferences_reload":

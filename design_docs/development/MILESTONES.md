@@ -1,5 +1,10 @@
 # Milestones and validation checkpoints
 
+**IMP-010 increment 1 implemented/verified, 2026-11-22:** Geographic source records
+await user acceptance; [execution evidence](evidence/IMP-010-increment-1-2026-11-22.md)
+tracks their checks. M1 stays open. No layouts/variants, real WORLD/LOC/MOVE/SAVE
+integration or opening-content readiness is established by this increment.
+
 **IMP-009 reader delivery accepted / IMP-010 handoff, 2026-11-22:** The user
 accepted increment 3, committed at `b33fa5a` (`Implementation Task 009, Part 3
 Completed, 11-22-2026`). All three assigned IMP-009 reader increments are now

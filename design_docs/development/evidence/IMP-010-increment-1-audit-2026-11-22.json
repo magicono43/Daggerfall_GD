@@ -1,0 +1,713 @@
+{
+  "schema": "imp-010-geography-audit-v1",
+  "date": "2026-11-22",
+  "status": "passed",
+  "scope": "increment 1 only; awaiting user acceptance",
+  "source_profile": "classic-geography-profile-v1",
+  "baseline_counts": {
+    "regions": 62,
+    "locations": 15251,
+    "climates": 10,
+    "contexts": 1,
+    "classic_sample_tiles": 1,
+    "records": 15325
+  },
+  "classic_sources": {
+    "MAPS.BSA": {
+      "sha256": "8b5550bfcac03b6f605842568fdbfb7cc6bbed7ace5999c33c900ad286fc24be",
+      "bytes": 22129312
+    },
+    "WOODS.WLD": {
+      "sha256": "2842ab5eb1b39b1666d96588856083bb34fcbdcd70621ca833be7349121bb5df",
+      "bytes": 26001168
+    },
+    "CLIMATE.PAK": {
+      "sha256": "6032403010707ed09394a9b72bf3418d3450ccc99f28e4c8451771f5d7e54cd0",
+      "bytes": 14771
+    },
+    "POLITIC.PAK": {
+      "sha256": "89d13251e82515890f024aef6be746bf92203e04661a35d31088b62d71b88c0e",
+      "bytes": 19597
+    }
+  },
+  "code_fixture_profile_sha256": {
+    "scripts/data/geography_formats.gd": "8741c2fa759e5b67e0dae7c8df09d77ae3f174e6b3031b5026ae5a2c7caa8df0",
+    "scripts/data/geography_source_reader.gd": "3533f990696eb254fa39a379fbf316c685fd98cbbd98f1581962a87bd60b9898",
+    "scripts/data/geography_inputs.gd": "7617e7b1ee4ef4e2dd1b1a5dd90e8a6bf5149d2c3dffa48ab65498a5a8d22b07",
+    "scripts/data/classic_access.gd": "3badd2fe33f7486a902b6cff20aeff60af90839f96162225acb12befd4e3d9ee",
+    "scripts/data/definition_registry.gd": "8532e79eb3107b93609327aa5dbba9850fe5e90053b17c6f9c965716c65dc63d",
+    "scripts/startup/provider_boundary.gd": "6761c82a52bf50531b9511ad7feea75c40cb4460f4b08c4650fb1836b4c54c77",
+    "scripts/startup/startup_shell.gd": "a3e0c69c658431d08997855e7a946aaad5905793fc57d349787de66cf830d2c9",
+    "tests/geography_cases.gd": "64afb25e696d2d28df133b06c4810139f9f7d36422fc9ae7dbc62a1ff2277ddb",
+    "tests/geography_inventory.json": "79f1602e2e50c34f85dfd37e9d8337d70bcbf5ad9c70b1ba98da51cb1fc2bfd9",
+    "tests/geography_source_observation.json": "6196c1223b5f6a71ca6bc1ff6a9bb40a7805efaf34ae7ec6b7343cfe5e569cdf",
+    "content/geography/profile.json": "3da6ad3df76d177619329a6a3fdc28e5a9a0d4374bc9dbace55bf90b4696fe8d",
+    "content/geography/DFU_LICENSE.txt": "6e5e22fa760938ab398743150787896bd20fcf4936aad0122704700bad1e669a",
+    "export_presets.cfg": "d105805e502590a32bc729cc81288af5a703e46f28803855a874a9d782cedecb"
+  },
+  "selections": [
+    {
+      "suite": "actor-inputs",
+      "mode": "headless",
+      "fixture": "actor-inputs-v1",
+      "expected": 236,
+      "actual": 236,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-headless-6fcba9ab6c5c4de3a4d54c83519daecb/report.json",
+      "report_sha256": "f757ac4231489e73e4c0853c1dc1855ea357cf68e09671e4908ce9c76b7402d6",
+      "source_count": 45,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "actor-inputs",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "actor-inputs-v1"
+        }
+      },
+      "report_pointer": "main_project/tests/.runs/verification-headless-6fcba9ab6c5c4de3a4d54c83519daecb/report.json.archive.json",
+      "report_archive_sha256": "ffdb51c9703fc10116f7082807c61a9bb6c584e6c26ff6b235f7252087eb91d7",
+      "report_recovery_verified": true
+    },
+    {
+      "suite": "actor-inputs",
+      "mode": "rendered",
+      "fixture": "actor-inputs-v1",
+      "expected": 238,
+      "actual": 238,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-rendered-ceb76768bf884551868f2146fc10563a/report.json",
+      "report_sha256": "50adbbb0fabf1322076d183a495ec1c14288d4bccbe767b7691f61327486efda",
+      "source_count": 45,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "actor-inputs",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "actor-inputs-v1"
+        }
+      },
+      "report_pointer": "main_project/tests/.runs/verification-rendered-ceb76768bf884551868f2146fc10563a/report.json.archive.json",
+      "report_archive_sha256": "8b1989e77053f32d29b49adc1c3ad9331d403f4f8f9179e0bd74f4e9846a4d88",
+      "report_recovery_verified": true
+    },
+    {
+      "suite": "classic",
+      "mode": "headless",
+      "fixture": "classic-v1",
+      "expected": 97,
+      "actual": 97,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-headless-25b11760716c4e05bb838788279ae88d/report.json",
+      "report_sha256": "eb819f87d33c14da8afa1062c0c9e3615299c1a2a884409728129316578a3e47",
+      "source_count": 4,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "classic",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "classic-v1"
+        }
+      }
+    },
+    {
+      "suite": "classic",
+      "mode": "rendered",
+      "fixture": "classic-v1",
+      "expected": 100,
+      "actual": 100,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-rendered-3392d81d866c4b4183d10dfe63f3fc82/report.json",
+      "report_sha256": "30ff2a51fe7a903dc3ca23d544a4bae2c4a47c0f6d91069f9e9378b7ff640ae2",
+      "source_count": 4,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "classic",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "classic-v1"
+        }
+      }
+    },
+    {
+      "suite": "faction-quest-inputs",
+      "mode": "headless",
+      "fixture": "faction-quest-inputs-v1",
+      "expected": 132,
+      "actual": 132,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-headless-c73bb038a1124c88a72877181e5e044b/report.json",
+      "report_sha256": "5ead3018ed136650015c322a298338fa2f36be16dd7779212438c8bc6b0a87dd",
+      "source_count": 47,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "faction-quest-inputs",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "faction-quest-inputs-v1"
+        }
+      }
+    },
+    {
+      "suite": "faction-quest-inputs",
+      "mode": "rendered",
+      "fixture": "faction-quest-inputs-v1",
+      "expected": 134,
+      "actual": 134,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-rendered-acb85aff0f5c4121a54e47c8383ec0f6/report.json",
+      "report_sha256": "48cde41dc86bbe26d056b6b5466f7e633626db83a16ad8f66b008c087081d62f",
+      "source_count": 47,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "faction-quest-inputs",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "faction-quest-inputs-v1"
+        }
+      }
+    },
+    {
+      "suite": "geography-inputs",
+      "mode": "headless",
+      "fixture": "geography-inputs-v1",
+      "expected": 200,
+      "actual": 200,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-headless-2c26a87de3e04ee0947f0b0cdc5d094e/report.json",
+      "report_sha256": "97a79191caf42c23ab190f355d4c29b6ae3c1a16cd3664292ddc8debfdd4a0e9",
+      "source_count": 50,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "geography-inputs",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "geography-inputs-v1"
+        }
+      }
+    },
+    {
+      "suite": "geography-inputs",
+      "mode": "rendered",
+      "fixture": "geography-inputs-v1",
+      "expected": 202,
+      "actual": 202,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-rendered-70fcff1ca0ac4e698381072c528d53fb/report.json",
+      "report_sha256": "1c0715178ffbd0ce28c775d1522eb92f2396b85b1a6539db42b0cc3ab9e03204",
+      "source_count": 50,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "geography-inputs",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "geography-inputs-v1"
+        }
+      }
+    },
+    {
+      "suite": "item-spell-inputs",
+      "mode": "headless",
+      "fixture": "item-spell-inputs-v1",
+      "expected": 160,
+      "actual": 160,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-headless-b280acfaf4ab449e961cc7cf6a8f041c/report.json",
+      "report_sha256": "381e35351deed97a3a3abe1c36d8264a906499c22e92a8f7b388fdd0b43b648d",
+      "source_count": 47,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "item-spell-inputs",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "item-spell-inputs-v1"
+        }
+      },
+      "report_pointer": "main_project/tests/.runs/verification-headless-b280acfaf4ab449e961cc7cf6a8f041c/report.json.archive.json",
+      "report_archive_sha256": "fd348b318d99b632b2eac8f0ae458e35f5dcaf78a75c1b2fb96c84d83e424331",
+      "report_recovery_verified": true
+    },
+    {
+      "suite": "item-spell-inputs",
+      "mode": "rendered",
+      "fixture": "item-spell-inputs-v1",
+      "expected": 162,
+      "actual": 162,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-rendered-18c651867c68457b9d6dd02b18acacef/report.json",
+      "report_sha256": "fdd5586122fac47f237e3f08379bb81f9be81b89cf0f93e44e7fa38d238738f9",
+      "source_count": 47,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "item-spell-inputs",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "item-spell-inputs-v1"
+        }
+      },
+      "report_pointer": "main_project/tests/.runs/verification-rendered-18c651867c68457b9d6dd02b18acacef/report.json.archive.json",
+      "report_archive_sha256": "f26e9ed3b19b83c9294d9b14c467ab1bc6a8374ca99ba2147d9657f89b21df75",
+      "report_recovery_verified": true
+    },
+    {
+      "suite": "publication",
+      "mode": "headless",
+      "fixture": "publication-v1",
+      "expected": 111,
+      "actual": 111,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-headless-3e9c281119f848829b40692fdb3ee92a/report.json",
+      "report_sha256": "18f963fac6fed126b014782eea917b183cedfaadb52c21545257d6d8cad9683d",
+      "source_count": 4,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "publication",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "publication-v1"
+        }
+      },
+      "fresh_process_assertions": 8
+    },
+    {
+      "suite": "publication",
+      "mode": "rendered",
+      "fixture": "publication-v1",
+      "expected": 117,
+      "actual": 117,
+      "status": "passed",
+      "report": "main_project/tests/.runs/verification-rendered-f30ff3537d7a418b935fe36ab4fa307a/report.json",
+      "report_sha256": "ae0c64aab95616764c9630c42c07602f04d0c0be78c5d30da53c517adcab42e9",
+      "source_count": 4,
+      "sources_unchanged": true,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "source_revision": "561ff3454b9371d806b48a76e6de6fd8d28a3d8a",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Suite": "publication",
+          "TimeoutSeconds": 600,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "InputSequence": "",
+          "Clock": null,
+          "Fixture": "publication-v1"
+        }
+      },
+      "fresh_process_assertions": 8
+    }
+  ],
+  "exports": [
+    {
+      "configuration": "debug",
+      "status": "passed",
+      "report": "main_project/tests/.runs/export-80793aee3f41495cad8277c6b22d1285/result.json",
+      "report_sha256": "640ce851deb1b8a3490703908e6435fc9e744428536bdfccaaa765a79c1107c8",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "pck_sha256": "B0ED49F7E96124EE0BCF1DE52EC096C10FC0E01E5DD9480A1BBCB6F5C3DDF3C0",
+      "source_hashes": {
+        "content/geography/profile.json": "3DA6AD3DF76D177619329A6A3FDC28E5A9A0D4374BC9DBACE55BF90B4696FE8D",
+        "scripts/data/classic_access.gd": "3BADD2FE33F7486A902B6CFF20AEFF60AF90839F96162225ACB12BEFD4E3D9EE",
+        "content/geography/DFU_LICENSE.txt": "6E5E22FA760938AB398743150787896BD20FCF4936AAD0122704700BAD1E669A",
+        "tests/geography_source_observation.json": "6196C1223B5F6A71CA6BC1FF6A9BB40A7805EFAF34AE7EC6B7343CFE5E569CDF",
+        "tests/geography_cases.gd": "64AFB25E696D2D28DF133B06C4810139F9F7D36422FC9AE7DBC62A1FF2277DDB",
+        "scripts/data/geography_formats.gd": "8741C2FA759E5B67E0DAE7C8DF09D77AE3F174E6B3031B5026AE5A2C7CAA8DF0",
+        "scripts/startup/startup_shell.gd": "A3E0C69C658431D08997855E7A946AAAD5905793FC57D349787DE66CF830D2C9",
+        "scripts/data/definition_registry.gd": "8532E79EB3107B93609327AA5DBBA9850FE5E90053B17C6F9C965716C65DC63D",
+        "scripts/data/geography_inputs.gd": "7617E7B1EE4EF4E2DD1B1A5DD90E8A6BF5149D2C3DFFA48AB65498A5A8D22B07",
+        "scripts/startup/provider_boundary.gd": "6761C82A52BF50531B9511AD7FEEA75C40CB4460F4B08C4650FB1836B4C54C77",
+        "export_presets.cfg": "D105805E502590A32BC729CC81288AF5A703E46F28803855A874A9D782CEDECB",
+        "scripts/data/geography_source_reader.gd": "3533F990696EB254FA39A379FBF316C685FD98CBBD98F1581962A87BD60B9898"
+      },
+      "checks": [
+        {
+          "mode": "headless",
+          "expected": 200,
+          "actual": 200,
+          "sources_unchanged": true,
+          "source_count": 50
+        },
+        {
+          "mode": "rendered",
+          "expected": 202,
+          "actual": 202,
+          "sources_unchanged": true,
+          "source_count": 50
+        }
+      ],
+      "command": {
+        "command": "./main_project/tools/verify_startup_export.ps1",
+        "arguments": {
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "DependencyPlanning": false,
+          "Randomness": false,
+          "RandomnessSession": false,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "FormulaFault": false,
+          "GeographyInputs": true,
+          "FormulaExtraError": false,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "DefinitionPublication": false,
+          "Formula": false,
+          "Configuration": "debug",
+          "ModDiscovery": false
+        }
+      }
+    },
+    {
+      "configuration": "release",
+      "status": "passed",
+      "report": "main_project/tests/.runs/export-b40236ee16914b89bf2a4dc13d4cf357/result.json",
+      "report_sha256": "baf277559751cb8a1051d5a8b8576013a51cb34f2101f5af6f9d14a3cb5bff8d",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "pck_sha256": "5B85CB3B90C3C9030BEDD73D74FA764449EBE2B3F81D0E9DDE555EF0034BE875",
+      "source_hashes": {
+        "content/geography/profile.json": "3DA6AD3DF76D177619329A6A3FDC28E5A9A0D4374BC9DBACE55BF90B4696FE8D",
+        "scripts/data/classic_access.gd": "3BADD2FE33F7486A902B6CFF20AEFF60AF90839F96162225ACB12BEFD4E3D9EE",
+        "content/geography/DFU_LICENSE.txt": "6E5E22FA760938AB398743150787896BD20FCF4936AAD0122704700BAD1E669A",
+        "tests/geography_source_observation.json": "6196C1223B5F6A71CA6BC1FF6A9BB40A7805EFAF34AE7EC6B7343CFE5E569CDF",
+        "tests/geography_cases.gd": "64AFB25E696D2D28DF133B06C4810139F9F7D36422FC9AE7DBC62A1FF2277DDB",
+        "scripts/data/geography_formats.gd": "8741C2FA759E5B67E0DAE7C8DF09D77AE3F174E6B3031B5026AE5A2C7CAA8DF0",
+        "scripts/startup/startup_shell.gd": "A3E0C69C658431D08997855E7A946AAAD5905793FC57D349787DE66CF830D2C9",
+        "scripts/data/definition_registry.gd": "8532E79EB3107B93609327AA5DBBA9850FE5E90053B17C6F9C965716C65DC63D",
+        "scripts/data/geography_inputs.gd": "7617E7B1EE4EF4E2DD1B1A5DD90E8A6BF5149D2C3DFFA48AB65498A5A8D22B07",
+        "scripts/startup/provider_boundary.gd": "6761C82A52BF50531B9511AD7FEEA75C40CB4460F4B08C4650FB1836B4C54C77",
+        "export_presets.cfg": "D105805E502590A32BC729CC81288AF5A703E46F28803855A874A9D782CEDECB",
+        "scripts/data/geography_source_reader.gd": "3533F990696EB254FA39A379FBF316C685FD98CBBD98F1581962A87BD60B9898"
+      },
+      "checks": [
+        {
+          "mode": "headless",
+          "expected": 200,
+          "actual": 200,
+          "sources_unchanged": true,
+          "source_count": 50
+        },
+        {
+          "mode": "rendered",
+          "expected": 202,
+          "actual": 202,
+          "sources_unchanged": true,
+          "source_count": 50
+        }
+      ],
+      "command": {
+        "command": "./main_project/tools/verify_startup_export.ps1",
+        "arguments": {
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "DependencyPlanning": false,
+          "Randomness": false,
+          "RandomnessSession": false,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "FormulaFault": false,
+          "GeographyInputs": true,
+          "FormulaExtraError": false,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "DefinitionPublication": false,
+          "Formula": false,
+          "Configuration": "release",
+          "ModDiscovery": false
+        }
+      }
+    }
+  ],
+  "unavailable": [
+    "IMP-010 layouts and variants",
+    "WORLD/LOC/MOVE geometry and physics, IMP-013/025/057/061",
+    "discovery gameplay and history",
+    "weather/climate effects",
+    "QUEST runtime binding",
+    "SAVE compatibility/restoration",
+    "CORE opening-content readiness",
+    "M1 acceptance"
+  ],
+  "cleanup_pending": false,
+  "cleanup": {
+    "remaining_run_files": 57800,
+    "remaining_run_bytes": 1393775288,
+    "removed_files": 33949.0,
+    "journal": "main_project/tests/.runs/geography-cleanup-2026-11-22.json",
+    "removed_bytes": 5939147332.0,
+    "retained_files": 262,
+    "status": "complete",
+    "run_roots_compacted": 27,
+    "large_diagnostic_files_archived": 10,
+    "archive_original_bytes": 240930115,
+    "archive_bytes": 8307234,
+    "recovery_hashes_verified": true,
+    "completed_full_builds_retained": 0,
+    "deletion_failures": 0,
+    "archive_journal": "main_project/tests/.runs/geography-archive-result.json",
+    "unrelated_generated_uids_removed": 11
+  },
+  "manual_review": {
+    "capture_sha256": "f0f01d9e0c548aaefe42a2155f11a44c1633062daa61eea7f218ffbbd73014f7",
+    "dimensions": [
+      1152,
+      648
+    ],
+    "captures": [
+      "main_project/tests/.runs/verification-rendered-70fcff1ca0ac4e698381072c528d53fb/project/tests/.runs/scenario-1/geography-main-menu.png",
+      "main_project/tests/.runs/export-80793aee3f41495cad8277c6b22d1285/build/tests/.runs/rendered/geography-main-menu.png",
+      "main_project/tests/.runs/export-b40236ee16914b89bf2a4dc13d4cf357/build/tests/.runs/rendered/geography-main-menu.png"
+    ],
+    "observed": "Legible actual main menu; character entry and saved games explicitly unavailable. No world/terrain/physics readiness claimed."
+  },
+  "changed_files": [
+    {
+      "status": " M",
+      "path": "design_docs/development/DEPENDENCY_GRAPH.md"
+    },
+    {
+      "status": " M",
+      "path": "design_docs/development/IMPLEMENTATION_READINESS.md"
+    },
+    {
+      "status": " M",
+      "path": "design_docs/development/MILESTONES.md"
+    },
+    {
+      "status": " M",
+      "path": "design_docs/development/RUN_ARTIFACT_CLEANUP.md"
+    },
+    {
+      "status": " M",
+      "path": "design_docs/development/TASK_BACKLOG.md"
+    },
+    {
+      "status": " M",
+      "path": "design_docs/development/tasks/IMP-010.md"
+    },
+    {
+      "status": " M",
+      "path": "main_project/export_presets.cfg"
+    },
+    {
+      "status": " M",
+      "path": "main_project/scripts/data/DEFINITION_PUBLICATION.md"
+    },
+    {
+      "status": " M",
+      "path": "main_project/scripts/data/README.md"
+    },
+    {
+      "status": " M",
+      "path": "main_project/scripts/data/classic_access.gd"
+    },
+    {
+      "status": " M",
+      "path": "main_project/scripts/data/definition_registry.gd"
+    },
+    {
+      "status": " M",
+      "path": "main_project/scripts/startup/provider_boundary.gd"
+    },
+    {
+      "status": " M",
+      "path": "main_project/scripts/startup/startup_shell.gd"
+    },
+    {
+      "status": " M",
+      "path": "main_project/tests/README.md"
+    },
+    {
+      "status": " M",
+      "path": "main_project/tools/verify.ps1"
+    },
+    {
+      "status": " M",
+      "path": "main_project/tools/verify_startup_export.ps1"
+    },
+    {
+      "status": "??",
+      "path": "design_docs/development/evidence/IMP-010-increment-1-2026-11-22.md"
+    },
+    {
+      "status": "??",
+      "path": "design_docs/development/evidence/IMP-010-increment-1-audit-2026-11-22.json"
+    },
+    {
+      "status": "??",
+      "path": "main_project/content/geography/DFU_LICENSE.txt"
+    },
+    {
+      "status": "??",
+      "path": "main_project/content/geography/PROVENANCE.md"
+    },
+    {
+      "status": "??",
+      "path": "main_project/content/geography/profile.json"
+    },
+    {
+      "status": "??",
+      "path": "main_project/scripts/data/GEOGRAPHY_INPUTS.md"
+    },
+    {
+      "status": "??",
+      "path": "main_project/scripts/data/geography_formats.gd"
+    },
+    {
+      "status": "??",
+      "path": "main_project/scripts/data/geography_formats.gd.uid"
+    },
+    {
+      "status": "??",
+      "path": "main_project/scripts/data/geography_inputs.gd"
+    },
+    {
+      "status": "??",
+      "path": "main_project/scripts/data/geography_inputs.gd.uid"
+    },
+    {
+      "status": "??",
+      "path": "main_project/scripts/data/geography_source_reader.gd"
+    },
+    {
+      "status": "??",
+      "path": "main_project/scripts/data/geography_source_reader.gd.uid"
+    },
+    {
+      "status": "??",
+      "path": "main_project/tests/geography_cases.gd"
+    },
+    {
+      "status": "??",
+      "path": "main_project/tests/geography_inventory.json"
+    },
+    {
+      "status": "??",
+      "path": "main_project/tests/geography_source_observation.json"
+    },
+    {
+      "status": "??",
+      "path": "main_project/tools/geography_fixture.ps1"
+    },
+    {
+      "status": "??",
+      "path": "main_project/tools/observe_geography.py"
+    }
+  ],
+  "final_diff_check": "passed"
+}

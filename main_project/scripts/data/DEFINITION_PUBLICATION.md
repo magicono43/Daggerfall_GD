@@ -1,5 +1,13 @@
 # Definition publication — IMP-005 increment 3
 
+IMP-010 increment 1 registers [geographic inputs](GEOGRAPHY_INPUTS.md) through
+this same transaction. Required classic readers precede preparation; PCK-backed
+identity metadata and baseline records feed the existing shipped hook. Complete
+extent/coverage, typed references, scoped classic mappings and multiple-location
+pixel indexes validate before publication. Layouts, variants, real WORLD/LOC/MOVE
+physics, discovery and SAVE compatibility remain unavailable. No commitment,
+omission, source-retirement or run-long locking rule changes.
+
 IMP-009 increment 3 adds [faction/quest sources](FACTION_QUEST_INPUTS.md) with
 origin-scoped logical pack resources, explicit legacy mappings, whole-text/list/
 table replacement and fresh faction graph validation. Shipped sources use PCK
@@ -83,6 +91,17 @@ Adapter interface:
 | `patch_record(previous, fields)` | `{ok:true,value:complete_record}` or `{ok:false,reason}`; explicit null/nested/list policy belongs here |
 | `validate_references(resources)` | Array of failures with source/reason; may identify introducing contribution token and whether it may be explicitly omitted |
 
+An adapter may memoize derived lookup keys during candidate validation, scoped
+and cleared by `begin_candidate` / `finish_candidate`, and expose
+`read_only_index(ticket)`. This changes no published/session facts or validation
+outcomes. These are preparation-only callbacks, not runtime mutation requests. The registry's
+`domain_index(domain)` calls that optional projection only with its **published**
+ticket and returns a detached copy; before publication it returns `before_readiness`.
+Geography uses this for validated membership/name/classic-mapping lookup keys,
+then reads records through the authoritative registry's ordinary `query` API.
+Failed candidates clear the projection; new tickets replace it. There is no
+second record registry, publication callback or change to the durable commit path.
+
 `json_envelopes` defaults to true for existing adapters. The production text
 adapter explicitly declares false: even an empty JSON envelope cannot reset a
 CSV catalog or bypass entry validation. Its versioned CSV reader owns operations.
@@ -97,8 +116,9 @@ contributions. An unresolved required resource/reference blocks publication even
 after omission. Unknown operations do not acquire universal merge/delete semantics.
 No adapters are enabled implicitly: the ordinary build without production domain
 adapters reports `adapters_unavailable`. Bounded fixture adapters are registered
-only through the explicitly isolated verification launch path. No IMP-007–010
-production text/media/authored/world schema has been invented.
+only through the explicitly isolated verification launch path. Production source
+adapters register explicitly in normal startup as documented above; their source
+schemas do not establish later gameplay or world-assembly readiness.
 
 ## Sources and explicit contributions
 
@@ -169,6 +189,11 @@ matching record IDs retain prior origin. `add` requires unused target IDs and
 `patch` requires existing IDs. Add/replace duplicate IDs are invalid; repeated
 patch entries apply sequentially to the same record. Invalid late entries reject
 **all** mutations from that file. All work is isolated on copied candidate state.
+Internal preparation copies the resource being changed once and uses a new outer
+resource map; untouched resources are never mutated. Public `apply_contribution`
+first detaches its input, and candidate/active/query/index projections remain deep
+copies. This removes redundant full-world copies for geographic catalogs without
+sharing mutable input with callers or weakening whole-file rollback.
 Other valid files may be visible in a failed diagnostic projection, but none of
 that failed candidate can publish or satisfy normal definition reads.
 
@@ -257,8 +282,9 @@ pipeline for their named interface tests and do not qualify real publication.
 SAVE receives the eventual read-only active plan/package/definition-provenance
 context through its later compatibility integration. No `save_compatible` success
 is fabricated, and CORE's real SAVE/CHAR/WORLD providers remain unavailable.
-IMP-007–010/061 schemas and IMP-050/051 executable activation are still required
-from their owners. Passing bounded schemas does not close all M1 requirements.
+Later layout/variant and IMP-061 assembly schemas, real domain/physics/SAVE
+integrations and IMP-050/051 executable activation are still required from their
+owners. Delivered source schemas do not close those M1 requirements.
 
 ## Formula publication participant — IMP-006 increment 3
 

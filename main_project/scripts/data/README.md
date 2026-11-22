@@ -1,5 +1,12 @@
 # Classic access — IMP-004
 
+IMP-010 increment 1 adds [geographic inputs](GEOGRAPHY_INPUTS.md) through the
+existing DATA/MOD/CORE transaction: checked region/location records, terrain and
+climate samples, stable mappings and validated extent extensions. Normal startup
+declares its required sources before preparation. [Provenance/license records](../../content/geography/PROVENANCE.md)
+cover the pinned classic profile and DFU labels. Layouts/variants and real
+WORLD/LOC/MOVE/discovery/SAVE readiness remain unavailable.
+
 IMP-009 increment 3 adds [faction/quest structural inputs](FACTION_QUEST_INPUTS.md)
 through the existing definition registry: the complete explicit DFU faction,
 text-quest, selection-list and shared-table profile, with package identity,
@@ -71,34 +78,34 @@ requires these four source-level adapters using the common `bsa-v1` reader:
 | --- | --- | --- |
 | `ARCH3D.BSA` | Numeric/ordinal directory, raw payload bytes | IMP-008 meshes |
 | `BLOCKS.BSA` | Named/ordinal directory, raw payload bytes | IMP-010 layouts, IMP-061 dungeon assembly |
-| `MAPS.BSA` | Named/ordinal directory, raw payload bytes | IMP-010 geography |
+| `MAPS.BSA` | Named/ordinal directory; geographic decoding through the separately enabled adapter | IMP-010 layouts |
 | `DAGGER.SND` | Numeric/ordinal directory, raw payload bytes | IMP-008 audio |
 
 This is an explicit **foundation container inventory**, not the complete eventual
 game manifest. The enabled production consumer is the startup required-reader
 gate; raw container requests are the delivered DATA interface. Normal startup now
-also enables IMP-007's real text reader and catalogs. Media/world consumers remain
-with their later owners.
+also enables the delivered text/media/actor/item/spell/faction/quest/geographic
+adapters described above. Their structural source access does not close later
+gameplay, geometry or SAVE consumer gates.
 The four initialized containers are mandatory, not optional substitutes for those
 later capabilities. The registry composes/deduplicates declarations of enabled
 capabilities and retains their adapter IDs in each manifest entry.
 
 Before initialization, owners use `register_adapter(id, sources)` and
-`enable_capability(id)`. The former currently accepts implemented `bsa-v1` and `text-rsc-v1`
-checks; unsupported formats are rejected. Enabling an undeclared capability fails
+`enable_capability(id)`. The former accepts only formats backed by real registered
+container/text/media/actor/item-spell/geography readers; unsupported formats are
+rejected. Enabling an undeclared capability fails
 manifest composition with `capability_unavailable`, including when a caller has
 not supplied an implementation. Registration/enabling after preparation or
 activation is rejected. Owners must check these request results. This is a DATA
 registration boundary, not MOD's package permission/registration policy.
 
-IMP-007 must add classic text/localization sources and their schemas; IMP-008
-must add actual mesh/image/texture/audio/music/video formats and enabled required
-dependencies; IMP-009 must add authored definition sources, including packaged
-sources; IMP-010 must add terrain/climate sources (including `WOODS.WLD` where
-required), mapping and typed layouts; IMP-061 must validate assembled dungeon
-records/arrival markers. Their complete manifests require their actual consumer
-declarations and verification. None is implemented, marked optional, or claimed
-ready here. Each enabled capability must join validation/initialization before
+The historical IMP-004 follow-on reader plan has now delivered the source
+adapters listed above. IMP-010 increment 1 explicitly adds WOODS/CLIMATE/POLITIC
+and shares MAPS with the foundation. IMP-010 layouts/variants and IMP-061 assembled
+dungeons/arrival markers remain later work. Complete runtime manifests still
+require actual consumer declarations and verification; structural source access
+cannot establish those owners' semantic readiness. Each enabled capability must join validation/initialization before
 normal entry. Adding a non-BSA format requires its owner's real checked reader,
 not changing the format label or accepting opaque presence alone.
 

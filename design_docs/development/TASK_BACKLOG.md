@@ -1,5 +1,10 @@
 # Implementation backlog
 
+**IMP-010 increment 1 implemented/verified, 2026-11-22:** Geographic records await
+user acceptance; see [execution evidence](evidence/IMP-010-increment-1-2026-11-22.md).
+IMP-005 remains accepted. Layouts, variants, downstream owner/SAVE/physics and M1
+gates remain open. Historical handoff-only statements below precede issuance.
+
 **IMP-009 reader delivery accepted / IMP-010 handoff, 2026-11-22:** The user
 accepted increment 3, committed at `b33fa5a` (`Implementation Task 009, Part 3
 Completed, 11-22-2026`). All three assigned IMP-009 reader increments are now

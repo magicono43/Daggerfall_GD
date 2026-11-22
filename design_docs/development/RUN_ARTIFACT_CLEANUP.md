@@ -210,3 +210,17 @@ Exact local manifests and verification are recorded in:
 
 Future agents should apply the default evidence-only policy above after large
 verification batches rather than repeat the first pass's whole-build retention.
+
+## 2026-11-22 IMP-010 increment-1 compaction
+
+The issued geographic-record increment completed its source/rendered/Windows
+export checks and affected regressions. Its 27 inactive generated run roots
+were compacted under standing authorization: 33,949 files /
+5,939,147,332 logical bytes removed; 262 evidence files hash-verified.
+Ten large verification/diagnostic JSON files were losslessly archived with verified
+recovery hashes and readable pointers. Zero completed full builds from this
+increment remain, with no deletion failures. Installed junction targets and
+protected existing inputs/evidence remain. The measured final run retention is
+approximately 1.30 GiB. Exact manifests are `tests/.runs/geography-cleanup-2026-11-22.json`
+and `tests/.runs/geography-archive-result.json` under `main_project/`; see the
+[execution evidence](evidence/IMP-010-increment-1-2026-11-22.md) and its versioned audit.

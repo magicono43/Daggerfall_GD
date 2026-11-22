@@ -215,7 +215,7 @@ func prepare(mods: RefCounted) -> Dictionary:
 			omitted.append(entry.source.duplicate(true))
 			continue
 		entry.source.token = token
-		var applied: Dictionary = apply_contribution(resources, read.bytes, entry.source) if read.ok else read
+		var applied: Dictionary = _apply_owned_contribution(resources, read.bytes, entry.source) if read.ok else read
 		if not applied.ok:
 			var issue := failure(applied.get("kind", "invalid"), JSON.stringify(entry.source), applied.reason, token, omittable)
 			if applied.has("schema"): issue.input_failure = applied.duplicate(true)
@@ -248,6 +248,12 @@ func prepare(mods: RefCounted) -> Dictionary:
 	return projection()
 
 func apply_contribution(base: Dictionary, bytes: PackedByteArray, source: Dictionary) -> Dictionary:
+	# Public authoring/fixture callers receive an independent candidate. During
+	# prepare the owner already owns all resources, and copies only the resource
+	# being changed; untouched resources are never mutated or exposed directly.
+	return _apply_owned_contribution(base.duplicate(true),bytes,source)
+
+func _apply_owned_contribution(base: Dictionary, bytes: PackedByteArray, source: Dictionary) -> Dictionary:
 	if str(source.get("file", "")).get_extension().to_lower() == "csv":
 		for registered: Dictionary in _adapters.values():
 			if registered.declaration.get("formats", []).has("text-csv-v1") and registered.adapter.has_method("apply_csv"):
@@ -276,8 +282,8 @@ func apply_contribution(base: Dictionary, bytes: PackedByteArray, source: Dictio
 	if registered.adapter.has_method("resource_path"):
 		logical_path = registered.adapter.resource_path(logical_path,source.duplicate(true))
 	var key := domain + ":" + logical_path
-	var working := base.duplicate(true)
-	var previous: Dictionary = working.get(key, {"domain": domain, "path": logical_path, "records": {}, "contributors": [], "winner": {}}).duplicate(true)
+	var working := base.duplicate(false)
+	var previous: Dictionary = working.get(key, {"domain": domain, "path": logical_path, "records": {}, "contributors": [], "winner": {}})
 	var target: Dictionary = previous.duplicate(true)
 	if operation == "replace":
 		target.records = {}
@@ -367,6 +373,13 @@ func read_loose_media(file: String) -> Dictionary:
 
 func active() -> Dictionary:
 	return _active.duplicate(true)
+
+func domain_index(domain: String) -> Dictionary:
+	# Optional detached domain projection. A prepared index is never readable via
+	# this boundary before the exact candidate's actual CORE publication.
+	if _active.is_empty(): return failure("before_readiness",domain,"Actual menu publication required.")
+	if not _adapters.has(domain) or not _adapters[domain].adapter.has_method("read_only_index"): return failure("source_unavailable",domain,"Domain index provider unavailable.")
+	return _adapters[domain].adapter.read_only_index(int(_active.ticket)).duplicate(true)
 
 func dispose() -> void:
 	_candidate.clear()

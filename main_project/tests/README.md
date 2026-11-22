@@ -1,5 +1,30 @@
 # Shared verification — IMP-003 / DEV-014
 
+IMP-010 increment 1 uses `geography-inputs` / `geography-inputs-v1`:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Suite geography-inputs -Fixture geography-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 600
+./main_project/tools/verify_rendered.ps1 -Suite geography-inputs -Fixture geography-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 600
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -GeographyInputs -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -GeographyInputs -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+The complete production baseline has 62 regions, 15,251 locations, ten climates,
+one extent context and one classic sample tile. Independent observation pins
+source locations, raw/detail samples and shifted climate alignment. Checked MOD
+folder/ZIP/loose transactions exercise expansion, rollback, omission with remaining
+required references, repair, stale/interrupted publication and locking. All 50
+required external files (including accepted actor/item sources) are READ guarded
+and hashed before/after each child. Import/export execution is sequential on
+Windows. The [contract](../scripts/data/GEOGRAPHY_INPUTS.md) keeps later
+WORLD/LOC/MOVE/discovery/SAVE/M1 gates explicitly unavailable.
+
+`geography_inventory.json` freezes 200 headless / 202 rendered assertion IDs,
+also required in both Windows export configurations. Public-candidate isolation
+and fractional sample rejection are included. Internal contribution preparation
+copies only its changed resource; public views/results remain detached. The
+accepted actor, item/spell and faction/quest inventories are unchanged.
+
 IMP-009 increment 3 uses `faction-quest-inputs` / `faction-quest-inputs-v1`:
 
 ```powershell

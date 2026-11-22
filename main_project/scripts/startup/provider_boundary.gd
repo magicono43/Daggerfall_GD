@@ -13,6 +13,11 @@ var media: RefCounted
 var media_preferences: RefCounted
 var _preference_stores: Dictionary = {}
 
+func enable_geography_inputs() -> Dictionary:
+	var candidate := preload("res://scripts/data/geography_inputs.gd").new()
+	candidate.classic = classic
+	return register_content_adapter(candidate,"",[])
+
 func enable_faction_quest_inputs() -> Dictionary:
 	return register_content_adapter(preload("res://scripts/data/faction_quest_inputs.gd").new(),"",[])
 
