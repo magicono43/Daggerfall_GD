@@ -1,5 +1,15 @@
 # Milestones and validation checkpoints
 
+**IMP-009 increment 1 accepted / increment 2 handoff, 2026-11-21:** The user
+accepted increment 1, committed at `f9779c4`, and requested a copy/paste prompt
+for another chat. See [accepted evidence](evidence/IMP-009-increment-1-biog-2026-11-21.md)
+and the [increment-2 prompt](handoffs/IMP-009-INCREMENT-2-PROMPT.txt). Issuing the
+prompt authorizes DATA-010/011 items/spells only; preparing it starts no implementation.
+IMP-005 remains the accepted task prerequisite. No parent IMP-009, increment-3,
+real ITEM/MAGIC/CHAR/NPC/SAVE, shared-feature or M1 gate is closed by this acceptance.
+Earlier pending-acceptance and source-blocking notes are historical.
+
+
 **BIOG correction authorized, 2026-11-21:** The user explicitly approved adopting
 DFU's removal of the 12 observed standalone ampersand markers, without unrelated
 biography changes. The correction is a source annotation, not an executable effect.

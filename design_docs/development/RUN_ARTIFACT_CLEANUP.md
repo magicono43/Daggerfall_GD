@@ -2,6 +2,33 @@
 
 ## Default retention policy
 
+### Standing authorization and permission prompts
+
+The user authorizes routine cleanup of understood, inactive, reproducible
+verification outputs under `main_project/tests/.runs/` as part of normal work.
+This authorization persists across chats and batches. Agents should perform that
+cleanup without asking the user for another task-level confirmation, while
+preserving the evidence, inputs and protected roots required below. Removing
+unique inputs or necessary evidence still requires a separate scope decision.
+
+Use ordinary workspace permissions. Prefer reliable non-elevated activity checks
+and the verification runner's owned-child lifetime evidence when available.
+Do not make privileged WMI/CIM access a cleanup prerequisite when sufficient
+activity evidence is already available. In the IMP-009 work, bundling
+`Get-CimInstance Win32_Process` into each cleanup command caused repeated
+execution-environment escalation requests; that is not a repository requirement
+or a reason to ask for fresh cleanup authorization.
+
+A terminal report alone does not prove that a build was never relaunched. Account
+for active debugging/review use and any uncertainty about current activity. If a
+target cannot safely be established as inactive, leave that target and report the
+deferral; continue cleanup of other verified targets. Do not bypass a denied
+operation, broaden deletion scope, or change host security settings to avoid an
+approval. Host-enforced execution approvals remain separate from this standing
+authorization and cannot be waived by repository instructions.
+
+### Retained artifacts
+
 **Keep compact evidence, not test builds.** At the end of verification, remove
 disposable copied projects, exported executables/PCKs, copied native DLLs/banks,
 import/compile caches and isolated runtime state. A reference to `report.json`,

@@ -1,5 +1,18 @@
 # IMP-009 increment 1 — approved BIOG correction and real-source qualification
 
+## User acceptance and increment-2 handoff
+
+On 2026-11-21 the user said, “I accept what you have done in increment 1” and
+requested a copy/paste prompt for another agent to start increment 2. Git records
+the accepted implementation at `f9779c4` (`Implementation Task 009, Part 1
+Completed, 11-21-2026`). Increment 1's assigned input-reader delivery is now
+user-accepted. The [increment-2 prompt](../handoffs/IMP-009-INCREMENT-2-PROMPT.txt)
+is prepared for issuance in another chat; it starts no implementation here.
+Parent IMP-009, increment 3, real-owner/semantic, SAVE and M1 gates remain open.
+Earlier uncommitted/pending-acceptance statements below preserve the execution
+history and are superseded by this acceptance. Current uncommitted cleanup-policy
+and handoff/acceptance edits are not part of the earlier implementation commit.
+
 ## Authorization and delivery status
 
 On 2026-11-21 the user explicitly instructed: “In this case, assume the DFU
