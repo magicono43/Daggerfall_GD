@@ -2,8 +2,8 @@
   "schema": "imp010-increment3-audit-v1",
   "date": "2026-11-22",
   "status": "passed",
-  "user_acceptance": "pending",
-  "scope": "IMP-010 increment 3 DATA only; parent IMP-010 and M1 open",
+  "user_acceptance": "accepted",
+  "scope": "IMP-010 increment 3 DATA only; parent IMP-010 DATA task complete and user-accepted; real-owner/M1 gates open",
   "engine": "4.7.2.stable.official.ed1daf0bf",
   "platform": "Windows",
   "source_revision": "e324d549966e003d7941709c3897630b05faf5c7",
@@ -1030,5 +1030,25 @@
       "reparse_points_followed": false,
       "policy": "Known completed payloads will be removed after the sequential verification batch; active roots protected."
     }
+  },
+  "acceptance": {
+    "date": "2026-11-22",
+    "commit": "c4d50e7",
+    "commit_subject": "Implementation Task 010, Part 3 Completed, 11-22-2026",
+    "user_statement": "I accept what you have done in increment 3.",
+    "scope": "Documented increment-3 DATA boundary and supported limits; parent IMP-010 and real-owner/M1 gates remain open."
+  },
+  "parent_task_acceptance": {
+    "task": "IMP-010",
+    "status": "complete_and_user_accepted",
+    "date": "2026-11-22",
+    "user_statement": "I also accept IMP-010 itself",
+    "component_commits": [
+      "3b9e4bd",
+      "e324d54",
+      "c4d50e7"
+    ],
+    "scope": "Documented geographic/layout/variant DATA delivery and supported limits; downstream owner integrations and M1 remain open.",
+    "dependent_work": "IMP-010 DATA prerequisite delivered; other prerequisites, implementation authorization and real-provider joint checks still required."
   }
 }
