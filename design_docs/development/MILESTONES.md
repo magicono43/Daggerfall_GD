@@ -1,5 +1,18 @@
 # Milestones and validation checkpoints
 
+**2026-11-21 increment 2 accepted / increment 3 handoff:** The user explicitly
+accepted increment 2 and requested a copy/paste prompt for another chat. The
+accepted implementation is committed at `7e9947f` (`Implementation Task 009,
+Part 2 Completed, 11-21-2026`). See [increment-2 evidence](evidence/IMP-009-increment-2-2026-11-21.md)
+and the [increment-3 prompt](handoffs/IMP-009-INCREMENT-3-PROMPT.txt). Issuing that
+prompt authorizes DATA-009/012 faction/quest input adapters only; preparing it
+starts no increment-3 implementation here. IMP-005 remains the accepted listed
+prerequisite. Standing PROJECT-DATA-D01 permits suitable original/DFU data and
+routine corrections, prioritizing coherent modding support over exact vanilla
+parity. Preserve uncommitted policy and handoff edits. Real-owner/SAVE, parent
+IMP-009 and M1 gates remain open; earlier increment-2 review-pending notes below
+are historical.
+
 **IMP-009 increment 2 execution, 2026-11-21:** The issued prompt authorized only
 DATA-010/011 items/spells. The user separately authorized an explicitly identified
 DFU packaged item baseline and clarified consistency rather than exact original

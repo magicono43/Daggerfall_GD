@@ -3,6 +3,15 @@
 Approval status: **Approved — finalized v1.** User approved the complete Draft v1 on 2026-11-05: “I approve”.
 Updated: 2026-11-05.
 
+**2026-11-21 standing clarification:** `PROJECT-DATA-D01` in
+[GAMEPLAY_DECISIONS.md](../../GAMEPLAY_DECISIONS.md) permits suitable DFU data and
+routine corrections using engineering judgment within an authorized task.
+Modding and a reasonably consistent baseline take priority over exact vanilla
+values. This supersedes the older per-correction approval requirement below for
+routine data/compatibility choices; material changes to approved gameplay still
+require clarification. Corrections remain explicit, input-matched, documented
+and subordinate to later mod/loose overrides. This note applies no runtime fix.
+
 ## Gameplay purpose
 
 Supply identifiable standard spell records and complete conversion inputs for MAGIC, item, quest and save consumers. Preserve distinct classic content, explicit correction provenance and truthful failure when a spell cannot be represented as authored.

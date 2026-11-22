@@ -3,6 +3,13 @@
 Approval status: **Approved — finalized v1.** User approved the complete Draft v1 on 2026-11-05: “I approve”.
 Updated: 2026-11-05.
 
+**2026-11-21 standing clarification:** `PROJECT-DATA-D01` in
+[GAMEPLAY_DECISIONS.md](../../GAMEPLAY_DECISIONS.md) permits original or DFU data,
+sensible corrections and documented combinations chosen for consistency and
+modding. Exact original-value parity is not required. Historical reference-only
+wording below does not prohibit adopting suitable DFU content within an authorized
+task. Preserve provenance, validation, identities and override precedence.
+
 ## Gameplay purpose
 
 Supply validated reusable item and magic-item definitions with stable identity, source mappings and required references for creation, lookup and restoration. Keep imported content separate from item-instance state and domain gameplay rules.

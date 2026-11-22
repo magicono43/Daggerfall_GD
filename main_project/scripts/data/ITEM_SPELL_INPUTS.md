@@ -1,5 +1,14 @@
 # Item and spell structural inputs — v1
 
+**Standing policy update, 2026-11-21:** Repository AGENTS.md and
+`PROJECT-DATA-D01` in `design_docs/design/GAMEPLAY_DECISIONS.md` authorize choosing
+suitable original/DFU data and routine corrections for a coherent moddable
+baseline. Exact vanilla parity and separate permission for every routine DFU
+correction are not required. The implementation inventory below records what
+increment 2 actually enabled; its currently disabled spell corrections are not
+a project-wide prohibition. Future authorized work should follow the standing
+policy while retaining provenance, input matching and mod override precedence.
+
 IMP-009 increment 2, Godot 4.7.2 / Windows. Registered by
 `StartupProviderBoundary.enable_item_spell_inputs()` before source preparation;
 normal startup enables this alongside accepted actor inputs. The domain is

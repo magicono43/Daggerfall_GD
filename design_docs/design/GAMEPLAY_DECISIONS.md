@@ -2,6 +2,29 @@
 
 Individual decisions can be confirmed before a complete feature specification is approved.
 
+## Standing project data policy
+
+- **PROJECT-DATA-D01 — 2026-11-21 — User-authorized source/correction discretion.**
+  The user clarified that DFU data and corrections are allowed and agents should
+  use whichever source makes the most sense, keeping related content reasonably
+  consistent where possible. Modding is the highest overall priority; exact vanilla
+  values and bug-for-bug fidelity are not required, since data will be changed or
+  replaced through mods. Original data, DFU packaged data/corrections and documented
+  combinations are valid baseline choices. Agents may adopt sensible routine
+  data/compatibility corrections within an authorized task without requesting
+  separate approval solely because they differ from vanilla or originate in DFU.
+  Record source/license provenance, rationale, consistency checks and intentional
+  differences. Preserve stable identity, validation, explicit correction matching
+  and later mod/loose override precedence. This supersedes older blanket
+  reference-only restrictions and individual-approval requirements for routine
+  source/correction choices, including DATA-011-D05's earlier approval wording.
+  Explicitly approved gameplay/architecture, task scope, owner readiness and
+  save/state safeguards still apply; material conflicts require clarification.
+  This records standing guidance and changes no runtime data by itself.
+
+  User: “the modding aspect is the most important overall” and “use whichever
+  data source makes sense to.” See the standing policy in repository AGENTS.md.
+
 ## DEV-014 decisions
 
 - **DEV-014-D01 — 2026-11-18.** Start with failed restore preservation, enemy placement and combat, and quest fault/retry scenarios. Add focused formula and classic conversion checks as those owners implement behavior. The user answered “1. Yes”.

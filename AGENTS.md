@@ -8,6 +8,39 @@ Build the approved Daggerfall-style RPG in **Godot 4.7.2**, progressing through 
 - Create recreation code in `main_project/`, which contains `project.godot` and is the game directory for IMP-001. Repository-relative documentation paths start at this repository root; Godot `res://` paths start at `main_project/`.
 - Use **GDScript** for the main game, UI and tools, and **C++ GDExtensions** for native adapters, as approved by the user on 2026-11-18. Follow existing project conventions within that split. Approved mod languages are Luau for restricted scripts and GDScript for trusted scripts. Native media/runtime adapters follow the linked contracts.
 
+## Standing data-source and correction policy
+
+**User clarification, 2026-11-21:** Modding is the highest overall priority.
+Exact vanilla Daggerfall values and bug-for-bug fidelity are not project goals;
+baseline values are expected to be changed or replaced through mods.
+
+- Choose whichever source makes the most sense for the assigned work: original
+  Daggerfall data, DFU packaged data, DFU corrections, or an explicitly documented
+  combination. DFU data and corrections are allowed, not merely reference-only.
+  Prefer a coherent, usable and moddable baseline that is reasonably consistent
+  with related Daggerfall content over unnecessary exact-original parity.
+- Use engineering judgment to adopt sensible source data and routine corrections
+  within the authorized task. Do not ask for separate permission merely because
+  a value/correction comes from DFU, differs from vanilla, or lacks an original
+  executable comparison. Explain the choice, check relevant consistency and
+  references, and record provenance, licensing and intentional differences.
+- Keep baseline choices and corrections explicit and replaceable. Preserve stable
+  identities, deterministic publication, correction provenance and later mod/loose
+  override precedence. Match a correction's intended input so it does not overwrite
+  externally modified values accidentally. Never bake vanilla values into owners
+  where the approved data/mod interfaces should supply them.
+- This standing authorization supersedes older blanket reference-only wording and
+  per-correction approval requirements for routine data/compatibility choices.
+  It does not authorize unrelated tasks, material changes to explicitly approved
+  gameplay/architecture, unsupported behavior, source-file mutation or false
+  readiness claims. Ask only when a concrete material conflict or design choice
+  remains; ordinary source selection and consistency fixes should proceed.
+
+See `PROJECT-DATA-D01` in
+[GAMEPLAY_DECISIONS.md](design_docs/design/GAMEPLAY_DECISIONS.md). Historical
+approvals and execution evidence describe what was adopted at the time; they are
+not a standing ban on adopting further DFU data or corrections.
+
 ## Read the relevant documents
 
 Start with the assigned `design_docs/development/tasks/IMP-NNN.md`. Read its linked feature specifications, applicable approved GAD decisions, prerequisites and supporting contracts. Inspect the affected implementation and callers. Expand into adjacent owners or source analysis when a dependency, ambiguity or failure requires it. Avoid loading the entire design catalog for each task.
