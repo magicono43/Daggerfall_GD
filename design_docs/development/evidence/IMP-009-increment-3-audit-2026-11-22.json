@@ -584,7 +584,7 @@
       "engine": "4.7.2.stable.official.ed1daf0bf"
     }
   ],
-  "status": "delivered_for_user_review",
+  "status": "user_accepted_increment_3",
   "required_increment_checks": "passed",
   "source_blockers": [],
   "standalone_snapshot_exclusions": {
@@ -622,5 +622,11 @@
     "runtime_binary_count": 0,
     "retained_bytes_at_scan": 1379051957,
     "archival": "Original JSON paths hold explicit gzip pointers. Verified decompressed SHA-256 recovers byte-exact original reports/results."
+  },
+  "user_acceptance": {
+    "remaining_integration_gates": "Unchanged; no real-owner/SAVE/CORE-012/M1 acceptance inferred",
+    "commit": "b33fa5a",
+    "date": "2026-11-22",
+    "scope": "Assigned DATA-009/012 reader increment; all three IMP-009 reader increments accepted"
   }
 }

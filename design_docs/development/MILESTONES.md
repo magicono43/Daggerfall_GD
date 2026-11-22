@@ -1,5 +1,19 @@
 # Milestones and validation checkpoints
 
+**IMP-009 reader delivery accepted / IMP-010 handoff, 2026-11-22:** The user
+accepted increment 3, committed at `b33fa5a` (`Implementation Task 009, Part 3
+Completed, 11-22-2026`). All three assigned IMP-009 reader increments are now
+complete and user-accepted (`f9779c4`, `7e9947f`, `b33fa5a`). No additional reader
+implementation or rerun is required merely to record acceptance. Named real-owner,
+SAVE/CORE-012 and M1 integration/feature acceptance gates remain open; acceptance
+does not certify gameplay usability or close those deferred checks. See
+[evidence](evidence/IMP-009-increment-3-2026-11-22.md).
+IMP-010's sole listed prerequisite, IMP-005, is already accepted. Its
+[increment-1 prompt](handoffs/IMP-010-INCREMENT-1-PROMPT.txt) authorizes geographic
+records only when issued to the receiving agent. Preparing this handoff starts
+no IMP-010 implementation here. Layouts and variants retain later review gates.
+Earlier review-pending and handoff-only statements below are historical.
+
 **IMP-009 increment 3 execution, 2026-11-21–22:** The user issued the faction/quest
 handoff. DATA-009/012 source adapters, explicit complete DFU profile, package/loose
 resolution and checked validation handoffs are delivered for user review; the
