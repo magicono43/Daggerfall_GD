@@ -1,5 +1,26 @@
 # Shared verification — IMP-003 / DEV-014
 
+IMP-009 increment 3 uses `faction-quest-inputs` / `faction-quest-inputs-v1`:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Suite faction-quest-inputs -Fixture faction-quest-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 300
+./main_project/tools/verify_rendered.ps1 -Suite faction-quest-inputs -Fixture faction-quest-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 300
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -FactionQuestInputs -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -FactionQuestInputs -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+The fixed inventory is 132 headless / 134 rendered assertions. Complete production
+composition includes accepted actors/items/spells; all 47 required external files
+are guarded READ-only and hashed before/after each child. The selected shipped
+profile has 366 factions, 265 text quests, two lists / 188 entries, ten shared
+tables / 1,270 rows. Profile/source/license hashes validate PCK intake. Controlled
+semantic providers remain interface-only; real FACT/QUEST/SAVE/CORE-012 gates are
+open. See [the contract](../scripts/data/FACTION_QUEST_INPUTS.md) and
+[provenance](../content/faction_quest/PROVENANCE.md). Source vectors, production
+folder/ZIP/loose recovery and CORE publication share the existing entry points.
+The shared UTF-8 precheck was extracted from `text_csv.parse` without changing
+CSV behavior; affected `text` regressions retain their established inventories.
+
 IMP-009 increment 2 uses `item-spell-inputs` / `item-spell-inputs-v1`:
 
 ```powershell

@@ -1,0 +1,626 @@
+{
+  "revision": "3c324ec9fcfb7e81c8a939287d2287f74add7c00",
+  "original_faction_unchanged": true,
+  "manual": {
+    "gameplay_semantic_acceptance": false,
+    "renderer": "D3D12 / Forward+ / Intel UHD Graphics 630",
+    "menu_png_sha256": "F0F01D9E0C548AAEFE42A2155F11A44C1633062DAA61EEA7F218FFBBD73014F7",
+    "observations": [
+      "Actual main menu, New Game, Settings / Setup and Quit; character/saved-game unavailable notice remains truthful.",
+      "Text recovery retains source selection, Retry and independent readable controls."
+    ]
+  },
+  "date": "2026-11-22",
+  "started": "2026-11-21",
+  "source_hashes": {
+    "scripts/startup/startup_shell.gd": "AD1FB795334B494654FA199894EB6D70EC7F0ABA05FEB8CCCFC25F79447BDA43",
+    "tests/faction_quest_cases.gd": "057DBD2377AF46672D131ACE761A9CA3ACBDEA67425C9BEAB9641A490DE27C73",
+    "tests/faction_quest_inventory.json": "D09D28013AD60270E0320EE6B8B261990630DAFBAF0AB239911549E74AC15D05",
+    "scripts/data/faction_quest_source_reader.gd": "2B670B81A658AB491E1B01608DA374F8D5A1E556F38DB1024336654527E6D39A",
+    "scripts/data/faction_quest_formats.gd": "8B3F81A738EC2FC79BCAAA6468496D3AA35D6ABA203E84A634F967E6CF594C2B",
+    "scripts/data/text_csv.gd": "8729B18F935B8A40A5A1BDA20DE726768C149D8C20E293C12719C1FAD69D2F42",
+    "scripts/data/definition_registry.gd": "B90B99333DEE3531DF3D75C1CA15F563C880338E5816DD3357CFB2F954075EFF",
+    "export_presets.cfg": "561A9F6A227AE02817FB3EE315377B80B8092C90E951A08DA335A45BA095EB56",
+    "content/faction_quest/profile.json": "CF66EC631C3462417EAE0EA6AA7FBE3797D4FA9232E9F1EAAED3CF894962AC56",
+    "scripts/data/faction_quest_inputs.gd": "6CF4B29CA8B20219DF001D02583B217C268BA42C9529C040DC78AC6D9F5D6676",
+    "scripts/startup/provider_boundary.gd": "456829A93452773C392CB1067C96C42478E3A671CAA750CCF14CAB63F2EC47D9",
+    "content/faction_quest/DFU_LICENSE.txt": "6E5E22FA760938AB398743150787896BD20FCF4936AAD0122704700BAD1E669A"
+  },
+  "source_profile": "dfu-faction-quest-profile-v1",
+  "coverage": {
+    "selected_text_files": 278,
+    "factions": 366,
+    "list_entries": 188,
+    "tables": 10,
+    "lists": 2,
+    "table_rows": 1270,
+    "quests": 265,
+    "production_semantic_ready": false,
+    "definition_records": 643
+  },
+  "reference_and_shipped_sources_unchanged": true,
+  "open_gates": [
+    "FACT IMP-032",
+    "QUEST IMP-028",
+    "SAVE/FACT/QUEST compatibility and migrations",
+    "CORE-012 opening/tutorial registration and execution",
+    "real CHAR/NPC/ITEM/MAGIC integration",
+    "parent IMP-009",
+    "M1"
+  ],
+  "schema": "imp009-increment3-audit-v1",
+  "scope": "DATA-009/012 source adapters only, delivered for user review",
+  "exports": [
+    {
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "checks": [
+        {
+          "process_exit": 0,
+          "source_unchanged": true,
+          "guarded_sources": 47,
+          "mode": "headless",
+          "actual": 132,
+          "expected": 132
+        },
+        {
+          "process_exit": 0,
+          "source_unchanged": true,
+          "guarded_sources": 47,
+          "mode": "rendered",
+          "actual": 134,
+          "expected": 134
+        }
+      ],
+      "reproduction": {
+        "command": "./main_project/tools/verify_startup_export.ps1",
+        "arguments": {
+          "FormulaFault": false,
+          "RandomnessSession": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "DependencyPlanning": false,
+          "ModDiscovery": false,
+          "FactionQuestInputs": true,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Formula": false,
+          "FormulaExtraError": false,
+          "Randomness": false,
+          "DefinitionPublication": false,
+          "Configuration": "debug",
+          "ClassicSource": "C:/Games/Daggerfall/arena2"
+        }
+      },
+      "configuration": "debug",
+      "source_hashes_match": true,
+      "pck_sha256": "2FFA7A917C41024ACCF122F588BDB2605F89F24E8154F93260E25C674C909C07",
+      "status": "passed",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "report": "main_project/tests/.runs/export-fcebbd73f5b349e98e2babe70e239f4f/result.json"
+    },
+    {
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "checks": [
+        {
+          "process_exit": 0,
+          "source_unchanged": true,
+          "guarded_sources": 47,
+          "mode": "headless",
+          "actual": 132,
+          "expected": 132
+        },
+        {
+          "process_exit": 0,
+          "source_unchanged": true,
+          "guarded_sources": 47,
+          "mode": "rendered",
+          "actual": 134,
+          "expected": 134
+        }
+      ],
+      "reproduction": {
+        "arguments": {
+          "FormulaFault": false,
+          "ModDiscovery": false,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Randomness": false,
+          "DefinitionPublication": false,
+          "DependencyPlanning": false,
+          "Formula": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "RandomnessSession": false,
+          "Configuration": "release",
+          "FactionQuestInputs": true,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "FormulaExtraError": false
+        },
+        "command": "./main_project/tools/verify_startup_export.ps1"
+      },
+      "configuration": "release",
+      "source_hashes_match": true,
+      "pck_sha256": "4734CA0FA7789DFE31D4CCC71B9E6076A8175511C4DDB71DF2DBCC90C0E952C0",
+      "status": "passed",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "report": "main_project/tests/.runs/export-5d13bc3e3260464db6854ccf06e3291b/result.json"
+    }
+  ],
+  "selections": [
+    {
+      "guarded_sources": 47,
+      "process_exit": 0,
+      "actual": 132,
+      "source_access_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "fixture": "faction-quest-inputs-v1",
+      "source_unchanged": true,
+      "retained_result": "main_project/tests/.runs/verification-headless-a263267d39fa4f72b44f0d583c2ea8bb/evidence/project/tests/.runs/scenario-1/result.json",
+      "status": "passed",
+      "source_snapshot_matches": {
+        "scripts/startup/startup_shell.gd": true,
+        "tests/faction_quest_cases.gd": true,
+        "tests/faction_quest_inventory.json": true,
+        "scripts/data/faction_quest_source_reader.gd": true,
+        "scripts/data/faction_quest_formats.gd": true,
+        "scripts/data/text_csv.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "content/faction_quest/profile.json": true,
+        "scripts/data/faction_quest_inputs.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "content/faction_quest/DFU_LICENSE.txt": true
+      },
+      "report": "main_project/tests/.runs/verification-headless-a263267d39fa4f72b44f0d583c2ea8bb/report.json",
+      "mode": "headless",
+      "reproduction": {
+        "arguments": {
+          "Seed": null,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Clock": null,
+          "Suite": "faction-quest-inputs",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "TimeoutSeconds": 300,
+          "Fixture": "faction-quest-inputs-v1",
+          "InputSequence": ""
+        },
+        "command": "./main_project/tools/verify_headless.ps1"
+      },
+      "suite": "faction-quest-inputs",
+      "expected": 132,
+      "engine": "4.7.2.stable.official.ed1daf0bf"
+    },
+    {
+      "guarded_sources": 47,
+      "process_exit": 0,
+      "actual": 134,
+      "source_access_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "fixture": "faction-quest-inputs-v1",
+      "source_unchanged": true,
+      "retained_result": "main_project/tests/.runs/verification-rendered-5f80ab5abe6e43cca02706d9f074b22e/evidence/project/tests/.runs/scenario-1/result.json",
+      "status": "passed",
+      "source_snapshot_matches": {
+        "scripts/startup/startup_shell.gd": true,
+        "tests/faction_quest_cases.gd": true,
+        "tests/faction_quest_inventory.json": true,
+        "scripts/data/faction_quest_source_reader.gd": true,
+        "scripts/data/faction_quest_formats.gd": true,
+        "scripts/data/text_csv.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "content/faction_quest/profile.json": true,
+        "scripts/data/faction_quest_inputs.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "content/faction_quest/DFU_LICENSE.txt": true
+      },
+      "report": "main_project/tests/.runs/verification-rendered-5f80ab5abe6e43cca02706d9f074b22e/report.json",
+      "mode": "rendered",
+      "reproduction": {
+        "arguments": {
+          "Fixture": "faction-quest-inputs-v1",
+          "Seed": null,
+          "TimeoutSeconds": 300,
+          "Suite": "faction-quest-inputs",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "InputSequence": "",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Clock": null,
+          "Scenario": []
+        },
+        "command": "./main_project/tools/verify_rendered.ps1"
+      },
+      "suite": "faction-quest-inputs",
+      "expected": 134,
+      "engine": "4.7.2.stable.official.ed1daf0bf"
+    },
+    {
+      "guarded_sources": 45,
+      "process_exit": 0,
+      "actual": 236,
+      "source_access_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "fixture": "actor-inputs-v1",
+      "source_unchanged": true,
+      "retained_result": "main_project/tests/.runs/verification-headless-b03b0615b3834454b92147302e97c31a/evidence/project/tests/.runs/scenario-1/result.json",
+      "status": "passed",
+      "source_snapshot_matches": {
+        "scripts/startup/startup_shell.gd": true,
+        "tests/faction_quest_cases.gd": true,
+        "tests/faction_quest_inventory.json": true,
+        "scripts/data/faction_quest_source_reader.gd": true,
+        "scripts/data/faction_quest_formats.gd": true,
+        "scripts/data/text_csv.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "content/faction_quest/profile.json": true,
+        "scripts/data/faction_quest_inputs.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "content/faction_quest/DFU_LICENSE.txt": true
+      },
+      "report": "main_project/tests/.runs/verification-headless-b03b0615b3834454b92147302e97c31a/report.json",
+      "mode": "headless",
+      "reproduction": {
+        "arguments": {
+          "Suite": "actor-inputs",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Seed": null,
+          "Clock": null,
+          "Scenario": [],
+          "Fixture": "actor-inputs-v1",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "InputSequence": "",
+          "TimeoutSeconds": 300
+        },
+        "command": "./main_project/tools/verify_headless.ps1"
+      },
+      "suite": "actor-inputs",
+      "expected": 236,
+      "engine": "4.7.2.stable.official.ed1daf0bf"
+    },
+    {
+      "guarded_sources": 45,
+      "process_exit": 0,
+      "actual": 238,
+      "source_access_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "fixture": "actor-inputs-v1",
+      "source_unchanged": true,
+      "retained_result": "main_project/tests/.runs/verification-rendered-5497572d204b4fc5928275b7f6eb7f26/evidence/project/tests/.runs/scenario-1/result.json",
+      "status": "passed",
+      "source_snapshot_matches": {
+        "scripts/startup/startup_shell.gd": true,
+        "tests/faction_quest_cases.gd": true,
+        "tests/faction_quest_inventory.json": true,
+        "scripts/data/faction_quest_source_reader.gd": true,
+        "scripts/data/faction_quest_formats.gd": true,
+        "scripts/data/text_csv.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "content/faction_quest/profile.json": true,
+        "scripts/data/faction_quest_inputs.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "content/faction_quest/DFU_LICENSE.txt": true
+      },
+      "report": "main_project/tests/.runs/verification-rendered-5497572d204b4fc5928275b7f6eb7f26/report.json",
+      "mode": "rendered",
+      "reproduction": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "InputSequence": "",
+          "Clock": null,
+          "Seed": null,
+          "TimeoutSeconds": 300,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Scenario": [],
+          "Fixture": "actor-inputs-v1",
+          "Suite": "actor-inputs",
+          "ClassicSource": "C:/Games/Daggerfall/arena2"
+        }
+      },
+      "suite": "actor-inputs",
+      "expected": 238,
+      "engine": "4.7.2.stable.official.ed1daf0bf"
+    },
+    {
+      "guarded_sources": 47,
+      "process_exit": 0,
+      "actual": 160,
+      "source_access_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "fixture": "item-spell-inputs-v1",
+      "source_unchanged": true,
+      "retained_result": "main_project/tests/.runs/verification-headless-b043854f22ff4d71a3d6acfaea3719c5/evidence/project/tests/.runs/scenario-1/result.json",
+      "status": "passed",
+      "source_snapshot_matches": {
+        "scripts/startup/startup_shell.gd": true,
+        "tests/faction_quest_cases.gd": true,
+        "tests/faction_quest_inventory.json": true,
+        "scripts/data/faction_quest_source_reader.gd": true,
+        "scripts/data/faction_quest_formats.gd": true,
+        "scripts/data/text_csv.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "content/faction_quest/profile.json": true,
+        "scripts/data/faction_quest_inputs.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "content/faction_quest/DFU_LICENSE.txt": true
+      },
+      "report": "main_project/tests/.runs/verification-headless-b043854f22ff4d71a3d6acfaea3719c5/report.json",
+      "mode": "headless",
+      "reproduction": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Suite": "item-spell-inputs",
+          "Seed": null,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "TimeoutSeconds": 300,
+          "InputSequence": "",
+          "Scenario": [],
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "item-spell-inputs-v1",
+          "Clock": null
+        }
+      },
+      "suite": "item-spell-inputs",
+      "expected": 160,
+      "engine": "4.7.2.stable.official.ed1daf0bf"
+    },
+    {
+      "guarded_sources": 47,
+      "process_exit": 0,
+      "actual": 162,
+      "source_access_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "fixture": "item-spell-inputs-v1",
+      "source_unchanged": true,
+      "retained_result": "main_project/tests/.runs/verification-rendered-c15c22619a0341c7a057b62f9b0f3b61/evidence/project/tests/.runs/scenario-1/result.json",
+      "status": "passed",
+      "source_snapshot_matches": {
+        "scripts/startup/startup_shell.gd": true,
+        "tests/faction_quest_cases.gd": true,
+        "tests/faction_quest_inventory.json": true,
+        "scripts/data/faction_quest_source_reader.gd": true,
+        "scripts/data/faction_quest_formats.gd": true,
+        "scripts/data/text_csv.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "content/faction_quest/profile.json": true,
+        "scripts/data/faction_quest_inputs.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "content/faction_quest/DFU_LICENSE.txt": true
+      },
+      "report": "main_project/tests/.runs/verification-rendered-c15c22619a0341c7a057b62f9b0f3b61/report.json",
+      "mode": "rendered",
+      "reproduction": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "Fixture": "item-spell-inputs-v1",
+          "Scenario": [],
+          "Suite": "item-spell-inputs",
+          "Seed": null,
+          "TimeoutSeconds": 300,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "InputSequence": "",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Clock": null
+        }
+      },
+      "suite": "item-spell-inputs",
+      "expected": 162,
+      "engine": "4.7.2.stable.official.ed1daf0bf"
+    },
+    {
+      "guarded_sources": 4,
+      "process_exit": 0,
+      "actual": 111,
+      "source_access_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "fixture": "publication-v1",
+      "source_unchanged": true,
+      "retained_result": "main_project/tests/.runs/verification-headless-515501723f2c422a84528fe335c94895/evidence/project/tests/.runs/scenario-1/result.json",
+      "status": "passed",
+      "source_snapshot_matches": {
+        "scripts/startup/startup_shell.gd": true,
+        "tests/faction_quest_cases.gd": true,
+        "tests/faction_quest_inventory.json": true,
+        "scripts/data/faction_quest_source_reader.gd": true,
+        "scripts/data/faction_quest_formats.gd": true,
+        "scripts/data/text_csv.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "content/faction_quest/profile.json": true,
+        "scripts/data/faction_quest_inputs.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "content/faction_quest/DFU_LICENSE.txt": true
+      },
+      "report": "main_project/tests/.runs/verification-headless-515501723f2c422a84528fe335c94895/report.json",
+      "mode": "headless",
+      "reproduction": {
+        "arguments": {
+          "Suite": "publication",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "TimeoutSeconds": 300,
+          "Clock": null,
+          "Scenario": [],
+          "Seed": null,
+          "InputSequence": "",
+          "Fixture": "publication-v1"
+        },
+        "command": "./main_project/tools/verify_headless.ps1"
+      },
+      "suite": "publication",
+      "expected": 111,
+      "engine": "4.7.2.stable.official.ed1daf0bf"
+    },
+    {
+      "guarded_sources": 4,
+      "process_exit": 0,
+      "actual": 117,
+      "source_access_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "fixture": "publication-v1",
+      "source_unchanged": true,
+      "retained_result": "main_project/tests/.runs/verification-rendered-11dc57ab6aa94e55bffe011c28e41254/evidence/project/tests/.runs/scenario-1/result.json",
+      "status": "passed",
+      "source_snapshot_matches": {
+        "scripts/startup/startup_shell.gd": true,
+        "tests/faction_quest_cases.gd": true,
+        "tests/faction_quest_inventory.json": true,
+        "scripts/data/faction_quest_source_reader.gd": true,
+        "scripts/data/faction_quest_formats.gd": true,
+        "scripts/data/text_csv.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "content/faction_quest/profile.json": true,
+        "scripts/data/faction_quest_inputs.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "content/faction_quest/DFU_LICENSE.txt": true
+      },
+      "report": "main_project/tests/.runs/verification-rendered-11dc57ab6aa94e55bffe011c28e41254/report.json",
+      "mode": "rendered",
+      "reproduction": {
+        "arguments": {
+          "Scenario": [],
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Suite": "publication",
+          "InputSequence": "",
+          "Fixture": "publication-v1",
+          "Seed": null,
+          "TimeoutSeconds": 300,
+          "Clock": null,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        },
+        "command": "./main_project/tools/verify_rendered.ps1"
+      },
+      "suite": "publication",
+      "expected": 117,
+      "engine": "4.7.2.stable.official.ed1daf0bf"
+    },
+    {
+      "guarded_sources": 4,
+      "process_exit": 0,
+      "actual": 121,
+      "source_access_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "fixture": "text-v1",
+      "source_unchanged": true,
+      "retained_result": "main_project/tests/.runs/verification-headless-c68185e4e3fc48e383632517836c5137/evidence/project/tests/.runs/scenario-1/result.json",
+      "status": "passed",
+      "source_snapshot_matches": {
+        "scripts/startup/startup_shell.gd": true,
+        "tests/faction_quest_cases.gd": true,
+        "tests/faction_quest_inventory.json": true,
+        "scripts/data/faction_quest_source_reader.gd": true,
+        "scripts/data/faction_quest_formats.gd": true,
+        "scripts/data/text_csv.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "content/faction_quest/profile.json": true,
+        "scripts/data/faction_quest_inputs.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "content/faction_quest/DFU_LICENSE.txt": true
+      },
+      "report": "main_project/tests/.runs/verification-headless-c68185e4e3fc48e383632517836c5137/report.json",
+      "mode": "headless",
+      "reproduction": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Fixture": "text-v1",
+          "InputSequence": "",
+          "Seed": null,
+          "TimeoutSeconds": 300,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Clock": null,
+          "Scenario": [],
+          "Suite": "text",
+          "ClassicSource": "C:/Games/Daggerfall/arena2"
+        }
+      },
+      "suite": "text",
+      "expected": 121,
+      "engine": "4.7.2.stable.official.ed1daf0bf"
+    },
+    {
+      "guarded_sources": 4,
+      "process_exit": 0,
+      "actual": 127,
+      "source_access_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "fixture": "text-v1",
+      "source_unchanged": true,
+      "retained_result": "main_project/tests/.runs/verification-rendered-ef512dd437ea420f92fe705435e92567/evidence/project/tests/.runs/scenario-1/result.json",
+      "status": "passed",
+      "source_snapshot_matches": {
+        "scripts/startup/startup_shell.gd": true,
+        "tests/faction_quest_cases.gd": true,
+        "tests/faction_quest_inventory.json": true,
+        "scripts/data/faction_quest_source_reader.gd": true,
+        "scripts/data/faction_quest_formats.gd": true,
+        "scripts/data/text_csv.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "content/faction_quest/profile.json": true,
+        "scripts/data/faction_quest_inputs.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "content/faction_quest/DFU_LICENSE.txt": true
+      },
+      "report": "main_project/tests/.runs/verification-rendered-ef512dd437ea420f92fe705435e92567/report.json",
+      "mode": "rendered",
+      "reproduction": {
+        "arguments": {
+          "InputSequence": "",
+          "TimeoutSeconds": 300,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Seed": null,
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Fixture": "text-v1",
+          "Suite": "text",
+          "Clock": null
+        },
+        "command": "./main_project/tools/verify_rendered.ps1"
+      },
+      "suite": "text",
+      "expected": 127,
+      "engine": "4.7.2.stable.official.ed1daf0bf"
+    }
+  ],
+  "status": "delivered_for_user_review",
+  "required_increment_checks": "passed",
+  "source_blockers": [],
+  "standalone_snapshot_exclusions": {
+    "export_presets.cfg": "Not captured by standalone source enumerator; fingerprinted in both exported project copies."
+  },
+  "artifacts": {
+    "completed_full_builds_retained": 0,
+    "cleanup_manifests": [
+      "imp009-increment3-cleanup-18651864b7334d0d95fbae1bf08dcb70.json",
+      "imp009-increment3-cleanup-1cedeebe95de428f923b6c9bdc22f691.json",
+      "imp009-increment3-cleanup-2681f987d13d4588af78955d6351709e.json",
+      "imp009-increment3-cleanup-388e4ecc81bc4aa5badc39bda1a305dd.json",
+      "imp009-increment3-cleanup-390579c653714e1a9adfb3dbaf18a157.json",
+      "imp009-increment3-cleanup-3964f678d390419c92478d971901b757.json",
+      "imp009-increment3-cleanup-3df181b2180045a6913fdfb5b41da30e.json",
+      "imp009-increment3-cleanup-3f0d86ffc60541389b2c88abf63e01cd.json",
+      "imp009-increment3-cleanup-4edc5d1d34fa45118623a8305d423674.json",
+      "imp009-increment3-cleanup-5357869495254cbeba7a5ca996819997.json",
+      "imp009-increment3-cleanup-56873e928c7447ad823e44f9da5b79af.json",
+      "imp009-increment3-cleanup-96446fd4d2aa4f4e92c5827316318f36.json",
+      "imp009-increment3-cleanup-df0c72a841e5409998de58c3460907e5.json",
+      "imp009-increment3-cleanup-f0dc7ba9714f4b5eb6a50ac02c34e418.json",
+      "imp009-increment3-cleanup-f58d3b5e81bd4cf3a8a86cbd544ba518.json",
+      "imp009-increment3-cleanup-f65945238ddd469a98ecb24084f85560.json"
+    ],
+    "compressed_evidence_bytes": 5534269.0,
+    "archives": 8,
+    "reparse_count": 0,
+    "retention_report": "main_project/tests/.runs/imp009-increment3-retention.json",
+    "uncompressed_evidence_bytes": 210258822.0,
+    "archive_manifest": "main_project/tests/.runs/imp009-increment3-evidence-archives.json",
+    "removed_files": 35023.0,
+    "removed_bytes": 6564977592.0,
+    "retained_files_at_scan": 57515,
+    "runtime_binary_count": 0,
+    "retained_bytes_at_scan": 1379051957,
+    "archival": "Original JSON paths hold explicit gzip pointers. Verified decompressed SHA-256 recovers byte-exact original reports/results."
+  }
+}

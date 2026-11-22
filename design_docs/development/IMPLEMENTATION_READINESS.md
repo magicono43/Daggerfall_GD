@@ -1,5 +1,15 @@
 # Implementation readiness
 
+**IMP-009 increment 3 execution, 2026-11-21–22:** The user issued the faction/quest
+handoff. DATA-009/012 source adapters, explicit complete DFU profile, package/loose
+resolution and checked validation handoffs are delivered for user review; the
+132/134 source suites, affected regressions and Windows debug/release exports
+passed. See [increment-3 evidence](evidence/IMP-009-increment-3-2026-11-22.md).
+IMP-005 remains the accepted prerequisite; increments 1/2 remain accepted at
+`f9779c4` / `7e9947f`. Real FACT/QUEST/SAVE/CORE-012, parent IMP-009 and M1 gates
+remain open. This delivery starts no gameplay owner, migration or other IMP.
+Earlier handoff-only and review-pending notes below are historical.
+
 **2026-11-21 increment 2 accepted / increment 3 handoff:** The user explicitly
 accepted increment 2 and requested a copy/paste prompt for another chat. The
 accepted implementation is committed at `7e9947f` (`Implementation Task 009,

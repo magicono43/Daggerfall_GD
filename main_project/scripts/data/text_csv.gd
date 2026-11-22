@@ -8,7 +8,7 @@ const MAX_FIELD := 262144
 static func failure(reason: String, line: int, column: int) -> Dictionary:
 	return {"ok":false, "kind":"invalid_csv", "reason":reason, "line":line, "column":column}
 
-static func parse(bytes: PackedByteArray) -> Dictionary:
+static func validate_encoding(bytes: PackedByteArray) -> Dictionary:
 	if bytes.size() > MAX_BYTES:
 		return failure("CSV exceeds 16 MiB.", 1, 1)
 	if bytes.size() >= 3 and bytes.slice(0,3) == PackedByteArray([239,187,191]):
@@ -26,6 +26,13 @@ static func parse(bytes: PackedByteArray) -> Dictionary:
 		if (width == 3 and ((first == 224 and bytes[cursor + 1] < 160) or (first == 237 and bytes[cursor + 1] >= 160))) or (width == 4 and ((first == 240 and bytes[cursor + 1] < 144) or (first == 244 and bytes[cursor + 1] >= 144))):
 			return failure("Invalid UTF-8 scalar at byte %d." % cursor, 1, 1)
 		cursor += width
+	return {"ok":true}
+
+static func parse(bytes: PackedByteArray) -> Dictionary:
+	var encoding := validate_encoding(bytes)
+	if not encoding.ok: return encoding
+	if bytes.size() >= 3 and bytes.slice(0,3) == PackedByteArray([239,187,191]):
+		bytes = bytes.slice(3)
 	var text := bytes.get_string_from_utf8()
 	if text.to_utf8_buffer() != bytes:
 		return failure("CSV must be complete UTF-8.", 1, 1)

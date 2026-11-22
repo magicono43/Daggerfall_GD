@@ -312,3 +312,13 @@ capability admission, trust, runtime cleanup and sandboxing remain IMP-050/051.
 Explicit omission removes a provider's entire formula-hook contribution for the
 run and revalidates; it does not silently disable its package or bypass its other
 requirements. Registry registration/winners lock with the actual menu entry.
+
+# IMP-009 faction/quest input contributions
+
+`data.faction-quest-inputs-v1` supplies checked data-only envelopes through the
+existing folder/ZIP/package readers and `Overrides/` capture. New definitions use
+`packs/<origin-package>`; replacements explicitly target existing resources and
+retain original identity. Same basenames across unrelated packs remain separate.
+See [FACTION_QUEST_INPUTS.md](../data/FACTION_QUEST_INPUTS.md) for source/list/table
+operations, mappings, references and unavailable real FACT/QUEST validation.
+No package code or custom command activation is added.

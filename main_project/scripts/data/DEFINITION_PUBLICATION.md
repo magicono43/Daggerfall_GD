@@ -1,5 +1,13 @@
 # Definition publication — IMP-005 increment 3
 
+IMP-009 increment 3 adds [faction/quest sources](FACTION_QUEST_INPUTS.md) with
+origin-scoped logical pack resources, explicit legacy mappings, whole-text/list/
+table replacement and fresh faction graph validation. Shipped sources use PCK
+FileAccess; folder/ZIP/loose JSON contributions reuse this transaction. Rejected
+records retain record/referring/provider/line diagnostics; reference failures
+retain complete cycle/candidate context. Controlled semantic handoffs cannot
+establish real FACT/QUEST usability. Commitment/omission/locking rules are unchanged.
+
 IMP-009 increment 2 adds [item/spell inputs](ITEM_SPELL_INPUTS.md) within this
 transaction. The trusted bundled hook reads fingerprinted DFU item JSON from
 `res://` and the explicit selected classic spell/magic readers. Required base and

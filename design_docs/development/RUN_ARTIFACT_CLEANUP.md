@@ -1,5 +1,27 @@
 # Verification run artifact cleanup
 
+## 2026-11-22 IMP-009 increment 3
+
+All owned source/regression/export commands returned before their payload cleanup.
+Non-elevated activity checks found no Godot/Startup process before final cleanup;
+no WMI/CIM or security-setting dependency was introduced. Exact checked targets,
+deletion lists and preserved evidence hashes are in
+`main_project/tests/.runs/imp009-increment3-cleanup-*.json`.
+
+Removed 35,023 files / 6,564,977,592 logical bytes of copied projects, exports,
+runtime roots and caches. Reports/logs/reviewed captures remain under each owned
+root's `evidence/`; installed-template junctions were unlinked without recursion.
+Eight large JSON reports/results were preserved in adjacent gzip archives after
+decompressed SHA-256 verification, reducing 210,258,822 bytes to 5,534,269 bytes.
+Original paths hold explicit archive pointers. See
+`imp009-increment3-evidence-archives.json` and `imp009-increment3-retention.json`.
+
+Total `.runs` retention measured 1,379,051,957 bytes (1.28 GiB), below the 2 GiB
+review threshold, with zero completed full builds, EXE/DLL/PCK payloads or reparse
+points. Source/reference/classic data, installed tools, unique inputs and earlier
+acceptance evidence were protected. The [execution evidence](evidence/IMP-009-increment-3-2026-11-22.md)
+and its audit identify the final verified sources/builds and remaining owner gates.
+
 ## 2026-11-21 IMP-009 increment 2
 
 The increment-2 verification/export commands completed before cleanup. A normal

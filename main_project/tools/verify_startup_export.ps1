@@ -12,6 +12,7 @@ param(
     [switch]$TranslationPreferences,
     [switch]$ActorInputs,
     [switch]$ItemSpellInputs,
+    [switch]$FactionQuestInputs,
     [switch]$ClassicMedia,
     [switch]$MediaReplacements,
     [switch]$NativeMedia,
@@ -26,6 +27,7 @@ $ErrorActionPreference = 'Stop'
 . "$PSScriptRoot/assertion_values.ps1"
 . "$PSScriptRoot/actor_fixture.ps1"
 . "$PSScriptRoot/item_spell_fixture.ps1"
+. "$PSScriptRoot/faction_quest_fixture.ps1"
 function Invoke-IsolatedExport([string]$Executable,[string[]]$EngineArguments,[string]$Log) {
     $priorPath = $env:PATH
     try {
@@ -57,6 +59,7 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
     }
 }
 try {
+if ($FactionQuestInputs) { $report.fixture = 'faction-quest-inputs-v1'; $report.reproduction.arguments.FactionQuestInputs = $true }
 if ($ItemSpellInputs) { $report.fixture = 'item-spell-inputs-v1'; $report.reproduction.arguments.ItemSpellInputs = $true }
 if ($ActorInputs) { $report.fixture = 'actor-inputs-v1'; $report.reproduction.arguments.ActorInputs = $true }
 if ($NativeMedia) { $report.fixture = 'native-v1'; $report.reproduction.arguments.NativeMedia = $true }
@@ -68,8 +71,8 @@ if ($LocaleFonts) { $report.fixture = 'locale-fonts-v1'; $report.reproduction.ar
 if ($StructuredText) { $report.fixture = 'structured-text-v1'; $report.reproduction.arguments.StructuredText = $true }
 if ($TextCatalog) { $report.fixture = 'text-v1'; $report.reproduction.arguments.TextCatalog = $true }
 if ($FormulaExtraError -and !$FormulaFault) { throw 'Additional formula errors require the explicit fault scenario' }
-if (($ItemSpellInputs -or $ActorInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $StructuredText -or $TextCatalog -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
-if (@($ItemSpellInputs,$ActorInputs,$NativeMedia,$MediaReplacements,$ClassicMedia,$TranslationPreferences,$LocaleFonts,$StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
+if (($FactionQuestInputs -or $ItemSpellInputs -or $ActorInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $StructuredText -or $TextCatalog -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
+if (@($FactionQuestInputs,$ItemSpellInputs,$ActorInputs,$NativeMedia,$MediaReplacements,$ClassicMedia,$TranslationPreferences,$LocaleFonts,$StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -84,6 +87,13 @@ if (!(Test-ScriptDiagnostics @("$run/import.log") '' $null)) { throw 'Export imp
 if ($LASTEXITCODE -ne 0 -or !(Test-Path "$build/Startup.exe") -or !(Test-ScriptDiagnostics @("$run/export.log") '' $null)) {
     Get-Content "$run/export.log" -Tail 30
     throw "Windows export failed: $run"
+}
+$report.pck_sha256 = (Get-FileHash -LiteralPath "$build/Startup.pck" -Algorithm SHA256).Hash
+if ($FactionQuestInputs) {
+    $report.source_hashes = @{}
+    foreach ($relative in @('scripts/data/faction_quest_formats.gd','scripts/data/faction_quest_inputs.gd','scripts/data/faction_quest_source_reader.gd','scripts/data/definition_registry.gd','scripts/data/text_csv.gd','scripts/startup/provider_boundary.gd','scripts/startup/startup_shell.gd','tests/faction_quest_cases.gd','tests/faction_quest_inventory.json','content/faction_quest/profile.json','content/faction_quest/DFU_LICENSE.txt','export_presets.cfg')) {
+        $report.source_hashes[$relative] = (Get-FileHash -LiteralPath (Join-Path $runtimeProject $relative) -Algorithm SHA256).Hash
+    }
 }
 $checks = @()
 $licenseRoot = "$build/licenses/native-media"
@@ -106,7 +116,7 @@ foreach ($mode in @('headless','rendered')) {
         if ((Split-Path $selectedRoot -Leaf) -ine 'ARENA2') { $selectedRoot = Join-Path $selectedRoot 'ARENA2' }
         $lockedRoot = "$sandbox/locked/ARENA2"
         New-Item -ItemType Directory -Force $lockedRoot | Out-Null
-        foreach ($name in ($(if ($ItemSpellInputs) { @('SPELLS.STD','MAGIC.DEF') } else { @() }) + $(if ($ActorInputs -or $ItemSpellInputs) { Get-ActorSourceNames } else { @() }) + @('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($ClassicMedia -or $NativeMedia) { @('MIDI.BSA','TEXTURE.321','TEXTURE.024','TEXTURE.002','INVE00I0.IMG','APAINT.CIF','BUTTONS.RCI','ART_PAL.COL','ANIM0011.VID') } else { @() }) + $(if ($TranslationPreferences -or $StructuredText -or $LocaleFonts) { @('TEXT.RSC') } else { @() }))) {
+        foreach ($name in ($(if ($ItemSpellInputs -or $FactionQuestInputs) { @('SPELLS.STD','MAGIC.DEF') } else { @() }) + $(if ($ActorInputs -or $ItemSpellInputs -or $FactionQuestInputs) { Get-ActorSourceNames } else { @() }) + @('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($ClassicMedia -or $NativeMedia) { @('MIDI.BSA','TEXTURE.321','TEXTURE.024','TEXTURE.002','INVE00I0.IMG','APAINT.CIF','BUTTONS.RCI','ART_PAL.COL','ANIM0011.VID') } else { @() }) + $(if ($TranslationPreferences -or $StructuredText -or $LocaleFonts) { @('TEXT.RSC') } else { @() }))) {
             $before[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
             $guards += [IO.File]::Open((Join-Path $selectedRoot $name), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
             [IO.File]::WriteAllBytes("$lockedRoot/$name", [byte[]]@(1,0,0,2,42,232,3,0,0,1,0,0,0))
@@ -128,6 +138,7 @@ foreach ($mode in @('headless','rendered')) {
         $fixture.mode = 'publication'
         $fixture.fixture = 'publication-v1'
     }
+    if ($FactionQuestInputs) { $fixture.mode = 'faction-quest-inputs'; $fixture.fixture = 'faction-quest-inputs-v1' }
     if ($ItemSpellInputs) { $fixture.mode = 'item-spell-inputs'; $fixture.fixture = 'item-spell-inputs-v1' }
     if ($ActorInputs) { $fixture.mode = 'actor-inputs'; $fixture.fixture = 'actor-inputs-v1' }
     if ($StructuredText) { $fixture.mode = 'structured-text'; $fixture.fixture = 'structured-text-v1' }
@@ -189,6 +200,7 @@ foreach ($mode in @('headless','rendered')) {
     }
     $result = Get-Content "$sandbox/result.json" -Raw | ConvertFrom-Json
     $report.engine = $result.engine
+    if ($FactionQuestInputs -and !(Test-FactionQuestInventory $result $mode)) { throw 'Incomplete exported faction/quest assertion inventory' }
     if ($ItemSpellInputs -and !(Test-ItemSpellInventory $result $mode)) { throw 'Incomplete exported item/spell assertion inventory' }
     if ($ActorInputs -and !(Test-ActorInventory $result $mode)) { throw 'Incomplete exported actor input assertion inventory' }
     if ($NativeMedia -and !(Test-NativeInventory $result $mode)) { throw 'Incomplete exported native terminal inventory' }
@@ -207,7 +219,7 @@ foreach ($mode in @('headless','rendered')) {
         $after[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
-    $expected = if ($ItemSpellInputs) { if ($mode -eq 'headless') {160} else {162} } elseif ($ActorInputs) { if ($mode -eq 'headless') {236} else {238} } elseif ($NativeMedia) { Get-NativeExpectedCount $mode } elseif ($MediaReplacements) { if ($mode -eq 'headless') {168} else {173} } elseif ($ClassicMedia) { if ($mode -eq 'headless') {119} else {136} } elseif ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    $expected = if ($FactionQuestInputs) { if ($mode -eq 'headless') {132} else {134} } elseif ($ItemSpellInputs) { if ($mode -eq 'headless') {160} else {162} } elseif ($ActorInputs) { if ($mode -eq 'headless') {236} else {238} } elseif ($NativeMedia) { Get-NativeExpectedCount $mode } elseif ($MediaReplacements) { if ($mode -eq 'headless') {168} else {173} } elseif ($ClassicMedia) { if ($mode -eq 'headless') {119} else {136} } elseif ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
     $formulaExpected = if ($FormulaFault) { 18 } elseif ($mode -eq 'headless') { 82 } else { 84 }
     if (($Formula -or $FormulaFault) -and $result.count -ne $formulaExpected) { throw 'Incomplete formula export inventory' }
     $sessionExpected = if ($mode -eq 'headless') { 115 } else { 116 }

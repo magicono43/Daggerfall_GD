@@ -219,6 +219,8 @@ func prepare(mods: RefCounted) -> Dictionary:
 		if not applied.ok:
 			var issue := failure(applied.get("kind", "invalid"), JSON.stringify(entry.source), applied.reason, token, omittable)
 			if applied.has("schema"): issue.input_failure = applied.duplicate(true)
+			for context: String in ["record","referring","line","target","provider"]:
+				if applied.has(context): issue[context] = applied[context]
 			issues.append(issue)
 		else:
 			resources = applied.resources
@@ -231,7 +233,7 @@ func prepare(mods: RefCounted) -> Dictionary:
 		var references: Array = registered.adapter.validate_references(resources.duplicate(true))
 		for reference: Dictionary in references:
 			var issue := failure("references", str(reference.get("source", domain)), str(reference.reason), str(reference.get("token", "")), bool(reference.get("omittable", false)))
-			for context: String in ["target","provider"]:
+			for context: String in ["target","provider","referring","line","record","cycle","candidates"]:
 				if reference.has(context): issue[context] = reference[context].duplicate(true) if reference[context] is Dictionary else reference[context]
 			issues.append(issue)
 	_candidate = {"ok": issues.is_empty(), "ticket": _serial, "revision": mods.revision, "profile": mods.selected,
@@ -299,7 +301,7 @@ func apply_contribution(base: Dictionary, bytes: PackedByteArray, source: Dictio
 			value = patched.value.duplicate(true)
 		var reason: String = registered.adapter.validate_record(entry.id, value)
 		if not reason.is_empty():
-			return failure("invalid", key, reason)
+			return failure("invalid", key, reason).merged({"record":entry.id,"referring":key+"#"+entry.id,"provider":source.duplicate(true),"line":value.get("data",{}).get("line",0) if value.get("data") is Dictionary else 0})
 		var identity: Dictionary = prior.identity.duplicate(true) if exists else {"domain": domain, "package": source.provider, "local": str(path.path) + "#" + entry.id, "record": entry.id}
 		var fields: Dictionary = prior.fields.duplicate(true) if operation == "patch" else {}
 		for field: String in entry.value:

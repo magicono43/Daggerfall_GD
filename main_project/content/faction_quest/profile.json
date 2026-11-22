@@ -1,0 +1,1951 @@
+{
+  "resources": [
+    {
+      "kind": "factions",
+      "file": "Factions/FACTION.TXT",
+      "sha256": "365cb347fa3e93b99c1646e06009955dc9510fc4143eeca447f5f835bce00cb5",
+      "id": "factions",
+      "legacy": "FACTION"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO01.txt",
+      "sha256": "63f21aa705e1dc539fe0da20951cfe914884ee58f5188a4d17465f7c6962677d",
+      "id": "quest-000",
+      "legacy": "__DEMO01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO02.txt",
+      "sha256": "760b2656ded8655e5e23cfbf89ecb73fa122f1f5020d3d8a0bec5444d5defb1e",
+      "id": "quest-001",
+      "legacy": "__DEMO02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO03.txt",
+      "sha256": "4a85f72c1262db61a595f96d27a70424392e6d7f374d60e64aa96193ce68285a",
+      "id": "quest-002",
+      "legacy": "__DEMO03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO04.txt",
+      "sha256": "3797ac769041bd004df54d1c3b00c4e424443fd0316fb84e554ef37cf857ebea",
+      "id": "quest-003",
+      "legacy": "__DEMO04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO05.txt",
+      "sha256": "02fcd2348e86f5132bf341eeefa3bf153ed8e4d9931a7d36345e20d6169dc2e4",
+      "id": "quest-004",
+      "legacy": "__DEMO05"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO06.txt",
+      "sha256": "8cc792b613604674c1292cdbd8e35c7ff93417ec092001b99138963e39f3f901",
+      "id": "quest-005",
+      "legacy": "__DEMO06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO07.txt",
+      "sha256": "98e103e0ff54d02a67503f8d2bb43a47c93365e85a4f7cd4126c48a0b78cd7fd",
+      "id": "quest-006",
+      "legacy": "__DEMO07"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO08.txt",
+      "sha256": "03aa5853f814b8289db1b267f047e3bc791170549bbfcb8d12e6f029b4d7132f",
+      "id": "quest-007",
+      "legacy": "__DEMO08"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO09.txt",
+      "sha256": "782bf22baf27937aae11578b8f89fb40a5b45d6938ba170c1616c47497ce24dd",
+      "id": "quest-008",
+      "legacy": "__DEMO09"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO10.txt",
+      "sha256": "dc7c3b44028b1c37fa1a00f221671117ad59f712bbc32dfe61f9accf43d9746a",
+      "id": "quest-009",
+      "legacy": "__DEMO10"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO11.txt",
+      "sha256": "f68904489fd4afd79bb0dd8d49e31cde6f7cb2f588fe5eaada2e3cc7b82ad704",
+      "id": "quest-010",
+      "legacy": "__DEMO11"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO12.txt",
+      "sha256": "cb3bc5e99091c4564e0100f1323bbaeb2517081ed0582eb2465cdcee4740657c",
+      "id": "quest-011",
+      "legacy": "__DEMO12"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO13.txt",
+      "sha256": "7c574b1bc93df4738f570f80ac62e7344efe825fcecd5da51516414929f2a8ff",
+      "id": "quest-012",
+      "legacy": "__DEMO13"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO14.txt",
+      "sha256": "447521d4230ae07a4966fecfc522b3b2820d93bbc7f2e585306ad762b7b33058",
+      "id": "quest-013",
+      "legacy": "__DEMO14"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO15.txt",
+      "sha256": "1ff11515467df082152bc7ae80151ff5a0db24fbdbe50ca515f19e4f15ff3014",
+      "id": "quest-014",
+      "legacy": "__DEMO15"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO16.txt",
+      "sha256": "3e44046d41f5f38a0e0eb64f2e9ad214964f3054e4cb7d5b0677317835d2ca54",
+      "id": "quest-015",
+      "legacy": "__DEMO16"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO17.txt",
+      "sha256": "de7c0cfdcdcdb6c1e1d69952b599a960829334c7f46c5cadbb424fa1da787ee0",
+      "id": "quest-016",
+      "legacy": "__DEMO17"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO18.txt",
+      "sha256": "513bb934743e324a2ffd431d00fe01b7c303d741e0d499a3a431ccc45cc5cffa",
+      "id": "quest-017",
+      "legacy": "__DEMO18"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO19.txt",
+      "sha256": "d0efbe9b9ddbf6e1b2cad5ceebb88d73f182e456adbd1567c268027440299b89",
+      "id": "quest-018",
+      "legacy": "__DEMO19"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO20.txt",
+      "sha256": "c088e63b00b6d95ad2ed728c960283a8936e0ab940b8671534fd7239797da8b7",
+      "id": "quest-019",
+      "legacy": "__DEMO20"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/__DEMO21.txt",
+      "sha256": "9dd93c8e81a21d4f4ed88fd39e26c4b22a2d63e9e7e62dac64540ce150751b9c",
+      "id": "quest-020",
+      "legacy": "__DEMO21"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/_BRISIEN.txt",
+      "sha256": "1794af2325d2014f461777b0595a52ee6eb96635d2145ea7b0b8b9a0eb759390",
+      "id": "quest-021",
+      "legacy": "_BRISIEN"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/_TUTOR__.txt",
+      "sha256": "fae5eda739a6c5a827b5c67c38ba4a9454a110d07fc772bdb662b265e458bbc5",
+      "id": "quest-022",
+      "legacy": "_TUTOR__"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/$CUREVAM.txt",
+      "sha256": "b70b5f990d0f2ca1347fcc543bb598da0084aa5ebdc765747c8eef89fa2a9bf7",
+      "id": "quest-023",
+      "legacy": "$CUREVAM"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/$CUREWER.txt",
+      "sha256": "aa10ac3bc834af459f01a30ece85391d537708a9a29b3c599abfb36648587ee0",
+      "id": "quest-024",
+      "legacy": "$CUREWER"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/00B00Y00.txt",
+      "sha256": "2c78cc5ac8cc142cb4cb144abc42adc3b238d3cfef04c37f1db5c38d867f17c1",
+      "id": "quest-025",
+      "legacy": "00B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/10C00Y00.txt",
+      "sha256": "36a0a3d18bc39229d4845e9fd610bbbcdf99f057af3f06ed0abdfaaaa99c13f4",
+      "id": "quest-026",
+      "legacy": "10C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/20C00Y00.txt",
+      "sha256": "e7f84c19e4e85c0fcbc998a92416d575948fcdcdba9d8922920c46d4f39bc618",
+      "id": "quest-027",
+      "legacy": "20C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/30C00Y00.txt",
+      "sha256": "0a436d6252b59f705c1bd2420c16f481fdd994c19b1c13a2820e580ba95410ac",
+      "id": "quest-028",
+      "legacy": "30C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/40C00Y00.txt",
+      "sha256": "e19646d52818a8b885127457fdfb0d694b8545ad58e8aa96c985c8d051bd3236",
+      "id": "quest-029",
+      "legacy": "40C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/50C00Y00.txt",
+      "sha256": "853544b815d1f718444296805a1d54465e1c4639879fa293f5a037c1332c06f2",
+      "id": "quest-030",
+      "legacy": "50C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/60C00Y00.txt",
+      "sha256": "42e26dcfc36de0e7b72cc9e29c8ecdd63c6532b80f0fe83d2c56c3191eba6465",
+      "id": "quest-031",
+      "legacy": "60C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/70C00Y00.txt",
+      "sha256": "d8748e811efe0e89edc37fbc699cd5e4e364d93ae1120c3f885cdccb04cdb909",
+      "id": "quest-032",
+      "legacy": "70C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/80C0XY00.txt",
+      "sha256": "04e69142633efe75b46f6eef08ab3a17f9357bb6318028c35f1802dbc6880a50",
+      "id": "quest-033",
+      "legacy": "80C0XY00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/90C00Y00.txt",
+      "sha256": "28bd89ad8ade3755b768b5f7086dfa43bf4deb4b868e76b56f7a10afcded5e2f",
+      "id": "quest-034",
+      "legacy": "90C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C00Y00.txt",
+      "sha256": "62990c6257b71f90a5cff2bb4b184bb1a9116eb60d1f9e792b5044b455f3b117",
+      "id": "quest-035",
+      "legacy": "A0C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C00Y06.txt",
+      "sha256": "98b07c830b094043fa63d65453cf4a7db537237b84dc9d5b7f4bd4b43b6650a6",
+      "id": "quest-036",
+      "legacy": "A0C00Y06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C00Y07.txt",
+      "sha256": "a42035e65ccbd2dd7d1af8e6eaea692e643e322022b0c7b43f04a967530eac7c",
+      "id": "quest-037",
+      "legacy": "A0C00Y07"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C00Y08.txt",
+      "sha256": "db59cbb234d118850a4eba17ab3a8ab1f8788ceaa9ee5221ffbcdfa3a2b4636f",
+      "id": "quest-038",
+      "legacy": "A0C00Y08"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C00Y10.txt",
+      "sha256": "a0f6fb8f578433bcab46cd8029ccf29a14cd013b0c970819013f5c97a8de743a",
+      "id": "quest-039",
+      "legacy": "A0C00Y10"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C00Y11.txt",
+      "sha256": "ea72c048521d33f6c093ebd61b2305e4268103a1fcbe8acc9f325aaaceba8a52",
+      "id": "quest-040",
+      "legacy": "A0C00Y11"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C00Y12.txt",
+      "sha256": "5bd704c7edbfe17766cd756189270d8a13cbcfca3a4ff9fe575ffe8b6db2c527",
+      "id": "quest-041",
+      "legacy": "A0C00Y12"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C00Y14.txt",
+      "sha256": "838635f8e3b8b777018c8347fb2161792a0d05607d104cf01ea11886b6349c5c",
+      "id": "quest-042",
+      "legacy": "A0C00Y14"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C00Y15.txt",
+      "sha256": "56c35748ec9d0c813cd50b7b8ce0b924cbbd6ffbc08803ea9fd72d9de165cf3e",
+      "id": "quest-043",
+      "legacy": "A0C00Y15"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C00Y16.txt",
+      "sha256": "03a93dc7f96fa94200c480f1399e0b7d33d2467031a12cf199e7b2be5811a316",
+      "id": "quest-044",
+      "legacy": "A0C00Y16"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C00Y17.txt",
+      "sha256": "8592ae1ce99230378ffbf7836e8329df9a807d25fefa3ecc4cc48b54b96fe75f",
+      "id": "quest-045",
+      "legacy": "A0C00Y17"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C01Y01.txt",
+      "sha256": "d4b5c07c4612c28969c3b8ae30f2f12093b2e465981821c1a120283aa766f538",
+      "id": "quest-046",
+      "legacy": "A0C01Y01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C01Y03.txt",
+      "sha256": "baf42429f1ebeaf1c60c574b517e9b5c138f9ea8af23dc97b55596119d52de10",
+      "id": "quest-047",
+      "legacy": "A0C01Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C01Y06.txt",
+      "sha256": "7102a284f38e6c42937957e2d8011323ec933aee40bf8060046f584c6e55fde9",
+      "id": "quest-048",
+      "legacy": "A0C01Y06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C01Y09.txt",
+      "sha256": "2bec9bb816e72d4a47dc6895c16fb3f83a0c7836d868a05e64e27b0ac241bd0e",
+      "id": "quest-049",
+      "legacy": "A0C01Y09"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C01Y13.txt",
+      "sha256": "22f4e09dfbc48be0e3caeb878c7d5da0353f2758bf1db94117e98cbcdee0431d",
+      "id": "quest-050",
+      "legacy": "A0C01Y13"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C0XY04.txt",
+      "sha256": "434a11da089f555e2f0fda80b9e3f8052ade77a4b2eeb3f5a586c887c3cd2f92",
+      "id": "quest-051",
+      "legacy": "A0C0XY04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C10Y02.txt",
+      "sha256": "b8f0ec9785a288bc741cbaed7ed883c25bf14007732a98b469d4d7befa0f0fca",
+      "id": "quest-052",
+      "legacy": "A0C10Y02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C10Y05.txt",
+      "sha256": "0abef1e8a335b125f1e45b31c03cb7cb418b26b7ba0549a1ed676d1d4b0b9344",
+      "id": "quest-053",
+      "legacy": "A0C10Y05"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/A0C41Y18.txt",
+      "sha256": "bd03db322a8d9f08919baaf0768d2945992ebb1e9ad0e7528046ba6e893c4853",
+      "id": "quest-054",
+      "legacy": "A0C41Y18"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B00Y00.txt",
+      "sha256": "240639d50aade0f4126c3736151d44ae7c72b9cea85930da2f25bc238b569d20",
+      "id": "quest-055",
+      "legacy": "B0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B00Y01.txt",
+      "sha256": "4a879f4e562da838b880b94be9abd0b476592ab74ac4f1be58b987f31b65340c",
+      "id": "quest-056",
+      "legacy": "B0B00Y01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B10Y04.txt",
+      "sha256": "e9ac1aa4e0397b96461afba654e7a829aefb826feeb54304e7f0e24010604ec1",
+      "id": "quest-057",
+      "legacy": "B0B10Y04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B20Y07.txt",
+      "sha256": "6cb63de09b82641c3a0181a32fb443a1ff57477c36d58d4c58dd831fb831b08d",
+      "id": "quest-058",
+      "legacy": "B0B20Y07"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B40Y08.txt",
+      "sha256": "df18bc0eec7b0caae58bf41e47304d4344260dc5c10d905240371a1ecfa76bd8",
+      "id": "quest-059",
+      "legacy": "B0B40Y08"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B40Y09.txt",
+      "sha256": "d673db47c1bb7acca2b4d3a80c26e34f657da05c008c3e70ec50bca389c92532",
+      "id": "quest-060",
+      "legacy": "B0B40Y09"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B50Y11.txt",
+      "sha256": "ea0341b3873c55a6e9cda307a280e5e07267455b18da851e0af7d32f5f223847",
+      "id": "quest-061",
+      "legacy": "B0B50Y11"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B60Y12.txt",
+      "sha256": "2f2438b1db2bb07cbcf98404276069220e3363a3630d833aafc61c6d02b8d110",
+      "id": "quest-062",
+      "legacy": "B0B60Y12"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B70Y14.txt",
+      "sha256": "98528693d6f3a2efe17ab7c60479e29adef7af5162be26ff98b035338a8ef078",
+      "id": "quest-063",
+      "legacy": "B0B70Y14"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B70Y16.txt",
+      "sha256": "6e06d9081d850d2cbb49c8d1dff6a799709c04bec3d7ca3c45aab163fc423ed1",
+      "id": "quest-064",
+      "legacy": "B0B70Y16"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B71Y03.txt",
+      "sha256": "4f8ea80990c3b3d0dc05d88923e650aa69c1d0ef99729d577bb23becf5da9e63",
+      "id": "quest-065",
+      "legacy": "B0B71Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B80Y17.txt",
+      "sha256": "b4481f3256b9a09e3dba439431299693bce9ee8ad42aaa279e9c10a4668ad5ca",
+      "id": "quest-066",
+      "legacy": "B0B80Y17"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0B81Y02.txt",
+      "sha256": "26b5528abb70545ac37f2f725dd2326b3925bcace9ee0f8fdd63def1f48d0206",
+      "id": "quest-067",
+      "legacy": "B0B81Y02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0C00Y05.txt",
+      "sha256": "c4f9b13897322be3cf2869e53a1dcb1519443843e4295ca0892249015c9d5996",
+      "id": "quest-068",
+      "legacy": "B0C00Y05"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0C00Y06.txt",
+      "sha256": "c100272fdfe11538d396995279bc93970fed6a8010dbb771c72b591191782afd",
+      "id": "quest-069",
+      "legacy": "B0C00Y06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0C00Y10.txt",
+      "sha256": "6ebe768b85810b57fc2d23b7e115ce1b23f114547a1db2f3ee7e05603d9c4cd7",
+      "id": "quest-070",
+      "legacy": "B0C00Y10"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/B0C00Y13.txt",
+      "sha256": "c63e66fc0127494d7b67a23ee8fbade1965bd70cdf5199ba253bad345a11cd89",
+      "id": "quest-071",
+      "legacy": "B0C00Y13"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B00Y00.txt",
+      "sha256": "616445ff672a2c80477d82cee70e59baaaec78b45cbedd7b09ec0ae9be22ef99",
+      "id": "quest-072",
+      "legacy": "C0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B00Y01.txt",
+      "sha256": "1a2a911b9e7f0daba8f6b055512893640c7b84840816dd1733d414cd6f3067d9",
+      "id": "quest-073",
+      "legacy": "C0B00Y01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B00Y02.txt",
+      "sha256": "fd80cc29aae7d864fe2a24771f0bf3825ecb4a3e720b65aef3cccb2d325250a0",
+      "id": "quest-074",
+      "legacy": "C0B00Y02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B00Y03.txt",
+      "sha256": "d2fa6c745da7911add9f139d4a318230d9410dd87b2150aca4cd65ca2f87d2f3",
+      "id": "quest-075",
+      "legacy": "C0B00Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B00Y04.txt",
+      "sha256": "6b4d663d4cfe9ac2c090c4eca3f8e353f01aaf64c74ec011a79bb1b2306c6f89",
+      "id": "quest-076",
+      "legacy": "C0B00Y04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B00Y14.txt",
+      "sha256": "d3b7c4bb3be958a452a242d43fe57a5ac9339c158bf3a5bd2d55dabfc353931d",
+      "id": "quest-077",
+      "legacy": "C0B00Y14"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B10Y05.txt",
+      "sha256": "73d31da226ccf1d3f53d943f073aa75d82db6ea1b49a79aa8f6dea7813a65337",
+      "id": "quest-078",
+      "legacy": "C0B10Y05"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B10Y06.txt",
+      "sha256": "ca9551c1efaa2ddef03ad542b0b1f9746d3ef097c03797bc46fb99891c797c52",
+      "id": "quest-079",
+      "legacy": "C0B10Y06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B10Y07.txt",
+      "sha256": "e6e6f5be59023532c1b625b7d72e2b25f93b5231bafef956d7555267defdfee0",
+      "id": "quest-080",
+      "legacy": "C0B10Y07"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B10Y15.txt",
+      "sha256": "aedc6a7aa635215e6a9ba4dab7f0c52d588040b8663c1a59dc89d800f23e22f4",
+      "id": "quest-081",
+      "legacy": "C0B10Y15"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B20Y08.txt",
+      "sha256": "0f6f6e686f63c52824023785191af0d4626b8c8ba2d547f8baa05b4af319de91",
+      "id": "quest-082",
+      "legacy": "C0B20Y08"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0B3XY09.txt",
+      "sha256": "b0b700b7eccf4d05fa1b1bf4964daff6ef28b09cba622cda8579439e703f0d09",
+      "id": "quest-083",
+      "legacy": "C0B3XY09"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0C00Y10.txt",
+      "sha256": "a99558f67fd804452733f2605d90f79b3bc75f6faf7e591382685779e0522def",
+      "id": "quest-084",
+      "legacy": "C0C00Y10"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0C00Y11.txt",
+      "sha256": "de6beaacee3f29974f61bb12ef5aeef78df9ac32d370adbb907cda6f6538ade3",
+      "id": "quest-085",
+      "legacy": "C0C00Y11"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0C00Y12.txt",
+      "sha256": "9054d3f4058e4f9523860bffce991ddc6e369bbef889ae95f8961ae1c459c362",
+      "id": "quest-086",
+      "legacy": "C0C00Y12"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/C0C00Y13.txt",
+      "sha256": "0b14ea7d13d2fa40411ff73bd42d00fded95c16a7fb421b38359b1e53271a460",
+      "id": "quest-087",
+      "legacy": "C0C00Y13"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/CUSTOM01.txt",
+      "sha256": "0c96ddb4d3dfa71004cf76ebf800d33c3f791aef6d1fc156d8e23484343331dc",
+      "id": "quest-088",
+      "legacy": "CUSTOM01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/D0B00Y00.txt",
+      "sha256": "37fe14abff7a051220b262803888a5b2d1a0f2d002fc909fb79c5e5cc7aa36bb",
+      "id": "quest-089",
+      "legacy": "D0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/E0B00Y00.txt",
+      "sha256": "a6d9f66ec89186b73c2e6eed687fb9af4b743cc63c2f381832344d8dfb0dc01d",
+      "id": "quest-090",
+      "legacy": "E0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/F0B00Y00.txt",
+      "sha256": "22ebee61cf58f545916bed782cc90e8633fbbcdb5ff68460831ceb3a9b165b44",
+      "id": "quest-091",
+      "legacy": "F0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/G0B00Y00.txt",
+      "sha256": "4213626e5dedfa5690514c916644ceeb48daa198e536a1d0031aee45033cb38a",
+      "id": "quest-092",
+      "legacy": "G0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/H0B00Y00.txt",
+      "sha256": "0679ddd0148378b1cf3e9911da30154420593257db40896235762d552053721d",
+      "id": "quest-093",
+      "legacy": "H0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/I0B00Y00.txt",
+      "sha256": "607e31a822452bbce0406737338cd98ebc34b75b21ba307ea3ec2acd0d6c6445",
+      "id": "quest-094",
+      "legacy": "I0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/J0B00Y00.txt",
+      "sha256": "0cfa5d65c55e282129288e626b75de66b1373b476f67374a7c94538483b5d755",
+      "id": "quest-095",
+      "legacy": "J0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C00Y00.txt",
+      "sha256": "7351cb0d8cc6501d6cf1eaa095645a65c8c40645bad97e148fbc2b0ba26311d5",
+      "id": "quest-096",
+      "legacy": "K0C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C00Y02.txt",
+      "sha256": "4254ad5ecca68824c7ec0065a96710aac4095c85e45a927a9032e0916af1adb0",
+      "id": "quest-097",
+      "legacy": "K0C00Y02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C00Y03.txt",
+      "sha256": "838796763c9666fd4dbf818846c340a6ee11a5487121a6f9d7cba8df72ff21d4",
+      "id": "quest-098",
+      "legacy": "K0C00Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C00Y04.txt",
+      "sha256": "95174b63c12ac558680700499ede956f00e1f4ec34ff32fd25b15c94653175b1",
+      "id": "quest-099",
+      "legacy": "K0C00Y04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C00Y05.txt",
+      "sha256": "003c029d74ab95e500f22deff4bd685443e8695b367523868e070babc622b4c8",
+      "id": "quest-100",
+      "legacy": "K0C00Y05"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C00Y06.txt",
+      "sha256": "da059d3d52f1795efc9e894c785a32b08defe564a947007e122d4b2561db464e",
+      "id": "quest-101",
+      "legacy": "K0C00Y06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C00Y07.txt",
+      "sha256": "1176e2e3c44fcde623a2370e4e7b0edd83bed471a2439f38165632adb3a5caf6",
+      "id": "quest-102",
+      "legacy": "K0C00Y07"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C00Y08.txt",
+      "sha256": "a8b49e13c290847a5fb175f439f138baf925df64c806e618a369d04c0e990b71",
+      "id": "quest-103",
+      "legacy": "K0C00Y08"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C00Y09.txt",
+      "sha256": "a94c158baddc7a08e293ff8c4e850638cc752f3d6e9e7679f259728f437a27a0",
+      "id": "quest-104",
+      "legacy": "K0C00Y09"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C01Y00.txt",
+      "sha256": "c90abf3e36cde52b8eb96899651b52719c01c166a6e99e085435351a90eaa90d",
+      "id": "quest-105",
+      "legacy": "K0C01Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C01Y10.txt",
+      "sha256": "71f6a42ce761e6a5a4484ad4ba6d185af0af8c090d6818077b4c2ab81c576950",
+      "id": "quest-106",
+      "legacy": "K0C01Y10"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C0XY01.txt",
+      "sha256": "3e30673ecc8c664a43f4369bb69ccd1d7385dcb7f74b11180f7752955bf247d8",
+      "id": "quest-107",
+      "legacy": "K0C0XY01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/K0C30Y03.txt",
+      "sha256": "c1ddd0591ef33e7307172489bd73e20c2517cb0f27c91c2e50bd83aa5c820b68",
+      "id": "quest-108",
+      "legacy": "K0C30Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0A01L00.txt",
+      "sha256": "8d2497cf078224c56861052067c1f9ccfab0e30cef708d1dcf67448a271d3bd6",
+      "id": "quest-109",
+      "legacy": "L0A01L00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B00Y00.txt",
+      "sha256": "2e6f11e69f6b761acf4ddec104f0e5c206545962bd3d634b467e3f831222b63a",
+      "id": "quest-110",
+      "legacy": "L0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B00Y01.txt",
+      "sha256": "eb5ddcb2f52a5bded125b82eddd9d1e8b99f98939852fba286b40da9ff9f2470",
+      "id": "quest-111",
+      "legacy": "L0B00Y01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B00Y02.txt",
+      "sha256": "f1e0b10532ee60487f14f63c888bcd08cd5b85254817257eea942aaa27276c28",
+      "id": "quest-112",
+      "legacy": "L0B00Y02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B00Y03.txt",
+      "sha256": "ae6380ecf90f9d54a3a57e708bffce3785f00967f12d00109b516a20b0ad887b",
+      "id": "quest-113",
+      "legacy": "L0B00Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B10Y01.txt",
+      "sha256": "4cefaba3bba2a06ff79f8a657a947f8a6ca8cffe90d7633c2abe2562d9e6e36e",
+      "id": "quest-114",
+      "legacy": "L0B10Y01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B10Y03.txt",
+      "sha256": "58240bc66f8970866d5b7152e8f7f3e33e121cda23ee5ccd219786a99b69b73a",
+      "id": "quest-115",
+      "legacy": "L0B10Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B20Y02.txt",
+      "sha256": "27781e7ea96c1bd704aec66c3e4d1f2e0d60850159630ff39d15412d68de51fe",
+      "id": "quest-116",
+      "legacy": "L0B20Y02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B30Y03.txt",
+      "sha256": "41a162ae1c7019de3749f3766673735554be5f9c69226d9277946ba8f28ac872",
+      "id": "quest-117",
+      "legacy": "L0B30Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B30Y09.txt",
+      "sha256": "9f4375412358e33d046a556d45c25a895f4ce82acc5b4f7c14819479afbea8be",
+      "id": "quest-118",
+      "legacy": "L0B30Y09"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B40Y04.txt",
+      "sha256": "4fc1b39a045921964527c6dff2c83fa16b5acb153af43da0e977f0ca2db12a33",
+      "id": "quest-119",
+      "legacy": "L0B40Y04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B50Y11.txt",
+      "sha256": "edf525f828fb49bf677388efed7e4d6077e4a53ade9df79f0f88160ec5530fad",
+      "id": "quest-120",
+      "legacy": "L0B50Y11"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/L0B60Y10.txt",
+      "sha256": "aa98f2306605428b3775e01d39ab0f2db5a437b3a4f2601466cfb5f5f8e824dc",
+      "id": "quest-121",
+      "legacy": "L0B60Y10"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B00Y00.txt",
+      "sha256": "8a6c62c850d8254627f142bc0b80863e191a63c79a5e81f0019b93ed733c19cc",
+      "id": "quest-122",
+      "legacy": "M0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B00Y06.txt",
+      "sha256": "1f604bb42ea679e627ba50f4ee22856de01a306deb2cf346305b9307fda05aff",
+      "id": "quest-123",
+      "legacy": "M0B00Y06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B00Y07.txt",
+      "sha256": "f3d43078e475a5f6907c6d84c69b58cba32046cff204d1e07b5069145a8c41f1",
+      "id": "quest-124",
+      "legacy": "M0B00Y07"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B00Y15.txt",
+      "sha256": "1cb29012dda4049048d7871c1dd5ff52c5b6416b36403e611816c4403c7fd9ab",
+      "id": "quest-125",
+      "legacy": "M0B00Y15"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B00Y16.txt",
+      "sha256": "f45a8d8ec721157580a88a04efa272b4f01d1c436a77651d65815349be31fd1d",
+      "id": "quest-126",
+      "legacy": "M0B00Y16"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B00Y17.txt",
+      "sha256": "dbb9227705814461e9fc7b95c18cdf0f552479b6641e2d7ec320f5b33d00185e",
+      "id": "quest-127",
+      "legacy": "M0B00Y17"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B11Y18.txt",
+      "sha256": "fa827cc4c59411e4abf4a76bae79b19c904c38e7e38598961064082fc7ef4bca",
+      "id": "quest-128",
+      "legacy": "M0B11Y18"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B1XY01.txt",
+      "sha256": "410578c168950b908811b93655a8855db712f2fdb4c17225b20c4ecdd9e2b8e7",
+      "id": "quest-129",
+      "legacy": "M0B1XY01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B20Y02.txt",
+      "sha256": "81e12a5ef8746e80b1327d4ec7bf5c8eefc62297bbb8f1b52c9f38e8221fbc7d",
+      "id": "quest-130",
+      "legacy": "M0B20Y02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B21Y19.txt",
+      "sha256": "e807247a67bcf4e3760f10260a7c2093ab703b4587f64cf44ca5a3108f62c7d6",
+      "id": "quest-131",
+      "legacy": "M0B21Y19"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B30Y03.txt",
+      "sha256": "6dcb0ac7670584c7e9c4b771322b9f2da39fd8afd2953c58d093357b227054ff",
+      "id": "quest-132",
+      "legacy": "M0B30Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B30Y04.txt",
+      "sha256": "e5893832d8a455b5a8c4038cf6b69c3edba01993e8d451ade48584e353777afe",
+      "id": "quest-133",
+      "legacy": "M0B30Y04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B30Y08.txt",
+      "sha256": "f12af8fab3600090ff6675d0d01bd12ae356daac6e57d13973fc9a4a8528f5b5",
+      "id": "quest-134",
+      "legacy": "M0B30Y08"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B40Y05.txt",
+      "sha256": "e3ed2ef1c54889a255f94ef5e034a9462316684ec59ab6389c6278b9e5e4ef21",
+      "id": "quest-135",
+      "legacy": "M0B40Y05"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B50Y09.txt",
+      "sha256": "21c2a015df2fd09a92ac8856bd270ce8bdded10ac95d214f233eaff690ccb327",
+      "id": "quest-136",
+      "legacy": "M0B50Y09"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0B60Y10.txt",
+      "sha256": "987414d6cfd5afc0f8c2c2c1071c9ffa4b8886886c9fa115c12b4d22c6d575e7",
+      "id": "quest-137",
+      "legacy": "M0B60Y10"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0C00Y11.txt",
+      "sha256": "f46ce541619d1f1b91ebf010ed90deff5bc624cd9d79ac34c4fa82b3508cad39",
+      "id": "quest-138",
+      "legacy": "M0C00Y11"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0C00Y12.txt",
+      "sha256": "253b068bdb055aac8f23f39915a095f16bfd0d6dc7f657a1374213cd8184bcb0",
+      "id": "quest-139",
+      "legacy": "M0C00Y12"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0C00Y13.txt",
+      "sha256": "651de14d6cf716bd6bf13326596dd650aaabbdaf1bfe11ca1e417e49af5a5afa",
+      "id": "quest-140",
+      "legacy": "M0C00Y13"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/M0C00Y14.txt",
+      "sha256": "f0d1839229f4a7c0076d1f7cedaf0b29e8616aca687d53633d5a2df27fbe23c7",
+      "id": "quest-141",
+      "legacy": "M0C00Y14"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B00Y04.txt",
+      "sha256": "17bfc8c921c4eb12e7ca6050454b74206ef2c42dd6affef191160b6d094ef033",
+      "id": "quest-142",
+      "legacy": "N0B00Y04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B00Y06.txt",
+      "sha256": "2d77b14c160c90c48d8814d5cc283573c0d15432b6cd09405eba5f0a82bd9b61",
+      "id": "quest-143",
+      "legacy": "N0B00Y06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B00Y08.txt",
+      "sha256": "04ed9704e48b1dc2149bafda1f67223373287ea34e87624383953afe83ace41f",
+      "id": "quest-144",
+      "legacy": "N0B00Y08"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B00Y09.txt",
+      "sha256": "24be78df9969bf27f5b4ba7f97aeab29fa8df96d64a86324a5e7063eba88c4c7",
+      "id": "quest-145",
+      "legacy": "N0B00Y09"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B00Y16.txt",
+      "sha256": "e7acd51d94e68dd4882817b7f5907be8b79a507c6876a20fd105a2810d5b852e",
+      "id": "quest-146",
+      "legacy": "N0B00Y16"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B00Y17.txt",
+      "sha256": "3f9efb70bd2aae6de58b0697d5f7d7e16c980fd3369500db926431e188cf33a4",
+      "id": "quest-147",
+      "legacy": "N0B00Y17"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B10Y01.txt",
+      "sha256": "43323a86c0b64ca0053bbc9c72f92a9c38b0dd5df307f9d8a0b14224e2db2bfa",
+      "id": "quest-148",
+      "legacy": "N0B10Y01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B10Y03.txt",
+      "sha256": "daa5bb328c0eb8d55855ba00f3a0ceae6644712584b60e46f6e1e41e9bb97d9f",
+      "id": "quest-149",
+      "legacy": "N0B10Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B11Y18.txt",
+      "sha256": "98cfdccd7ef69c7b422ad9e6bf329daab37962f5d7559126502dfa1ae486d924",
+      "id": "quest-150",
+      "legacy": "N0B11Y18"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B20Y02.txt",
+      "sha256": "db2943f6fe7bf8a00bfa2457fe3c1a49f4caf69eca273856e686bdc319f891db",
+      "id": "quest-151",
+      "legacy": "N0B20Y02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B20Y05.txt",
+      "sha256": "cc6cc460ea3572ad112bef9bfd6f777834d973664a34d12e300b7d0ba14edf1f",
+      "id": "quest-152",
+      "legacy": "N0B20Y05"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B21Y14.txt",
+      "sha256": "1aec50d02cf985a9540c717d3242f0687ed8a3088a639c2c3d436512c0487ce2",
+      "id": "quest-153",
+      "legacy": "N0B21Y14"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B30Y15.txt",
+      "sha256": "6af41ccc7a54937152d2b0d6b0529cab36aa421f2f11c49d50eff63ef95a6552",
+      "id": "quest-154",
+      "legacy": "N0B30Y15"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0B40Y07.txt",
+      "sha256": "1e65acf20927dfd94cc6fb847983312b484d075b92f3875a23e59eddbc283082",
+      "id": "quest-155",
+      "legacy": "N0B40Y07"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0C00Y10.txt",
+      "sha256": "abdbc61b70f4ac0a405dc5691c8db49f4ad6e2bfe64b9d922299e34a7641c218",
+      "id": "quest-156",
+      "legacy": "N0C00Y10"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0C00Y11.txt",
+      "sha256": "6c94e647b24bb14c10df261663709e31f833dbaa19bdbeceaf17f7821093488c",
+      "id": "quest-157",
+      "legacy": "N0C00Y11"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0C00Y12.txt",
+      "sha256": "7dd9de282a4994a1b99d9977333f2cb55594745de25797a2def40356bc5820bf",
+      "id": "quest-158",
+      "legacy": "N0C00Y12"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/N0C00Y13.txt",
+      "sha256": "54326873a8b006d91a888f58a76c84646576aa598996cb9c5090311d6bdc150c",
+      "id": "quest-159",
+      "legacy": "N0C00Y13"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0A0AL00.txt",
+      "sha256": "e615ef482a9a44053a249d548a36ec1303ac469a92ccb9d348c3139dfd0ed8d1",
+      "id": "quest-160",
+      "legacy": "O0A0AL00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B00Y00.txt",
+      "sha256": "2ceb1d4cc40ce40aeedbe47e3436c0a1b16fc525a063b4ca17d8814a67d36412",
+      "id": "quest-161",
+      "legacy": "O0B00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B00Y01.txt",
+      "sha256": "29aac9e7cc33c50e5e2ef70b4378fd3b0345b596c3768601917e89b2ad34fa7a",
+      "id": "quest-162",
+      "legacy": "O0B00Y01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B00Y11.txt",
+      "sha256": "7c9dd46e5b3cf582a97a386fd411e7cbde6f1accd500ceafb0d8f826f6a75a46",
+      "id": "quest-163",
+      "legacy": "O0B00Y11"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B00Y12.txt",
+      "sha256": "d8a8ca3bfe1af3a3b19d7f4139ff61819b67cb26de340b89b918bce7c7a01e79",
+      "id": "quest-164",
+      "legacy": "O0B00Y12"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B10Y00.txt",
+      "sha256": "900af06f6066563ec618986e3886823597ca67db5b262d5bb37786178ff9f4e0",
+      "id": "quest-165",
+      "legacy": "O0B10Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B10Y03.txt",
+      "sha256": "06b6462cc84deb8493ff061bed07eb9623b9b54201a9f0bffd58cecee67eab2b",
+      "id": "quest-166",
+      "legacy": "O0B10Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B10Y05.txt",
+      "sha256": "e78a830728bfee1e38e6d8809b05d4714d1b5983527a8a4f888659aa06d8470c",
+      "id": "quest-167",
+      "legacy": "O0B10Y05"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B10Y06.txt",
+      "sha256": "42115ff0f9b14d924e513cc7acf62b92fca08aa03eba194b2348d920f872a894",
+      "id": "quest-168",
+      "legacy": "O0B10Y06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B10Y07.txt",
+      "sha256": "869a1cc58c8ae83a320b2c5de3d4a7b8af0fe73ea2e7fdf0f75705c973feac65",
+      "id": "quest-169",
+      "legacy": "O0B10Y07"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B20Y02.txt",
+      "sha256": "dccff25bf48b8a2d1a2bf7f02bd32934af4f759408c0bdab040abe9ea340d1d4",
+      "id": "quest-170",
+      "legacy": "O0B20Y02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B2XY04.txt",
+      "sha256": "ff4fab1febdbb40aa096999c95d12c1dd7c1ce737b80db7c42e1ea617a4a82b5",
+      "id": "quest-171",
+      "legacy": "O0B2XY04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B2XY08.txt",
+      "sha256": "b9360347cf899fd61ad42df3e0727298547696520b3a3dd80f276965c4f232e7",
+      "id": "quest-172",
+      "legacy": "O0B2XY08"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B2XY09.txt",
+      "sha256": "5b7217d9ef663892b951564f44e1aecfc137115397749a93abeace577ce4d9bb",
+      "id": "quest-173",
+      "legacy": "O0B2XY09"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/O0B2XY10.txt",
+      "sha256": "d46e8b89e2d441b292f66362927645508cacfe0ac857ab10e53da74d3f00c66e",
+      "id": "quest-174",
+      "legacy": "O0B2XY10"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/P0A01L00.txt",
+      "sha256": "d4d73162f7e37749bc97e6d65b5a77be95ab8649e18bdfbf8212901181735768",
+      "id": "quest-175",
+      "legacy": "P0A01L00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/P0B00L01.txt",
+      "sha256": "85893a295b8de64461744b12b2fcab2e1fc0a858aa83bb035e019201dc50067e",
+      "id": "quest-176",
+      "legacy": "P0B00L01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/P0B00L03.txt",
+      "sha256": "df2290a660236f90553a6b8632d63ca2aff9f9d4d353cfb43bb12f95d91b8a32",
+      "id": "quest-177",
+      "legacy": "P0B00L03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/P0B00L04.txt",
+      "sha256": "4886ea1e1641ba31e737020d60e80786ace3b38678f2fd8a4d54fb640052e28c",
+      "id": "quest-178",
+      "legacy": "P0B00L04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/P0B00L06.txt",
+      "sha256": "b73f106961d628b4a982bfec8c4cb00bd4db32d751bf073250df302fec3beef4",
+      "id": "quest-179",
+      "legacy": "P0B00L06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/P0B01L02.txt",
+      "sha256": "6bcc15ca7c512ffd2653ecd23c9c80ccee16fc0eb9b54a8f58927e1cd38564dd",
+      "id": "quest-180",
+      "legacy": "P0B01L02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/P0B10L07.txt",
+      "sha256": "12b22aed21300856b124038200b1c0cd0366ac4e5f1a75e198b831bd41348e63",
+      "id": "quest-181",
+      "legacy": "P0B10L07"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/P0B10L08.txt",
+      "sha256": "2016922763e0c9edfeafb91be0f826790e71d5800e6d8fc24807860771a5b220",
+      "id": "quest-182",
+      "legacy": "P0B10L08"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/P0B10L10.txt",
+      "sha256": "8009a8c253fe82e865ff37a91c1f552636bc6db0272e5560e7428342a53fb609",
+      "id": "quest-183",
+      "legacy": "P0B10L10"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/P0B20L09.txt",
+      "sha256": "46e381f6643780667be497baff1007bc2c3c8f6a3b32c00accd78d78cf1dae58",
+      "id": "quest-184",
+      "legacy": "P0B20L09"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Q0C00Y01.txt",
+      "sha256": "82bcc3135f86ab4aa8766e136a5b3d45b22af45fc30f156a1d67870f674e0e1b",
+      "id": "quest-185",
+      "legacy": "Q0C00Y01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Q0C00Y03.txt",
+      "sha256": "972665b08777b2c8ecb475ad34442b9880abf0a4238134c2760445e5a8e34fcb",
+      "id": "quest-186",
+      "legacy": "Q0C00Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Q0C00Y04.txt",
+      "sha256": "66977f63be66277de8d8de3cb0a9196ca8d7fb52de04777d813b9a134c4813a8",
+      "id": "quest-187",
+      "legacy": "Q0C00Y04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Q0C00Y06.txt",
+      "sha256": "ff106ff13aa26434e876203b66e072f16b6bf35dfae8bf2e459ae9741a694e85",
+      "id": "quest-188",
+      "legacy": "Q0C00Y06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Q0C00Y07.txt",
+      "sha256": "fcd475f66233e004ea6febee16f73ea311d93bd80a3fa561675a7a0727e05cc9",
+      "id": "quest-189",
+      "legacy": "Q0C00Y07"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Q0C00Y08.txt",
+      "sha256": "6507bdc69aee1d50a2dcd9413d96ebbb3cd72d1160214a15f203d66c9ab5e2a4",
+      "id": "quest-190",
+      "legacy": "Q0C00Y08"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Q0C0XY02.txt",
+      "sha256": "acaac40f5a7b0692d1d0c00765916ae8131b4cbd1586286f853723a220981488",
+      "id": "quest-191",
+      "legacy": "Q0C0XY02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Q0C10Y00.txt",
+      "sha256": "bdad635062caa8f79c50a9deadf18b6ab7eb593f215a1cf91637ccac79182036",
+      "id": "quest-192",
+      "legacy": "Q0C10Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Q0C20Y02.txt",
+      "sha256": "584c087741555611aec5ea43e3ba9ed5ace40bb24c1d1ae991cc06882daf5aee",
+      "id": "quest-193",
+      "legacy": "Q0C20Y02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Q0C4XY04.txt",
+      "sha256": "8269c80fec4e8882338bf1fcb682d116cea7e9f1b6816d860be9a569bd845b69",
+      "id": "quest-194",
+      "legacy": "Q0C4XY04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y00.txt",
+      "sha256": "35a57fa0fbe7c16b1bee062f1efdf41d22206080133b1fb0b06e7401290b4863",
+      "id": "quest-195",
+      "legacy": "R0C10Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y01.txt",
+      "sha256": "423d2f726762d6d7a0f63ba3df24f12e4c4d51fd2baf2f58c45ed60f98277516",
+      "id": "quest-196",
+      "legacy": "R0C10Y01"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y02.txt",
+      "sha256": "85f1387d5c5dd737e6af5cab84951f0c99a795cd2b02262362ebaa768812228b",
+      "id": "quest-197",
+      "legacy": "R0C10Y02"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y04.txt",
+      "sha256": "e0aecdb846984b5a8b54be26a615e12220b7c8f698d07e97fd170484d26bf588",
+      "id": "quest-198",
+      "legacy": "R0C10Y04"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y05.txt",
+      "sha256": "17c9300568ac28d48bbe2b004ee5aa957b2215f1c15972be4b5bc26657e67e64",
+      "id": "quest-199",
+      "legacy": "R0C10Y05"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y06.txt",
+      "sha256": "21daac857bffac5514739d0d3fea44e023966520301de69978862eeee32adfdc",
+      "id": "quest-200",
+      "legacy": "R0C10Y06"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y08.txt",
+      "sha256": "44959e8193decf66ce3c1bca5473196113a8f8ef711bb098418de9569b29a294",
+      "id": "quest-201",
+      "legacy": "R0C10Y08"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y09.txt",
+      "sha256": "ba36377fdd0a8e28d50ad217222bdf7ecf7982dd08d3ad3bdf226c21ebcc02b4",
+      "id": "quest-202",
+      "legacy": "R0C10Y09"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y10.txt",
+      "sha256": "a6ef39615b7b2045828a4d5a5b98d2a62fcc90e6a658a333a7406a1abc0839ae",
+      "id": "quest-203",
+      "legacy": "R0C10Y10"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y11.txt",
+      "sha256": "9283adfb7c32354d2f055f53700f98cb4bec736a7eb0bcd25732e1799293705f",
+      "id": "quest-204",
+      "legacy": "R0C10Y11"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y12.txt",
+      "sha256": "6de2afe7f403a3bd08a0659181906954f6f8d35c41dee16f9b1b625bdcb46e5a",
+      "id": "quest-205",
+      "legacy": "R0C10Y12"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y13.txt",
+      "sha256": "7ed733e5eefd3e2da67a3054c3e0e45a19903eebd1d6497565893dbdb5759924",
+      "id": "quest-206",
+      "legacy": "R0C10Y13"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y14.txt",
+      "sha256": "41de6d9cbedc38225eea692ac500ee56c45831082047c5ff93f5d623319748f4",
+      "id": "quest-207",
+      "legacy": "R0C10Y14"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y15.txt",
+      "sha256": "04d86bc25c1730d4154fab68385fe3f4ee3ff103534fea05db3d9929b2d80f30",
+      "id": "quest-208",
+      "legacy": "R0C10Y15"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y17.txt",
+      "sha256": "de4edd709509a456f3535ee45b97b0bdee15f46931b7f410089bf58764c68a1d",
+      "id": "quest-209",
+      "legacy": "R0C10Y17"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y18.txt",
+      "sha256": "6e9c76982ac66b09192d30159deb90dd3795becd9a770424e70e7e6d10bbb4b3",
+      "id": "quest-210",
+      "legacy": "R0C10Y18"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y20.txt",
+      "sha256": "73d98bda963b32572075e954de31450a78dd0a67395ebd799eea849224fe03e9",
+      "id": "quest-211",
+      "legacy": "R0C10Y20"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C10Y21.txt",
+      "sha256": "3325c17076c9d336dece7db3c2c0fb66d41a17984b55a0b981faf57743c0c012",
+      "id": "quest-212",
+      "legacy": "R0C10Y21"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C11Y03.txt",
+      "sha256": "8ffe9326b87b07cff4c9bfc916444b0aadb36ffd1c33be0762c1a15fc5bb3a44",
+      "id": "quest-213",
+      "legacy": "R0C11Y03"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C11Y16.txt",
+      "sha256": "ae4983c9a8e42b110cbe8def3ca8cf16b7b67d55428b3775f316d5f2d9016b35",
+      "id": "quest-214",
+      "legacy": "R0C11Y16"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C11Y19.txt",
+      "sha256": "319df6e194789852ab023de09ad3d624d48a43071668276e6819ba60fb15a4f4",
+      "id": "quest-215",
+      "legacy": "R0C11Y19"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C11Y26.txt",
+      "sha256": "d9b7b7731d3b16df68ac43916dbf6845277c33600fbce43f2926942253b7423c",
+      "id": "quest-216",
+      "legacy": "R0C11Y26"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C11Y27.txt",
+      "sha256": "d2e697d79ed516f41b26e7f45da239145a637eb4b8a98b1cf05dff196da1f40a",
+      "id": "quest-217",
+      "legacy": "R0C11Y27"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C11Y28.txt",
+      "sha256": "59e89b2a4e66eea37cc1b1e74e36d83c61c8be7174d09cb1e3aaa4a4371f4772",
+      "id": "quest-218",
+      "legacy": "R0C11Y28"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C20Y07.txt",
+      "sha256": "81e02378877a5b1f2f528d18b5ec9af095d21c2093d82cab056776eee37122aa",
+      "id": "quest-219",
+      "legacy": "R0C20Y07"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C20Y22.txt",
+      "sha256": "25dcd68f0c98a13ed8561e870e96d007bceeadee609433377cf0994299a8e4d8",
+      "id": "quest-220",
+      "legacy": "R0C20Y22"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C30Y25.txt",
+      "sha256": "70de9f4d6b8a665e76540ee3cbbefd86b2398324291376491138d5844567e02a",
+      "id": "quest-221",
+      "legacy": "R0C30Y25"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C4XY23.txt",
+      "sha256": "7d8575b468ef077cb6e843cd482d951a187f00c7ea7dd849f795d707e65bbd2c",
+      "id": "quest-222",
+      "legacy": "R0C4XY23"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/R0C60Y24.txt",
+      "sha256": "215c9e2512cad594b6cf4d14fd95071bdd2c93b6b0ec1bea8940aca6b98b90fd",
+      "id": "quest-223",
+      "legacy": "R0C60Y24"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000001.txt",
+      "sha256": "5ffd2f6f13c0a6e0058b429200c46a2ef0a0120db9b03d4209bde2b4e56c99e8",
+      "id": "quest-224",
+      "legacy": "S0000001"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000002.txt",
+      "sha256": "36819e11c8ad27b46c200b209ac7dfecfe1d74810890cb553a10ad21f4f9b921",
+      "id": "quest-225",
+      "legacy": "S0000002"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000003.txt",
+      "sha256": "c2aa0e3cfb4bdb145d3f967c205079272b71489abd0ce6b314cf1588db1970c9",
+      "id": "quest-226",
+      "legacy": "S0000003"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000004.txt",
+      "sha256": "be9bcb8977788ef6b943edef2e32503f01e77a09039e4e1a80d68480aa8c99b5",
+      "id": "quest-227",
+      "legacy": "S0000004"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000005.txt",
+      "sha256": "4228ef31eea79a3de3fa774e8c5376a06f4b27d0f7c3c6f90005a2240ccbb5bb",
+      "id": "quest-228",
+      "legacy": "S0000005"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000006.txt",
+      "sha256": "10e686840e8faee013b2f758a4a809488e75be4d4955799cbd341f12333c65f1",
+      "id": "quest-229",
+      "legacy": "S0000006"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000007.txt",
+      "sha256": "784bef24b50e9ee9e80848c4e7631569743b2f1cc3d6a27bb750acba9bc11df3",
+      "id": "quest-230",
+      "legacy": "S0000007"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000008.txt",
+      "sha256": "1335ac670301e5b143c2d09dcbe6089c5871c241393f3181685dab4d50ffcd33",
+      "id": "quest-231",
+      "legacy": "S0000008"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000009.txt",
+      "sha256": "0bb41d2b4f1136efdb51e3ac938379ad986a9acf3a7333af4b4b24e897a0b338",
+      "id": "quest-232",
+      "legacy": "S0000009"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000010.txt",
+      "sha256": "d2a1764a9c67f6a76bf1c3689d425bf82698500090fa144b771a21e13886d5e6",
+      "id": "quest-233",
+      "legacy": "S0000010"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000011.txt",
+      "sha256": "ea2984b2baf4d66e38515a58013063ee3a7d257b08934cb772b0d6241ed0651a",
+      "id": "quest-234",
+      "legacy": "S0000011"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000012.txt",
+      "sha256": "f0024b51a032d1a8e81eeab4577a63621cebbedc4bb4e1c3a63029813f65b020",
+      "id": "quest-235",
+      "legacy": "S0000012"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000013.txt",
+      "sha256": "96b137e1e15030a2c05f92a8a2f9abdaa60588994fa02e63e943d11efe752679",
+      "id": "quest-236",
+      "legacy": "S0000013"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000015.txt",
+      "sha256": "721b6fd18af3dafcb7ca053345063671a53f7948e65000736e898381c89053a8",
+      "id": "quest-237",
+      "legacy": "S0000015"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000016.txt",
+      "sha256": "74614ec0a8be8b47ec034304d978c1d5d9461f8ca65c973c359ba3f6a53d489e",
+      "id": "quest-238",
+      "legacy": "S0000016"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000017.txt",
+      "sha256": "818488c46e5b556a82d316d443f6d401ee863e9835535ae5de78ddc332b690b5",
+      "id": "quest-239",
+      "legacy": "S0000017"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000018.txt",
+      "sha256": "a5f34829ae0631a39a2c9f27631246f199fe531ecdbcac4a27fb2bbc3e344f93",
+      "id": "quest-240",
+      "legacy": "S0000018"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000020.txt",
+      "sha256": "bd3610e1838db835555b9f6653d68600987a0d951f1717d2eba9e49c2b053c0d",
+      "id": "quest-241",
+      "legacy": "S0000020"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000021.txt",
+      "sha256": "60881c5c1b7dd2b3fd72a143a43113c99cc583adfc74fd9550c808f1a9fc00a1",
+      "id": "quest-242",
+      "legacy": "S0000021"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000022.txt",
+      "sha256": "4fdfa4b3024663d9140fe9dbb513df665c2b765182327727e8d70406dbf51431",
+      "id": "quest-243",
+      "legacy": "S0000022"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000100.txt",
+      "sha256": "d618d74f4d2a473c2d9ab7ff54fcb0941dd886a0f8abfa2adf05e59495eb16c0",
+      "id": "quest-244",
+      "legacy": "S0000100"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000101.txt",
+      "sha256": "4e7d433d37c7dcbc33750cf117a378588ee6bb6874627e26daae631bc4c9390f",
+      "id": "quest-245",
+      "legacy": "S0000101"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000102.txt",
+      "sha256": "c26b7cd3b1efe35c3aa3b2f45cfb4712ffe82255189db998685fde1f167b078a",
+      "id": "quest-246",
+      "legacy": "S0000102"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000103.txt",
+      "sha256": "f8f6b8b13b1393039324ef5afd640d1015eb8d0acba7bdb0cefe730bfe873a10",
+      "id": "quest-247",
+      "legacy": "S0000103"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000104.txt",
+      "sha256": "d5a0dfea847bd30f971d189d05b9bd4c98b2de41eb8094476ef6b3b675fe4b2c",
+      "id": "quest-248",
+      "legacy": "S0000104"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000106.txt",
+      "sha256": "e8d969d8b23f17f2803c3d366ebe26038ceac5468b49e09ee855f83ce2d550c3",
+      "id": "quest-249",
+      "legacy": "S0000106"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000107.txt",
+      "sha256": "b02eabdde6e10f8113e6cab1a1fe41c87998cdae4bcd3da1caf3174217c8c96b",
+      "id": "quest-250",
+      "legacy": "S0000107"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000500.txt",
+      "sha256": "f43e00f12eacd3abdf877a3ef145017b95578344e6d73a8e3e6b4be4927df88f",
+      "id": "quest-251",
+      "legacy": "S0000500"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000501.txt",
+      "sha256": "697e13c2688f6374fdd0b459d1dae481f17a0e85763f953742db7c467357623c",
+      "id": "quest-252",
+      "legacy": "S0000501"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000502.txt",
+      "sha256": "fbbbc74c9b111ce61a95eb1d262ac7646f287c5e3d7c46252f3a20ec9a3e89e7",
+      "id": "quest-253",
+      "legacy": "S0000502"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000503.txt",
+      "sha256": "14f6f050976b07d869995edc242e709802d25159f58daae3b079966812064c88",
+      "id": "quest-254",
+      "legacy": "S0000503"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000977.txt",
+      "sha256": "370db9b88ff4320fde574f0e5471633cb07f57b9e732676c73dc4c4c192b97ba",
+      "id": "quest-255",
+      "legacy": "S0000977"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000988.txt",
+      "sha256": "56b228163971c583a0a93f89115ceb5074e481ea710fa43e53d6bc604a9b3dcd",
+      "id": "quest-256",
+      "legacy": "S0000988"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/S0000999.txt",
+      "sha256": "907b8310ce2aac83be4b01dde3a73beff0b047b239650e1cffee523ed4cc6b72",
+      "id": "quest-257",
+      "legacy": "S0000999"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/T0C00Y00.txt",
+      "sha256": "89783736c8fef2f4158817f5d140663181b119704b4130ea8deede62b9318690",
+      "id": "quest-258",
+      "legacy": "T0C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/U0C00Y00.txt",
+      "sha256": "98853c0e9d6d1e10bbe44147d23218ce2a54e6ed5ccc887a8f014a2e368374b6",
+      "id": "quest-259",
+      "legacy": "U0C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/V0C00Y00.txt",
+      "sha256": "6fed1f086c17a70f41a194b1bf6a4201718c9b6a14744ebe9c97ba6a7627fa96",
+      "id": "quest-260",
+      "legacy": "V0C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/W0C00Y00.txt",
+      "sha256": "71f248cfea74f3aa9e688852c62206353463b39e2459ada8bef047db2744085c",
+      "id": "quest-261",
+      "legacy": "W0C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/X0C00Y00.txt",
+      "sha256": "5207c93bc9bde6037b4acf8cdbc6e7a2b736b4a4746bb35505410fc41385844b",
+      "id": "quest-262",
+      "legacy": "X0C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Y0C00Y00.txt",
+      "sha256": "3ac544d21893bc291c5ceff640c8a76e6d41358cbce340b19770fe81b56e959b",
+      "id": "quest-263",
+      "legacy": "Y0C00Y00"
+    },
+    {
+      "kind": "quest",
+      "file": "Quests/Z0C00Y00.txt",
+      "sha256": "0d0b41a999242f3c0f3db88d2898a87e21decff2755a4b857a717050d5c5062f",
+      "id": "quest-264",
+      "legacy": "Z0C00Y00"
+    },
+    {
+      "kind": "list",
+      "file": "Tables/QuestList-Classic.txt",
+      "sha256": "24299ba54dc246ae278123f4c855928e1d7cd36626b972236d13c44c5005d001",
+      "id": "questlist-classic",
+      "legacy": "QuestList-Classic"
+    },
+    {
+      "kind": "list",
+      "file": "Tables/QuestList-DFU.txt",
+      "sha256": "701f578d6c8af5ad434784772eced41c7400618cb9132f6f5a16647783c60f2d",
+      "id": "questlist-dfu",
+      "legacy": "QuestList-DFU"
+    },
+    {
+      "kind": "table",
+      "file": "Tables/Quests-Diseases.txt",
+      "sha256": "255de695bb6040d955b83b9bcfdc63682cf87f433dd3c0acf16f7200d1180efd",
+      "id": "quests-diseases",
+      "legacy": "Quests-Diseases"
+    },
+    {
+      "kind": "table",
+      "file": "Tables/Quests-Factions.txt",
+      "sha256": "e28632bea135cd8108a78d283dfa22898bb9805443e91753aa624e35ca84b2d7",
+      "id": "quests-factions",
+      "legacy": "Quests-Factions"
+    },
+    {
+      "kind": "table",
+      "file": "Tables/Quests-Foes.txt",
+      "sha256": "7b71658306ee0c4d93d3089ae791f531566c7020636a50a4a6d1989bc34d30bd",
+      "id": "quests-foes",
+      "legacy": "Quests-Foes"
+    },
+    {
+      "kind": "table",
+      "file": "Tables/Quests-GlobalVars.txt",
+      "sha256": "56b59de5ad3a4e96e15b1449adfcdff6480d5f519ef4a6834ff5341ff8f60423",
+      "id": "quests-globalvars",
+      "legacy": "Quests-GlobalVars"
+    },
+    {
+      "kind": "table",
+      "file": "Tables/Quests-Items.txt",
+      "sha256": "16bf321394ee961f4bf85be57e644a2702a6b6db1c506f18ccfa9448e38e5271",
+      "id": "quests-items",
+      "legacy": "Quests-Items"
+    },
+    {
+      "kind": "table",
+      "file": "Tables/Quests-Places.txt",
+      "sha256": "ab298938775c8b9cf2a5092ce354abb489af8abb5f7e13daab58e11b05c03fa1",
+      "id": "quests-places",
+      "legacy": "Quests-Places"
+    },
+    {
+      "kind": "table",
+      "file": "Tables/Quests-Sounds.txt",
+      "sha256": "b516508636e9acd090360a63d2d893900b4774203c0608231458234acb1976d0",
+      "id": "quests-sounds",
+      "legacy": "Quests-Sounds"
+    },
+    {
+      "kind": "table",
+      "file": "Tables/Quests-Spells.txt",
+      "sha256": "1fa5fba556f3266c04455c2621c9c51c1d67ff44e8e19fbc6f3b450b36c46de0",
+      "id": "quests-spells",
+      "legacy": "Quests-Spells"
+    },
+    {
+      "kind": "table",
+      "file": "Tables/Quests-StaticMessages.txt",
+      "sha256": "58229f994aaf2a88672ad6ca340626a4c9554c3b0255863a0675aa72256e2a7c",
+      "id": "quests-staticmessages",
+      "legacy": "Quests-StaticMessages"
+    },
+    {
+      "kind": "table",
+      "file": "Tables/Spells-Entity.txt",
+      "sha256": "aaf4929cae82ee47f223f9f49ef6c1dac7995ba83529d1db6cfdfbf2b278d47d",
+      "id": "spells-entity",
+      "legacy": "Spells-Entity"
+    }
+  ],
+  "schema": "dfu-faction-quest-profile-v1"
+}

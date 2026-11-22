@@ -1,5 +1,11 @@
 # Classic access — IMP-004
 
+IMP-009 increment 3 adds [faction/quest structural inputs](FACTION_QUEST_INPUTS.md)
+through the existing definition registry: the complete explicit DFU faction,
+text-quest, selection-list and shared-table profile, with package identity,
+provenance, checked hierarchy/references and detached PCK-capable access.
+FACT/QUEST semantics, opening registration and SAVE compatibility remain gated.
+
 IMP-009 increment 2 adds [item/spell structural inputs](ITEM_SPELL_INPUTS.md):
 selected SPELLS.STD/MAGIC.DEF, an explicitly authorized DFU packaged item baseline,
 stable contextual identities, required references and detached inspection views.
