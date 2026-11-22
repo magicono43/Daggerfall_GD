@@ -44,7 +44,7 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
-	if fixture.is_empty() or fixture.get("mode") in ["layout-inputs","layout-inputs_reload"]:
+	if fixture.is_empty() or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 		var resource_sources: Array = []
 		if not fixture.is_empty():
 			var observation: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/layout_source_observation.json"))
@@ -53,7 +53,12 @@ func _ready() -> void:
 		if not registered.ok:
 			label("Layout registration failed: " + registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["geography-inputs","layout-inputs","layout-inputs_reload"]:
+	if fixture.is_empty() or fixture.get("mode") in ["variant-inputs","variant-inputs_reload"]:
+		var registered: Dictionary = controller.providers.enable_variant_inputs()
+		if not registered.ok:
+			label("Variant registration failed: " + registered.reason)
+			return
+	if fixture.is_empty() or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","geography-inputs","layout-inputs","layout-inputs_reload"]:
 		var registered: Dictionary = controller.providers.enable_geography_inputs()
 		if not registered.ok:
 			label("Geographic registration failed: " + registered.reason)
@@ -73,7 +78,7 @@ func _ready() -> void:
 		if not registered.ok:
 			label("Actor input registration failed: " + registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["layout-inputs","layout-inputs_reload","replacements","replacements_reload","native","native_reload","native-library"]:
+	if fixture.is_empty() or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload","replacements","replacements_reload","native","native_reload","native-library"]:
 		var registered: Dictionary = controller.providers.enable_media_replacements()
 		if not registered.ok:
 			label("Media adapter registration failed: " + registered.reason)
@@ -468,6 +473,10 @@ func run_fixture() -> void:
 		script_path = "res://tests/layout_cases.gd"
 	elif fixture.get("mode") == "layout-inputs_reload":
 		script_path = "res://tests/layout_reload_cases.gd"
+	elif fixture.get("mode") == "variant-inputs":
+		script_path = "res://tests/variant_cases.gd"
+	elif fixture.get("mode") == "variant-inputs_reload":
+		script_path = "res://tests/variant_reload_cases.gd"
 	elif fixture.get("mode") == "faction-quest-inputs":
 		script_path = "res://tests/faction_quest_cases.gd"
 	elif fixture.get("mode") == "translation-preferences_reload":
@@ -499,7 +508,7 @@ func run_fixture() -> void:
 		var music_cleanup: Dictionary = await session_shell.music_playback.shutdown()
 		checks.native_cleanup = {"ok":video_cleanup.ok and music_cleanup.ok,"video":video_cleanup,"music":music_cleanup}
 		checks.ok = checks.ok and checks.native_cleanup.ok
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

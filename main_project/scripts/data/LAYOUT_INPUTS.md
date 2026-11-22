@@ -1,7 +1,13 @@
 # Layout structural inputs — v1
 
 IMP-010 increment 2, DATA-005. Qualification evidence is recorded separately;
-this contract does not establish user acceptance. Variants are excluded.
+this contract does not establish user acceptance. Increment-3 variant definitions
+and pure scoped proposals are specified separately in [VARIANT_INPUTS.md](VARIANT_INPUTS.md).
+
+The variant resolver reuses `location_inputs`, `decode_block`, declared occurrence
+metadata and `prepare_structural_inputs`; these retain the same resource, marker,
+door, link and coordinate checks. Trusted resolved inputs do not publish definitions
+or create live LOC objects. Required variant failure leaves no usable occurrences.
 
 `layout-inputs-v1` is a trusted adapter in the existing DATA/MOD/CORE transaction,
 not another registry. `enable_layout_inputs(required_resource_sources)` registers

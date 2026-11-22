@@ -1,5 +1,13 @@
 # Definition publication — IMP-005 increment 3
 
+IMP-010 increment 3 registers [variant declarations and scoped proposals](VARIANT_INPUTS.md)
+in `world.variants` before preparation. Final candidate validation includes winning
+variant/default references across layout, geography and media contributions;
+selected alternatives undergo the accepted structural/resource checks on demand.
+Installed definition precedence, omissions, publication reservations and durable
+profile ordering remain this transaction's authority. Pure resolution never writes
+session selections, unlocks content or adds fallible post-commit work.
+
 IMP-010 increment 1 registers [geographic inputs](GEOGRAPHY_INPUTS.md) through
 this same transaction. Required classic readers precede preparation; PCK-backed
 identity metadata and baseline records feed the existing shipped hook. Complete

@@ -1,0 +1,1034 @@
+{
+  "schema": "imp010-increment3-audit-v1",
+  "date": "2026-11-22",
+  "status": "passed",
+  "user_acceptance": "pending",
+  "scope": "IMP-010 increment 3 DATA only; parent IMP-010 and M1 open",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "platform": "Windows",
+  "source_revision": "e324d549966e003d7941709c3897630b05faf5c7",
+  "prerequisites": {
+    "IMP-005": "accepted",
+    "IMP-010 increment 1": "accepted at 3b9e4bd",
+    "IMP-010 increment 2": "accepted at e324d54"
+  },
+  "inventories": {
+    "variant-inputs": {
+      "headless": 497,
+      "rendered": 503,
+      "reload": 21
+    },
+    "validator_vectors": 15
+  },
+  "source_manifest": {
+    "scripts/data/variant_inputs.gd": "394cdcd1154d3f3c225a3d810712a487f6a60d74ec0c55bf4df957272f3a359d",
+    "scripts/data/variant_resolution.gd": "7c7450b57b6a46b6fd5d6d9aa35992ae88705e21dd29d2b12ca85abcbb39ab8f",
+    "scripts/data/layout_inputs.gd": "848bb362ba242e683f43b05880cd48dca85c266457c63aa66978dbf6b21f705b",
+    "scripts/startup/provider_boundary.gd": "aa6885fee3a8c465064b761d4249682451d71a89dc188cf36f282619417e7f1c",
+    "scripts/startup/startup_shell.gd": "9e3da238604f57f60b387e5db50fe9009c747e4d7376e3863ab23219aa246fa1",
+    "scripts/data/definition_registry.gd": "37e2013443f3dfd43cf89a521fc94f612a3cbc87c047a3bc3478d4b7acb110cb",
+    "scripts/data/classic_access.gd": "3badd2fe33f7486a902b6cff20aeff60af90839f96162225acb12befd4e3d9ee",
+    "tests/variant_cases.gd": "e5017ffe13b383ba6f29540ce5aa1e2f020e933ecc5ce9b43a647ea8c79bfad3",
+    "tests/variant_reload_cases.gd": "11c83ce396bf97ee0bb838247d375525a9b4a176e2bfe6ad3628e999a1ebbd01",
+    "tests/variant_inventory.json": "3133314d4598a3f2d80061f1c937bcde6cc44dea2bb43cd6aa61733add0bc060",
+    "tests/layout_cases.gd": "08434985a594f22489f562124c4470122a45e2e4a1bd557e90121a766dbb03c5",
+    "content/variants/baseline.json": "794d0e2caff7b177d13717064c32f027dd2e79b7803ee42c8571aaf832a542a9",
+    "content/variants/LICENSE.txt": "7ae5a80e35dd22168f113ad5e1111869f2ecb1609d869734e459932c9f57f4a2",
+    "content/layouts/profile.json": "a2e629e5d085b3d0ed58f3c17958f4accec4910e9204b6967203ab55af717b75",
+    "export_presets.cfg": "9e1922014e2ff5bf9b6f90a11598931a2bdd5dbd1185831fd0ee725e14b8865b"
+  },
+  "source_manifest_sha256": "95211944f9c9380c698ee38ed17ef2259df401d0a4e8397149ecd3c1d8e466ca",
+  "preserved_inventories": {
+    "geography_inventory.json": {
+      "unchanged_after_repository_eol_normalization": true,
+      "sha256": "79f1602e2e50c34f85dfd37e9d8337d70bcbf5ad9c70b1ba98da51cb1fc2bfd9",
+      "counts": {
+        "headless": 200,
+        "rendered": 202
+      }
+    },
+    "layout_inventory.json": {
+      "unchanged_after_repository_eol_normalization": true,
+      "sha256": "ca3f1caa99b0485a4f84e6e7f967720107d23f1773cf38255471fff152c72302",
+      "counts": {
+        "rendered": 372,
+        "headless": 369,
+        "reload": 15
+      }
+    },
+    "actor_input_inventory.json": {
+      "unchanged_after_repository_eol_normalization": true,
+      "sha256": "2bcd58ba520209f16cb8eda4f877f7b3daba78a3c2265e0801bc5a62a3241752",
+      "counts": {
+        "rendered": 238,
+        "headless": 236
+      }
+    },
+    "item_spell_inventory.json": {
+      "unchanged_after_repository_eol_normalization": true,
+      "sha256": "be7126c68cb1b3acc44fa103a996c5f64ac417a1044f1f89b0b853b099fbd51f",
+      "counts": {
+        "headless": 160,
+        "rendered": 162
+      }
+    },
+    "faction_quest_inventory.json": {
+      "unchanged_after_repository_eol_normalization": true,
+      "sha256": "d09d28013ad60270e0320ee6b8b261990630dafbaf0ab239911549e74ac15d05",
+      "counts": {
+        "rendered": 134,
+        "headless": 132
+      }
+    },
+    "media_inventory.json": {
+      "unchanged_after_repository_eol_normalization": true,
+      "sha256": "ad30326ab62b8d6b6ee7151d66ebb1ee87a274485e4e123e7ffdb930f3241a3b",
+      "counts": {
+        "rendered": 136,
+        "headless": 119
+      }
+    },
+    "replacement_inventory.json": {
+      "unchanged_after_repository_eol_normalization": true,
+      "sha256": "1efe2aa4c937159b89d02d6112a68d760eb4a2b318895030995003762eeb0e54",
+      "counts": {
+        "headless": 168,
+        "rendered": 173,
+        "reload": 10
+      }
+    }
+  },
+  "verification": [
+    {
+      "run": "verification-headless-2804a43d986844d796605a0f41571a4d",
+      "report": "main_project/tests/.runs/verification-headless-2804a43d986844d796605a0f41571a4d/report.json",
+      "report_sha256": "063098e8283aececf2b5840c0384aaee73796b8884a6fbeef790fc1484d00bd2",
+      "status": "passed",
+      "configuration": null,
+      "mode": "headless",
+      "suite": "variant-inputs",
+      "children": [
+        {
+          "mode": "headless",
+          "role": "primary",
+          "expected": 497,
+          "actual": 497
+        },
+        {
+          "mode": "headless",
+          "role": "reload",
+          "expected": 21,
+          "actual": 21
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 52,
+          "unchanged": true
+        },
+        {
+          "child": "reload",
+          "count": 52,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-headless-2804a43d986844d796605a0f41571a4d/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-headless-2804a43d986844d796605a0f41571a4d/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-headless-2804a43d986844d796605a0f41571a4d/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-headless-2804a43d986844d796605a0f41571a4d/evidence/scenario-1/layout-restart-receipt.json",
+        "main_project/tests/.runs/verification-headless-2804a43d986844d796605a0f41571a4d/evidence/scenario-1/reload-console.stderr.log",
+        "main_project/tests/.runs/verification-headless-2804a43d986844d796605a0f41571a4d/evidence/scenario-1/reload-console.stdout.log",
+        "main_project/tests/.runs/verification-headless-2804a43d986844d796605a0f41571a4d/evidence/scenario-1/reload-fixture.json",
+        "main_project/tests/.runs/verification-headless-2804a43d986844d796605a0f41571a4d/evidence/scenario-1/reload-result.json",
+        "main_project/tests/.runs/verification-headless-2804a43d986844d796605a0f41571a4d/evidence/scenario-1/result.json",
+        "main_project/tests/.runs/verification-headless-2804a43d986844d796605a0f41571a4d/evidence/scenario-1/variant-restart-receipt.json"
+      ]
+    },
+    {
+      "run": "verification-rendered-ecf9f4d491154b49828d6375850f2ca6",
+      "report": "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/report.json",
+      "report_sha256": "297243d433a06edd0b534bf53c6b1ab8607a130b8df48095eb097c45901e8017",
+      "status": "passed",
+      "configuration": null,
+      "mode": "rendered",
+      "suite": "variant-inputs",
+      "children": [
+        {
+          "mode": "rendered",
+          "role": "primary",
+          "expected": 503,
+          "actual": 503
+        },
+        {
+          "mode": "rendered",
+          "role": "reload",
+          "expected": 21,
+          "actual": 21
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 52,
+          "unchanged": true
+        },
+        {
+          "child": "reload",
+          "count": 52,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/layout-restart-receipt.json",
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/layout-structural-menu.png",
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/reload-console.stderr.log",
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/reload-console.stdout.log",
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/reload-fixture.json",
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/reload-result.json",
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/result.json",
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/variant-proposals.png",
+        "main_project/tests/.runs/verification-rendered-ecf9f4d491154b49828d6375850f2ca6/evidence/scenario-1/variant-restart-receipt.json"
+      ]
+    },
+    {
+      "run": "export-d03c067b8c434ce1bd5558ac58b11887",
+      "report": "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/result.json",
+      "report_sha256": "09d7d5dd3e200b5c15735637ef16644130263a91ef0e36041f11e5400594335f",
+      "status": "passed",
+      "configuration": "debug",
+      "mode": null,
+      "suite": "variant-inputs",
+      "children": [
+        {
+          "mode": "headless",
+          "role": "primary",
+          "expected": 497,
+          "actual": 497
+        },
+        {
+          "mode": "headless",
+          "role": "reload",
+          "expected": 21,
+          "actual": 21
+        },
+        {
+          "mode": "rendered",
+          "role": "primary",
+          "expected": 503,
+          "actual": 503
+        },
+        {
+          "mode": "rendered",
+          "role": "reload",
+          "expected": 21,
+          "actual": 21
+        }
+      ],
+      "pck_sha256": "CE29C771742059C0D4AA53EE5A6F6ECF5C87A4C9883F6219D075D879A38B052D",
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "source_hashes": {
+        "tests/variant_cases.gd": "E5017FFE13B383BA6F29540CE5AA1E2F020E933ECC5CE9B43A647EA8C79BFAD3",
+        "tests/layout_inventory.json": "CA3F1CAA99B0485A4F84E6E7F967720107D23F1773CF38255471FFF152C72302",
+        "scripts/data/classic_image.gd": "7C54CE072C158DFC56D883EC7A9EBB26244F06C8D6E6FD8BC52C6347FE454378",
+        "scripts/data/variant_inputs.gd": "394CDCD1154D3F3C225A3D810712A487F6A60D74EC0C55BF4DF957272F3A359D",
+        "tests/layout_cases.gd": "08434985A594F22489F562124C4470122A45E2E4A1BD557E90121A766DBB03C5",
+        "scripts/data/layout_placements.gd": "B6CCD3804FFC9BFAE5F06A43D916BD4CE45C9B2D8DBB013687F113D48F3F70CF",
+        "export_presets.cfg": "9E1922014E2FF5BF9B6F90A11598931A2BDD5DBD1185831FD0EE725E14B8865B",
+        "scripts/data/media_replacements.gd": "C3AAFFCF752039B8DB290872FB5917D445DBFF4143950C8D4F0B9A55C1C1D85A",
+        "content/layouts/profile.json": "A2E629E5D085B3D0ED58F3C17958F4ACCEC4910E9204B6967203AB55AF717B75",
+        "scripts/data/classic_media_source.gd": "2200F6914662CFF8516FA3D1650687A00386702B1C4F53B259BC7AD353F207F6",
+        "scripts/data/layout_formats.gd": "C8E2E93510D029FE4CD73BA06C689CFD17C5822340784A4142707F7874102A8D",
+        "tests/variant_inventory.json": "3133314D4598A3F2D80061F1C937BCDE6CC44DEA2BB43CD6AA61733ADD0BC060",
+        "content/layouts/DFU_LICENSE.txt": "6E5E22FA760938AB398743150787896BD20FCF4936AAD0122704700BAD1E669A",
+        "scripts/data/layout_inputs.gd": "848BB362BA242E683F43B05880CD48DCA85C266457C63AA66978DBF6B21F705B",
+        "tests/variant_reload_cases.gd": "11C83CE396BF97EE0BB838247D375525A9B4A176E2BFE6AD3628E999A1EBBD01",
+        "content/variants/LICENSE.txt": "7AE5A80E35DD22168F113AD5E1111869F2ECB1609D869734E459932C9F57F4A2",
+        "scripts/startup/startup_shell.gd": "9E3DA238604F57F60B387E5DB50FE9009C747E4D7376E3863AB23219AA246FA1",
+        "tests/layout_source_observation.json": "649677BCAB76FBAC3C00458D868EE197863CA2A5487A03539D3E9CDB0E2B7C52",
+        "scripts/startup/provider_boundary.gd": "AA6885FEE3A8C465064B761D4249682451D71A89DC188CF36F282619417E7F1C",
+        "tests/layout_reload_cases.gd": "43C6971F155F5EA8633F0FD67E2A86787BCF5309B6874D010BFF86CCE4862F6E",
+        "scripts/data/geography_inputs.gd": "7617E7B1EE4EF4E2DD1B1A5DD90E8A6BF5149D2C3DFFA48AB65498A5A8D22B07",
+        "scripts/data/classic_access.gd": "3BADD2FE33F7486A902B6CFF20AEFF60AF90839F96162225ACB12BEFD4E3D9EE",
+        "scripts/data/definition_registry.gd": "37E2013443F3DFD43CF89A521FC94F612A3CBC87C047A3BC3478D4B7ACB110CB",
+        "content/variants/baseline.json": "794D0E2CAFF7B177D13717064C32F027DD2E79B7803EE42C8571AAF832A542A9",
+        "scripts/data/variant_resolution.gd": "7C7450B57B6A46B6FD5D6D9AA35992AE88705E21DD29D2B12CA85ABCBB39AB8F"
+      },
+      "source_guard": "READ-sharing guards held across each exported primary/reload child",
+      "source_samples": [
+        {
+          "child": "headless-primary",
+          "count": 52,
+          "unchanged": true
+        },
+        {
+          "child": "headless-reload",
+          "count": 52,
+          "unchanged": true
+        },
+        {
+          "child": "rendered-primary",
+          "count": 52,
+          "unchanged": true
+        },
+        {
+          "child": "rendered-reload",
+          "count": 52,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/headless/fixture.json",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/headless/layout-restart-receipt.json",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/headless/reload-fixture.json",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/headless/reload-result.json",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/headless/result.json",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/headless/variant-restart-receipt.json",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/rendered/fixture.json",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/rendered/layout-restart-receipt.json",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/rendered/layout-structural-menu.png",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/rendered/reload-fixture.json",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/rendered/reload-result.json",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/rendered/result.json",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/rendered/variant-proposals.png",
+        "main_project/tests/.runs/export-d03c067b8c434ce1bd5558ac58b11887/evidence/rendered/variant-restart-receipt.json"
+      ]
+    },
+    {
+      "run": "export-661c101726e74e0dae5ccdbc56520afb",
+      "report": "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/result.json",
+      "report_sha256": "e7785d9abefd314e1d20ca3a252429b152d947fb0f34e218e57a1ef868676a26",
+      "status": "passed",
+      "configuration": "release",
+      "mode": null,
+      "suite": "variant-inputs",
+      "children": [
+        {
+          "mode": "headless",
+          "role": "primary",
+          "expected": 497,
+          "actual": 497
+        },
+        {
+          "mode": "headless",
+          "role": "reload",
+          "expected": 21,
+          "actual": 21
+        },
+        {
+          "mode": "rendered",
+          "role": "primary",
+          "expected": 503,
+          "actual": 503
+        },
+        {
+          "mode": "rendered",
+          "role": "reload",
+          "expected": 21,
+          "actual": 21
+        }
+      ],
+      "pck_sha256": "9E744085454A3E06BFB35AA7236CD50CB3B0B45D41DF5F93A7A45D64E5CA63A3",
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "source_hashes": {
+        "tests/layout_cases.gd": "08434985A594F22489F562124C4470122A45E2E4A1BD557E90121A766DBB03C5",
+        "tests/variant_inventory.json": "3133314D4598A3F2D80061F1C937BCDE6CC44DEA2BB43CD6AA61733ADD0BC060",
+        "content/variants/LICENSE.txt": "7AE5A80E35DD22168F113AD5E1111869F2ECB1609D869734E459932C9F57F4A2",
+        "tests/layout_source_observation.json": "649677BCAB76FBAC3C00458D868EE197863CA2A5487A03539D3E9CDB0E2B7C52",
+        "tests/variant_cases.gd": "E5017FFE13B383BA6F29540CE5AA1E2F020E933ECC5CE9B43A647EA8C79BFAD3",
+        "scripts/data/layout_inputs.gd": "848BB362BA242E683F43B05880CD48DCA85C266457C63AA66978DBF6B21F705B",
+        "scripts/data/geography_inputs.gd": "7617E7B1EE4EF4E2DD1B1A5DD90E8A6BF5149D2C3DFFA48AB65498A5A8D22B07",
+        "scripts/startup/startup_shell.gd": "9E3DA238604F57F60B387E5DB50FE9009C747E4D7376E3863AB23219AA246FA1",
+        "scripts/data/variant_resolution.gd": "7C7450B57B6A46B6FD5D6D9AA35992AE88705E21DD29D2B12CA85ABCBB39AB8F",
+        "scripts/data/classic_access.gd": "3BADD2FE33F7486A902B6CFF20AEFF60AF90839F96162225ACB12BEFD4E3D9EE",
+        "scripts/startup/provider_boundary.gd": "AA6885FEE3A8C465064B761D4249682451D71A89DC188CF36F282619417E7F1C",
+        "content/layouts/profile.json": "A2E629E5D085B3D0ED58F3C17958F4ACCEC4910E9204B6967203AB55AF717B75",
+        "content/variants/baseline.json": "794D0E2CAFF7B177D13717064C32F027DD2E79B7803EE42C8571AAF832A542A9",
+        "scripts/data/definition_registry.gd": "37E2013443F3DFD43CF89A521FC94F612A3CBC87C047A3BC3478D4B7ACB110CB",
+        "scripts/data/layout_placements.gd": "B6CCD3804FFC9BFAE5F06A43D916BD4CE45C9B2D8DBB013687F113D48F3F70CF",
+        "scripts/data/classic_media_source.gd": "2200F6914662CFF8516FA3D1650687A00386702B1C4F53B259BC7AD353F207F6",
+        "scripts/data/classic_image.gd": "7C54CE072C158DFC56D883EC7A9EBB26244F06C8D6E6FD8BC52C6347FE454378",
+        "scripts/data/layout_formats.gd": "C8E2E93510D029FE4CD73BA06C689CFD17C5822340784A4142707F7874102A8D",
+        "export_presets.cfg": "9E1922014E2FF5BF9B6F90A11598931A2BDD5DBD1185831FD0EE725E14B8865B",
+        "tests/layout_reload_cases.gd": "43C6971F155F5EA8633F0FD67E2A86787BCF5309B6874D010BFF86CCE4862F6E",
+        "tests/variant_reload_cases.gd": "11C83CE396BF97EE0BB838247D375525A9B4A176E2BFE6AD3628E999A1EBBD01",
+        "tests/layout_inventory.json": "CA3F1CAA99B0485A4F84E6E7F967720107D23F1773CF38255471FFF152C72302",
+        "scripts/data/media_replacements.gd": "C3AAFFCF752039B8DB290872FB5917D445DBFF4143950C8D4F0B9A55C1C1D85A",
+        "content/layouts/DFU_LICENSE.txt": "6E5E22FA760938AB398743150787896BD20FCF4936AAD0122704700BAD1E669A",
+        "scripts/data/variant_inputs.gd": "394CDCD1154D3F3C225A3D810712A487F6A60D74EC0C55BF4DF957272F3A359D"
+      },
+      "source_guard": "READ-sharing guards held across each exported primary/reload child",
+      "source_samples": [
+        {
+          "child": "headless-primary",
+          "count": 52,
+          "unchanged": true
+        },
+        {
+          "child": "headless-reload",
+          "count": 52,
+          "unchanged": true
+        },
+        {
+          "child": "rendered-primary",
+          "count": 52,
+          "unchanged": true
+        },
+        {
+          "child": "rendered-reload",
+          "count": 52,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/headless/fixture.json",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/headless/layout-restart-receipt.json",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/headless/reload-fixture.json",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/headless/reload-result.json",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/headless/result.json",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/headless/variant-restart-receipt.json",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/rendered/fixture.json",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/rendered/layout-restart-receipt.json",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/rendered/layout-structural-menu.png",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/rendered/reload-fixture.json",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/rendered/reload-result.json",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/rendered/result.json",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/rendered/variant-proposals.png",
+        "main_project/tests/.runs/export-661c101726e74e0dae5ccdbc56520afb/evidence/rendered/variant-restart-receipt.json"
+      ]
+    },
+    {
+      "run": "verification-headless-efedbcc8775543039c1ef73ceda83cc4",
+      "report": "main_project/tests/.runs/verification-headless-efedbcc8775543039c1ef73ceda83cc4/report.json",
+      "report_sha256": "d640a7ffe2814493b48f768f0e5d848be798fe04f76de10411d433835c5a96af",
+      "status": "passed",
+      "configuration": null,
+      "mode": "headless",
+      "suite": "classic",
+      "children": [
+        {
+          "mode": "headless",
+          "role": "primary",
+          "expected": 97,
+          "actual": 97
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 4,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-headless-efedbcc8775543039c1ef73ceda83cc4/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-headless-efedbcc8775543039c1ef73ceda83cc4/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-headless-efedbcc8775543039c1ef73ceda83cc4/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-headless-efedbcc8775543039c1ef73ceda83cc4/evidence/scenario-1/result.json"
+      ]
+    },
+    {
+      "run": "verification-rendered-d386c3f86810419e9313b2776b93c1b7",
+      "report": "main_project/tests/.runs/verification-rendered-d386c3f86810419e9313b2776b93c1b7/report.json",
+      "report_sha256": "82180d1d1497851c84ddf976c685fe8026f257354e3c68d358d0dc845b57e340",
+      "status": "passed",
+      "configuration": null,
+      "mode": "rendered",
+      "suite": "classic",
+      "children": [
+        {
+          "mode": "rendered",
+          "role": "primary",
+          "expected": 100,
+          "actual": 100
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 4,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-rendered-d386c3f86810419e9313b2776b93c1b7/evidence/scenario-1/classic-invalid.png",
+        "main_project/tests/.runs/verification-rendered-d386c3f86810419e9313b2776b93c1b7/evidence/scenario-1/classic-package-gate.png",
+        "main_project/tests/.runs/verification-rendered-d386c3f86810419e9313b2776b93c1b7/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-rendered-d386c3f86810419e9313b2776b93c1b7/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-rendered-d386c3f86810419e9313b2776b93c1b7/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-rendered-d386c3f86810419e9313b2776b93c1b7/evidence/scenario-1/result.json"
+      ]
+    },
+    {
+      "run": "verification-headless-f6b68a171e124a77b9945f28c69f0817",
+      "report": "main_project/tests/.runs/verification-headless-f6b68a171e124a77b9945f28c69f0817/report.json",
+      "report_sha256": "2b1642c8b0d80499e41a7d3a8015a34123a66969432393bab788ef7326c15c69",
+      "status": "passed",
+      "configuration": null,
+      "mode": "headless",
+      "suite": "geography-inputs",
+      "children": [
+        {
+          "mode": "headless",
+          "role": "primary",
+          "expected": 200,
+          "actual": 200
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 50,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-headless-f6b68a171e124a77b9945f28c69f0817/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-headless-f6b68a171e124a77b9945f28c69f0817/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-headless-f6b68a171e124a77b9945f28c69f0817/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-headless-f6b68a171e124a77b9945f28c69f0817/evidence/scenario-1/result.json"
+      ]
+    },
+    {
+      "run": "verification-rendered-ba0612f30508420d806b9a077c7d83ee",
+      "report": "main_project/tests/.runs/verification-rendered-ba0612f30508420d806b9a077c7d83ee/report.json",
+      "report_sha256": "0d705abe3882d9bdf9d6f052656bffffee0f7d4635c1b8cf7317acdb549c106d",
+      "status": "passed",
+      "configuration": null,
+      "mode": "rendered",
+      "suite": "geography-inputs",
+      "children": [
+        {
+          "mode": "rendered",
+          "role": "primary",
+          "expected": 202,
+          "actual": 202
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 50,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-rendered-ba0612f30508420d806b9a077c7d83ee/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-rendered-ba0612f30508420d806b9a077c7d83ee/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-rendered-ba0612f30508420d806b9a077c7d83ee/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-rendered-ba0612f30508420d806b9a077c7d83ee/evidence/scenario-1/geography-main-menu.png",
+        "main_project/tests/.runs/verification-rendered-ba0612f30508420d806b9a077c7d83ee/evidence/scenario-1/result.json"
+      ]
+    },
+    {
+      "run": "verification-headless-bdd9cd64814f433b931f67159872ac00",
+      "report": "main_project/tests/.runs/verification-headless-bdd9cd64814f433b931f67159872ac00/report.json",
+      "report_sha256": "6298bd13cd3c48b44acca89f70f90b626915f1794b7d106f88523f6f85577bef",
+      "status": "passed",
+      "configuration": null,
+      "mode": "headless",
+      "suite": "layout-inputs",
+      "children": [
+        {
+          "mode": "headless",
+          "role": "primary",
+          "expected": 369,
+          "actual": 369
+        },
+        {
+          "mode": "headless",
+          "role": "reload",
+          "expected": 15,
+          "actual": 15
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 52,
+          "unchanged": true
+        },
+        {
+          "child": "reload",
+          "count": 52,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-headless-bdd9cd64814f433b931f67159872ac00/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-headless-bdd9cd64814f433b931f67159872ac00/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-headless-bdd9cd64814f433b931f67159872ac00/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-headless-bdd9cd64814f433b931f67159872ac00/evidence/scenario-1/layout-restart-receipt.json",
+        "main_project/tests/.runs/verification-headless-bdd9cd64814f433b931f67159872ac00/evidence/scenario-1/reload-console.stderr.log",
+        "main_project/tests/.runs/verification-headless-bdd9cd64814f433b931f67159872ac00/evidence/scenario-1/reload-console.stdout.log",
+        "main_project/tests/.runs/verification-headless-bdd9cd64814f433b931f67159872ac00/evidence/scenario-1/reload-fixture.json",
+        "main_project/tests/.runs/verification-headless-bdd9cd64814f433b931f67159872ac00/evidence/scenario-1/reload-result.json",
+        "main_project/tests/.runs/verification-headless-bdd9cd64814f433b931f67159872ac00/evidence/scenario-1/result.json"
+      ]
+    },
+    {
+      "run": "verification-rendered-d414985747af4ddca97dd51feb5cc66a",
+      "report": "main_project/tests/.runs/verification-rendered-d414985747af4ddca97dd51feb5cc66a/report.json",
+      "report_sha256": "008bff7eee640661691a1ee69d888a381af6bec4c02021ca5f4a5ad69a4b1923",
+      "status": "passed",
+      "configuration": null,
+      "mode": "rendered",
+      "suite": "layout-inputs",
+      "children": [
+        {
+          "mode": "rendered",
+          "role": "primary",
+          "expected": 372,
+          "actual": 372
+        },
+        {
+          "mode": "rendered",
+          "role": "reload",
+          "expected": 15,
+          "actual": 15
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 52,
+          "unchanged": true
+        },
+        {
+          "child": "reload",
+          "count": 52,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-rendered-d414985747af4ddca97dd51feb5cc66a/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-rendered-d414985747af4ddca97dd51feb5cc66a/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-rendered-d414985747af4ddca97dd51feb5cc66a/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-rendered-d414985747af4ddca97dd51feb5cc66a/evidence/scenario-1/layout-restart-receipt.json",
+        "main_project/tests/.runs/verification-rendered-d414985747af4ddca97dd51feb5cc66a/evidence/scenario-1/layout-structural-menu.png",
+        "main_project/tests/.runs/verification-rendered-d414985747af4ddca97dd51feb5cc66a/evidence/scenario-1/reload-console.stderr.log",
+        "main_project/tests/.runs/verification-rendered-d414985747af4ddca97dd51feb5cc66a/evidence/scenario-1/reload-console.stdout.log",
+        "main_project/tests/.runs/verification-rendered-d414985747af4ddca97dd51feb5cc66a/evidence/scenario-1/reload-fixture.json",
+        "main_project/tests/.runs/verification-rendered-d414985747af4ddca97dd51feb5cc66a/evidence/scenario-1/reload-result.json",
+        "main_project/tests/.runs/verification-rendered-d414985747af4ddca97dd51feb5cc66a/evidence/scenario-1/result.json"
+      ]
+    },
+    {
+      "run": "verification-headless-c587203372a546668d0b03b93caebf26",
+      "report": "main_project/tests/.runs/verification-headless-c587203372a546668d0b03b93caebf26/report.json",
+      "report_sha256": "a6af0ac60a62c71f3fa6e54cc88162a4772fcfa3beaff00180a8ae28820cc08c",
+      "status": "passed",
+      "configuration": null,
+      "mode": "headless",
+      "suite": "media",
+      "children": [
+        {
+          "mode": "headless",
+          "role": "primary",
+          "expected": 119,
+          "actual": 119
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 13,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-headless-c587203372a546668d0b03b93caebf26/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-headless-c587203372a546668d0b03b93caebf26/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-headless-c587203372a546668d0b03b93caebf26/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-headless-c587203372a546668d0b03b93caebf26/evidence/scenario-1/result.json"
+      ]
+    },
+    {
+      "run": "verification-rendered-4957a5f3e6d64ae2b524b7e786965fb7",
+      "report": "main_project/tests/.runs/verification-rendered-4957a5f3e6d64ae2b524b7e786965fb7/report.json",
+      "report_sha256": "74e79eaad8bd560f1b1a30b9d812e651c2c13a0ccbdd282a98f26573f3819e71",
+      "status": "passed",
+      "configuration": null,
+      "mode": "rendered",
+      "suite": "media",
+      "children": [
+        {
+          "mode": "rendered",
+          "role": "primary",
+          "expected": 136,
+          "actual": 136
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 13,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-rendered-4957a5f3e6d64ae2b524b7e786965fb7/evidence/scenario-1/classic-images.png",
+        "main_project/tests/.runs/verification-rendered-4957a5f3e6d64ae2b524b7e786965fb7/evidence/scenario-1/classic-model.png",
+        "main_project/tests/.runs/verification-rendered-4957a5f3e6d64ae2b524b7e786965fb7/evidence/scenario-1/classic-vid-frame10.png",
+        "main_project/tests/.runs/verification-rendered-4957a5f3e6d64ae2b524b7e786965fb7/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-rendered-4957a5f3e6d64ae2b524b7e786965fb7/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-rendered-4957a5f3e6d64ae2b524b7e786965fb7/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-rendered-4957a5f3e6d64ae2b524b7e786965fb7/evidence/scenario-1/result.json"
+      ]
+    },
+    {
+      "run": "verification-headless-8610927cf61f4f7aa75e1df9cb99950f",
+      "report": "main_project/tests/.runs/verification-headless-8610927cf61f4f7aa75e1df9cb99950f/report.json",
+      "report_sha256": "5a8c234ee1de4c576eafe0359438071a81498d2257f839075b4ffbb458da5f2d",
+      "status": "passed",
+      "configuration": null,
+      "mode": "headless",
+      "suite": "publication",
+      "children": [
+        {
+          "mode": "headless",
+          "role": "primary",
+          "expected": 111,
+          "actual": 111
+        },
+        {
+          "mode": "headless",
+          "role": "reload",
+          "expected": 8,
+          "actual": 8
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 4,
+          "unchanged": true
+        },
+        {
+          "child": "reload",
+          "count": 4,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-headless-8610927cf61f4f7aa75e1df9cb99950f/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-headless-8610927cf61f4f7aa75e1df9cb99950f/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-headless-8610927cf61f4f7aa75e1df9cb99950f/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-headless-8610927cf61f4f7aa75e1df9cb99950f/evidence/scenario-1/reload-console.stderr.log",
+        "main_project/tests/.runs/verification-headless-8610927cf61f4f7aa75e1df9cb99950f/evidence/scenario-1/reload-console.stdout.log",
+        "main_project/tests/.runs/verification-headless-8610927cf61f4f7aa75e1df9cb99950f/evidence/scenario-1/reload-fixture.json",
+        "main_project/tests/.runs/verification-headless-8610927cf61f4f7aa75e1df9cb99950f/evidence/scenario-1/reload-result.json",
+        "main_project/tests/.runs/verification-headless-8610927cf61f4f7aa75e1df9cb99950f/evidence/scenario-1/result.json"
+      ]
+    },
+    {
+      "run": "verification-rendered-f900c48ee29f46f2956ba7ce0d12002d",
+      "report": "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/report.json",
+      "report_sha256": "3fc7b5389a60a85cbc01144ee96d4e34d6175ee3e5635dcfef9d1bc41c9b9224",
+      "status": "passed",
+      "configuration": null,
+      "mode": "rendered",
+      "suite": "publication",
+      "children": [
+        {
+          "mode": "rendered",
+          "role": "primary",
+          "expected": 117,
+          "actual": 117
+        },
+        {
+          "mode": "rendered",
+          "role": "reload",
+          "expected": 8,
+          "actual": 8
+        }
+      ],
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "source_samples": [
+        {
+          "child": "primary",
+          "count": 4,
+          "unchanged": true
+        },
+        {
+          "child": "reload",
+          "count": 4,
+          "unchanged": true
+        }
+      ],
+      "full_build_removed": true,
+      "retained_evidence": [
+        "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/evidence/scenario-1/console.stderr.log",
+        "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/evidence/scenario-1/console.stdout.log",
+        "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/evidence/scenario-1/fixture.json",
+        "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/evidence/scenario-1/publication-main-menu.png",
+        "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/evidence/scenario-1/publication-rejection.png",
+        "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/evidence/scenario-1/publication-unsaved.png",
+        "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/evidence/scenario-1/reload-console.stderr.log",
+        "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/evidence/scenario-1/reload-console.stdout.log",
+        "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/evidence/scenario-1/reload-fixture.json",
+        "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/evidence/scenario-1/reload-result.json",
+        "main_project/tests/.runs/verification-rendered-f900c48ee29f46f2956ba7ce0d12002d/evidence/scenario-1/result.json"
+      ]
+    }
+  ],
+  "required_remaining_selections": [],
+  "open_integrations": [
+    "WORLD/LOC live selection, reconstruction, transitions, cancellation and recovery",
+    "MOVE geometry, collision, transforms and player placement",
+    "QUEST/action and persistent-object binding",
+    "SAVE early restore, compatibility, migrations, save-during-transition and commit timing",
+    "CORE-opening and M1"
+  ],
+  "supported_limits": [
+    "Building defaults and arbitrary cross-level merging unsupported",
+    "Edited building alternatives require complete authored RMB source/target with identical outside envelopes",
+    "Multiple edited buildings in one placement unsupported",
+    "No historical revision or variant-to-variant migration"
+  ],
+  "cleanup_manifests": [
+    "main_project/tests/.runs/variant-cleanup-6786f236170f4857aefd0a2e36ded39a.json",
+    "main_project/tests/.runs/variant-cleanup-dbedda81f0a4430697c4ea34871a1d14.json"
+  ],
+  "assertion_instances": 4995,
+  "verification_children": 26,
+  "inventory_validator": {
+    "checks": [
+      {
+        "actual": true,
+        "expected": true,
+        "id": "headless-valid"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "headless-missing"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "headless-duplicate"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "headless-unknown"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "headless-wrong-fixture"
+      },
+      {
+        "actual": true,
+        "expected": true,
+        "id": "rendered-valid"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "rendered-missing"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "rendered-duplicate"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "rendered-unknown"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "rendered-wrong-fixture"
+      },
+      {
+        "actual": true,
+        "expected": true,
+        "id": "reload-valid"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "reload-missing"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "reload-duplicate"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "reload-unknown"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "id": "reload-wrong-fixture"
+      }
+    ],
+    "schema": "variant-inventory-qualification-v1",
+    "ok": true
+  },
+  "external_sources": {
+    "MAPS.BSA": "8b5550bfcac03b6f605842568fdbfb7cc6bbed7ace5999c33c900ad286fc24be",
+    "PAINT.DAT": "ca488cf262931d38788f9eae24d5d3f0d22591181b190c04b2093772cc054905",
+    "CLASS08.CFG": "65f042c357110586e8a33df7e53a30de8ac4291e3726991c7680a2226a58e826",
+    "CLASS10.CFG": "2f7c57085af4542b4a9579e9a8924d3332ccb59d18b991be49ed1e7e44a7d37f",
+    "POLITIC.PAK": "89d13251e82515890f024aef6be746bf92203e04661a35d31088b62d71b88c0e",
+    "DAGGER.SND": "fbb6195ba72f9b2787b659e38afd9ed92d95ca185916d8bdd28ba947b986f3e2",
+    "BIOG09T0.TXT": "4d837c0a25717b55f81c0ab0f82979333baa49998bebf87ed86793e49b5fd615",
+    "BIOG00T0.TXT": "870c8ffd350b18a2944bd6b79bcb6d2e6f97843a5604503e0d145797fb62b397",
+    "MAGIC.DEF": "04ba8a529be11653e8d2bc66adaec2dfc3009f93ceec75f5c175cdeddab808ba",
+    "CLASS07.CFG": "a636f60219779f3e2957959bd1541fb22df9526a76d8bbe44dc7eb27c17007a2",
+    "TEXTURE.199": "2cff83352dc79e742622b4f289b09d18e8df4cdd8e7b24ca5162d0cb1773d1a3",
+    "BIOG17T0.TXT": "a4a2034e8bad59504167380e25b9cca30110c37139e8d66bf38f6e3810fbdf1d",
+    "BIOG16T0.TXT": "8ed04afa6a7b67a1f2e08f247e9bce36f4037fe604730a8a78e84e9863056f1a",
+    "BIOG03T0.TXT": "8789b14f45dc2b522fca4dabb4ae99af0b9c8ce17e543567dd93bf1502b405da",
+    "WOODS.WLD": "2842ab5eb1b39b1666d96588856083bb34fcbdcd70621ca833be7349121bb5df",
+    "CLASS09.CFG": "6fd9161e884a74b1a2d6010876e190637c90ee9f1fe73c6e3378dca6774d9937",
+    "CLASS18.CFG": "04cc7047081d7da7b7697484cc23cd214e1a69d9cc310ac211aed798f23f09f0",
+    "BIOG10T0.TXT": "8abcbf2f9b27905fd72f8d67ccdee57bff4b1d16a020f416d3d4b46cb1ffc1d8",
+    "BIOG02T0.TXT": "c0cccf03ea4f169b2d58940db01cb0b9e9720dcfeef6734fc6fcf6ef58e6a6da",
+    "CLASS04.CFG": "e6988b484f7672221ecdbd347e3547e2c7de28c50143027293af954bf3d457a0",
+    "CLIMATE.PAK": "6032403010707ed09394a9b72bf3418d3450ccc99f28e4c8451771f5d7e54cd0",
+    "FLATS.CFG": "b0f0f695fd8e71556f247505dbeb14262399041ea1569f62c1b836a30fdf63c9",
+    "BIOG06T0.TXT": "8d264b4d4ebe78b23f6c161627638ecf06dcafc9ca82a9d745d24f9a7c30c8dd",
+    "CLASS14.CFG": "550567bbb9ba7aa37aa7d53092f2e5d27096ecfe1b9fe7acd9560ea8a9891765",
+    "BIOG04T0.TXT": "4c95fd6371eb57f96c23ef38aaea4abc737a18184f6203512572136fe0f49c59",
+    "CLASS15.CFG": "88ffd4f642aea3fa5e75fea8cab02f6d0bc6a2ec90efde4a09ab24895a4920b6",
+    "CLASS16.CFG": "0bcc15434b887eae2f1f209a7cd6f9eb6779cff5052f532072ce84f52dce78ff",
+    "CLASS13.CFG": "1f519564f535cc74f17384639020a01bc3b2097b9654a6dd694d6ad1f0754bcf",
+    "BIOG07T0.TXT": "4dddd34d08fb8db69ae539c93357892ad41a6f4f1f7fe7f9236889ca5bd2fd0e",
+    "SPELLS.STD": "d8b34e983a9c646c7e145f862f3c410a046ea889b429f84740c9ff3d3ec3dd47",
+    "BIOG11T0.TXT": "edc4f51d0cba9d7494ceb6dfa4ce6b9d6ae6acd4e27a43ed63c74c2df1cbd150",
+    "CLASS17.CFG": "a136c8d540f265d64bf7d514eb8140bb6ecc2bb751f2660f0cf3cf676098b82e",
+    "BIOG13T0.TXT": "0217bc55bd80caad63d1bf081d6cfd0a4e7918a1b5c1896f3593077c65b86bd5",
+    "TEXTURE.210": "6088cea95c48e8355c04089c9989946dfaec32a40793765f79f33f0a35378f9b",
+    "ARCH3D.BSA": "a51a9e149168814c4a14dc80bb93d38f153be18dc9754be44bc9c7b25dd46a85",
+    "MONSTER.BSA": "fcb88bf1bea9845675255c19f838deb414b63fb2df7c6977ab10f21155b6e90f",
+    "CLASS06.CFG": "2793378bb3d86c00d7cbeb1935d52b0fdc0e83f96c1a42b0547bee5b60823504",
+    "BLOCKS.BSA": "6f5a4c8d9401c1b00ef83eaac9b0c6c32f53cef6eaa4c7d7027deb739bde4795",
+    "BIO.DAT": "96a90efbab3f6586d581038ef56cb873b168ec86c289823bf704f79372567c8b",
+    "CLASS11.CFG": "57bd796553a5fa251f885652f28fe5e3ccd0818130e067954346eb24f2f38082",
+    "BIOG08T0.TXT": "79930e83b8d9e0aa54332e3695ee9d4d1e2ccfc767bee2c4ba16ec4d6c18deb8",
+    "BIOG01T0.TXT": "c6dfbb827b6e614f408ae61e313a33f06496ccb1b3cd5370dadd379f06bffc88",
+    "CLASS12.CFG": "99c1b6d177a73fc29d12f91b9bb1cad949b7710043df11d114386b0b7dcfb4e0",
+    "CLASS01.CFG": "61451b004fab69c6286601e86c5b9536fc209eeb4692b57d3ac5d00d56641a8b",
+    "BIOG15T0.TXT": "b968e5c5152fca0914a35ff0bb8b956024e3efb4170023667a233176fc710f09",
+    "CLASS02.CFG": "31ddbd67a9a0b2e1fb6df78762864974e4d03a8dae6f0540eccd9cc04cf95075",
+    "BIOG05T0.TXT": "438df773064d7f04dc6bf92560f02a791db5302a9c9e808fd4acf7c5a82d8686",
+    "CLASS00.CFG": "be68beedc4f12bef56a25b409b94a2d267f6c0ab574f88ed160b7ff54c49c870",
+    "BIOG12T0.TXT": "2f5fa90f97c37d97e3ce31a79f9cda6209848ec7cf5b09c1fd018f2ae0122a18",
+    "CLASS03.CFG": "0fb6bbbd90bcf6561903f1c2dd22e04ab72fb3f81630f32cca4d1f640958beba",
+    "CLASS05.CFG": "05def9f51313766880dbf92b4fe75559357df78fb65edeb5932cafb1bf4ec188",
+    "BIOG14T0.TXT": "1552a38273f754117f89f4ca9ecf81b355511dad1065347028e47de83395392d"
+  },
+  "cleanup_status": "complete; zero completed full builds from this increment retained",
+  "manual_review": [
+    "Final standalone variant diagnostic capture: readable, complete, structural only",
+    "Final debug PCK variant diagnostic: readable, complete, owner gates explicit",
+    "Final release PCK variant and layout diagnostic captures: readable; two source-frame previews displayed; no geometry qualification"
+  ],
+  "cleanup": {
+    "final_batch": {
+      "files_removed": 23217,
+      "bytes_removed": 4465928874,
+      "verified_evidence_files": 154,
+      "targets_removed": 54,
+      "links_unlinked": 3,
+      "failures": []
+    },
+    "initial_batch": {
+      "files_removed": 6025,
+      "bytes_removed": 1034944278,
+      "verified_evidence_files": 28
+    },
+    "final_run_retention": {
+      "bytes": 1683683164,
+      "files": 58525,
+      "reparse_points_followed": false,
+      "below_2_gib": true
+    },
+    "review_before_compaction": {
+      "schema": "variant-retention-review-v1",
+      "measured_utc": "2026-11-22T19:02:02Z",
+      "bytes": 3232861393,
+      "largest": [
+        {
+          "name": "export-661c101726e74e0dae5ccdbc56520afb",
+          "bytes": 522069535
+        },
+        {
+          "name": "export-e9ea671c06e249f8859e144e55807bb6",
+          "bytes": 515975406
+        },
+        {
+          "name": "verification-rendered-83bf083b3d2c446c88c3be3ca372dc31",
+          "bytes": 209413835
+        },
+        {
+          "name": "verification-headless-615184144b2b4fc0b8881b13c3f0ec64",
+          "bytes": 207464209
+        },
+        {
+          "name": "verification-headless-2804a43d986844d796605a0f41571a4d",
+          "bytes": 206982393
+        },
+        {
+          "name": "verification-rendered-2e84f6de05364ff29d5ce9611e4b065b",
+          "bytes": 64616492
+        },
+        {
+          "name": "verification-headless-6ef31e46a2f64fed9296fa303ff8567b",
+          "bytes": 64593287
+        },
+        {
+          "name": "verification-rendered-692de3dbe0854b34b9056e99a009e67f",
+          "bytes": 40743183
+        },
+        {
+          "name": "verification-headless-5e7d6fe3492940b3989c9d0e90f0a0ea",
+          "bytes": 40719960
+        },
+        {
+          "name": "verification-headless-79ead312eb74452985db8c4e7979f44f",
+          "bytes": 40712726
+        }
+      ],
+      "reparse_points_followed": false,
+      "policy": "Known completed payloads will be removed after the sequential verification batch; active roots protected."
+    }
+  }
+}

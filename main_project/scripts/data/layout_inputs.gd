@@ -286,6 +286,15 @@ static func lookup(registry: RefCounted, ref_: String) -> Dictionary:
 	var parts := ref_.split("#")
 	return registry.query(DOMAIN,parts[0],parts[1])
 
+func declared_occurrence_keys(data: Dictionary, kind: String) -> Array:
+	# Candidate-time metadata only; this does not decode or certify usable content.
+	# The explicit edition ledger reserves identities even for unsupported blocks.
+	if data.get("mode") == "classic-source":
+		var source: Dictionary = (_locations if kind == "placement" else _blocks).get(data.get("mapping"),{})
+		return source.get("placements" if kind == "placement" else "buildings",{}).values().duplicate()
+	var entries: Array = data.get("placements",[]) if kind == "placement" else data.get("structure",{}).get("buildings",[])
+	return entries.map(func(entry: Dictionary): return entry.id)
+
 static func rmb_building_inputs(definition: Dictionary, mapping: Dictionary) -> Dictionary:
 	var buildings := {}
 	var records := {}
@@ -392,9 +401,14 @@ func location_inputs(registry: RefCounted, ref_: String) -> Dictionary:
 func prepare_location(registry: RefCounted, ref_: String, resource_provider: Callable, required: Array = []) -> Dictionary:
 	var layout := location_inputs(registry,ref_)
 	if not layout.ok: return layout
+	return prepare_structural_inputs(registry,ref_,layout,{},resource_provider,required)
+
+## Pure scoped alternate inputs, supplied by DATA's variant resolver. No publication
+## or session state is changed. All normal resource/purpose/parent checks still run.
+func prepare_structural_inputs(registry: RefCounted, ref_: String, layout: Dictionary, blocks: Dictionary, resource_provider: Callable, required: Array = []) -> Dictionary:
 	var occurrences: Array = []
 	for p: Dictionary in layout.data.placements:
-		var block := decode_block(registry,p.block)
+		var block: Dictionary = blocks[p.id].duplicate(true) if blocks.has(p.id) else decode_block(registry,p.block)
 		if not block.ok: return block.merged({"placement":p.id,"layout":layout.identity},true)
 		if block.definition.format != ("RDB" if p.context == "dungeon" else "RMB"): return F.fail("Block format differs from required placement context.",p.block,p.id,p.context,"unsupported")
 		var records: Array = []

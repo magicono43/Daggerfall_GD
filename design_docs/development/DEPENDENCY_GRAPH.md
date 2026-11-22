@@ -1,5 +1,9 @@
 # Implementation dependencies
 
+**IMP-010 increment 3 implemented and verified, 2026-11-22:** DATA variant definitions, explicit scoped proposals and revision/scoped structural mapping checks are delivered. Independent 497/503 checks, 21-check fresh-process selections, Windows debug/release PCK exports and the named regressions pass; see [increment-3 evidence](evidence/IMP-010-increment-3-2026-11-22.md). Awaiting user acceptance. Increments 1/2 and the sole listed prerequisite IMP-005 remain accepted. Parent IMP-010, real WORLD/LOC/MOVE/QUEST/SAVE/CORE-opening integrations and M1 remain open; no prerequisite edge closes here. Earlier handoff and pending-acceptance notes below are historical.
+
+**IMP-010 increment 2 accepted / increment-3 handoff, 2026-11-22:** The user accepted layouts at `e324d54` and requested a prompt for another chat. The [increment-3 prompt](handoffs/IMP-010-INCREMENT-3-PROMPT.txt) authorizes DATA variant definitions and scoped resolution when issued. Preparing it starts no increment-3 implementation. Increment 1 remains accepted; real WORLD/LOC/MOVE/QUEST/SAVE/CORE-opening, parent IMP-010 and M1 gates remain open. Earlier acceptance-pending notes below are historical.
+
 **IMP-010 increment 2 implemented and verified, 2026-11-22:** Layout structures, explicit identities, scoped references and checked handoffs are delivered, including the user-authorized TEXTURE.210 decoder extension. Independent 369/372 layout checks, 15-check restarts, Windows debug/release exports and named regressions pass. See [increment-2 execution evidence](evidence/IMP-010-increment-2-2026-11-22.md). Awaiting user acceptance. Increment 1 remains accepted; variants, parent IMP-010 and named real-owner/M1 gates remain open. Earlier handoff statements below are historical.
 
 **IMP-010 increment 1 accepted / increment-2 handoff, 2026-11-22:** The user

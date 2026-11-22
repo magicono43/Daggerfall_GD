@@ -6,7 +6,7 @@ pins are in `tests/layout_source_observation.json`. No classic block/map payload
 is shipped or modified. `profile.json` contains explicit edition identities,
 source addresses/hashes and qualification metadata, generated once by the
 GDScript authoring tool, which refuses an existing output. Unknown editions do
-not receive inferred mappings. This profile is not yet user-accepted.
+not receive inferred mappings. This profile was user-accepted with increment 2 at `e324d54` on 2026-11-22.
 The current profile SHA-256 is
 `a2e629e5d085b3d0ed58f3c17958f4accec4910e9204b6967203ab55af717b75`.
 It preserves all 1,295 initial block, 615,448 reserved object-record and 85,690

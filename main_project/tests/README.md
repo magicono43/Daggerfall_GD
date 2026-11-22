@@ -1,5 +1,28 @@
 # Shared verification — IMP-003 / DEV-014
 
+IMP-010 increment 3 uses `variant-inputs` / `variant-inputs-v1`:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Suite variant-inputs -Fixture variant-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 600
+./main_project/tools/verify_rendered.ps1 -Suite variant-inputs -Fixture variant-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 600
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -VariantInputs -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -VariantInputs -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/qualify_variant_inventory.ps1
+```
+
+The independent frozen inventory contains 497 headless / 503 rendered / 21
+fresh-process IDs, including the accepted 369/372 and 15 layout assertions.
+The new selections reuse the same production CORE/MOD/DATA pipeline, explicit
+classic source, READ-sharing guards and per-child before/after hashes. The
+fixture's declarations/alternates are project-authored; accepted real RMB exterior,
+interior, RDB and containing-location observations remain the structural baseline.
+Rendered diagnostics show scoped DATA proposals; real live reconstruction,
+transitions, geometry, quest binding and SAVE are unavailable. See the versioned
+[contract](../scripts/data/VARIANT_INPUTS.md). Windows imports/exports run sequentially.
+The variant inventory validator separately rejects missing, duplicate, unknown
+and wrong-fixture IDs in all three modes. Cleanup uses exact known run names and
+retains compact reports/captures with verified hashes.
+
 IMP-010 increment 1 uses `geography-inputs` / `geography-inputs-v1`:
 
 ```powershell

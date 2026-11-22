@@ -241,3 +241,29 @@ protected existing inputs/evidence remain. The measured final run retention is
 approximately 1.30 GiB. Exact manifests are `tests/.runs/geography-cleanup-2026-11-22.json`
 and `tests/.runs/geography-archive-result.json` under `main_project/`; see the
 [execution evidence](evidence/IMP-010-increment-1-2026-11-22.md) and its versioned audit.
+
+
+## 2026-11-22 IMP-010 increment-3 compaction
+
+After the DATA variant verification matrix, 22 known inactive roots were compacted
+in two batches. Removed **29,242 files / 5,500,873,152 logical bytes**; verified
+**182 retained evidence-file hashes**. Three disposable template junctions were
+unlinked without touching their installed targets. No deletion failures occurred.
+Zero completed full builds from this increment remain. All 14 final selections /
+26 child results, root reports, source/build/PCK identities, logs and reviewed
+captures remain as compact evidence; source projects and exports are reproducible
+through the authoritative runners.
+
+Retention above 2 GiB was reviewed before compaction. Final total run retention
+measured **1,683,683,164 bytes (1.57 GiB)** without following reparse points.
+Unique inputs, prior accepted evidence and installed tools were preserved. Activity
+was checked with ordinary process inspection and completed runner outcomes; no
+privileged WMI dependency was introduced. See the [execution evidence](evidence/IMP-010-increment-3-2026-11-22.md)
+and [audit](evidence/IMP-010-increment-3-audit-2026-11-22.json).
+
+Exact manifests are `main_project/tests/.runs/variant-cleanup-6786f236170f4857aefd0a2e36ded39a.json`
+and `main_project/tests/.runs/variant-cleanup-dbedda81f0a4430697c4ea34871a1d14.json`.
+Each records checked absolute targets, protected evidence, pre-deletion inventory,
+actual deletion outcomes and SHA-256 recovery verification. Root reports describe
+executed runtime/build paths that have now been removed; rebuild rather than using
+those archived paths as implementation inputs.

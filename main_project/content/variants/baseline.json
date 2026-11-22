@@ -1,0 +1,1 @@
+{"domain":"world.variants","path":"packs/project","operation":"add","entries":[{"id":"sample-block-baseline","value":{"schema":"variant-inputs-v1","kind":"default","target":{"scope":"global-block","block":"packs/classic#block-0000"},"choice":{"intent":"baseline"}}}]}

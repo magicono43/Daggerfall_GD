@@ -24,6 +24,7 @@ if ($Scenario -contains 'native-libraries' -or $Suite -eq 'native-libraries' -or
 . "$PSScriptRoot/faction_quest_fixture.ps1"
 . "$PSScriptRoot/geography_fixture.ps1"
 . "$PSScriptRoot/layout_fixture.ps1"
+. "$PSScriptRoot/variant_fixture.ps1"
 $project = [IO.Path]::GetFullPath("$PSScriptRoot/..")
 $run = "$project/tests/.runs/verification-$Mode-$([Guid]::NewGuid().ToString('N'))"
 $runtimeProject = "$run/project"
@@ -127,11 +128,11 @@ try {
         $item = [ordered]@{ scenario = $id; fixture = $Fixture; root = $caseRoot; inputs = $report.inputs
             status = 'incomplete'; reason = ''; process_exit = $null; result = $null }
         $report.scenarios += $item
-        if ($id -notin @('qualification','startup','session','layout-inputs','geography-inputs','faction-quest-inputs','item-spell-inputs','actor-inputs','formula','formula-fault','randomness-session','randomness','native','replacements','media','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences')) {
+        if ($id -notin @('qualification','startup','session','variant-inputs','layout-inputs','geography-inputs','faction-quest-inputs','item-spell-inputs','actor-inputs','formula','formula-fault','randomness-session','randomness','native','replacements','media','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences')) {
             $item.reason = 'Required scenario unavailable; real owner/provider not registered'
             continue
         }
-        if (($id -eq 'layout-inputs' -and $Fixture -ne 'layout-inputs-v1') -or ($id -eq 'geography-inputs' -and $Fixture -ne 'geography-inputs-v1') -or ($id -eq 'faction-quest-inputs' -and $Fixture -ne 'faction-quest-inputs-v1') -or ($id -eq 'item-spell-inputs' -and $Fixture -ne 'item-spell-inputs-v1') -or ($id -eq 'actor-inputs' -and $Fixture -ne 'actor-inputs-v1') -or ($id -eq 'native' -and $Fixture -ne 'native-v1') -or ($id -eq 'replacements' -and $Fixture -ne 'replacements-v1') -or ($id -eq 'media' -and $Fixture -ne 'media-v1') -or ($id -eq 'translation-preferences' -and $Fixture -ne 'translation-preferences-v1') -or ($id -eq 'locale-fonts' -and $Fixture -ne 'locale-fonts-v1') -or ($id -eq 'structured-text' -and $Fixture -ne 'structured-text-v1') -or ($id -eq 'text' -and $Fixture -ne 'text-v1') -or ($id -eq 'formula' -and $Fixture -ne 'formula-v1') -or ($id -eq 'formula-fault' -and $Fixture -notin @('formula-v1','formula-extra-error-v1')) -or ($id -eq 'randomness-session' -and $Fixture -ne 'randomness-session-v1') -or ($id -eq 'randomness' -and $Fixture -ne 'randomness-v1') -or ($id -eq 'publication' -and $Fixture -ne 'publication-v1') -or ($id -eq 'planning' -and $Fixture -ne 'planning-v1') -or ($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('layout-inputs','geography-inputs','faction-quest-inputs','item-spell-inputs','actor-inputs','formula','formula-fault','randomness-session','randomness','native','replacements','media','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
+        if (($id -eq 'variant-inputs' -and $Fixture -ne 'variant-inputs-v1') -or ($id -eq 'layout-inputs' -and $Fixture -ne 'layout-inputs-v1') -or ($id -eq 'geography-inputs' -and $Fixture -ne 'geography-inputs-v1') -or ($id -eq 'faction-quest-inputs' -and $Fixture -ne 'faction-quest-inputs-v1') -or ($id -eq 'item-spell-inputs' -and $Fixture -ne 'item-spell-inputs-v1') -or ($id -eq 'actor-inputs' -and $Fixture -ne 'actor-inputs-v1') -or ($id -eq 'native' -and $Fixture -ne 'native-v1') -or ($id -eq 'replacements' -and $Fixture -ne 'replacements-v1') -or ($id -eq 'media' -and $Fixture -ne 'media-v1') -or ($id -eq 'translation-preferences' -and $Fixture -ne 'translation-preferences-v1') -or ($id -eq 'locale-fonts' -and $Fixture -ne 'locale-fonts-v1') -or ($id -eq 'structured-text' -and $Fixture -ne 'structured-text-v1') -or ($id -eq 'text' -and $Fixture -ne 'text-v1') -or ($id -eq 'formula' -and $Fixture -ne 'formula-v1') -or ($id -eq 'formula-fault' -and $Fixture -notin @('formula-v1','formula-extra-error-v1')) -or ($id -eq 'randomness-session' -and $Fixture -ne 'randomness-session-v1') -or ($id -eq 'randomness' -and $Fixture -ne 'randomness-v1') -or ($id -eq 'publication' -and $Fixture -ne 'publication-v1') -or ($id -eq 'planning' -and $Fixture -ne 'planning-v1') -or ($id -eq 'mods' -and $Fixture -ne 'mods-v1') -or ($id -eq 'classic' -and $Fixture -ne 'classic-v1') -or ($id -notin @('variant-inputs','layout-inputs','geography-inputs','faction-quest-inputs','item-spell-inputs','actor-inputs','formula','formula-fault','randomness-session','randomness','native','replacements','media','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences') -and ($Fixture -notin @('m1-v1','assert-fail-v1') -or ($Fixture -eq 'assert-fail-v1' -and $id -ne 'qualification')))) {
             $item.reason = 'Fixture unavailable for selected scenario'
             continue
         }
@@ -148,14 +149,14 @@ try {
         $sourceReadGuards = @()
         $sourceBefore = @{}
         $unreadable = "$caseRoot/locked/ARENA2"
-        if ($id -in @('layout-inputs','geography-inputs','faction-quest-inputs','item-spell-inputs','actor-inputs','native','replacements','media','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences','formula','formula-fault')) {
+        if ($id -in @('variant-inputs','layout-inputs','geography-inputs','faction-quest-inputs','item-spell-inputs','actor-inputs','native','replacements','media','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences','formula','formula-fault')) {
             if (!$ClassicSource -or !(Test-Path -LiteralPath $ClassicSource -PathType Container)) {
                 $item.reason = 'Explicit available -ClassicSource is required'; continue
             }
             $selectedRoot = [IO.Path]::GetFullPath($ClassicSource)
             if ((Split-Path $selectedRoot -Leaf) -ine 'ARENA2') { $selectedRoot = Join-Path $selectedRoot 'ARENA2' }
             $item.selected_source = $selectedRoot
-            foreach ($name in ($(if ($id -eq 'layout-inputs') { @('TEXTURE.199','TEXTURE.210') } else { @() }) + $(if ($id -in @('layout-inputs','geography-inputs')) { @('WOODS.WLD','CLIMATE.PAK','POLITIC.PAK') } else { @() }) + $(if ($id -in @('layout-inputs','geography-inputs','item-spell-inputs','faction-quest-inputs')) { @('SPELLS.STD','MAGIC.DEF') } else { @() }) + $(if ($id -in @('layout-inputs','geography-inputs','actor-inputs','item-spell-inputs','faction-quest-inputs')) { Get-ActorSourceNames } else { @() }) + @('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($id -in @('media','native')) { @('MIDI.BSA','TEXTURE.321','TEXTURE.024','TEXTURE.002','INVE00I0.IMG','APAINT.CIF','BUTTONS.RCI','ART_PAL.COL','ANIM0011.VID') } else { @() }) + $(if ($id -in @('structured-text','locale-fonts','translation-preferences')) { @('TEXT.RSC') } else { @() }))) {
+            foreach ($name in ($(if ($id -in @('variant-inputs','layout-inputs')) { @('TEXTURE.199','TEXTURE.210') } else { @() }) + $(if ($id -in @('variant-inputs','layout-inputs','geography-inputs')) { @('WOODS.WLD','CLIMATE.PAK','POLITIC.PAK') } else { @() }) + $(if ($id -in @('variant-inputs','layout-inputs','geography-inputs','item-spell-inputs','faction-quest-inputs')) { @('SPELLS.STD','MAGIC.DEF') } else { @() }) + $(if ($id -in @('variant-inputs','layout-inputs','geography-inputs','actor-inputs','item-spell-inputs','faction-quest-inputs')) { Get-ActorSourceNames } else { @() }) + @('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($id -in @('media','native')) { @('MIDI.BSA','TEXTURE.321','TEXTURE.024','TEXTURE.002','INVE00I0.IMG','APAINT.CIF','BUTTONS.RCI','ART_PAL.COL','ANIM0011.VID') } else { @() }) + $(if ($id -in @('structured-text','locale-fonts','translation-preferences')) { @('TEXT.RSC') } else { @() }))) {
                 $sourceBefore[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
                 $sourceReadGuards += [IO.File]::Open((Join-Path $selectedRoot $name), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
             }
@@ -169,25 +170,25 @@ try {
         }
         if ($id -eq 'mods') { $modLock = New-ModFixture $caseRoot }
         @{ sandbox = $caseRoot.Replace('\','/'); mode = $(if ($id -eq 'startup') { 'suite' } else { $id })
-            fixture = $Fixture; inputs = $report.inputs; classic_source = $(if ($id -in @('layout-inputs','geography-inputs','faction-quest-inputs','item-spell-inputs','actor-inputs','native','replacements','media','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences','formula','formula-fault')) { $selectedRoot.Replace('\','/') } else { '' }); unreadable_root = $unreadable.Replace('\','/') } | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/fixture.json"
+            fixture = $Fixture; inputs = $report.inputs; classic_source = $(if ($id -in @('variant-inputs','layout-inputs','geography-inputs','faction-quest-inputs','item-spell-inputs','actor-inputs','native','replacements','media','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences','formula','formula-fault')) { $selectedRoot.Replace('\','/') } else { '' }); unreadable_root = $unreadable.Replace('\','/') } | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/fixture.json"
         $arguments = @('--path',$runtimeProject,'--max-fps','60','--quit-after','1800','--',"--startup-fixture=$caseRoot/fixture.json")
         if ($id -eq 'native') { $arguments[5] = '12000' }
         if ($Mode -eq 'headless') { $arguments = @('--headless') + $arguments }
         try {
             $outcome = Invoke-Engine $arguments $caseRoot 'console'
-            if ($id -eq 'layout-inputs') {
+            if ($sourceBefore.Count -gt 0) {
                 $item['child_source_samples'] = @(@{ child='primary'; before=$sourceBefore; after=(Get-LayoutSourceHashes $sourceBefore $selectedRoot) })
             }
-            if ($id -in @('layout-inputs','native','replacements','mods','planning','publication','randomness-session','locale-fonts','translation-preferences') -and $outcome.exit -eq 0) {
+            if ($id -in @('variant-inputs','layout-inputs','native','replacements','mods','planning','publication','randomness-session','locale-fonts','translation-preferences') -and $outcome.exit -eq 0) {
                 $reloadFixture = Get-Content "$caseRoot/fixture.json" -Raw | ConvertFrom-Json
                 $reloadFixture.mode = $id + '_reload'
                 if ($id -eq 'locale-fonts') { $reloadFixture.sandbox = "$caseRoot/relaunch".Replace('\','/') }
                 $reloadFixture | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/reload-fixture.json"
                 $reloadArguments = @('--path',$runtimeProject,'--max-fps','60','--quit-after','1800','--',"--startup-fixture=$caseRoot/reload-fixture.json")
                 if ($Mode -eq 'headless') { $reloadArguments = @('--headless') + $reloadArguments }
-                if ($id -eq 'layout-inputs') { $reloadSourceBefore = Get-LayoutSourceHashes $sourceBefore $selectedRoot }
+                if ($sourceBefore.Count -gt 0) { $reloadSourceBefore = Get-LayoutSourceHashes $sourceBefore $selectedRoot }
                 $reloadOutcome = Invoke-Engine $reloadArguments $caseRoot 'reload-console'
-                if ($id -eq 'layout-inputs') { $item.child_source_samples += @{ child='reload'; before=$reloadSourceBefore; after=(Get-LayoutSourceHashes $sourceBefore $selectedRoot) } }
+                if ($sourceBefore.Count -gt 0) { $item.child_source_samples += @{ child='reload'; before=$reloadSourceBefore; after=(Get-LayoutSourceHashes $sourceBefore $selectedRoot) } }
                 $item.reload_process_exit = $reloadOutcome.exit
             }
         }
@@ -197,7 +198,7 @@ try {
             foreach ($guard in $sourceReadGuards) { $guard.Dispose() }
             $sourceReadGuards = @()
         }
-        if ($id -in @('layout-inputs','geography-inputs','faction-quest-inputs','item-spell-inputs','actor-inputs','native','replacements','media','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences','formula','formula-fault')) {
+        if ($id -in @('variant-inputs','layout-inputs','geography-inputs','faction-quest-inputs','item-spell-inputs','actor-inputs','native','replacements','media','classic','mods','planning','publication','text','structured-text','locale-fonts','translation-preferences','formula','formula-fault')) {
             $item.source_before = $sourceBefore
             $item.source_after = @{}
             foreach ($name in $sourceBefore.Keys) {
@@ -214,15 +215,16 @@ try {
             $item.reason = 'Malformed terminal report'; continue
         }
         $item.result = $result
-        if ($id -in @('layout-inputs','native','replacements','mods','planning','publication','randomness-session','locale-fonts','translation-preferences') -and $result.ok) {
+        if ($id -in @('variant-inputs','layout-inputs','native','replacements','mods','planning','publication','randomness-session','locale-fonts','translation-preferences') -and $result.ok) {
             $reloadReport = if ($id -eq 'locale-fonts') { "$caseRoot/relaunch/reload-result.json" } else { "$caseRoot/reload-result.json" }
             if (!(Test-Path $reloadReport)) { $item.reason = 'Missing fresh-process terminal result'; continue }
             $reloadResult = Get-Content $reloadReport -Raw | ConvertFrom-Json
+            if ($id -eq 'variant-inputs' -and !(Test-VariantInventory $reloadResult 'reload')) { $item.reason = 'Incomplete variant reload inventory'; continue }
             if ($id -eq 'layout-inputs' -and !(Test-LayoutInventory $reloadResult 'reload')) { $item.reason = 'Incomplete layout reload inventory'; continue }
             if ($id -eq 'replacements' -and !(Test-ReplacementInventory $reloadResult 'reload')) { $item.reason = 'Incomplete replacement reload terminal inventory'; continue }
             if ($id -eq 'native' -and !(Test-NativeInventory $reloadResult 'reload')) { $item.reason = 'Incomplete native reload terminal inventory'; continue }
             $item.reload_result = $reloadResult
-            $reloadExpected = if ($id -eq 'layout-inputs') { 15 } elseif ($id -eq 'native') { Get-NativeExpectedCount 'reload' } elseif ($id -in @('replacements','locale-fonts','translation-preferences')) { 10 } elseif ($id -eq 'randomness-session') { 15 } else { 8 }
+            $reloadExpected = if ($id -eq 'variant-inputs') { Get-VariantExpectedCount 'reload' } elseif ($id -eq 'layout-inputs') { 15 } elseif ($id -eq 'native') { Get-NativeExpectedCount 'reload' } elseif ($id -in @('replacements','locale-fonts','translation-preferences')) { 10 } elseif ($id -eq 'randomness-session') { 15 } else { 8 }
             if ($reloadOutcome.timed_out -or $null -eq $reloadResult.ok -or $reloadResult.count -ne $reloadExpected -or $reloadResult.checks.Count -ne $reloadExpected -or
                 !$reloadResult.engine -or ($Mode -eq 'rendered' -and $reloadResult.display -eq 'headless') -or
                 !(Test-ScriptDiagnostics @((Get-Item "$caseRoot/reload-console.*.log").FullName) '' $reloadResult)) {
@@ -235,6 +237,7 @@ try {
         }
         $expectedCounts = if ($Mode -eq 'headless') { @{ 'layout-inputs' = 369; 'geography-inputs' = 200; 'faction-quest-inputs' = 132; 'item-spell-inputs' = 160; 'actor-inputs' = 236; qualification = 2; startup = 84; session = 263; formula = 82; 'formula-fault' = 18; randomness = 108; 'randomness-session' = 115; native = 1; replacements = 168; media = 119; classic = 97; mods = 119; planning = 87; publication = 111; text = 121; 'structured-text' = 284; 'locale-fonts' = 419; 'translation-preferences' = 149 } } else { @{ 'layout-inputs' = 372; 'geography-inputs' = 202; 'faction-quest-inputs' = 134; 'item-spell-inputs' = 162; 'actor-inputs' = 238; qualification = 3; startup = 92; session = 264; formula = 84; 'formula-fault' = 18; randomness = 108; 'randomness-session' = 116; native = 1; replacements = 173; media = 136; classic = 100; mods = 136; planning = 101; publication = 117; text = 127; 'structured-text' = 294; 'locale-fonts' = 441; 'translation-preferences' = 164 } }
         $item.expected_assertions = $expectedCounts[$id]
+        if ($id -eq 'variant-inputs') { $item.expected_assertions = Get-VariantExpectedCount $Mode; if (!(Test-VariantInventory $result $Mode)) { $item.reason = 'Incomplete variant inventory'; continue } }
         if ($id -eq 'layout-inputs' -and !(Test-LayoutInventory $result $Mode)) { $item.reason = 'Incomplete layout assertion inventory'; continue }
         if ($id -eq 'geography-inputs' -and !(Test-GeographyInventory $result $Mode)) { $item.reason = 'Incomplete geographic assertion inventory'; continue }
         if ($id -eq 'faction-quest-inputs' -and !(Test-FactionQuestInventory $result $Mode)) { $item.reason = 'Incomplete faction/quest assertion inventory'; continue }

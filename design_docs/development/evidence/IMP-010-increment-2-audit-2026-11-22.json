@@ -1,7 +1,7 @@
 {
   "schema": "imp010-increment2-audit-v1",
   "date": "2026-11-22",
-  "status": "implemented_verified_awaiting_user_acceptance",
+  "status": "user_accepted",
   "engine": "4.7.2.stable.official.ed1daf0bf",
   "scope": "DATA-005 layouts only; media extension explicitly authorized",
   "profile_sha256": "a2e629e5d085b3d0ed58f3c17958f4accec4910e9204b6967203ab55af717b75",
@@ -494,5 +494,16 @@
       "bytes": 24981,
       "sha256": "d996af44b809eaba17b629fc336d4a6ad6923e4321174b28cf9ee477f58c6c41"
     }
+  },
+  "verification_status_at_delivery": "implemented_verified_awaiting_user_acceptance",
+  "acceptance": {
+    "date": "2026-11-22",
+    "commit": "e324d54",
+    "user_statement": "I accept what you have done in increment 2",
+    "increment_3_handoff": "design_docs/development/handoffs/IMP-010-INCREMENT-3-PROMPT.txt",
+    "increment_3_started": false,
+    "historical_file_hashes": "Verification-time snapshots are preserved; acceptance/handoff documentation edits postdate them.",
+    "parent_imp010_complete": false,
+    "m1_complete": false
   }
 }

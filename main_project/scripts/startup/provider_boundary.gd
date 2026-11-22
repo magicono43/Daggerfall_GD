@@ -13,6 +13,15 @@ var media: RefCounted
 var media_preferences: RefCounted
 var _preference_stores: Dictionary = {}
 var layouts: RefCounted
+var variants: RefCounted
+
+func enable_variant_inputs() -> Dictionary:
+	if layouts == null: return {"ok":false,"reason":"Register layout provider before variants."}
+	var candidate := preload("res://scripts/data/variant_inputs.gd").new()
+	candidate.layouts = layouts
+	var registered := register_content_adapter(candidate,"",[])
+	if registered.ok: variants = candidate
+	return registered
 
 func enable_layout_inputs(required_resource_sources: Array = []) -> Dictionary:
 	var candidate := preload("res://scripts/data/layout_inputs.gd").new()

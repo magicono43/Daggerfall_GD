@@ -4,6 +4,18 @@ const LF = preload("res://scripts/data/layout_formats.gd")
 var resource_calls := 0
 var retiring_source: RefCounted
 
+func extend_fixture_content(_content: Dictionary, _mods: RefCounted) -> void:
+	pass
+
+func verify_variants(_shell: Control, _fixture: Dictionary) -> void:
+	pass
+
+func validate_variant_candidate(_shell: Control, _fixture: Dictionary) -> void:
+	pass
+
+func verify_variant_retirement(_shell: Control, _fixture: Dictionary) -> void:
+	pass
+
 func check(id: String, expected: Variant, actual: Variant) -> void:
 	checks.append({"scenario":id,"expected":expected,"actual":actual})
 	if checks.size()%20 == 0: print("Layout assertion ",checks.size(),": ",id)
@@ -147,10 +159,12 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	var custom_layout := Layout.value("layout",{"mode":"authored","location":"packs/classic#place-00000","placements":[custom_placement,custom_second]})
 	content.entries.append({"id":"custom-block","value":custom_block})
 	content.entries.append({"id":"custom-resources","value":custom_layout})
+	extend_fixture_content(content,mods)
 	schema_negatives(adapter,custom_block,custom_layout)
 	texture_negatives()
 	var pack := manifest("test.pack")
 	pack.content = ["layout.json","media.json"]
+	if has_method("variant_content_files"): pack.content.append_array(call("variant_content_files"))
 	write(mods.root.path_join("Mods/layout/mod.json"),JSON.stringify(pack))
 	write(mods.root.path_join("Mods/layout/layout.json"),JSON.stringify(content))
 	var image := Image.create(2,2,false,Image.FORMAT_RGBA8)
@@ -232,6 +246,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	mods.rescan()
 	candidate = registry.prepare(mods)
 	check("required block and media repairs rebuild indexes",true,candidate.ok)
+	validate_variant_candidate(shell,fixture)
 	write(mods.root.path_join("Overrides/layout.json"),"External edit requires restart")
 	check("loose changes require restart",true,registry.prepare(mods).ok)
 	var pure_base := {key:candidate.resources[key].duplicate(true)}
@@ -443,6 +458,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		var viewport_height: float = shell.get_viewport_rect().size.y
 		check("rendered structural inspector visible",true,inspector.is_visible_in_tree() and inspector.get_global_rect().position.y >= 0 and inspector.get_global_rect().end.y <= viewport_height)
 		check("rendered texture frame probes",true,previews.get_child_count() == 2 and previews.get_global_rect().position.y >= 0 and previews.get_global_rect().end.y <= viewport_height)
+	await verify_variants(shell,fixture)
 	retiring_source = controller.providers.classic
 	resource_calls = 0
 	var lost_block: Dictionary = adapter.prepare_location(registry,"packs/test.pack#repeated",later_source_failure)
@@ -452,6 +468,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("later block exact failed placement","first",lost_block.placement)
 	check("later block retains definition provider",true,lost_block.has("provider") and lost_block.has("definition") and lost_block.has("input"))
 	check("retired source cannot reuse decoded blocks",false,adapter.decode_block(registry,"packs/classic#block-0000").ok)
+	verify_variant_retirement(shell,fixture)
 	return terminal(fixture)
 
 func terminal(fixture: Dictionary) -> Dictionary:
