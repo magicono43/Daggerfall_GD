@@ -1,5 +1,27 @@
 # Verification run artifact cleanup
 
+## 2026-11-21 IMP-009 increment 2
+
+The increment-2 verification/export commands completed before cleanup. A normal
+Get-Process check found no Godot/FFmpeg process; no elevated WMI/CIM dependency
+was introduced. Exact manifests under `main_project/tests/.runs/` are
+`imp009-increment2-cleanup-plan.json` and `imp009-increment2-cleanup-result.json`.
+Removed 22,876 files / 5,747,966,876 logical bytes from reproducible payloads in
+23 explicitly owned run roots. Preserved reports/logs/captures were relocated
+under each root's `evidence/` with SHA-256 verification. Installed-template
+junctions were unlinked without recursion, leaving their targets intact.
+
+Thirty-two large JSON reports/results were additionally preserved byte-for-byte
+in adjacent gzip archives after decompressed SHA-256 verification, reducing
+659,205,033 bytes to 19,964,260 bytes. Their original JSON paths now contain
+explicit archive pointers, not runnable terminal results. See
+`imp009-increment2-evidence-archives.json` and `imp009-increment2-retention-final.json`.
+No completed full build remains for this task. Prior acceptance evidence,
+classic/reference sources, installed tools and authoritative files were protected.
+The [execution evidence](evidence/IMP-009-increment-2-2026-11-21.md) and its final
+audit identify the verified builds and readable summaries. Older records below
+retain their historical cleanup outcomes.
+
 ## Default retention policy
 
 ### Standing authorization and permission prompts

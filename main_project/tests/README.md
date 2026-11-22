@@ -1,5 +1,24 @@
 # Shared verification — IMP-003 / DEV-014
 
+IMP-009 increment 2 uses `item-spell-inputs` / `item-spell-inputs-v1`:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Suite item-spell-inputs -Fixture item-spell-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_rendered.ps1 -Suite item-spell-inputs -Fixture item-spell-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -ItemSpellInputs -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -ItemSpellInputs -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+The frozen inventory is 160 headless / 162 rendered assertions. All four foundation
+sources plus SPELLS.STD and MAGIC.DEF are guarded read-only and hashed before/after.
+Actual publication uses all 288 explicitly authorized DFU packaged item templates,
+59 selected magic sources and 89 selected spells. Item JSON, mapping and license
+hashes verify PCK intake in both Windows exports. Synthetic vectors only test
+negative/interface behavior; they do not replace actual source qualification.
+See [the versioned contract](../scripts/data/ITEM_SPELL_INPUTS.md) and
+[source/license provenance](../content/items/PROVENANCE.md). Semantic ITEM/MAGIC
+and SAVE gates stay unavailable; controlled probes cannot authorize gameplay.
+
 IMP-009 increment 1 uses `actor-inputs` / `actor-inputs-v1`:
 
 ```powershell

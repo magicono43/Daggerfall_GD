@@ -44,7 +44,12 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
-	if fixture.is_empty() or fixture.get("mode") == "actor-inputs":
+	if fixture.is_empty() or fixture.get("mode") == "item-spell-inputs":
+		var registered: Dictionary = controller.providers.enable_item_spell_inputs()
+		if not registered.ok:
+			label("Item/spell input registration failed: " + registered.reason)
+			return
+	if fixture.is_empty() or fixture.get("mode") in ["actor-inputs","item-spell-inputs"]:
 		var registered: Dictionary = controller.providers.enable_actor_inputs()
 		if not registered.ok:
 			label("Actor input registration failed: " + registered.reason)
@@ -436,6 +441,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/structured_text_cases.gd"
 	elif fixture.get("mode") == "actor-inputs":
 		script_path = "res://tests/actor_input_cases.gd"
+	elif fixture.get("mode") == "item-spell-inputs":
+		script_path = "res://tests/item_spell_cases.gd"
 	elif fixture.get("mode") == "translation-preferences_reload":
 		script_path = "res://tests/translation_preference_reload_cases.gd"
 	elif fixture.get("mode") == "translation-preferences":

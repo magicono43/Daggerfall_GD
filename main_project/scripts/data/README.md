@@ -1,5 +1,11 @@
 # Classic access — IMP-004
 
+IMP-009 increment 2 adds [item/spell structural inputs](ITEM_SPELL_INPUTS.md):
+selected SPELLS.STD/MAGIC.DEF, an explicitly authorized DFU packaged item baseline,
+stable contextual identities, required references and detached inspection views.
+Normal startup declares these sources before preparation. Real ITEM/MAGIC/SAVE
+readiness remains unavailable; no gameplay spell correction is enabled.
+
 IMP-009 increment 1 adds [actor/character structural input readers](ACTOR_INPUTS.md)
 and domain `actor.inputs` through the existing pre-menu transaction. Normal startup
 declares their real sources before preparation. Known stock flat conflicts now

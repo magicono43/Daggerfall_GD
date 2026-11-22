@@ -1,0 +1,357 @@
+{
+  "schema": "imp009-increment2-audit-v1",
+  "date": "2026-11-21",
+  "scope": "DATA-010/011 increment 2 only; structural delivery for review",
+  "revision": "fd260d3c3c2e22223e620f2ceac179f9ecdafd7a",
+  "chosen_sources": "C:/Games/Daggerfall/arena2",
+  "source_coverage": {
+    "production_semantic_ready": false,
+    "dfu_packaged_items": 288,
+    "selected_magic_items": 59,
+    "artifact_sources": 23,
+    "spell_collision_indexes": [
+      58
+    ],
+    "selected_spells": 89
+  },
+  "source_hashes": {
+    "scripts/data/item_spell_formats.gd": "595083A7F637499D71FEAC01B1CBB869B594D3378030003AF4CB2A96E4CFDE33",
+    "scripts/data/item_spell_source_reader.gd": "FD04DAFF667A9344D4479EE92F878165EAEDCDECF27AC8C19FFE25636F6B85EC",
+    "scripts/data/item_spell_inputs.gd": "D464A56FE4A36B2E8CEBDFACC822E5C3B90BB2FE316C953BB3FA191BCC992553",
+    "scripts/data/classic_access.gd": "98DC5B871F2312BB7F60E86AEBA6FB6567DEE4EAA20A7010C109A02615D0FC4A",
+    "scripts/startup/provider_boundary.gd": "6302E0B7461E76A053E1344030EFC8B77E65D9424AFB3D29B9593D240B37EE46",
+    "scripts/startup/startup_shell.gd": "5A82D872A6A4CBE0AB11252478CF30FB3CAC567BD9D456D24890323CD2BBDB59",
+    "tests/item_spell_cases.gd": "0180AEE96594015D3A35657AD36B452891F2AE487EDCD94A42B10EFC7D052D75",
+    "tests/item_spell_inventory.json": "BE7126C68CB1B3ACC44FA103A996C5F64AC417A1044F1F89B0B853B099FBD51F",
+    "content/items/dfu-item-templates.json": "33F4D2703447F4EB8EEABC7B103D8D946115CFFAF6490BE78578F97DB35693A9",
+    "content/items/dfu-item-mappings.json": "4F6F11B4FE011E2477DC951FE53935BD7DB09CF791ED0DF8F8A589F75E492725",
+    "content/items/DFU_LICENSE.txt": "6E5E22FA760938AB398743150787896BD20FCF4936AAD0122704700BAD1E669A",
+    "export_presets.cfg": "19A327D341F387F6DA4E663C569067229035240B3C99CEF3851359B98FBD969C"
+  },
+  "selections": [
+    {
+      "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-c8cc8bc297224e4eb11a1f9582dc3b8c/project/tests/.runs/scenario-1/result.json",
+      "guarded_sources": 47,
+      "report": "main_project/tests/.runs/verification-headless-c8cc8bc297224e4eb11a1f9582dc3b8c/report.json",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "relevant_source_hashes_match": {
+        "scripts/data/item_spell_formats.gd": true,
+        "scripts/data/item_spell_source_reader.gd": true,
+        "scripts/data/item_spell_inputs.gd": true,
+        "scripts/data/classic_access.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "tests/item_spell_cases.gd": true,
+        "tests/item_spell_inventory.json": true,
+        "content/items/dfu-item-templates.json": true,
+        "content/items/dfu-item-mappings.json": true,
+        "content/items/DFU_LICENSE.txt": true,
+        "export_presets.cfg": true
+      },
+      "fixture": "item-spell-inputs-v1",
+      "scenario": "item-spell-inputs",
+      "status": "passed",
+      "mode": "headless",
+      "assertions": 160,
+      "source_unchanged": true,
+      "retained_terminal_result": "main_project/tests/.runs/verification-headless-c8cc8bc297224e4eb11a1f9582dc3b8c/evidence/project/tests/.runs/scenario-1/result.json"
+    },
+    {
+      "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-3986ce48c10b49d69b8da5f74b1e089c/project/tests/.runs/scenario-1/result.json",
+      "guarded_sources": 47,
+      "report": "main_project/tests/.runs/verification-rendered-3986ce48c10b49d69b8da5f74b1e089c/report.json",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "relevant_source_hashes_match": {
+        "scripts/data/item_spell_formats.gd": true,
+        "scripts/data/item_spell_source_reader.gd": true,
+        "scripts/data/item_spell_inputs.gd": true,
+        "scripts/data/classic_access.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "tests/item_spell_cases.gd": true,
+        "tests/item_spell_inventory.json": true,
+        "content/items/dfu-item-templates.json": true,
+        "content/items/dfu-item-mappings.json": true,
+        "content/items/DFU_LICENSE.txt": true,
+        "export_presets.cfg": true
+      },
+      "fixture": "item-spell-inputs-v1",
+      "scenario": "item-spell-inputs",
+      "status": "passed",
+      "mode": "rendered",
+      "assertions": 162,
+      "source_unchanged": true,
+      "retained_terminal_result": "main_project/tests/.runs/verification-rendered-3986ce48c10b49d69b8da5f74b1e089c/evidence/project/tests/.runs/scenario-1/result.json"
+    },
+    {
+      "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b771275f6bc54b8c9feee9f910e58980/project/tests/.runs/scenario-1/result.json",
+      "guarded_sources": 45,
+      "report": "main_project/tests/.runs/verification-headless-b771275f6bc54b8c9feee9f910e58980/report.json",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "relevant_source_hashes_match": {
+        "scripts/data/classic_access.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "scripts/data/actor_inputs.gd": true,
+        "scripts/data/actor_input_formats.gd": true
+      },
+      "fixture": "actor-inputs-v1",
+      "scenario": "actor-inputs",
+      "status": "passed",
+      "mode": "headless",
+      "assertions": 236,
+      "source_unchanged": true,
+      "retained_terminal_result": "main_project/tests/.runs/verification-headless-b771275f6bc54b8c9feee9f910e58980/evidence/project/tests/.runs/scenario-1/result.json"
+    },
+    {
+      "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-7d1caf8a75c746e7a14151c92598ad48/project/tests/.runs/scenario-1/result.json",
+      "guarded_sources": 45,
+      "report": "main_project/tests/.runs/verification-rendered-7d1caf8a75c746e7a14151c92598ad48/report.json",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "relevant_source_hashes_match": {
+        "scripts/data/classic_access.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "scripts/data/actor_inputs.gd": true,
+        "scripts/data/actor_input_formats.gd": true
+      },
+      "fixture": "actor-inputs-v1",
+      "scenario": "actor-inputs",
+      "status": "passed",
+      "mode": "rendered",
+      "assertions": 238,
+      "source_unchanged": true,
+      "retained_terminal_result": "main_project/tests/.runs/verification-rendered-7d1caf8a75c746e7a14151c92598ad48/evidence/project/tests/.runs/scenario-1/result.json"
+    },
+    {
+      "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-0611795317d14585a4a1b7c2db433f52/project/tests/.runs/scenario-1/result.json",
+      "guarded_sources": 4,
+      "report": "main_project/tests/.runs/verification-headless-0611795317d14585a4a1b7c2db433f52/report.json",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "relevant_source_hashes_match": {
+        "scripts/data/classic_access.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "scripts/data/actor_inputs.gd": true,
+        "scripts/data/actor_input_formats.gd": true
+      },
+      "fixture": "classic-v1",
+      "scenario": "classic",
+      "status": "passed",
+      "mode": "headless",
+      "assertions": 97,
+      "source_unchanged": true,
+      "retained_terminal_result": "main_project/tests/.runs/verification-headless-0611795317d14585a4a1b7c2db433f52/evidence/project/tests/.runs/scenario-1/result.json"
+    },
+    {
+      "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-a9385e5b8eb54b6cbb99d72468ccfdb0/project/tests/.runs/scenario-1/result.json",
+      "guarded_sources": 4,
+      "report": "main_project/tests/.runs/verification-rendered-a9385e5b8eb54b6cbb99d72468ccfdb0/report.json",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "relevant_source_hashes_match": {
+        "scripts/data/classic_access.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "scripts/data/actor_inputs.gd": true,
+        "scripts/data/actor_input_formats.gd": true
+      },
+      "fixture": "classic-v1",
+      "scenario": "classic",
+      "status": "passed",
+      "mode": "rendered",
+      "assertions": 100,
+      "source_unchanged": true,
+      "retained_terminal_result": "main_project/tests/.runs/verification-rendered-a9385e5b8eb54b6cbb99d72468ccfdb0/evidence/project/tests/.runs/scenario-1/result.json"
+    },
+    {
+      "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-467cf437a3e8486c8a9a7b12a5b58d8a/project/tests/.runs/scenario-1/result.json",
+      "guarded_sources": 4,
+      "report": "main_project/tests/.runs/verification-headless-467cf437a3e8486c8a9a7b12a5b58d8a/report.json",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "relevant_source_hashes_match": {
+        "scripts/data/classic_access.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "scripts/data/actor_inputs.gd": true,
+        "scripts/data/actor_input_formats.gd": true
+      },
+      "fixture": "publication-v1",
+      "scenario": "publication",
+      "status": "passed",
+      "mode": "headless",
+      "assertions": 111,
+      "source_unchanged": true,
+      "retained_terminal_result": "main_project/tests/.runs/verification-headless-467cf437a3e8486c8a9a7b12a5b58d8a/evidence/project/tests/.runs/scenario-1/result.json"
+    },
+    {
+      "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-891b5d952aab4587a106b8bcce98c02b/project/tests/.runs/scenario-1/result.json",
+      "guarded_sources": 4,
+      "report": "main_project/tests/.runs/verification-rendered-891b5d952aab4587a106b8bcce98c02b/report.json",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "relevant_source_hashes_match": {
+        "scripts/data/classic_access.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/data/definition_registry.gd": true,
+        "scripts/data/actor_inputs.gd": true,
+        "scripts/data/actor_input_formats.gd": true
+      },
+      "fixture": "publication-v1",
+      "scenario": "publication",
+      "status": "passed",
+      "mode": "rendered",
+      "assertions": 117,
+      "source_unchanged": true,
+      "retained_terminal_result": "main_project/tests/.runs/verification-rendered-891b5d952aab4587a106b8bcce98c02b/evidence/project/tests/.runs/scenario-1/result.json"
+    }
+  ],
+  "exports": [
+    {
+      "status": "passed",
+      "configuration": "debug",
+      "pck_sha256": "AAB468EDEA584267118479907B882F9A88CDA0CFF47348F6F5CE5CF71ECE89BE",
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "report": "main_project/tests/.runs/export-fcc7c51a89b142c0a3a23f7bdac42112/result.json",
+      "checks": [
+        {
+          "assertions": 160,
+          "scenario": "exported-headless",
+          "source_unchanged": true,
+          "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-fcc7c51a89b142c0a3a23f7bdac42112/build/tests/.runs/headless/result.json",
+          "guarded_sources": 47,
+          "retained_terminal_result": "main_project/tests/.runs/export-fcc7c51a89b142c0a3a23f7bdac42112/evidence/build/tests/.runs/headless/result.json"
+        },
+        {
+          "assertions": 162,
+          "scenario": "exported-rendered",
+          "source_unchanged": true,
+          "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-fcc7c51a89b142c0a3a23f7bdac42112/build/tests/.runs/rendered/result.json",
+          "guarded_sources": 47,
+          "retained_terminal_result": "main_project/tests/.runs/export-fcc7c51a89b142c0a3a23f7bdac42112/evidence/build/tests/.runs/rendered/result.json"
+        }
+      ],
+      "final_relevant_source_hashes_match": {
+        "scripts/data/item_spell_formats.gd": true,
+        "scripts/data/item_spell_source_reader.gd": true,
+        "scripts/data/item_spell_inputs.gd": true,
+        "scripts/data/classic_access.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "tests/item_spell_cases.gd": true,
+        "tests/item_spell_inventory.json": true,
+        "content/items/dfu-item-templates.json": true,
+        "content/items/dfu-item-mappings.json": true,
+        "content/items/DFU_LICENSE.txt": true,
+        "export_presets.cfg": true
+      },
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      }
+    },
+    {
+      "status": "passed",
+      "configuration": "release",
+      "pck_sha256": "63C6AD0625FF995C341D301196A5D34688A0796C6CB28DB5262B55411872C2BC",
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "report": "main_project/tests/.runs/export-bc23f1f4299845288c696acd16c6c7e9/result.json",
+      "checks": [
+        {
+          "assertions": 160,
+          "scenario": "exported-headless",
+          "source_unchanged": true,
+          "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-bc23f1f4299845288c696acd16c6c7e9/build/tests/.runs/headless/result.json",
+          "guarded_sources": 47,
+          "retained_terminal_result": "main_project/tests/.runs/export-bc23f1f4299845288c696acd16c6c7e9/evidence/build/tests/.runs/headless/result.json"
+        },
+        {
+          "assertions": 162,
+          "scenario": "exported-rendered",
+          "source_unchanged": true,
+          "terminal_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-bc23f1f4299845288c696acd16c6c7e9/build/tests/.runs/rendered/result.json",
+          "guarded_sources": 47,
+          "retained_terminal_result": "main_project/tests/.runs/export-bc23f1f4299845288c696acd16c6c7e9/evidence/build/tests/.runs/rendered/result.json"
+        }
+      ],
+      "final_relevant_source_hashes_match": {
+        "scripts/data/item_spell_formats.gd": true,
+        "scripts/data/item_spell_source_reader.gd": true,
+        "scripts/data/item_spell_inputs.gd": true,
+        "scripts/data/classic_access.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "tests/item_spell_cases.gd": true,
+        "tests/item_spell_inventory.json": true,
+        "content/items/dfu-item-templates.json": true,
+        "content/items/dfu-item-mappings.json": true,
+        "content/items/DFU_LICENSE.txt": true,
+        "export_presets.cfg": true
+      },
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      }
+    }
+  ],
+  "source_review": {
+    "review": "Independent PowerShell little-endian reads compared with DFU packaged JSON; reference bytes untouched",
+    "packaged_magic_records": 59,
+    "all_selected_fields_match_packaged": true,
+    "source_sha256": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA",
+    "selected_magic_records": 59,
+    "source": "C:/Games/Daggerfall/arena2/MAGIC.DEF",
+    "differences": [],
+    "schema": "item-spell-source-review-v1"
+  },
+  "reviewed_capture": {
+    "observation": "1152x648 actual main menu; New Game, Settings/Setup, Quit and truthful unavailable character/save support text",
+    "matches_prior_reviewed_capture": true,
+    "path": "main_project/tests/.runs/verification-rendered-3986ce48c10b49d69b8da5f74b1e089c/project/tests/.runs/scenario-1/items-spells-main-menu.png",
+    "sha256": "F0F01D9E0C548AAEFE42A2155F11A44C1633062DAA61EEA7F218FFBBD73014F7",
+    "retained_path": "main_project/tests/.runs/verification-rendered-3986ce48c10b49d69b8da5f74b1e089c/evidence/project/tests/.runs/scenario-1/items-spells-main-menu.png"
+  },
+  "cleanup": {
+    "all_payloads_removed": true,
+    "removed_files": 22876,
+    "retention": "main_project/tests/.runs/imp009-increment2-retention.json",
+    "source_guards_unchanged": true,
+    "removed_bytes": 5747966876,
+    "owned_roots": 23,
+    "retained_total_bytes": 1355308904,
+    "plan": "main_project/tests/.runs/imp009-increment2-cleanup-plan.json",
+    "completed_full_builds_retained": 0,
+    "result": "main_project/tests/.runs/imp009-increment2-cleanup-result.json",
+    "evidence_archives": "main_project/tests/.runs/imp009-increment2-evidence-archives.json",
+    "archived_report_count": 32,
+    "archive_original_bytes": 659205033,
+    "archive_compressed_bytes": 19964260,
+    "final_retention": "main_project/tests/.runs/imp009-increment2-retention-final.json"
+  },
+  "remaining_gates": [
+    "Real ITEM IMP-017",
+    "Real MAGIC IMP-033",
+    "SAVE compatibility/migrations",
+    "CHAR/NPC/effect integration",
+    "Increment 3 separate authorization",
+    "Parent IMP-009 and M1 acceptance"
+  ]
+}

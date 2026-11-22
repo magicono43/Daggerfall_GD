@@ -1,5 +1,12 @@
 # Definition publication — IMP-005 increment 3
 
+IMP-009 increment 2 adds [item/spell inputs](ITEM_SPELL_INPUTS.md) within this
+transaction. The trusted bundled hook reads fingerprinted DFU item JSON from
+`res://` and the explicit selected classic spell/magic readers. Required base and
+cast references validate after resolution; colliding spells retain separate IDs
+and ambiguous legacy mappings. Checked conversion probes never establish real
+ITEM/MAGIC readiness. No registry ordering, omission or commitment policy changed.
+
 IMP-009 increment 1 adds [actor input schemas/readers](ACTOR_INPUTS.md) without
 another registry. A trusted bundled contribution may return a checked `read`
 failure instead of bytes; actor source diagnoses retain their source/record

@@ -8,6 +8,8 @@ const ModelDecoder = preload("res://scripts/data/classic_model.gd")
 const HmiDecoder = preload("res://scripts/data/classic_hmi.gd")
 const ActorFormats = preload("res://scripts/data/actor_input_formats.gd")
 const ActorReader = preload("res://scripts/data/actor_source_reader.gd")
+const ItemSpellFormats = preload("res://scripts/data/item_spell_formats.gd")
+const ItemSpellReader = preload("res://scripts/data/item_spell_source_reader.gd")
 var _declarations: Dictionary = {}
 var _enabled: Array[String] = ["classic-containers-v1"]
 var _active: Dictionary = {}
@@ -30,7 +32,7 @@ func register_adapter(id: String, sources: Array) -> bool:
 		return false
 	for entry: Dictionary in sources:
 		var file := str(entry.get("file", ""))
-		if file.is_empty() or file.get_file() != file or file.contains("\\") or (entry.get("format") not in ["bsa-v1", TextReader.VERSION] and entry.get("format") not in MediaReader.FORMATS and entry.get("format") not in ActorFormats.FORMATS):
+		if file.is_empty() or file.get_file() != file or file.contains("\\") or (entry.get("format") not in ["bsa-v1", TextReader.VERSION] and entry.get("format") not in MediaReader.FORMATS and entry.get("format") not in ActorFormats.FORMATS and entry.get("format") not in ItemSpellFormats.FORMATS):
 			return false # Other formats require their actual owner implementation.
 	_declarations[id] = sources.duplicate(true)
 	return true
@@ -61,6 +63,7 @@ func _reader(format_id: String) -> RefCounted:
 	if format_id == TextReader.VERSION: return TextReader.new()
 	if format_id in MediaReader.FORMATS: return MediaReader.new(format_id)
 	if format_id in ActorFormats.FORMATS: return ActorReader.new(format_id)
+	if format_id in ItemSpellFormats.FORMATS: return ItemSpellReader.new(format_id)
 	return null
 
 func resolve(candidate: String) -> Dictionary:

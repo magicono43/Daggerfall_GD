@@ -1,5 +1,15 @@
 # Implementation backlog
 
+**IMP-009 increment 2 execution, 2026-11-21:** The issued prompt authorized only
+DATA-010/011 items/spells. The user separately authorized an explicitly identified
+DFU packaged item baseline and clarified consistency rather than exact original
+parity. Structural adapters, contextual spell identities, complete checked owner
+probes and DATA/MOD/CORE integration are delivered for review; verification and
+source coverage are recorded in [increment-2 evidence](evidence/IMP-009-increment-2-2026-11-21.md).
+Real ITEM/MAGIC/SAVE, increment 3, parent IMP-009 and M1 gates remain open. No
+faction/quest reader or downstream gameplay implementation starts here. Earlier
+increment-2 handoff-only statements below are historical.
+
 **IMP-009 increment 1 accepted / increment 2 handoff, 2026-11-21:** The user
 accepted increment 1, committed at `f9779c4`, and requested a copy/paste prompt
 for another chat. See [accepted evidence](evidence/IMP-009-increment-1-biog-2026-11-21.md)

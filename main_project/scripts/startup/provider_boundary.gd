@@ -13,6 +13,11 @@ var media: RefCounted
 var media_preferences: RefCounted
 var _preference_stores: Dictionary = {}
 
+func enable_item_spell_inputs() -> Dictionary:
+	var candidate := preload("res://scripts/data/item_spell_inputs.gd").new()
+	candidate.classic = classic
+	return register_content_adapter(candidate,"",[])
+
 func enable_actor_inputs() -> Dictionary:
 	var candidate := preload("res://scripts/data/actor_inputs.gd").new()
 	candidate.classic = classic

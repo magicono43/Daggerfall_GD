@@ -1,5 +1,10 @@
 # MOD package, profile and dependency contracts — IMP-005
 
+IMP-009 increment 2 adds [item/spell input contributions](../data/ITEM_SPELL_INPUTS.md)
+under capability `data.item-spell-inputs-v1`. The existing checked folder/ZIP/loose
+intake, add/replace/patch, required-reference recovery and menu lock apply. It
+activates no item/effect providers or package code.
+
 IMP-009 increment 1 adds [actor/character input contributions](../data/ACTOR_INPUTS.md)
 under capability `data.actor-inputs-v1`. The same checked folder/ZIP and loose
 intake, explicit omissions, candidate tickets and run-long locks apply. This adds
