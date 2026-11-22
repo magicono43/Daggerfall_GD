@@ -1,5 +1,13 @@
 # Verification run artifact cleanup
 
+## 2026-11-22 M1 integration audit
+
+The [M1 audit](evidence/M1-INTEGRATION-AUDIT-2026-11-22.md) compacted its 47 completed verification copies and two Windows exports after all owned matrix, probe, qualification, process and ordinary-start children returned. No completed audit build, EXE, DLL or PCK payload remains. Root reports, child reports/logs, reviewed captures, fixture/build/source hashes and diagnostic support scripts remain. Exact-root cleanup plans and evidence hash checks are retained alongside each run; template junctions and the inactive process alias were unlinked without following their targets.
+
+Twenty large JSON evidence files were losslessly archived: 226,765,002 original bytes to 6,242,888 gzip bytes, with decompressed SHA-256 verification. Original JSON paths contain explicit archive pointers. Final measured total `.runs` retention is approximately **1.63 GiB** (1,746,986,941 bytes before the last small summary updates), below the 2 GiB trigger. The temporary diagnostic runtime exception expired and its copy was removed.
+
+The process suite's editor import created 23 previously absent UID sidecars in the source tree. Their exact bytes, hashes and creation timestamps were preserved before removing only those identified audit outputs, restoring the initial runtime source tree. Reference/classic data, authoritative source/assets, installed tools and earlier evidence were preserved. See `main_project/tests/.runs/m1-audit-2026-11-22/` for `cleanup-*.json`, `export-cleanup.json`, `json-archives.json`, `retention-final.json`, `generated-uid-cleanup.json` and the associated per-root plans. No elevated process query or security-setting change was used.
+
 ## 2026-11-22 IMP-010 increment 2
 
 All owned layout, export and regression children exited before payload cleanup.

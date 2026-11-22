@@ -1,0 +1,1690 @@
+{
+  "final_checks": [
+    {
+      "started": "2026-11-22T20:57:43.9250133Z",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-ca1c02ee6c864d68b216be6f0aa1f8e7/report.json"
+      ],
+      "elapsed_seconds": 158.7628899,
+      "exit": 0,
+      "selection": "native-headless-isolated-repeat"
+    },
+    {
+      "started": "2026-11-22T21:00:22.6959795Z",
+      "output": [
+        "Composition headless exit 0",
+        "Composition rendered exit 0"
+      ],
+      "elapsed_seconds": 111.350236,
+      "exit": 0,
+      "selection": "all-adapter-isolated-repeat"
+    },
+    {
+      "started": "2026-11-22T21:02:14.0476287Z",
+      "output": [
+        "headless pass qualified: exit 0, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-bd871517df684ff1a5d2b86f59281ca6/report.json",
+        "headless fail qualified: exit 1, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-610d9705938c4f449f242ad0e0edd29b/report.json",
+        "headless missing qualified: exit 2, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-1b9e3f74a6c149e8b0901eda517a8100/report.json",
+        "rendered pass qualified: exit 0, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-6dbba9e51a69484b90033c3855832966/report.json",
+        "rendered fail qualified: exit 1, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-555af525176b4426a45c764d3c3586d5/report.json",
+        "rendered missing qualified: exit 2, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-3c650297dab347e5907f942d75ef2c37/report.json",
+        "Qualification evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/qualification-0416b8986bf94d9c835a0b7807c4b2e5/result.json"
+      ],
+      "elapsed_seconds": 127.9591536,
+      "exit": 0,
+      "selection": "harness-qualification"
+    },
+    {
+      "started": "2026-11-22T21:04:22.0085794Z",
+      "output": [
+        "Windows process PASS: 9 scenarios; evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/process-3077e095a0b447478008096118a9707d"
+      ],
+      "elapsed_seconds": 34.5385403,
+      "exit": 0,
+      "selection": "storage-process-interruption"
+    },
+    {
+      "started": "2026-11-22T21:04:56.5483115Z",
+      "output": [
+        "Windows debug export PASS: headless and rendered startup; evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-f637fcaf71fb4f859e54bef0a694b08c"
+      ],
+      "elapsed_seconds": 41.461505,
+      "exit": 0,
+      "selection": "publication-windows-debug"
+    },
+    {
+      "started": "2026-11-22T21:05:38.0113204Z",
+      "output": [
+        "Windows release export PASS: headless and rendered startup; evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-607f7239e2d94c8f84c690f5087591d5"
+      ],
+      "elapsed_seconds": 53.3719723,
+      "exit": 0,
+      "selection": "publication-windows-release"
+    }
+  ],
+  "primary_assertions": 8310.0,
+  "revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+  "schema": "m1-integration-audit-v1",
+  "date": "2026-11-22",
+  "compositions": [
+    {
+      "domains": [
+        "layout.inputs",
+        "world.variants",
+        "geography.inputs",
+        "faction-quest.inputs",
+        "item-spell.inputs",
+        "actor.inputs",
+        "media.assets",
+        "mod.preferences",
+        "text.catalogs",
+        "text.fonts"
+      ],
+      "elapsed_total_ms": 47910,
+      "process_frames_during_selection": 0,
+      "faction_probe": {
+        "elapsed_usec": 946849,
+        "kind": "",
+        "ok": true
+      },
+      "elapsed_selection_ms": 47910,
+      "report": "main_project/tests/.runs/m1-audit-2026-11-22/composition-headless.json",
+      "classification": "Publication succeeded; diagnostic UI reproduction intentionally records a defect, not a passing skip-preference assertion.",
+      "report_sha256": "8F472CFD70355253399ABCDDF7574A1AA9F5A082106DC8F6AAD4555DA596552C",
+      "menu_entered": true,
+      "manifest_entries": 51,
+      "cinematic_skip_defect": {
+        "accepted": "authored",
+        "effective": "authored",
+        "message": "Cinematic skip preference saved.",
+        "persisted": "authored",
+        "selected": "back"
+      },
+      "peak_static_memory_bytes": 2177483527,
+      "mode": "headless",
+      "static_memory_bytes": 1778368270
+    },
+    {
+      "domains": [
+        "layout.inputs",
+        "world.variants",
+        "geography.inputs",
+        "faction-quest.inputs",
+        "item-spell.inputs",
+        "actor.inputs",
+        "media.assets",
+        "mod.preferences",
+        "text.catalogs",
+        "text.fonts"
+      ],
+      "elapsed_total_ms": 47659,
+      "process_frames_during_selection": 0,
+      "faction_probe": {
+        "elapsed_usec": 976270,
+        "kind": "",
+        "ok": true
+      },
+      "elapsed_selection_ms": 47659,
+      "report": "main_project/tests/.runs/m1-audit-2026-11-22/composition-rendered.json",
+      "classification": "Publication succeeded; diagnostic UI reproduction intentionally records a defect, not a passing skip-preference assertion.",
+      "report_sha256": "5E29DDB5DBBDD432EAD413A9B97F8FF9709B9F001F29DBB4352331753165C469",
+      "menu_entered": true,
+      "manifest_entries": 51,
+      "cinematic_skip_defect": {
+        "accepted": "authored",
+        "effective": "authored",
+        "message": "Cinematic skip preference saved.",
+        "persisted": "authored",
+        "selected": "back"
+      },
+      "peak_static_memory_bytes": 2201545513,
+      "mode": "rendered",
+      "static_memory_bytes": 1802433536
+    }
+  ],
+  "failed_selections": 1,
+  "selections": [
+    {
+      "report": "main_project/tests/.runs/verification-headless-9c3d0ba1a1b94a84bc0694c5862914e5/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "m1-v1",
+      "failures": [],
+      "scenario": "qualification",
+      "suite": "m1",
+      "report_sha256": "B7094E9940540ABD1D06E3960FC83F6B368BDB72A0380D0C1BFDB7D9A734D6B8",
+      "assertions": 2,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-9c3d0ba1a1b94a84bc0694c5862914e5/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "m1-v1",
+      "failures": [],
+      "scenario": "startup",
+      "suite": "m1",
+      "report_sha256": "B7094E9940540ABD1D06E3960FC83F6B368BDB72A0380D0C1BFDB7D9A734D6B8",
+      "assertions": 84,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-9c3d0ba1a1b94a84bc0694c5862914e5/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "m1-v1",
+      "failures": [],
+      "scenario": "session",
+      "suite": "m1",
+      "report_sha256": "B7094E9940540ABD1D06E3960FC83F6B368BDB72A0380D0C1BFDB7D9A734D6B8",
+      "assertions": 263,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-210c8a5cb3bd4310a9e8bd32c2e98017/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "m1-v1",
+      "failures": [],
+      "scenario": "qualification",
+      "suite": "m1",
+      "report_sha256": "9F176E431EE818E80BF947E9ABE6DC9CCDC75DBD605853F32FF965E1B3470561",
+      "assertions": 3,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-210c8a5cb3bd4310a9e8bd32c2e98017/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "m1-v1",
+      "failures": [],
+      "scenario": "startup",
+      "suite": "m1",
+      "report_sha256": "9F176E431EE818E80BF947E9ABE6DC9CCDC75DBD605853F32FF965E1B3470561",
+      "assertions": 92,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-210c8a5cb3bd4310a9e8bd32c2e98017/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "m1-v1",
+      "failures": [],
+      "scenario": "session",
+      "suite": "m1",
+      "report_sha256": "9F176E431EE818E80BF947E9ABE6DC9CCDC75DBD605853F32FF965E1B3470561",
+      "assertions": 264,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-68fed0d4b2674258b5937cfc984f3c9a/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "classic-v1",
+      "failures": [],
+      "scenario": "classic",
+      "suite": "classic",
+      "report_sha256": "B5F049E449B0AB87AA1BE4E59C61FEDF32ED80D70E956154BAF3F95376AC3B77",
+      "assertions": 97,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-1035443461b942f0af913ca6fb14d6b7/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 8,
+      "fixture": "mods-v1",
+      "failures": [],
+      "scenario": "mods",
+      "suite": "mods",
+      "report_sha256": "23C8932857D8C6BEB3338C8E9FB0D5ECCA6CF3C297C8F304BC47353C7F347599",
+      "assertions": 119,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-beda9e73a62e4f4cbf1c9562a0fbd87a/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 8,
+      "fixture": "planning-v1",
+      "failures": [],
+      "scenario": "planning",
+      "suite": "planning",
+      "report_sha256": "A241329ADC50031F2E64904618BF62FAC49FAB4BDEF0141A591D41234C274D49",
+      "assertions": 87,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-d00f7c43f311417ebb16b651ec41dab7/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 8,
+      "fixture": "publication-v1",
+      "failures": [],
+      "scenario": "publication",
+      "suite": "publication",
+      "report_sha256": "546532ECB4DF3B9D0DEDF3169C101C08B6B4E43D9E8670A9080FBF1AA8795D3A",
+      "assertions": 111,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-623b787bc9b0407a99eff35c10a7ff52/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "randomness-v1",
+      "failures": [],
+      "scenario": "randomness",
+      "suite": "randomness",
+      "report_sha256": "1FAC14EC170ACDC4491AFAE08323DA72F6EA0B2B540DC1D522D8D1FC3A6DCD95",
+      "assertions": 108,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-9b31f4f24f134da19ea6cdf6752e2d91/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 15,
+      "fixture": "randomness-session-v1",
+      "failures": [],
+      "scenario": "randomness-session",
+      "suite": "randomness-session",
+      "report_sha256": "1A788AF401EC0C6CF905AAD307A8AFC099FD65AC606B387625147767A897A907",
+      "assertions": 115,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-99067621dd724a789861f4300fd82905/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "formula-v1",
+      "failures": [],
+      "scenario": "formula",
+      "suite": "formula",
+      "report_sha256": "C6EB09BD0AE86DA4CB3B30FF2E9D270D3403E1FB1F09B308E7654EB263611100",
+      "assertions": 82,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-16ec5f63b3bc4bc89650e27057cf952c/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "text-v1",
+      "failures": [],
+      "scenario": "text",
+      "suite": "text",
+      "report_sha256": "CC02C983D46427EDDCB13087B01DAF4582230B44B427C6602C9116AD8F71C0E2",
+      "assertions": 121,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-b95cd75c80164507b4efc0c47a1f5287/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "structured-text-v1",
+      "failures": [],
+      "scenario": "structured-text",
+      "suite": "structured-text",
+      "report_sha256": "0B683469E61293954F3D148F4D3A90B10BECB63777E720C603E831E860E31345",
+      "assertions": 284,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-6c7ab043583b4d1a8936719a4c427f95/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 10,
+      "fixture": "locale-fonts-v1",
+      "failures": [],
+      "scenario": "locale-fonts",
+      "suite": "locale-fonts",
+      "report_sha256": "F08C377E138805C5B1405574B8AA062A0A8575BF8C4A4EAFFB65D5859A620173",
+      "assertions": 419,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-961c5192d9de4068ac578941cfece11e/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 10,
+      "fixture": "translation-preferences-v1",
+      "failures": [],
+      "scenario": "translation-preferences",
+      "suite": "translation-preferences",
+      "report_sha256": "80C8CA2736AD6C3DDB4B395C0B12FE7257799644BED7EA44CBF1CB6C41FECF2C",
+      "assertions": 149,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-6d9e8f6847ab432aa68b3998975f7049/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "media-v1",
+      "failures": [],
+      "scenario": "media",
+      "suite": "media",
+      "report_sha256": "B7CD2FADE835CB1052B0C35E53749B5AFED1DE45F7BF505546743F09FC4C40BE",
+      "assertions": 119,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-d942d41911d74c2eab488b77df5f7e20/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 10,
+      "fixture": "replacements-v1",
+      "failures": [],
+      "scenario": "replacements",
+      "suite": "replacements",
+      "report_sha256": "12C9077658136686FA1BCE8DC09F7515F130FC8D0537FB1CD26F1D758CA2D1B8",
+      "assertions": 168,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-4c232847a051401cbbf5afcef187b87b/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "native-v1",
+      "failures": [
+        {
+          "actual": false,
+          "expected": true,
+          "scenario": "vp9-full presented sync within two frames"
+        }
+      ],
+      "scenario": "native",
+      "suite": "native",
+      "report_sha256": "0AAD418EE1A8B752755385CD7E1B8DF17633873D79B3E184D31C399BE1F4DF61",
+      "assertions": 344,
+      "reason": "Assertion failure",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "failed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-dbe44af8f2734739ac62ba1922cdb4c0/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "actor-inputs-v1",
+      "failures": [],
+      "scenario": "actor-inputs",
+      "suite": "actor-inputs",
+      "report_sha256": "A8FAE65EDD9182CA9B3C2F4F4C37EF0F61CCDFE3A9FD620A736F62FC5D87094B",
+      "assertions": 236,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-1876fd2906834edebf51337246d91315/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "item-spell-inputs-v1",
+      "failures": [],
+      "scenario": "item-spell-inputs",
+      "suite": "item-spell-inputs",
+      "report_sha256": "CBB5FA12031374CDEE76A21EECD7F29EBF52D86C6B32055DBFDE910596D54C33",
+      "assertions": 160,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-f704af3ce5cc449191b6b7e0b0adc800/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "faction-quest-inputs-v1",
+      "failures": [],
+      "scenario": "faction-quest-inputs",
+      "suite": "faction-quest-inputs",
+      "report_sha256": "69DC278B7480963B109C8AC0930B808D1DE72176668C7C6EB269603B9F56329B",
+      "assertions": 132,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-7f631410ff6b48b29ea5033578c42b78/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "geography-inputs-v1",
+      "failures": [],
+      "scenario": "geography-inputs",
+      "suite": "geography-inputs",
+      "report_sha256": "61B842BD1D309B11B12E1B6698211CE7255F74D2D7632284DC9984DA56B89468",
+      "assertions": 200,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-4dff562c004d4c8fa4581c99c1820a25/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 21,
+      "fixture": "variant-inputs-v1",
+      "failures": [],
+      "scenario": "variant-inputs",
+      "suite": "variant-inputs",
+      "report_sha256": "FE8548C828363BEB4879D0ADB2BFEFB4E9553A6A61DF194E1370B24DD3C23BE1",
+      "assertions": 497,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-e16d6a45feaa4a4d8b4947e5026b938e/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "classic-v1",
+      "failures": [],
+      "scenario": "classic",
+      "suite": "classic",
+      "report_sha256": "A62F759DAD26A32EAE69AB282018CE5A0768CEFAE9FDD4C1524E0261A26A3171",
+      "assertions": 100,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-d2ab958eccc747cd830926e6330e844d/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 8,
+      "fixture": "mods-v1",
+      "failures": [],
+      "scenario": "mods",
+      "suite": "mods",
+      "report_sha256": "5371F8657987597360BB6ADDBD3F9584279AFC9A101FCD1FC1F705422714C578",
+      "assertions": 136,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-53fdceee8dec4129a80e0c0b4c339469/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 8,
+      "fixture": "planning-v1",
+      "failures": [],
+      "scenario": "planning",
+      "suite": "planning",
+      "report_sha256": "682DC24C07C48EBF5001ACEDD52C758197EC9E1FCC85655A36A89BCC692F2BB2",
+      "assertions": 101,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-3f01d0fef64349f5b4a90a3f0dcd188b/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 8,
+      "fixture": "publication-v1",
+      "failures": [],
+      "scenario": "publication",
+      "suite": "publication",
+      "report_sha256": "9F769366F97DDB221B284CCE91238417328A2DF00467DDBA0B2F28DA1ED87231",
+      "assertions": 117,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-8d100c07e0684ceca5b8ae0cc684471b/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "randomness-v1",
+      "failures": [],
+      "scenario": "randomness",
+      "suite": "randomness",
+      "report_sha256": "CDF799594BE8038A79D5EABD6D3926218CE4F1F44C6C4BD286D3DF8D32245209",
+      "assertions": 108,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-4c0cd35d63b94f9bb776a4b2db1716aa/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 15,
+      "fixture": "randomness-session-v1",
+      "failures": [],
+      "scenario": "randomness-session",
+      "suite": "randomness-session",
+      "report_sha256": "25F3A3E327FDCA35C836AE17FB312C8975027EB4F9B5E3C755968B4147D189D5",
+      "assertions": 116,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-f3045095ea7d41d4a61c6fe1ea79b903/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "formula-v1",
+      "failures": [],
+      "scenario": "formula",
+      "suite": "formula",
+      "report_sha256": "165799C7BD18B835EDB45B556C272206CCD59F50AA63FF1DDBBEAAF8DD940A15",
+      "assertions": 84,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-ecded5cd99214810b346ee4cf5b277c8/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "text-v1",
+      "failures": [],
+      "scenario": "text",
+      "suite": "text",
+      "report_sha256": "20045C3083540E794EF248B1204B231E71110AFA655473C686EB87BBD32D2D5D",
+      "assertions": 127,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-e4622e7fd05a4eda842d9b87f0e38cd9/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "structured-text-v1",
+      "failures": [],
+      "scenario": "structured-text",
+      "suite": "structured-text",
+      "report_sha256": "9D3B009B3F6B3D91C25B77A3C9A343F7FA2FBB4224BAE4E02775833C8BBCFDE6",
+      "assertions": 294,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-8b64e852a9b04c34805ed851a012fdc8/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 10,
+      "fixture": "locale-fonts-v1",
+      "failures": [],
+      "scenario": "locale-fonts",
+      "suite": "locale-fonts",
+      "report_sha256": "7F21E065AEE067D5972CC7834821766567357E650F7964979F696A3F1FF0FE89",
+      "assertions": 441,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-b00c39c8095a4a3ab106539735dfb188/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 10,
+      "fixture": "translation-preferences-v1",
+      "failures": [],
+      "scenario": "translation-preferences",
+      "suite": "translation-preferences",
+      "report_sha256": "F3DBA6B5C078DC03ABCB47345E133EA2F965367292E86DEBA540EA1725E73E87",
+      "assertions": 164,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-d0be9613de044a02984f3d7aae0b043f/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "media-v1",
+      "failures": [],
+      "scenario": "media",
+      "suite": "media",
+      "report_sha256": "E0DB89BE330DCFABA1454A509378C86C06548FE5EC8EC323B7569F43D41FEC7B",
+      "assertions": 136,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-509dead87da54d409713cb61877e9c2b/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 10,
+      "fixture": "replacements-v1",
+      "failures": [],
+      "scenario": "replacements",
+      "suite": "replacements",
+      "report_sha256": "647FE4AC9BE869A94327AB6A36EAEF4244CC238545F977B93ED7A021A6666CE6",
+      "assertions": 173,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-6288ca05793e4c0285daf4e514424116/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 11,
+      "fixture": "native-v1",
+      "failures": [],
+      "scenario": "native",
+      "suite": "native",
+      "report_sha256": "E7E8E09F1377DA4F1A7C7385982470C6B86937D7ED34260DC70E9D3F588C7737",
+      "assertions": 374,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-3796ee7948f148f1ae85be09337bfb40/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "actor-inputs-v1",
+      "failures": [],
+      "scenario": "actor-inputs",
+      "suite": "actor-inputs",
+      "report_sha256": "00A42869B95241758366ED83434ACEB229D2A43668D1B45FDE802A69F12E4B6B",
+      "assertions": 238,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-393a755192e643b9bac51221119286bb/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "item-spell-inputs-v1",
+      "failures": [],
+      "scenario": "item-spell-inputs",
+      "suite": "item-spell-inputs",
+      "report_sha256": "E91539ABC5B0334935EFAF7A018B9D59BAD5B23DE967A3EA5F0EB0755C95F78B",
+      "assertions": 162,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-123cebee503c4afa88930ee04b7aa66b/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "faction-quest-inputs-v1",
+      "failures": [],
+      "scenario": "faction-quest-inputs",
+      "suite": "faction-quest-inputs",
+      "report_sha256": "A8D2F67048BC71DE24976E3BB3F2643BE6B72266D219985513387818BC68BFC2",
+      "assertions": 134,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-bb49fa52b3f14e98bf099765ff68128a/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 0,
+      "fixture": "geography-inputs-v1",
+      "failures": [],
+      "scenario": "geography-inputs",
+      "suite": "geography-inputs",
+      "report_sha256": "8A7131649A018AB5508767B47F881058DD3F3F904F7B1565B7125C171C35EA6E",
+      "assertions": 202,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-rendered-b95ece41128541b3956d4c2f05f12f86/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 21,
+      "fixture": "variant-inputs-v1",
+      "failures": [],
+      "scenario": "variant-inputs",
+      "suite": "variant-inputs",
+      "report_sha256": "997360C85473A751C19A5895BEE2B06B29EBA20AC4008982D2F3B244E58F4A0C",
+      "assertions": 503,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "rendered"
+    },
+    {
+      "report": "main_project/tests/.runs/verification-headless-ca1c02ee6c864d68b216be6f0aa1f8e7/report.json",
+      "source_revision": "fb03e7f62fa9352cfd89822df3382d78f73cba59",
+      "reload_assertions": 11,
+      "fixture": "native-v1",
+      "failures": [],
+      "scenario": "native",
+      "suite": "native",
+      "report_sha256": "45A0440C646FBEDB1D38AF2C5A7D902D6536FFFEE1D734A4ED94903EFAC5B390",
+      "assertions": 344,
+      "reason": "",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "mode": "headless"
+    }
+  ],
+  "runtime_changes": false,
+  "reload_assertions": 202.0,
+  "qualification": [
+    {
+      "case": "pass",
+      "expected_status": "passed",
+      "actual_exit": 0,
+      "actual_status": "passed",
+      "mode": "headless",
+      "expected_exit": 0,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-bd871517df684ff1a5d2b86f59281ca6/report.json",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-bd871517df684ff1a5d2b86f59281ca6"
+    },
+    {
+      "case": "fail",
+      "expected_status": "failed",
+      "actual_exit": 1,
+      "actual_status": "failed",
+      "mode": "headless",
+      "expected_exit": 1,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-610d9705938c4f449f242ad0e0edd29b/report.json",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-610d9705938c4f449f242ad0e0edd29b"
+    },
+    {
+      "case": "missing",
+      "expected_status": "incomplete",
+      "actual_exit": 2,
+      "actual_status": "incomplete",
+      "mode": "headless",
+      "expected_exit": 2,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-1b9e3f74a6c149e8b0901eda517a8100/report.json",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-1b9e3f74a6c149e8b0901eda517a8100"
+    },
+    {
+      "case": "pass",
+      "expected_status": "passed",
+      "actual_exit": 0,
+      "actual_status": "passed",
+      "mode": "rendered",
+      "expected_exit": 0,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-6dbba9e51a69484b90033c3855832966/report.json",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-6dbba9e51a69484b90033c3855832966"
+    },
+    {
+      "case": "fail",
+      "expected_status": "failed",
+      "actual_exit": 1,
+      "actual_status": "failed",
+      "mode": "rendered",
+      "expected_exit": 1,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-555af525176b4426a45c764d3c3586d5/report.json",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-555af525176b4426a45c764d3c3586d5"
+    },
+    {
+      "case": "missing",
+      "expected_status": "incomplete",
+      "actual_exit": 2,
+      "actual_status": "incomplete",
+      "mode": "rendered",
+      "expected_exit": 2,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-3c650297dab347e5907f942d75ef2c37/report.json",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-3c650297dab347e5907f942d75ef2c37"
+    }
+  ],
+  "storage_process": {
+    "checks": [
+      {
+        "assertions": 2,
+        "scenario": "conflict-",
+        "actual": "pass",
+        "expected": "pass"
+      },
+      {
+        "assertions": 2,
+        "scenario": "conflict-dot",
+        "actual": "pass",
+        "expected": "pass"
+      },
+      {
+        "assertions": 2,
+        "scenario": "conflict-case",
+        "actual": "pass",
+        "expected": "pass"
+      },
+      {
+        "assertions": 2,
+        "scenario": "conflict-junction",
+        "actual": "pass",
+        "expected": "pass"
+      },
+      {
+        "assertions": 1,
+        "scenario": "concurrent-distinct",
+        "actual": "pass",
+        "expected": "pass"
+      },
+      {
+        "assertions": 1,
+        "scenario": "reacquire-after-termination",
+        "actual": "pass",
+        "expected": "pass"
+      },
+      {
+        "assertions": 1,
+        "scenario": "reacquire-after-normal-exit",
+        "actual": "pass",
+        "expected": "pass"
+      },
+      {
+        "assertions": 1,
+        "scenario": "reopen-backup",
+        "actual": "pass",
+        "expected": "pass"
+      },
+      {
+        "assertions": 1,
+        "scenario": "reopen-settings_publish",
+        "actual": "pass",
+        "expected": "pass"
+      }
+    ],
+    "fixture": "IMP-001-Windows-process-v1",
+    "ok": true
+  },
+  "ordinary_exports": [
+    {
+      "diagnostics_qualified": true,
+      "visual_review": "Not claimed: post-commit launch-log observation proves publication, not a human visual/device check.",
+      "pck_sha256": "F1316E53C19420A0CD7E7912BCA510BB0B8D4BE165E197CEDC8EF4161B3C3415",
+      "storage": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-f637fcaf71fb4f859e54bef0a694b08c/build/PortableAppdata",
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "ok": true,
+      "fixture": "m1-audit-ordinary-export-v1",
+      "elapsed_seconds": 52.8324099,
+      "mode": "headless",
+      "publication_log_after_commit": true,
+      "export_root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-f637fcaf71fb4f859e54bef0a694b08c",
+      "launch_arguments": [
+        "--headless",
+        "--max-fps",
+        "60",
+        "--quit-after",
+        "120"
+      ],
+      "storage_mode": "portable",
+      "configuration": "debug",
+      "exit": 0,
+      "fixture_override": false
+    },
+    {
+      "diagnostics_qualified": true,
+      "visual_review": "Not claimed: post-commit launch-log observation proves publication, not a human visual/device check.",
+      "pck_sha256": "AAE7D5AD34F7C6A3721A1BA73E01C0B5FE5DD6ABC3E8C1255DE12BCB4E7F360A",
+      "storage": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-607f7239e2d94c8f84c690f5087591d5/build/PortableAppdata",
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "ok": true,
+      "fixture": "m1-audit-ordinary-export-v1",
+      "elapsed_seconds": 51.1005674,
+      "mode": "rendered",
+      "publication_log_after_commit": true,
+      "export_root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-607f7239e2d94c8f84c690f5087591d5",
+      "launch_arguments": [
+        "--max-fps",
+        "60",
+        "--quit-after",
+        "120"
+      ],
+      "storage_mode": "portable",
+      "configuration": "release",
+      "exit": 0,
+      "fixture_override": false
+    }
+  ],
+  "export_verification": [
+    {
+      "fixture": "publication-v1",
+      "reproduction": {
+        "arguments": {
+          "FormulaFault": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "VariantInputs": false,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Formula": false,
+          "DependencyPlanning": false,
+          "ModDiscovery": false,
+          "LayoutInputs": false,
+          "Randomness": false,
+          "FormulaExtraError": false,
+          "DefinitionPublication": true,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Configuration": "debug",
+          "RandomnessSession": false
+        },
+        "command": "./main_project/tools/verify_startup_export.ps1"
+      },
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "classic_source": "C:/Games/Daggerfall/arena2",
+      "checks": [
+        {
+          "actual": "pass",
+          "source_before": {
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE"
+          },
+          "source_after": {
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE"
+          },
+          "assertions": 111,
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-f637fcaf71fb4f859e54bef0a694b08c/build/tests/.runs/headless/result.json",
+          "reload": {
+            "assertions": 8,
+            "process_exit": 0,
+            "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-f637fcaf71fb4f859e54bef0a694b08c/build/tests/.runs/headless/reload-result.json"
+          },
+          "scenario": "exported-headless",
+          "process_exit": 0
+        },
+        {
+          "actual": "pass",
+          "source_before": {
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE"
+          },
+          "source_after": {
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE"
+          },
+          "assertions": 117,
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-f637fcaf71fb4f859e54bef0a694b08c/build/tests/.runs/rendered/result.json",
+          "reload": {
+            "assertions": 8,
+            "process_exit": 0,
+            "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-f637fcaf71fb4f859e54bef0a694b08c/build/tests/.runs/rendered/reload-result.json"
+          },
+          "scenario": "exported-rendered",
+          "process_exit": 0
+        }
+      ],
+      "native_sha256": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "ok": true,
+      "pck_sha256": "F1316E53C19420A0CD7E7912BCA510BB0B8D4BE165E197CEDC8EF4161B3C3415",
+      "configuration": "debug",
+      "status": "passed",
+      "native_media_sha256": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2"
+    },
+    {
+      "fixture": "publication-v1",
+      "reproduction": {
+        "arguments": {
+          "FormulaFault": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "VariantInputs": false,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Formula": false,
+          "DependencyPlanning": false,
+          "ModDiscovery": false,
+          "LayoutInputs": false,
+          "Randomness": false,
+          "FormulaExtraError": false,
+          "DefinitionPublication": true,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Configuration": "release",
+          "RandomnessSession": false
+        },
+        "command": "./main_project/tools/verify_startup_export.ps1"
+      },
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "classic_source": "C:/Games/Daggerfall/arena2",
+      "checks": [
+        {
+          "actual": "pass",
+          "source_before": {
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE"
+          },
+          "source_after": {
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE"
+          },
+          "assertions": 111,
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-607f7239e2d94c8f84c690f5087591d5/build/tests/.runs/headless/result.json",
+          "reload": {
+            "assertions": 8,
+            "process_exit": 0,
+            "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-607f7239e2d94c8f84c690f5087591d5/build/tests/.runs/headless/reload-result.json"
+          },
+          "scenario": "exported-headless",
+          "process_exit": 0
+        },
+        {
+          "actual": "pass",
+          "source_before": {
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE"
+          },
+          "source_after": {
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE"
+          },
+          "assertions": 117,
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-607f7239e2d94c8f84c690f5087591d5/build/tests/.runs/rendered/result.json",
+          "reload": {
+            "assertions": 8,
+            "process_exit": 0,
+            "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-607f7239e2d94c8f84c690f5087591d5/build/tests/.runs/rendered/reload-result.json"
+          },
+          "scenario": "exported-rendered",
+          "process_exit": 0
+        }
+      ],
+      "native_sha256": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "ok": true,
+      "pck_sha256": "AAE7D5AD34F7C6A3721A1BA73E01C0B5FE5DD6ABC3E8C1255DE12BCB4E7F360A",
+      "configuration": "release",
+      "status": "passed",
+      "native_media_sha256": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2"
+    }
+  ],
+  "source_guards": {
+    "ordinary_exports": {
+      "after": {
+        "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188",
+        "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+        "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+        "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+        "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+        "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+        "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+        "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+        "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+        "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+        "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+        "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+        "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+        "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+        "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+        "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+        "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+        "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+        "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+        "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+        "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+        "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+        "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+        "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+        "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+        "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+        "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+        "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+        "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+        "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+        "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+        "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+        "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+        "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+        "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA",
+        "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615",
+        "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+        "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+        "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+        "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+        "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+        "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+        "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+        "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+        "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+        "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+        "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+        "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+        "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+        "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF",
+        "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686"
+      },
+      "before": {
+        "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188",
+        "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+        "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+        "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+        "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+        "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+        "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+        "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+        "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+        "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+        "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+        "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+        "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+        "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+        "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+        "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+        "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+        "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+        "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+        "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+        "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+        "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+        "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+        "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+        "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+        "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+        "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+        "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+        "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686",
+        "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+        "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+        "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+        "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+        "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+        "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA",
+        "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+        "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+        "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+        "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+        "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615",
+        "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+        "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+        "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+        "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+        "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+        "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+        "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+        "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+        "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+        "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+        "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF"
+      },
+      "guard": "READ sharing held across both normal exports",
+      "unchanged": true
+    },
+    "composition": {
+      "guard": "READ sharing held for both children",
+      "after": {
+        "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+        "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+        "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+        "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+        "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+        "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+        "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+        "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+        "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+        "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+        "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686",
+        "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+        "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+        "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+        "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+        "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+        "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+        "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+        "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+        "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+        "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+        "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+        "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+        "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+        "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+        "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+        "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+        "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+        "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+        "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+        "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+        "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+        "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF",
+        "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+        "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+        "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+        "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+        "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+        "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+        "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+        "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+        "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+        "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188",
+        "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+        "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+        "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+        "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+        "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA",
+        "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+        "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+        "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615"
+      },
+      "unchanged": true,
+      "before": {
+        "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+        "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+        "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+        "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+        "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA",
+        "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+        "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+        "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+        "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+        "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+        "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+        "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+        "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+        "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+        "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686",
+        "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+        "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+        "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+        "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+        "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+        "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+        "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+        "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+        "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+        "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+        "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+        "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+        "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+        "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+        "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+        "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+        "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+        "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+        "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+        "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF",
+        "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+        "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+        "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+        "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+        "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+        "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+        "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+        "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188",
+        "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+        "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+        "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+        "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+        "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+        "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+        "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+        "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615"
+      }
+    }
+  },
+  "engine_binary_sha256": "AB1824F85BFD8E0E4128182C000C4003A3E042245B2967848D089B2A04B22424",
+  "composition_probe_sha256": "D5F1760965F84EA0BFE8FDE9C2D44B68B61896018EE86C7431872BC929F3E634",
+  "acceptance": {
+    "verified_defect": "M1-A01",
+    "maintained_coverage_gap": "M1-A03",
+    "measured_concern": "M1-A02",
+    "native_timing": "Initial headless failure retained; isolated headless repeat and independent rendered selection passed. Root cause unproven.",
+    "ready": false
+  },
+  "retention": {
+    "schema": "m1-audit-retention-v1",
+    "owned_roots": 51,
+    "completed_owned_builds_retained": 0,
+    "owned_exe_dll_pck_retained": 0,
+    "cache_cleanup": [
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-audit-2026-11-22\\probe-roaming",
+        "files": 66,
+        "bytes": 1831884
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-audit-2026-11-22\\probe-local",
+        "files": 0,
+        "bytes": 0
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-audit-2026-11-22\\composition-headless-roaming",
+        "files": 0,
+        "bytes": 0
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-audit-2026-11-22\\composition-headless-local",
+        "files": 0,
+        "bytes": 0
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-audit-2026-11-22\\composition-rendered-roaming",
+        "files": 66,
+        "bytes": 1831884
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-audit-2026-11-22\\composition-rendered-local",
+        "files": 0,
+        "bytes": 0
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-audit-2026-11-22\\normal-debug-roaming",
+        "files": 0,
+        "bytes": 0
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-audit-2026-11-22\\normal-debug-local",
+        "files": 0,
+        "bytes": 0
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-audit-2026-11-22\\normal-release-roaming",
+        "files": 65,
+        "bytes": 1738564
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-audit-2026-11-22\\normal-release-local",
+        "files": 0,
+        "bytes": 0
+      }
+    ],
+    "archived_json_files": 20,
+    "archived_original_bytes": 226765002,
+    "compressed_bytes": 6242888,
+    "all_run_files": 59795,
+    "all_run_logical_bytes": 1746986941,
+    "activity": "All owned matrix, diagnostic, qualification, process, export and normal-start children returned before final compaction."
+  },
+  "composition_diagnostic_qualification": [
+    {
+      "prefix": "initial-composition",
+      "mode": "headless",
+      "qualified": true
+    },
+    {
+      "prefix": "initial-composition",
+      "mode": "rendered",
+      "qualified": true
+    },
+    {
+      "prefix": "composition",
+      "mode": "headless",
+      "qualified": true
+    },
+    {
+      "prefix": "composition",
+      "mode": "rendered",
+      "qualified": true
+    }
+  ],
+  "evidence_archives": [
+    {
+      "path": "main_project\\tests\\.runs\\verification-headless-1035443461b942f0af913ca6fb14d6b7\\evidence\\scenario-1\\encoding\\folder\\mod.json",
+      "archive": "main_project\\tests\\.runs\\verification-headless-1035443461b942f0af913ca6fb14d6b7\\evidence\\scenario-1\\encoding\\folder\\mod.json.gz",
+      "original_bytes": 1048577,
+      "original_sha256": "2cb74edba754a81d121c9db6833704a8e7d417e5b13d1a19f4a52f007d644264",
+      "archive_bytes": 1060,
+      "archive_sha256": "c0c3d6fb4d5cb07d094f6863d1970b5958b68444f374ee8f2fa8bc82ecbcacc4",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-headless-16ec5f63b3bc4bc89650e27057cf952c\\report.json",
+      "archive": "main_project\\tests\\.runs\\verification-headless-16ec5f63b3bc4bc89650e27057cf952c\\report.json.gz",
+      "original_bytes": 1084941,
+      "original_sha256": "cc02c983d46427eddcb13087b01daf4582230b44b427c6602c9116ad8f71c0e2",
+      "archive_bytes": 62620,
+      "archive_sha256": "4bc7d5dc04e3d2ad556b7d0060f89d3a72977a09e875306f7e9ff3b83eb95e63",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-headless-1876fd2906834edebf51337246d91315\\report.json",
+      "archive": "main_project\\tests\\.runs\\verification-headless-1876fd2906834edebf51337246d91315\\report.json.gz",
+      "original_bytes": 37745685,
+      "original_sha256": "cbb5fa12031374cdee76a21eecd7f29ebf52d86c6b32055dbfde910596d54c33",
+      "archive_bytes": 884602,
+      "archive_sha256": "ad438e9afdcc912042b83dc980007d7488a1a583123ff4533212071997d2c389",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-headless-1876fd2906834edebf51337246d91315\\evidence\\scenario-1\\result.json",
+      "archive": "main_project\\tests\\.runs\\verification-headless-1876fd2906834edebf51337246d91315\\evidence\\scenario-1\\result.json.gz",
+      "original_bytes": 26844842,
+      "original_sha256": "0b633cc4cdb5d82c57f965af804ff9f00d7e43471dbf346834ab04a0d652cb2f",
+      "archive_bytes": 745360,
+      "archive_sha256": "2538e710c9df235f3a64dd4b0ab22d88afb80abc2c74b89e9c677ce46da973b7",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-headless-6c7ab043583b4d1a8936719a4c427f95\\report.json",
+      "archive": "main_project\\tests\\.runs\\verification-headless-6c7ab043583b4d1a8936719a4c427f95\\report.json.gz",
+      "original_bytes": 1927485,
+      "original_sha256": "f08c377e138805c5b1405574b8aa062a0a8575bf8c4a4eaffb65d5859a620173",
+      "archive_bytes": 109834,
+      "archive_sha256": "a57adccb26dcced18744e2f21e40b8efcd0e4439906980a98e7de29b86e4171c",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-headless-6c7ab043583b4d1a8936719a4c427f95\\evidence\\scenario-1\\result.json",
+      "archive": "main_project\\tests\\.runs\\verification-headless-6c7ab043583b4d1a8936719a4c427f95\\evidence\\scenario-1\\result.json.gz",
+      "original_bytes": 1747245,
+      "original_sha256": "faf069ead037bed7f5b6182f7df7bb92bfb342f58c9b241914f159b677e6682d",
+      "archive_bytes": 71722,
+      "archive_sha256": "d9fef141c682385908ec066f1036b2c3b0ad2be79116e88978d5daa0ff524b35",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-headless-b95cd75c80164507b4efc0c47a1f5287\\report.json",
+      "archive": "main_project\\tests\\.runs\\verification-headless-b95cd75c80164507b4efc0c47a1f5287\\report.json.gz",
+      "original_bytes": 1284684,
+      "original_sha256": "0b683469e61293954f3d148f4d3a90b10becb63777e720c603e831e860e31345",
+      "archive_bytes": 74894,
+      "archive_sha256": "7b8e8f78b272783293536afddb985f4efa6583df8cf23442677f64529d1e3f83",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-headless-b95cd75c80164507b4efc0c47a1f5287\\evidence\\scenario-1\\result.json",
+      "archive": "main_project\\tests\\.runs\\verification-headless-b95cd75c80164507b4efc0c47a1f5287\\evidence\\scenario-1\\result.json.gz",
+      "original_bytes": 1129313,
+      "original_sha256": "886e6d9a78314be7c22abefb9e9ec98a82029d6f0089de7887f194eab46d0ce7",
+      "archive_bytes": 37593,
+      "archive_sha256": "f0943f3866545927040b7c9928d59e2e584b0c2554dd8f115970ba4a00afb7be",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-headless-dbe44af8f2734739ac62ba1922cdb4c0\\report.json",
+      "archive": "main_project\\tests\\.runs\\verification-headless-dbe44af8f2734739ac62ba1922cdb4c0\\report.json.gz",
+      "original_bytes": 23741276,
+      "original_sha256": "a8fae65edd9182ca9b3c2f4f4c37ef0f61ccdfe3a9fd620a736f62fc5d87094b",
+      "archive_bytes": 619261,
+      "archive_sha256": "3489057f737bdebfa318a52f6030286b0bf91fb80aa206ba39749c5460a042f5",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-headless-dbe44af8f2734739ac62ba1922cdb4c0\\evidence\\scenario-1\\result.json",
+      "archive": "main_project\\tests\\.runs\\verification-headless-dbe44af8f2734739ac62ba1922cdb4c0\\evidence\\scenario-1\\result.json.gz",
+      "original_bytes": 16820701,
+      "original_sha256": "1c8aa3d3e0852068fbbf6f6baa05de78f822e0f265c3363482675c9bf6e2383c",
+      "archive_bytes": 513575,
+      "archive_sha256": "de3b5dd0e10ac10c45a4fab3eda3c8f361e6985fa38d8d102f099444df6f1d99",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-rendered-3796ee7948f148f1ae85be09337bfb40\\report.json",
+      "archive": "main_project\\tests\\.runs\\verification-rendered-3796ee7948f148f1ae85be09337bfb40\\report.json.gz",
+      "original_bytes": 23741681,
+      "original_sha256": "00a42869b95241758366ed83434aceb229d2a43668d1b45fde802a69f12e4b6b",
+      "archive_bytes": 619372,
+      "archive_sha256": "f4198ed46a24e4babcaaf6c4eb99247ff0233396d848141b080f543ed4fd604a",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-rendered-3796ee7948f148f1ae85be09337bfb40\\evidence\\scenario-1\\result.json",
+      "archive": "main_project\\tests\\.runs\\verification-rendered-3796ee7948f148f1ae85be09337bfb40\\evidence\\scenario-1\\result.json.gz",
+      "original_bytes": 16820921,
+      "original_sha256": "e872a792b51202874e7c585f428d20f12aab7914398f31161b287757a0ec780f",
+      "archive_bytes": 513700,
+      "archive_sha256": "044483463b2ed5eeb2aefc835f9866f7e5b480ad85fb62c961ff67dda28b952e",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-rendered-393a755192e643b9bac51221119286bb\\report.json",
+      "archive": "main_project\\tests\\.runs\\verification-rendered-393a755192e643b9bac51221119286bb\\report.json.gz",
+      "original_bytes": 37746081,
+      "original_sha256": "e91539abc5b0334935efaf7a018b9d59bad5b23de967a3ea5f0eb0755c95f78b",
+      "archive_bytes": 884709,
+      "archive_sha256": "ce4dfca1b47ae33cb2d519175c0ba4ee66062dfe53fdd91704a5edcf20eee40a",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-rendered-393a755192e643b9bac51221119286bb\\evidence\\scenario-1\\result.json",
+      "archive": "main_project\\tests\\.runs\\verification-rendered-393a755192e643b9bac51221119286bb\\evidence\\scenario-1\\result.json.gz",
+      "original_bytes": 26845053,
+      "original_sha256": "5cc6f6254c22fc3535b2edacd0140b3d5a03041253430f5c8c895b637f8e4128",
+      "archive_bytes": 745380,
+      "archive_sha256": "4c93aeb48e6473f2b83f92f916c205fd96478bd48f13a684f5dec1179ed85380",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-rendered-8b64e852a9b04c34805ed851a012fdc8\\report.json",
+      "archive": "main_project\\tests\\.runs\\verification-rendered-8b64e852a9b04c34805ed851a012fdc8\\report.json.gz",
+      "original_bytes": 1932144,
+      "original_sha256": "7f21e065aee067d5972cc7834821766567357e650f7964979f696a3f1ff0fe89",
+      "archive_bytes": 110333,
+      "archive_sha256": "4bc32e59f0b7221f0621ea6ef41c1ab0ebf44b3e1073ddab82eb63af81d95820",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-rendered-8b64e852a9b04c34805ed851a012fdc8\\evidence\\scenario-1\\result.json",
+      "archive": "main_project\\tests\\.runs\\verification-rendered-8b64e852a9b04c34805ed851a012fdc8\\evidence\\scenario-1\\result.json.gz",
+      "original_bytes": 1750760,
+      "original_sha256": "99935400708c33355218a91a11931c785069c24e066fbb7b6143e05e3263e3ab",
+      "archive_bytes": 72139,
+      "archive_sha256": "49f5db377808b6e7d746702f0703f40a99f1f919d3b3d2ede923b4cce99947cf",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-rendered-d2ab958eccc747cd830926e6330e844d\\evidence\\scenario-1\\encoding\\folder\\mod.json",
+      "archive": "main_project\\tests\\.runs\\verification-rendered-d2ab958eccc747cd830926e6330e844d\\evidence\\scenario-1\\encoding\\folder\\mod.json.gz",
+      "original_bytes": 1048577,
+      "original_sha256": "2cb74edba754a81d121c9db6833704a8e7d417e5b13d1a19f4a52f007d644264",
+      "archive_bytes": 1060,
+      "archive_sha256": "c0c3d6fb4d5cb07d094f6863d1970b5958b68444f374ee8f2fa8bc82ecbcacc4",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-rendered-e4622e7fd05a4eda842d9b87f0e38cd9\\report.json",
+      "archive": "main_project\\tests\\.runs\\verification-rendered-e4622e7fd05a4eda842d9b87f0e38cd9\\report.json.gz",
+      "original_bytes": 1287512,
+      "original_sha256": "9d3b009b3f6b3d91c25b77a3c9a343f7fa2fbb4224bae4e02775833c8bbcfde6",
+      "archive_bytes": 75129,
+      "archive_sha256": "e4c97e23974f4621157cc4ede79d24f9a2dd653464729813e6861d40afa76dce",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-rendered-e4622e7fd05a4eda842d9b87f0e38cd9\\evidence\\scenario-1\\result.json",
+      "archive": "main_project\\tests\\.runs\\verification-rendered-e4622e7fd05a4eda842d9b87f0e38cd9\\evidence\\scenario-1\\result.json.gz",
+      "original_bytes": 1131572,
+      "original_sha256": "fd72683458f563f9d90cc583e0ddc2b5e4cc57d8a1cab7ec4af0ba3747a6f95c",
+      "archive_bytes": 37789,
+      "archive_sha256": "c33a561f2bcc63dc7b311b41f3f34d36659d2a75435c2864999213ad4aa58d50",
+      "recovery_verified": true
+    },
+    {
+      "path": "main_project\\tests\\.runs\\verification-rendered-ecded5cd99214810b346ee4cf5b277c8\\report.json",
+      "archive": "main_project\\tests\\.runs\\verification-rendered-ecded5cd99214810b346ee4cf5b277c8\\report.json.gz",
+      "original_bytes": 1085952,
+      "original_sha256": "20045c3083540e794ef248b1204b231e71110afa655473c686eb87bbd32d2d5d",
+      "archive_bytes": 62756,
+      "archive_sha256": "4e655ec5f889f83a50ea1a6b7bdd0cfec1170d3d7092e98b41979417d9796512",
+      "recovery_verified": true
+    }
+  ],
+  "generated_uid_cleanup": {
+    "files": 23,
+    "exact_bytes_retained_in": "main_project/tests/.runs/m1-audit-2026-11-22/generated-uid-cleanup.json",
+    "source_tree_restored": true
+  }
+}
