@@ -1,5 +1,22 @@
 # Verification run artifact cleanup
 
+## 2026-11-22 IMP-010 increment 2
+
+All owned layout, export and regression children exited before payload cleanup.
+Non-elevated activity checks and exact workspace/reparse-point checks preceded
+deletion. `main_project/tests/.runs/layout-exploratory-cleanup.json` records
+39,094 removed files / 7,112,300,809 logical bytes, preserving reports, logs,
+reviewed captures and their hashes. Export-template junctions were unlinked
+without recursing into installed tools. No external/reference data was changed.
+
+Four redundant metadata outputs were losslessly archived with verified recovery
+hashes and readable pointers; see `layout-metadata-archives.json`. Final retention
+is about 1.55 GiB, below the 2 GiB threshold, with zero completed full builds,
+EXE/DLL/PCK payloads or reparse points. Historical evidence-only directories are
+preserved; an old directory named `project` alone is not a retained full build.
+See `layout-retention-final.json` and the
+[execution evidence](evidence/IMP-010-increment-2-2026-11-22.md).
+
 ## 2026-11-22 IMP-009 increment 3
 
 All owned source/regression/export commands returned before their payload cleanup.

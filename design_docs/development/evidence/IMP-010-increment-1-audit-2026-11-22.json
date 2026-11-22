@@ -2,7 +2,7 @@
   "schema": "imp-010-geography-audit-v1",
   "date": "2026-11-22",
   "status": "passed",
-  "scope": "increment 1 only; awaiting user acceptance",
+  "scope": "increment 1 user-accepted; parent IMP-010 and M1 remain open",
   "source_profile": "classic-geography-profile-v1",
   "baseline_counts": {
     "regions": 62,
@@ -709,5 +709,12 @@
       "path": "main_project/tools/observe_geography.py"
     }
   ],
-  "final_diff_check": "passed"
+  "final_diff_check": "passed",
+  "user_acceptance": {
+    "date": "2026-11-22",
+    "commit": "3b9e4bd03d5ccb5fa78c9a090b4ea45dfd5df09a",
+    "scope": "Geographic records, IMP-010 increment 1",
+    "next_handoff": "design_docs/development/handoffs/IMP-010-INCREMENT-2-PROMPT.txt",
+    "increment_2_started": false
+  }
 }

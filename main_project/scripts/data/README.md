@@ -1,10 +1,17 @@
 # Classic access — IMP-004
 
+IMP-010 increment 2 adds [layout structural inputs](LAYOUT_INPUTS.md): RMB
+exterior/interior and RDB records, MAPS placement inputs, explicit scoped keys,
+checked references and source-coordinate handoffs through the same publication
+transaction. Real LOC/WORLD/MOVE/action/QUEST/SAVE and opening readiness remain
+separate. The required TEXTURE.210 transparent-run profile was added to the
+existing media decoder with user authorization; no new library/runtime was added.
+
 IMP-010 increment 1 adds [geographic inputs](GEOGRAPHY_INPUTS.md) through the
 existing DATA/MOD/CORE transaction: checked region/location records, terrain and
 climate samples, stable mappings and validated extent extensions. Normal startup
 declares its required sources before preparation. [Provenance/license records](../../content/geography/PROVENANCE.md)
-cover the pinned classic profile and DFU labels. Layouts/variants and real
+cover the pinned classic profile and DFU labels. Variants and real
 WORLD/LOC/MOVE/discovery/SAVE readiness remain unavailable.
 
 IMP-009 increment 3 adds [faction/quest structural inputs](FACTION_QUEST_INPUTS.md)

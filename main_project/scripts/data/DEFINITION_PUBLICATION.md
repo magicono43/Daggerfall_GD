@@ -84,6 +84,12 @@ from a package.
 
 Adapter interface:
 
+IMP-010 increment 2 also permits optional `validate_replace(previous, entries)`
+before clearing a namespace's records. It receives detached inputs and must be
+synchronous/pure like the other validators. Layouts use it to reject implicit
+sibling-ID deletion; adapters without the hook retain their accepted semantics.
+This adds no publication callback or fallible work after CORE's durable step.
+
 | Method | Required result |
 | --- | --- |
 | `declaration()` | Stable `id`, `domain`, supported `operations` (`replace/add/patch`), optional `required_resources`, `capabilities`, `classic_sources` |

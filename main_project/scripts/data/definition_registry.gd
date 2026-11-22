@@ -286,6 +286,9 @@ func _apply_owned_contribution(base: Dictionary, bytes: PackedByteArray, source:
 	var previous: Dictionary = working.get(key, {"domain": domain, "path": logical_path, "records": {}, "contributors": [], "winner": {}})
 	var target: Dictionary = previous.duplicate(true)
 	if operation == "replace":
+		if registered.adapter.has_method("validate_replace"):
+			var replacement: Dictionary = registered.adapter.validate_replace(previous.duplicate(true),contribution.entries.duplicate(true))
+			if not replacement.get("ok",false): return replacement
 		target.records = {}
 	var seen := {}
 	for entry in contribution.entries:

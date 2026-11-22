@@ -896,6 +896,32 @@ and [execution evidence](../../design_docs/development/evidence/IMP-008-incremen
 MIDI/SF2/general WebM/MP4 explicitly report backend-unavailable here. Real room,
 spatial audio, music/cinematic, WORLD/SAVE/native and M1 integrations stay open.
 
+### IMP-010 increment 2: layout records
+
+Run independent selections with the explicit classic installation:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Scenario layout-inputs -Fixture layout-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 600
+./main_project/tools/verify_rendered.ps1 -Scenario layout-inputs -Fixture layout-inputs-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 600
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -LayoutInputs -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -LayoutInputs -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/qualify_layout_inventory.ps1
+```
+
+`layout_inventory.json` freezes 369 headless / 372 rendered / 15 fresh-process
+reload IDs. Source guards and before/after hashes cover every declared external
+dependency for each child. Independent observations pin real exterior/interior
+RMB, dungeon RDB, MAPS placements and all 83 TEXTURE.210 frames. Inspect the
+rendered layout inspector and two grayscale source-frame previews; these are
+structural diagnostics, with no LOC assembly, physics or animation timing claim.
+Folder, ZIP, loose and shipped publication, rejection/retry, CORE commitment,
+locking and restart use the actual production owners. Controlled occurrence and
+resource-failure probes certify interfaces only. The optional offline
+`layout_corpus.gd`, `layout_probe.gd` and profile authoring tool require an explicit
+source/output; they are not startup scans. See
+[the layout contract](../scripts/data/LAYOUT_INPUTS.md) and
+[execution evidence](../../design_docs/development/evidence/IMP-010-increment-2-2026-11-22.md).
+
 ### IMP-008 increment 3: native media
 
 Build the pinned native dependencies with `tools/fetch_media_dependencies.ps1`

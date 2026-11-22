@@ -1,5 +1,13 @@
 # Implementation backlog
 
+**IMP-010 increment 2 implemented and verified, 2026-11-22:** Layout structures, explicit identities, scoped references and checked handoffs are delivered, including the user-authorized TEXTURE.210 decoder extension. Independent 369/372 layout checks, 15-check restarts, Windows debug/release exports and named regressions pass. See [increment-2 execution evidence](evidence/IMP-010-increment-2-2026-11-22.md). Awaiting user acceptance. Increment 1 remains accepted; variants, parent IMP-010 and named real-owner/M1 gates remain open. Earlier handoff statements below are historical.
+
+**IMP-010 increment 1 accepted / increment-2 handoff, 2026-11-22:** Geographic
+records are user-accepted at `3b9e4bd`. The [layout prompt](handoffs/IMP-010-INCREMENT-2-PROMPT.txt)
+is ready to issue to another chat. Preparing it starts no implementation. Parent
+IMP-010, variants and named real-owner/physics/SAVE/M1 gates remain open; older
+pending-acceptance notes below are historical.
+
 **IMP-010 increment 1 implemented/verified, 2026-11-22:** Geographic records await
 user acceptance; see [execution evidence](evidence/IMP-010-increment-1-2026-11-22.md).
 IMP-005 remains accepted. Layouts, variants, downstream owner/SAVE/physics and M1

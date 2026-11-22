@@ -55,7 +55,7 @@ rejected reads never become successful empty media.
 | Family / converter | Supported interpretation | Explicitly rejected / remaining coverage |
 | --- | --- | --- |
 | ARCH3D / `classic-model-v1` | v2.5/v2.6/v2.7 headers, aligned point references (v2.5 reference ×3), exact signed source coordinates/normals, per-plane texture archive/record, encoded UVs and first-three delta/affine UV interpretation, polygon triangulation preserving source winding | Unknown versions, invalid extents/references, fewer than three points, degenerate first-three UV basis and polygons that cannot triangulate. Older IDs below 905 requiring DFU's UV unpack correction reject explicitly; that correction has no independent acceptance vectors here. No DFU model-specific patches, smoothing, collision, object-data behavior or world placement. Non-render geometry fields retain source metadata rather than gaining gameplay semantics. |
-| Texture archives / `classic-image-v1` | 20-byte directories at 26, signed offsets/dimensions, logical size/data offset, raw single-frame profiles 0x0000 and verified 0x0900 with physical 256-byte row stride; row-table 0x0108/0x1108, explicit raw/0x8000 rows, frame-table order | Unknown compression/row encodings, solid synthetic archives TEXTURE.000/.001, raw multi-frame zero-run animation and invalid dimensions/runs. These are not silently decoded through a default branch. Logical RecordSize is not a physical pixel boundary: terrain record headers share an interleaved row store. |
+| Texture archives / `classic-image-v1` | 20-byte directories at 26, signed offsets/dimensions, logical size/data offset, raw single-frame profiles 0x0000 and verified 0x0900 with physical 256-byte row stride; row-table 0x0108/0x1108, explicit raw/0x8000 rows, frame-table order; user-authorized IMP-010 transparent/literal-run multi-frame profile below | Unknown compression/row encodings, solid synthetic archives TEXTURE.000/.001 and invalid dimensions/runs. These are not silently decoded through a default branch. Logical RecordSize is not a physical pixel boundary for interleaved single-frame terrain. |
 | IMG / `classic-image-v1` | Standard 12-byte header, uncompressed pixels, signed offsets; headerless dimensions for the explicit byte-length inventory in `classic_image.gd`; six named embedded six-bit palettes | Compressed IMG, unexplained trailing bytes, short pixels/palettes, unknown mappings. The DFU 44-byte→22×22 case is deliberately not accepted: those extents conflict. |
 | CIF / `classic-image-v1` | Sequential standard IMG records, uncompressed or 0x0002 run/literal compression, record order and offsets | Weapon animation CIF headers/frames; unknown compression, truncated headers/data and oversized runs. |
 | RCI / `classic-image-v1` | Exact filename/dimension mappings FACES.CIF, CHLD00I0.RCI, TFAC00I0.RCI (64×64), BUTTONS.RCI (32×16), MPOP.RCI (17×17), NOTE.RCI (44×9), SPOP.RCI (22×22); exact record multiples | Unknown names/dimensions, partial final records, nonexistent record/frame. Filename is an explicit format mapping, never a domain alias inference. |
@@ -143,3 +143,33 @@ Actual acceptance scope, pinned fixture values, report paths and open integratio
 are recorded in IMP-008 execution evidence. Replacement/export/cache resolution,
 FluidSynth/SF2, FFmpeg profiles and default-bank licensing remain separately
 authorized later increments. IMP-013/024/035/061 and M1 gates remain open.
+
+## IMP-010 required transparent-run texture profile
+
+The user authorized this additive decoder extension on 2026-11-22 after the
+existing reader correctly rejected TEXTURE.210. `classic-image-v1` retains its
+accepted interfaces; `classic-texture-transparent-runs-v1` names the additional
+profile. No native dependency or playback scheduler changed.
+
+For compression 0x0000/0x0900 with multiple frames, the source data starts with
+`frame_count` signed little-endian 32-bit offsets relative to the data base.
+Offsets must follow the complete table and fit the bounded animation record.
+Each frame begins with signed 16-bit width/height, matching the record dimensions
+in this supported profile. Every row contains unsigned-byte transparent count,
+unsigned-byte literal count, then literal bytes, repeated to the exact width.
+Zero-progress, row overflow, truncated literals/table, cross-header extents and
+unknown required profiles reject without partial pixels. Explicit source zero
+runs produce transparent indices; no failed decode substitutes an empty image.
+Reordered/repeated offsets remain supported. Unused frame-tail bytes are retained.
+
+Only this animation profile treats RecordSize as its bounded storage extent;
+legacy interleaved single-frame terrain and existing RLE profiles keep their
+accepted rules. Output retains frame/source/storage extents and metadata. Pixel
+orientation stays top-left row-major; palette and alpha remain explicit. No FPS,
+loop timing, gameplay action, model/world scale or engine pose is selected.
+
+Independent observations under `tests/layout_source_observation.json` pin all 30
+TEXTURE.210 records / 83 frames. The layout selection tests their actual reader
+results and known synthetic transparent/literal runs, malformed inputs, detached
+shared-frame outputs, source order and a later frame failure after an earlier
+success. Existing classic-media 119/136 inventories remain separate and unchanged.

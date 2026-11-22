@@ -12,6 +12,16 @@ var preferences: RefCounted
 var media: RefCounted
 var media_preferences: RefCounted
 var _preference_stores: Dictionary = {}
+var layouts: RefCounted
+
+func enable_layout_inputs(required_resource_sources: Array = []) -> Dictionary:
+	var candidate := preload("res://scripts/data/layout_inputs.gd").new()
+	candidate.classic = classic
+	candidate.resource_sources = required_resource_sources.duplicate(true)
+	candidate.media = media
+	var registered := register_content_adapter(candidate,"",[])
+	if registered.ok: layouts = candidate
+	return registered
 
 func enable_geography_inputs() -> Dictionary:
 	var candidate := preload("res://scripts/data/geography_inputs.gd").new()
@@ -36,6 +46,7 @@ func enable_media_replacements() -> Dictionary:
 	var registered := register_content_adapter(candidate,"",[])
 	if registered.ok:
 		media = candidate
+		if layouts != null: layouts.media = candidate
 		media_preferences = preload("res://scripts/av/media_preferences.gd").new()
 		media_preferences.media = candidate
 	return registered

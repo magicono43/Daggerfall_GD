@@ -120,6 +120,47 @@ func _image(width: int, height: int, x: int, y: int, record: int, frame: int, fr
 		"record":record,"frame":frame,"frame_count":frames,"record_count":records,"position":position,
 		"indices":indices,"orientation":"row-major-top-left","palette_policy":"explicit","converter":VERSION}
 
+func _texture_animation(bytes: PackedByteArray, start: int, data: int, length: int, frames: int, frame: int, width: int, height: int, records: int) -> Dictionary:
+	# classic-texture-transparent-runs-v1. Unlike interleaved single-frame terrain,
+	# these records carry a bounded frame-offset table and transparent/literal runs.
+	var end := start+length
+	for i in records:
+		var other := bytes.decode_s32(28+i*20)
+		if other > start and other < end: return failure("Animated texture record overlaps another record header.",start)
+	var table := start+data
+	if end > bytes.size() or data < 28 or frames*4 > end-table: return failure("Animated texture frame table exceeds record extent.",table)
+	var offsets: Array[int] = []
+	for i in frames:
+		var offset := bytes.decode_s32(table+i*4)
+		if offset < frames*4 or offset > end-table-4: return failure("Animated texture frame offset outside payload.",table+i*4)
+		offsets.append(offset)
+	var at := table+offsets[frame]
+	var frame_end := end
+	# Frame offsets need not be enumerated in physical order; repeated offsets
+	# share source bytes without sharing a mutable playback cursor.
+	for offset in offsets:
+		if offset > offsets[frame]: frame_end = mini(frame_end,table+offset)
+	var cursor := Cursor.new(bytes,at,frame_end)
+	var cx := cursor.s16()
+	var cy := cursor.s16()
+	if not cursor.reason.is_empty() or cx != width or cy != height: return failure("Unsupported animated texture frame dimensions.",at)
+	if width*height > (frame_end-at-4)*129: return failure("Animated texture dimensions exceed possible run output.",at)
+	var output := PackedByteArray()
+	output.resize(width*height)
+	for y in height:
+		var x := 0
+		while x < width:
+			if not cursor.has(2): return failure(cursor.reason,cursor.position)
+			var transparent := cursor.u8()
+			var literal := cursor.u8()
+			if transparent+literal == 0 or transparent+literal > width-x: return failure("Invalid animated texture zero-progress/overflow run.",cursor.position-2)
+			var pixels := cursor.take(literal)
+			if not cursor.reason.is_empty(): return failure(cursor.reason,cursor.position)
+			# Zeroes here are explicit transparent runs in the source, never fallback.
+			for i in literal: output[y*width+x+transparent+i] = pixels[i]
+			x += transparent+literal
+	return {"ok":true,"indices":output,"animation_profile":"classic-texture-transparent-runs-v1","frame_source_extent":[at,cursor.position],"frame_storage_extent":[at,frame_end],"unused_frame_tail":cursor.take(frame_end-cursor.position).hex_encode()}
+
 func _texture(bytes: PackedByteArray, record: int, frame: int) -> Dictionary:
 	var cursor := Cursor.new(bytes)
 	var records := cursor.s16()
@@ -145,6 +186,7 @@ func _texture(bytes: PackedByteArray, record: int, frame: int) -> Dictionary:
 		return failure("Invalid texture record extent/dimensions.",start)
 	if frame >= frames or frames == 0: return failure("Texture frame absent.",start,"record_not_found")
 	var indices := PackedByteArray()
+	var animation := {}
 	if compression in [0,0x900] and frames == 1:
 		if width > 256: return failure("Uncompressed texture width exceeds row stride.",start)
 		# RecordSize is logical size, not a physical extent: terrain records share
@@ -153,6 +195,10 @@ func _texture(bytes: PackedByteArray, record: int, frame: int) -> Dictionary:
 		for row in height:
 			cursor.seek(start + data + row * 256)
 			indices.append_array(cursor.take(width))
+	elif compression in [0,0x900] and frames > 1:
+		animation = _texture_animation(bytes,start,data,length,frames,frame,width,height,records)
+		if not animation.ok: return animation
+		indices = animation.indices
 	elif compression in [0x108,0x1108]:
 		var table := start + data + height * frame * 4
 		var headers := Cursor.new(bytes,table,bytes.size())
@@ -180,4 +226,6 @@ func _texture(bytes: PackedByteArray, record: int, frame: int) -> Dictionary:
 	if not cursor.reason.is_empty() or indices.size() != width * height: return failure("Truncated texture pixels: " + cursor.reason,cursor.position)
 	var result := _image(width,height,x,y,record,frame,frames,records,start,indices)
 	result.merge({"scale_x":scale_x,"scale_y":scale_y,"normal_flag":normal,"unknown":unknown,"compression":compression,"logical_record_size":length,"data_offset":data})
+	if not animation.is_empty():
+		for field in ["animation_profile","frame_source_extent","frame_storage_extent","unused_frame_tail"]: result[field] = animation[field]
 	return result

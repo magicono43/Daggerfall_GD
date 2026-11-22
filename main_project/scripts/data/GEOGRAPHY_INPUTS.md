@@ -3,7 +3,8 @@
 IMP-010 increment 1 / DATA-004/006. Godot 4.7.2, Windows first. This contract
 implements GAD-01/07/10, DATA-001/002/003 and PROJECT-DATA-D01. WORLD-006-D04
 supersedes all older single-location occupancy wording. Layouts and variants are
-not implemented. No geography read establishes opening-content, geometry,
+not implemented by this geography adapter. Layout structural access is separately
+defined in [LAYOUT_INPUTS.md](LAYOUT_INPUTS.md). No geography read establishes opening-content, geometry,
 collision, placement, discovery gameplay, weather, SAVE compatibility or M1 readiness.
 
 ## Registration and publication
@@ -11,7 +12,8 @@ collision, placement, discovery gameplay, weather, SAVE compatibility or M1 read
 Normal startup calls `enable_geography_inputs()` before classic preparation.
 `geography_inputs.gd` declares MAPS.BSA (`bsa-v1`), WOODS.WLD
 (`woods-source-v1`), CLIMATE.PAK and POLITIC.PAK (`geography-pak-v1`). MAPS shares
-the existing application BSA reader; BLOCKS remains foundation-only, undecoded.
+the existing application BSA reader. This geography adapter leaves BLOCKS
+undecoded; the sibling layout adapter performs its structural decoding on demand.
 No installation search, replacement installation or fallback data exists.
 
 The shipped-tier adapter reads its pinned profile with `FileAccess` at
