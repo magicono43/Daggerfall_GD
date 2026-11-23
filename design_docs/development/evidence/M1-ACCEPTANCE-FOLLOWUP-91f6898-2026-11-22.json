@@ -1,0 +1,2133 @@
+{
+  "source_revision": "91f68988926ab7a3380a3f251e72ccf81c48f567",
+  "decision": "M1 user-accepted on 2026-11-22 following independent automated audit and passing human acceptance/IME checks",
+  "verified_new_implementation_defects": [],
+  "original_engineering_findings": {
+    "A01": "Closed: verified fix and user-reported packaged UI/relaunch PASS",
+    "A02": "targeted changes verified; residual measured synchronous cost",
+    "A03": "maintained complete-composition gate verified"
+  },
+  "selections": [
+    {
+      "mode": "headless",
+      "exit": 0,
+      "suite": "m1",
+      "elapsed_seconds": 98.4133873,
+      "fixture": "m1-v1",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-0e1f358e49cd4c838465c6e7ae0cf998/report.json"
+      ],
+      "started": "2026-11-23T01:20:43.0120025Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-0e1f358e49cd4c838465c6e7ae0cf998\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "qualification",
+          "status": "passed",
+          "count": 2,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": null,
+          "source_guard": null
+        },
+        {
+          "scenario": "startup",
+          "status": "passed",
+          "count": 84,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": null,
+          "source_guard": null
+        },
+        {
+          "scenario": "session",
+          "status": "passed",
+          "count": 263,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": null,
+          "source_guard": null
+        },
+        {
+          "scenario": "m1-composition",
+          "status": "passed",
+          "count": 33,
+          "ok": true,
+          "observations": {
+            "commit_phases": {
+              "intake_usec": 9483510,
+              "prepare_serial": 3,
+              "prepare_usec": 12246071,
+              "projection_usec": 643879,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 16129,
+                  "validate_usec": 1393
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 40020,
+                  "validate_usec": 28153
+                },
+                "geography.inputs": {
+                  "copy_usec": 337347,
+                  "validate_usec": 201673
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 187377,
+                  "validate_usec": 3615
+                },
+                "layout.inputs": {
+                  "copy_usec": 590884,
+                  "validate_usec": 121692
+                },
+                "media.assets": {
+                  "copy_usec": 308657,
+                  "validate_usec": 10
+                },
+                "mod.preferences": {
+                  "copy_usec": 203,
+                  "validate_usec": 5
+                },
+                "text.catalogs": {
+                  "copy_usec": 219,
+                  "validate_usec": 19
+                },
+                "text.fonts": {
+                  "copy_usec": 87,
+                  "validate_usec": 20
+                },
+                "world.variants": {
+                  "copy_usec": 568076,
+                  "validate_usec": 52203
+                }
+              }
+            },
+            "commit_usec": 13990363,
+            "faction_query_usec": 1091,
+            "initial_startup_usec": 58257,
+            "memory_peak_bytes": 2337837401,
+            "memory_static_bytes": 1782935216,
+            "selection_phases": {
+              "intake_usec": 11313424,
+              "prepare_serial": 1,
+              "prepare_usec": 14433910,
+              "projection_usec": 724971,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 16233,
+                  "validate_usec": 1354
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 36847,
+                  "validate_usec": 28612
+                },
+                "geography.inputs": {
+                  "copy_usec": 383736,
+                  "validate_usec": 206372
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 201441,
+                  "validate_usec": 3350
+                },
+                "layout.inputs": {
+                  "copy_usec": 692733,
+                  "validate_usec": 127241
+                },
+                "media.assets": {
+                  "copy_usec": 336697,
+                  "validate_usec": 12
+                },
+                "mod.preferences": {
+                  "copy_usec": 206,
+                  "validate_usec": 7
+                },
+                "text.catalogs": {
+                  "copy_usec": 229,
+                  "validate_usec": 22
+                },
+                "text.fonts": {
+                  "copy_usec": 88,
+                  "validate_usec": 22
+                },
+                "world.variants": {
+                  "copy_usec": 689181,
+                  "validate_usec": 50591
+                }
+              }
+            },
+            "selection_usec": 17617494
+          },
+          "reload_count": 12,
+          "reload_ok": true,
+          "reload_observations": {
+            "automatic_publication_phases": {
+              "intake_usec": 11665234,
+              "prepare_serial": 1,
+              "prepare_usec": 14962549,
+              "projection_usec": 755993,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 17302,
+                  "validate_usec": 1596
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 46808,
+                  "validate_usec": 29706
+                },
+                "geography.inputs": {
+                  "copy_usec": 398914,
+                  "validate_usec": 209486
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 211396,
+                  "validate_usec": 3590
+                },
+                "layout.inputs": {
+                  "copy_usec": 707926,
+                  "validate_usec": 131028
+                },
+                "media.assets": {
+                  "copy_usec": 402429,
+                  "validate_usec": 14
+                },
+                "mod.preferences": {
+                  "copy_usec": 213,
+                  "validate_usec": 8
+                },
+                "text.catalogs": {
+                  "copy_usec": 229,
+                  "validate_usec": 23
+                },
+                "text.fonts": {
+                  "copy_usec": 93,
+                  "validate_usec": 23
+                },
+                "world.variants": {
+                  "copy_usec": 718482,
+                  "validate_usec": 53001
+                }
+              }
+            },
+            "initial_startup_usec": 17098387,
+            "memory_peak_bytes": 1788107092,
+            "memory_static_bytes": 1780331450
+          },
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "headless",
+      "exit": 0,
+      "suite": "publication",
+      "elapsed_seconds": 20.6805329,
+      "fixture": "publication-v1",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-b27a16b5d32c4300ae9d77b03a570081/report.json"
+      ],
+      "started": "2026-11-23T01:22:21.4313490Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b27a16b5d32c4300ae9d77b03a570081\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "publication",
+          "status": "passed",
+          "count": 111,
+          "ok": true,
+          "observations": null,
+          "reload_count": 8,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "headless",
+      "exit": 0,
+      "suite": "faction-quest-inputs",
+      "elapsed_seconds": 57.924489,
+      "fixture": "faction-quest-inputs-v1",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-c2db678e967040629bb9cc32b419e14b/report.json"
+      ],
+      "started": "2026-11-23T01:22:42.1158199Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-c2db678e967040629bb9cc32b419e14b\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "faction-quest-inputs",
+          "status": "passed",
+          "count": 132,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "headless",
+      "exit": 0,
+      "suite": "variant-inputs",
+      "elapsed_seconds": 297.5047993,
+      "fixture": "variant-inputs-v1",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-aff9146064884c15880db9c643f2873f/report.json"
+      ],
+      "started": "2026-11-23T01:23:40.0412281Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-aff9146064884c15880db9c643f2873f\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "variant-inputs",
+          "status": "passed",
+          "count": 497,
+          "ok": true,
+          "observations": null,
+          "reload_count": 21,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "headless",
+      "exit": 0,
+      "suite": "actor-inputs",
+      "elapsed_seconds": 33.6469799,
+      "fixture": "actor-inputs-v1",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-dc720f84f1db4deca0c221b34af5236c/report.json"
+      ],
+      "started": "2026-11-23T01:28:37.5470649Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-dc720f84f1db4deca0c221b34af5236c\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "actor-inputs",
+          "status": "passed",
+          "count": 236,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "headless",
+      "exit": 0,
+      "suite": "item-spell-inputs",
+      "elapsed_seconds": 49.9694779,
+      "fixture": "item-spell-inputs-v1",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-6323cefb643a45219d9ebedd8ef2f784/report.json"
+      ],
+      "started": "2026-11-23T01:29:11.1953030Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-6323cefb643a45219d9ebedd8ef2f784\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "item-spell-inputs",
+          "status": "passed",
+          "count": 160,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "headless",
+      "exit": 0,
+      "suite": "locale-fonts",
+      "elapsed_seconds": 21.6024944,
+      "fixture": "locale-fonts-v1",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-72093c08711244ea9751320ff1ddfbd6/report.json"
+      ],
+      "started": "2026-11-23T01:30:01.1659142Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-72093c08711244ea9751320ff1ddfbd6\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "locale-fonts",
+          "status": "passed",
+          "count": 419,
+          "ok": true,
+          "observations": null,
+          "reload_count": 10,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "headless",
+      "exit": 0,
+      "suite": "translation-preferences",
+      "elapsed_seconds": 20.7430679,
+      "fixture": "translation-preferences-v1",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-ce845158a67f46a0bbd8e87f9584dc5b/report.json"
+      ],
+      "started": "2026-11-23T01:30:22.7695391Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-ce845158a67f46a0bbd8e87f9584dc5b\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "translation-preferences",
+          "status": "passed",
+          "count": 149,
+          "ok": true,
+          "observations": null,
+          "reload_count": 10,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "headless",
+      "exit": 0,
+      "suite": "replacements",
+      "elapsed_seconds": 22.4025694,
+      "fixture": "replacements-v1",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-04881d5be9cf4d5181d0206e89c05f33/report.json"
+      ],
+      "started": "2026-11-23T01:30:43.5135767Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-04881d5be9cf4d5181d0206e89c05f33\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "replacements",
+          "status": "passed",
+          "count": 168,
+          "ok": true,
+          "observations": {
+            "goldens": {
+              "authoring": {
+                "SoundFile": "0.13.1",
+                "libsndfile": "1.2.2"
+              },
+              "expected": {
+                "corners_rgba": [
+                  [
+                    255.0,
+                    0.0,
+                    0.0,
+                    255.0
+                  ],
+                  [
+                    0.0,
+                    255.0,
+                    0.0,
+                    128.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    255.0,
+                    255.0
+                  ],
+                  [
+                    255.0,
+                    255.0,
+                    255.0,
+                    0.0
+                  ]
+                ],
+                "tone_frames": 22050.0,
+                "tone_rate": 44100.0,
+                "tone_seconds": 0.5,
+                "triangle_godot_indices": [
+                  0.0,
+                  2.0,
+                  1.0
+                ],
+                "triangle_source_positions": [
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                ]
+              },
+              "license": "CC0-1.0; project-authored synthetic media",
+              "schema": "replacement-goldens-v1",
+              "sha256": {
+                "corners.png.bytes": "39886660ae78af5af63ad680eeb7be78300c69f9743063e185f68a01aa2d04f4",
+                "float.wav.bytes": "d7692cc6ba015b97f19995b60ab016ffe1a6d1f2766d51a4e3a0b2c667996148",
+                "gray16.png.bytes": "7ebaff23e0a0ff4f188e562167ccc28572b01149215bfaeb4c0b30212712cd31",
+                "palette.png.bytes": "c6606d3cdb18636f77cdab313008e1b5d4ddf6dd70fff46cba4afa6c775786b2",
+                "pcm-16-1-22050.wav.bytes": "e845faf8550ebff3e34e47013d6da8ec41405cec78c9772594a140b73f5c4e9e",
+                "pcm-16-1-44100.wav.bytes": "fe9c944453d76ddbf246579c90fcd7528bbda5562093032116559b89acc13fe6",
+                "pcm-16-1-48000.wav.bytes": "f9b396a5cac85075b19498f158d0afabb14ab0fb54d847003051020c4a07a378",
+                "pcm-16-2-22050.wav.bytes": "1eb85436ccf6a3f39f594f67ee22eb422b7c2f11cf90d804456141ac8ebf5dbf",
+                "pcm-16-2-44100.wav.bytes": "e15847a7efa3d283f701ef9c9d965d275eba002b27c4186445cf2ff8333149a6",
+                "pcm-16-2-48000.wav.bytes": "513a4522289c48e04ec042ce2b2d4e8bcb55dbb0fa58edd608a2d2e4f605af14",
+                "pcm-8-1-22050.wav.bytes": "26a8de338f2b801028087574c367d9a2a1f46f883292e5e5f93885568170c7d8",
+                "pcm-8-1-44100.wav.bytes": "32c996dc5875e0da40d232dc3a49453769296a3a530f26bbef65deab32fa5ecf",
+                "pcm-8-1-48000.wav.bytes": "109d58ad20781a32c3d0ad54d22824935c49cc25ba52fa4edfc85713ff32c9be",
+                "pcm-8-2-22050.wav.bytes": "3cd180d4d25d73ff473be90e58189395d78c2a177a0612e8af2134e274185023",
+                "pcm-8-2-44100.wav.bytes": "49288840a8ada16445afbae644d101df4d2c93e8eb52b44d9f77a3c9a1a50b06",
+                "pcm-8-2-48000.wav.bytes": "6cd208fc49a042957213b4e5ee3435aedd69d38b619f1503d5ff93d31c6568b1",
+                "rgb.png.bytes": "e6d66889131220f931fddfb05730d647a0992456c63ae0a8154b4ae32ff219ef",
+                "tone.ogg.bytes": "9b53d6df0101c9add76d11e2d2a3421282c0569568ad65f83a69eb16ecd47fb2",
+                "triangle.glb.bytes": "cebcfc9afecea051291d97c53be378f81e360f4c2da64faca428ebff31c6853a"
+              }
+            },
+            "measurements": {
+              "decode_microseconds": 2806,
+              "decoded_exports": 20,
+              "generation": 21,
+              "source_bytes": 6883
+            }
+          },
+          "reload_count": 10,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "headless",
+      "exit": 0,
+      "suite": "native",
+      "elapsed_seconds": 173.4673249,
+      "fixture": "native-v1",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-4353b993d8c247edbe6bf05c7099c9cb/report.json"
+      ],
+      "started": "2026-11-23T01:31:05.9171178Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-4353b993d8c247edbe6bf05c7099c9cb\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "native",
+          "status": "passed",
+          "count": 344,
+          "ok": true,
+          "observations": {
+            "capabilities": {
+              "converter": "native-media-v1",
+              "ffmpeg_build": "n8.1.3-39-g660b5aa7db-20261121",
+              "ffmpeg_configuration": "--prefix=/ffbuild/prefix --pkg-config-flags=--static --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32- --arch=x86_64 --target-os=mingw32 --enable-version3 --disable-debug --enable-shared --disable-static --disable-w32threads --enable-pthreads --enable-iconv --enable-zlib --enable-libxml2 --enable-libvmaf --enable-fontconfig --enable-libharfbuzz --enable-libfreetype --enable-libfribidi --enable-lcms2 --enable-vulkan --enable-libshaderc --enable-libdav1d --enable-libvorbis --enable-librav1e --enable-librsvg --disable-libxcb --disable-xlib --disable-libpulse --enable-gmp --enable-lzma --enable-liblcevc-dec --enable-opencl --enable-amf --enable-libaom --disable-avisynth --enable-chromaprint --disable-libdavs2 --disable-libdvdread --disable-libdvdnav --disable-libfdk-aac --enable-ffnvcodec --enable-cuda-llvm --disable-frei0r --enable-libgme --enable-libkvazaar --enable-libaribb24 --enable-libaribcaption --enable-libass --enable-libbluray --enable-libjxl --enable-libmp3lame --enable-libopus --enable-libplacebo --enable-librist --enable-libssh --enable-libtheora --enable-libvpx --enable-libwebp --enable-libzmq --enable-lv2 --enable-libvpl --enable-openal --enable-liboapv --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt --disable-librubberband --enable-schannel --enable-sdl2 --enable-libsnappy --enable-libsoxr --enable-libsrt --enable-libsvtav1 --enable-libtwolame --enable-libuavs3d --disable-libdrm --enable-vaapi --enable-vapoursynth --disable-libvidstab --enable-libvvenc --disable-whisper --disable-libx264 --disable-libx265 --disable-libxavs2 --disable-libxvid --enable-libzimg --disable-libzvbi --extra-cflags=-DLIBTWOLAME_STATIC --extra-cxxflags= --extra-libs=-lgomp --extra-ldflags=-pthread --extra-ldexeflags= --cc=x86_64-w64-mingw32-gcc --cxx=x86_64-w64-mingw32-g++ --ar=x86_64-w64-mingw32-gcc-ar --ranlib=x86_64-w64-mingw32-gcc-ranlib --nm=x86_64-w64-mingw32-gcc-nm --extra-version=20261121",
+              "ffmpeg_license": "LGPL version 3 or later",
+              "fluid_version": "2.4.7",
+              "kind": "capabilities",
+              "midi": true,
+              "midi_reason": "",
+              "ok": true,
+              "reason": "",
+              "runtime_identity": "libintl-8.dll=7cf5a705c825e082d8e7b57d113ebcba897a9421f465a7e43ad610b89a359b14;libglib-2.0-0.dll=0c3720b588874fc3c60f66b486c4172c4976c56b0b0f04908f730d7215c93400;libgthread-2.0-0.dll=f49aabf9d780bcaae8f72870a2f2a6817e987efd115aaee6c9442d401ab4bb34;libgobject-2.0-0.dll=28ca3fe5392dce2e8c48b6157baa9da31f88ebb7103dc2ce7feeca7d5a3b17ca;sndfile.dll=4e3bd2de8e1485110eaebef8e1239471f73d608773831c323bf528e05645655e;libinstpatch-2.dll=3f46c2a0151e1fff951b38797ae1e0c5e0a0b13826a4c2f1ba99fc253a26214b;SDL3.dll=2dfe1c60557c3e054ddda61bf7f29fdfd462c10faddf04dc6864961f43960df6;libfluidsynth-3.dll=a7c6d9945c32249614216aabc47b5a064d306dca81c54e26e4930d776cdecf3d;avutil-60.dll=4fe6682eeac1cdfc8c699637bdd04cee8312d03f2d3794cb4436230dd14bddda;avcodec-62.dll=b73de3e72de25186c921dcc2cc4399a9e3196b022e0309b9da9e53b0d170f5ca;avformat-62.dll=5e08b7c4073187ea172215d667d335885b604a724856a7bdf736378343bdb70d;swscale-9.dll=3d459670f04e73d878561c5a13dc67aa967dda8682bc21a872a45da11d21037a;swresample-6.dll=b4ff013d1baf6bd7f7fb0d823bc61e98b9ad5ce2409c79b16a25bcfd57ca1d87;",
+              "video": true,
+              "video_reason": ""
+            },
+            "classic_display_aspect": 1.6,
+            "death_presentation_failure": "unavailable",
+            "decoders": {
+              "h264-aac": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "aac",
+                "audio_time_base_seconds": 2.08333333333333e-05,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 182435.5,
+                "decoded_audio": 480000,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1347584,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 48000,
+                "source_bytes": 52149,
+                "source_start_seconds": 0.0,
+                "video_codec": "h264",
+                "width": 192
+              },
+              "h264-anamorphic": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "aac",
+                "audio_time_base_seconds": 2.26757369614512e-05,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 871742.2,
+                "decoded_audio": 479999,
+                "decoded_video": 300,
+                "height": 720,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 37006664,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 44100,
+                "source_bytes": 97726,
+                "source_start_seconds": 0.0,
+                "video_codec": "h264",
+                "width": 1280
+              },
+              "h264-none": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "",
+                "audio_time_base_seconds": 0.0,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 169946.2,
+                "decoded_audio": 0,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1769472,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 0,
+                "source_bytes": 34829,
+                "source_start_seconds": 0.0,
+                "video_codec": "h264",
+                "width": 192
+              },
+              "vp8-none": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "",
+                "audio_time_base_seconds": 0.0,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 187599.0,
+                "decoded_audio": 0,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1769472,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 0,
+                "source_bytes": 39568,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp8",
+                "width": 192
+              },
+              "vp8-opus": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "opus",
+                "audio_time_base_seconds": 0.001,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 242673.7,
+                "decoded_audio": 480000,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1339392,
+                "reason": "",
+                "seconds": 10.008,
+                "source_audio_rate": 48000,
+                "source_bytes": 82630,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp8",
+                "width": 192
+              },
+              "vp8-vorbis": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "vorbis",
+                "audio_time_base_seconds": 0.001,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 130627.8,
+                "decoded_audio": 480000,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1347584,
+                "reason": "",
+                "seconds": 10.003,
+                "source_audio_rate": 48000,
+                "source_bytes": 50348,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp8",
+                "width": 192
+              },
+              "vp9-full": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "",
+                "audio_time_base_seconds": 0.0,
+                "color": "bt709-full",
+                "converter": "native-media-v1",
+                "decode_microseconds": 189749.9,
+                "decoded_audio": 0,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1769472,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 0,
+                "source_bytes": 24181,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp9",
+                "width": 192
+              },
+              "vp9-none": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "",
+                "audio_time_base_seconds": 0.0,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 186353.3,
+                "decoded_audio": 0,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1769472,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 0,
+                "source_bytes": 23499,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp9",
+                "width": 192
+              },
+              "vp9-opus": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "opus",
+                "audio_time_base_seconds": 0.001,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 271049.9,
+                "decoded_audio": 480000,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1339392,
+                "reason": "",
+                "seconds": 10.008,
+                "source_audio_rate": 48000,
+                "source_bytes": 66560,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp9",
+                "width": 192
+              },
+              "vp9-vorbis": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "vorbis",
+                "audio_time_base_seconds": 0.001,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 103309.0,
+                "decoded_audio": 480000,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1347584,
+                "reason": "",
+                "seconds": 10.003,
+                "source_audio_rate": 48000,
+                "source_bytes": 34278,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp9",
+                "width": 192
+              }
+            },
+            "default_bank": {
+              "presets": "0:0,0:1,0:2,0:3,0:4,0:5,0:6,0:7,0:8,0:9,0:10,0:11,0:12,0:13,0:14,0:15,0:16,0:17,0:18,0:19,0:20,0:21,0:22,0:23,0:24,0:25,0:26,0:27,0:28,0:29,0:30,0:31,0:32,0:33,0:34,0:35,0:36,0:37,0:38,0:39,0:40,0:41,0:42,0:43,0:44,0:45,0:46,0:47,0:48,0:49,0:50,0:51,0:52,0:53,0:54,0:55,0:56,0:57,0:58,0:59,0:60,0:61,0:62,0:63,0:64,0:65,0:66,0:67,0:68,0:69,0:70,0:71,0:72,0:73,0:74,0:75,0:76,0:77,0:78,0:79,0:80,0:81,0:82,0:83,0:84,0:85,0:86,0:87,0:88,0:89,0:90,0:91,0:92,0:93,0:94,0:95,0:96,0:97,0:98,0:99,0:100,0:101,0:102,0:103,0:104,0:105,0:106,0:107,0:108,0:109,0:110,0:111,0:112,0:113,0:114,0:115,0:116,0:117,0:118,0:119,0:120,0:121,0:122,0:123,0:124,0:125,0:126,0:127,1:38,1:44,1:48,1:49,1:52,1:56,1:57,1:60,1:61,1:80,1:81,1:98,1:120,1:121,1:122,1:123,1:124,1:125,1:126,1:127,2:102,2:120,2:122,2:123,2:124,2:125,2:126,2:127,3:122,3:123,3:124,3:125,3:126,3:127,4:122,4:124,4:125,4:126,5:122,5:124,5:125,5:126,6:125,7:125,8:4,8:5,8:6,8:14,8:16,8:17,8:19,8:21,8:24,8:25,8:26,8:27,8:28,8:30,8:31,8:38,8:39,8:48,8:50,8:61,8:62,8:63,8:80,8:81,8:107,8:115,8:116,8:117,8:118,8:125,9:14,9:125,11:0,11:1,11:4,11:5,11:6,11:8,11:11,11:14,11:16,11:17,11:18,11:19,11:20,11:29,11:38,11:39,11:49,11:50,11:51,11:61,11:78,11:81,11:88,11:89,11:96,11:98,11:100,11:119,11:121,11:122,11:127,12:0,12:4,12:6,12:10,12:16,12:17,12:19,12:27,12:38,12:48,12:49,12:80,12:81,12:88,12:89,12:119,12:122,12:127,13:48,13:80,13:81,13:88,16:25,24:75,25:75,26:75,120:0,120:1,120:2,120:8,120:16,120:24,120:25,120:26,120:32,120:40,120:48,120:56,120:127,128:0,128:1,128:2,128:8,128:16,128:24,128:25,128:26,128:32,128:40,128:48,128:56,128:127,",
+              "sha256": "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe"
+            },
+            "memory_after": {
+              "converter": "native-media-v1",
+              "kind": "memory",
+              "ok": true,
+              "peak_working_set_bytes": 360189952,
+              "private_bytes": 250867712,
+              "reason": "",
+              "working_set_bytes": 263192576
+            },
+            "memory_before": {
+              "converter": "native-media-v1",
+              "kind": "memory",
+              "ok": true,
+              "peak_working_set_bytes": 308944896,
+              "private_bytes": 180748288,
+              "reason": "",
+              "working_set_bytes": 194187264
+            },
+            "music": {
+              "peak_buffer_frames": 16383,
+              "peak_buffer_seconds": 0.3413125,
+              "peak_instances": 2,
+              "peak_prepare_microseconds": 147887,
+              "prepared": 5,
+              "requested_buffer_seconds": 0.25,
+              "retired": 5,
+              "underruns": 0
+            },
+            "native_loop_note_samples": [
+              72000
+            ],
+            "native_note_samples": [
+              [
+                60,
+                0
+              ],
+              [
+                67,
+                0
+              ],
+              [
+                64,
+                24000
+              ]
+            ],
+            "preparation": {
+              "decode_microseconds": 743391,
+              "decoded_exports": 31,
+              "generation": 2,
+              "source_bytes": 1474217
+            },
+            "video": {
+              "dropped_frames": 10,
+              "frames": 3150,
+              "peak_audio_buffer_frames": 16383,
+              "peak_audio_buffer_seconds": 0.371428571428571,
+              "peak_classic_queue": 16,
+              "presented_markers": [
+                {
+                  "presentation_clock": 5e-06,
+                  "source_pts": 0.0
+                },
+                {
+                  "presentation_clock": 0.034979,
+                  "source_pts": 0.033
+                },
+                {
+                  "presentation_clock": 0.068394,
+                  "source_pts": 0.067
+                }
+              ],
+              "terminals": 25,
+              "underruns": 0
+            }
+          },
+          "reload_count": 11,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "headless",
+      "exit": 0,
+      "suite": "formula",
+      "elapsed_seconds": 22.316941,
+      "fixture": "formula-v1",
+      "output": [
+        "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-11a4ddf2d2fb48fa8fd660998cff9648/report.json"
+      ],
+      "started": "2026-11-23T01:33:59.3853815Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-11a4ddf2d2fb48fa8fd660998cff9648\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "formula",
+          "status": "passed",
+          "count": 82,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "rendered",
+      "exit": 0,
+      "suite": "m1",
+      "elapsed_seconds": 123.7940594,
+      "fixture": "m1-v1",
+      "output": [
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-28ff411e9f6f4a849e54b9d5dd790247/report.json"
+      ],
+      "started": "2026-11-23T01:34:21.7033315Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-28ff411e9f6f4a849e54b9d5dd790247\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "qualification",
+          "status": "passed",
+          "count": 3,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": null,
+          "source_guard": null
+        },
+        {
+          "scenario": "startup",
+          "status": "passed",
+          "count": 92,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": null,
+          "source_guard": null
+        },
+        {
+          "scenario": "session",
+          "status": "passed",
+          "count": 264,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": null,
+          "source_guard": null
+        },
+        {
+          "scenario": "m1-composition",
+          "status": "passed",
+          "count": 34,
+          "ok": true,
+          "observations": {
+            "commit_phases": {
+              "intake_usec": 9059493,
+              "prepare_serial": 3,
+              "prepare_usec": 11769900,
+              "projection_usec": 614665,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 16241,
+                  "validate_usec": 1352
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 40729,
+                  "validate_usec": 28086
+                },
+                "geography.inputs": {
+                  "copy_usec": 341580,
+                  "validate_usec": 202858
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 184445,
+                  "validate_usec": 3337
+                },
+                "layout.inputs": {
+                  "copy_usec": 565289,
+                  "validate_usec": 119155
+                },
+                "media.assets": {
+                  "copy_usec": 299292,
+                  "validate_usec": 9
+                },
+                "mod.preferences": {
+                  "copy_usec": 212,
+                  "validate_usec": 5
+                },
+                "text.catalogs": {
+                  "copy_usec": 224,
+                  "validate_usec": 19
+                },
+                "text.fonts": {
+                  "copy_usec": 87,
+                  "validate_usec": 20
+                },
+                "world.variants": {
+                  "copy_usec": 561175,
+                  "validate_usec": 47574
+                }
+              }
+            },
+            "commit_usec": 13443352,
+            "faction_query_usec": 1088,
+            "initial_startup_usec": 55581,
+            "memory_peak_bytes": 2360854214,
+            "memory_static_bytes": 1805982437,
+            "selection_phases": {
+              "intake_usec": 11334231,
+              "prepare_serial": 1,
+              "prepare_usec": 14086066,
+              "projection_usec": 628184,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 15204,
+                  "validate_usec": 1315
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 35989,
+                  "validate_usec": 27689
+                },
+                "geography.inputs": {
+                  "copy_usec": 332082,
+                  "validate_usec": 197124
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 178248,
+                  "validate_usec": 3245
+                },
+                "layout.inputs": {
+                  "copy_usec": 601405,
+                  "validate_usec": 120132
+                },
+                "media.assets": {
+                  "copy_usec": 304893,
+                  "validate_usec": 9
+                },
+                "mod.preferences": {
+                  "copy_usec": 205,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 221,
+                  "validate_usec": 20
+                },
+                "text.fonts": {
+                  "copy_usec": 88,
+                  "validate_usec": 21
+                },
+                "world.variants": {
+                  "copy_usec": 585384,
+                  "validate_usec": 49582
+                }
+              }
+            },
+            "selection_usec": 17038631
+          },
+          "reload_count": 13,
+          "reload_ok": true,
+          "reload_observations": {
+            "automatic_publication_phases": {
+              "intake_usec": 11263787,
+              "prepare_serial": 1,
+              "prepare_usec": 14246891,
+              "projection_usec": 699471,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 15181,
+                  "validate_usec": 1406
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 36608,
+                  "validate_usec": 27914
+                },
+                "geography.inputs": {
+                  "copy_usec": 373273,
+                  "validate_usec": 208344
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 196056,
+                  "validate_usec": 3799
+                },
+                "layout.inputs": {
+                  "copy_usec": 642293,
+                  "validate_usec": 119109
+                },
+                "media.assets": {
+                  "copy_usec": 332252,
+                  "validate_usec": 11
+                },
+                "mod.preferences": {
+                  "copy_usec": 202,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 221,
+                  "validate_usec": 20
+                },
+                "text.fonts": {
+                  "copy_usec": 87,
+                  "validate_usec": 20
+                },
+                "world.variants": {
+                  "copy_usec": 640741,
+                  "validate_usec": 49648
+                }
+              }
+            },
+            "initial_startup_usec": 16262872,
+            "memory_peak_bytes": 1811496265,
+            "memory_static_bytes": 1803726351
+          },
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "rendered",
+      "exit": 0,
+      "suite": "publication",
+      "elapsed_seconds": 29.25078,
+      "fixture": "publication-v1",
+      "output": [
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-d5f7cfa423d54cd9b10357313a37940e/report.json"
+      ],
+      "started": "2026-11-23T01:36:25.4986763Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-d5f7cfa423d54cd9b10357313a37940e\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "publication",
+          "status": "passed",
+          "count": 117,
+          "ok": true,
+          "observations": null,
+          "reload_count": 8,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "rendered",
+      "exit": 0,
+      "suite": "faction-quest-inputs",
+      "elapsed_seconds": 70.0971452,
+      "fixture": "faction-quest-inputs-v1",
+      "output": [
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-df0df4502caf4de38a209855a8311240/report.json"
+      ],
+      "started": "2026-11-23T01:36:54.7505416Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-df0df4502caf4de38a209855a8311240\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "faction-quest-inputs",
+          "status": "passed",
+          "count": 134,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "rendered",
+      "exit": 0,
+      "suite": "variant-inputs",
+      "elapsed_seconds": 307.0947477,
+      "fixture": "variant-inputs-v1",
+      "output": [
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-8871a80926e441e88f8a9b172f228639/report.json"
+      ],
+      "started": "2026-11-23T01:38:04.8486758Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-8871a80926e441e88f8a9b172f228639\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "variant-inputs",
+          "status": "passed",
+          "count": 503,
+          "ok": true,
+          "observations": null,
+          "reload_count": 21,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "rendered",
+      "exit": 0,
+      "suite": "actor-inputs",
+      "elapsed_seconds": 38.6288004,
+      "fixture": "actor-inputs-v1",
+      "output": [
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-2f95d56c7f1048beb9883fb37e7df4fa/report.json"
+      ],
+      "started": "2026-11-23T01:43:11.9448368Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-2f95d56c7f1048beb9883fb37e7df4fa\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "actor-inputs",
+          "status": "passed",
+          "count": 238,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "rendered",
+      "exit": 0,
+      "suite": "item-spell-inputs",
+      "elapsed_seconds": 53.5474586,
+      "fixture": "item-spell-inputs-v1",
+      "output": [
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-603f86ccc1464fd9bdcc3f32429f6158/report.json"
+      ],
+      "started": "2026-11-23T01:43:50.5746953Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-603f86ccc1464fd9bdcc3f32429f6158\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "item-spell-inputs",
+          "status": "passed",
+          "count": 162,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "rendered",
+      "exit": 0,
+      "suite": "locale-fonts",
+      "elapsed_seconds": 29.2702606,
+      "fixture": "locale-fonts-v1",
+      "output": [
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-eb6fecdf5c0847cd99023669c5b804e4/report.json"
+      ],
+      "started": "2026-11-23T01:44:44.1235285Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-eb6fecdf5c0847cd99023669c5b804e4\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "locale-fonts",
+          "status": "passed",
+          "count": 441,
+          "ok": true,
+          "observations": null,
+          "reload_count": 10,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "rendered",
+      "exit": 0,
+      "suite": "translation-preferences",
+      "elapsed_seconds": 28.1024825,
+      "fixture": "translation-preferences-v1",
+      "output": [
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-073aa8620f0f4b03a3fc8fc4d5108604/report.json"
+      ],
+      "started": "2026-11-23T01:45:13.3951224Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-073aa8620f0f4b03a3fc8fc4d5108604\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "translation-preferences",
+          "status": "passed",
+          "count": 164,
+          "ok": true,
+          "observations": null,
+          "reload_count": 10,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "rendered",
+      "exit": 0,
+      "suite": "replacements",
+      "elapsed_seconds": 31.9087136,
+      "fixture": "replacements-v1",
+      "output": [
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-03124d02bf5e4377976572659c931d44/report.json"
+      ],
+      "started": "2026-11-23T01:45:41.4986721Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-03124d02bf5e4377976572659c931d44\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "replacements",
+          "status": "passed",
+          "count": 173,
+          "ok": true,
+          "observations": {
+            "goldens": {
+              "authoring": {
+                "SoundFile": "0.13.1",
+                "libsndfile": "1.2.2"
+              },
+              "expected": {
+                "corners_rgba": [
+                  [
+                    255.0,
+                    0.0,
+                    0.0,
+                    255.0
+                  ],
+                  [
+                    0.0,
+                    255.0,
+                    0.0,
+                    128.0
+                  ],
+                  [
+                    0.0,
+                    0.0,
+                    255.0,
+                    255.0
+                  ],
+                  [
+                    255.0,
+                    255.0,
+                    255.0,
+                    0.0
+                  ]
+                ],
+                "tone_frames": 22050.0,
+                "tone_rate": 44100.0,
+                "tone_seconds": 0.5,
+                "triangle_godot_indices": [
+                  0.0,
+                  2.0,
+                  1.0
+                ],
+                "triangle_source_positions": [
+                  [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.0,
+                    1.0,
+                    0.0
+                  ]
+                ]
+              },
+              "license": "CC0-1.0; project-authored synthetic media",
+              "schema": "replacement-goldens-v1",
+              "sha256": {
+                "corners.png.bytes": "39886660ae78af5af63ad680eeb7be78300c69f9743063e185f68a01aa2d04f4",
+                "float.wav.bytes": "d7692cc6ba015b97f19995b60ab016ffe1a6d1f2766d51a4e3a0b2c667996148",
+                "gray16.png.bytes": "7ebaff23e0a0ff4f188e562167ccc28572b01149215bfaeb4c0b30212712cd31",
+                "palette.png.bytes": "c6606d3cdb18636f77cdab313008e1b5d4ddf6dd70fff46cba4afa6c775786b2",
+                "pcm-16-1-22050.wav.bytes": "e845faf8550ebff3e34e47013d6da8ec41405cec78c9772594a140b73f5c4e9e",
+                "pcm-16-1-44100.wav.bytes": "fe9c944453d76ddbf246579c90fcd7528bbda5562093032116559b89acc13fe6",
+                "pcm-16-1-48000.wav.bytes": "f9b396a5cac85075b19498f158d0afabb14ab0fb54d847003051020c4a07a378",
+                "pcm-16-2-22050.wav.bytes": "1eb85436ccf6a3f39f594f67ee22eb422b7c2f11cf90d804456141ac8ebf5dbf",
+                "pcm-16-2-44100.wav.bytes": "e15847a7efa3d283f701ef9c9d965d275eba002b27c4186445cf2ff8333149a6",
+                "pcm-16-2-48000.wav.bytes": "513a4522289c48e04ec042ce2b2d4e8bcb55dbb0fa58edd608a2d2e4f605af14",
+                "pcm-8-1-22050.wav.bytes": "26a8de338f2b801028087574c367d9a2a1f46f883292e5e5f93885568170c7d8",
+                "pcm-8-1-44100.wav.bytes": "32c996dc5875e0da40d232dc3a49453769296a3a530f26bbef65deab32fa5ecf",
+                "pcm-8-1-48000.wav.bytes": "109d58ad20781a32c3d0ad54d22824935c49cc25ba52fa4edfc85713ff32c9be",
+                "pcm-8-2-22050.wav.bytes": "3cd180d4d25d73ff473be90e58189395d78c2a177a0612e8af2134e274185023",
+                "pcm-8-2-44100.wav.bytes": "49288840a8ada16445afbae644d101df4d2c93e8eb52b44d9f77a3c9a1a50b06",
+                "pcm-8-2-48000.wav.bytes": "6cd208fc49a042957213b4e5ee3435aedd69d38b619f1503d5ff93d31c6568b1",
+                "rgb.png.bytes": "e6d66889131220f931fddfb05730d647a0992456c63ae0a8154b4ae32ff219ef",
+                "tone.ogg.bytes": "9b53d6df0101c9add76d11e2d2a3421282c0569568ad65f83a69eb16ecd47fb2",
+                "triangle.glb.bytes": "cebcfc9afecea051291d97c53be378f81e360f4c2da64faca428ebff31c6853a"
+              }
+            },
+            "measurements": {
+              "decode_microseconds": 2964,
+              "decoded_exports": 20,
+              "generation": 22,
+              "source_bytes": 6883
+            }
+          },
+          "reload_count": 10,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "rendered",
+      "exit": 0,
+      "suite": "native",
+      "elapsed_seconds": 175.732699,
+      "fixture": "native-v1",
+      "output": [
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-79d008a44c114e528d6da1d63ddaff06/report.json"
+      ],
+      "started": "2026-11-23T01:46:13.4083807Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-79d008a44c114e528d6da1d63ddaff06\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "native",
+          "status": "passed",
+          "count": 374,
+          "ok": true,
+          "observations": {
+            "capabilities": {
+              "converter": "native-media-v1",
+              "ffmpeg_build": "n8.1.3-39-g660b5aa7db-20261121",
+              "ffmpeg_configuration": "--prefix=/ffbuild/prefix --pkg-config-flags=--static --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32- --arch=x86_64 --target-os=mingw32 --enable-version3 --disable-debug --enable-shared --disable-static --disable-w32threads --enable-pthreads --enable-iconv --enable-zlib --enable-libxml2 --enable-libvmaf --enable-fontconfig --enable-libharfbuzz --enable-libfreetype --enable-libfribidi --enable-lcms2 --enable-vulkan --enable-libshaderc --enable-libdav1d --enable-libvorbis --enable-librav1e --enable-librsvg --disable-libxcb --disable-xlib --disable-libpulse --enable-gmp --enable-lzma --enable-liblcevc-dec --enable-opencl --enable-amf --enable-libaom --disable-avisynth --enable-chromaprint --disable-libdavs2 --disable-libdvdread --disable-libdvdnav --disable-libfdk-aac --enable-ffnvcodec --enable-cuda-llvm --disable-frei0r --enable-libgme --enable-libkvazaar --enable-libaribb24 --enable-libaribcaption --enable-libass --enable-libbluray --enable-libjxl --enable-libmp3lame --enable-libopus --enable-libplacebo --enable-librist --enable-libssh --enable-libtheora --enable-libvpx --enable-libwebp --enable-libzmq --enable-lv2 --enable-libvpl --enable-openal --enable-liboapv --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt --disable-librubberband --enable-schannel --enable-sdl2 --enable-libsnappy --enable-libsoxr --enable-libsrt --enable-libsvtav1 --enable-libtwolame --enable-libuavs3d --disable-libdrm --enable-vaapi --enable-vapoursynth --disable-libvidstab --enable-libvvenc --disable-whisper --disable-libx264 --disable-libx265 --disable-libxavs2 --disable-libxvid --enable-libzimg --disable-libzvbi --extra-cflags=-DLIBTWOLAME_STATIC --extra-cxxflags= --extra-libs=-lgomp --extra-ldflags=-pthread --extra-ldexeflags= --cc=x86_64-w64-mingw32-gcc --cxx=x86_64-w64-mingw32-g++ --ar=x86_64-w64-mingw32-gcc-ar --ranlib=x86_64-w64-mingw32-gcc-ranlib --nm=x86_64-w64-mingw32-gcc-nm --extra-version=20261121",
+              "ffmpeg_license": "LGPL version 3 or later",
+              "fluid_version": "2.4.7",
+              "kind": "capabilities",
+              "midi": true,
+              "midi_reason": "",
+              "ok": true,
+              "reason": "",
+              "runtime_identity": "libintl-8.dll=7cf5a705c825e082d8e7b57d113ebcba897a9421f465a7e43ad610b89a359b14;libglib-2.0-0.dll=0c3720b588874fc3c60f66b486c4172c4976c56b0b0f04908f730d7215c93400;libgthread-2.0-0.dll=f49aabf9d780bcaae8f72870a2f2a6817e987efd115aaee6c9442d401ab4bb34;libgobject-2.0-0.dll=28ca3fe5392dce2e8c48b6157baa9da31f88ebb7103dc2ce7feeca7d5a3b17ca;sndfile.dll=4e3bd2de8e1485110eaebef8e1239471f73d608773831c323bf528e05645655e;libinstpatch-2.dll=3f46c2a0151e1fff951b38797ae1e0c5e0a0b13826a4c2f1ba99fc253a26214b;SDL3.dll=2dfe1c60557c3e054ddda61bf7f29fdfd462c10faddf04dc6864961f43960df6;libfluidsynth-3.dll=a7c6d9945c32249614216aabc47b5a064d306dca81c54e26e4930d776cdecf3d;avutil-60.dll=4fe6682eeac1cdfc8c699637bdd04cee8312d03f2d3794cb4436230dd14bddda;avcodec-62.dll=b73de3e72de25186c921dcc2cc4399a9e3196b022e0309b9da9e53b0d170f5ca;avformat-62.dll=5e08b7c4073187ea172215d667d335885b604a724856a7bdf736378343bdb70d;swscale-9.dll=3d459670f04e73d878561c5a13dc67aa967dda8682bc21a872a45da11d21037a;swresample-6.dll=b4ff013d1baf6bd7f7fb0d823bc61e98b9ad5ce2409c79b16a25bcfd57ca1d87;",
+              "video": true,
+              "video_reason": ""
+            },
+            "classic_display_aspect": 1.60000007535204,
+            "death_presentation_failure": "unavailable",
+            "decoders": {
+              "h264-aac": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "aac",
+                "audio_time_base_seconds": 2.08333333333333e-05,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 101655.3,
+                "decoded_audio": 480000,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1347584,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 48000,
+                "source_bytes": 52149,
+                "source_start_seconds": 0.0,
+                "video_codec": "h264",
+                "width": 192
+              },
+              "h264-anamorphic": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "aac",
+                "audio_time_base_seconds": 2.26757369614512e-05,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 852655.1,
+                "decoded_audio": 479999,
+                "decoded_video": 300,
+                "height": 720,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 25893968,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 44100,
+                "source_bytes": 97726,
+                "source_start_seconds": 0.0,
+                "video_codec": "h264",
+                "width": 1280
+              },
+              "h264-none": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "",
+                "audio_time_base_seconds": 0.0,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 88586.4,
+                "decoded_audio": 0,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1769472,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 0,
+                "source_bytes": 34829,
+                "source_start_seconds": 0.0,
+                "video_codec": "h264",
+                "width": 192
+              },
+              "vp8-none": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "",
+                "audio_time_base_seconds": 0.0,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 161125.8,
+                "decoded_audio": 0,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1769472,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 0,
+                "source_bytes": 39568,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp8",
+                "width": 192
+              },
+              "vp8-opus": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "opus",
+                "audio_time_base_seconds": 0.001,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 212553.8,
+                "decoded_audio": 480000,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1339392,
+                "reason": "",
+                "seconds": 10.008,
+                "source_audio_rate": 48000,
+                "source_bytes": 82630,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp8",
+                "width": 192
+              },
+              "vp8-vorbis": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "vorbis",
+                "audio_time_base_seconds": 0.001,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 189987.8,
+                "decoded_audio": 480000,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1347584,
+                "reason": "",
+                "seconds": 10.003,
+                "source_audio_rate": 48000,
+                "source_bytes": 50348,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp8",
+                "width": 192
+              },
+              "vp9-full": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "",
+                "audio_time_base_seconds": 0.0,
+                "color": "bt709-full",
+                "converter": "native-media-v1",
+                "decode_microseconds": 102718.7,
+                "decoded_audio": 0,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1769472,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 0,
+                "source_bytes": 24181,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp9",
+                "width": 192
+              },
+              "vp9-none": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "",
+                "audio_time_base_seconds": 0.0,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 23587.6,
+                "decoded_audio": 0,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1769472,
+                "reason": "",
+                "seconds": 10.0,
+                "source_audio_rate": 0,
+                "source_bytes": 23499,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp9",
+                "width": 192
+              },
+              "vp9-opus": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "opus",
+                "audio_time_base_seconds": 0.001,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 103205.6,
+                "decoded_audio": 480000,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1339392,
+                "reason": "",
+                "seconds": 10.008,
+                "source_audio_rate": 48000,
+                "source_bytes": 66560,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp9",
+                "width": 192
+              },
+              "vp9-vorbis": {
+                "aspect": 1.33333333333333,
+                "audio_codec": "vorbis",
+                "audio_time_base_seconds": 0.001,
+                "color": "bt709-limited",
+                "converter": "native-media-v1",
+                "decode_microseconds": 82272.1,
+                "decoded_audio": 480000,
+                "decoded_video": 300,
+                "height": 144,
+                "kind": "video_ready",
+                "native_diagnostics": "",
+                "ok": true,
+                "peak_queue_bytes": 1347584,
+                "reason": "",
+                "seconds": 10.003,
+                "source_audio_rate": 48000,
+                "source_bytes": 34278,
+                "source_start_seconds": 0.0,
+                "video_codec": "vp9",
+                "width": 192
+              }
+            },
+            "default_bank": {
+              "presets": "0:0,0:1,0:2,0:3,0:4,0:5,0:6,0:7,0:8,0:9,0:10,0:11,0:12,0:13,0:14,0:15,0:16,0:17,0:18,0:19,0:20,0:21,0:22,0:23,0:24,0:25,0:26,0:27,0:28,0:29,0:30,0:31,0:32,0:33,0:34,0:35,0:36,0:37,0:38,0:39,0:40,0:41,0:42,0:43,0:44,0:45,0:46,0:47,0:48,0:49,0:50,0:51,0:52,0:53,0:54,0:55,0:56,0:57,0:58,0:59,0:60,0:61,0:62,0:63,0:64,0:65,0:66,0:67,0:68,0:69,0:70,0:71,0:72,0:73,0:74,0:75,0:76,0:77,0:78,0:79,0:80,0:81,0:82,0:83,0:84,0:85,0:86,0:87,0:88,0:89,0:90,0:91,0:92,0:93,0:94,0:95,0:96,0:97,0:98,0:99,0:100,0:101,0:102,0:103,0:104,0:105,0:106,0:107,0:108,0:109,0:110,0:111,0:112,0:113,0:114,0:115,0:116,0:117,0:118,0:119,0:120,0:121,0:122,0:123,0:124,0:125,0:126,0:127,1:38,1:44,1:48,1:49,1:52,1:56,1:57,1:60,1:61,1:80,1:81,1:98,1:120,1:121,1:122,1:123,1:124,1:125,1:126,1:127,2:102,2:120,2:122,2:123,2:124,2:125,2:126,2:127,3:122,3:123,3:124,3:125,3:126,3:127,4:122,4:124,4:125,4:126,5:122,5:124,5:125,5:126,6:125,7:125,8:4,8:5,8:6,8:14,8:16,8:17,8:19,8:21,8:24,8:25,8:26,8:27,8:28,8:30,8:31,8:38,8:39,8:48,8:50,8:61,8:62,8:63,8:80,8:81,8:107,8:115,8:116,8:117,8:118,8:125,9:14,9:125,11:0,11:1,11:4,11:5,11:6,11:8,11:11,11:14,11:16,11:17,11:18,11:19,11:20,11:29,11:38,11:39,11:49,11:50,11:51,11:61,11:78,11:81,11:88,11:89,11:96,11:98,11:100,11:119,11:121,11:122,11:127,12:0,12:4,12:6,12:10,12:16,12:17,12:19,12:27,12:38,12:48,12:49,12:80,12:81,12:88,12:89,12:119,12:122,12:127,13:48,13:80,13:81,13:88,16:25,24:75,25:75,26:75,120:0,120:1,120:2,120:8,120:16,120:24,120:25,120:26,120:32,120:40,120:48,120:56,120:127,128:0,128:1,128:2,128:8,128:16,128:24,128:25,128:26,128:32,128:40,128:48,128:56,128:127,",
+              "sha256": "9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe"
+            },
+            "memory_after": {
+              "converter": "native-media-v1",
+              "kind": "memory",
+              "ok": true,
+              "peak_working_set_bytes": 823238656,
+              "private_bytes": 743858176,
+              "reason": "",
+              "working_set_bytes": 751124480
+            },
+            "memory_before": {
+              "converter": "native-media-v1",
+              "kind": "memory",
+              "ok": true,
+              "peak_working_set_bytes": 696770560,
+              "private_bytes": 589701120,
+              "reason": "",
+              "working_set_bytes": 599027712
+            },
+            "music": {
+              "peak_buffer_frames": 16383,
+              "peak_buffer_seconds": 0.3413125,
+              "peak_instances": 2,
+              "peak_prepare_microseconds": 135608,
+              "prepared": 5,
+              "requested_buffer_seconds": 0.25,
+              "retired": 5,
+              "underruns": 0
+            },
+            "native_loop_note_samples": [
+              72000
+            ],
+            "native_note_samples": [
+              [
+                60,
+                0
+              ],
+              [
+                67,
+                0
+              ],
+              [
+                64,
+                24000
+              ]
+            ],
+            "preparation": {
+              "decode_microseconds": 797960,
+              "decoded_exports": 31,
+              "generation": 2,
+              "source_bytes": 1474217
+            },
+            "video": {
+              "dropped_frames": 2,
+              "frames": 3158,
+              "peak_audio_buffer_frames": 16383,
+              "peak_audio_buffer_seconds": 0.371428571428571,
+              "peak_classic_queue": 16,
+              "presented_markers": [
+                {
+                  "presentation_clock": 2e-06,
+                  "source_pts": 0.0
+                },
+                {
+                  "presentation_clock": 0.040601,
+                  "source_pts": 0.033
+                },
+                {
+                  "presentation_clock": 0.073949,
+                  "source_pts": 0.067
+                }
+              ],
+              "terminals": 25,
+              "underruns": 0
+            }
+          },
+          "reload_count": 11,
+          "reload_ok": true,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "rendered",
+      "exit": 0,
+      "suite": "formula",
+      "elapsed_seconds": 22.4907283,
+      "fixture": "formula-v1",
+      "output": [
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-231ea8e6a37b455cb7e2ef53646e7c39/report.json"
+      ],
+      "started": "2026-11-23T01:49:09.1421129Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-231ea8e6a37b455cb7e2ef53646e7c39\\report.json",
+      "status": "passed",
+      "scenarios": [
+        {
+          "scenario": "formula",
+          "status": "passed",
+          "count": 84,
+          "ok": true,
+          "observations": null,
+          "reload_count": null,
+          "reload_ok": null,
+          "reload_observations": null,
+          "source_unchanged": true,
+          "source_guard": "Windows read handles sharing READ only held across child: source write opens denied"
+        }
+      ]
+    },
+    {
+      "mode": "export",
+      "exit": 0,
+      "suite": "m1-composition",
+      "elapsed_seconds": 166.5199193,
+      "configuration": "debug",
+      "output": [
+        "Windows debug export PASS: headless and rendered startup; evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-cce19117aa7949829ee2b12b97e654cd"
+      ],
+      "started": "2026-11-23T01:49:31.6340197Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-cce19117aa7949829ee2b12b97e654cd\\result.json",
+      "verified_ok": true,
+      "pck_sha256": "1411DF1A23FA0C411D080EC0545FDD21C38D791189DFDFDEC672DAE646ED3C05"
+    },
+    {
+      "mode": "export",
+      "exit": 0,
+      "suite": "m1-composition",
+      "elapsed_seconds": 154.0808271,
+      "configuration": "release",
+      "output": [
+        "Windows release export PASS: headless and rendered startup; evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-db2503c896444669809deafebd2a772e"
+      ],
+      "started": "2026-11-23T01:52:18.1551604Z",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-db2503c896444669809deafebd2a772e\\result.json",
+      "verified_ok": true,
+      "pck_sha256": "B8CA657AD2D20A852896A879A4A0F832AC7BDDF0D615335EB9622D0C2F351E2A"
+    }
+  ],
+  "post_checks": [
+    {
+      "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/qualification-e85dc1afd7934f549fffd44777fa2af0/result.json",
+      "selection": "harness-qualification",
+      "output": [
+        "headless pass qualified: exit 0, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-178e6a621825472f838db8ed3241a8c0/report.json",
+        "headless fail qualified: exit 1, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-061baa236e7d4430b9388a6fb615aa79/report.json",
+        "headless missing qualified: exit 2, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-9bc8485ae3544070b8ac34bd48374c8b/report.json",
+        "rendered pass qualified: exit 0, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-238ce02034a4486ea196fddd03d4b796/report.json",
+        "rendered fail qualified: exit 1, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-e58a1a8a8a6a432e8f23bed2bf11f25a/report.json",
+        "rendered missing qualified: exit 2, C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-5835685798ae4e9283bcccdcd734949f/report.json",
+        "Qualification evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/qualification-e85dc1afd7934f549fffd44777fa2af0/result.json"
+      ],
+      "ok": true
+    },
+    {
+      "expected_exit": 2,
+      "ok": true,
+      "mode": "headless",
+      "expected_status": "incomplete",
+      "actual_exit": 2,
+      "output": [
+        "headless incomplete: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-7ae5aaa920944f15a1822ac2d454fedb/report.json"
+      ],
+      "selection": "missing-source",
+      "actual_status": "incomplete",
+      "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-7ae5aaa920944f15a1822ac2d454fedb/report.json"
+    },
+    {
+      "expected_exit": 2,
+      "ok": true,
+      "mode": "headless",
+      "expected_status": "incomplete",
+      "actual_exit": 2,
+      "output": [
+        "headless incomplete: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-a8cd9ee6b19940f28e7ca096a91bc577/report.json"
+      ],
+      "selection": "wrong-fixture",
+      "actual_status": "incomplete",
+      "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-a8cd9ee6b19940f28e7ca096a91bc577/report.json"
+    },
+    {
+      "expected_exit": 2,
+      "ok": true,
+      "mode": "rendered",
+      "expected_status": "incomplete",
+      "actual_exit": 2,
+      "output": [
+        "rendered incomplete: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-95b0734d809446118c71be15e387c79f/report.json"
+      ],
+      "selection": "missing-source",
+      "actual_status": "incomplete",
+      "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-95b0734d809446118c71be15e387c79f/report.json"
+    },
+    {
+      "expected_exit": 2,
+      "ok": true,
+      "mode": "rendered",
+      "expected_status": "incomplete",
+      "actual_exit": 2,
+      "output": [
+        "rendered incomplete: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-688a35d32c0948c4af80e92eedd5bd39/report.json"
+      ],
+      "selection": "wrong-fixture",
+      "actual_status": "incomplete",
+      "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-688a35d32c0948c4af80e92eedd5bd39/report.json"
+    }
+  ],
+  "inventory_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-composition-inventory-92bc694a188c41769f683b0b5f1fde15\\result.json",
+  "manual_build": {
+    "pck_sha256": "86DDB29209C3CCDA3BCB105DB7BD24E4A6D1E6FE93DA02AA9E5A8EB6CC33CA7D",
+    "source_commit": "91f68988926ab7a3380a3f251e72ccf81c48f567",
+    "controlled_stock_settings_entry": "2-Preferences-Review.cmd",
+    "helper_sha256": "548EDFE58D98CE9A669326560967E7010DF1D5A1654BD83B3C12FEA45551104A",
+    "selftest": {
+      "commit": "91f68988926ab7a3380a3f251e72ccf81c48f567",
+      "display": "Windows",
+      "effective_skip": "authored",
+      "fixture": "m1-human-review-v1",
+      "menu_entered": true,
+      "route": "main_menu",
+      "stock_skip_selection": 0,
+      "window": "settings"
+    },
+    "human_results": "Pending; automated selftest is not human acceptance.",
+    "ordinary_entry": "1-Startup-Review.cmd",
+    "exe_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+    "fixture": "m1-human-review-v1",
+    "controlled_storage_entry": "3-Storage-Recovery-Review.cmd",
+    "fixture_difference": "Audit-only startup subclass exposes actual stock application settings and accepts disposable blocked-root/fallback inputs behind explicit flags; ordinary launcher delegates normal production startup. This PCK is a review fixture, not the unchanged export PCK."
+  },
+  "review_fixture_selftest": {
+    "finished": "2026-11-23T01:59:28.5035332Z",
+    "human_checks": "Pending",
+    "storage_fixture": {
+      "actual_root": "c:/godot/projects/daggerfall_gd/main_project/tests/.runs/m1-followup-91f6898-2026-11-22/manual-review/build/storage-fallback",
+      "expected_root": "c:/godot/projects/daggerfall_gd/main_project/tests/.runs/m1-followup-91f6898-2026-11-22/manual-review/build/storage-fallback",
+      "fallback_mode": "standard_fallback",
+      "fallback_route": "mandatory_setup",
+      "fixture": "m1-human-storage-review-v1",
+      "initial": {
+        "choices": [
+          "Retry",
+          "Use standard storage",
+          "Quit"
+        ],
+        "detail": "Windows error 3: The system cannot find the path specified.\r\n",
+        "kind": "io",
+        "ok": false,
+        "operation": "acquire",
+        "path": "C:/Godot/Projects/Daggerfall_GD/main_project/tests/.runs/m1-followup-91f6898-2026-11-22/manual-review/build/storage-fixture/PortableAppdata",
+        "route": "storage_recovery"
+      },
+      "initial_route": "storage_recovery",
+      "ok": true
+    },
+    "ok": true
+  },
+  "human_checks": "All requested manual acceptance checks reported PASS by the user on 2026-11-22",
+  "retention": {
+    "total_runs_logical_bytes_no_reparse": 2150124285,
+    "reviewed_above_2GiB": true,
+    "owned_runtime_roots_compacted": 34,
+    "removed_runtime_bytes": 7815611468,
+    "archives": [
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-dc720f84f1db4deca0c221b34af5236c\\evidence\\scenario-1\\result.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-dc720f84f1db4deca0c221b34af5236c\\evidence\\scenario-1\\result.json.gz",
+        "uncompressed_sha256": "1f1f6fa4b5f0aef47c408305e28e120a977b5e92e67d36677883e06674057db0",
+        "uncompressed_bytes": 16820701,
+        "status": null,
+        "ok": true,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      },
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-dc720f84f1db4deca0c221b34af5236c\\report.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-dc720f84f1db4deca0c221b34af5236c\\report.json.gz",
+        "uncompressed_sha256": "41989d320efa103e7d34da9f3dc1a2135619ffb7adb7e8056c5a4b770757538d",
+        "uncompressed_bytes": 23741622,
+        "status": "passed",
+        "ok": null,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      },
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-6323cefb643a45219d9ebedd8ef2f784\\evidence\\scenario-1\\result.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-6323cefb643a45219d9ebedd8ef2f784\\evidence\\scenario-1\\result.json.gz",
+        "uncompressed_sha256": "d0fb892616b402619ad8bf64f9cbe3c71729e222f618c78cb121d27d1a3c2418",
+        "uncompressed_bytes": 26844842,
+        "status": null,
+        "ok": true,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      },
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-6323cefb643a45219d9ebedd8ef2f784\\report.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-6323cefb643a45219d9ebedd8ef2f784\\report.json.gz",
+        "uncompressed_sha256": "39ed4336de235831a1c394430c75d3d9f6f89690a9d68d8c8c61e3292f26adce",
+        "uncompressed_bytes": 37746031,
+        "status": "passed",
+        "ok": null,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      },
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-72093c08711244ea9751320ff1ddfbd6\\evidence\\scenario-1\\result.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-72093c08711244ea9751320ff1ddfbd6\\evidence\\scenario-1\\result.json.gz",
+        "uncompressed_sha256": "68b56acfbb073fc0479af2cb0b43bebc3431111c49ceb80355fea80dcc60d9b2",
+        "uncompressed_bytes": 1747245,
+        "status": null,
+        "ok": true,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      },
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-72093c08711244ea9751320ff1ddfbd6\\report.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-72093c08711244ea9751320ff1ddfbd6\\report.json.gz",
+        "uncompressed_sha256": "8332f71f2e4478310c788029537ee036fe07805185d51f12cf21fa196fbbde47",
+        "uncompressed_bytes": 1927831,
+        "status": "passed",
+        "ok": null,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      },
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-2f95d56c7f1048beb9883fb37e7df4fa\\evidence\\scenario-1\\result.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-2f95d56c7f1048beb9883fb37e7df4fa\\evidence\\scenario-1\\result.json.gz",
+        "uncompressed_sha256": "8ae07712c4379cdf10724d0b23a4401f1d03ee0010d3353b05ba03ffff867375",
+        "uncompressed_bytes": 16820921,
+        "status": null,
+        "ok": true,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      },
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-2f95d56c7f1048beb9883fb37e7df4fa\\report.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-2f95d56c7f1048beb9883fb37e7df4fa\\report.json.gz",
+        "uncompressed_sha256": "0de0b6ab081276775883fb4e6f54c735d9f207409a0935dba48250ba398fa062",
+        "uncompressed_bytes": 23741938,
+        "status": "passed",
+        "ok": null,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      },
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-603f86ccc1464fd9bdcc3f32429f6158\\evidence\\scenario-1\\result.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-603f86ccc1464fd9bdcc3f32429f6158\\evidence\\scenario-1\\result.json.gz",
+        "uncompressed_sha256": "e5b7cf5d2a4691f213020fc6b8f65a309f7d90f7a7d174c6b082c734bc6f221e",
+        "uncompressed_bytes": 26845053,
+        "status": null,
+        "ok": true,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      },
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-603f86ccc1464fd9bdcc3f32429f6158\\report.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-603f86ccc1464fd9bdcc3f32429f6158\\report.json.gz",
+        "uncompressed_sha256": "7eb7e4329b5e03d148f2a1b0075e6cfcc5a5dbea7963d9c5dcef9ea404972a90",
+        "uncompressed_bytes": 37746338,
+        "status": "passed",
+        "ok": null,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      },
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-eb6fecdf5c0847cd99023669c5b804e4\\evidence\\scenario-1\\result.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-eb6fecdf5c0847cd99023669c5b804e4\\evidence\\scenario-1\\result.json.gz",
+        "uncompressed_sha256": "6b655c317ff16c0fb16a58b9dd6be72fa4a22114247f811042477cdfe64623e3",
+        "uncompressed_bytes": 1750760,
+        "status": null,
+        "ok": true,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      },
+      {
+        "pointer": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-eb6fecdf5c0847cd99023669c5b804e4\\report.json",
+        "archive": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-eb6fecdf5c0847cd99023669c5b804e4\\report.json.gz",
+        "uncompressed_sha256": "ce515ba032f9aa2d31e491e2cf889d542a4596c02f30f5181fbf969a46afc5ec",
+        "uncompressed_bytes": 1932401,
+        "status": "passed",
+        "ok": null,
+        "note": "Lossless original JSON; decompress and verify SHA-256. Historical failures unchanged."
+      }
+    ],
+    "manual_engine_cache_removed": [
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-followup-91f6898-2026-11-22\\manual-review\\engine-roaming",
+        "bytes": 1756433
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-followup-91f6898-2026-11-22\\manual-review\\engine-local",
+        "bytes": 3269734
+      }
+    ],
+    "retained_full_builds": 1,
+    "active_build": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-followup-91f6898-2026-11-22\\manual-review\\build",
+    "purpose": "User human M1 acceptance checks",
+    "expiry": "After user reports results; review by 2026-11-29",
+    "activity": "All owned verification/export/fixture children returned; final review-ready file written after final child exit. Human build/state excluded."
+  },
+  "production_fixes_performed": false,
+  "human_followup": {
+    "date": "2026-11-22",
+    "build": "91f6898 / m1-human-review-v1",
+    "evidence_type": "User-reported human observations; not new automated execution",
+    "ordinary_startup_picker_cancel_invalid_retry_keyboard_remembered_source": "PASS",
+    "cinematic_apply_reopen_relaunch": "PASS",
+    "blocked_portable_explicit_fallback_marker_retained": "PASS",
+    "unexpected_behavior": "None reported; user marked Pass and stated everything worked as expected",
+    "remaining_mandatory_M1_gates": [],
+    "conditional_limitations": [
+      "Other IMEs/Windows configurations unqualified; tested Microsoft Japanese IME passed"
+    ],
+    "formal_milestone_acceptance": "Explicitly accepted by the user on 2026-11-22: In that case, I accept M1",
+    "earlier_pending_fields": "manual_build and review_fixture_selftest retain snapshots captured before this human report",
+    "build_retention": "Eligible for activity-checked routine cleanup; user-created state/evidence protected; no deletion performed in this documentation update"
+  },
+  "physical_IME_human_followup": {
+    "date": "2026-11-22",
+    "build": "91f6898 / m1-ime-review-v1",
+    "evidence_type": "User-reported physical IME observations, supplemented by retained owner-response log",
+    "IME": "Microsoft Japanese IME",
+    "Windows_version": "Not supplied",
+    "compatibility_mode": "Not supplied",
+    "notepad": "PASS",
+    "composition_enter_then_separate_submit": "PASS",
+    "escape_composition_before_prompt_cancel": "PASS",
+    "backspace_and_focus_no_unintended_response": "PASS",
+    "english_and_glyph_candidate_display": "PASS",
+    "unexpected_behavior": "User reported 0; interpreted as no unexpected behavior/responses, not zero total intentional owner responses",
+    "response_log": {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\m1-ime-review-2026-11-22\\human-ime-responses.json",
+      "sha256": "141b00ae1e90ae8bf959c55b98637ceb7c7ddf5b0de89bf4c2130bca3b2b107d",
+      "entries": 4,
+      "all_callbacks_report_empty_IME": true
+    },
+    "qualification": "Tested local Windows / Microsoft Japanese IME configuration and stock application-scoped prompt",
+    "limits": [
+      "Other IMEs and Windows configurations not qualified",
+      "No Japanese game locale added",
+      "Later gameplay input-owner integrations remain open"
+    ],
+    "production_code_fixes": false,
+    "retention": "Human log protected; review build now eligible for activity-checked cleanup; no build deletion in this documentation update"
+  },
+  "formal_acceptance": {
+    "date": "2026-11-22",
+    "user_statement": "In that case, I accept M1",
+    "source_revision": "91f68988926ab7a3380a3f251e72ccf81c48f567",
+    "scope": "Audited M1 deliverables and completed named manual gates; tested Microsoft Japanese IME configuration",
+    "later_gates": "Retained at their documented milestone/provider checkpoints",
+    "next_task_authorized": false
+  }
+}

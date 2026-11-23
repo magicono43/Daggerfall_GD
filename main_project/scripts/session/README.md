@@ -67,7 +67,14 @@ input, apply fixed shortcut priority and remove simultaneous quicksave/quickload
 Only stock Escape/options and Godot UI navigation are connected here. Real
 gameplay bindings, owner delivery, cursor capture and device policy join IMP-011.
 Prompt text uses Godot LineEdit composition ownership and a submission guard.
-Actual Windows language/IME qualification remains open.
+The user reported a physical Microsoft Japanese IME PASS on 2026-11-22 using
+`91f6898 / m1-ime-review-v1`: candidate/hiragana Enter commits without submitting,
+separate Enter submits once, Escape resolves composition before prompt cancel,
+and Backspace/focus switching cause no unintended response. English text and
+glyph/candidate display also passed. This qualifies the tested local configuration
+and stock application-scoped prompt; other IMEs/Windows configurations and later
+gameplay input-provider integrations remain unqualified. See
+[M1 follow-up evidence](../../../design_docs/development/evidence/M1-ACCEPTANCE-FOLLOWUP-91f6898-2026-11-22.md).
 
 Cadence requires explicit session-fixed interval, dependency-ordered checked
 consumers and a positive budget counted in consumer deliveries. Only eligible

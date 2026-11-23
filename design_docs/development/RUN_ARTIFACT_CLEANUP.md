@@ -1,5 +1,48 @@
 # Verification run artifact cleanup
 
+## 2026-11-22 optional physical IME review
+
+**Human-result update:** The user reports all requested Japanese IME checks PASS.
+The human response log is preserved separately with a verified hash. This review
+build is now eligible for activity-checked cleanup, protecting unique user state
+and evidence; no build deletion was performed while recording the results.
+
+`main_project/tests/.runs/m1-ime-review-2026-11-22/build` is retained for the
+user-requested physical Windows IME test, expiring after results or for review
+on 2026-11-29. Its owned rendered smoke child exited before 208,688,321 logical
+bytes of copied project/import caches were removed; the installed-template
+junction was unlinked without following it. Build/source hashes, capture,
+success/failure logs and guide remain. Total `.runs` retention measured
+2,458,782,224 bytes without following reparse points and was reviewed: the new
+IME build has a concrete active purpose; prior human-review build/state remains
+untouched and eligible for later activity-checked cleanup. Preserve all unique
+human state/evidence. See its `BUILD.json` and `cleanup.json`. Physical IME
+qualification remains pending; no production fix was made.
+
+## 2026-11-22 independent M1 acceptance follow-up
+
+**Human-result update:** The user has reported all requested checks PASS. The
+review build below is now eligible for routine activity-checked cleanup, with
+user-created state/evidence protected. This documentation update did not delete
+the build or change its historical cleanup manifests.
+
+The [follow-up audit](evidence/M1-ACCEPTANCE-FOLLOWUP-91f6898-2026-11-22.md)
+compacted 34 completed verification/export runtime roots, removing 7,815,611,468
+logical bytes after owned children exited. Reports/logs/captures were retained
+with pre/post SHA-256 checks; twelve large JSON outputs have verified lossless
+gzip archives and explicit pointers. Template junctions were unlinked without
+following installed targets. Final `.runs` retention measured 2,150,124,285 bytes
+without following reparse points; retention above 2 GiB was reviewed.
+
+One build is intentionally active for the user's outstanding human checks:
+`main_project/tests/.runs/m1-followup-91f6898-2026-11-22/manual-review/build`.
+Remove after the user reports results; review retention by **2026-11-29**.
+Protect user-created review state and evidence. No other completed full build
+from this audit remains. Exact plans, preserved hashes, archive pointers and
+activity evidence are in the audit's `cleanup-*.json`, `retention-final.json`
+and per-wrapper `followup-cleanup.json`. Rebuild archived runtime paths rather
+than trying to launch them. No security settings or external data were changed.
+
 ## 2026-11-22 M1 audit remediation
 
 All owned matrix, export and qualification commands returned before compaction.
