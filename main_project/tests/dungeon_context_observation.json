@@ -1,0 +1,3161 @@
+{
+	"environment_blocks": [
+		{
+			"block": "block-0926",
+			"markers": [
+				{
+					"address": 12693,
+					"id": "record-00144",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000003.RDB",
+			"source_sha256": "419a5532ad843e4181baa587fec8b83af34e0b275c5ab9db609e28006fe350b4"
+		},
+		{
+			"block": "block-0927",
+			"markers": [
+				{
+					"address": 22418,
+					"id": "record-00263",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000004.RDB",
+			"source_sha256": "e23828dd991fd8f39b52443058504415c7262098d3038c66ee2519960ab3752f"
+		},
+		{
+			"block": "block-0928",
+			"markers": [
+				{
+					"address": 21194,
+					"id": "record-00036",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000005.RDB",
+			"source_sha256": "a7f6cc2e199c2bf5f5f62748a2562e4b6c70406657cf41b690b72e7234103a27"
+		},
+		{
+			"block": "block-0929",
+			"markers": [
+				{
+					"address": 11094,
+					"id": "record-00056",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000006.RDB",
+			"source_sha256": "78e16cf07802984b8ad96eb0bbc496f25f73783379925f1c4f6b45d81e294f11"
+		},
+		{
+			"block": "block-0931",
+			"markers": [
+				{
+					"address": 26159,
+					"id": "record-00220",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000008.RDB",
+			"source_sha256": "1aac471703516f73c956ace9d937c7728ff039e8e6cb1c60e0fef9e87ac16ed4"
+		},
+		{
+			"block": "block-0932",
+			"markers": [
+				{
+					"address": 16334,
+					"id": "record-00021",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000009.RDB",
+			"source_sha256": "b78e79a6605d88efb1ca1da26369102321b2b1e89b0e6fb5d1e9ef3c620ba885"
+		},
+		{
+			"block": "block-0933",
+			"markers": [
+				{
+					"address": 19305,
+					"id": "record-00121",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000010.RDB",
+			"source_sha256": "6aa7b125ff00af0157c5fd977604fad242c2157dda493e47b81097b2d1eede40"
+		},
+		{
+			"block": "block-0934",
+			"markers": [
+				{
+					"address": 19305,
+					"id": "record-00136",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000011.RDB",
+			"source_sha256": "5bf3a4e07cb46b7534dee127105442b568b58975b1a7236d03b07c40360dabaa"
+		},
+		{
+			"block": "block-0935",
+			"markers": [
+				{
+					"address": 9596,
+					"id": "record-00206",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000012.RDB",
+			"source_sha256": "092840e2ab2cb6b7a96d6f0f226e03d337b4dce505e149188d040ea6cb254548"
+		},
+		{
+			"block": "block-0936",
+			"markers": [
+				{
+					"address": 20410,
+					"id": "record-00075",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000013.RDB",
+			"source_sha256": "68a197ecadf84bd36d88c03d0810c0f69ee505671b72a5b43aacdc6de3cebd4d"
+		},
+		{
+			"block": "block-0937",
+			"markers": [
+				{
+					"address": 21574,
+					"id": "record-00147",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000014.RDB",
+			"source_sha256": "dcacc719f4e7a218d569dc3348f9e8d4109c1a6da675d61df162aeceff083d05"
+		},
+		{
+			"block": "block-0938",
+			"markers": [
+				{
+					"address": 18794,
+					"id": "record-00207",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000015.RDB",
+			"source_sha256": "6e0f22c9d6be265febcf7ad68a3b7deb897601951dbb6e246f4e4d7329065732"
+		},
+		{
+			"block": "block-0939",
+			"markers": [
+				{
+					"address": 18794,
+					"id": "record-00002",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000016.RDB",
+			"source_sha256": "f1d8eac562846ab642dbabba7809dcec0bfa6eeefa7a4e744a2d06787ae5d9ba"
+		},
+		{
+			"block": "block-0940",
+			"markers": [
+				{
+					"address": 18794,
+					"id": "record-00151",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000017.RDB",
+			"source_sha256": "3777b081444a746493309d0b6f020e1636fadd82de204f51e5c2a23d47132b42"
+		},
+		{
+			"block": "block-0941",
+			"markers": [
+				{
+					"address": 10384,
+					"id": "record-00005",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000018.RDB",
+			"source_sha256": "8b7a2e9736dc6a9a27bc57e5bfc1884784418b630a88bac5ac7e022b35ed9543"
+		},
+		{
+			"block": "block-0942",
+			"markers": [
+				{
+					"address": 16421,
+					"id": "record-00047",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000019.RDB",
+			"source_sha256": "f7ed3435fe34b6513e4a81233e963a994c9ba3581e374b5b895c9ee924256586"
+		},
+		{
+			"block": "block-0943",
+			"markers": [
+				{
+					"address": 16421,
+					"id": "record-00181",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000020.RDB",
+			"source_sha256": "dd594ebbcfcb01f2b2220ee27a795e3c72fd3f1b69b7b4a5f9010d319491b624"
+		},
+		{
+			"block": "block-0944",
+			"markers": [
+				{
+					"address": 15116,
+					"id": "record-00184",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000021.RDB",
+			"source_sha256": "57f94aa5fa9f08fc33738673f22d26314343993df3f5349ac5929f9804f2eb2a"
+		},
+		{
+			"block": "block-0945",
+			"markers": [
+				{
+					"address": 25463,
+					"id": "record-00159",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000022.RDB",
+			"source_sha256": "ddb23b25b44c7056700dca44ea90d50be52de35a757d40305fb8c97b79eeb004"
+		},
+		{
+			"block": "block-0946",
+			"markers": [
+				{
+					"address": 26399,
+					"id": "record-00169",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000023.RDB",
+			"source_sha256": "3b38f3cf125a8a8d2d80838b84f6c99266c95daa4b55e803349d70e380497988"
+		},
+		{
+			"block": "block-0947",
+			"markers": [
+				{
+					"address": 11605,
+					"id": "record-00065",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000024.RDB",
+			"source_sha256": "eb1c451b44eae05db6715d2a585298f732cc70b5b51cc5c0a8aadf6bd5400e53"
+		},
+		{
+			"block": "block-0948",
+			"markers": [
+				{
+					"address": 19963,
+					"id": "record-00199",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000025.RDB",
+			"source_sha256": "d6aee91a259dcb14471602f71507cee441135f50e1f75cde2c74e7c740e8c143"
+		},
+		{
+			"block": "block-0949",
+			"markers": [
+				{
+					"address": 20257,
+					"id": "record-00020",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000026.RDB",
+			"source_sha256": "01fade818b3387b8d5c37a9131178a4c6bdb6caab7c0a755ed454d76f9c19274"
+		},
+		{
+			"block": "block-0950",
+			"markers": [
+				{
+					"address": 19270,
+					"id": "record-00145",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000027.RDB",
+			"source_sha256": "dd61bc186da7bc93f38bd3ae8f6a75a30d003e6c00cbf9bfb333442d169de860"
+		},
+		{
+			"block": "block-0951",
+			"markers": [
+				{
+					"address": 19270,
+					"id": "record-00143",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000028.RDB",
+			"source_sha256": "db1820f5779f6823ef0064f7a28d73d0c47e7e6f3716b59cbc390fea9b306a21"
+		},
+		{
+			"block": "block-0952",
+			"markers": [
+				{
+					"address": 19270,
+					"id": "record-00166",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000029.RDB",
+			"source_sha256": "b68c9cec612941ed0b2c5f7ca1692dbf1fdf6a9fec62dd54a2f0c2a1e7780319"
+		},
+		{
+			"block": "block-0953",
+			"markers": [
+				{
+					"address": 16041,
+					"id": "record-00055",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000030.RDB",
+			"source_sha256": "9ced9c66f3065e24f3eb3018a8a42a2cc72d03d2b3baede3d71c6f8aec777174"
+		},
+		{
+			"block": "block-0954",
+			"markers": [
+				{
+					"address": 19329,
+					"id": "record-00071",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000031.RDB",
+			"source_sha256": "2661e2eba8287045ff2a61edc33091d35cd23f3e863155a9759faf243d144b54"
+		},
+		{
+			"block": "block-0955",
+			"markers": [
+				{
+					"address": 20333,
+					"id": "record-00032",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000032.RDB",
+			"source_sha256": "32c92c09bc5b7b3d3ae9616bac1396a4f9f6987d085b14afa9cf630772a39c9d"
+		},
+		{
+			"block": "block-0956",
+			"markers": [
+				{
+					"address": 19384,
+					"id": "record-00241",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000033.RDB",
+			"source_sha256": "8ec9e2cb11987b33f016cbfef45402ad95f27e059a69129816a8bd862b739f2a"
+		},
+		{
+			"block": "block-0957",
+			"markers": [
+				{
+					"address": 28142,
+					"id": "record-00233",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000034.RDB",
+			"source_sha256": "a22a3fc9b10612aabf7a5c6a77e9bb486c5d0be2cd196f90e573bffa5d36f5a2"
+		},
+		{
+			"block": "block-0958",
+			"markers": [
+				{
+					"address": 19384,
+					"id": "record-00213",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000035.RDB",
+			"source_sha256": "a9d3d66d05b2c74bd2cb552039fef542607e30ae6bc045e8571d4d8910ba7d6a"
+		},
+		{
+			"block": "block-0959",
+			"markers": [
+				{
+					"address": 14100,
+					"id": "record-00146",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000036.RDB",
+			"source_sha256": "db8fc1fb119a48ba8a89ea1f93532bf461c1c9e2cce7e105f2483548fd8b9e14"
+		},
+		{
+			"block": "block-0960",
+			"markers": [
+				{
+					"address": 14100,
+					"id": "record-00227",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000037.RDB",
+			"source_sha256": "dbc9a410fcd41aba9afa17335b82a381b8a064503d04825d2205501fe0a58a86"
+		},
+		{
+			"block": "block-0961",
+			"markers": [
+				{
+					"address": 14100,
+					"id": "record-00235",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000038.RDB",
+			"source_sha256": "734bfac40a39977485802bacee5b1f7b5469e4569e35369bced1a8407a609249"
+		},
+		{
+			"block": "block-0962",
+			"markers": [
+				{
+					"address": 14404,
+					"id": "record-00155",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000039.RDB",
+			"source_sha256": "cb29660a6f93fbf4c7eb3d53383ea4923b9aee66acbc3e89ff2b1bc7fd6a4cc9"
+		},
+		{
+			"block": "block-0963",
+			"markers": [
+				{
+					"address": 20425,
+					"id": "record-00123",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000040.RDB",
+			"source_sha256": "512a5e1d9aacbe7b7004f02bdfbf105c8fe9fecc9792200bbc7becad30ed33a1"
+		},
+		{
+			"block": "block-0964",
+			"markers": [
+				{
+					"address": 14404,
+					"id": "record-00038",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000041.RDB",
+			"source_sha256": "13d4e8f57e2636180fe52ccf4724b1cdad7e5b4cc8259c6f9ff656a9454ac70c"
+		},
+		{
+			"block": "block-0965",
+			"markers": [
+				{
+					"address": 21493,
+					"id": "record-00140",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000042.RDB",
+			"source_sha256": "1de9ab2bfe99c8aa0dc947f3f66fc2ff2c311485e76f05dc13072b06921cd4a9"
+		},
+		{
+			"block": "block-0966",
+			"markers": [
+				{
+					"address": 21493,
+					"id": "record-00002",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000043.RDB",
+			"source_sha256": "a65db50f9b627e1d3d464748a12058b9e6b8d372b24e8634b1ab67cc13d62e24"
+		},
+		{
+			"block": "block-0967",
+			"markers": [
+				{
+					"address": 21493,
+					"id": "record-00003",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000044.RDB",
+			"source_sha256": "e6ed7c667e9ef0bb9f1709cdad848244bdd38fc7517b79c86f6d7b69cd83b5d2"
+		},
+		{
+			"block": "block-0968",
+			"markers": [
+				{
+					"address": 17170,
+					"id": "record-00093",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000045.RDB",
+			"source_sha256": "d54e9ff672404f02d37906d8366340fd58c6934ec3b7f981f20e3b4111a17f23"
+		},
+		{
+			"block": "block-0969",
+			"markers": [
+				{
+					"address": 18069,
+					"id": "record-00063",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000046.RDB",
+			"source_sha256": "6bee03cad141ab0351996318b70ba4eff5221648c5c632874653f7f1c91f1333"
+		},
+		{
+			"block": "block-0970",
+			"markers": [
+				{
+					"address": 20056,
+					"id": "record-00044",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000047.RDB",
+			"source_sha256": "eb80e5706ee675fd49f869d15b93852f88016a880569f885ff15f32a42aa8865"
+		},
+		{
+			"block": "block-0972",
+			"markers": [
+				{
+					"address": 19763,
+					"id": "record-00058",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000049.RDB",
+			"source_sha256": "c7f9b1d849f2c6d6bba18deaef32660521f0dc86bbed7082ff0aa537ad756194"
+		},
+		{
+			"block": "block-0973",
+			"markers": [
+				{
+					"address": 20123,
+					"id": "record-00000",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000050.RDB",
+			"source_sha256": "bb7d1e728dff5fed6cad8846a0fc5fee25fde942c16ea97d975f73bfba4f2849"
+		},
+		{
+			"block": "block-0974",
+			"markers": [
+				{
+					"address": 17572,
+					"id": "record-00189",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000051.RDB",
+			"source_sha256": "5f0e417564df427ac9422a3f7a4285f0e3c053f6c7f4f23164307a12e581ef51"
+		},
+		{
+			"block": "block-0976",
+			"markers": [
+				{
+					"address": 22377,
+					"id": "record-00177",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000053.RDB",
+			"source_sha256": "2907f4f1473e82d4b6315e2c7161829fe3d98b4bbc93c581e8fecc2cbe9652ac"
+		},
+		{
+			"block": "block-0977",
+			"markers": [
+				{
+					"address": 15824,
+					"id": "record-00092",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000054.RDB",
+			"source_sha256": "ae540f4babfc253c790a365f9567f348be79f94f797d48cc0a72565feb40dc19"
+		},
+		{
+			"block": "block-0978",
+			"markers": [
+				{
+					"address": 19824,
+					"id": "record-00040",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000055.RDB",
+			"source_sha256": "2ffd457fbd50b92bb280da65d9c9947b28f33ece86d1c85f07ee0235dde67c30"
+		},
+		{
+			"block": "block-0979",
+			"markers": [
+				{
+					"address": 19647,
+					"id": "record-00061",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000056.RDB",
+			"source_sha256": "077d8418d91105bc60aae55153cbb886777274b52e2462ad0720d7a8c4f9f5e0"
+		},
+		{
+			"block": "block-0980",
+			"markers": [
+				{
+					"address": 11354,
+					"id": "record-00087",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000057.RDB",
+			"source_sha256": "aa307f555b69152b37319148cef1b747ba57752fca5113c48bbaaa7da2669288"
+		},
+		{
+			"block": "block-0981",
+			"markers": [
+				{
+					"address": 9644,
+					"id": "record-00018",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000058.RDB",
+			"source_sha256": "928bfd55a3aa37e577ee738bd9deac1e046841be400b0f90882ec4be28a488cc"
+		},
+		{
+			"block": "block-0982",
+			"markers": [
+				{
+					"address": 17450,
+					"id": "record-00042",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000059.RDB",
+			"source_sha256": "b4cdd15a68b0c38cab7e6317076c7741890f4065979b16d04497343e62dbd2da"
+		},
+		{
+			"block": "block-0983",
+			"markers": [
+				{
+					"address": 13733,
+					"id": "record-00120",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000060.RDB",
+			"source_sha256": "b6fd93e357e4706fd4e9c6bee411ea5128ad618aadebb633b5c4e1e7b887006c"
+		},
+		{
+			"block": "block-0984",
+			"markers": [
+				{
+					"address": 18035,
+					"id": "record-00075",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000061.RDB",
+			"source_sha256": "42cc7ead5a96ad1db77f014eacc236cfc00545e0816215238240307300574ee0"
+		},
+		{
+			"block": "block-0985",
+			"markers": [
+				{
+					"address": 18969,
+					"id": "record-00031",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000062.RDB",
+			"source_sha256": "9512bdb2aec4062b18114dfe9531d6f8d7944350470d3ab6c009d13932dcfe53"
+		},
+		{
+			"block": "block-0986",
+			"markers": [
+				{
+					"address": 14154,
+					"id": "record-00116",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000063.RDB",
+			"source_sha256": "d2c380c87790538f2dc4261c84bbd02511937e5d468aa3b07ef0c40e317111bd"
+		},
+		{
+			"block": "block-0987",
+			"markers": [
+				{
+					"address": 19350,
+					"id": "record-00108",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000064.RDB",
+			"source_sha256": "50b74b14fc3ce949555bcd7cb51ea2bbbc0cef2fc7c2f5fe4fc557ab4a0748fe"
+		},
+		{
+			"block": "block-0988",
+			"markers": [
+				{
+					"address": 22014,
+					"id": "record-00054",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000065.RDB",
+			"source_sha256": "160b0d42c57343032a29ef8f64322317dd60543e16dd694bc02f4bfcdadae229"
+		},
+		{
+			"block": "block-0989",
+			"markers": [
+				{
+					"address": 12968,
+					"id": "record-00091",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000066.RDB",
+			"source_sha256": "516ec2343b184cb39cf7ed0b22755bfd2b2b589f9179cd6cb50b5d01d622ec3f"
+		},
+		{
+			"block": "block-0990",
+			"markers": [
+				{
+					"address": 17418,
+					"id": "record-00050",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000067.RDB",
+			"source_sha256": "966fef9a55871cdc01bb9e3cc3404079c64ef37e635c0a9e3cf205c5d04112ba"
+		},
+		{
+			"block": "block-0991",
+			"markers": [
+				{
+					"address": 17994,
+					"id": "record-00053",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000068.RDB",
+			"source_sha256": "c1acfa13dca16af83636f918cbcb9698601f37fb9de33307ad530bc7ff13dc02"
+		},
+		{
+			"block": "block-0992",
+			"markers": [
+				{
+					"address": 27550,
+					"id": "record-00188",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000069.RDB",
+			"source_sha256": "a66e9973f59395ec8fc72bf42f9aaad4a3debb4755c0b6923b227db2d89fd1f9"
+		},
+		{
+			"block": "block-0993",
+			"markers": [
+				{
+					"address": 27692,
+					"id": "record-00223",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000070.RDB",
+			"source_sha256": "6b7d79e127db2edf0aa3bb9871989cfe3335e803816ca52a56f4add01268ed12"
+		},
+		{
+			"block": "block-0994",
+			"markers": [
+				{
+					"address": 28792,
+					"id": "record-00085",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000071.RDB",
+			"source_sha256": "9bc643b5df56bfd69c437f40d506d95500e37e4898864935a9052a83f8737673"
+		},
+		{
+			"block": "block-0995",
+			"markers": [
+				{
+					"address": 26300,
+					"id": "record-00001",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000072.RDB",
+			"source_sha256": "a427a522e38fc9c80dfe51b59a7c020c57018aeb9957185855aa7e649d588067"
+		},
+		{
+			"block": "block-0996",
+			"markers": [
+				{
+					"address": 26553,
+					"id": "record-00108",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000073.RDB",
+			"source_sha256": "11705ab86ab95ed766be3122cc018b40504c356ff3e784d3178199eb2cf69f06"
+		},
+		{
+			"block": "block-0997",
+			"markers": [
+				{
+					"address": 27042,
+					"id": "record-00181",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000074.RDB",
+			"source_sha256": "abd68ff04d7e4e36c2be0932dffd852dbe2596ad4b1f97e286f0c58020c0c7f0"
+		},
+		{
+			"block": "block-0998",
+			"markers": [
+				{
+					"address": 24879,
+					"id": "record-00001",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000075.RDB",
+			"source_sha256": "52dcf8d5b619d544e7a735059d5fb195efcc36b66682e66b6ae515210547a1a5"
+		},
+		{
+			"block": "block-0999",
+			"markers": [
+				{
+					"address": 24879,
+					"id": "record-00108",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000076.RDB",
+			"source_sha256": "5c85b8a3ea3c99dc6ee0b30c5a6866056b5d7fd764efbed392ece42061d42a92"
+		},
+		{
+			"block": "block-1000",
+			"markers": [
+				{
+					"address": 24879,
+					"id": "record-00005",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000077.RDB",
+			"source_sha256": "2e21f86c59423cc93d3597f5d8e7d125a6b9e36aaa198e9a66df9bef4f1a41ef"
+		},
+		{
+			"block": "block-1001",
+			"markers": [
+				{
+					"address": 20620,
+					"id": "record-00099",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000078.RDB",
+			"source_sha256": "5b580cd7ef8e53014f8ad4249c6734298aa242a88847d70db572a9d7ed336d13"
+		},
+		{
+			"block": "block-1002",
+			"markers": [
+				{
+					"address": 22096,
+					"id": "record-00129",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000079.RDB",
+			"source_sha256": "fd45ca5bb8ffd2d6da7295e018ffb980bc00fca43db512dfb512608494155519"
+		},
+		{
+			"block": "block-1003",
+			"markers": [
+				{
+					"address": 23029,
+					"id": "record-00003",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000080.RDB",
+			"source_sha256": "fbd508c820624b02ff467c2d29ce44c849f8a38037180e043aae2ebb22f0d0f5"
+		},
+		{
+			"block": "block-1004",
+			"markers": [
+				{
+					"address": 28728,
+					"id": "record-00087",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000081.RDB",
+			"source_sha256": "13a8e383a44cdea70cba224d2ce7e45c772207221fb2dcbad8c2aa42b267b7b6"
+		},
+		{
+			"block": "block-1005",
+			"markers": [
+				{
+					"address": 28728,
+					"id": "record-00000",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000082.RDB",
+			"source_sha256": "0570cbe475d49334281ed5d44488e98412dca65f56936c010180bfef3e48b3c2"
+		},
+		{
+			"block": "block-1006",
+			"markers": [
+				{
+					"address": 28728,
+					"id": "record-00220",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000083.RDB",
+			"source_sha256": "22186fee8adbca14c27caa67ffd7a0811086d8df8cc9b0de0463a605452b68e7"
+		},
+		{
+			"block": "block-1007",
+			"markers": [
+				{
+					"address": 26932,
+					"id": "record-00226",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000084.RDB",
+			"source_sha256": "d28862c470fdea03a8b23685965c93c4f62da9ae7e230e04cd6f563652b60cc4"
+		},
+		{
+			"block": "block-1008",
+			"markers": [
+				{
+					"address": 31347,
+					"id": "record-00104",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000085.RDB",
+			"source_sha256": "19b693f60700e870cc6d1ca64bf4add8e58ab0ad732b29a60cb3663aa9679873"
+		},
+		{
+			"block": "block-1009",
+			"markers": [
+				{
+					"address": 36192,
+					"id": "record-00003",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000086.RDB",
+			"source_sha256": "d317fb12b4e7700e89f51b0cf3be137f50268ad12057a3368b94976229411492"
+		},
+		{
+			"block": "block-1010",
+			"markers": [
+				{
+					"address": 22743,
+					"id": "record-00149",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000087.RDB",
+			"source_sha256": "746283a658286b29135d0439b5ec3b6f3a97d6eadfd428dadcbec96cd6309365"
+		},
+		{
+			"block": "block-1011",
+			"markers": [
+				{
+					"address": 24077,
+					"id": "record-00007",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000088.RDB",
+			"source_sha256": "e4de7bb417df7b6a0747713a6bfbee85197b88b976fc9cbe70b86e548a724da5"
+		},
+		{
+			"block": "block-1012",
+			"markers": [
+				{
+					"address": 25885,
+					"id": "record-00133",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000089.RDB",
+			"source_sha256": "eb8c51839fc303b95c3a56b448617469a5f18654744e14ab67437271d50a2701"
+		},
+		{
+			"block": "block-1013",
+			"markers": [
+				{
+					"address": 46743,
+					"id": "record-00272",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000090.RDB",
+			"source_sha256": "4f3aca8ad14943e1ef4251d08c97556fa7f2b9739e58d676555aef208124baae"
+		},
+		{
+			"block": "block-1014",
+			"markers": [
+				{
+					"address": 16068,
+					"id": "record-00163",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000091.RDB",
+			"source_sha256": "e3b0c4d5b4219aa31dc62727e980d873e9bdf14c8dd8cc44aebcec3fcb789e68"
+		},
+		{
+			"block": "block-1015",
+			"markers": [
+				{
+					"address": 16068,
+					"id": "record-00212",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "N0000092.RDB",
+			"source_sha256": "378d8692459f57df002561c64dcfb1ecbba4691c10021e485a6d28013a502259"
+		},
+		{
+			"block": "block-1016",
+			"markers": [
+				{
+					"address": 19185,
+					"id": "record-00004",
+					"magnitude": 0,
+					"native_height": -496,
+					"sound_index": 62
+				}
+			],
+			"name": "W0000000.RDB",
+			"source_sha256": "dfa34ee5725e56f2999f03870f1a7ef218376377617578fceaebdefd9e13caf7"
+		},
+		{
+			"block": "block-1018",
+			"markers": [
+				{
+					"address": 19384,
+					"id": "record-00241",
+					"magnitude": 0,
+					"native_height": -240,
+					"sound_index": 30
+				}
+			],
+			"name": "W0000002.RDB",
+			"source_sha256": "a7fe06368e375660b1ae47670ba3e585f7738b69625a54f27c48a822faa6c632"
+		},
+		{
+			"block": "block-1019",
+			"markers": [
+				{
+					"address": 12693,
+					"id": "record-00144",
+					"magnitude": 0,
+					"native_height": -448,
+					"sound_index": 56
+				}
+			],
+			"name": "W0000003.RDB",
+			"source_sha256": "441de9d9c7f02a8502ae9a1c06253c42ec030573994a80e060c99d65aeea6579"
+		},
+		{
+			"block": "block-1020",
+			"markers": [
+				{
+					"address": 14100,
+					"id": "record-00145",
+					"magnitude": 0,
+					"native_height": -288,
+					"sound_index": 36
+				}
+			],
+			"name": "W0000004.RDB",
+			"source_sha256": "84d1d79014d023bdc749325aa7b8b269f1ae7afb0fef6f7d24bd943ce6e2671c"
+		},
+		{
+			"block": "block-1021",
+			"markers": [
+				{
+					"address": 11094,
+					"id": "record-00218",
+					"magnitude": 0,
+					"native_height": -496,
+					"sound_index": 62
+				}
+			],
+			"name": "W0000005.RDB",
+			"source_sha256": "9176319e5e117966bfa0b2287a8b2da16efa034b0be26347c4059f57ec4cdfb5"
+		},
+		{
+			"block": "block-1022",
+			"markers": [
+				{
+					"address": 17205,
+					"id": "record-00158",
+					"magnitude": 0,
+					"native_height": -496,
+					"sound_index": 62
+				}
+			],
+			"name": "W0000006.RDB",
+			"source_sha256": "adf32dfe19e5df976062831b937683a610a0ff17b3cb4d30d43259cc8571d7d0"
+		},
+		{
+			"block": "block-1023",
+			"markers": [
+				{
+					"address": 17205,
+					"id": "record-00159",
+					"magnitude": 0,
+					"native_height": -488,
+					"sound_index": 61
+				}
+			],
+			"name": "W0000007.RDB",
+			"source_sha256": "998253a111ba693d64f75244d424c1d428e8843b715bd065d48b98a6916f5a71"
+		},
+		{
+			"block": "block-1024",
+			"markers": [
+				{
+					"address": 16334,
+					"id": "record-00016",
+					"magnitude": 0,
+					"native_height": -384,
+					"sound_index": 48
+				}
+			],
+			"name": "W0000008.RDB",
+			"source_sha256": "f0fec73f8ab5d556eb6d5d6d55b59e01ba559ad073ddc876cb62d9385645e1d1"
+		},
+		{
+			"block": "block-1025",
+			"markers": [
+				{
+					"address": 28196,
+					"id": "record-00166",
+					"magnitude": 0,
+					"native_height": -272,
+					"sound_index": 34
+				}
+			],
+			"name": "W0000009.RDB",
+			"source_sha256": "54fa78e2501fd69e33f2dd23ee2ee385b7671ab14c07c64e9e9772625a9f165a"
+		},
+		{
+			"block": "block-1026",
+			"markers": [
+				{
+					"address": 27080,
+					"id": "record-00108",
+					"magnitude": 0,
+					"native_height": -488,
+					"sound_index": 61
+				}
+			],
+			"name": "W0000010.RDB",
+			"source_sha256": "ed902be2f2a0752f1c2b865ac11b1ead60162aa0eabcb32a7d73627a52844b4a"
+		},
+		{
+			"block": "block-1027",
+			"markers": [
+				{
+					"address": 24879,
+					"id": "record-00121",
+					"magnitude": 0,
+					"native_height": -248,
+					"sound_index": 31
+				}
+			],
+			"name": "W0000011.RDB",
+			"source_sha256": "7daf3c0273da4684a14cb136a54f154077befb38bddd41704fed7c8c6c0b5998"
+		},
+		{
+			"block": "block-1028",
+			"markers": [
+				{
+					"address": 21935,
+					"id": "record-00043",
+					"magnitude": 0,
+					"native_height": -240,
+					"sound_index": 30
+				}
+			],
+			"name": "W0000012.RDB",
+			"source_sha256": "652f7bd50616591a933f9357cac1f2086a01c2a88f5257ce7d2f69dec26093db"
+		},
+		{
+			"block": "block-1029",
+			"markers": [
+				{
+					"address": 11605,
+					"id": "record-00065",
+					"magnitude": 0,
+					"native_height": -240,
+					"sound_index": 30
+				}
+			],
+			"name": "W0000013.RDB",
+			"source_sha256": "1810916bb3e8b7069466e63b64bd24e4fdc48ab1dd99ba45a681673804dff0eb"
+		},
+		{
+			"block": "block-1030",
+			"markers": [
+				{
+					"address": 11354,
+					"id": "record-00099",
+					"magnitude": 0,
+					"native_height": -280,
+					"sound_index": 35
+				}
+			],
+			"name": "W0000014.RDB",
+			"source_sha256": "3cafda050d2357e2548b79c5854de438e9b7fd1968b25ba10c112c1d0e042e6d"
+		},
+		{
+			"block": "block-1031",
+			"markers": [
+				{
+					"address": 19562,
+					"id": "record-00083",
+					"magnitude": 0,
+					"native_height": -488,
+					"sound_index": 61
+				}
+			],
+			"name": "W0000015.RDB",
+			"source_sha256": "230095efbf3e82bc9a431cb36f80084d3de1f707166c9772474a9eedaac12893"
+		},
+		{
+			"block": "block-1032",
+			"markers": [
+				{
+					"address": 14154,
+					"id": "record-00125",
+					"magnitude": 0,
+					"native_height": -192,
+					"sound_index": 24
+				}
+			],
+			"name": "W0000016.RDB",
+			"source_sha256": "1e99e3b04a245c587ce1f6a24c7aa46a8b2620536f37efcab7d951b2f4db6d52"
+		},
+		{
+			"block": "block-1033",
+			"markers": [
+				{
+					"address": 12968,
+					"id": "record-00103",
+					"magnitude": 0,
+					"native_height": -240,
+					"sound_index": 30
+				}
+			],
+			"name": "W0000017.RDB",
+			"source_sha256": "a8422fe27891f92d9bdff90a845172ce7fbd7176dabbeda7ba504b399d54f430"
+		},
+		{
+			"block": "block-1034",
+			"markers": [
+				{
+					"address": 25043,
+					"id": "record-00001",
+					"magnitude": 0,
+					"native_height": -360,
+					"sound_index": 45
+				}
+			],
+			"name": "W0000018.RDB",
+			"source_sha256": "d5f1c663c218eeea006d6308103918e8af0133d82855d62cae5b67b8258cbc03"
+		},
+		{
+			"block": "block-1035",
+			"markers": [
+				{
+					"address": 20158,
+					"id": "record-00171",
+					"magnitude": 0,
+					"native_height": -496,
+					"sound_index": 62
+				}
+			],
+			"name": "W0000019.RDB",
+			"source_sha256": "df2a37cd6b23a41fd5bfead08ed66901580d5dff12a98425119c94c59e49f8b9"
+		},
+		{
+			"block": "block-1036",
+			"markers": [
+				{
+					"address": 21471,
+					"id": "record-00181",
+					"magnitude": 0,
+					"native_height": -400,
+					"sound_index": 50
+				}
+			],
+			"name": "W0000020.RDB",
+			"source_sha256": "f7b81502c93356fb554fa7b4f5d303eeaa771b29681aca912e4c4af350f26395"
+		},
+		{
+			"block": "block-1037",
+			"markers": [
+				{
+					"address": 20819,
+					"id": "record-00140",
+					"magnitude": 0,
+					"native_height": -208,
+					"sound_index": 26
+				}
+			],
+			"name": "W0000021.RDB",
+			"source_sha256": "d8e1bae9320b117f711491afa3a9034878bc12d7d424ef4a1dc1d2ffb93ee7b7"
+		},
+		{
+			"block": "block-1038",
+			"markers": [
+				{
+					"address": 28728,
+					"id": "record-00227",
+					"magnitude": 0,
+					"native_height": -144,
+					"sound_index": 18
+				}
+			],
+			"name": "W0000022.RDB",
+			"source_sha256": "0dcb5de44ac8b06295596e183442d1b6330570622cb564263719c14459f6ac91"
+		},
+		{
+			"block": "block-1039",
+			"markers": [
+				{
+					"address": 18794,
+					"id": "record-00000",
+					"magnitude": 0,
+					"native_height": -272,
+					"sound_index": 34
+				}
+			],
+			"name": "W0000023.RDB",
+			"source_sha256": "154d3d80e99cdedefa01ed60464565222680d5fac54418948e24480e6034f915"
+		},
+		{
+			"block": "block-1040",
+			"markers": [
+				{
+					"address": 17170,
+					"id": "record-00090",
+					"magnitude": 0,
+					"native_height": -288,
+					"sound_index": 36
+				}
+			],
+			"name": "W0000024.RDB",
+			"source_sha256": "87f885a60999a11f39867740fd8f106c9c6f27450082f3673dac47aeb14f14e6"
+		},
+		{
+			"block": "block-1042",
+			"markers": [
+				{
+					"address": 19270,
+					"id": "record-00160",
+					"magnitude": 0,
+					"native_height": -248,
+					"sound_index": 31
+				}
+			],
+			"name": "W0000026.RDB",
+			"source_sha256": "a7fb860895b4c2bb9ca7197628282196670b013b5aa1931446bffbcfb9445331"
+		},
+		{
+			"block": "block-1043",
+			"markers": [
+				{
+					"address": 38928,
+					"id": "record-00141",
+					"magnitude": 0,
+					"native_height": -240,
+					"sound_index": 30
+				}
+			],
+			"name": "W0000027.RDB",
+			"source_sha256": "e1c9096df41b5dfb47cb361f5d433f450b5b16bc870ec7456985da6acd9171ac"
+		},
+		{
+			"block": "block-1044",
+			"markers": [
+				{
+					"address": 25885,
+					"id": "record-00068",
+					"magnitude": 0,
+					"native_height": -240,
+					"sound_index": 30
+				}
+			],
+			"name": "W0000028.RDB",
+			"source_sha256": "a2fe1ddeca2e6f4cfb78dd5bc3c0d8eac64528e3cbd2763b1445af3fa76be9d3"
+		},
+		{
+			"block": "block-1045",
+			"markers": [
+				{
+					"address": 16068,
+					"id": "record-00149",
+					"magnitude": 0,
+					"native_height": -496,
+					"sound_index": 62
+				}
+			],
+			"name": "W0000029.RDB",
+			"source_sha256": "e1dd909bb0de2cf813627a6213f97b7afaeff7b15929bb3895926597819990c8"
+		},
+		{
+			"block": "block-1046",
+			"markers": [
+				{
+					"address": 9999,
+					"id": "record-00032",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "M0000000.RDB",
+			"source_sha256": "048788527889ac2eca2cda013364de6d9f459bfeae180290031085ccdb834624"
+		},
+		{
+			"block": "block-1047",
+			"markers": [
+				{
+					"address": 9999,
+					"id": "record-00042",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "M0000001.RDB",
+			"source_sha256": "c56311e94f63f3c51050181c87132af78b71510c69139a9e356dcb2496817c7b"
+		},
+		{
+			"block": "block-1048",
+			"markers": [
+				{
+					"address": 9999,
+					"id": "record-00027",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "M0000002.RDB",
+			"source_sha256": "3cdeca950339a1d40cad25b4a1e3605d45973e829a8f837329a3bf2b608af6e4"
+		},
+		{
+			"block": "block-1049",
+			"markers": [
+				{
+					"address": 9999,
+					"id": "record-00037",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "M0000003.RDB",
+			"source_sha256": "a344a1b141e7183915e8349ff72aef321d82adabb75b2572106a0bcbff8f5a7a"
+		},
+		{
+			"block": "block-1050",
+			"markers": [
+				{
+					"address": 9999,
+					"id": "record-00064",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "M0000004.RDB",
+			"source_sha256": "0ae1e6a6fbc17338cc6b3fa5fb0d67e566d9a92b5952e2e8f88fa4df9c320081"
+		},
+		{
+			"block": "block-1051",
+			"markers": [
+				{
+					"address": 9999,
+					"id": "record-00041",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "M0000005.RDB",
+			"source_sha256": "dab89b33dc811d89f82eea6a41bf4a492a676d4998842b0ac62f5c814b5e3971"
+		},
+		{
+			"block": "block-1052",
+			"markers": [
+				{
+					"address": 9999,
+					"id": "record-00036",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "M0000006.RDB",
+			"source_sha256": "11d2df819b04da2cc35c2e50cc558c3d5b6b7d61a5fcbf4bc4dac4191511c781"
+		},
+		{
+			"block": "block-1053",
+			"markers": [
+				{
+					"address": 9999,
+					"id": "record-00016",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "M0000007.RDB",
+			"source_sha256": "d9510ac1dff3c0791829ed87f601c6d9db5b1d31597cfdcdff464d66ca830f78"
+		},
+		{
+			"block": "block-1054",
+			"markers": [
+				{
+					"address": 9999,
+					"id": "record-00034",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "M0000008.RDB",
+			"source_sha256": "d57341504c5ebdd3a68a08c741a3de82b7ac25218ca2ed2c5ea2f81e3e75dbf7"
+		},
+		{
+			"block": "block-1055",
+			"markers": [
+				{
+					"address": 20925,
+					"id": "record-00212",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000000.RDB",
+			"source_sha256": "718050d7ff864dd4ed51dcb6bf09f7f7faa125ba919f8b4735167962302f3ed5"
+		},
+		{
+			"block": "block-1056",
+			"markers": [
+				{
+					"address": 22180,
+					"id": "record-00108",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000001.RDB",
+			"source_sha256": "cce38f0181cd42c6ab686ec04d62ddf4a9426f194f6d41d21a25770342e3c30b"
+		},
+		{
+			"block": "block-1057",
+			"markers": [
+				{
+					"address": 34396,
+					"id": "record-00237",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000002.RDB",
+			"source_sha256": "3f59d762f0e777b1d797092353618c3cef2b471d449571583b66c0c5a926b51e"
+		},
+		{
+			"block": "block-1058",
+			"markers": [
+				{
+					"address": 35768,
+					"id": "record-00290",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000003.RDB",
+			"source_sha256": "5ac52da7fc1bb58ce986c7058ba78f2b1a7f606cbb47c4c57b417349b109d685"
+		},
+		{
+			"block": "block-1059",
+			"markers": [
+				{
+					"address": 31563,
+					"id": "record-00194",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000004.RDB",
+			"source_sha256": "ee0c010ca125b4e3fe5cd85c87166b693cdae2d9c03cac23d5837acf0efae304"
+		},
+		{
+			"block": "block-1060",
+			"markers": [
+				{
+					"address": 13701,
+					"id": "record-00028",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000005.RDB",
+			"source_sha256": "4d70905f91ebab9edf7f10538c3bfe686998bc0873986f3c7bef1825aea1633e"
+		},
+		{
+			"block": "block-1061",
+			"markers": [
+				{
+					"address": 13628,
+					"id": "record-00009",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000006.RDB",
+			"source_sha256": "5ad7a0c2d278c15eac1b3a69c749d4bc6b17d5379a036b4da268671a47ccef26"
+		},
+		{
+			"block": "block-1065",
+			"markers": [
+				{
+					"address": 20560,
+					"id": "record-00188",
+					"magnitude": 1,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000040.RDB",
+			"source_sha256": "1ddc2c7188aa432ff679e3b400eee112319b4a69a9b8f0591335822f7ef7f49f"
+		},
+		{
+			"block": "block-1066",
+			"markers": [
+				{
+					"address": 17579,
+					"id": "record-00029",
+					"magnitude": 1,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000041.RDB",
+			"source_sha256": "d779c2385f1ebe2f6b61008f2c0ee7d3fbd6e3a940bacd936aed206e31a7356b"
+		},
+		{
+			"block": "block-1067",
+			"markers": [
+				{
+					"address": 12902,
+					"id": "record-00057",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000042.RDB",
+			"source_sha256": "e31128a22f1ee0c53c23fc2c12b3ef67e40c9573777ccb1ebb19410fd3fc567e"
+		},
+		{
+			"block": "block-1068",
+			"markers": [
+				{
+					"address": 24469,
+					"id": "record-00184",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000043.RDB",
+			"source_sha256": "5a84b182c3e6e4f623a7c65c44d1124f4af2172f131421ab1cc120348a6d73d5"
+		},
+		{
+			"block": "block-1069",
+			"markers": [
+				{
+					"address": 18794,
+					"id": "record-00214",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000060.RDB",
+			"source_sha256": "dbb67d4aba64d584bd8144bbe1262632140fa436aaf44fbc3f30278a13ab7be7"
+		},
+		{
+			"block": "block-1071",
+			"markers": [
+				{
+					"address": 20410,
+					"id": "record-00066",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000062.RDB",
+			"source_sha256": "17727c9ce9f522361afa8b0b9b5daf38f1e3220e4232a8152a1b387c7c58dcf9"
+		},
+		{
+			"block": "block-1073",
+			"markers": [
+				{
+					"address": 18275,
+					"id": "record-00069",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000070.RDB",
+			"source_sha256": "cd6aa58b23752814956c49e5c4f553760fbdcb3e367eb8e882a6b2f8c8bc7b9f"
+		},
+		{
+			"block": "block-1074",
+			"markers": [
+				{
+					"address": 16421,
+					"id": "record-00046",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000071.RDB",
+			"source_sha256": "ad2a579cbd0c4f2344a7d8374e366e24530fd595a31f628bd8821d7b71315b5a"
+		},
+		{
+			"block": "block-1075",
+			"markers": [
+				{
+					"address": 15322,
+					"id": "record-00077",
+					"magnitude": 1,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000080.RDB",
+			"source_sha256": "c60b1f2364c3056b040973da6695b828433be9b9c9de61b0e37ba44a9490f5f6"
+		},
+		{
+			"block": "block-1076",
+			"markers": [
+				{
+					"address": 29238,
+					"id": "record-00107",
+					"magnitude": 1,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000081.RDB",
+			"source_sha256": "5c29c8e6a8be239e11b64dd6432c1a5ed2cecd544ece60c8f2efa99267c858fd"
+		},
+		{
+			"block": "block-1078",
+			"markers": [
+				{
+					"address": 29451,
+					"id": "record-00071",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000100.RDB",
+			"source_sha256": "30759136abbb53f97c815260199aff45d04dafa0e8c90ed3e7678933ae766175"
+		},
+		{
+			"block": "block-1079",
+			"markers": [
+				{
+					"address": 31689,
+					"id": "record-00267",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000101.RDB",
+			"source_sha256": "a5f0fc7f764b50f1cb974686c47356ad7b78b81fea293d42d0e877613827be02"
+		},
+		{
+			"block": "block-1080",
+			"markers": [
+				{
+					"address": 13082,
+					"id": "record-00172",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000120.RDB",
+			"source_sha256": "e1acc1102c43ad8891b04bd88470bb2fd3b9b19a23387028aa06eef0fdf0a67d"
+		},
+		{
+			"block": "block-1081",
+			"markers": [
+				{
+					"address": 23689,
+					"id": "record-00221",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000121.RDB",
+			"source_sha256": "baf5cde2b5092d60b17a21d165d50ce0d6def30b64a06c7252b6d9c9f9abaccd"
+		},
+		{
+			"block": "block-1083",
+			"markers": [
+				{
+					"address": 16164,
+					"id": "record-00126",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000141.RDB",
+			"source_sha256": "5c6c8e84bf195344e32bfddbb21138f74b738a5881aa77d87ed6e23680260aec"
+		},
+		{
+			"block": "block-1085",
+			"markers": [
+				{
+					"address": 20307,
+					"id": "record-00110",
+					"magnitude": 0,
+					"native_height": -288,
+					"sound_index": 36
+				}
+			],
+			"name": "S0000161.RDB",
+			"source_sha256": "0d4b34f459d9619140a59d42cde1e359cce77ad4277ae76ac04643b7b317fd77"
+		},
+		{
+			"block": "block-1086",
+			"markers": [
+				{
+					"address": 18985,
+					"id": "record-00124",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000180.RDB",
+			"source_sha256": "2dc99ece24d050823d4bffd44372ccb41f0dc08cf32a8eec1fd3ca6dd8aef131"
+		},
+		{
+			"block": "block-1087",
+			"markers": [
+				{
+					"address": 16192,
+					"id": "record-00179",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000181.RDB",
+			"source_sha256": "bf2c6373d2b65c43bc3354b6d2549d6e621dd00cf3e265ac4005bb349029f551"
+		},
+		{
+			"block": "block-1088",
+			"markers": [
+				{
+					"address": 14835,
+					"id": "record-00058",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000200.RDB",
+			"source_sha256": "dc65162af0f6830a30fc9c18226adf8577a7905d472020eff3fefeb2b11196f8"
+		},
+		{
+			"block": "block-1089",
+			"markers": [
+				{
+					"address": 15426,
+					"id": "record-00060",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000201.RDB",
+			"source_sha256": "123cd5cbd7a4b69883da482b37a4b56f34fb95f5793662687774d5e174253b12"
+		},
+		{
+			"block": "block-1090",
+			"markers": [
+				{
+					"address": 15059,
+					"id": "record-00079",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000202.RDB",
+			"source_sha256": "392338bbd5da4c92d746022be39d7ee7f2f3f257ade13fbc9dfd04556291bdee"
+		},
+		{
+			"block": "block-1091",
+			"markers": [
+				{
+					"address": 17032,
+					"id": "record-00085",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000203.RDB",
+			"source_sha256": "f565c45f2cf1fe67e4bc6947b5cc8a54bf8907616492d7b454c3db6364bed3d9"
+		},
+		{
+			"block": "block-1092",
+			"markers": [
+				{
+					"address": 22737,
+					"id": "record-00169",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000204.RDB",
+			"source_sha256": "0a61d256555b7b0324c65a61f87bf6ad46267af5efcac64ba7feed4db2b10f02"
+		},
+		{
+			"block": "block-1093",
+			"markers": [
+				{
+					"address": 12242,
+					"id": "record-00019",
+					"magnitude": 0,
+					"native_height": 10000,
+					"sound_index": 0
+				}
+			],
+			"name": "S0000205.RDB",
+			"source_sha256": "dc816ab7becf28e0edbab4c3555cc2300566d1c46ab81b95de79b7d31594482a"
+		}
+	],
+	"fixture_blocks": {
+		"S0000040.RDB": {
+			"block": "block-1065",
+			"bounds": [
+				[
+					-0.0000000476837165308552,
+					0.0,
+					-51.0499992370605
+				],
+				[
+					49.4500007629395,
+					48.0,
+					-0.150001525878906
+				]
+			],
+			"castle": true,
+			"environment_markers": [
+				{
+					"id": "record-00188",
+					"position": [
+						36.85,
+						0.625,
+						-28.8
+					]
+				}
+			],
+			"model_sha256": {
+				"41000": "84b3d249d75b2282af6d7422bb0e82dc2fc27ac77a584912d1440d87045c45b2",
+				"41018": "006fb7458a85e17e01c3540d3e5bcb89db8af0b704d6a7f325fa74c03617b9f2",
+				"41020": "3d881c1d339f9314a3d3cccab10e2f9fa4b21bb9cae2e4ddaa5dd2b5bbf441cb",
+				"41025": "fc6ac9aa1192acae085a04b230d3b28bf1500cc0ef91d80ce5ad4e42fd266e6f",
+				"41031": "40ba2be8b246d14a912e9ec895a28a59c118620f4d37549ad350e60ec3698b49",
+				"41032": "a1e22ab3f6f26d2b8ee50b7df27f685d41051aef90b70fa80c0984002bab8c39",
+				"41043": "547557cfa6373c07c336b8c6ee1e9d1434ae021c2f383d9a1da406aad595723a",
+				"41049": "6d2343c3035650e61252e099953f546c10b8473fe28f4a615340c094031f0cfa",
+				"41050": "99de4d9c3d22c7d95de547e95d0e10f5f78f457ced04bc8459f925433b828c6a",
+				"41100": "430c22c3984cf1b75da95e3b5d08f549f8f71faac8222afcd5479ede1b2cdb6c",
+				"41101": "a15f7e8536139ef3e8171b0d28d14f0280c284cfabd58389412bdc6b899b3a69",
+				"41103": "3019ac1366e44b5f98b39c31869d81f486dda51af901c015a48b178f19876925",
+				"41105": "269d814a94bb66e016645fd1a3517533dad44e48985221d30f341cf968827f59",
+				"41108": "017e4c026deea042668a4aca19380db32b85eff6d59d4c13824ed94f1390054a",
+				"41109": "ab58d5888d9a200b04c368b9ec5874e248fa609915762bd56d0afc9ab18a63c7",
+				"41110": "bb6551824089c5a1add59344911cb43f1970af3756b3e80c9965932b57f1e8ab",
+				"41123": "322f64520599ce05b1c2a31c56a7eeab552f0002b871232a6738bebc8700b744",
+				"41800": "a543c3539882dd0c72f8c0cbe6fb30cf86fdbb23022ee94063b9a0c473a2c9ee",
+				"41811": "b747372a85ebed17e209ead4cbb35283c585877712a4f38dfe7985676f8069ca",
+				"42501": "f8220d9a9c33ba0f3baa83136c4e0bff3efee5bfff8fc74c7bc71a1811fd43b4",
+				"42509": "ec24922078e3bfc227bc7e6c401257f47ce0a7fc63a0d9ac46d57bfc5fe5d61c",
+				"42511": "e40443f907027fe3ad5b9d5205aa50635e5e647541fcd6d2341d7a1dc1572473",
+				"42521": "f8b935551e4852f29475f290f1f295e876c8917fd6ec2a64e8dbb92f9ff57989",
+				"42523": "413e45dd9c147eaed880676bb2b4a8f615050cd923229cb3f6792d33dd556569",
+				"42525": "3309c8ba1c3fc7855250bf79fec3d110f942162975d074ac7c214c4dfa4edb4a",
+				"42537": "82edef9dad15d2238f6c17ca67dd878e6432d297ffbc87026056cdbf253433ea",
+				"42549": "99675611753438ed062bae173abd276acfa51056942bed6357676b80c28092e5",
+				"42561": "a5c4322b048870e29091a048e347bc0c7bf96833070f60054a015d230026fb16",
+				"55000": "29655d17b72cb7e5d6e8e5a9402b6c9f0d18b10fe9dbdb026853e788e035b62c",
+				"55001": "1eda3196d1e09e37ebbc7da598071d95d25c0a3a5d433afddade17542990bdda",
+				"55002": "29655d17b72cb7e5d6e8e5a9402b6c9f0d18b10fe9dbdb026853e788e035b62c",
+				"55004": "29655d17b72cb7e5d6e8e5a9402b6c9f0d18b10fe9dbdb026853e788e035b62c",
+				"58004": "3b0f09cbfd709b9598eb83528956c0b1dd5a9d0f3c96daa70c30a1328cb6a745",
+				"61026": "fcdba9b1127ae15edcd7b1431c12a0465dc5a4b24fad505bd85ccfb85e998fd1",
+				"61028": "6ef243d913f30c69fa0faa3bb7414afee71fd63ffdf902e4a035784318ef7e1e",
+				"61202": "c51b82821a696f6011cbf3cc2fe063e11d2fbb3d33ceea9dce846bdb17cac438",
+				"61203": "c8e6e7d09f39908a647834a0569dedbe13288ff2ce09035cc170cb2a34eedf04",
+				"61214": "757f754fadfc8a13e92a523fd0730eb81ee17a9bb819cee08074a69c7a40e10e",
+				"64300": "5c80ca1a8013288ccf7f0d6f979ffad4957dedb90987b1d2203a4b81d7f008d4",
+				"64303": "5bc5127c59565bd88978b15b6dcd0e339a0050769def524a0d8fe5ce751ba4c1",
+				"67200": "95fab997a7e8624b457fe719c88c47321d05dbfac837a8b2c01079ef0c146b5a",
+				"67209": "8c891c709e0e01280bf235e7732dd59d41e33e7d268a0c103c0c5d5f12104f34",
+				"67217": "fbac77425b392242d67155167dce4879bbbe160a4348d60f201eec44794457a7",
+				"67218": "afc541b9718a90c95b6ef3a2b992a7c3ead8f7df1102d57c3cbc19508608eeae",
+				"67219": "c2f60f843a94c1e823e3d43b27dd4ad1f10684334d029f460a4847315341be22",
+				"67220": "4ab972bc69a79500c972a5ccd18cc095a8100e577d9c7c935385134a41f693b3",
+				"67501": "c94469b9e693ca4ef5ab6c1720e4fd160fd0ce12e2a3fea617065696fa1f3dc0",
+				"67527": "e61f43be81e759e50db7fe0a08a68f86be1c5d7c5ee35c6da4fdc872c5fcfa75",
+				"70300": "9205439a0025cf96c88df736329b1266e475eaa9aa8a949959ef6f309f6e89dd",
+				"71706": "80051075d5eaac43eec9b5fcc0e29db5fa06e7c5b5ebbbb250e96047f0876709",
+				"71708": "6914bf23024b77bba12e10a2e549d6ab5fcc9fb5b1fe6895dd26f911be9270c6",
+				"71709": "8a7fbde85bfce33148b260d16fd9ce75838a29b7bc8b8df70945d609f059652d",
+				"72019": "3698370d287a3856d813c81cf56c17a9a02c8231df8264acb978dd4638fb8235",
+				"74024": "a1b3bc06a280621c6a92b0e844a639bd446e87fc77a6b41ede6e40393d8bfa61",
+				"74025": "70b69dc7fe3fffa5de41fb802c65220d88ee350ad56ab06098042834a424c759",
+				"74030": "28e2a1480140fa23eb986bf75a065f8a7e70da1795e095552f38fd4649766c6c",
+				"74031": "5efd7116c8c7e3d2fcc724f3f240e877fa89cd47c20c1c715e079890ed89c78f",
+				"74106": "f0dbff2f0d310507e209d4b1225b8c65caf0dd266ff7565b86f8b6fdd21e1275",
+				"74107": "9efc4566ca2403ec7b9a71c70c30fcf59284bbe01b88218bdef51dda4489ca4a"
+			},
+			"name": "S0000040.RDB",
+			"native_height": 10000,
+			"scope": "single-source-block-context-fixture; not complete original dungeon",
+			"sha256": "1ddc2c7188aa432ff679e3b400eee112319b4a69a9b8f0591335822f7ef7f49f",
+			"texture_archives": [
+				0,
+				1,
+				22,
+				55,
+				57,
+				67,
+				71,
+				74,
+				90,
+				95,
+				122,
+				124,
+				354,
+				449,
+				450
+			],
+			"water_probe": {}
+		},
+		"S0000161.RDB": {
+			"block": "block-1085",
+			"bounds": [
+				[
+					-0.0750000476837158,
+					0.0,
+					-51.2000007629395
+				],
+				[
+					51.2000007629395,
+					41.9000015258789,
+					0.150001525878906
+				]
+			],
+			"castle": false,
+			"environment_markers": [
+				{
+					"id": "record-00110",
+					"position": [
+						22.425,
+						26.275,
+						-40.5
+					]
+				}
+			],
+			"model_sha256": {
+				"42500": "4aeaf99a79dcdc96d50c1268328210e4f713a1934f0b74022971e4f70522e565",
+				"42524": "be45ef225f73024b52123ac1f29ef66b078d399a649855cf50a969239d052d7b",
+				"42548": "97c5fe1ea09855a501a239e76891e89a4012d0b96371e43d64112d7bf2af9303",
+				"42560": "fc74f753098d40435ac42e7ce952237119c744342984ce771d9d698842f39833",
+				"55001": "1eda3196d1e09e37ebbc7da598071d95d25c0a3a5d433afddade17542990bdda",
+				"55005": "1eda3196d1e09e37ebbc7da598071d95d25c0a3a5d433afddade17542990bdda",
+				"55010": "2a16c22910ea3c80f3e57c04da02fbc88c125139363cb6059e18763f8b3f6e54",
+				"55032": "58bce97ab98e8e5960f94529bddc860643903934fb4cab4ae400aad48317346b",
+				"58002": "dbf7665ba9bc4b9a782c6fc8e3800c8fdd9b6767179d1db1e1b23434e3a64034",
+				"61002": "8cb5ac95c0b717609e82950d5390ea005a3522b1bf93f513ae80e82bd7b2cc26",
+				"61003": "534fc60fa73c8ab17ba8be5d613c1132b72930d98f1fd18512e943553e930151",
+				"61004": "14ad6aa28bae0c03df95cd476b990d21d535b4b356ce2723c41972b516465f2f",
+				"61005": "597da786c5060483b2e62f383d6d7665d553085ac59885eadf3c7dcfa576ecd9",
+				"61012": "b3ce8a3d997b9d7ad38737a42e22ed5d2b28932149a9195e3047946b12d712fc",
+				"61014": "fe1f06497df8020181b54b609cb789a73384869f555b3273fd5364d0dc963a20",
+				"61019": "b84497548af6039a4ea2e8480b29dd8f55cd99669ac4ad3c31bfc1d09c1440fc",
+				"61020": "f2400b136757035ab34f579ccae164760762ae3bea5916159f6ddc815b1d3552",
+				"61022": "ca7495072bd2acaa2201ff92a9b87b8ab26c2d41c1c5784ba0effbff18655feb",
+				"61026": "fcdba9b1127ae15edcd7b1431c12a0465dc5a4b24fad505bd85ccfb85e998fd1",
+				"61027": "ccbbdd7d6ab1ea83db5fbfac3d0cb06a4b7d126a7f4bccbba1062aa2e05def5a",
+				"61031": "702a7a7aded9e7ac09c0b98d84d05fc36417dc2ed360a317ccc3029134066e8b",
+				"61032": "00a20df3342edc53587dbd0bf31d46269b3b5a86d8289fcd625cbfc67cc5695b",
+				"61300": "da51f18b1706d7932d2c92d4a162f1382f7ee1e33f980646e7a0148fd6094df4",
+				"64300": "5c80ca1a8013288ccf7f0d6f979ffad4957dedb90987b1d2203a4b81d7f008d4",
+				"70300": "9205439a0025cf96c88df736329b1266e475eaa9aa8a949959ef6f309f6e89dd",
+				"70501": "c8d677baedb289098d7888b1be75302a776d5db10f54e673fe99f7303b0bd625",
+				"70509": "60a8e05d15a22bbac5b00c86e926911f520cd47c13c5b45bc4f8db2b24ed3dc3",
+				"74032": "9c97e18ad1b8829c2a0e7efb9cf4a7744c396128b7b0fee6e8a8e21bdb06a777",
+				"74033": "e125377a38ce7257bd620ddc4dcb836dc90e5909a5318ddf04a217bb2a59a8e7",
+				"74034": "39e123479a6dc26f4d2db4208a752babd8680a1d12f3fd6aa5be9f6b3e26c023",
+				"74035": "f7df219d604789c4fb4e56d53294d540279cf20e22efc5b3dce94fe6f2dce4a4",
+				"74036": "cee87c5cadf7b0a14e2cc2eab8f3f4d7ee6349d49b2282d8421284edfb47408a",
+				"74037": "58011f9fd6e15c3df04272a13b317f0fbe492692015fc50892e298731a9bcc96",
+				"74038": "c24ba99a5fd90d3fe1089a3bf7e5a4e232e168e3523251939ddb963ad94208fc",
+				"74039": "01a10db7a09ba8c6a1c503c256bd756ea0756d59b3a225a9e7bafb5246505acd",
+				"75000": "fd0b72c905c688d00117a3da827d90ed8cf29270c70cd9be2c120fd7b9cd1c10"
+			},
+			"name": "S0000161.RDB",
+			"native_height": -288,
+			"scope": "single-source-block-context-fixture; not complete original dungeon",
+			"sha256": "0d4b34f459d9619140a59d42cde1e359cce77ad4277ae76ac04643b7b317fd77",
+			"texture_archives": [
+				0,
+				1,
+				22,
+				55,
+				57,
+				67,
+				74,
+				86,
+				90,
+				95,
+				121,
+				122,
+				321,
+				350,
+				467
+			],
+			"water_probe": {
+				"floor_triangle": {
+					"model": 61002,
+					"plane": 10,
+					"points": [
+						[
+							43.2000007629395,
+							6.40000009536743,
+							-20.8000011444092
+						],
+						[
+							43.2000007629395,
+							6.40000009536743,
+							-25.6000003814697
+						],
+						[
+							40.0,
+							6.40000009536743,
+							-25.6000003814697
+						]
+					],
+					"record": "record-00101"
+				},
+				"position": [
+					42.1333351135254,
+					6.5,
+					-24.0
+				],
+				"surface": 7.2
+			}
+		},
+		"W0000000.RDB": {
+			"block": "block-1016",
+			"bounds": [
+				[
+					-0.000000381469732246842,
+					6.40000009536743,
+					-51.6000022888184
+				],
+				[
+					51.6000022888184,
+					54.4000015258789,
+					0.0999984741210938
+				]
+			],
+			"castle": false,
+			"environment_markers": [
+				{
+					"id": "record-00004",
+					"position": [
+						10.975,
+						32.6,
+						-16.0
+					]
+				}
+			],
+			"model_sha256": {
+				"41304": "ad40da465206cb048c11e3efabf13cbc38d8ea753ae4a90e2a0b275dfbc85a8a",
+				"41315": "f9e5252b7ace8d4697b9975b79c41a53b1afb76715aa0c9b95fdec31f6cf5446",
+				"41704": "d1d6086b065c6c4eb94c2b8c6003b5d1ac5c502b86184e06ac317b8a9d4dde33",
+				"41707": "89c7dfd81b362cc4a15ddfc739ebca7f1287d603b6d0a1c4c26c52152414f054",
+				"41710": "88ba9593938dd271fd6389d18ab8ac977c626ceb68e447287df879bc6f6aa6e9",
+				"41711": "6747b917b621e06220ac5d6514f4617fc6a5a7d225ef5f3d01b234891bd98377",
+				"41712": "9313963622c8f9db532ebf1f156e3dbfa6bf6704df4292dd3acb5dd83e5ffaba",
+				"41732": "8ddcdf9c4cebae3de17b4b79d4b057fc103b9f3f939facfdcac0683e9fec0a62",
+				"41733": "9c92459c5add4f0c5773b648fbffce9d93821053693fcfc0a9f712704b250ea8",
+				"41736": "e48a547d0f97b799eeeab58103109c25392da2aabee5c9e47831dea96a4f25c1",
+				"41833": "45aaf1505c2db5b54328b6469277d4dabd35e705c2860f6b264277f9ed07ef89",
+				"41834": "1ab96062119073eff36b2117f0fcf90149f18058028bab1d1340a0a2174a8001",
+				"55003": "1eda3196d1e09e37ebbc7da598071d95d25c0a3a5d433afddade17542990bdda",
+				"60100": "423b2bb408d097e1dc29ad1402cf0cc36fcb8718e8cd22d8c4b2a097b4de5b58",
+				"60101": "fa253cec13b6df04674dd5f545bb48ff9e4c9357847c2e06b245b277af8f46f9",
+				"60102": "35973243ce8f1a10d5746a06952b387e6981dea0d3cd7a81c7b79107a71266d4",
+				"60103": "d30077a04ed01d6ca8287eb1bfd520778e1d0fedb9312fb941a6d4b7fa41e612",
+				"60104": "4a79df40dc8d9d2f9b34bf4eea37b12a4b018d73a30693fa6263d38cc7e10fd5",
+				"60105": "dd905abfcc7669affe451823b8730a0c7e69f491827e32f18727bc6c244158b0",
+				"60106": "9c003c62fc2a12be1d6ad5f907a89b07783941d7aea03d9855cb8e1daf71a5e7",
+				"60110": "6a873ecff833c61b158397a395df56248356ec489c6ffb84dfeab2c1ae33648e",
+				"60111": "a98e88075c69201ffab94fad4c855f443344e4d08bcb23ee9dbd090ce94af8f4",
+				"60112": "21a38516c0eccb5cc825a9e7e41dc62b785eda9bffc7fd2107f1cbe522501dba",
+				"60200": "192f449e46e373ff5b9d4cdf6f7ad982b80d2191d0fa9f0eb4b3519439a3ea25",
+				"60201": "e55eb493667810cd212ac66a890d010d02b157751d937c47b4c2a45355e1c073",
+				"63104": "3f0021e9a1a8022fb3316e3546bee5f4e316dcb01c49085983b7ed7a25de64d1",
+				"63105": "962e4f58f5818914d8bfadf9b96f01d2b4fb3468236042de0e579d08cdd753c3",
+				"63130": "9e0fa5871f037e25d6a65728c1a5919e1c6af1ebd12d966b17582af930a356b8",
+				"63147": "5f65d950ff425b145a1683763bbe03a55df9fa9beed834c7b87daefc4bf9e853",
+				"70300": "9205439a0025cf96c88df736329b1266e475eaa9aa8a949959ef6f309f6e89dd",
+				"72100": "324a6ae3d1c62b3c65467f99e90e3d0bfc867011c5c87ab7c97163764968b2a4"
+			},
+			"name": "W0000000.RDB",
+			"native_height": -496,
+			"scope": "single-source-block-context-fixture; not complete original dungeon",
+			"sha256": "dfa34ee5725e56f2999f03870f1a7ef218376377617578fceaebdefd9e13caf7",
+			"texture_archives": [
+				0,
+				41,
+				46,
+				67,
+				74,
+				90,
+				92,
+				94,
+				95,
+				122,
+				123,
+				141,
+				146,
+				147,
+				321
+			],
+			"water_probe": {
+				"floor_triangle": {
+					"model": 60112,
+					"plane": 3,
+					"points": [
+						[
+							13.1999998092651,
+							6.40000009536743,
+							-32.0
+						],
+						[
+							18.8000011444092,
+							6.40000009536743,
+							-32.0
+						],
+						[
+							14.0,
+							7.59999990463257,
+							-35.2000007629395
+						]
+					],
+					"record": "record-00098"
+				},
+				"position": [
+					15.3333330154419,
+					6.89999961853027,
+					-33.0666656494141
+				],
+				"surface": 12.4
+			}
+		}
+	},
+	"model_id": 67019,
+	"model_sha256": "248d80ddfeaab3c55aeea969d5e81cc725d90addfdfb147f65e614dbbb57cc49",
+	"planes": [
+		{
+			"archive": 120,
+			"normal": [
+				0,
+				256,
+				0
+			],
+			"record": 3,
+			"source_points": [
+				[
+					-16384,
+					-32768,
+					32768
+				],
+				[
+					16384,
+					-32768,
+					32768
+				],
+				[
+					16384,
+					-32768,
+					-16384
+				]
+			],
+			"uv_sixteenths": [
+				[
+					0,
+					0
+				],
+				[
+					0,
+					1024
+				],
+				[
+					1536,
+					1024
+				]
+			]
+		},
+		{
+			"archive": 120,
+			"normal": [
+				256,
+				0,
+				0
+			],
+			"record": 0,
+			"source_points": [
+				[
+					-16384,
+					-32768,
+					-16384
+				],
+				[
+					-16384,
+					0,
+					-16384
+				],
+				[
+					-16384,
+					0,
+					32768
+				]
+			],
+			"uv_sixteenths": [
+				[
+					0,
+					0
+				],
+				[
+					0,
+					1024
+				],
+				[
+					2048,
+					1024
+				]
+			]
+		},
+		{
+			"archive": 120,
+			"normal": [
+				0,
+				-256,
+				0
+			],
+			"record": 2,
+			"source_points": [
+				[
+					8192,
+					0,
+					-16384
+				],
+				[
+					16384,
+					0,
+					-16384
+				],
+				[
+					16384,
+					0,
+					32768
+				]
+			],
+			"uv_sixteenths": [
+				[
+					256,
+					1536
+				],
+				[
+					496,
+					1536
+				],
+				[
+					496,
+					0
+				]
+			]
+		},
+		{
+			"archive": 120,
+			"normal": [
+				0,
+				-256,
+				0
+			],
+			"record": 2,
+			"source_points": [
+				[
+					-8192,
+					0,
+					-16384
+				],
+				[
+					8192,
+					0,
+					-16384
+				],
+				[
+					-16384,
+					0,
+					32768
+				]
+			],
+			"uv_sixteenths": [
+				[
+					-256,
+					1536
+				],
+				[
+					256,
+					1536
+				],
+				[
+					-512,
+					0
+				]
+			]
+		},
+		{
+			"archive": 321,
+			"normal": [
+				0,
+				-256,
+				0
+			],
+			"record": 2,
+			"source_points": [
+				[
+					-8192,
+					0,
+					-16384
+				],
+				[
+					-6400,
+					0,
+					-32768
+				],
+				[
+					6400,
+					0,
+					-32768
+				]
+			],
+			"uv_sixteenths": [
+				[
+					0,
+					0
+				],
+				[
+					1024,
+					112
+				],
+				[
+					1024,
+					912
+				]
+			]
+		},
+		{
+			"archive": 121,
+			"normal": [
+				-254,
+				0,
+				28
+			],
+			"record": 2,
+			"source_points": [
+				[
+					6400,
+					0,
+					-32768
+				],
+				[
+					6400,
+					-23040,
+					-32768
+				],
+				[
+					8192,
+					-28672,
+					-16384
+				]
+			],
+			"uv_sixteenths": [
+				[
+					1024,
+					1792
+				],
+				[
+					1024,
+					352
+				],
+				[
+					0,
+					0
+				]
+			]
+		},
+		{
+			"archive": 121,
+			"normal": [
+				254,
+				0,
+				28
+			],
+			"record": 2,
+			"source_points": [
+				[
+					-8192,
+					0,
+					-16384
+				],
+				[
+					-8192,
+					-28672,
+					-16384
+				],
+				[
+					-6400,
+					-23040,
+					-32768
+				]
+			],
+			"uv_sixteenths": [
+				[
+					0,
+					1792
+				],
+				[
+					0,
+					0
+				],
+				[
+					1024,
+					352
+				]
+			]
+		},
+		{
+			"archive": 121,
+			"normal": [
+				0,
+				242,
+				83
+			],
+			"record": 3,
+			"source_points": [
+				[
+					-8192,
+					-28672,
+					-16384
+				],
+				[
+					8192,
+					-28672,
+					-16384
+				],
+				[
+					6400,
+					-23040,
+					-32768
+				]
+			],
+			"uv_sixteenths": [
+				[
+					0,
+					1024
+				],
+				[
+					0,
+					0
+				],
+				[
+					1024,
+					112
+				]
+			]
+		},
+		{
+			"archive": 120,
+			"normal": [
+				0,
+				0,
+				256
+			],
+			"record": 0,
+			"source_points": [
+				[
+					-16384,
+					-32768,
+					-16384
+				],
+				[
+					16384,
+					-32768,
+					-16384
+				],
+				[
+					8192,
+					-28672,
+					-16384
+				]
+			],
+			"uv_sixteenths": [
+				[
+					1024,
+					0
+				],
+				[
+					0,
+					0
+				],
+				[
+					256,
+					128
+				]
+			]
+		},
+		{
+			"archive": 120,
+			"normal": [
+				0,
+				0,
+				256
+			],
+			"record": 0,
+			"source_points": [
+				[
+					16384,
+					-32768,
+					-16384
+				],
+				[
+					16384,
+					0,
+					-16384
+				],
+				[
+					8192,
+					0,
+					-16384
+				]
+			],
+			"uv_sixteenths": [
+				[
+					0,
+					0
+				],
+				[
+					0,
+					1024
+				],
+				[
+					256,
+					1024
+				]
+			]
+		},
+		{
+			"archive": 120,
+			"normal": [
+				0,
+				0,
+				256
+			],
+			"record": 0,
+			"source_points": [
+				[
+					-8192,
+					-28672,
+					-16384
+				],
+				[
+					-8192,
+					0,
+					-16384
+				],
+				[
+					-16384,
+					0,
+					-16384
+				]
+			],
+			"uv_sixteenths": [
+				[
+					768,
+					128
+				],
+				[
+					768,
+					1024
+				],
+				[
+					1024,
+					1024
+				]
+			]
+		},
+		{
+			"archive": 120,
+			"normal": [
+				-256,
+				0,
+				0
+			],
+			"record": 0,
+			"source_points": [
+				[
+					16384,
+					-32768,
+					-16384
+				],
+				[
+					16384,
+					-32768,
+					32768
+				],
+				[
+					16384,
+					0,
+					32768
+				]
+			],
+			"uv_sixteenths": [
+				[
+					2048,
+					0
+				],
+				[
+					0,
+					0
+				],
+				[
+					0,
+					1024
+				]
+			]
+		}
+	],
+	"schema": "dungeon-context-independent-observation-v1",
+	"sources": {
+		"ARCH3D.BSA": "a51a9e149168814c4a14dc80bb93d38f153be18dc9754be44bc9c7b25dd46a85",
+		"BLOCKS.BSA": "6f5a4c8d9401c1b00ef83eaac9b0c6c32f53cef6eaa4c7d7027deb739bde4795",
+		"MAPS.BSA": "8b5550bfcac03b6f605842568fdbfb7cc6bbed7ace5999c33c900ad286fc24be",
+		"PAL.PAL": "42b8da761c310cfd7f4949e95bbe7dbda19b490dc5e11746857a89808b826f99",
+		"TEXTURE.000": "b6adacc9b6a7f604bb82d82136c593c9d23b59d9c3576a041ecc01951afae680",
+		"TEXTURE.001": "cca317a742d13a6aa1ba323ba45d12c2e716f089cbd86e1d2b1e7c3262d66bfb",
+		"TEXTURE.022": "49d7dda4cc1ff0147c2a10b77954e19dd81cab2ee8844af1b47b152a8f82a8d8",
+		"TEXTURE.041": "7e060eedb3331ee07365fe0f982d7824233ba58358991b20d7bb4a83d17eaa18",
+		"TEXTURE.046": "501b94b3e7eee4266236e2dcf7645b8547a54bd3eec89d0d4de80c2f244b1c51",
+		"TEXTURE.055": "846810988de2d2ce75fc4fcdb3e2b7bafff37cb6fba147a920736f5d7d700f29",
+		"TEXTURE.057": "d3d41f1054d2b258a1e8b2dddecaea42ba93185e66a28227cbdcd6ce0d9d5643",
+		"TEXTURE.067": "0f627b0b9a1437f8e0abb761c111c208dd5ec64b27803aa842a4a204b0c22789",
+		"TEXTURE.071": "b570bb8496cce91bbb1e3cf28b34b253c2a70ab5a4b9cead40faaa23cf50ad38",
+		"TEXTURE.074": "13fcbefcc6409e4551aa4eaa48c5f60361f688b98d6fda32a5846094c56e911e",
+		"TEXTURE.086": "ce3e021bf42fcaba8b779a62f9dcc6ae88b00bf56a07dc10784a7cae359503de",
+		"TEXTURE.090": "16fca391e4a5139e4fe372eb256b21d36f8f8b57b266535244ec6d69bb494564",
+		"TEXTURE.092": "ca3412ff0a4d2ac91908d7220643a937908534d3167d5f2ea7035f5981ed4786",
+		"TEXTURE.094": "c16ce31326dba2d8c8ba360e33e6b6061134ef4cbca22d04b9f4f05abbc15cc6",
+		"TEXTURE.095": "0ec26f535aa8e2b0078c040eb544ad6d8dd31284a066f04fa83a0b1347730193",
+		"TEXTURE.120": "6d0450088ebc46f23c4c1de82338d68d96e348d5cfb8ecbe8296a49ef7a601b4",
+		"TEXTURE.121": "d8cfd2170ce0868c9c1ca36e59f2bdc2882ebdbcad29863fc4bbc29cce9b336f",
+		"TEXTURE.122": "6989496f5162c172b4f75b049ac3df62b1e4a61d7480888dec41cbf4429c3191",
+		"TEXTURE.123": "e3b1349eb5703c61af13a6af111612acc3800d2c87d881e8d3bc017895e0a37b",
+		"TEXTURE.124": "b1ede1a3563406c92212e67c4224ddfe12fd961d3209bb87cab225c594235663",
+		"TEXTURE.141": "111607517b805ec8f6186d284a0f3d03a965201a4056a00356250758cf009bbc",
+		"TEXTURE.146": "3f150e5532b9813e0d8c234e6943f89be3ac4b1b7acf2f6e0d82a5a23979147e",
+		"TEXTURE.147": "e76599a7b182b1897eacf5ebdac415b72e7479f7ada4446b3bd6c89f6938df79",
+		"TEXTURE.174": "8ad8712b0e65092698a8247c4100ce9fb1b5692c5334f586f06499fb6471639d",
+		"TEXTURE.321": "fcfd29797d7315df5ffda4152a852713f653d87239772af08301704e260db4ee",
+		"TEXTURE.350": "2d9a8ec78ba4877d6711a69c5e7f329de9efc8bc2be05bc0342ee5c1f1f1c756",
+		"TEXTURE.354": "42daaeb51afdc767af4398b05e9f21b845607ba108ec278e91ee60af9ce915a3",
+		"TEXTURE.374": "d224fb90df62685616e9a83357272806f144191e4855feced8a650b7d0cee0e1",
+		"TEXTURE.449": "110af74fe800cde8f96ec480648c03c9f6200d4c7a08068dc3c7e7ce93e6834e",
+		"TEXTURE.450": "f6074ea1758936c3bb2bee73517ade298ba674dccdb0c527db317e241a6b6a6c",
+		"TEXTURE.467": "4389b528ead27d445efddc016485425770549a9ab15b0cb7a8ed58fa7c2f64f4",
+		"TEXTURE.474": "db33cf551b0d848100f2f072623485edd46f41d122e000315256ec5342259097"
+	},
+	"textures": {
+		"120/0": {
+			"first_pixel": [
+				40,
+				40,
+				40,
+				255
+			],
+			"rgba_sha256": "7e7ed2b9b07fb50c0f8c58939b2088cfa3910b3c95a7d6ad3f450f19ceab65ee",
+			"size": [
+				64,
+				32
+			],
+			"source_sha256": "6d0450088ebc46f23c4c1de82338d68d96e348d5cfb8ecbe8296a49ef7a601b4"
+		},
+		"120/2": {
+			"first_pixel": [
+				67,
+				67,
+				67,
+				255
+			],
+			"rgba_sha256": "6119e9646059a9350b512710bec0f04ce1c6d611d6cc894c745ebfe44021f027",
+			"size": [
+				64,
+				64
+			],
+			"source_sha256": "6d0450088ebc46f23c4c1de82338d68d96e348d5cfb8ecbe8296a49ef7a601b4"
+		},
+		"120/3": {
+			"first_pixel": [
+				91,
+				67,
+				38,
+				255
+			],
+			"rgba_sha256": "8da6372f7cd520d6a8bdc89087427f1116c4cc8a9fafb6cf1407b6c364d63f37",
+			"size": [
+				64,
+				64
+			],
+			"source_sha256": "6d0450088ebc46f23c4c1de82338d68d96e348d5cfb8ecbe8296a49ef7a601b4"
+		},
+		"121/2": {
+			"first_pixel": [
+				69,
+				63,
+				42,
+				255
+			],
+			"rgba_sha256": "fe88a76c877875b4c559ce0a1e3a3e7110b5431658e8e97bf5dbe2ad5e77071c",
+			"size": [
+				64,
+				112
+			],
+			"source_sha256": "d8cfd2170ce0868c9c1ca36e59f2bdc2882ebdbcad29863fc4bbc29cce9b336f"
+		},
+		"121/3": {
+			"first_pixel": [
+				91,
+				67,
+				38,
+				255
+			],
+			"rgba_sha256": "afc26e9b2ba4c89081388d87696f86d7e859923b0f63ab6197b47933dcdba7a0",
+			"size": [
+				64,
+				64
+			],
+			"source_sha256": "d8cfd2170ce0868c9c1ca36e59f2bdc2882ebdbcad29863fc4bbc29cce9b336f"
+		},
+		"123/0": {
+			"first_pixel": [
+				78,
+				78,
+				78,
+				255
+			],
+			"rgba_sha256": "f987c8939214398fe3d862c98e06bfd0ee377627c62b1307f3f50d333000392e",
+			"size": [
+				64,
+				32
+			],
+			"source_sha256": "e3b1349eb5703c61af13a6af111612acc3800d2c87d881e8d3bc017895e0a37b"
+		},
+		"123/2": {
+			"first_pixel": [
+				40,
+				40,
+				40,
+				255
+			],
+			"rgba_sha256": "ff4ff33439da201aa42a4977bcf0036fe6fed1af63d02428a5bff0e1141c8352",
+			"size": [
+				64,
+				64
+			],
+			"source_sha256": "e3b1349eb5703c61af13a6af111612acc3800d2c87d881e8d3bc017895e0a37b"
+		},
+		"123/3": {
+			"first_pixel": [
+				67,
+				67,
+				67,
+				255
+			],
+			"rgba_sha256": "3940e74da0f6f09e0011ae86785d362cfac0ca976b6c71181d4aab8c8126a464",
+			"size": [
+				64,
+				64
+			],
+			"source_sha256": "e3b1349eb5703c61af13a6af111612acc3800d2c87d881e8d3bc017895e0a37b"
+		},
+		"321/2": {
+			"first_pixel": [
+				31,
+				31,
+				31,
+				255
+			],
+			"rgba_sha256": "5838bb95addfaf77ef50b388676a21211c79f45cd82d569558a163ada2c754e0",
+			"size": [
+				64,
+				64
+			],
+			"source_sha256": "fcfd29797d7315df5ffda4152a852713f653d87239772af08301704e260db4ee"
+		}
+	}
+}

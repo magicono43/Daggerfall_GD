@@ -1062,3 +1062,51 @@ as passing. The independent action-input/session/startup/M1 composition selectio
 remain regression gates. Human review preparation uses prepare_binding_review.ps1
 with a passing binding-config run; the protected package has its own checklist
 and expiry. Smoke entry/shutdown does not establish human acceptance.
+## IMP-061 increment-2 context qualification
+
+Use independent commands (each includes a fresh-process child):
+
+```powershell
+& ./main_project/tools/verify_headless.ps1 -Suite dungeon-context -Fixture dungeon-context-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 240
+& ./main_project/tools/verify_rendered.ps1 -Suite dungeon-context -Fixture dungeon-context-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 240
+& ./main_project/tools/verify_startup_export.ps1 -Configuration debug -DungeonContext -ClassicSource C:/Games/Daggerfall/arena2
+& ./main_project/tools/verify_startup_export.ps1 -Configuration release -DungeonContext -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+`dungeon_context_inventory.json` freezes complete unique scenario IDs before
+qualification, separately for headless/rendered and reconstruction. The original
+assembly inventory and source fixture remain unchanged. The independent GDScript
+observer takes read-only source root and a NEW absolute output path:
+
+```powershell
+& 'C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe' --headless --path main_project --script res://tests/observe_dungeon_context.gd -- C:/Games/Daggerfall/arena2 C:/absolute/new-observation.json
+```
+
+The observer imports no production decoder and records raw UV/texture/marker
+observations plus independently transformed geometry and wet floor probes.
+Source water/castle/treasury cases are isolated supported real blocks; they do
+not qualify full original dungeon layouts. PNG/bridge/volume fixtures are project
+authored. The selected-image failure proxy is a controlled read-failure seam,
+not real media withdrawal. CORE lifecycle seams and fresh-process reconstruction
+are not real MOVE contact, breath, action/QUEST state or native SAVE. See
+[supported context contract](../scripts/loc/DUNGEON_CONTEXT.md) and increment-2
+execution evidence for exact passing commands, rendered review and open gates.
+Supplementary policy checks (10 complete unique IDs) use the actual shipped
+context declaration and pure production resolver/environment interfaces. They
+cover changed configuration, destination identity/climate, explicit missing
+selection/configuration failures, reconstructability and rejection of fallback
+from an unproved higher-priority water volume. They do not qualify a session:
+
+```powershell
+& 'C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe' --headless --path main_project --script res://tests/dungeon_context_policy.gd -- C:/absolute/new-policy-report.json
+```
+
+The supplementary AV raster boundary uses real rendering with controlled authored
+pixels, original64x64 logical UV dimensions and an adjacent differently sized
+atlas region. Eight unique checks require real GPU update/isolation, opaque/cutout/blended pixel counts
+and captures. This supplements the real DATA-image/LOC tests; it does not claim a
+DATA session or gameplay integration:
+
+```powershell
+& 'C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe' --path main_project --script res://tests/dungeon_surface_render.gd -- C:/absolute/new-raster-report.json
+```

@@ -61,6 +61,16 @@ func _ready() -> void:
 		if fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 			var observation: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/layout_source_observation.json"))
 			resource_sources = observation.resource_sources
+		if ordinary_composition:
+			var contexts: Dictionary = preload("res://scripts/data/layout_inputs.gd").context_annotations()
+			if not contexts.ok:
+				label("Dungeon context registration failed: "+contexts.reason)
+				return
+			resource_sources += contexts.data.resource_sources
+			if fixture.get("fixture") == "dungeon-context-v1":
+				var source_contexts: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/dungeon_context_observation.json"))
+				for source_block: Dictionary in source_contexts.fixture_blocks.values():
+					for archive: int in source_block.texture_archives: resource_sources.append({"file":"TEXTURE.%03d" % archive,"format":"classic-texture-v1"})
 		var registered: Dictionary = controller.providers.enable_layout_inputs(resource_sources)
 		if not registered.ok:
 			label("Layout registration failed: " + registered.reason)
@@ -525,9 +535,9 @@ func run_fixture() -> void:
 	elif fixture.get("mode") == "geography-inputs":
 		script_path = "res://tests/geography_cases.gd"
 	elif fixture.get("mode") == "dungeon-assembly":
-		script_path = "res://tests/dungeon_cases.gd"
+		script_path = "res://tests/dungeon_context_cases.gd" if fixture.get("fixture") == "dungeon-context-v1" else "res://tests/dungeon_cases.gd"
 	elif fixture.get("mode") == "dungeon-assembly_reload":
-		script_path = "res://tests/dungeon_reload_cases.gd"
+		script_path = "res://tests/dungeon_context_reload_cases.gd" if fixture.get("fixture") == "dungeon-context-v1" else "res://tests/dungeon_reload_cases.gd"
 	elif fixture.get("mode") == "layout-inputs":
 		script_path = "res://tests/layout_cases.gd"
 	elif fixture.get("mode") == "layout-inputs_reload":

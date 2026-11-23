@@ -181,3 +181,13 @@ TEXTURE.210 records / 83 frames. The layout selection tests their actual reader
 results and known synthetic transparent/literal runs, malformed inputs, detached
 shared-frame outputs, source order and a later frame failure after an earlier
 success. Existing classic-media 119/136 inventories remain separate and unchanged.
+
+## Solid texture swatches for dungeon context
+
+IMP-061 increment 2 narrowly adds `classic-solid-swatches-v1` for TEXTURE.000/001:
+exact 2,586-byte, 128-record directories with verified explicit indices, zero
+reserved fields, record 0..127 and frame zero. Each produces a 32x32 opaque-index
+swatch (record or 128+record), following DFU TextureFile.ReadSolid (MIT).
+Unsupported extents/fields fail; no generic missing-texture fallback is added.
+Independent observer hashes both complete files. Dungeon UV/pixel and actual
+source assemblies exercise this profile; existing media inventories stay intact.

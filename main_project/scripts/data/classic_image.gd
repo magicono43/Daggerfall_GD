@@ -67,6 +67,7 @@ func _rle(cursor: RefCounted, length: int) -> PackedByteArray:
 func decode(bytes: PackedByteArray, name: String, record: int, frame: int) -> Dictionary:
 	name = name.to_upper()
 	if record < 0 or frame < 0: return failure("Negative record/frame.",0,"record_not_found")
+	if name in ["TEXTURE.000","TEXTURE.001"]: return _solid_texture(bytes,name,record,frame)
 	if name.begins_with("TEXTURE."): return _texture(bytes,record,frame)
 	if RCI_SIZES.has(name):
 		var size: Vector2i = RCI_SIZES[name]
@@ -160,6 +161,24 @@ func _texture_animation(bytes: PackedByteArray, start: int, data: int, length: i
 			for i in literal: output[y*width+x+transparent+i] = pixels[i]
 			x += transparent+literal
 	return {"ok":true,"indices":output,"animation_profile":"classic-texture-transparent-runs-v1","frame_source_extent":[at,cursor.position],"frame_storage_extent":[at,frame_end],"unused_frame_tail":cursor.take(frame_end-cursor.position).hex_encode()}
+
+func _solid_texture(bytes: PackedByteArray, name: String, record: int, frame: int) -> Dictionary:
+	# DFU TextureFile.ReadSolid (MIT): 32x32 palette-index swatches. The source
+	# edition stores all 128 colour indices explicitly in its directory, no pixels.
+	var base := 0 if name == "TEXTURE.000" else 128
+	if bytes.size() != 2586 or bytes.decode_u16(0) != 128: return failure("Unsupported solid-colour directory extent.")
+	for index in 128:
+		var at := 26+index*20
+		if bytes[at] != 0 or bytes[at+1] != base+index: return failure("Solid-colour directory mapping differs.",at)
+		for offset in range(2,20):
+			if bytes[at+offset] != 0: return failure("Unsupported solid-colour directory fields.",at+offset)
+	if record >= 128 or frame != 0: return failure("Solid texture record/frame absent.",0,"record_not_found")
+	var indices := PackedByteArray()
+	indices.resize(32*32)
+	indices.fill(base+record)
+	var result := _image(32,32,0,0,record,0,1,128,26+record*20,indices)
+	result.profile = "classic-solid-swatches-v1"
+	return result
 
 func _texture(bytes: PackedByteArray, record: int, frame: int) -> Dictionary:
 	var cursor := Cursor.new(bytes)

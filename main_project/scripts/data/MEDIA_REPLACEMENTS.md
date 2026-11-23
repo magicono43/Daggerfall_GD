@@ -186,3 +186,12 @@ commit; recording-only admission does not require a native MIDI bank.
 See [the bounded playback contract](../av/NATIVE_PLAYBACK.md) and
 [native build and provenance](../../native/media/README.md). Real WORLD/SAVE,
 room/spatial playback and full requester assembly gates remain open.
+
+## Dungeon surface instance consumer
+
+IMP-061 context slots may bind an exact published DATA image export by source
+record. `AV.dungeon_palette` prepares an immutable model atlas; `AV.dungeon_material`
+constructs independently owned mutable atlas textures and materials, uses original classic pixel dimensions for UV normalization, and
+preserves replacement alpha interpretation. Preparation-private image caching
+does not expose DATA mutation. Selected asset/generation/create failures abort
+assembly without fallback; existing publication recovery remains authoritative.

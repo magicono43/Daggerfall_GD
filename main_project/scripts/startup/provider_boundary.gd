@@ -14,6 +14,7 @@ var media_preferences: RefCounted
 var _preference_stores: Dictionary = {}
 var layouts: RefCounted
 var variants: RefCounted
+var geography: RefCounted
 
 func enable_variant_inputs() -> Dictionary:
 	if layouts == null: return {"ok":false,"reason":"Register layout provider before variants."}
@@ -35,7 +36,9 @@ func enable_layout_inputs(required_resource_sources: Array = []) -> Dictionary:
 func enable_geography_inputs() -> Dictionary:
 	var candidate := preload("res://scripts/data/geography_inputs.gd").new()
 	candidate.classic = classic
-	return register_content_adapter(candidate,"",[])
+	var registered := register_content_adapter(candidate,"",[])
+	if registered.ok: geography = candidate
+	return registered
 
 func enable_faction_quest_inputs() -> Dictionary:
 	return register_content_adapter(preload("res://scripts/data/faction_quest_inputs.gd").new(),"",[])

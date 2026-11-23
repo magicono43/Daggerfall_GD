@@ -8,6 +8,10 @@ var _boot_body_limit := int(ProjectSettings.get_setting(BODY_LIMIT_SETTING,0))
 var layouts: RefCounted
 var registry: RefCounted
 var core: RefCounted
+var geography: RefCounted
+var variants: RefCounted
+var _environment: RefCounted
+var _prepared_environment: RefCounted
 var _serial := 0
 var _stage := {}
 var _committed := {}
@@ -34,7 +38,7 @@ func _result(kind: String, reason := "") -> Dictionary:
 func begin(request: Dictionary) -> Dictionary:
 	_purge_obsolete_preparation()
 	if not _stage.is_empty(): return _result("busy")
-	if request.size() != 7 or not request.get("id") is String or request.id.is_empty() or not request.get("requester") is String or request.requester.is_empty() or not request.get("layout") is String or not request.get("preparation") is String or request.preparation.is_empty() or not request.get("session") is String or not request.get("core_ticket") is Dictionary or not request.get("content_ticket") is int: return _result("invalid","Complete original requester/session/content/preparation identity required.")
+	if request.size() != 7+int(request.has("presentation"))+int(request.has("variants")) or not request.get("id") is String or request.id.is_empty() or not request.get("requester") is String or request.requester.is_empty() or not request.get("layout") is String or not request.get("preparation") is String or request.preparation.is_empty() or not request.get("session") is String or not request.get("core_ticket") is Dictionary or not request.get("content_ticket") is int: return _result("invalid","Complete original requester/session/content/preparation identity required.")
 	if not _current(request): return _result("stale")
 	if _boot_body_limit < 1: return _result("physics_unavailable","The qualified Jolt body-capacity setting is unavailable.")
 	var key := Hash.digest([request.requester,request.id])
@@ -47,9 +51,34 @@ func begin(request: Dictionary) -> Dictionary:
 	var started := Time.get_ticks_usec()
 	var input: Dictionary = layouts.location_inputs(registry,request.layout)
 	if not input.ok: return input
+	var variant: Dictionary = _variant_input(request,input)
+	if not variant.ok: return variant
+	if variant.has("layout_inputs"): input = variant.layout_inputs
 	var placements: Array = input.data.placements.filter(func(p: Dictionary): return p.context == "dungeon")
 	if placements.is_empty(): return _result("missing","No dungeon placements; never substitute a destination.")
 	if not input.data.has("assembly"): return _result("unsupported","Required assembly connection declarations unavailable for this layout.")
+	var palette := {}
+	var environment: RefCounted
+	if input.data.has("context"):
+		if geography == null: return _result("provider_unavailable","Destination climate provider unavailable.")
+		var location_parts: PackedStringArray = input.data.location.split("#")
+		var site: Dictionary = geography.lookup(registry,location_parts[0],location_parts[1])
+		if not site.ok: return site
+		var position: Array = site.record.value.data.position
+		var climate: Dictionary = geography.sample(registry,position[0],position[1])
+		if not climate.ok: return climate
+		var configuration: Variant = request.get("presentation",{"variation":false,"version":"dungeon-presentation-v1"})
+		if not configuration is Dictionary: return _result("invalid_configuration","Explicit presentation configuration required.")
+		palette = preload("res://scripts/loc/dungeon_palette.gd").resolve(input.data.context,site.record.identity,climate.climate,configuration)
+		if not palette.ok: return palette
+		environment = preload("res://scripts/loc/dungeon_environment.gd").new()
+		var prepared: Dictionary = environment.prepare(input.data.context)
+		if not prepared.ok: return prepared
+		if input.data.context.has("classic_environment"):
+			var expected: Dictionary = input.data.context.classic_environment
+			if expected.size() != placements.size() or not placements.all(func(p: Dictionary): return expected.has(p.id)): return _result("incompatible_environment","Classic environmental annotations must match the complete effective placement scope.")
+	elif request.has("presentation"):
+		return _result("unsupported_context","Selected layout has no qualified palette/environment declarations.")
 	_serial += 1
 	var viewport := SubViewport.new()
 	viewport.own_world_3d = true
@@ -69,7 +98,45 @@ func begin(request: Dictionary) -> Dictionary:
 	_stage.geometry_cache = {}
 	_stage.body_nodes = {}
 	_stage.body_limit = mini(_boot_body_limit,int(ProjectSettings.get_setting(BODY_LIMIT_SETTING,0)))
+	_stage.palette = palette
+	_stage.environment = environment
+	_stage.materials = preload("res://scripts/loc/dungeon_materials.gd").new()
+	_stage.materials.classic = layouts.classic
+	_stage.materials.media = layouts.media
+	_stage.materials.ticket = registry.content_ticket()
+	_stage.material_bindings = {}
+	_stage.variant = variant
 	return {"ok":true,"kind":"staging","ticket":ticket.duplicate(true),"destination_ready":false}
+
+func _variant_input(request: Dictionary, baseline: Dictionary) -> Dictionary:
+	if variants == null: return _result("provider_unavailable","Variant DATA provider unavailable.") if request.has("variants") else {"ok":true}
+	var choices: Dictionary = variants.assembly_choices(registry,baseline)
+	if not choices.ok: return choices
+	if not choices.needed and not request.has("variants"): return {"ok":true}
+	var selections: Variant = request.get("variants",{"layout_selection":choices.root,"selections":[],"required":[],"compatibility":[]})
+	if not selections is Dictionary or selections.size() != 4 or not selections.get("layout_selection") is Dictionary or not selections.get("selections") is Array or not selections.get("required") is Array or not selections.get("compatibility") is Array: return _result("invalid","Complete explicit variant selection intent required.")
+	var query: Dictionary = selections.duplicate(true)
+	query.schema = "variant-query-v1"
+	query.owner = request.requester
+	query.content_context = choices.context
+	query.layout = baseline.identity
+	var proposal: Dictionary = variants.assembly_inputs(registry,query)
+	if not proposal.ok: return proposal
+	var effective: Dictionary = proposal.layout_inputs
+	var old_placements := {}
+	var new_placements := {}
+	for p: Dictionary in baseline.data.placements: old_placements[p.id] = p
+	for p: Dictionary in effective.data.placements: new_placements[p.id] = p
+	if Hash.digest(old_placements) != Hash.digest(new_placements) or Hash.digest(baseline.data.get("assembly")) != Hash.digest(effective.data.get("assembly")): return _variant_pending(proposal,"Changed structural layout needs its real geometry/owner compatibility gates; LOC-010 grants no migration.")
+	for receipt: Dictionary in proposal.compatibility:
+		if receipt.scope.scope != "location-layout" or not receipt.changed_payloads.is_empty(): return _variant_pending(proposal,"Changed block/record meaning requires the named IMP-055 and gameplay owner integrations.")
+	return proposal
+
+func _variant_pending(proposal: Dictionary, reason: String) -> Dictionary:
+	var result := _result("provider_pending",reason)
+	result.compatibility_receipts = proposal.compatibility.duplicate(true)
+	result.variant_proposals = proposal.proposals.duplicate(true)
+	return result
 
 func _valid(ticket: Dictionary) -> bool:
 	return not _stage.is_empty() and ticket == _stage.ticket and _current(ticket.request)
@@ -90,12 +157,26 @@ func _discard(kind: String, reason := "", referring: Variant = null, provider_fa
 		result.physics_bodies = _stage.get("body_nodes",{}).size()
 		result.physics_body_limit = _stage.get("body_limit",0)
 		result.provider_failure = provider_failure.duplicate(true)
-		_stage.viewport.free()
+		Geometry.release(_stage.viewport)
 		_stage.clear()
 	return result
 
 static func record_key(placement: String, record: String) -> String:
 	return placement+"/"+record
+
+static func environment_radius(context: Dictionary, placement: String, origin: Vector3) -> float:
+	var radius := Frame.MAX_SUPPORT_DEPTH*sqrt(3.0)
+	for volume: Dictionary in context.water+context.areas:
+		if volume.source.get("placement") != placement: continue
+		for x in 2:
+			for y in 2:
+				for z in 2: radius = maxf(radius,origin.distance_to(Vector3(volume.bounds[x][0],volume.bounds[y][1],volume.bounds[z][2])))
+	return radius
+
+static func environment_pose_matches(actual: Transform3D, expected: Transform3D, radius: float) -> bool:
+	if actual.origin.distance_to(expected.origin) > Frame.POSITION_TOLERANCE: return false
+	var tolerance := Frame.POSITION_TOLERANCE/(4.0*radius)
+	return actual.basis.x.distance_to(expected.basis.x) <= tolerance and actual.basis.y.distance_to(expected.basis.y) <= tolerance and actual.basis.z.distance_to(expected.basis.z) <= tolerance
 
 func step(ticket: Dictionary) -> Dictionary:
 	if not _valid(ticket):
@@ -104,11 +185,25 @@ func step(ticket: Dictionary) -> Dictionary:
 	if _stage.next >= _stage.placements.size(): return {"ok":true,"kind":"staged"}
 	var p: Dictionary = _stage.placements[_stage.next]
 	if not _stage.blocks.has(p.block):
-		_stage.blocks[p.block] = layouts.decode_block(registry,p.block)
+		_stage.blocks[p.block] = _stage.variant.blocks[p.id] if _stage.variant.get("blocks",{}).has(p.id) else layouts.decode_block(registry,p.block)
 		if _stage.blocks[p.block].ok: _stage.block_versions[p.block] = Hash.digest(_stage.blocks[p.block].definition)
 	var block: Dictionary = _stage.blocks[p.block]
 	if not block.ok: return _discard(block.get("kind","failed"),block.get("reason","Required block failed."),p.id,block)
 	if block.definition.format != "RDB": return _discard("unsupported","Dungeon requires RDB geometry.",p.id)
+	var expected_environment: Dictionary = _stage.input.data.get("context",{}).get("classic_environment",{})
+	if expected_environment.has(p.id):
+		var observed: Dictionary = block.definition.get("environment_observation",{})
+		var expected: Dictionary = expected_environment[p.id]
+		var context: Dictionary = _stage.input.data.context
+		var placement_transform := Frame.placement(p)
+		var radius := environment_radius(context,p.id,placement_transform.origin)
+		if not observed.get("ok",false) or p.block != expected.block or not environment_pose_matches(placement_transform,Frame.pose(expected.transform),radius) or observed.get("source_input",{}).get("payload_sha256") != expected.sha256 or observed.native_height != expected.native_height or observed.castle != expected.castle: return _discard("incompatible_environment","Classic environmental annotation no longer matches the effective block/placement input.",p.id,observed)
+		if observed.water_present:
+			if (placement_transform.basis*Vector3.UP).distance_to(Vector3.UP) > Frame.POSITION_TOLERANCE/(4.0*radius): return _discard("unsupported_environment","Tilted classic water needs an explicit native volume interpretation.",p.id,observed)
+			var surface := (placement_transform*Vector3(0,-float(observed.native_height)*Frame.CLASSIC_METRES,0)).y
+			if not context.water.any(func(volume: Dictionary): return volume.source.get("placement") == p.id and volume.source.get("block") == block.identity.record and volume.source.get("sha256") == expected.sha256 and observed.markers.any(func(marker: Dictionary): return marker.record == volume.source.get("marker")) and absf(float(volume.surface)-surface) <= Frame.POSITION_TOLERANCE): return _discard("missing_environment","Required classic water has no source-matched checked extent.",p.id,observed)
+		for role: String in observed.get("special_roles",[]):
+			if not context.areas.any(func(area: Dictionary): return area.source.get("placement") == p.id and area.source.get("block") == block.identity.record and area.source.get("sha256") == expected.sha256 and area.source.get("classic_role") == role): return _discard("missing_environment","Required classic special area has no source-matched explicit scope.",p.id,observed)
 	var placed := Node3D.new()
 	placed.transform = Frame.placement(p)
 	_stage.root.add_child(placed)
@@ -134,17 +229,21 @@ func step(ticket: Dictionary) -> Dictionary:
 				if not resource.ok: return _discard(resource.get("kind","failed"),resource.get("reason","Required geometry unavailable."),binding.identity,resource)
 				_stage.cache[resource_key] = resource
 				_stage.resource_decodes += 1
-			var geometry := Geometry.model(_stage.cache[resource_key],_stage.geometry_cache.get(resource_key,{}))
+			if not _stage.palette.is_empty() and not _stage.material_bindings.has(resource_key):
+				var selected: Dictionary = _stage.materials.bindings(_stage.cache[resource_key],_stage.palette.material_slots)
+				if not selected.ok: return _discard(selected.get("kind","required_asset_failed"),selected.get("reason","Required material failed."),binding.identity,selected)
+				_stage.material_bindings[resource_key] = selected
+			var geometry := Geometry.model(_stage.cache[resource_key],_stage.geometry_cache.get(resource_key,{}),_stage.material_bindings.get(resource_key,{}))
 			if not geometry.ok: return _discard(geometry.kind,geometry.reason,binding.identity)
 			_stage.geometry_cache[resource_key] = geometry.prototype
-			_stage.resource_versions[resource_key] = geometry.provenance.sha256
+			_stage.resource_versions[resource_key] = {"sha256":geometry.provenance.sha256,"converter":geometry.provenance.get("converter",""),"profile":geometry.provenance.get("profile","")}
 			binding.geometry_provenance = geometry.provenance.duplicate(true)
 			geometry.node.transform = Frame.pose(record.transform)
 			geometry.collision.set_meta("scoped_record",key)
 			var separate_body: bool = record.get("door_metadata",{}).get("candidate",false) or record.has("action") or protected_targets.has(record.id)
 			if separate_body or fixed_body == null:
 				if _stage.body_nodes.size() >= _stage.body_limit:
-					geometry.node.free()
+					Geometry.release(geometry.node)
 					return _discard("physics_capacity","Required collision exceeds the configured Jolt body capacity.",binding.identity)
 			if separate_body:
 				_stage.body_nodes[geometry.body.get_instance_id()] = geometry.body
@@ -316,6 +415,11 @@ func finish(ticket: Dictionary) -> Dictionary:
 	var physics_space: RID = _stage.viewport.find_world_3d().space
 	for body: StaticBody3D in _stage.body_nodes.values():
 		if PhysicsServer3D.body_get_space(body.get_rid()) != physics_space or PhysicsServer3D.body_get_shape_count(body.get_rid()) < 1: return _discard("physics_unavailable","A required body/shape failed physics-space registration.")
+	if _stage.environment != null:
+		var checked_environment: Dictionary = _stage.environment.qualify(func(from: Vector3,to: Vector3):
+			var query := PhysicsRayQueryParameters3D.create(from,to)
+			return {"ok":true,"found":not _stage.viewport.find_world_3d().direct_space_state.intersect_ray(query).is_empty()})
+		if not checked_environment.ok: return _discard(checked_environment.get("kind","invalid_environment"),checked_environment.get("reason","Required environment failed."),null,checked_environment)
 	var connections: Array = []
 	for connection: Dictionary in _stage.assembly.connections:
 		var checked := _connection(connection)
@@ -334,8 +438,24 @@ func finish(ticket: Dictionary) -> Dictionary:
 	candidate.required_bindings = _stage.assembly.required_bindings.duplicate(true)
 	candidate.pending_action_bindings = _stage.pending_action_bindings.duplicate(true)
 	candidate.pending_door_bindings = _stage.doors.keys().duplicate()
+	var geometry_input: Dictionary = _stage.input.data.duplicate(true)
+	geometry_input.erase("context")
+	candidate.geometry_version = Hash.digest({"layout":geometry_input,"blocks":_stage.block_versions,"resources":_stage.resource_versions,"frame":Frame.FRAME})
+	candidate.context_ready = _stage.environment != null
+	candidate.palette = _stage.palette.duplicate(true)
+	candidate.material_assets = _stage.materials.receipts()
+	candidate.variant_proposals = _stage.variant.get("proposals",[]).duplicate(true)
+	candidate.compatibility_receipts = _stage.variant.get("compatibility",[]).duplicate(true)
+	candidate.variant_version = Hash.digest(candidate.compatibility_receipts.map(func(receipt: Dictionary): return {"variant":receipt.variant,"scope":receipt.scope,"source":receipt.source_sha256,"target":receipt.target_sha256,"mapping":receipt.mapping}))
+	candidate.variant_geometry_applied = not candidate.variant_proposals.is_empty()
+	candidate.structural_migration_accepted = false
+	if candidate.context_ready:
+		var definition: Dictionary = _stage.input.data.context
+		candidate.environment_version = Hash.digest({"geometry":candidate.geometry_version,"profile":preload("res://scripts/loc/dungeon_environment.gd").PROFILE,"water":definition.water,"areas":definition.areas,"classic_environment":definition.get("classic_environment",{})})
+		candidate.context_version = Hash.digest({"layout":candidate.layout_version,"definition":definition,"palette":_stage.palette.version,"assets":_stage.materials.asset_version(),"material_profile":preload("res://scripts/av/replacement_instances.gd").DUNGEON_SURFACE_PROFILE,"variant":candidate.variant_version,"environment":candidate.environment_version})
 	candidate.layout_provenance = {"winner":_stage.input.winner.duplicate(true),"contributors":_stage.input.contributors.duplicate(true),"content_context":_stage.input.content_context.duplicate(true)}
 	measurements = {"assembly_usec":Time.get_ticks_usec()-_stage.started,"blocks":_stage.next,"unique_block_decodes":_stage.blocks.size(),"unique_resource_decodes":_stage.resource_decodes,"unique_geometry_builds":_stage.geometry_cache.size(),"geometry_instances":_stage.geometry_instances,"physics_bodies":_stage.body_nodes.size(),"physics_body_limit":_stage.body_limit,"triangles":_stage.triangles}
+	measurements.unique_image_resources = _stage.materials.reads
 	# Move coherent geometry out of the isolated staging world in one synchronous
 	# publication. No entry/simulation eligibility or gameplay event is emitted.
 	if not ticket.request.core_ticket.is_empty():
@@ -344,6 +464,7 @@ func finish(ticket: Dictionary) -> Dictionary:
 		_prepared = candidate
 		_prepared_viewport = _stage.viewport
 		_prepared_root = _stage.root
+		_prepared_environment = _stage.environment
 	else:
 		var prior := _live
 		if prior != null: remove_child(prior)
@@ -353,7 +474,8 @@ func finish(ticket: Dictionary) -> Dictionary:
 		_stage.viewport.free()
 		candidate.activation_session = ticket.request.session
 		_committed = candidate
-		if prior != null: prior.free()
+		_environment = _stage.environment
+		if prior != null: Geometry.release(prior)
 	_stage.clear()
 	var result := projection(ticket)
 	var request: Dictionary = ticket.request
@@ -375,7 +497,7 @@ func _view(ticket: Dictionary) -> Dictionary:
 func readiness(ticket: Dictionary) -> Dictionary:
 	var view := _view(ticket)
 	if view.is_empty(): return _result("stale")
-	return {"ok":true,"ticket":ticket.duplicate(true),"layout":view.layout.duplicate(true),"layout_version":view.layout_version,"frame":Frame.FRAME,"assembly_ready":true,"geometry_ready":true,"collision_ready":true,"destination_ready":false,"owner_state_ready":false,"placement_committed":false,"activated":view.has("activation_session")}
+	return {"ok":true,"ticket":ticket.duplicate(true),"layout":view.layout.duplicate(true),"layout_version":view.layout_version,"geometry_version":view.geometry_version,"environment_version":view.get("environment_version",""),"frame":Frame.FRAME,"assembly_ready":true,"geometry_ready":true,"collision_ready":true,"context_ready":view.get("context_ready",false),"context_version":view.get("context_version",""),"destination_ready":false,"owner_state_ready":false,"placement_committed":false,"activated":view.has("activation_session")}
 
 func binding(ticket: Dictionary, placement: String, record: String) -> Dictionary:
 	var current := readiness(ticket)
@@ -399,6 +521,33 @@ func geometry_ray(ticket: Dictionary, from: Vector3, to: Vector3) -> Dictionary:
 	if not root.is_ancestor_of(hit.collider) or not view.bindings.has(key): return _result("foreign_geometry","Query hit geometry outside this assembly.")
 	return {"ok":true,"found":true,"position":hit.position,"normal":hit.normal,"record":view.bindings[key].identity.duplicate(true),"ticket":ticket.duplicate(true)}
 
+func spatial_context(ticket: Dictionary, frame: String, position: Vector3) -> Dictionary:
+	var current := readiness(ticket)
+	if not current.ok: return current
+	if frame != Frame.FRAME: return _result("invalid_frame","Checked local dungeon frame required.")
+	var environment: RefCounted = _prepared_environment if _prepared.get("ticket") == ticket else _environment
+	if environment == null: return _result("unsupported_context","No qualified environmental extents for this layout.")
+	var result: Dictionary = environment.query(position,func(from: Vector3,to: Vector3): return geometry_ray(ticket,from,to))
+	result.ticket = ticket.duplicate(true)
+	result.context_version = _view(ticket).context_version
+	result.environment_version = current.environment_version
+	result.pose_authoritative = false
+	result.contact_committed = false
+	result.events = []
+	return result
+
+func environment_projection(ticket: Dictionary) -> Dictionary:
+	var current := readiness(ticket)
+	if not current.ok: return current
+	var environment: RefCounted = _prepared_environment if _prepared.get("ticket") == ticket else _environment
+	if environment == null: return _result("unsupported_context","No qualified environmental geometry for this layout.")
+	var result: Dictionary = environment.projection()
+	result.ticket = ticket.duplicate(true)
+	result.frame = Frame.FRAME
+	result.context_version = current.context_version
+	result.environment_version = current.environment_version
+	return result
+
 func activate(ticket: Dictionary) -> Dictionary:
 	if not _committed.is_empty() and ticket == _committed.ticket and not _view(ticket).is_empty(): return readiness(ticket)
 	if _prepared.is_empty() or ticket != _prepared.ticket or not _current(ticket.request): return _result("stale")
@@ -414,15 +563,18 @@ func activate(ticket: Dictionary) -> Dictionary:
 	_prepared_root = null
 	_prepared.activation_session = scope
 	_committed = _prepared
+	_environment = _prepared_environment
+	_prepared_environment = null
 	_prepared = {}
-	if prior != null: prior.free()
+	if prior != null: Geometry.release(prior)
 	return readiness(ticket)
 
 func _drop_prepared() -> void:
-	if _prepared_viewport != null: _prepared_viewport.free()
+	if _prepared_viewport != null: Geometry.release(_prepared_viewport)
 	_prepared_viewport = null
 	_prepared_root = null
 	_prepared.clear()
+	_prepared_environment = null
 
 func operation_terminal(result: Dictionary) -> void:
 	if not _stage.is_empty() and _stage.ticket.request.core_ticket.get("id","") == result.id: _discard("cancelled")
@@ -432,15 +584,17 @@ func retire_scope(scope: String) -> void:
 	if not _stage.is_empty() and _stage.ticket.request.session == scope and not core.layout_operation_owns(_stage.ticket.request.core_ticket): _discard("cancelled")
 	if not _prepared.is_empty() and _prepared.ticket.request.session == scope and not core.layout_operation_owns(_prepared.ticket.request.core_ticket): _drop_prepared()
 	if not _committed.is_empty() and _committed.activation_session == scope:
-		if _live != null: _live.free()
+		if _live != null: Geometry.release(_live)
 		_live = null
 		_committed.clear()
+		_environment = null
 		_receipts.clear()
 
 func dispose() -> void:
 	if not _stage.is_empty(): _discard("cancelled")
 	_drop_prepared()
-	if _live != null: _live.free()
+	if _live != null: Geometry.release(_live)
 	_live = null
 	_committed.clear()
+	_environment = null
 	_receipts.clear()

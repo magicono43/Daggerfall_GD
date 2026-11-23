@@ -193,7 +193,8 @@ and material IDs in inspection projections are diagnostics, never durable IDs.
 
 ## Remaining real integrations
 
-Increment 2 retains LOC-010/012 palette/story, water and special-area selection.
+Increment 2 adds LOC-010/012 palette/story, water and special-area preparation;
+see [DUNGEON_CONTEXT.md](DUNGEON_CONTEXT.md) for its bounded spatial contract.
 Increment 3 retains LOC-011 route/start/return resolution. Actual placement and
 entry require IMP-013/MOVE; exterior return IMP-025; swimming IMP-040; edited
 variant qualification IMP-055. Native SAVE, QUEST/action restoration and other

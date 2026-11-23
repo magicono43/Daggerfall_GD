@@ -430,6 +430,10 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("locked layout retained until restart",100,Layout.lookup(registry,"packs/test.pack#repeated").record.value.data.placements[0].transform.position[0])
 	write(sandbox.path_join("layout-restart-receipt.json"),JSON.stringify({"old_media_sha256":exported.provenance.sha256,"profile":Layout.PROFILE_HASH}))
 	if DisplayServer.get_name() != "headless":
+		# Publication/session notifications queued a stock UI render during the
+		# synchronous checks above. Settle that work before attaching inspection
+		# controls, otherwise the deferred render frees them during capture's yield.
+		for frame in range(3): await shell.get_tree().process_frame
 		shell.render()
 		var inspector := Label.new()
 		inspector.text = "Structural DATA inspection only — no live location or physics\nRMB: %s; interior model %s at %s\nPlacements: first / second — separate record identities\nQuest/action-door cycle: marker-room and other-room\nTEXTURE.210: 30 records / 83 independently checked frames\nResource, door and marker failures retain no partial location" % [observed.interior_pin.name,str(interior_model.model_id),str(interior_model.transform.position)]
@@ -456,8 +460,8 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		shell.panel.add_child(previews)
 		await capture(shell,"layout-structural-menu")
 		var viewport_height: float = shell.get_viewport_rect().size.y
-		check("rendered structural inspector visible",true,inspector.is_visible_in_tree() and inspector.get_global_rect().position.y >= 0 and inspector.get_global_rect().end.y <= viewport_height)
-		check("rendered texture frame probes",true,previews.get_child_count() == 2 and previews.get_global_rect().position.y >= 0 and previews.get_global_rect().end.y <= viewport_height)
+		check("rendered structural inspector visible",true,is_instance_valid(inspector) and inspector.is_visible_in_tree() and inspector.get_global_rect().position.y >= 0 and inspector.get_global_rect().end.y <= viewport_height)
+		check("rendered texture frame probes",true,is_instance_valid(previews) and previews.get_child_count() == 2 and previews.get_global_rect().position.y >= 0 and previews.get_global_rect().end.y <= viewport_height)
 	await verify_variants(shell,fixture)
 	retiring_source = controller.providers.classic
 	resource_calls = 0

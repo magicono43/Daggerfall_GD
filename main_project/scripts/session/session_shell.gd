@@ -149,6 +149,8 @@ func synchronize_startup() -> void:
 		dungeon_assembly = preload("res://scripts/loc/dungeon_assembly.gd").new()
 		dungeon_assembly.layouts = host.controller.providers.layouts
 		dungeon_assembly.registry = host.controller.providers.definitions
+		dungeon_assembly.geography = host.controller.providers.geography
+		dungeon_assembly.variants = host.controller.providers.variants
 		dungeon_assembly.core = core
 		host.add_child(dungeon_assembly)
 		core.retiring.connect(dungeon_assembly.retire_scope)

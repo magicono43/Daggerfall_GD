@@ -5,6 +5,7 @@ param(
     [string]$ClassicSource = '',
     [switch]$M1Composition,
     [switch]$DungeonAssembly,
+    [switch]$DungeonContext,
     [switch]$ModDiscovery,
     [switch]$DependencyPlanning,
     [switch]$DefinitionPublication,
@@ -28,6 +29,7 @@ param(
     [switch]$FormulaExtraError
 )
 $ErrorActionPreference = 'Stop'
+if ($DungeonContext) { $DungeonAssembly = $true; $Fixture = 'dungeon-context-v1' }
 if ($DungeonAssembly) {
     foreach ($selection in @('M1Composition','ModDiscovery','DependencyPlanning','DefinitionPublication','TextCatalog','StructuredText','LocaleFonts','TranslationPreferences','ActorInputs','ItemSpellInputs','FactionQuestInputs','GeographyInputs','LayoutInputs','VariantInputs','ClassicMedia','MediaReplacements','NativeMedia','Randomness','RandomnessSession','Formula','FormulaFault','FormulaExtraError')) {
         if ((Get-Variable -Name $selection -ValueOnly)) { throw 'DungeonAssembly requires its independent export selection.' }
@@ -62,7 +64,7 @@ $priorLocal = $env:LOCALAPPDATA
 $report = @{ ok = $false; status = 'incomplete'; configuration = $Configuration; classic_source = $ClassicSource
     fixture = $(if ($FormulaExtraError) {'formula-extra-error-v1'} elseif ($Formula -or $FormulaFault) {'formula-v1'} elseif ($RandomnessSession) {'randomness-session-v1'} elseif ($Randomness) {'randomness-v1'} elseif ($DefinitionPublication) {'publication-v1'} elseif ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
     reproduction = @{ command = './main_project/tools/verify_startup_export.ps1'; arguments = @{
-        DungeonAssembly = [bool]$DungeonAssembly; M1Composition = [bool]$M1Composition; VariantInputs = [bool]$VariantInputs; LayoutInputs = [bool]$LayoutInputs; Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; RandomnessSession = [bool]$RandomnessSession; Formula = [bool]$Formula; FormulaFault = [bool]$FormulaFault; FormulaExtraError = [bool]$FormulaExtraError; Godot = $Godot; Templates = $Templates } } }
+        DungeonContext = [bool]$DungeonContext; DungeonAssembly = [bool]$DungeonAssembly; M1Composition = [bool]$M1Composition; VariantInputs = [bool]$VariantInputs; LayoutInputs = [bool]$LayoutInputs; Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; RandomnessSession = [bool]$RandomnessSession; Formula = [bool]$Formula; FormulaFault = [bool]$FormulaFault; FormulaExtraError = [bool]$FormulaExtraError; Godot = $Godot; Templates = $Templates } } }
 function Copy-ExportResources([string]$Source, [string]$Destination) {
     New-Item -ItemType Directory -Force $Destination | Out-Null
     foreach ($entry in Get-ChildItem -LiteralPath $Source) {
@@ -169,6 +171,21 @@ foreach ($mode in @('headless','rendered')) {
             $guards += [IO.File]::Open((Join-Path $selectedRoot $name), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
             [IO.File]::WriteAllBytes("$lockedRoot/$name", [byte[]]@(1,0,0,2,42,232,3,0,0,1,0,0,0))
         }
+        if ($DungeonAssembly -or $M1Composition) {
+            $contextSources = Get-Content -LiteralPath "$runtimeProject/content/layouts/dungeon_context.json" -Raw | ConvertFrom-Json
+            if ($DungeonContext) {
+                $observation = Get-Content -LiteralPath "$runtimeProject/tests/dungeon_context_observation.json" -Raw | ConvertFrom-Json
+                foreach ($block in $observation.fixture_blocks.PSObject.Properties.Value) {
+                    foreach ($archive in $block.texture_archives) { $contextSources.resource_sources += @{file=('TEXTURE.{0:000}' -f $archive);format='classic-texture-v1'} }
+                }
+            }
+            foreach ($source in $contextSources.resource_sources) {
+                $name = $source.file
+                if ($before.ContainsKey($name)) { continue }
+                $before[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name)).Hash
+                $guards += [IO.File]::Open((Join-Path $selectedRoot $name), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
+            }
+        }
         $classicLock = [IO.File]::Open("$lockedRoot/ARCH3D.BSA", [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::None)
         $fixture = @{ sandbox = $sandbox.Replace('\','/'); mode = 'classic'; fixture = 'classic-v1'; inputs = @{}
             classic_source = $selectedRoot.Replace('\','/'); unreadable_root = $lockedRoot.Replace('\','/') }
@@ -215,7 +232,7 @@ foreach ($mode in @('headless','rendered')) {
         $fixture.fixture = if ($FormulaExtraError) { 'formula-extra-error-v1' } else { 'formula-v1' }
     }
     if ($M1Composition) { $fixture.mode = 'm1-composition'; $fixture.fixture = 'm1-composition-v1' }
-    if ($DungeonAssembly) { $fixture.mode = 'dungeon-assembly'; $fixture.fixture = 'dungeon-assembly-v1'; $report.fixture = 'dungeon-assembly-v1' }
+    if ($DungeonAssembly) { $fixture.mode = 'dungeon-assembly'; $fixture.fixture = $(if ($DungeonContext) { 'dungeon-context-v1' } else { 'dungeon-assembly-v1' }); $report.fixture = $fixture.fixture }
     $fixture |
         ConvertTo-Json | Set-Content "$sandbox/fixture.json"
     $arguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/fixture.json")

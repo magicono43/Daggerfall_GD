@@ -26,6 +26,22 @@ static func marker(texture: Dictionary) -> String:
 	if texture.archive != 199: return ""
 	return {8:"dungeon-entrance",10:"dungeon-start",11:"quest",18:"quest-item"}.get(texture.record,"editor-other")
 
+static func environment(records: Array) -> Dictionary:
+	# Metadata observation is independent of arrival role selection. All matching
+	# records must agree; enumeration order never chooses environmental meaning.
+	var markers: Array = []
+	var levels := {}
+	var castle := {}
+	for record: Dictionary in records:
+		if record.get("type") != "flat" or record.get("texture",{}).get("archive") != 199 or record.texture.record != 10: continue
+		var sound := int(record.sound_index)
+		var native_height := -8*sound if sound != 0 else 10000
+		levels[native_height] = true
+		castle[int(record.magnitude) != 0] = true
+		markers.append({"record":record.get("id",record.get("address")),"sound_index":sound,"magnitude":record.magnitude,"native_height":native_height})
+	if levels.size() > 1 or castle.size() > 1: return fail("Conflicting environmental marker metadata requires an explicit validated override.","RDB",markers,null,"ambiguous_environment")
+	return {"ok":true,"schema":"classic-rdb-environment-observation-v1","markers":markers,"water_present":not levels.is_empty() and not levels.has(10000),"native_height":levels.keys()[0] if not levels.is_empty() else 10000,"castle":castle.has(true),"extents_ready":false,"arrival_selected":false,"mapping":"dfu-1.1.1-start-metadata-v1"}
+
 static func claim_extent(mask: PackedByteArray, claims: Dictionary, at: int, count: int, kind: String) -> bool:
 	if at < 0 or count < 0 or at > mask.size()-count: return false
 	if claims.has(at): return claims[at].count == count and claims[at].kind == kind

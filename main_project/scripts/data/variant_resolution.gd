@@ -5,6 +5,11 @@ const C = preload("res://scripts/data/actor_input_formats.gd")
 const F = preload("res://scripts/data/layout_formats.gd")
 const DOMAIN = "world.variants"
 const VERSION = "variant-query-v1"
+var _block_reads := {} # One synchronous, exact-content resolution only.
+
+func block_input(adapter: RefCounted, registry: RefCounted, ref_: String) -> Dictionary:
+	if not _block_reads.has(ref_): _block_reads[ref_] = adapter.layouts.decode_block(registry,ref_)
+	return _block_reads[ref_].duplicate(true)
 
 static func target_key(target: Dictionary) -> String:
 	var parts: Array = []
@@ -99,7 +104,7 @@ func check_mapping(source: Dictionary, target: Dictionary, selected: Dictionary,
 func alternative(adapter: RefCounted, registry: RefCounted, source: Dictionary, selection: Dictionary, is_layout: bool, request: Dictionary, receipts: Array, scope: Dictionary) -> Dictionary:
 	if selection.intent == "baseline": return source
 	var record: Dictionary = selection.variant
-	var target: Dictionary = adapter.layouts.location_inputs(registry,record.value.alternate) if is_layout else adapter.layouts.decode_block(registry,record.value.alternate)
+	var target: Dictionary = adapter.layouts.location_inputs(registry,record.value.alternate) if is_layout else block_input(adapter,registry,record.value.alternate)
 	if not target.ok: return target.merged({"variant":record.identity,"referring":request.owner,"provider":record.winner},true)
 	var mapping := check_mapping(source,target,record,is_layout,request)
 	if not mapping.ok: return mapping
@@ -129,7 +134,7 @@ static func building_envelope(block: Dictionary, building: String) -> Dictionary
 	shell.erase("buildings")
 	return {"format":definition.format,"outside":outside,"parents":parents,"shell":shell,"ground":definition.get("ground"),"automap":definition.get("automap")}
 
-func resolve(adapter: RefCounted, registry: RefCounted, request: Dictionary, resource_provider: Callable) -> Dictionary:
+func resolve(adapter: RefCounted, registry: RefCounted, request: Dictionary, resource_provider: Callable, loc_inputs := false) -> Dictionary:
 	var index: Dictionary = registry.domain_index(DOMAIN)
 	if not index.ok: return index
 	if request.get("schema") != VERSION or request.size() != 8 or not request.get("owner") is String or str(request.owner).is_empty() or not request.get("layout") is Dictionary or not request.get("layout_selection") is Dictionary or not request.get("selections") is Array or not request.get("required") is Array or not request.get("compatibility") is Array: return reject("Complete versioned explicit query required.",request,null,"invalid")
@@ -161,7 +166,8 @@ func resolve(adapter: RefCounted, registry: RefCounted, request: Dictionary, res
 	var blocks := {}
 	var proposals: Array = [{"target":root,"resolution":root_choice}]
 	for p: Dictionary in layout.data.placements:
-		var source_block: Dictionary = adapter.layouts.decode_block(registry,p.block)
+		if loc_inputs and p.context != "dungeon": continue
+		var source_block: Dictionary = block_input(adapter,registry,p.block)
 		if not source_block.ok: return source_block.merged({"placement":p.id,"referring":request.owner,"variant":root_choice.get("variant",{})},true)
 		var t := {"scope":"placement","location":location,"layout":request.layout.local,"block":p.block,"placement":p.id}
 		var key := target_key(t)
@@ -205,7 +211,11 @@ func resolve(adapter: RefCounted, registry: RefCounted, request: Dictionary, res
 			for id in check.required:
 				if not receipt.mapping.has(id): return reject("Required explicit record mapping absent.",request,{"record":id,"variant":receipt.variant})
 		if not found: return reject("Compatibility inputs obsolete or variant not selected.",request,check)
-	var result: Dictionary = adapter.layouts.prepare_structural_inputs(registry,request.layout.local,layout,blocks,resource_provider,request.required)
+	var scoped_layout: Dictionary = layout
+	if loc_inputs:
+		scoped_layout = layout.duplicate(true)
+		scoped_layout.data.placements = scoped_layout.data.placements.filter(func(p: Dictionary): return p.context == "dungeon")
+	var result: Dictionary = adapter.layouts.prepare_structural_inputs(registry,request.layout.local,scoped_layout,blocks,resource_provider,request.required,loc_inputs)
 	if not result.ok: return result.merged({"variant_proposals":proposals,"referring_owner":request.owner},true)
 	# Recheck after trusted resource callbacks: a disposed provider or obsolete
 	# candidate must not return a current successful result.
@@ -217,4 +227,8 @@ func resolve(adapter: RefCounted, registry: RefCounted, request: Dictionary, res
 	result.compatibility = receipts.duplicate(true)
 	result.selection_committed = false
 	result.transition_complete = false
+	if loc_inputs:
+		result.schema = "variant-assembly-inputs-v1"
+		result.layout_inputs = layout.duplicate(true)
+		result.blocks = blocks.duplicate(true)
 	return result

@@ -153,3 +153,19 @@ func resolve(registry: RefCounted, request: Dictionary, resource_provider: Calla
 		result.selection_committed = false
 		result.transition_complete = false
 	return result.duplicate(true)
+
+func assembly_choices(registry: RefCounted, layout: Dictionary) -> Dictionary:
+	if registry.content_ticket() != _ticket or not _index.get("ok",false): return F.fail("Exact published variant context required.",DOMAIN,null,null,"stale")
+	var root := {"scope":"location-layout","location":layout.data.location,"layout":layout.identity.local}
+	var root_default: bool = _index.defaults.has(Resolver.target_key(root))
+	var needed := root_default
+	for placement: Dictionary in layout.data.placements:
+		if placement.context != "dungeon": continue
+		for target in [{"scope":"placement","location":layout.data.location,"layout":layout.identity.local,"block":placement.block,"placement":placement.id},{"scope":"location-block","location":layout.data.location,"layout":layout.identity.local,"block":placement.block},{"scope":"global-block","block":placement.block}]:
+			needed = needed or _index.defaults.has(Resolver.target_key(target))
+	return {"ok":true,"needed":needed,"root":{"intent":"default" if root_default else "baseline"},"context":_index.context.duplicate(true)}
+
+func assembly_inputs(registry: RefCounted, request: Dictionary) -> Dictionary:
+	# The same selection/remapping checks, with resource readiness explicitly
+	# deferred to the real LOC consumer. This is never an entry/SAVE certificate.
+	return Resolver.new().resolve(self,registry,request,Callable(),true).duplicate(true)

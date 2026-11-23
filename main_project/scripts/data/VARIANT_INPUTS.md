@@ -197,3 +197,14 @@ snapshots/migrations, restore ordering, compatibility and save-during-transition
 timing. Controlled sequential-session/restore-order probes show only that DATA
 resolution can run before reconstruction and cannot inherit hidden selection.
 They do not qualify these real providers, opening gameplay, parent IMP-010 or M1.
+
+## LOC context proposal consumption
+
+IMP-061 increment 2 adds owner-indexed `assembly_choices` and `assembly_inputs`.
+The latter uses the same validated resolver/receipts with resource staging
+deferred to LOC; `resources_validated:false` is explicit. Decoded source blocks
+are memoized only within that resolution. LOC accepts unchanged structural
+placements/assembly with root context alternatives, retains compatibility
+receipts, and rejects structural migration as `provider_pending`. This does not
+implement durable selection storage, edited-variant owner migration or SAVE.
+See [dungeon context contract](../loc/DUNGEON_CONTEXT.md).

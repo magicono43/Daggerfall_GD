@@ -64,3 +64,29 @@ project-authored GLB stair geometry qualify owner interfaces, not a universal
 classic correction. Actual action/QUEST/SAVE state and actor placement remain
 unavailable. Initial candidate `place-00016` was explicitly rejected for a solid
 proposed seam; its failed evidence is retained rather than substituted at runtime.
+
+## IMP-061 increment-2 palette/environment annotations
+
+`dungeon_context.json` is project-authored, source-guarded metadata for the same
+place-00032 edition. Baseline slots 119/120/122/123/124/168 and explicit climate
+archive groups follow DFU DaggerfallDungeon/DungeonTextureTables/MapsFile (MIT;
+DFU_LICENSE.txt retained). Slot 74 climate bindings are explicit data. Default
+classic six-slot mapping is retained; opt-in selection deliberately uses stable
+SHA-256 of destination identity/climate/configuration/definition, rather than
+DFU's historic site seed algorithm or exact vanilla values. Pools and overrides
+remain replaceable through normal layout contributions. No source file changes
+or classic pixel payloads are shipped.
+
+`tests/observe_dungeon_context.gd` independently reads raw source bytes for
+model67019 UVs/planes, texture120/123 record3 RGBA hashes, PAL.PAL and complete
+file hashes, source environmental markers and transformed geometry/probes.
+Flat199/10 sound/magnitude interpretation follows DFU DaggerfallBillboard.Start;
+source sound zero is absence10000, otherwise native height=-8*sound. Treasury
+role S0000161 follows DFU PlayerEnterExit.SpecialAreaCheck and is guarded by exact
+block SHA. Its metadata also declares water7.2m; W0000000 declares12.4m.
+S0000040 declares castle and dry sentinel. These are deliberately isolated
+supported real-block test layouts, not automatic extents for the full corpus.
+Native extents/anchors/consumer-use declarations and test PNG/bridge are project
+authored. Classic UV pixel units and opaque model palette-index-zero handling
+follow DFU MeshReader/DaggerfallMesh. No new library or copied implementation
+source is introduced. See the increment-2 evidence for editions and limits.

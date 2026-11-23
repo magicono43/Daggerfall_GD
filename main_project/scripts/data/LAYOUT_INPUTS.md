@@ -195,3 +195,15 @@ metadata pool pairing, model-material climate substitution and SAVE compatibilit
 still require their real providers. IMP-061 increment-1 evidence separately
 qualifies its named geometry/instance source scope; actual MOVE/QUEST/action/SAVE
 and other named joint checks remain open. No controlled fixture closes them.
+
+## IMP-061 increment-2 context extension
+
+Validated `dungeon-context-v1` layout data supplies moddable palettes, explicit
+climate bindings, bounded water and special areas. Source-import annotations are
+SHA-pinned in `content/layouts/dungeon_context.json` and input-matched per placed
+block/pose. `environment_observation` scans all 199/10 records without selecting
+an arrival. Invalid/conflicting required metadata fails explicitly. The optional
+LOC-only deferred-resource preparation still validates typed references and
+retains all records; LOC must then validate/stage every required resource before
+readiness. Ordinary structural-input preparation retains its existing checks.
+See [dungeon context contract](../loc/DUNGEON_CONTEXT.md).

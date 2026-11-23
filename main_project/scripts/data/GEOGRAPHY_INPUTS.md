@@ -189,3 +189,10 @@ so none is invented.
 Reads/rebuilds do not change character history. Real WORLD/UI discovery policy,
 SAVE restoration/new-content handling, physics, terrain generation, layout/door/
 marker/action decoding, variants and quest execution remain with later owners.
+
+## Dungeon presentation consumer
+
+IMP-061 increment 2 resolves the declared destination site's validated identity
+and position, then samples that destination's climate through this adapter.
+Player GPS/current-origin climate never participates in dungeon palette selection.
+No geography data or coordinate ownership changes.

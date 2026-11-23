@@ -167,6 +167,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	publish_synthetic(mods)
 	check("assembly declaration schema","",Layout.AssemblySchema.reason(assembly))
 	var data := {"mode":"classic-source","location":"packs/classic#"+source.location,"mapping":source.location,"assembly":assembly}
+	data.context = Layout.context_annotations().data.layouts[source.location].duplicate(true)
 	write(mods.root.path_join("Overrides/assembly.json"),JSON.stringify({"domain":Layout.DOMAIN,"path":"packs/classic","operation":"patch","entries":[{"id":source.location,"value":{"data":data}}]}))
 	controller.settings.apply({"startup/show_setup":true})
 	controller.settings.effective["startup/show_setup"] = true
@@ -175,7 +176,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	if not controller.prepared_content.get("ok",false):
 		observations.failure = {"reason":selected.get("reason"),"issues":selected.get("issues",[])}
 		return terminal(fixture)
-	check("actual content publication",true,controller.continue_to_menu("run").ok)
+	check("actual content publication",true,controller.continue_to_menu("save" if fixture.fixture == "dungeon-context-v1" else "run").ok)
 	await shell.get_tree().process_frame
 	shell.session_shell.synchronize_startup()
 	observations.publication = registry.timings.duplicate(true)

@@ -32,6 +32,19 @@ static func gap_floor() -> PackedByteArray:
 		for index in [0,1,2,0,2,3]: indices.append(start+index)
 	return encode(points,normals,indices)
 
+static func bridge_and_lower_room() -> PackedByteArray:
+	var points: Array[Vector3] = []
+	var normals: Array[Vector3] = []
+	var indices: Array[int] = []
+	# Lower dry-room floor, pool floor, and a dry bridge above its surface.
+	for floor_ in [[-2.0,2.0,-2.0],[-2.0,2.0,0.0],[-0.5,0.5,2.0]]:
+		var start := points.size()
+		for point in [Vector3(floor_[0],floor_[2],-1),Vector3(floor_[0],floor_[2],1),Vector3(floor_[1],floor_[2],1),Vector3(floor_[1],floor_[2],-1)]:
+			points.append(point)
+			normals.append(Vector3.UP)
+		for index in [0,1,2,0,2,3]: indices.append(start+index)
+	return encode(points,normals,indices)
+
 static func encode(points: Array[Vector3], normals: Array[Vector3], indices: Array[int]) -> PackedByteArray:
 	var binary := PackedByteArray()
 	var views: Array = []
