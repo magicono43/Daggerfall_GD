@@ -156,3 +156,18 @@ gates. Preference locale plans retain their binding-time window context; Escape
 closes the editor before routing to underlying navigation. Font/label refresh keeps
 controls/draft/focus/confirmation stable. No owner answer, choice, RNG draw or
 session/location replacement is created by preview/presentation.
+
+
+## Binding controls - IMP-011 increment 2
+
+The stock title menu and Pause > Settings route expose Controls. Its application
+owner supplies a private draft; closing discards that draft, while Apply leaves
+accepted controls effective even when persistence fails. The controls window owns
+its normal CORE input/simulation holds. Capture consumes events before GUI input;
+closing, focus loss and reconfiguration retain the existing physical fresh-press
+quarantine and cancellation semantics. Escape/Start recovery is independent of
+editable controller Confirm/Back. UI actions use a compiled configuration index;
+ordinary navigation remains available while gameplay is gated. Disposal detaches
+the input consumer and breaks editor/owner references. No character snapshot can
+replace the application controls. See [input](../input/README.md) and
+[settings](../startup/README.md) for the request/result and recovery contracts.

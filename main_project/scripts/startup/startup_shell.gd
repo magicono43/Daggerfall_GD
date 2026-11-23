@@ -398,13 +398,19 @@ func _input(event: InputEvent) -> void:
 	# Observe releases even when a GUI control/IME consumes the event. Only
 	# unhandled eligible presses can become gameplay intent.
 	session_shell.action_input.observe(event)
+	if session_shell.route_controls(event):
+		session_shell.action_input.finish_consumed(event)
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventKey and event.keycode == KEY_ESCAPE and not event.pressed:
 		session_shell.capture_recovery(false)
 	if event is InputEventJoypadButton and event.button_index in [JOY_BUTTON_START,JOY_BUTTON_B] and not event.pressed:
 		session_shell.capture_recovery(false,false,"joy:%d:%d" % [event.device,event.button_index])
 
 func _physics_process(_delta: float) -> void:
-	if session_shell != null: session_shell.deliver_input()
+	if session_shell != null:
+		session_shell.refresh_control_labels()
+		session_shell.deliver_input()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_ESCAPE:
@@ -416,7 +422,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		session_shell.capture_recovery(event.pressed, event.echo)
 		get_viewport().set_input_as_handled()
 		return
-	if event is InputEventJoypadButton and (event.button_index == JOY_BUTTON_START or (event.button_index == JOY_BUTTON_B and not session_shell.windows.top().is_empty())):
+	if event is InputEventJoypadButton and event.button_index == JOY_BUTTON_START:
 		# Reserved recovery works from any controller, including an unselected one.
 		session_shell.capture_recovery(event.pressed,false,"joy:%d:%d" % [event.device,event.button_index])
 		get_viewport().set_input_as_handled()
@@ -461,6 +467,12 @@ func run_fixture() -> void:
 	var script_path := "res://tests/startup_cases.gd"
 	if fixture.get("mode") == "session":
 		script_path = "res://tests/session_cases.gd"
+	elif fixture.get("mode") == "binding-review":
+		script_path = "res://tests/binding_review.gd"
+	elif fixture.get("mode") == "binding-config_reload":
+		script_path = "res://tests/binding_config_reload_cases.gd"
+	elif fixture.get("mode") == "binding-config":
+		script_path = "res://tests/binding_config_cases.gd"
 	elif fixture.get("mode") == "action-input":
 		script_path = "res://tests/action_input_cases.gd"
 	elif fixture.get("mode") == "qualification":
@@ -542,7 +554,7 @@ func run_fixture() -> void:
 		var music_cleanup: Dictionary = await session_shell.music_playback.shutdown()
 		checks.native_cleanup = {"ok":video_cleanup.ok and music_cleanup.ok,"video":video_cleanup,"music":music_cleanup}
 		checks.ok = checks.ok and checks.native_cleanup.ok
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["m1-composition_reload", "variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["binding-config_reload", "m1-composition_reload", "variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

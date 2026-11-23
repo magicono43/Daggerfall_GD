@@ -1,5 +1,5 @@
 extends RefCounted
-## Physical identities. Application editing/persistence is staged for increment 2.
+## Indexed physical identities; validated publication belongs to BindingConfiguration.
 var _index: Dictionary = {}
 
 func _init(entries: Array = defaults()) -> void:

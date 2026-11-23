@@ -18,6 +18,7 @@ var menu_entered := false
 var warnings: Array[String] = []
 var mods: RefCounted
 var prepared_content: Dictionary = {}
+var controls := preload("res://scripts/input/binding_configuration.gd").new()
 
 func real_content_pipeline() -> bool:
 	return providers.has_method("uses_definition_pipeline") and providers.uses_definition_pipeline()
@@ -34,6 +35,7 @@ func start(inputs: Dictionary, fallback := false, reset := false) -> Dictionary:
 			warnings = warnings.filter(func(text: String): return not text.begins_with("Optional logs"))
 	if settings == null:
 		settings = Settings.new(storage.adapter, checked.context.settings)
+		controls.declare_settings(settings)
 		if providers.get("presentation") != null:
 			providers.presentation.declare_settings(settings)
 		if providers.get("media_preferences") != null:
@@ -41,6 +43,9 @@ func start(inputs: Dictionary, fallback := false, reset := false) -> Dictionary:
 	checked = settings.initialize(reset)
 	if not checked.ok:
 		return set_route("settings_recovery", checked)
+	controls.load_effective()
+	for notice: String in controls.notices:
+		if not warnings.has(notice): warnings.append(notice)
 	if checked.kind == "recovered" and not warnings.has(checked.detail):
 		warnings.append(checked.detail)
 	if mods == null:

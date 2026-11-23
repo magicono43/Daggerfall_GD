@@ -13,6 +13,26 @@ var selected_controller := -1
 var last_device := ""
 var movement_deadzone := 0.15
 var look_deadzone := 0.10
+var _analog := {"movement_pair":0,"look_pair":1,"movement_invert":false,"look_invert":false}
+
+func can_configure(candidate: Dictionary) -> bool:
+	return preload("res://scripts/input/binding_configuration.gd").valid(candidate)
+
+func configure(candidate: Dictionary) -> bool:
+	if not can_configure(candidate): return false
+	var replacement := Bindings.new(preload("res://scripts/input/binding_configuration.gd").entries(candidate))
+	invalidate("controls changed")
+	bindings = replacement
+	_analog = candidate.analog.duplicate(true)
+	movement_deadzone = _analog.movement_deadzone
+	look_deadzone = _analog.look_deadzone
+	# A held direction from an old binding must not retain a stale action.
+	for physical: Dictionary in _physical.values(): physical.action = ""
+	_accepted_axes.clear()
+	return true
+
+func physical_down() -> Array:
+	return _physical.values().duplicate(true)
 var _connected: Dictionary = {}
 var _physical: Dictionary = {}
 var _logical: Dictionary = {}
@@ -104,7 +124,16 @@ func observe(event: InputEvent) -> void:
 			_accepted_axes[event.axis] = false # GUI gets first refusal.
 		return
 	var value := _identity(event)
-	if not value.is_empty(): _observe_value(value)
+	if not value.is_empty():
+		if value.kind == "mouse" and value.code in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN,MOUSE_BUTTON_WHEEL_LEFT,MOUSE_BUTTON_WHEEL_RIGHT]:
+			_release(_id(value)) # A previous GUI-consumed wheel step has no platform up.
+		_observe_value(value)
+
+func finish_consumed(event: InputEvent) -> void:
+	# Capture owns these complete impulses, including when GUI never dispatches
+	# an unhandled event. No gameplay contributor was admitted for this press.
+	if event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN,MOUSE_BUTTON_WHEEL_LEFT,MOUSE_BUTTON_WHEEL_RIGHT]:
+		_release(_id(_identity(event)))
 
 func _observe_value(value: Dictionary) -> void:
 	var id := _id(value)
@@ -221,9 +250,12 @@ static func radial(value: Vector2, deadzone: float) -> Vector2:
 
 func stick(look: bool) -> Vector2:
 	if not core.gates.gameplay_input(): return Vector2.ZERO
-	var x := JOY_AXIS_RIGHT_X if look else JOY_AXIS_LEFT_X
-	var y := JOY_AXIS_RIGHT_Y if look else JOY_AXIS_LEFT_Y
-	return radial(Vector2(_axes.get(x,0.0) if _accepted_axes.get(x,false) else 0.0,_axes.get(y,0.0) if _accepted_axes.get(y,false) else 0.0),look_deadzone if look else movement_deadzone)
+	var pair: int = _analog.look_pair if look else _analog.movement_pair
+	var x := JOY_AXIS_LEFT_X if pair == 0 else JOY_AXIS_RIGHT_X
+	var y := JOY_AXIS_LEFT_Y if pair == 0 else JOY_AXIS_RIGHT_Y
+	var value := Vector2(_axes.get(x,0.0) if _accepted_axes.get(x,false) else 0.0,_axes.get(y,0.0) if _accepted_axes.get(y,false) else 0.0)
+	if _analog.look_invert if look else _analog.movement_invert: value.y = -value.y
+	return radial(value,look_deadzone if look else movement_deadzone)
 
 func movement() -> Vector2:
 	if not core.gates.gameplay_input(): return Vector2.ZERO

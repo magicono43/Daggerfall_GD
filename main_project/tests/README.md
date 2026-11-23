@@ -1019,3 +1019,23 @@ and native sync tolerances are unchanged.
 `./main_project/tools/qualify_m1_composition_inventory.ps1` qualifies all four
 mode inventories under both accepted fixture IDs against complete, missing,
 duplicate, unknown and wrong-fixture terminal IDs (40 vectors).
+
+
+## IMP-011 binding configuration
+
+Run independently:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Suite binding-config -Fixture binding-config-v1
+./main_project/tools/verify_rendered.ps1 -Suite binding-config -Fixture binding-config-v1
+```
+
+The 72 headless / 73 rendered main assertions exercise actual stock editor handlers,
+production settings/input owners and injected engine events. Each selection also
+launches a fresh process for eight reload assertions. Both inventories require
+all unique named checks in binding_config_inventory.json. Unknown fixtures remain
+unavailable. Physical controller and IME qualification are deferred, never counted
+as passing. The independent action-input/session/startup/M1 composition selections
+remain regression gates. Human review preparation uses prepare_binding_review.ps1
+with a passing binding-config run; the protected package has its own checklist
+and expiry. Smoke entry/shutdown does not establish human acceptance.

@@ -58,8 +58,13 @@ func kinds(outcomes: Array) -> Array:
 	return outcomes.map(func(value: Dictionary): return value.edge.kind)
 
 func find_button(shell: Control, prefix: String) -> Button:
-	for child in shell.panel.get_children():
+	return find_button_in(shell.panel,prefix)
+
+func find_button_in(parent: Node, prefix: String) -> Button:
+	for child in parent.get_children():
 		if child is Button and child.text.begins_with(prefix): return child
+		var nested := find_button_in(child,prefix)
+		if nested != null: return nested
 	return null
 
 func request(core: SessionLifecycle, mode := "new") -> Dictionary:

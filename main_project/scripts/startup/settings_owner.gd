@@ -12,6 +12,20 @@ var schema: Dictionary = {}
 var groups: Dictionary = {}
 var last_result: Dictionary = {}
 var definition_errors: Array[String] = []
+var _upgrades: Dictionary = {}
+var _format_guards: Dictionary = {}
+
+func declare_format_guard(id: String, guard: Callable) -> void:
+	if accepted != null or not schema.has(id) or not guard.is_valid():
+		definition_errors.append("Invalid or late owner format guard: " + id)
+		return
+	_format_guards[id] = guard
+
+func declare_upgrade(id: String, upgrade: Callable) -> void:
+	if accepted != null or not schema.has(id) or not upgrade.is_valid():
+		definition_errors.append("Invalid or late compatible upgrade: " + id)
+		return
+	_upgrades[id] = upgrade
 
 func _init(storage: StartupStorageAdapter, directory: String) -> void:
 	adapter = storage
@@ -88,7 +102,10 @@ func load_config(source: String) -> ConfigFile:
 	return result if result.load(source) == OK else null
 
 func supported(config: ConfigFile) -> bool:
-	return config != null and config.has_section_key("metadata", "format_version") and typeof(config.get_value("metadata", "format_version")) == TYPE_INT and config.get_value("metadata", "format_version") == 1
+	if config == null or not config.has_section_key("metadata", "format_version") or typeof(config.get_value("metadata", "format_version")) != TYPE_INT or config.get_value("metadata", "format_version") != 1: return false
+	for id: String in _format_guards:
+		if not _format_guards[id].call(value(config,id)): return false
+	return true
 
 func initialize(explicit_reset := false) -> Dictionary:
 	# Packaged defaults are validated before any user file is modified.
@@ -125,7 +142,17 @@ func initialize(explicit_reset := false) -> Dictionary:
 		else:
 			chosen = clone(defaults)
 			source = "defaults"
+	# Compatible owner additions preserve unknown entries and deliberate empties.
+	# This is not an implicit migration of unsupported format versions.
+	var upgraded_resets: Array = []
+	for id: String in _upgrades:
+		var prior_value: Variant = value(chosen,id)
+		if prior_value != null:
+			var upgraded: Dictionary = _upgrades[id].call(prior_value)
+			put(chosen,id,upgraded.value)
+			upgraded_resets.append_array(upgraded.get("resets",[]))
 	var checked := validate(chosen, true)
+	checked.resets.append_array(upgraded_resets)
 	if not validate(chosen, false).ok:
 		return outcome("installation_error", false, "Owner recovery defaults are incompatible")
 	var needs_write := not exists or damaged or chosen.encode_to_text() != original.encode_to_text()

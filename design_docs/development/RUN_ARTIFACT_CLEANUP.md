@@ -1,5 +1,53 @@
 # Verification run artifact cleanup
 
+## 2026-11-23 IMP-011 increment-2 human review closure
+
+The user reports all six keyboard/mouse binding-editor checks **PASS**. The
+review-build retention need is fulfilled. With no active engine in the ordinary
+non-elevated process inventory, all human launch state/logs and reviewed build,
+instructions and launcher identity were copied and hash-checked before deletion.
+**163 evidence files** passed copy and post-cleanup verification. Only the inactive
+review project/import caches were removed: **1,368 files / 210,775,946 bytes**.
+No full binding-review build remains; root metadata and `human-evidence/` remain
+under `main_project/tests/.runs/imp011-binding-review-2026-11-23/`.
+
+Exact records: `human-build-cleanup.json` and `human-evidence/human-results.json`
+in that package. Measured total `.runs` retention is **1,866,718,418 bytes (about
+1.74 GiB)** without following reparse points, below 2 GiB. Unique human inputs,
+authoritative source, external data, installed tools and earlier evidence were
+protected. The review-build exception and expiry below are now fulfilled and
+historical. Increment 2 is ready for acceptance; formal acceptance is not inferred.
+Controller/IME qualification stays user-deferred, and increment 3 is unstarted.
+
+## 2026-11-23 IMP-011 increment 2
+
+After all owned engines returned, ordinary non-elevated process inventory was
+empty. Two checked batches compacted **36** task-owned verification projects and
+their import caches: **45,060 files / 7,484,350,886 logical bytes** removed.
+**352** retained scenario/settings/log/capture hashes passed copy and post-delete
+checks. Root reports and fixture/source identities remain. Initial root import
+also generated 24 unrelated untracked UID sidecars; those task-generated files
+were removed after confirming the initial tree was clean. No original script or
+tracked UID was removed.
+
+Exact records: `main_project/tests/.runs/imp011-increment2-cleanup.json`,
+`imp011-increment2-cleanup-final.json`, `imp011-increment2-run-index.json` and
+`imp011-increment2-final-source-checks.json`. No automated verification project
+from this task remains. Earlier unique human inputs and other-task evidence were
+protected; reference/classic inputs and installed tools were never cleanup targets.
+
+One disposable binding-editor review package remains at
+`main_project/tests/.runs/imp011-binding-review-2026-11-23/` for outstanding human
+keyboard/mouse review, expiring on results or **2026-11-30**. It is **209,318,932
+bytes**. Preserve every future `project/tests/.runs/review-*` launch's settings,
+logs and user-created results before removing reproducible payload. Final reviewed
+`.runs` retention measured **2,071,836,133 bytes (about 1.93 GiB)**, skipping reparse
+points, below 2 GiB. Physical controller/IME qualification remains user-deferred;
+review fixture smoke does not count as human PASS.
+
+See [execution evidence](evidence/IMP-011-increment-2-2026-11-23.md) and the
+[binding review](evidence/IMP-011-BINDING-REVIEW-2026-11-23.md).
+
 ## 2026-11-23 IMP-011 human results and review-build closure
 
 The user completed keyboard/mouse/focus review. The partial check-5 observation

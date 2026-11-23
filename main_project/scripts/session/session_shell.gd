@@ -25,6 +25,69 @@ var music_playback: Node
 var video_playback: Control
 var ambience_requests := preload("res://scripts/av/ambience_requests.gd").new()
 var _media_shutdown_started := false
+var binding_editor: RefCounted
+var _ui_controller_down: Dictionary = {}
+var _ui_triggers: Dictionary = {}
+var _keyboard_layout := -1
+
+func refresh_control_labels() -> void:
+	if windows.top().get("window") != "controls" or DisplayServer.get_name() == "headless": return
+	var layout := DisplayServer.keyboard_get_current_layout()
+	if layout != _keyboard_layout:
+		_keyboard_layout = layout
+		schedule_render()
+
+func open_controls() -> void:
+	host.controller.controls.begin()
+	windows.open("controls",core.snapshot().session)
+
+func close_controls() -> void:
+	if binding_editor != null: binding_editor.stop_capture()
+	host.controller.controls.cancel()
+	if windows.top().get("window") == "controls": windows.close(windows.top().id,true)
+
+func route_controls(event: InputEvent) -> bool:
+	if binding_editor != null and windows.top().get("window") == "controls" and binding_editor.route(event):
+		if event is InputEventJoypadButton or (event is InputEventJoypadMotion and event.axis in [JOY_AXIS_TRIGGER_LEFT,JOY_AXIS_TRIGGER_RIGHT]):
+			var value: Dictionary = binding_editor.event_value(event)
+			var identity := "%d:%s:%d" % [value.device,value.kind,value.code]
+			if value.pressed: _ui_controller_down[identity] = {"consumed":true}
+			else: _ui_controller_down.erase(identity)
+		return true
+	# Controller UI mappings do not alter Godot's global InputMap or text entry.
+	# Intercept legacy Confirm/Back as well, so cleared slots stay cleared.
+	var kind := "button"
+	var code := -1
+	var pressed := false
+	if event is InputEventJoypadButton:
+		code = event.button_index
+		pressed = event.pressed
+	elif event is InputEventJoypadMotion and event.axis in [JOY_AXIS_TRIGGER_LEFT,JOY_AXIS_TRIGGER_RIGHT]:
+		kind = "trigger"
+		code = event.axis
+		var trigger_id := "%d:%d" % [event.device,code]
+		pressed = _ui_triggers.get(trigger_id,false)
+		if event.axis_value >= 0.55: pressed = true
+		elif event.axis_value <= 0.45: pressed = false
+		_ui_triggers[trigger_id] = pressed
+	else: return false
+	var identity := "%d:%s:%d" % [event.device,kind,code]
+	if not pressed:
+		var consumed: bool = _ui_controller_down.get(identity,{}).get("consumed",false)
+		_ui_controller_down.erase(identity)
+		return consumed
+	if _ui_controller_down.has(identity): return _ui_controller_down[identity].consumed
+	_ui_controller_down[identity] = {"consumed":false}
+	if windows.top().is_empty() and core.gates.gameplay_input(): return false
+	if kind == "button" and code == JOY_BUTTON_START: return false # Independent recovery.
+	var action: String = host.controller.controls.resolve_ui(kind,code)
+	if action.is_empty() and not (kind == "button" and code in [JOY_BUTTON_A,JOY_BUTTON_B]): return false
+	_ui_controller_down[identity].consumed = true
+	if action == "ui_back": options()
+	elif action == "ui_confirm":
+		var focused := host.get_viewport().gui_get_focus_owner()
+		if focused is Button and not focused.disabled: focused.pressed.emit()
+	return true
 
 func _init(shell: Control) -> void:
 	host = shell
@@ -116,6 +179,9 @@ func return_to_setup() -> void:
 
 func dispose() -> void:
 	Input.joy_connection_changed.disconnect(controller_connection_changed)
+	host.controller.controls.detach(action_input)
+	if binding_editor != null: binding_editor.dispose()
+	host.controller.controls.dispose()
 	action_input.dispose()
 	if is_instance_valid(video_playback): video_playback.free()
 	if is_instance_valid(music_playback): music_playback.free()
@@ -132,6 +198,9 @@ func controller_connection_changed(device: int, connected: bool) -> void:
 
 func focus_changed(focused: bool) -> void:
 	if not focused and _focus_hold == 0:
+		if binding_editor != null and not binding_editor.capture.is_empty():
+			host.controller.controls.status = "Capture cancelled on focus loss; slot unchanged."
+			binding_editor.stop_capture()
 		_focus_hold = core.gates.acquire("focus", "", ["simulation", "input"])
 	elif focused and _focus_hold != 0:
 		action_input.reconcile_focus_return()
@@ -197,6 +266,9 @@ func deliver_input() -> Array[Dictionary]:
 
 func options() -> void:
 	var top := windows.top()
+	if top.get("window") == "controls":
+		close_controls()
+		return
 	if not top.is_empty():
 		if top.window == "prompt":
 			var response := "cancel" if top.data.get("responses", []).has("cancel") else "ok" if top.data.get("kind") == "information" else ""
@@ -218,6 +290,10 @@ func render() -> void:
 	host.panel.add_child(host.logging_status)
 	host.update_logging_warning()
 	var state := core.snapshot()
+	if host.controller.settings != null and host.controller.settings.accepted != null:
+		host.controller.controls.attach(action_input)
+		if binding_editor == null:
+			binding_editor = preload("res://scripts/input/binding_editor.gd").new(host.controller.controls,action_input,self)
 	if not message.is_empty():
 		host.label(message)
 	if action_input.disconnect_pending():
@@ -231,6 +307,10 @@ func render() -> void:
 				host.button("Select Controller %d · %s" % [device,Input.get_joy_name(device)], func(): action_input.select_controller(device))
 	if not quit_phase.is_empty():
 		render_quit()
+		return
+	if windows.top().get("window") == "controls":
+		binding_editor.render(host)
+		restore_focus()
 		return
 	if core.cleanup_blocked():
 		host.label("Cleanup incomplete. New sessions remain blocked.")
@@ -260,6 +340,7 @@ func render() -> void:
 		host.button("New Game", func(): request("new"))
 		host.label("Character entry and saved games are unavailable until their support is enabled.", 15)
 		host.button("Settings / Setup", func(): host.controller.open_setup(); host.render())
+		host.button("Controls",open_controls)
 	else:
 		host.label("Active session", 18)
 		host.label("HUD" if core.gates.hud_visible() else "")
@@ -340,6 +421,7 @@ func unavailable(text: String, reason: String) -> void:
 
 func render_settings(top: Dictionary) -> void:
 	host.label("Settings · startup", 24)
+	host.button("Controls",open_controls)
 	var check := CheckBox.new()
 	check.text = "Show setup at startup (next launch)"
 	check.button_pressed = top.data.get("draft", host.controller.settings.value(host.controller.settings.accepted, "startup/show_setup"))
