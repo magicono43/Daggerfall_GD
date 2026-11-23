@@ -1,5 +1,78 @@
 # Verification run artifact cleanup
 
+## 2026-11-23 IMP-011 human results and review-build closure
+
+The user completed keyboard/mouse/focus review. The partial check-5 observation
+was expected Space confirmation of focused Cancel, supported by zero gameplay
+edges in all 16 logged preflight intervals and maintained rendered handoff tests.
+No further human repetition or active debugging build is needed; explicit
+increment acceptance remains pending. Controller/IME physical qualification stays
+user-deferred to later M2.
+
+After the human engine and final verification children exited, all **76 human
+launch files** were copied and hash-verified under the review package's
+`human-evidence/`, including user storage/state, raw input log and summary.
+BUILD-used.json and instructions-used.md preserve the actual reviewed identity
+and original ambiguous instructions. **57** smoke/import evidence files were
+also preserved. Only then was the inactive copied project/cache removed.
+
+Two final standalone verification copies were compacted, preserving **11**
+additional report/log/capture hashes. This closure removed **4,107 files /
+632,430,084 logical bytes**, with no remaining full review project. Exact records
+are `imp011-keyboard-review-2026-11-23/human-build-cleanup.json`,
+`human-results.json`, `human-closure.json` and the sibling
+`imp011-increment1-2026-11-22/keyboard-human-closure-cleanup.json` under `.runs`.
+Final measured `.runs` retention is **1,856,078,395 bytes (about 1.73 GiB)**,
+below 2 GiB, without following reparse points. Unique human evidence, authoritative
+source, installed tools and external data were protected. The earlier active
+review-build exception below is now fulfilled and superseded.
+
+## 2026-11-23 IMP-011 keyboard/mouse review
+
+One disposable project/cache is actively retained at
+`main_project/tests/.runs/imp011-keyboard-review-2026-11-23/project` for the user's
+requested keyboard/mouse/focus checks. It is 214,625,857 logical bytes including
+package support/evidence. Expiry: human results, or review by **2026-11-30**.
+Preserve every human launch's `input-events.jsonl`, `review-summary.json` and any
+user-created captures before removing reproducible project/import payload.
+Physical controller/IME qualification is user-deferred to later M2.
+
+All owned automated children exited before eight standalone verification roots
+were compacted with ordinary process/path/reparse checks: **9,926 files /
+1,663,806,210 bytes** removed; **46** retained hashes verified. No earlier unique
+human state, authoritative source, installed tool or external data was deleted.
+Manifest: `main_project/tests/.runs/imp011-increment1-2026-11-22/keyboard-review-cleanup.json`.
+Root reports remain and child evidence is under `evidence/scenario-1`.
+
+Final measured `.runs` size is **2,067,115,127 bytes (about 1.93 GiB)** without
+following reparse points, below the 2 GiB trigger. The retained build is the
+concrete outstanding human-review exception, recorded in its BUILD.json and
+retention.json. See [review evidence](evidence/IMP-011-KEYBOARD-REVIEW-2026-11-23.md).
+
+## IMP-011 increment 1 — logical delivery
+
+After all owned headless/rendered/negative selections returned, ordinary
+non-elevated process inspection found no Godot/Startup engine. Two checked batches
+compacted **27** explicitly owned inactive runtime roots, removing **33,512 files /
+5,612,273,052 logical bytes**. **177** retained report/log/capture hashes passed
+copy and post-deletion verification; there were zero cleanup failures and zero
+remaining task runtime projects. No full build is retained for this increment.
+
+Exact strict-descendant paths, activity evidence, inventories, retained artifact
+mapping and outcomes are under
+`main_project/tests/.runs/imp011-increment1-2026-11-22/`. The first manifest is
+losslessly archived as `cleanup.json.gz`; `cleanup.json` retains its explicit
+recovery pointer and verified decompressed SHA-256. The second batch remains in
+`cleanup-final.json`. `run-index.json`, `final-source-checks.json` and
+`retention-final.json` retain run/status/source identity and retention evidence.
+Child evidence moved to each run's `evidence/scenario-*`; root reports remain.
+
+Final measured `.runs` retention was **1,848,680,443 bytes (about 1.72 GiB)** without
+following reparse points, below the 2 GiB review trigger. Earlier unique human
+state, authoritative inputs, installed tools and external/reference data were
+protected. See [execution evidence](evidence/IMP-011-increment-1-2026-11-22.md).
+Physical checks remain open; this cleanup does not count them as passing.
+
 ## 2026-11-22 optional physical IME review
 
 **Human-result update:** The user reports all requested Japanese IME checks PASS.

@@ -4,10 +4,15 @@ const Lifecycle = preload("res://scripts/session/session_lifecycle.gd")
 const Windows = preload("res://scripts/session/window_stack.gd")
 var core := Lifecycle.new()
 var windows := Windows.new(core)
+var action_input := preload("res://scripts/input/action_input.gd").new(core, windows)
+signal gameplay_edge(edge: Dictionary)
+signal gameplay_cancelled(report: Dictionary)
 var host: Control
 var _counter := 0
 var _focus_hold := 0
 var _quit_hold := 0
+var _recovery_hold := 0
+var _recovery_inputs: Dictionary = {}
 var quit_phase := ""
 var quit_consent_scope := ""
 var setup_pending := false
@@ -23,7 +28,15 @@ var _media_shutdown_started := false
 
 func _init(shell: Control) -> void:
 	host = shell
+	Input.joy_connection_changed.connect(controller_connection_changed)
+	action_input.controller_changed.connect(schedule_render)
+	action_input.cancelled.connect(func(report: Dictionary): gameplay_cancelled.emit(report))
+	action_input.failure.connect(func(report: Dictionary):
+		message = report.reason
+		host.controller.logger.message("WARNING", report.reason)
+		schedule_render())
 	core.formulas = host.controller.providers.formulas
+	core.gates.changed.connect(schedule_render)
 	core.state_changed.connect(func(_old: Dictionary, _new: Dictionary, _reason: String): schedule_render())
 	core.terminal.connect(func(result: Dictionary):
 		message = str(result.reason) if result.kind == "Failed" else ""
@@ -102,6 +115,8 @@ func return_to_setup() -> void:
 			setup_pending = false
 
 func dispose() -> void:
+	Input.joy_connection_changed.disconnect(controller_connection_changed)
+	action_input.dispose()
 	if is_instance_valid(video_playback): video_playback.free()
 	if is_instance_valid(music_playback): music_playback.free()
 	_prompt_owners.clear()
@@ -109,10 +124,23 @@ func dispose() -> void:
 		windows.changed.disconnect(connection.callable)
 	core.dispose()
 
+func controller_connection_changed(device: int, connected: bool) -> void:
+	action_input.connection_changed(device,connected)
+	if not connected:
+		for identity: String in _recovery_inputs.keys():
+			if identity.begins_with("joy:%d:" % device): capture_recovery(false,false,identity)
+
 func focus_changed(focused: bool) -> void:
 	if not focused and _focus_hold == 0:
 		_focus_hold = core.gates.acquire("focus", "", ["simulation", "input"])
 	elif focused and _focus_hold != 0:
+		action_input.reconcile_focus_return()
+		for identity: String in _recovery_inputs.keys():
+			var down := Input.is_physical_key_pressed(KEY_ESCAPE)
+			if identity.begins_with("joy:"):
+				var parts := identity.split(":")
+				down = Input.is_joy_button_pressed(int(parts[1]),int(parts[2]))
+			if not down: capture_recovery(false,false,identity)
 		core.gates.release(_focus_hold, "focus")
 		_focus_hold = 0
 	schedule_render()
@@ -120,6 +148,52 @@ func focus_changed(focused: bool) -> void:
 func pause() -> void:
 	if core.snapshot().ready and windows.top().is_empty():
 		windows.open("pause", core.snapshot().session)
+
+func capture_recovery(pressed: bool, echo := false, identity := "escape") -> void:
+	if echo: return
+	if not pressed:
+		_recovery_inputs.erase(identity)
+		if _recovery_inputs.is_empty(): windows.capture("options",false)
+		return
+	if _recovery_inputs.has(identity): return
+	_recovery_inputs[identity] = true
+	if _recovery_inputs.size() != 1: return
+	windows.capture("options",true)
+	if _recovery_hold == 0:
+		_recovery_hold = core.gates.acquire("recovery-input","",["input"])
+
+func finish_recovery_dispatch() -> void:
+	if _recovery_hold != 0:
+		var token := _recovery_hold
+		_recovery_hold = 0
+		core.gates.release(token,"recovery-input")
+
+func deliver_input() -> Array[Dictionary]:
+	var shortcuts: Array = []
+	var context := windows.context_generation
+	var scope := core.gates.session
+	var results: Array[Dictionary] = action_input.deliver(func(edge: Dictionary) -> Dictionary:
+		if Windows.PRIORITY.has(edge.action):
+			if edge.kind == "started": shortcuts.append(edge)
+			return {"kind":"shortcut_candidate"}
+		if edge.action == "hud_toggle" and edge.kind == "started":
+			core.gates.hud_preference = not core.gates.hud_preference
+			schedule_render()
+			return {"kind":"applied"}
+		edge.make_read_only()
+		gameplay_edge.emit(edge)
+		return {"kind":"intent_delivered"})
+	if shortcuts.is_empty(): return results
+	if context == windows.context_generation and scope == core.gates.session and action_input.context_current(shortcuts[0]):
+		var selected := windows.dispatch_actions(shortcuts.map(func(edge: Dictionary): return edge.action))
+		if selected.kind == "dispatch":
+			# Real gameplay providers are intentionally not invented in this increment.
+			message = "%s support is unavailable." % str(selected.action).capitalize()
+			schedule_render()
+		elif not windows.last_feedback.is_empty():
+			message = windows.last_feedback
+			schedule_render()
+	return results
 
 func options() -> void:
 	var top := windows.top()
@@ -146,6 +220,15 @@ func render() -> void:
 	var state := core.snapshot()
 	if not message.is_empty():
 		host.label(message)
+	if action_input.disconnect_pending():
+		host.label("Selected controller disconnected. Reconnection requires explicit Continue.")
+		if action_input.controllers().has(action_input.selected_controller):
+			host.button("Continue with Controller", func(): action_input.continue_controller())
+		host.button("Continue with Keyboard / Mouse", action_input.continue_keyboard)
+	elif action_input.controllers().size() > 0:
+		for device: int in action_input.controllers():
+			if device != action_input.selected_controller:
+				host.button("Select Controller %d · %s" % [device,Input.get_joy_name(device)], func(): action_input.select_controller(device))
 	if not quit_phase.is_empty():
 		render_quit()
 		return
@@ -225,6 +308,11 @@ func render() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN if windows.top().get("data",{}).get("cursor")=="hidden" else Input.MOUSE_MODE_VISIBLE
 
 func restore_focus() -> void:
+	if windows.top().is_empty() and core.gates.gameplay_input():
+		# Returning to gameplay must not leave Space/Enter or controller Confirm
+		# armed on the placeholder shell's Pause button. Menus retain UI focus.
+		host.get_viewport().gui_release_focus()
+		return
 	# Stock safe initial focus; restored identity is independent of the old Control.
 	if windows.top().get("window") == "prompt":
 		return # Prompt owns its safe choice, unarmed choice or active text field.

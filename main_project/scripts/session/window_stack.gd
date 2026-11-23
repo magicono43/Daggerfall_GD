@@ -164,6 +164,13 @@ func capture(action: String, pressed: bool, echo := false) -> void:
 func dispatch() -> Dictionary:
 	var actions := _edges.duplicate()
 	_edges.clear()
+	return dispatch_actions(actions)
+
+func dispatch_actions(actions: Array) -> Dictionary:
+	# Already resolved, once-delivered gameplay presses from MOVE. Never retain
+	# suppressed candidates as a second hidden shortcut queue.
+	actions = actions.duplicate()
+	last_feedback = ""
 	if actions.has("quicksave") and actions.has("quickload"):
 		actions.erase("quicksave")
 		actions.erase("quickload")

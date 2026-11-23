@@ -19,10 +19,14 @@ var authoring_view: Control
 
 func _ready() -> void:
 	var startup_started := Time.get_ticks_usec()
+	# Blank shell space must bubble pointer events to gameplay after GUI refusal.
+	# Actual controls still consume their own clicks.
+	mouse_filter = Control.MOUSE_FILTER_PASS
 	get_tree().auto_accept_quit = false
 	session_shell = preload("res://scripts/session/session_shell.gd").new(self)
 	var background := ColorRect.new()
 	background.color = Color("17212a")
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(background)
 	var margin := MarginContainer.new()
@@ -389,6 +393,19 @@ func _notification(what: int) -> void:
 	elif what == NOTIFICATION_APPLICATION_FOCUS_IN:
 		session_shell.focus_changed(true)
 
+func _input(event: InputEvent) -> void:
+	if session_shell == null: return
+	# Observe releases even when a GUI control/IME consumes the event. Only
+	# unhandled eligible presses can become gameplay intent.
+	session_shell.action_input.observe(event)
+	if event is InputEventKey and event.keycode == KEY_ESCAPE and not event.pressed:
+		session_shell.capture_recovery(false)
+	if event is InputEventJoypadButton and event.button_index in [JOY_BUTTON_START,JOY_BUTTON_B] and not event.pressed:
+		session_shell.capture_recovery(false,false,"joy:%d:%d" % [event.device,event.button_index])
+
+func _physics_process(_delta: float) -> void:
+	if session_shell != null: session_shell.deliver_input()
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_ESCAPE:
 		if is_instance_valid(preference_view) or is_instance_valid(authoring_view):
@@ -396,8 +413,15 @@ func _unhandled_input(event: InputEvent) -> void:
 				close_editor()
 			get_viewport().set_input_as_handled()
 			return
-		session_shell.windows.capture("options", event.pressed, event.echo)
+		session_shell.capture_recovery(event.pressed, event.echo)
 		get_viewport().set_input_as_handled()
+		return
+	if event is InputEventJoypadButton and (event.button_index == JOY_BUTTON_START or (event.button_index == JOY_BUTTON_B and not session_shell.windows.top().is_empty())):
+		# Reserved recovery works from any controller, including an unselected one.
+		session_shell.capture_recovery(event.pressed,false,"joy:%d:%d" % [event.device,event.button_index])
+		get_viewport().set_input_as_handled()
+		return
+	if session_shell.action_input.accept(event): get_viewport().set_input_as_handled()
 
 func choose_folder() -> void:
 	if picker != null:
@@ -417,6 +441,7 @@ func _process(_delta: float) -> void:
 		if dispatched.get("action") == "options" and dispatched.kind == "dispatch":
 			if not close_editor():
 				session_shell.options()
+		session_shell.finish_recovery_dispatch()
 
 func close_editor() -> bool:
 	if is_instance_valid(preference_view):
@@ -436,6 +461,8 @@ func run_fixture() -> void:
 	var script_path := "res://tests/startup_cases.gd"
 	if fixture.get("mode") == "session":
 		script_path = "res://tests/session_cases.gd"
+	elif fixture.get("mode") == "action-input":
+		script_path = "res://tests/action_input_cases.gd"
 	elif fixture.get("mode") == "qualification":
 		script_path = "res://tests/verification_cases.gd"
 	elif fixture.get("mode") == "classic":

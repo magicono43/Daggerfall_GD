@@ -1,5 +1,10 @@
 # Session shell interfaces
 
+IMP-011 increment 1 composes [logical action delivery](../input/README.md) through
+these same CORE gates and UI context generations. Reserved recovery remains a
+separate UI route; gameplay edges/cancellation never grant simulation eligibility
+or clear another requester's hold. Real gameplay consumers remain later gates.
+
 IMP-007 increment 3 supplies [application font/locale presentation](../data/LOCALE_FONTS.md).
 The real prompt can bind stable `text_ref` / response-keyed `label_refs` to DATA
 lookups. It stages matching text/font/metrics and updates active controls in place,
