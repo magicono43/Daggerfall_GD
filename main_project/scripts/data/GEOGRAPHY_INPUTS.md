@@ -7,6 +7,10 @@ not implemented by this geography adapter. Layout structural access is separatel
 defined in [LAYOUT_INPUTS.md](LAYOUT_INPUTS.md). No geography read establishes opening-content, geometry,
 collision, placement, discovery gameplay, weather, SAVE compatibility or M1 readiness.
 
+IMP-061 increment 1 separately consumes dungeon geometry through the named
+[LOC geometry frame](../loc/DUNGEON_ASSEMBLY.md). This does not change geography
+identity, sampling, world-origin ownership or the remaining WORLD/MOVE gates.
+
 ## Registration and publication
 
 Normal startup calls `enable_geography_inputs()` before classic preparation.

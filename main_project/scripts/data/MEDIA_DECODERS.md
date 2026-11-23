@@ -70,6 +70,14 @@ subformats without a versioned decoder/fixture extension.
 
 ## Geometry and AV inspection conversion
 
+IMP-061 increment 1 now supplies the separate, shared
+[`dungeon-geometry-metres-v1` LOC consumer](../loc/DUNGEON_ASSEMBLY.md). The decoded
+model remains immutable source-space data; successful model provenance additionally
+includes SHA-256 of the exact requested ARCH3D payload. LOC fingerprints effective
+geometry resources without reopening/decoding a model for point queries. This
+additive provenance does not broaden the supported model/UV/action format limits.
+The inspection-only conversion below retains its original scope and axes.
+
 DATA keeps source int32 coordinate triples and normals; source coordinates have
 1/256 classic-unit granularity and UVs use sixteenths of a pixel. The encoded
 first-three UV deltas are retained alongside derived values. DFU's older-ID UV
@@ -77,7 +85,7 @@ correction is not applied; suspected packed components reject until independentl
 verified conversion vectors establish that profile. Source polygons retain every referenced point; Godot Geometry2D
 triangulates the dominant-plane projection, and DATA restores original winding.
 No 0.025 world scale, tolerances, placement correction or origin change is adopted.
-IMP-010's common versioned layout/physics conversion remains unavailable here.
+No decoder itself applies the LOC geometry conversion or qualifies a motor pose.
 
 `av/classic_media_inspector.gd` is a bounded real consumer. Its preview resources
 divide positions by 256 into classic units, keep source axes, normalize supplied

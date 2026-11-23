@@ -43,6 +43,19 @@ func snapshot() -> Dictionary:
 func busy() -> bool:
 	return not _operation.is_empty()
 
+func layout_request_current(scope: String, original_ticket: Dictionary) -> bool:
+	if not original_ticket.is_empty():
+		return layout_operation_owns(original_ticket) and scope == original_ticket.scope and _state.phase in ["preflight","initializing"]
+	return not scope.is_empty() and scope == _state.session and _state.status == "alive" and not busy() and not _blocked
+
+func layout_operation_owns(original_ticket: Dictionary) -> bool:
+	# LOC preparation retains its admission scope across replacement. General
+	# complete_* callbacks still require their exact current phase ticket.
+	return busy() and original_ticket.size() == 3 and original_ticket.get("id") == _operation.intent.id and original_ticket.get("generation") == _operation.generation and original_ticket.get("scope") in [_operation.intent.get("origin",""),_operation.scope]
+
+func layout_activation_session(original_ticket: Dictionary) -> String:
+	return str(_state.session) if layout_operation_owns(original_ticket) and _state.phase == "initializing" else ""
+
 func cleanup_blocked() -> bool:
 	return _blocked
 

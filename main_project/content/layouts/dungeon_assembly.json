@@ -1,0 +1,758 @@
+{
+  "sources": {
+    "MAPS.BSA": "8b5550bfcac03b6f605842568fdbfb7cc6bbed7ace5999c33c900ad286fc24be",
+    "BLOCKS.BSA": "6f5a4c8d9401c1b00ef83eaac9b0c6c32f53cef6eaa4c7d7027deb739bde4795",
+    "ARCH3D.BSA": "a51a9e149168814c4a14dc80bb93d38f153be18dc9754be44bc9c7b25dd46a85"
+  },
+  "source_observation_sha256": "d7457b87442c8fe692548f910de72bedb6bdcdc8fdebc0c5ffedc24553515e1c",
+  "schema": "dungeon-classic-assembly-annotations-v1",
+  "provenance": "Project-authored structural socket associations for this exact source edition; qualified against transformed meshes and collision. No duplicate-door correction, action execution or source mutation.",
+  "layouts": {
+    "place-00032": {
+      "blocks": {
+        "block-0908": "77cd9c187699fb60a9f70bcaca44a9e484153273760aaa1e30d7b4574bc5a697",
+        "block-0918": "2e71589307a0d9d98ecde03becc8a480ef357325ed3b158f17a0b67187a3a211",
+        "block-1000": "2e21f86c59423cc93d3597f5d8e7d125a6b9e36aaa198e9a66df9bef4f1a41ef",
+        "block-1006": "22186fee8adbca14c27caa67ffd7a0811086d8df8cc9b0de0463a605452b68e7",
+        "block-0909": "77cd9c187699fb60a9f70bcaca44a9e484153273760aaa1e30d7b4574bc5a697",
+        "block-0919": "5dddca5f9e0332de776539479a6fb29882ee6487d37775de23edae375dac80cf"
+      },
+      "separation": "Border-to-border grid adjacency is not an authored traversable connection. Seven central-to-central/border adjacencies each declare lower and upper sockets.",
+      "assembly": {
+        "connections": [
+          {
+            "a": {
+              "path": [
+                [
+                  1984,
+                  -1281,
+                  640
+                ],
+                [
+                  2048,
+                  -1281,
+                  640
+                ]
+              ],
+              "normal": [
+                1,
+                0,
+                0
+              ],
+              "placement": "placement-00001"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  64,
+                  -1281,
+                  640
+                ],
+                [
+                  0,
+                  -1281,
+                  640
+                ]
+              ],
+              "normal": [
+                -1,
+                0,
+                0
+              ],
+              "placement": "placement-00003"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00001-placement-00003-lower",
+            "conditions": [],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  1984,
+                  -513,
+                  1408
+                ],
+                [
+                  2048,
+                  -513,
+                  1408
+                ]
+              ],
+              "normal": [
+                1,
+                0,
+                0
+              ],
+              "placement": "placement-00001"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  64,
+                  -513,
+                  1408
+                ],
+                [
+                  0,
+                  -513,
+                  1408
+                ]
+              ],
+              "normal": [
+                -1,
+                0,
+                0
+              ],
+              "placement": "placement-00003"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00001-placement-00003-upper",
+            "conditions": [
+              "placement-00003/record-00194"
+            ],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  640,
+                  -1281,
+                  1984
+                ],
+                [
+                  640,
+                  -1281,
+                  2048
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                1
+              ],
+              "placement": "placement-00002"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  640,
+                  -1281,
+                  64
+                ],
+                [
+                  640,
+                  -1281,
+                  0
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                -1
+              ],
+              "placement": "placement-00003"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00002-placement-00003-lower",
+            "conditions": [],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  1408,
+                  -513,
+                  1984
+                ],
+                [
+                  1408,
+                  -513,
+                  2048
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                1
+              ],
+              "placement": "placement-00002"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  1408,
+                  -513,
+                  64
+                ],
+                [
+                  1408,
+                  -513,
+                  0
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                -1
+              ],
+              "placement": "placement-00003"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00002-placement-00003-upper",
+            "conditions": [],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  640,
+                  -1281,
+                  1984
+                ],
+                [
+                  640,
+                  -1281,
+                  2048
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                1
+              ],
+              "placement": "placement-00003"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  640,
+                  -1281,
+                  64
+                ],
+                [
+                  640,
+                  -1281,
+                  0
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                -1
+              ],
+              "placement": "placement-00004"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00003-placement-00004-lower",
+            "conditions": [
+              "placement-00004/record-00000"
+            ],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  1408,
+                  -513,
+                  1984
+                ],
+                [
+                  1408,
+                  -513,
+                  2048
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                1
+              ],
+              "placement": "placement-00003"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  1408,
+                  -513,
+                  64
+                ],
+                [
+                  1408,
+                  -513,
+                  0
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                -1
+              ],
+              "placement": "placement-00004"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00003-placement-00004-upper",
+            "conditions": [
+              "placement-00004/record-00014"
+            ],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  1984,
+                  -1281,
+                  640
+                ],
+                [
+                  2048,
+                  -1281,
+                  640
+                ]
+              ],
+              "normal": [
+                1,
+                0,
+                0
+              ],
+              "placement": "placement-00003"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  64,
+                  -1281,
+                  640
+                ],
+                [
+                  0,
+                  -1281,
+                  640
+                ]
+              ],
+              "normal": [
+                -1,
+                0,
+                0
+              ],
+              "placement": "placement-00006"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00003-placement-00006-lower",
+            "conditions": [],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  1984,
+                  -513,
+                  1408
+                ],
+                [
+                  2048,
+                  -513,
+                  1408
+                ]
+              ],
+              "normal": [
+                1,
+                0,
+                0
+              ],
+              "placement": "placement-00003"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  64,
+                  -513,
+                  1408
+                ],
+                [
+                  0,
+                  -513,
+                  1408
+                ]
+              ],
+              "normal": [
+                -1,
+                0,
+                0
+              ],
+              "placement": "placement-00006"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00003-placement-00006-upper",
+            "conditions": [],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  640,
+                  -1281,
+                  1984
+                ],
+                [
+                  640,
+                  -1281,
+                  2048
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                1
+              ],
+              "placement": "placement-00005"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  640,
+                  -1281,
+                  64
+                ],
+                [
+                  640,
+                  -1281,
+                  0
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                -1
+              ],
+              "placement": "placement-00006"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00005-placement-00006-lower",
+            "conditions": [],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  1408,
+                  -513,
+                  1984
+                ],
+                [
+                  1408,
+                  -513,
+                  2048
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                1
+              ],
+              "placement": "placement-00005"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  1408,
+                  -513,
+                  64
+                ],
+                [
+                  1408,
+                  -513,
+                  0
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                -1
+              ],
+              "placement": "placement-00006"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00005-placement-00006-upper",
+            "conditions": [],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  640,
+                  -1281,
+                  1984
+                ],
+                [
+                  640,
+                  -1281,
+                  2048
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                1
+              ],
+              "placement": "placement-00006"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  640,
+                  -1281,
+                  64
+                ],
+                [
+                  640,
+                  -1281,
+                  0
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                -1
+              ],
+              "placement": "placement-00007"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00006-placement-00007-lower",
+            "conditions": [
+              "placement-00007/record-00000"
+            ],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  1408,
+                  -513,
+                  1984
+                ],
+                [
+                  1408,
+                  -513,
+                  2048
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                1
+              ],
+              "placement": "placement-00006"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  1408,
+                  -513,
+                  64
+                ],
+                [
+                  1408,
+                  -513,
+                  0
+                ]
+              ],
+              "normal": [
+                0,
+                0,
+                -1
+              ],
+              "placement": "placement-00007"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00006-placement-00007-upper",
+            "conditions": [
+              "placement-00007/record-00014"
+            ],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  1984,
+                  -1281,
+                  640
+                ],
+                [
+                  2048,
+                  -1281,
+                  640
+                ]
+              ],
+              "normal": [
+                1,
+                0,
+                0
+              ],
+              "placement": "placement-00006"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  64,
+                  -1281,
+                  640
+                ],
+                [
+                  0,
+                  -1281,
+                  640
+                ]
+              ],
+              "normal": [
+                -1,
+                0,
+                0
+              ],
+              "placement": "placement-00008"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00006-placement-00008-lower",
+            "conditions": [
+              "placement-00008/record-00010"
+            ],
+            "support_depth": 8
+          },
+          {
+            "a": {
+              "path": [
+                [
+                  1984,
+                  -513,
+                  1408
+                ],
+                [
+                  2048,
+                  -513,
+                  1408
+                ]
+              ],
+              "normal": [
+                1,
+                0,
+                0
+              ],
+              "placement": "placement-00006"
+            },
+            "kind": "passage",
+            "b": {
+              "path": [
+                [
+                  64,
+                  -513,
+                  1408
+                ],
+                [
+                  0,
+                  -513,
+                  1408
+                ]
+              ],
+              "normal": [
+                -1,
+                0,
+                0
+              ],
+              "placement": "placement-00008"
+            },
+            "clearance": [
+              12,
+              48,
+              12
+            ],
+            "id": "placement-00006-placement-00008-upper",
+            "conditions": [
+              "placement-00008/record-00038"
+            ],
+            "support_depth": 8
+          }
+        ],
+        "required_bindings": [],
+        "schema": "dungeon-assembly-declarations-v1",
+        "door_relationships": []
+      }
+    }
+  }
+}

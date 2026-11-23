@@ -160,9 +160,23 @@ purposes. A dungeon-start marker cannot establish new-character opening content.
 Source coordinates remain signed encoded XYZ in `classic-block-local-v1`, with
 `classic-layout-integer` position units and `classic-angle-2048` rotations. Unity
 axis changes, MeshReader scale and motor units are not adopted. Source-to-same-
-source conversion is exact, tolerance zero and no rounding. Other conversions
-return `unsupported_conversion`. Parent placement/grid and building transforms
-remain separate inputs; no checked engine pose or collision conversion is claimed.
+source conversion is exact, tolerance zero and no rounding. IMP-061 increment 1
+adds the explicitly named `dungeon-geometry-metres-v1` geometry consumer through
+the shared `layout_geometry_frame.gd` boundary. See
+[DUNGEON_ASSEMBLY.md](../loc/DUNGEON_ASSEMBLY.md) for units, axis/angle composition,
+normal/winding and precision fixtures. `convert` also accepts explicitly declared
+native poses in that frame. Other conversions still reject. DATA results retain
+`physics_ready=false`; motor scale, actor placement and WORLD origin/rebase
+qualification are not inferred from LOC geometry checks.
+
+Layouts may additionally publish complete versioned `data.assembly` declarations.
+Source mapping/receipts remain protected when these annotations are overridden.
+The hash-pinned shipped annotation covers only `place-00032` under its exact
+MAPS/BLOCKS/model edition guards. Unqualified classic layouts cannot silently
+acquire connections. Native authored transforms may use explicit metre/radian
+poses, plus checked `placement_mode`/`snap` declarations. Publication validates
+their structure; LOC owns actual geometry, instances and traversal validation.
+Location queries now retain detached content/winner/contributor provenance.
 
 Structural explicit remapping rejects absent/ambiguous destinations. All results
 retain `save_compatible=false`; unchanged IDs or checked mappings do not establish
@@ -176,6 +190,8 @@ fresh-process checks. The same source-reading paths are selected in actual Windo
 debug/release exports. See execution evidence for completed commands and any open
 checks; a versioned contract alone does not establish verification. Real LOC/WORLD/
 MOVE/action/QUEST/SAVE/CORE-opening and M1 gates remain unavailable throughout this
-increment. Source metadata pool pairing, model-material climate substitution,
-engine transforms/collision, live instances and SAVE compatibility require those
-providers. No controlled fixture closes a real-owner gate.
+increment. Those historical DATA-only tests do not qualify LOC geometry. Source
+metadata pool pairing, model-material climate substitution and SAVE compatibility
+still require their real providers. IMP-061 increment-1 evidence separately
+qualifies its named geometry/instance source scope; actual MOVE/QUEST/action/SAVE
+and other named joint checks remain open. No controlled fixture closes them.

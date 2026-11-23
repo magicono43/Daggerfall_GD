@@ -1,5 +1,17 @@
 # Shared verification — IMP-003 / DEV-014
 
+IMP-061 increment 1 uses independent `-Suite dungeon-assembly -Fixture
+dungeon-assembly-v1` headless/rendered selections with `-ClassicSource
+C:/Games/Daggerfall/arena2`. `dungeon_inventory.json` freezes 1,609/1,615 unique
+primary assertions and 15/21 fresh-process assertions. The ten-adapter fixture
+exercises real source geometry, synthetic GLB stairs, rotated/native poses,
+structural doors/references, original CORE tickets and 64-block scaling. Fresh
+processes rebuild the shipped annotation, not SAVE or actor state. Windows debug
+and release use `verify_startup_export.ps1 -Configuration debug` (or `release`)
+with `-DungeonAssembly -ClassicSource C:/Games/Daggerfall/arena2`. All four exported
+processes per configuration require their full frozen inventory. See the LOC
+owner contract and IMP-061 assembly review checklist for scope and human status.
+
 IMP-011 increment 3 uses independent `-Suite view-cursor -Fixture view-cursor-v1`
 headless/rendered selections. `view_cursor_inventory.json` freezes unique main and
 fresh-process assertion IDs. Production view/camera, source arbitration, smoothing,

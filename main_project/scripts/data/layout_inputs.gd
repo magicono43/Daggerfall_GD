@@ -5,11 +5,13 @@ const P = preload("res://scripts/data/layout_placements.gd")
 const G = preload("res://scripts/data/geography_inputs.gd")
 const Common = preload("res://scripts/data/actor_input_formats.gd")
 const Paths = preload("res://scripts/mod/package_library.gd")
+const AssemblySchema = preload("res://scripts/data/dungeon_assembly_schema.gd")
 const DOMAIN = "layout.inputs"
 const VERSION = "layout-inputs-v1"
 const ROOT = "res://content/layouts/"
 const BASE_PATH = "packs/classic"
 const PROFILE_HASH = "a2e629e5d085b3d0ed58f3c17958f4accec4910e9204b6967203ab55af717b75"
+const ASSEMBLY_HASH = "386895efaecb1af6c9a3e89974bafaec441d16cfeb1556a09693c130b5a1f056"
 var classic: RefCounted
 var media: RefCounted
 var resource_sources: Array = [] # Declared by the consumer before classic preparation.
@@ -21,6 +23,7 @@ var _index := {}
 var _ticket := -1
 var _baseline := PackedByteArray()
 var _source_paths := {}
+var _assembly_guard := ""
 
 func declaration() -> Dictionary:
 	return {"id":VERSION,"domain":DOMAIN,"reference_domains":[DOMAIN,G.DOMAIN,"media.assets"],"operations":["add","replace","patch"],"required_resources":[BASE_PATH],"capabilities":["data."+VERSION],"classic_sources":[{"file":"BLOCKS.BSA","format":"bsa-v1"},{"file":"MAPS.BSA","format":"bsa-v1"}]+resource_sources.duplicate(true)}
@@ -53,6 +56,15 @@ func bundled_contributions() -> Array:
 	for name: String in _profile.files:
 		if not files.has(name) or FileAccess.get_sha256(files[name]) != _profile.files[name]: return [{"root":ROOT,"file":"baseline.json","read":F.fail("Explicit layout edition mapping required.",name,null,null,"unsupported")}]
 	_source_paths = files.duplicate(true)
+	var annotation_bytes := FileAccess.get_file_as_bytes(ROOT+"dungeon_assembly.json")
+	if Common.sha256(annotation_bytes) != ASSEMBLY_HASH: return [{"root":ROOT,"file":"baseline.json","read":F.fail("Pinned assembly annotation missing/changed.",ROOT,null,null,"source_unavailable")}]
+	var annotations: Dictionary = JSON.parse_string(annotation_bytes.get_string_from_utf8())
+	if annotations.get("schema") != "dungeon-classic-assembly-annotations-v1" or annotations.sources.get("BLOCKS.BSA") != _profile.files["BLOCKS.BSA"] or annotations.sources.get("MAPS.BSA") != _profile.files["MAPS.BSA"]: return [{"root":ROOT,"file":"baseline.json","read":F.fail("Assembly annotation edition guard differs.",ROOT,null,null,"source_changed")}]
+	var annotation_guard := FileAccess.get_sha256(files.get("ARCH3D.BSA",""))
+	if annotation_guard != _assembly_guard:
+		_baseline = PackedByteArray()
+		_assembly_guard = annotation_guard
+	var use_annotations: bool = annotation_guard == annotations.sources["ARCH3D.BSA"]
 	# Source edition metadata is immutable for this application. Only serialized
 	# shipped input is reused; final definitions/indexes still rebuild per ticket.
 	if not _baseline.is_empty(): return [{"root":ROOT,"file":"baseline.json","version":VERSION,"bytes":_baseline}]
@@ -70,6 +82,11 @@ func bundled_contributions() -> Array:
 	for location: Dictionary in _profile.locations:
 		_locations[location.id] = location
 		var v := value("layout",{"mode":"classic-source","location":G.ref(location.id),"mapping":location.id})
+		if use_annotations and annotations.layouts.has(location.id):
+			var annotation: Dictionary = annotations.layouts[location.id]
+			for block: Dictionary in _profile.blocks:
+				if annotation.blocks.has(block.id) and annotation.blocks[block.id] != block.sha256: return [{"root":ROOT,"file":"baseline.json","read":F.fail("Assembly annotation input guard differs.",location.id,block.id,null,"source_changed")}]
+			v.data.assembly = annotation.assembly.duplicate(true)
 		v.input = {"edition":"classic-layout-profile-v1","file":"MAPS.BSA","sha256":_profile.files["MAPS.BSA"],"region":location.region,"ordinal":location.ordinal,"pitem_offset":location.pitem_offset}
 		_receipts[location.id] = v.input.duplicate(true)
 		entries.append({"id":location.id,"value":v})
@@ -93,6 +110,7 @@ func validate_replace(previous: Dictionary, entries: Array) -> Dictionary:
 	return {"ok":true}
 
 static func valid_transform(t: Variant) -> bool:
+	if preload("res://scripts/data/layout_geometry_frame.gd").valid_native(t): return true
 	if not t is Dictionary or t.size() != 6 or t.get("frame") != "classic-block-local-v1" or t.get("position_unit") != "classic-layout-integer" or t.get("rotation_unit") != "classic-angle-2048": return false
 	for field in ["position","rotation","scale"]:
 		if not t.get(field) is Array or t[field].size() != 3: return false
@@ -173,6 +191,10 @@ func validate_record(_id: String, record: Dictionary) -> String:
 	var compatibility: Variant = record.get("compatibility")
 	if not compatibility is Dictionary or compatibility.get("status") != "unverified" or not compatibility.get("remap") is Dictionary: return "Structural remapping does not establish SAVE/LOC/QUEST compatibility."
 	var d: Dictionary = record.data
+	if d.has("assembly"):
+		if record.kind != "layout": return "Assembly declarations belong to the layout."
+		var assembly_reason := AssemblySchema.reason(d.assembly)
+		if not assembly_reason.is_empty(): return assembly_reason
 	if d.get("mode") == "classic-source":
 		if not d.get("mapping") is String or not record.get("input") is Dictionary: return "Classic source requires immutable input/mapping."
 		if record.kind == "block" and d.get("format") not in ["RMB","RDB","RDI",""]: return "Unknown inventory classification."
@@ -180,12 +202,14 @@ func validate_record(_id: String, record: Dictionary) -> String:
 	if d.get("mode") != "authored": return "Explicit source or authored mode required."
 	if record.kind == "layout":
 		for field: String in d:
-			if field not in ["mode","location","placements"]: return "Unknown authored layout field: "+field
+			if field not in ["mode","location","placements","assembly"]: return "Unknown authored layout field: "+field
 		if not G.valid_ref(d.get("location")) or not d.get("placements") is Array: return "Layout requires containing location and placements."
 		var ids := {}
 		for p in d.placements:
 			if not p is Dictionary or not Paths.valid_id(p.get("id")) or ids.has(p.id) or not G.valid_ref(p.get("block")) or p.get("context") not in ["exterior","interior","dungeon"] or not valid_transform(p.get("transform")): return "Complete distinct placement identity/context/transform required."
-			if p.size() != 4: return "Complete placement has id/context/block/transform only."
+			if p.size() != 4+int(p.has("placement_mode"))+int(p.has("snap")): return "Complete placement has id/context/block/transform and optional placement_mode/snap only."
+			var snap_reason := preload("res://scripts/data/layout_geometry_frame.gd").snap_reason(p)
+			if not snap_reason.is_empty(): return snap_reason
 			ids[p.id] = true
 		var destinations := {}
 		for old: String in compatibility.remap:
@@ -244,7 +268,9 @@ func validate_source_record(id: String, record: Dictionary, _fields: Dictionary,
 		if record.kind != expected_kind: return F.fail("Replacement preserves definition kind.",path,id)
 		if record.data.mode == "classic-source":
 			var expected := {"mode":"classic-source","mapping":id,"format":_blocks[id].format} if expected_kind == "block" else {"mode":"classic-source","mapping":id,"location":G.ref(id)}
-			if not Common.equal_input(expected,record.data): return F.fail("Preserve classic source mapping; replace complete authored data to edit.",path,id)
+			var mapped_data: Dictionary = record.data.duplicate(true)
+			if expected_kind == "layout": mapped_data.erase("assembly")
+			if not Common.equal_input(expected,mapped_data): return F.fail("Preserve classic source mapping; replace complete authored data to edit.",path,id)
 	if source.provider == identity.package and not str(source.provider).begins_with("@shipped/") and path != "packs/"+("loose" if source.provider == "@loose" else str(source.provider)): return F.fail("Additions use originating package namespace.",path,id)
 	return {"ok":true}
 
@@ -366,7 +392,7 @@ func location_inputs(registry: RefCounted, ref_: String) -> Dictionary:
 	if not read.ok: return read
 	if read.record.value.kind != "layout": return F.fail("Reference is not a location layout.",ref_)
 	var d: Dictionary = read.record.value.data
-	if d.mode == "authored": return {"ok":true,"identity":read.record.identity,"data":d.duplicate(true)}
+	if d.mode == "authored": return {"ok":true,"identity":read.record.identity,"data":d.duplicate(true),"winner":read.record.winner.duplicate(true),"contributors":read.record.contributors.duplicate(true),"content_context":{"ticket":_ticket,"profile":PROFILE_HASH}}
 	if classic == null or not _locations.has(d.mapping): return F.fail("This location source provider is unavailable.",ref_,null,null,"provider_unavailable")
 	var source_checked := false
 	for source: Dictionary in classic.inventory():
@@ -396,7 +422,9 @@ func location_inputs(registry: RefCounted, ref_: String) -> Dictionary:
 			p.id = mapping.placements[address]
 			p.block = index.names[p.block_name]
 			placements.append(p)
-	return {"ok":true,"identity":read.record.identity,"data":{"location":d.location,"placements":placements,"exterior":exterior,"dungeon":dungeon},"physics_ready":false}
+	var data := {"location":d.location,"placements":placements,"exterior":exterior,"dungeon":dungeon}
+	if d.has("assembly"): data.assembly = d.assembly.duplicate(true)
+	return {"ok":true,"identity":read.record.identity,"data":data,"physics_ready":false,"winner":read.record.winner.duplicate(true),"contributors":read.record.contributors.duplicate(true),"content_context":{"ticket":_ticket,"profile":PROFILE_HASH}}
 
 func prepare_location(registry: RefCounted, ref_: String, resource_provider: Callable, required: Array = []) -> Dictionary:
 	var layout := location_inputs(registry,ref_)
@@ -476,7 +504,15 @@ func classic_resource(request: Dictionary) -> Dictionary:
 	return F.fail("Unsupported structural resource request.",DOMAIN,request.get("id"),null,"unsupported")
 
 static func convert(request: Dictionary) -> Dictionary:
-	if request.size() != 3 or request.get("source_frame") != "classic-block-local-v1" or request.get("target_frame") != "classic-block-local-v1" or not valid_transform(request.get("transform")): return F.fail("WORLD/LOC/MOVE conversion provider unavailable.",DOMAIN,null,request.get("target_frame"),"unsupported_conversion")
+	var geometry_frame = preload("res://scripts/data/layout_geometry_frame.gd")
+	if request.size() == 3 and request.get("source_frame") == geometry_frame.FRAME and request.get("target_frame") == geometry_frame.FRAME and geometry_frame.valid_native(request.get("transform")):
+		return {"ok":true,"transform":geometry_frame.pose(request.transform),"tolerance":geometry_frame.POSITION_TOLERANCE,"frame":geometry_frame.FRAME,"physics_ready":false,"motor_qualified":false}
+	if request.size() == 3 and request.get("source_frame") == "classic-block-local-v1" and request.get("target_frame") == preload("res://scripts/data/layout_geometry_frame.gd").FRAME and valid_transform(request.get("transform")) and request.transform.frame == request.source_frame:
+		var frame = preload("res://scripts/data/layout_geometry_frame.gd")
+		var pose: Transform3D = frame.pose(request.transform)
+		if not frame.bounded(pose.origin): return F.fail("Geometry precision extent exceeded.",DOMAIN,null,null,"unsupported_conversion")
+		return {"ok":true,"transform":pose,"tolerance":frame.POSITION_TOLERANCE,"frame":frame.FRAME,"physics_ready":false,"motor_qualified":false}
+	if request.size() != 3 or request.get("source_frame") != "classic-block-local-v1" or request.get("target_frame") != "classic-block-local-v1" or not valid_transform(request.get("transform")) or request.transform.frame != request.source_frame: return F.fail("WORLD/LOC/MOVE conversion provider unavailable.",DOMAIN,null,request.get("target_frame"),"unsupported_conversion")
 	return {"ok":true,"transform":request.transform.duplicate(true),"tolerance":0,"rounding":"none","physics_ready":false}
 
 static func check_record_mapping(previous: Array, current: Array, remap: Dictionary, required: Array) -> Dictionary:

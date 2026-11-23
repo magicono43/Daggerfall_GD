@@ -18,6 +18,10 @@ func decode(raw: Dictionary) -> Dictionary:
 		return rejected
 	if not raw.get("identity") is int: return _failure(raw,"ARCH3D domain decoding requires a numeric classic ID.",0)
 	var bytes: PackedByteArray = raw.bytes
+	var source_hash := HashingContext.new()
+	source_hash.start(HashingContext.HASH_SHA256)
+	source_hash.update(bytes)
+	var source_sha256 := source_hash.finish().hex_encode()
 	var cursor := Cursor.new(bytes)
 	if not cursor.has(64): return _failure(raw,cursor.reason,0)
 	var version := cursor.take(4).get_string_from_ascii()
@@ -102,7 +106,7 @@ func decode(raw: Dictionary) -> Dictionary:
 	if not cursor.reason.is_empty(): return _failure(raw,cursor.reason,cursor.position)
 	return {"ok":true,"kind":"ready","value":Value.new({"schema":Value.SCHEMA,"domain":"model",
 		"identity":{"origin":"classic","domain":"model","local_id":"%s/record/%d" % [str(raw.identity),int(raw.get("ordinal",-1))]},
-		"provenance":{"provider":"classic","source":raw.source,"record":raw.record,"classic_id":raw.identity,"ordinal":raw.get("ordinal",-1),"offset":raw.offset,"converter":VERSION},
+		"provenance":{"provider":"classic","source":raw.source,"record":raw.record,"classic_id":raw.identity,"ordinal":raw.get("ordinal",-1),"offset":raw.offset,"converter":VERSION,"sha256":source_sha256},
 		"source_version":version,"source_frame":"arch3d-native","coordinate_units":"signed-int32-1/256-classic-unit",
 		"world_conversion":"unavailable","points_source":source_points,"planes":output,"radius_source":radius,
 		"plane_data_offset":plane_data,"object_data_offset":object_data,"object_count":objects,"patch_policy":"none"})}

@@ -52,9 +52,12 @@ func _ready() -> void:
 	if inputs.is_empty():
 		return
 	# Combined verification retains every ordinary registration; only roots differ.
-	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["m1-composition","m1-composition_reload"]
+	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload"]
 	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 		var resource_sources: Array = []
+		if fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload"]:
+			var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/dungeon_source_observation.json"))
+			resource_sources = source.resource_sources
 		if fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 			var observation: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/layout_source_observation.json"))
 			resource_sources = observation.resource_sources
@@ -521,6 +524,10 @@ func run_fixture() -> void:
 		script_path = "res://tests/item_spell_cases.gd"
 	elif fixture.get("mode") == "geography-inputs":
 		script_path = "res://tests/geography_cases.gd"
+	elif fixture.get("mode") == "dungeon-assembly":
+		script_path = "res://tests/dungeon_cases.gd"
+	elif fixture.get("mode") == "dungeon-assembly_reload":
+		script_path = "res://tests/dungeon_reload_cases.gd"
 	elif fixture.get("mode") == "layout-inputs":
 		script_path = "res://tests/layout_cases.gd"
 	elif fixture.get("mode") == "layout-inputs_reload":
@@ -562,7 +569,7 @@ func run_fixture() -> void:
 		var music_cleanup: Dictionary = await session_shell.music_playback.shutdown()
 		checks.native_cleanup = {"ok":video_cleanup.ok and music_cleanup.ok,"video":video_cleanup,"music":music_cleanup}
 		checks.ok = checks.ok and checks.native_cleanup.ok
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["view-cursor_reload", "binding-config_reload", "m1-composition_reload", "variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["dungeon-assembly_reload", "view-cursor_reload", "binding-config_reload", "m1-composition_reload", "variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

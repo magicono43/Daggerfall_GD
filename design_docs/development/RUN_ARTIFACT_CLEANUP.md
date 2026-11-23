@@ -1,5 +1,36 @@
 # Verification run artifact cleanup
 
+## 2026-11-23 IMP-061 increment-1 verification
+
+All 14 final commands passed before the last cleanup. Ordinary non-elevated
+process inspection confirmed no engine active. Exact owned GUID roots, resolved
+workspace paths and reparse points were checked before deletion. Eighteen task
+cleanup journals record removal of **62,827 files / 10,884,226,051 logical bytes**
+over the verification work, preserving **359 child evidence files** plus root
+reports/logs, source/build/PCK/native hashes and escaped-defect source snapshots.
+Large earlier evidence was archived losslessly with SHA-256 recovery checks.
+The last six failed/superseded payloads alone removed 1,255,124,112 bytes.
+
+No task-owned full build remains. Human assembly review uses compact captures and
+the reproducible production fixture command, so no additional full-build exception
+or expiry is required. The protected pre-existing
+`imp011-view-review-2026-11-23-final` package remains **209,339,669 bytes**; all
+**96** inventoried root build/launcher/log and nested human-evidence files match
+their pre-cleanup hashes. Unique human state, installed templates/tools, classic
+source, reference material and other-task evidence were not deleted.
+
+Final measured `.runs` retention is **2,123,429,576 bytes (about 1.98 GiB)**,
+below the task's **2 GiB** review trigger. The largest remaining items were reviewed:
+the protected IMP-011 package and pre-existing compact evidence; they were excluded
+from task cleanup. Exact local records are `main_project/tests/.runs/imp061-cleanup-final.json`,
+`imp061-protected-imp011-before.json` and
+`dungeon-retention-577a962ce73d4e94b1c3bb377935ecc7.json` in that same `.runs` root.
+See [execution evidence](evidence/IMP-061-increment-1-2026-11-23.md) and the
+[assembly review checklist](evidence/IMP-061-ASSEMBLY-REVIEW-2026-11-23.md).
+Increment 1 was subsequently explicitly user-accepted on 2026-11-23. Later
+increments and all named real-provider gates remain open. Earlier cleanup/review
+statuses below are historical.
+
 ## 2026-11-23 IMP-011 increment-3 verification
 
 Twenty inactive automated roots were compacted after all owned engines returned

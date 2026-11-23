@@ -6,6 +6,12 @@ before classic preparation. `variant_resolution.gd` is stateless. Neither stores
 selections, starts transitions, imports saves, or certifies a playable location.
 Qualification and user acceptance are recorded separately in increment-3 evidence.
 
+IMP-061 increment 1 adds a LOC geometry consumer of published layouts, not active
+story/palette/environment selection. Geometry frame and optional assembly/snap
+declarations are specified in [DUNGEON_ASSEMBLY.md](../loc/DUNGEON_ASSEMBLY.md).
+Variant selection/edited-variant geometry integration remains increment 2 /
+IMP-055 as applicable; the existing pure proposals do not become entry readiness.
+
 ## Installed schema
 
 Logical paths are `packs/<originating package>`. The registry supplies complete

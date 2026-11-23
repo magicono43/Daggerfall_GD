@@ -40,3 +40,27 @@ only source metadata/hash/numeric observations and project-authored PNG fixtures
 are used. The rendered index-grayscale preview is diagnostic, not original color
 or animation timing qualification. See scripts/data/LAYOUT_INPUTS.md and
 MEDIA_DECODERS.md for format boundaries and named real-owner gates.
+
+## IMP-061 increment-1 geometry annotations
+
+`dungeon_assembly.json` is project-authored structural metadata for the exact
+observed `place-00032` (Ruins of Cyeghtan Manor) edition. It contains fourteen
+explicit connection declarations and input guards, not classic geometry bytes.
+`tests/dungeon_source_observation.json` records source file/block/model hashes,
+stable placements/records and independently computed transformed dimensions and
+plane vectors. The read-only observer is `tools/observe_dungeon_assembly.py`.
+Source edition is identified by hashes, not an unverified retail-version claim.
+
+The shared geometry scale is now deliberately 0.025 metre per source layout unit,
+with explicit Godot frame/angle/winding rules in `scripts/loc/DUNGEON_ASSEMBLY.md`.
+This supersedes the earlier DATA-only absence of engine conversion; it adopts no
+motor size, placement correction, world rebase threshold or source-file mutation.
+DFU's MIT-licensed `RDBLayout.GetModelMatrix`/`MeshReader` remain behavioral evidence;
+the included DFU license is retained. No new third-party code/library is introduced.
+
+All source doors in the fixture remain present. No DFU 1.4-unit or enumeration
+order duplicate rule is adopted. Synthetic authored duplicate relationships and
+project-authored GLB stair geometry qualify owner interfaces, not a universal
+classic correction. Actual action/QUEST/SAVE state and actor placement remain
+unavailable. Initial candidate `place-00016` was explicitly rejected for a solid
+proposed seam; its failed evidence is retained rather than substituted at runtime.

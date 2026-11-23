@@ -403,6 +403,10 @@ func read_loose_media(file: String) -> Dictionary:
 func active() -> Dictionary:
 	return _active.duplicate(true)
 
+func content_ticket() -> int:
+	# Constant-cost freshness check; never copy the complete published catalog.
+	return int(_active.get("ticket",-1))
+
 func domain_index(domain: String) -> Dictionary:
 	# Optional detached domain projection. A prepared index is never readable via
 	# this boundary before the exact candidate's actual CORE publication.

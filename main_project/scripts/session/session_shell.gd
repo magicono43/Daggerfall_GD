@@ -31,6 +31,7 @@ var binding_editor: RefCounted
 var _ui_controller_down: Dictionary = {}
 var _ui_triggers: Dictionary = {}
 var _keyboard_layout := -1
+var dungeon_assembly: Node
 
 func refresh_control_labels() -> void:
 	if windows.top().get("window") != "controls" or DisplayServer.get_name() == "headless": return
@@ -144,6 +145,14 @@ func schedule_render() -> void:
 		host.call_deferred("render")
 
 func synchronize_startup() -> void:
+	if host.controller.providers.get("layouts") != null and dungeon_assembly == null:
+		dungeon_assembly = preload("res://scripts/loc/dungeon_assembly.gd").new()
+		dungeon_assembly.layouts = host.controller.providers.layouts
+		dungeon_assembly.registry = host.controller.providers.definitions
+		dungeon_assembly.core = core
+		host.add_child(dungeon_assembly)
+		core.retiring.connect(dungeon_assembly.retire_scope)
+		core.terminal.connect(dungeon_assembly.operation_terminal)
 	if host.controller.providers.get("media") != null and music_playback == null:
 		music_playback = preload("res://scripts/av/music_playback.gd").new()
 		music_playback.media = host.controller.providers.media
@@ -185,6 +194,9 @@ func return_to_setup() -> void:
 			setup_pending = false
 
 func dispose() -> void:
+	if is_instance_valid(dungeon_assembly):
+		dungeon_assembly.dispose()
+		dungeon_assembly.free()
 	Input.joy_connection_changed.disconnect(controller_connection_changed)
 	host.controller.controls.detach(action_input)
 	host.controller.controls.detach(view)

@@ -6,6 +6,14 @@ initial concrete profiles. DATA owns selection/decoded reusable resources;
 visual/audio instances. These are bounded consumers, not WORLD room rendering,
 spatial sound, music scheduling, cinematics, physics, or SAVE integration.
 
+IMP-061 increment 1 reuses that same instance factory for selected static GLB
+models in the LOC assembly owner. LOC builds collision from their actual included
+node/mesh transforms in the accepted engine-metre frame. Independent material
+ownership is retained; source classic models use the single shared geometry
+converter instead. See [DUNGEON_ASSEMBLY.md](../loc/DUNGEON_ASSEMBLY.md). This
+consumer adds no media format, alias catalog, replacement precedence or native
+dependency, and does not qualify actor placement or SAVE restoration.
+
 ## Registration and declarations
 
 The normal shell explicitly calls `enable_media_replacements()` before classic
