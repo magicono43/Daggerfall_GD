@@ -19,7 +19,7 @@ static func sources() -> Array:
 	return result
 
 func declaration() -> Dictionary:
-	return {"id":"actor-inputs-v1","domain":DOMAIN,"operations":["add","replace","patch"],"required_resources":[RESOURCE],"capabilities":["data.actor-inputs-v1"],"classic_sources":sources()}
+	return {"id":"actor-inputs-v1","domain":DOMAIN,"reference_domains":[DOMAIN],"operations":["add","replace","patch"],"required_resources":[RESOURCE],"capabilities":["data.actor-inputs-v1"],"classic_sources":sources()}
 
 func validate_resource_path(path: String) -> String:
 	return "" if path == RESOURCE else "Actor inputs use the single catalog resource."

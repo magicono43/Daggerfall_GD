@@ -3,6 +3,7 @@ param(
     [string]$Godot = 'C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe',
     [string]$Templates = "$env:APPDATA/Godot/export_templates/4.7.2.stable",
     [string]$ClassicSource = '',
+    [switch]$M1Composition,
     [switch]$ModDiscovery,
     [switch]$DependencyPlanning,
     [switch]$DefinitionPublication,
@@ -26,6 +27,7 @@ param(
     [switch]$FormulaExtraError
 )
 $ErrorActionPreference = 'Stop'
+if ($M1Composition -and !$ClassicSource) { throw 'M1 composition requires an explicit classic source' }
 if ($VariantInputs) { $LayoutInputs = $true }
 . "$PSScriptRoot/mod_fixture.ps1"
 . "$PSScriptRoot/assertion_values.ps1"
@@ -53,7 +55,7 @@ $priorLocal = $env:LOCALAPPDATA
 $report = @{ ok = $false; status = 'incomplete'; configuration = $Configuration; classic_source = $ClassicSource
     fixture = $(if ($FormulaExtraError) {'formula-extra-error-v1'} elseif ($Formula -or $FormulaFault) {'formula-v1'} elseif ($RandomnessSession) {'randomness-session-v1'} elseif ($Randomness) {'randomness-v1'} elseif ($DefinitionPublication) {'publication-v1'} elseif ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
     reproduction = @{ command = './main_project/tools/verify_startup_export.ps1'; arguments = @{
-        VariantInputs = [bool]$VariantInputs; LayoutInputs = [bool]$LayoutInputs; Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; RandomnessSession = [bool]$RandomnessSession; Formula = [bool]$Formula; FormulaFault = [bool]$FormulaFault; FormulaExtraError = [bool]$FormulaExtraError; Godot = $Godot; Templates = $Templates } } }
+        M1Composition = [bool]$M1Composition; VariantInputs = [bool]$VariantInputs; LayoutInputs = [bool]$LayoutInputs; Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; RandomnessSession = [bool]$RandomnessSession; Formula = [bool]$Formula; FormulaFault = [bool]$FormulaFault; FormulaExtraError = [bool]$FormulaExtraError; Godot = $Godot; Templates = $Templates } } }
 function Copy-ExportResources([string]$Source, [string]$Destination) {
     New-Item -ItemType Directory -Force $Destination | Out-Null
     foreach ($entry in Get-ChildItem -LiteralPath $Source) {
@@ -66,6 +68,7 @@ function Copy-ExportResources([string]$Source, [string]$Destination) {
     }
 }
 try {
+if ($M1Composition) { $report.fixture = 'm1-composition-v1' }
 if ($LayoutInputs) { $report.fixture = 'layout-inputs-v1'; $report.reproduction.arguments.LayoutInputs = $true }
 if ($GeographyInputs) { $report.fixture = 'geography-inputs-v1'; $report.reproduction.arguments.GeographyInputs = $true }
 if ($FactionQuestInputs) { $report.fixture = 'faction-quest-inputs-v1'; $report.reproduction.arguments.FactionQuestInputs = $true }
@@ -81,7 +84,7 @@ if ($StructuredText) { $report.fixture = 'structured-text-v1'; $report.reproduct
 if ($TextCatalog) { $report.fixture = 'text-v1'; $report.reproduction.arguments.TextCatalog = $true }
 if ($FormulaExtraError -and !$FormulaFault) { throw 'Additional formula errors require the explicit fault scenario' }
 if (($LayoutInputs -or $GeographyInputs -or $FactionQuestInputs -or $ItemSpellInputs -or $ActorInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $StructuredText -or $TextCatalog -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
-if (@($LayoutInputs,$GeographyInputs,$FactionQuestInputs,$ItemSpellInputs,$ActorInputs,$NativeMedia,$MediaReplacements,$ClassicMedia,$TranslationPreferences,$LocaleFonts,$StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
+if (@($M1Composition,$LayoutInputs,$GeographyInputs,$FactionQuestInputs,$ItemSpellInputs,$ActorInputs,$NativeMedia,$MediaReplacements,$ClassicMedia,$TranslationPreferences,$LocaleFonts,$StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -143,7 +146,7 @@ foreach ($mode in @('headless','rendered')) {
         if ((Split-Path $selectedRoot -Leaf) -ine 'ARENA2') { $selectedRoot = Join-Path $selectedRoot 'ARENA2' }
         $lockedRoot = "$sandbox/locked/ARENA2"
         New-Item -ItemType Directory -Force $lockedRoot | Out-Null
-        foreach ($name in ($(if ($LayoutInputs) { @('TEXTURE.199','TEXTURE.210') } else { @() }) + $(if ($LayoutInputs -or $GeographyInputs) { @('WOODS.WLD','CLIMATE.PAK','POLITIC.PAK') } else { @() }) + $(if ($LayoutInputs -or $GeographyInputs -or $ItemSpellInputs -or $FactionQuestInputs) { @('SPELLS.STD','MAGIC.DEF') } else { @() }) + $(if ($LayoutInputs -or $GeographyInputs -or $ActorInputs -or $ItemSpellInputs -or $FactionQuestInputs) { Get-ActorSourceNames } else { @() }) + @('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($ClassicMedia -or $NativeMedia) { @('MIDI.BSA','TEXTURE.321','TEXTURE.024','TEXTURE.002','INVE00I0.IMG','APAINT.CIF','BUTTONS.RCI','ART_PAL.COL','ANIM0011.VID') } else { @() }) + $(if ($TranslationPreferences -or $StructuredText -or $LocaleFonts) { @('TEXT.RSC') } else { @() }))) {
+        foreach ($name in ($(if ($LayoutInputs) { @('TEXTURE.199','TEXTURE.210') } else { @() }) + $(if ($M1Composition -or $LayoutInputs -or $GeographyInputs) { @('WOODS.WLD','CLIMATE.PAK','POLITIC.PAK') } else { @() }) + $(if ($M1Composition -or $LayoutInputs -or $GeographyInputs -or $ItemSpellInputs -or $FactionQuestInputs) { @('SPELLS.STD','MAGIC.DEF') } else { @() }) + $(if ($M1Composition -or $LayoutInputs -or $GeographyInputs -or $ActorInputs -or $ItemSpellInputs -or $FactionQuestInputs) { Get-ActorSourceNames } else { @() }) + @('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($ClassicMedia -or $NativeMedia) { @('MIDI.BSA','TEXTURE.321','TEXTURE.024','TEXTURE.002','INVE00I0.IMG','APAINT.CIF','BUTTONS.RCI','ART_PAL.COL','ANIM0011.VID') } else { @() }) + $(if ($M1Composition -or $TranslationPreferences -or $StructuredText -or $LocaleFonts) { @('TEXT.RSC') } else { @() }))) {
             $before[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
             $guards += [IO.File]::Open((Join-Path $selectedRoot $name), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
             [IO.File]::WriteAllBytes("$lockedRoot/$name", [byte[]]@(1,0,0,2,42,232,3,0,0,1,0,0,0))
@@ -193,6 +196,7 @@ foreach ($mode in @('headless','rendered')) {
         $fixture.mode = if ($FormulaFault) { 'formula-fault' } else { 'formula' }
         $fixture.fixture = if ($FormulaExtraError) { 'formula-extra-error-v1' } else { 'formula-v1' }
     }
+    if ($M1Composition) { $fixture.mode = 'm1-composition'; $fixture.fixture = 'm1-composition-v1' }
     $fixture |
         ConvertTo-Json | Set-Content "$sandbox/fixture.json"
     $arguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/fixture.json")
@@ -200,8 +204,8 @@ foreach ($mode in @('headless','rendered')) {
     if ($mode -eq 'headless') { $arguments = @('--headless') + $arguments }
     $engineExit = Invoke-IsolatedExport "$build/Startup.console.exe" $arguments "$run/$mode.log"
     if ($LayoutInputs) { $report.child_source_samples += @{ child="$mode-primary"; before=$before; after=(Get-LayoutSourceHashes $before $selectedRoot) } }
-    if (($LayoutInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) -and $engineExit -eq 0) {
-        $fixture.mode = if ($VariantInputs) { 'variant-inputs_reload' } elseif ($LayoutInputs) { 'layout-inputs_reload' } elseif ($NativeMedia) { 'native_reload' } elseif ($MediaReplacements) { 'replacements_reload' } elseif ($TranslationPreferences) { 'translation-preferences_reload' } elseif ($LocaleFonts) { 'locale-fonts_reload' } elseif ($RandomnessSession) { 'randomness-session_reload' } elseif ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
+    if (($M1Composition -or $LayoutInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) -and $engineExit -eq 0) {
+        $fixture.mode = if ($M1Composition) { 'm1-composition_reload' } elseif ($VariantInputs) { 'variant-inputs_reload' } elseif ($LayoutInputs) { 'layout-inputs_reload' } elseif ($NativeMedia) { 'native_reload' } elseif ($MediaReplacements) { 'replacements_reload' } elseif ($TranslationPreferences) { 'translation-preferences_reload' } elseif ($LocaleFonts) { 'locale-fonts_reload' } elseif ($RandomnessSession) { 'randomness-session_reload' } elseif ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
         if ($LocaleFonts) { $fixture.sandbox = "$sandbox/relaunch".Replace('\','/') }
         $fixture | ConvertTo-Json -Depth 10 | Set-Content "$sandbox/reload-fixture.json"
         $reloadArguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/reload-fixture.json")
@@ -216,7 +220,8 @@ foreach ($mode in @('headless','rendered')) {
         if ($LayoutInputs -and !$VariantInputs -and !(Test-LayoutInventory $reloadResult 'reload')) { throw 'Incomplete exported layout reload inventory' }
         if ($MediaReplacements -and !(Test-ReplacementInventory $reloadResult 'reload')) { throw 'Incomplete exported replacement reload terminal inventory' }
         if ($NativeMedia -and !(Test-NativeInventory $reloadResult 'reload')) { throw 'Incomplete exported native reload inventory' }
-        $reloadExpected = if ($VariantInputs) { Get-VariantExpectedCount 'reload' } elseif ($LayoutInputs) { 15 } elseif ($NativeMedia) { Get-NativeExpectedCount 'reload' } elseif ($MediaReplacements -or $TranslationPreferences -or $LocaleFonts) { 10 } elseif ($RandomnessSession) { 15 } else { 8 }
+        if ($M1Composition -and !(Test-CompositionInventory $reloadResult ('reload-' + $mode))) { throw 'Incomplete exported M1 relaunch inventory' }
+        $reloadExpected = if ($M1Composition) { Get-CompositionExpectedCount ('reload-' + $mode) } elseif ($VariantInputs) { Get-VariantExpectedCount 'reload' } elseif ($LayoutInputs) { 15 } elseif ($NativeMedia) { Get-NativeExpectedCount 'reload' } elseif ($MediaReplacements -or $TranslationPreferences -or $LocaleFonts) { 10 } elseif ($RandomnessSession) { 15 } else { 8 }
         if ($null -eq $reloadResult.ok -or $reloadResult.count -ne $reloadExpected -or $reloadResult.checks.Count -ne $reloadExpected -or !$reloadResult.engine -or
             ($mode -eq 'rendered' -and $reloadResult.display -eq 'headless') -or
             !(Test-ScriptDiagnostics @("$run/$mode-reload.log") '' $reloadResult)) { throw 'Exported fresh-process restore incomplete' }
@@ -257,7 +262,8 @@ foreach ($mode in @('headless','rendered')) {
         $after[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
-    $expected = if ($VariantInputs) { Get-VariantExpectedCount $mode } elseif ($LayoutInputs) { if ($mode -eq 'headless') {369} else {372} } elseif ($GeographyInputs) { if ($mode -eq 'headless') {200} else {202} } elseif ($FactionQuestInputs) { if ($mode -eq 'headless') {132} else {134} } elseif ($ItemSpellInputs) { if ($mode -eq 'headless') {160} else {162} } elseif ($ActorInputs) { if ($mode -eq 'headless') {236} else {238} } elseif ($NativeMedia) { Get-NativeExpectedCount $mode } elseif ($MediaReplacements) { if ($mode -eq 'headless') {168} else {173} } elseif ($ClassicMedia) { if ($mode -eq 'headless') {119} else {136} } elseif ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    if ($M1Composition -and !(Test-CompositionInventory $result $mode)) { throw 'Incomplete exported M1 inventory' }
+    $expected = if ($M1Composition) { Get-CompositionExpectedCount $mode } elseif ($VariantInputs) { Get-VariantExpectedCount $mode } elseif ($LayoutInputs) { if ($mode -eq 'headless') {369} else {372} } elseif ($GeographyInputs) { if ($mode -eq 'headless') {200} else {202} } elseif ($FactionQuestInputs) { if ($mode -eq 'headless') {132} else {134} } elseif ($ItemSpellInputs) { if ($mode -eq 'headless') {160} else {162} } elseif ($ActorInputs) { if ($mode -eq 'headless') {236} else {238} } elseif ($NativeMedia) { Get-NativeExpectedCount $mode } elseif ($MediaReplacements) { if ($mode -eq 'headless') {168} else {173} } elseif ($ClassicMedia) { if ($mode -eq 'headless') {119} else {136} } elseif ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
     $formulaExpected = if ($FormulaFault) { 18 } elseif ($mode -eq 'headless') { 82 } else { 84 }
     if (($Formula -or $FormulaFault) -and $result.count -ne $formulaExpected) { throw 'Incomplete formula export inventory' }
     $sessionExpected = if ($mode -eq 'headless') { 115 } else { 116 }
@@ -266,7 +272,7 @@ foreach ($mode in @('headless','rendered')) {
     if ($ClassicSource -and !$Formula -and !$FormulaFault -and $result.count -ne $expected) { throw 'Incomplete owner export result' }
     $checks += @{ scenario = "exported-$mode"; actual = 'pass'; assertions = $result.count; process_exit = $engineExit
         source_before = $before; source_after = $after; result = "$sandbox/result.json" }
-    if ($LayoutInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) { $checks[-1].reload = @{ assertions = $reloadExpected; process_exit = $reloadExit; result = $reloadReport } }
+    if ($M1Composition -or $LayoutInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) { $checks[-1].reload = @{ assertions = $reloadExpected; process_exit = $reloadExit; result = $reloadReport } }
     if ($NativeMedia) {
         if (!$result.native_cleanup.ok) { throw 'Exported native consumer cleanup failed.' }
         $checks[-1].capabilities = $result.observations.capabilities

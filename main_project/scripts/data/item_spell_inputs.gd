@@ -19,7 +19,7 @@ static func sources() -> Array:
 	return [{"file":"SPELLS.STD","format":"spells-std-v1"},{"file":"MAGIC.DEF","format":"magic-def-v1"}]
 
 func declaration() -> Dictionary:
-	return {"id":VERSION,"domain":DOMAIN,"operations":["add","replace","patch"],"required_resources":["catalog"],"capabilities":["data."+VERSION],"classic_sources":sources()}
+	return {"id":VERSION,"domain":DOMAIN,"reference_domains":[DOMAIN],"operations":["add","replace","patch"],"required_resources":["catalog"],"capabilities":["data."+VERSION],"classic_sources":sources()}
 
 func validate_resource_path(path: String) -> String:
 	return "" if path == "catalog" else "Item/spell inputs use catalog."

@@ -8,7 +8,7 @@ const ASSETS := {"recovery-sans":"res://content/fonts/DejaVuSans.ttf", "sample-m
 const HASHES := {"recovery-sans":"7da195a74c55bef988d0d48f9508bd5d849425c1770dba5d7bfc6ce9ed848954", "sample-mono":"127875d255d4c5973ca57267a43bb9d1c04397e6c7d236984a595b6cdcb12b7c"}
 
 func declaration() -> Dictionary:
-	return {"id":"text.fonts.v1", "domain":DOMAIN, "operations":["add","replace","patch"], "required_resources":["installed"], "capabilities":[VERSION]}
+	return {"id":"text.fonts.v1", "domain":DOMAIN,"reference_domains":[DOMAIN], "operations":["add","replace","patch"], "required_resources":["installed"], "capabilities":[VERSION]}
 
 func validate_resource_path(path: String) -> String:
 	return "" if path == "installed" else "Font definitions require the installed logical resource."

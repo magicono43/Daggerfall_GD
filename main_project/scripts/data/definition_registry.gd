@@ -10,6 +10,7 @@ var _loose: Dictionary = {}
 var _omissions: Dictionary = {}
 var _commit_ticket := -1
 var _omission_revision := -1
+var timings: Dictionary = {} # Diagnostic microseconds; no latency acceptance budget.
 var faults: Dictionary = {} # Isolated verification seams, not player settings.
 
 func validate_adapter(adapter: RefCounted) -> Dictionary:
@@ -23,6 +24,12 @@ func validate_adapter(adapter: RefCounted) -> Dictionary:
 		return failure("adapter_invalid", "adapters", "Adapter ID/domain must be stable and domain ownership unique.")
 	if not declaration.get("operations") is Array or not declaration.get("required_resources", []) is Array:
 		return failure("adapter_invalid", "adapters", "Declare supported operations and required resources.")
+	if declaration.has("reference_domains"):
+		if not declaration.reference_domains is Array:
+			return failure("adapter_invalid", "adapters", "Reference domains must be an array.")
+		for domain in declaration.reference_domains:
+			if not Paths.valid_id(domain):
+				return failure("adapter_invalid", "adapters", "Reference domains must be stable domain IDs.")
 	for operation in declaration.operations:
 		if operation not in ["add", "patch", "replace"]:
 			return failure("adapter_invalid", "adapters", "Unsupported operation declaration.")
@@ -138,10 +145,12 @@ func source_entries(storage: StartupStorageAdapter, provider: String, root: Stri
 	return result
 
 func prepare(mods: RefCounted) -> Dictionary:
+	var started := Time.get_ticks_usec()
 	if _commit_ticket >= 0:
 		return failure("busy", "definitions", "Menu commit owns the candidate.")
 	if not _active.is_empty():
 		return failure("locked", "definitions", "Published definitions are locked until restart.")
+	timings = {"validators":{},"prepare_serial":_serial+1}
 	_started = true
 	_serial += 1
 	_candidate.clear()
@@ -224,13 +233,26 @@ func prepare(mods: RefCounted) -> Dictionary:
 			issues.append(issue)
 		else:
 			resources = applied.resources
+	timings.intake_usec = Time.get_ticks_usec()-started
 	for domain: String in domains:
 		var registered: Dictionary = _adapters[domain]
 		for required: String in registered.declaration.get("required_resources", []):
 			var normalized := Paths.relative_path(required)
 			if not normalized.ok or not resources.has(domain + ":" + str(normalized.get("path", ""))):
 				issues.append(failure("missing", domain + ":" + required, "Required logical resource is missing; omission cannot bypass it."))
-		var references: Array = registered.adapter.validate_references(resources.duplicate(true))
+		var validation_started := Time.get_ticks_usec()
+		# Each validator still receives detached data. Legacy adapters retain the
+		# whole-catalog contract; declared readers copy only their dependencies.
+		var validation_input := {}
+		if registered.declaration.has("reference_domains"):
+			for key: String in resources:
+				if key.get_slice(":",0) in registered.declaration.reference_domains:
+					validation_input[key] = resources[key].duplicate(true)
+		else:
+			validation_input = resources.duplicate(true)
+		var copied := Time.get_ticks_usec()
+		var references: Array = registered.adapter.validate_references(validation_input)
+		timings.validators[domain] = {"copy_usec":copied-validation_started,"validate_usec":Time.get_ticks_usec()-copied}
 		for reference: Dictionary in references:
 			var issue := failure("references", str(reference.get("source", domain)), str(reference.reason), str(reference.get("token", "")), bool(reference.get("omittable", false)))
 			for context: String in ["target","provider","referring","line","record","cycle","candidates"]:
@@ -245,7 +267,10 @@ func prepare(mods: RefCounted) -> Dictionary:
 	for registered: Dictionary in _adapters.values():
 		if registered.adapter.has_method("finish_candidate"):
 			registered.adapter.finish_candidate(resources, issues.is_empty())
-	return projection()
+	timings.prepare_usec = Time.get_ticks_usec()-started
+	var projected := projection()
+	timings.projection_usec = Time.get_ticks_usec()-started-int(timings.prepare_usec)
+	return projected
 
 func apply_contribution(base: Dictionary, bytes: PackedByteArray, source: Dictionary) -> Dictionary:
 	# Public authoring/fixture callers receive an independent candidate. During
@@ -359,10 +384,11 @@ func commit(ticket: int) -> Dictionary:
 	# committed profile/history. No callbacks or fallible I/O remain in this step.
 	if _commit_ticket != ticket or _candidate.get("ticket", -1) != ticket or not _active.is_empty():
 		return failure("stale", "definitions", "A current reserved menu commit is required.")
-	_active = _candidate.duplicate(true)
+	# Transfer private ownership; all public projections remain detached.
+	_active = _candidate
 	_active.stage = "published"
 	_active.ready = true
-	_candidate.clear()
+	_candidate = {}
 	_commit_ticket = -1
 	return active()
 

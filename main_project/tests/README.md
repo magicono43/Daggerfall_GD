@@ -148,11 +148,12 @@ Use PowerShell 7 (verified host 7.6.9). Build the pinned native adapter first
 repository root, independently invoke:
 
 ```powershell
-./main_project/tools/verify_headless.ps1 -Suite m1 -Fixture m1-v1
-./main_project/tools/verify_rendered.ps1 -Suite m1 -Fixture m1-v1
+./main_project/tools/verify_headless.ps1 -Suite m1 -Fixture m1-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 600
+./main_project/tools/verify_rendered.ps1 -Suite m1 -Fixture m1-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 600
 ```
 
-`m1` selects `qualification`, `startup`, and `session`. Select one with
+`m1` selects `qualification`, `startup`, `session`, and `m1-composition`.
+The combined scenario requires the explicit classic source. Select one with
 `-Scenario session` or `-Suite session`; PowerShell also accepts an array such as
 `-Scenario @('startup','session')`. Each scenario gets its own process, fresh
 startup storage seam and engine APPDATA/LOCALAPPDATA roots. The process retains
@@ -163,7 +164,9 @@ run's disposable `project/`, excluding prior evidence, toolchains and caches.
 Import and launch use that copy's existing normal scene, isolating `.godot` as
 well as engine user state. Scenario roots live inside that copy's `tests/.runs/`
 to preserve the production fixture-path guard. Source code remains authoritative
-in `main_project/`; the copy is retained evidence, not a second source project.
+in `main_project/`; compact completed copies under RUN_ARTIFACT_CLEANUP.md after
+preserving reports/logs/captures and build identity. The copy is reproducible
+verification output, not a second source project.
 When `-Godot` names the Windows console launcher, its paired engine executable
 is used directly when available; the report records the actual executable. This
 keeps process/stream lifetime and timeout ownership with the engine itself.
@@ -396,8 +399,9 @@ pwsh -NoProfile -File ./main_project/tools/verify_rendered.ps1 -Scenario classic
 ./main_project/tools/verify_startup_export.ps1 -Configuration release -ClassicSource C:/Games/Daggerfall/arena2
 ```
 
-`-Suite classic` also selects this scenario. `m1` retains the original three
-scenarios and `m1-v1` fixture; run the additional `classic-v1` scenario explicitly.
+`-Suite classic` also selects this scenario. `m1` uses `m1-v1` for its four
+separate inventories, including complete startup composition; run the deeper
+`classic-v1` reader inventory explicitly.
 There is no machine-specific source default. ARENA2 and its immediate parent are
 accepted; the runner records the invocation and actual selected root separately.
 A missing/unavailable real fixture produces incomplete/exit 2, never a skipped
@@ -985,3 +989,33 @@ Unavailable outputs/renderers, missing/duplicate/unknown IDs, worker/mixer leaks
 and unexpected script/native diagnostics fail qualification. The earlier
 replacement inventory remains unchanged and explicitly tests an unavailable
 native provider in its former unsupported-backend assertions.
+
+### Maintained complete M1 composition
+
+`m1 / m1-v1` now includes `m1-composition` alongside the separate qualification,
+startup and session inventories. Supply an explicit installation; absence leaves
+the combined required scenario incomplete. The standalone selection is:
+
+```powershell
+./main_project/tools/verify_headless.ps1 -Suite m1-composition -Fixture m1-composition-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 600
+./main_project/tools/verify_rendered.ps1 -Suite m1-composition -Fixture m1-composition-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 600
+./main_project/tools/verify_startup_export.ps1 -Configuration debug -M1Composition -ClassicSource C:/Games/Daggerfall/arena2
+./main_project/tools/verify_startup_export.ps1 -Configuration release -M1Composition -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+The combined fixture retains every ordinary startup adapter registration without
+adapter/source-contribution overrides. Disposable launch roots and controlled
+setup routing remain test inputs. It covers clean/cancel/invalid/unreadable source
+recovery, complete candidate validation, pre-publication invisibility, publication
+rejection/retry, detached public views, retained menu result and run locking. Its
+stock cinematic skip button checks applied/accepted/disk state, rejection and
+unsaved messages, reverse application and fresh-process remembered automatic
+startup. Automatic startup must prepare only once. The fixed named inventory
+(`m1_composition_inventory.json`) is checked in editor and exported runs; a missing
+assertion, relaunch or renderer cannot pass. Phase/query/memory measurements are
+diagnostics, not new timing assertions. Existing adapter-specific inventories
+and native sync tolerances are unchanged.
+
+`./main_project/tools/qualify_m1_composition_inventory.ps1` qualifies all four
+mode inventories under both accepted fixture IDs against complete, missing,
+duplicate, unknown and wrong-fixture terminal IDs (40 vectors).

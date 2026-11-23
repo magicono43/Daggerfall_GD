@@ -10,7 +10,7 @@ const HEADER := ["schema","codec","collection","locale","key","operation","base"
 const RECOVERY := {"retry":"Retry", "quit":"Quit", "choose_folder":"Choose Folder", "continue":"Continue", "cancel":"Cancel", "return_setup":"Return to Setup", "standard_storage":"Use standard storage for this launch", "reset_settings":"Preserve original and reset to defaults", "save_continue":"Save and Continue", "run_continue":"Continue for This Run", "retry_save":"Retry saving preferences"}
 
 func declaration() -> Dictionary:
-	return {"id":"text.catalogs.v1", "domain":DOMAIN, "operations":["add","replace"], "formats":[Csv.VERSION], "json_envelopes":false, "required_resources":["recovery"], "capabilities":["text-catalog-v1"]}
+	return {"id":"text.catalogs.v1", "domain":DOMAIN,"reference_domains":[DOMAIN], "operations":["add","replace"], "formats":[Csv.VERSION], "json_envelopes":false, "required_resources":["recovery"], "capabilities":["text-catalog-v1"]}
 
 func bundled_contributions() -> Array:
 	return [{"file":"recovery.csv", "bytes":FileAccess.get_file_as_bytes("res://content/text/recovery.csv")}]

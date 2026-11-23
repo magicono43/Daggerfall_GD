@@ -1,0 +1,2127 @@
+{
+  "schema": "m1-remediation-evidence-v1",
+  "date": "2026-11-22",
+  "original_audit": "M1-INTEGRATION-AUDIT-2026-11-22.md",
+  "source_revision": "dadcbe6956260723e15e1b8bb8860e3f2932f77e",
+  "verification": [
+    {
+      "seconds": 96.7286638,
+      "started": "2026-11-23T00:55:05.2556648Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "fixture": "m1-v1",
+      "selection": "m1",
+      "repeat_reason": "Guard exactly the 51 ordinary manifest inputs, without unrelated layout fixture textures.",
+      "mode": "headless",
+      "command": "main_project/tools/verify_headless.ps1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-headless-b36f37eb46f44b50ab3e7144ff41b98b/report.json",
+      "report_sha256": "092c8e49dd4a4ac45309264ea5f8adcee4210c30949aa938366044a9737043ec",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "qualification",
+          "status": "passed",
+          "assertions": 2,
+          "relaunch_assertions": 0
+        },
+        {
+          "scenario": "startup",
+          "status": "passed",
+          "assertions": 84,
+          "relaunch_assertions": 0
+        },
+        {
+          "scenario": "session",
+          "status": "passed",
+          "assertions": 263,
+          "relaunch_assertions": 0
+        },
+        {
+          "scenario": "m1-composition",
+          "status": "passed",
+          "assertions": 33,
+          "relaunch_assertions": 12
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "eac7df043390203cbc15911897eed1027fccd0cde588890f296ddeadad33fd83"
+    },
+    {
+      "selection": "publication",
+      "command": "main_project/tools/verify_headless.ps1",
+      "started": "2026-11-23T00:21:12.5532251Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "headless",
+      "seconds": 22.4764603,
+      "fixture": "publication-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-headless-0d20760964fe44b38d4c80db785a7b2e/report.json",
+      "report_sha256": "66203bf171c3c2691f249577177479eb2ec63b2528133cc5cd4cf42ecab7f9b3",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "publication",
+          "status": "passed",
+          "assertions": 111,
+          "relaunch_assertions": 8
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "dc2c23664d33899dd6922e847a37254e1e9bc1ba02bc1f1b1c45554fecda2238"
+    },
+    {
+      "selection": "faction-quest-inputs",
+      "command": "main_project/tools/verify_headless.ps1",
+      "started": "2026-11-23T00:21:35.6204649Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "headless",
+      "seconds": 60.8184687,
+      "fixture": "faction-quest-inputs-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-headless-acea678958f84b6494fb4102cc49ec82/report.json",
+      "report_sha256": "5e4d5808af52ee728fca7c5c13328c24ce840086c41f8b00b23cca7308c0efb1",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "faction-quest-inputs",
+          "status": "passed",
+          "assertions": 132,
+          "relaunch_assertions": 0
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "dc2c23664d33899dd6922e847a37254e1e9bc1ba02bc1f1b1c45554fecda2238"
+    },
+    {
+      "selection": "variant-inputs",
+      "command": "main_project/tools/verify_headless.ps1",
+      "started": "2026-11-23T00:22:36.9597468Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "headless",
+      "seconds": 302.8627288,
+      "fixture": "variant-inputs-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-headless-368119019297447bbfb29b88c4f61b89/report.json",
+      "report_sha256": "ec10cb8e5779b66c068ad30e5288d5cc6fbc85c15c42be4401d46198179f03e8",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "variant-inputs",
+          "status": "passed",
+          "assertions": 497,
+          "relaunch_assertions": 21
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "dc2c23664d33899dd6922e847a37254e1e9bc1ba02bc1f1b1c45554fecda2238"
+    },
+    {
+      "selection": "actor-inputs",
+      "command": "main_project/tools/verify_headless.ps1",
+      "started": "2026-11-23T00:27:40.4512418Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "headless",
+      "seconds": 37.2517881,
+      "fixture": "actor-inputs-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-headless-70b5b9cdde124558aafb3d7c77e9c3c5/report.json",
+      "report_sha256": "dfc97f421fe64ca5107261486b3cde1da4e650e5a92d190fec5f92227a2e5bff",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "actor-inputs",
+          "status": "passed",
+          "assertions": 236,
+          "relaunch_assertions": 0
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "321d7458d16954779b6ab7cc5f466ae1bc4ce74c2951343991cb72cd6c5e8303"
+    },
+    {
+      "selection": "item-spell-inputs",
+      "command": "main_project/tools/verify_headless.ps1",
+      "started": "2026-11-23T00:28:19.5203422Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "headless",
+      "seconds": 51.6938865,
+      "fixture": "item-spell-inputs-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-headless-b9fd2567ba7e40f4b8dff3237266db10/report.json",
+      "report_sha256": "38cbdbf72b10e05549af6456528cfdfec42c9522b3c67b0066335670be1d59fa",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "item-spell-inputs",
+          "status": "passed",
+          "assertions": 160,
+          "relaunch_assertions": 0
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "321d7458d16954779b6ab7cc5f466ae1bc4ce74c2951343991cb72cd6c5e8303"
+    },
+    {
+      "selection": "locale-fonts",
+      "command": "main_project/tools/verify_headless.ps1",
+      "started": "2026-11-23T00:29:13.4377774Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "headless",
+      "seconds": 23.1594593,
+      "fixture": "locale-fonts-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-headless-5fb681d80f5741f18c880ebcbfbc008a/report.json",
+      "report_sha256": "dd7dde67bceb4ffd312302f01846c39c2ebe4ff3985c3b57ae625898f939d3de",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "locale-fonts",
+          "status": "passed",
+          "assertions": 419,
+          "relaunch_assertions": 10
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "321d7458d16954779b6ab7cc5f466ae1bc4ce74c2951343991cb72cd6c5e8303"
+    },
+    {
+      "selection": "translation-preferences",
+      "command": "main_project/tools/verify_headless.ps1",
+      "started": "2026-11-23T00:29:37.3025391Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "headless",
+      "seconds": 30.0660278,
+      "fixture": "translation-preferences-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-headless-8bfeefefc6164c0ca4e6f0d535b243d1/report.json",
+      "report_sha256": "e016fca62c792c3dcef39a35c7d1dacd72fae8e4b8c73a1bb907ff4dfbb5fe39",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "translation-preferences",
+          "status": "passed",
+          "assertions": 149,
+          "relaunch_assertions": 10
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "321d7458d16954779b6ab7cc5f466ae1bc4ce74c2951343991cb72cd6c5e8303"
+    },
+    {
+      "selection": "replacements",
+      "command": "main_project/tools/verify_headless.ps1",
+      "started": "2026-11-23T00:30:08.0113965Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "headless",
+      "seconds": 23.5864426,
+      "fixture": "replacements-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-headless-694040d5467342479ccc4eea89f0be2c/report.json",
+      "report_sha256": "6be2186f9978f347cd7bb09d567ba7f3e0ccbe5e5fac4b485bb1b7bafb186732",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "replacements",
+          "status": "passed",
+          "assertions": 168,
+          "relaunch_assertions": 10
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "321d7458d16954779b6ab7cc5f466ae1bc4ce74c2951343991cb72cd6c5e8303"
+    },
+    {
+      "selection": "native",
+      "command": "main_project/tools/verify_headless.ps1",
+      "started": "2026-11-23T00:30:32.1869784Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "headless",
+      "seconds": 160.4482756,
+      "fixture": "native-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-headless-9aa91e231d63497d9adafb43b6444a21/report.json",
+      "report_sha256": "9a52c0c476ca0e8b4c952cf64eab69b04a437e407231651676e9d4504181f7d6",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "native",
+          "status": "passed",
+          "assertions": 344,
+          "relaunch_assertions": 11
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "321d7458d16954779b6ab7cc5f466ae1bc4ce74c2951343991cb72cd6c5e8303"
+    },
+    {
+      "selection": "formula",
+      "command": "main_project/tools/verify_headless.ps1",
+      "started": "2026-11-23T00:33:13.2893145Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "headless",
+      "seconds": 18.7763397,
+      "fixture": "formula-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-headless-2aa025c4180a4ac28bcffd1ce338e06a/report.json",
+      "report_sha256": "2ae0d15a268de21ef9013f62a709d7541a1b51692e1ad88659b523210276e823",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "formula",
+          "status": "passed",
+          "assertions": 82,
+          "relaunch_assertions": 0
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "321d7458d16954779b6ab7cc5f466ae1bc4ce74c2951343991cb72cd6c5e8303"
+    },
+    {
+      "seconds": 120.774846,
+      "started": "2026-11-23T00:56:42.8932796Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "fixture": "m1-v1",
+      "selection": "m1",
+      "repeat_reason": "Guard exactly the 51 ordinary manifest inputs, without unrelated layout fixture textures.",
+      "mode": "rendered",
+      "command": "main_project/tools/verify_rendered.ps1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-rendered-700d95f65c18457eaea4aeb6b28e10c2/report.json",
+      "report_sha256": "ca47ef51f99a6df529045536a4056008295bc7ea0067af83e8d66626ff34119a",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "qualification",
+          "status": "passed",
+          "assertions": 3,
+          "relaunch_assertions": 0
+        },
+        {
+          "scenario": "startup",
+          "status": "passed",
+          "assertions": 92,
+          "relaunch_assertions": 0
+        },
+        {
+          "scenario": "session",
+          "status": "passed",
+          "assertions": 264,
+          "relaunch_assertions": 0
+        },
+        {
+          "scenario": "m1-composition",
+          "status": "passed",
+          "assertions": 34,
+          "relaunch_assertions": 13
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "eac7df043390203cbc15911897eed1027fccd0cde588890f296ddeadad33fd83"
+    },
+    {
+      "selection": "publication",
+      "command": "main_project/tools/verify_rendered.ps1",
+      "started": "2026-11-23T00:35:32.5303428Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "rendered",
+      "seconds": 30.064071,
+      "fixture": "publication-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-rendered-8f118ae6ab194fe1958d2619d9527b76/report.json",
+      "report_sha256": "f1d4db272b40ade832ff57f9063a76726f68ea3a4256eb2e9dc98c409c5cf779",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "publication",
+          "status": "passed",
+          "assertions": 117,
+          "relaunch_assertions": 8
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "872669569cf5b80a3d7daa5b1e50a1ac017f20c9a4cd9fd18b4a9db7954ca02f"
+    },
+    {
+      "selection": "faction-quest-inputs",
+      "command": "main_project/tools/verify_rendered.ps1",
+      "started": "2026-11-23T00:36:03.4831257Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "rendered",
+      "seconds": 73.5152586,
+      "fixture": "faction-quest-inputs-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-rendered-3b7d916919e4489c99fd19e3d732586c/report.json",
+      "report_sha256": "587faaeba821c2a188ed65a203d3c655330a86cda0842ec676d2714eb339a563",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "faction-quest-inputs",
+          "status": "passed",
+          "assertions": 134,
+          "relaunch_assertions": 0
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "872669569cf5b80a3d7daa5b1e50a1ac017f20c9a4cd9fd18b4a9db7954ca02f"
+    },
+    {
+      "selection": "variant-inputs",
+      "command": "main_project/tools/verify_rendered.ps1",
+      "started": "2026-11-23T00:37:17.660801Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "rendered",
+      "seconds": 308.0402108,
+      "fixture": "variant-inputs-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-rendered-c6850ff14bdb4f189db7b28ae7d860bc/report.json",
+      "report_sha256": "d6aea7260adee326aaa8c8c2afe94e79c3982c24a333ede77a747fe2cdd190e0",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "variant-inputs",
+          "status": "passed",
+          "assertions": 503,
+          "relaunch_assertions": 21
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "872669569cf5b80a3d7daa5b1e50a1ac017f20c9a4cd9fd18b4a9db7954ca02f"
+    },
+    {
+      "selection": "actor-inputs",
+      "command": "main_project/tools/verify_rendered.ps1",
+      "started": "2026-11-23T00:42:26.4261658Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "rendered",
+      "seconds": 40.9596432,
+      "fixture": "actor-inputs-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-rendered-60894be52fe54ff6880130ce50733c5c/report.json",
+      "report_sha256": "edab06b03fd089db0037645adf6b7c7cacc5f4286d45e19da729a9c48c1e5c84",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "actor-inputs",
+          "status": "passed",
+          "assertions": 238,
+          "relaunch_assertions": 0
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "872669569cf5b80a3d7daa5b1e50a1ac017f20c9a4cd9fd18b4a9db7954ca02f"
+    },
+    {
+      "selection": "item-spell-inputs",
+      "command": "main_project/tools/verify_rendered.ps1",
+      "started": "2026-11-23T00:43:09.2465366Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "rendered",
+      "seconds": 48.5587896,
+      "fixture": "item-spell-inputs-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-rendered-8206ee6dc4a74609af0e55f10a9e00e7/report.json",
+      "report_sha256": "c556a5420606f20add063c845b960abe9ad2da9565d4de9520e1076a9e9d52ff",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "item-spell-inputs",
+          "status": "passed",
+          "assertions": 162,
+          "relaunch_assertions": 0
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "872669569cf5b80a3d7daa5b1e50a1ac017f20c9a4cd9fd18b4a9db7954ca02f"
+    },
+    {
+      "selection": "locale-fonts",
+      "command": "main_project/tools/verify_rendered.ps1",
+      "started": "2026-11-23T00:44:00.1791751Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "rendered",
+      "seconds": 30.4283259,
+      "fixture": "locale-fonts-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-rendered-ed748b96575a4a8eb12524a497be27f3/report.json",
+      "report_sha256": "7c47aa4887b7f3223313903fddd7d3aeb92362e766cbf0d7a22674b23533204f",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "locale-fonts",
+          "status": "passed",
+          "assertions": 441,
+          "relaunch_assertions": 10
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "872669569cf5b80a3d7daa5b1e50a1ac017f20c9a4cd9fd18b4a9db7954ca02f"
+    },
+    {
+      "selection": "translation-preferences",
+      "command": "main_project/tools/verify_rendered.ps1",
+      "started": "2026-11-23T00:44:31.3557146Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "rendered",
+      "seconds": 35.7799401,
+      "fixture": "translation-preferences-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-rendered-6c5dc51075cd4d7bb14bbc1310348ce9/report.json",
+      "report_sha256": "29950999753644b716875f8cb72f72ff8e65203e80685589e0677f1a1d2d8548",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "translation-preferences",
+          "status": "passed",
+          "assertions": 164,
+          "relaunch_assertions": 10
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "872669569cf5b80a3d7daa5b1e50a1ac017f20c9a4cd9fd18b4a9db7954ca02f"
+    },
+    {
+      "selection": "replacements",
+      "command": "main_project/tools/verify_rendered.ps1",
+      "started": "2026-11-23T00:45:08.0808709Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "rendered",
+      "seconds": 34.2133141,
+      "fixture": "replacements-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-rendered-a84cd6ed258641c7a96281e4117f1e3c/report.json",
+      "report_sha256": "8caf04986a03ee91111db5096202da269ea79f119b4dee039378df8bdce34961",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "replacements",
+          "status": "passed",
+          "assertions": 173,
+          "relaunch_assertions": 10
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "872669569cf5b80a3d7daa5b1e50a1ac017f20c9a4cd9fd18b4a9db7954ca02f"
+    },
+    {
+      "selection": "native",
+      "command": "main_project/tools/verify_rendered.ps1",
+      "started": "2026-11-23T00:45:42.9993753Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "rendered",
+      "seconds": 166.3513834,
+      "fixture": "native-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-rendered-88dcac773fe349b18181d02e6d67f39b/report.json",
+      "report_sha256": "920e5a4fe3fe52a228e5ff8f6c4d3e150f4291f37cec1e741e58ba9febfa31cc",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "native",
+          "status": "passed",
+          "assertions": 374,
+          "relaunch_assertions": 11
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "872669569cf5b80a3d7daa5b1e50a1ac017f20c9a4cd9fd18b4a9db7954ca02f"
+    },
+    {
+      "selection": "formula",
+      "command": "main_project/tools/verify_rendered.ps1",
+      "started": "2026-11-23T00:48:30.1878033Z",
+      "source": "C:/Games/Daggerfall/arena2",
+      "mode": "rendered",
+      "seconds": 23.6460583,
+      "fixture": "formula-v1",
+      "exit": 0,
+      "report": "main_project/tests/.runs/verification-rendered-e19f83adc7c643a7a3baca190ad4aeec/report.json",
+      "report_sha256": "f956de270927164b6f3d30ab3756cd1a995a25b48179f002131cfdcbc9d1e8d9",
+      "status": "passed",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "scenarios": [
+        {
+          "scenario": "formula",
+          "status": "passed",
+          "assertions": 84,
+          "relaunch_assertions": 0
+        }
+      ],
+      "source_files_unchanged": true,
+      "build_sources_sha256": "eac7df043390203cbc15911897eed1027fccd0cde588890f296ddeadad33fd83"
+    },
+    {
+      "arguments": {
+        "Configuration": "debug",
+        "M1Composition": true,
+        "ClassicSource": "C:/Games/Daggerfall/arena2"
+      },
+      "started": "2026-11-23T00:48:54.5285232Z",
+      "selection": "windows-debug",
+      "seconds": 168.830245,
+      "exit": 0,
+      "command": "main_project/tools/verify_startup_export.ps1",
+      "report": "main_project/tests/.runs/export-819be3b2b9c1491ba95ceb06e21a959c/result.json",
+      "report_sha256": "98deaefa505ecf9d906c754be8a1a3a266485bea8b504c91a3f2da5b5a231746",
+      "status": "passed",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "checks": [
+        {
+          "actual": "pass",
+          "process_exit": 0,
+          "scenario": "exported-headless",
+          "source_before": {
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+            "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+            "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+            "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+            "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686",
+            "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+            "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+            "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+            "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+            "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+            "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+            "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+            "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615",
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+            "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+            "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+            "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+            "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+            "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+            "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+            "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+            "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+            "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+            "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+            "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+            "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+            "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+            "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+            "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+            "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+            "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+            "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF",
+            "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+            "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+            "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+            "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+            "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA",
+            "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+            "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+            "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+            "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+            "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+            "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+            "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+            "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+            "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188"
+          },
+          "reload": {
+            "process_exit": 0,
+            "assertions": 12,
+            "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-819be3b2b9c1491ba95ceb06e21a959c/build/tests/.runs/headless/reload-result.json"
+          },
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-819be3b2b9c1491ba95ceb06e21a959c/build/tests/.runs/headless/result.json",
+          "source_after": {
+            "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+            "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+            "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+            "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686",
+            "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+            "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+            "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+            "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+            "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+            "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+            "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+            "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615",
+            "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+            "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+            "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+            "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+            "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+            "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+            "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+            "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+            "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+            "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+            "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+            "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+            "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188",
+            "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+            "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+            "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+            "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+            "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+            "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+            "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+            "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA",
+            "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+            "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+            "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+            "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+            "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+            "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+            "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+            "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+            "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+            "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+            "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF"
+          },
+          "assertions": 33
+        },
+        {
+          "actual": "pass",
+          "process_exit": 0,
+          "scenario": "exported-rendered",
+          "source_before": {
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+            "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+            "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+            "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+            "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686",
+            "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+            "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+            "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+            "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+            "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+            "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+            "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+            "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615",
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+            "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+            "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+            "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+            "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+            "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+            "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+            "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+            "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+            "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+            "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+            "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+            "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+            "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+            "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+            "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+            "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+            "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+            "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF",
+            "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+            "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+            "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+            "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+            "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA",
+            "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+            "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+            "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+            "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+            "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+            "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+            "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+            "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+            "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188"
+          },
+          "reload": {
+            "process_exit": 0,
+            "assertions": 13,
+            "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-819be3b2b9c1491ba95ceb06e21a959c/build/tests/.runs/rendered/reload-result.json"
+          },
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-819be3b2b9c1491ba95ceb06e21a959c/build/tests/.runs/rendered/result.json",
+          "source_after": {
+            "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+            "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+            "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+            "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686",
+            "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+            "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+            "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+            "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+            "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+            "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+            "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+            "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615",
+            "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+            "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+            "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+            "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+            "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+            "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+            "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+            "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+            "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+            "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+            "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+            "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+            "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188",
+            "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+            "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+            "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+            "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+            "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+            "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+            "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+            "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA",
+            "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+            "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+            "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+            "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+            "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+            "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+            "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+            "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+            "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+            "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+            "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF"
+          },
+          "assertions": 34
+        }
+      ],
+      "pck_sha256": "C2F33341FC7E5D87A5061A304FA9045673207FC7522512CD6C099AAA191A41CF",
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "native_sha256": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+      "native_media_sha256": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2"
+    },
+    {
+      "arguments": {
+        "Configuration": "release",
+        "M1Composition": true,
+        "ClassicSource": "C:/Games/Daggerfall/arena2"
+      },
+      "started": "2026-11-23T00:51:44.3031642Z",
+      "selection": "windows-release",
+      "seconds": 155.2576063,
+      "exit": 0,
+      "command": "main_project/tools/verify_startup_export.ps1",
+      "report": "main_project/tests/.runs/export-42acb55234e24a7795a195411cbaa8d0/result.json",
+      "report_sha256": "8c995d163b6f3fccc8f398262dbeba2f2511c87f552634614515d15921062902",
+      "status": "passed",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "checks": [
+        {
+          "scenario": "exported-headless",
+          "process_exit": 0,
+          "assertions": 33,
+          "reload": {
+            "assertions": 12,
+            "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-42acb55234e24a7795a195411cbaa8d0/build/tests/.runs/headless/reload-result.json",
+            "process_exit": 0
+          },
+          "source_after": {
+            "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+            "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+            "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+            "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+            "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+            "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+            "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+            "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+            "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+            "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+            "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+            "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+            "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+            "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+            "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+            "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+            "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+            "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+            "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+            "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+            "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+            "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+            "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+            "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+            "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+            "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686",
+            "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188",
+            "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+            "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+            "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+            "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+            "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+            "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+            "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+            "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+            "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+            "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+            "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+            "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+            "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF",
+            "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+            "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+            "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+            "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA"
+          },
+          "actual": "pass",
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-42acb55234e24a7795a195411cbaa8d0/build/tests/.runs/headless/result.json",
+          "source_before": {
+            "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+            "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+            "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+            "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+            "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615",
+            "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+            "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+            "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686",
+            "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+            "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188",
+            "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+            "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+            "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+            "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+            "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+            "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+            "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+            "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+            "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+            "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+            "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+            "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+            "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+            "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+            "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+            "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+            "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+            "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+            "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+            "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+            "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+            "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+            "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+            "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+            "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+            "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+            "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+            "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+            "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+            "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF",
+            "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+            "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+            "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+            "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA"
+          }
+        },
+        {
+          "scenario": "exported-rendered",
+          "process_exit": 0,
+          "assertions": 34,
+          "reload": {
+            "assertions": 13,
+            "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-42acb55234e24a7795a195411cbaa8d0/build/tests/.runs/rendered/reload-result.json",
+            "process_exit": 0
+          },
+          "source_after": {
+            "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+            "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+            "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+            "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+            "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+            "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+            "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+            "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+            "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+            "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+            "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+            "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+            "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+            "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+            "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+            "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+            "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+            "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+            "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+            "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+            "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+            "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+            "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+            "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+            "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+            "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686",
+            "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188",
+            "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+            "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+            "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+            "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+            "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+            "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+            "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+            "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+            "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+            "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+            "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+            "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+            "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF",
+            "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+            "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+            "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+            "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA"
+          },
+          "actual": "pass",
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-42acb55234e24a7795a195411cbaa8d0/build/tests/.runs/rendered/result.json",
+          "source_before": {
+            "CLASS01.CFG": "61451B004FAB69C6286601E86C5B9536FC209EEB4692B57D3AC5D00D56641A8B",
+            "BIOG01T0.TXT": "C6DFBB827B6E614F408AE61E313A33F06496CCB1B3CD5370DADD379F06BFFC88",
+            "SPELLS.STD": "D8B34E983A9C646C7E145F862F3C410A046EA889B429F84740C9FF3D3EC3DD47",
+            "CLASS08.CFG": "65F042C357110586E8A33DF7E53A30DE8AC4291E3726991C7680A2226A58E826",
+            "MAPS.BSA": "8B5550BFCAC03B6F605842568FDBFB7CC6BBED7ACE5999C33C900AD286FC24BE",
+            "DAGGER.SND": "FBB6195BA72F9B2787B659E38AFD9ED92D95CA185916D8BDD28BA947B986F3E2",
+            "BIOG10T0.TXT": "8ABCBF2F9B27905FD72F8D67CCDEE57BFF4B1D16A020F416D3D4B46CB1FFC1D8",
+            "BIOG09T0.TXT": "4D837C0A25717B55F81C0AB0F82979333BAA49998BEBF87ED86793E49B5FD615",
+            "BIOG02T0.TXT": "C0CCCF03EA4F169B2D58940DB01CB0B9E9720DCFEEF6734FC6FCF6EF58E6A6DA",
+            "BIOG17T0.TXT": "A4A2034E8BAD59504167380E25B9CCA30110C37139E8D66BF38F6E3810FBDF1D",
+            "BLOCKS.BSA": "6F5A4C8D9401C1B00EF83EAAC9B0C6C32F53CEF6EAA4C7D7027DEB739BDE4795",
+            "CLASS17.CFG": "A136C8D540F265D64BF7D514EB8140BB6ECC2BB751F2660F0CF3CF676098B82E",
+            "BIOG05T0.TXT": "438DF773064D7F04DC6BF92560F02A791DB5302A9C9E808FD4ACF7C5A82D8686",
+            "CLASS09.CFG": "6FD9161E884A74B1A2D6010876E190637C90EE9F1FE73C6E3378DCA6774D9937",
+            "CLASS05.CFG": "05DEF9F51313766880DBF92B4FE75559357DF78FB65EDEB5932CAFB1BF4EC188",
+            "BIOG00T0.TXT": "870C8FFD350B18A2944BD6B79BCB6D2E6F97843A5604503E0D145797FB62B397",
+            "BIOG14T0.TXT": "1552A38273F754117F89F4CA9ECF81B355511DAD1065347028E47DE83395392D",
+            "CLASS15.CFG": "88FFD4F642AEA3FA5E75FEA8CAB02F6D0BC6A2EC90EFDE4A09AB24895A4920B6",
+            "BIOG07T0.TXT": "4DDDD34D08FB8DB69AE539C93357892AD41A6F4F1F7FE7F9236889CA5BD2FD0E",
+            "CLASS04.CFG": "E6988B484F7672221ECDBD347E3547E2C7DE28C50143027293AF954BF3D457A0",
+            "POLITIC.PAK": "89D13251E82515890F024AEF6BE746BF92203E04661A35D31088B62D71B88C0E",
+            "CLASS11.CFG": "57BD796553A5FA251F885652F28FE5E3CCD0818130E067954346EB24F2F38082",
+            "BIOG11T0.TXT": "EDC4F51D0CBA9D7494CEB6DFA4CE6B9D6AE6ACD4E27A43ED63C74C2DF1CBD150",
+            "BIOG16T0.TXT": "8ED04AFA6A7B67A1F2E08F247E9BCE36F4037FE604730A8A78E84E9863056F1A",
+            "CLASS14.CFG": "550567BBB9BA7AA37AA7D53092F2E5D27096ECFE1B9FE7ACD9560EA8A9891765",
+            "TEXT.RSC": "CDBF1D8CACED2888EAC2B131185EF508DE431AD3B2BB86FE973C5981164D4B52",
+            "BIOG08T0.TXT": "79930E83B8D9E0AA54332E3695EE9D4D1E2CCFC767BEE2C4BA16EC4D6C18DEB8",
+            "CLASS07.CFG": "A636F60219779F3E2957959BD1541FB22DF9526A76D8BBE44DC7EB27C17007A2",
+            "CLASS00.CFG": "BE68BEEDC4F12BEF56A25B409B94A2D267F6C0AB574F88ED160B7FF54C49C870",
+            "CLASS18.CFG": "04CC7047081D7DA7B7697484CC23CD214E1A69D9CC310AC211AED798F23F09F0",
+            "CLASS06.CFG": "2793378BB3D86C00D7CBEB1935D52B0FDC0E83F96C1A42B0547BEE5B60823504",
+            "BIOG13T0.TXT": "0217BC55BD80CAAD63D1BF081D6CFD0A4E7918A1B5C1896F3593077C65B86BD5",
+            "CLASS03.CFG": "0FB6BBBD90BCF6561903F1C2DD22E04AB72FB3F81630F32CCA4D1F640958BEBA",
+            "CLIMATE.PAK": "6032403010707ED09394A9B72BF3418D3450CCC99F28E4C8451771F5D7E54CD0",
+            "CLASS16.CFG": "0BCC15434B887EAE2F1F209A7CD6F9EB6779CFF5052F532072CE84F52DCE78FF",
+            "CLASS10.CFG": "2F7C57085AF4542B4A9579E9A8924D3332CCB59D18B991BE49ED1E7E44A7D37F",
+            "BIOG04T0.TXT": "4C95FD6371EB57F96C23EF38AAEA4ABC737A18184F6203512572136FE0F49C59",
+            "WOODS.WLD": "2842AB5EB1B39B1666D96588856083BB34FCBDCD70621CA833BE7349121BB5DF",
+            "FLATS.CFG": "B0F0F695FD8E71556F247505DBEB14262399041EA1569F62C1B836A30FDF63C9",
+            "BIOG15T0.TXT": "B968E5C5152FCA0914A35FF0BB8B956024E3EFB4170023667A233176FC710F09",
+            "BIOG12T0.TXT": "2F5FA90F97C37D97E3CE31A79F9CDA6209848EC7CF5B09C1FD018F2AE0122A18",
+            "BIO.DAT": "96A90EFBAB3F6586D581038EF56CB873B168EC86C289823BF704F79372567C8B",
+            "BIOG03T0.TXT": "8789B14F45DC2B522FCA4DABB4AE99AF0B9C8CE17E543567DD93BF1502B405DA",
+            "BIOG06T0.TXT": "8D264B4D4EBE78B23F6C161627638ECF06DCAFC9CA82A9D745D24F9A7C30C8DD",
+            "CLASS13.CFG": "1F519564F535CC74F17384639020A01BC3B2097B9654A6DD694D6AD1F0754BCF",
+            "PAINT.DAT": "CA488CF262931D38788F9EAE24D5D3F0D22591181B190C04B2093772CC054905",
+            "ARCH3D.BSA": "A51A9E149168814C4A14DC80BB93D38F153BE18DC9754BE44BC9C7B25DD46A85",
+            "CLASS02.CFG": "31DDBD67A9A0B2E1FB6DF78762864974E4D03A8DAE6F0540ECCD9CC04CF95075",
+            "CLASS12.CFG": "99C1B6D177A73FC29D12F91B9BB1CAD949B7710043DF11D114386B0B7DCFB4E0",
+            "MONSTER.BSA": "FCB88BF1BEA9845675255C19F838DEB414B63FB2DF7C6977AB10F21155B6E90F",
+            "MAGIC.DEF": "04BA8A529BE11653E8D2BC66ADAEC2DFC3009F93CEEC75F5C175CDEDDAB808BA"
+          }
+        }
+      ],
+      "pck_sha256": "5E802BBCFC94E002AD82BD9DD63FA60078DD139B22C4F4B0C76D3B5E0A98B329",
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "native_sha256": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+      "native_media_sha256": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2"
+    }
+  ],
+  "performance": {
+    "headless": {
+      "interactive": {
+        "commit_phases": {
+          "intake_usec": 9126401,
+          "prepare_serial": 3,
+          "prepare_usec": 11882506,
+          "projection_usec": 619887,
+          "validators": {
+            "actor.inputs": {
+              "copy_usec": 16096,
+              "validate_usec": 1345
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 42733,
+              "validate_usec": 29329
+            },
+            "geography.inputs": {
+              "copy_usec": 344719,
+              "validate_usec": 198039
+            },
+            "item-spell.inputs": {
+              "copy_usec": 184191,
+              "validate_usec": 3359
+            },
+            "layout.inputs": {
+              "copy_usec": 580411,
+              "validate_usec": 119685
+            },
+            "media.assets": {
+              "copy_usec": 308815,
+              "validate_usec": 10
+            },
+            "mod.preferences": {
+              "copy_usec": 207,
+              "validate_usec": 6
+            },
+            "text.catalogs": {
+              "copy_usec": 220,
+              "validate_usec": 20
+            },
+            "text.fonts": {
+              "copy_usec": 94,
+              "validate_usec": 50
+            },
+            "world.variants": {
+              "copy_usec": 577083,
+              "validate_usec": 48256
+            }
+          }
+        },
+        "commit_usec": 13514961,
+        "faction_query_usec": 1077,
+        "initial_startup_usec": 57273,
+        "memory_peak_bytes": 2337837385,
+        "memory_static_bytes": 1782935200,
+        "selection_phases": {
+          "intake_usec": 11409310,
+          "prepare_serial": 1,
+          "prepare_usec": 14465334,
+          "projection_usec": 714808,
+          "validators": {
+            "actor.inputs": {
+              "copy_usec": 15656,
+              "validate_usec": 1428
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 36107,
+              "validate_usec": 27555
+            },
+            "geography.inputs": {
+              "copy_usec": 373169,
+              "validate_usec": 201841
+            },
+            "item-spell.inputs": {
+              "copy_usec": 194762,
+              "validate_usec": 3383
+            },
+            "layout.inputs": {
+              "copy_usec": 643754,
+              "validate_usec": 128504
+            },
+            "media.assets": {
+              "copy_usec": 366047,
+              "validate_usec": 11
+            },
+            "mod.preferences": {
+              "copy_usec": 207,
+              "validate_usec": 6
+            },
+            "text.catalogs": {
+              "copy_usec": 229,
+              "validate_usec": 22
+            },
+            "text.fonts": {
+              "copy_usec": 91,
+              "validate_usec": 21
+            },
+            "world.variants": {
+              "copy_usec": 674571,
+              "validate_usec": 50090
+            }
+          }
+        },
+        "selection_usec": 17601887
+      },
+      "automatic_relaunch": {
+        "automatic_publication_phases": {
+          "intake_usec": 11322992,
+          "prepare_serial": 1,
+          "prepare_usec": 14438564,
+          "projection_usec": 733504,
+          "validators": {
+            "actor.inputs": {
+              "copy_usec": 15216,
+              "validate_usec": 1311
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 36917,
+              "validate_usec": 28112
+            },
+            "geography.inputs": {
+              "copy_usec": 377449,
+              "validate_usec": 203232
+            },
+            "item-spell.inputs": {
+              "copy_usec": 200587,
+              "validate_usec": 3459
+            },
+            "layout.inputs": {
+              "copy_usec": 683910,
+              "validate_usec": 133913
+            },
+            "media.assets": {
+              "copy_usec": 370339,
+              "validate_usec": 12
+            },
+            "mod.preferences": {
+              "copy_usec": 216,
+              "validate_usec": 8
+            },
+            "text.catalogs": {
+              "copy_usec": 244,
+              "validate_usec": 23
+            },
+            "text.fonts": {
+              "copy_usec": 117,
+              "validate_usec": 23
+            },
+            "world.variants": {
+              "copy_usec": 666802,
+              "validate_usec": 51101
+            }
+          }
+        },
+        "initial_startup_usec": 16530197,
+        "memory_peak_bytes": 1788107092,
+        "memory_static_bytes": 1780331450
+      },
+      "source_guard_files": 51
+    },
+    "rendered": {
+      "interactive": {
+        "commit_phases": {
+          "intake_usec": 9273766,
+          "prepare_serial": 3,
+          "prepare_usec": 12092529,
+          "projection_usec": 628370,
+          "validators": {
+            "actor.inputs": {
+              "copy_usec": 17066,
+              "validate_usec": 1434
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 39867,
+              "validate_usec": 28863
+            },
+            "geography.inputs": {
+              "copy_usec": 352150,
+              "validate_usec": 205981
+            },
+            "item-spell.inputs": {
+              "copy_usec": 188425,
+              "validate_usec": 3963
+            },
+            "layout.inputs": {
+              "copy_usec": 589760,
+              "validate_usec": 120775
+            },
+            "media.assets": {
+              "copy_usec": 321736,
+              "validate_usec": 11
+            },
+            "mod.preferences": {
+              "copy_usec": 210,
+              "validate_usec": 6
+            },
+            "text.catalogs": {
+              "copy_usec": 232,
+              "validate_usec": 20
+            },
+            "text.fonts": {
+              "copy_usec": 90,
+              "validate_usec": 21
+            },
+            "world.variants": {
+              "copy_usec": 590720,
+              "validate_usec": 50223
+            }
+          }
+        },
+        "commit_usec": 13769936,
+        "faction_query_usec": 1143,
+        "initial_startup_usec": 66033,
+        "memory_peak_bytes": 2360854502,
+        "memory_static_bytes": 1805982685,
+        "selection_phases": {
+          "intake_usec": 11748502,
+          "prepare_serial": 1,
+          "prepare_usec": 14660574,
+          "projection_usec": 668878,
+          "validators": {
+            "actor.inputs": {
+              "copy_usec": 17185,
+              "validate_usec": 1473
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 40867,
+              "validate_usec": 31451
+            },
+            "geography.inputs": {
+              "copy_usec": 380658,
+              "validate_usec": 208650
+            },
+            "item-spell.inputs": {
+              "copy_usec": 196301,
+              "validate_usec": 4385
+            },
+            "layout.inputs": {
+              "copy_usec": 627959,
+              "validate_usec": 120264
+            },
+            "media.assets": {
+              "copy_usec": 315731,
+              "validate_usec": 12
+            },
+            "mod.preferences": {
+              "copy_usec": 213,
+              "validate_usec": 5
+            },
+            "text.catalogs": {
+              "copy_usec": 227,
+              "validate_usec": 22
+            },
+            "text.fonts": {
+              "copy_usec": 124,
+              "validate_usec": 39
+            },
+            "world.variants": {
+              "copy_usec": 599546,
+              "validate_usec": 49361
+            }
+          }
+        },
+        "selection_usec": 17764771
+      },
+      "automatic_relaunch": {
+        "automatic_publication_phases": {
+          "intake_usec": 11648695,
+          "prepare_serial": 1,
+          "prepare_usec": 14888568,
+          "projection_usec": 761772,
+          "validators": {
+            "actor.inputs": {
+              "copy_usec": 16917,
+              "validate_usec": 1537
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 40117,
+              "validate_usec": 29348
+            },
+            "geography.inputs": {
+              "copy_usec": 400483,
+              "validate_usec": 240465
+            },
+            "item-spell.inputs": {
+              "copy_usec": 220605,
+              "validate_usec": 3774
+            },
+            "layout.inputs": {
+              "copy_usec": 707527,
+              "validate_usec": 129815
+            },
+            "media.assets": {
+              "copy_usec": 374196,
+              "validate_usec": 12
+            },
+            "mod.preferences": {
+              "copy_usec": 218,
+              "validate_usec": 6
+            },
+            "text.catalogs": {
+              "copy_usec": 239,
+              "validate_usec": 22
+            },
+            "text.fonts": {
+              "copy_usec": 94,
+              "validate_usec": 21
+            },
+            "world.variants": {
+              "copy_usec": 686923,
+              "validate_usec": 51668
+            }
+          }
+        },
+        "initial_startup_usec": 16989995,
+        "memory_peak_bytes": 1811496265,
+        "memory_static_bytes": 1803726351
+      },
+      "source_guard_files": 51
+    },
+    "baseline-headless": {
+      "elapsed_total_ms": 47910,
+      "memory_static_bytes": 1778368270,
+      "memory_static_peak_bytes": 2177483527,
+      "faction_probe": {
+        "elapsed_usec": 946849,
+        "kind": "",
+        "ok": true
+      }
+    },
+    "baseline-rendered": {
+      "elapsed_total_ms": 47659,
+      "memory_static_bytes": 1802433536,
+      "memory_static_peak_bytes": 2201545513,
+      "faction_probe": {
+        "elapsed_usec": 976270,
+        "kind": "",
+        "ok": true
+      }
+    },
+    "instrumented_before_optimization": {
+      "report": "main_project/tests/.runs/verification-headless-759961451e2a4168b0933a39f4038c50/report.json",
+      "candidate_phases": {
+        "intake_usec": 9434068,
+        "prepare_serial": 2,
+        "prepare_usec": 19827187,
+        "projection_usec": 627407,
+        "validators": {
+          "actor.inputs": {
+            "copy_usec": 694217,
+            "validate_usec": 1507
+          },
+          "faction-quest.inputs": {
+            "copy_usec": 1183594,
+            "validate_usec": 28231
+          },
+          "geography.inputs": {
+            "copy_usec": 1032358,
+            "validate_usec": 209829
+          },
+          "item-spell.inputs": {
+            "copy_usec": 1032495,
+            "validate_usec": 3967
+          },
+          "layout.inputs": {
+            "copy_usec": 962741,
+            "validate_usec": 118999
+          },
+          "media.assets": {
+            "copy_usec": 928839,
+            "validate_usec": 25
+          },
+          "mod.preferences": {
+            "copy_usec": 953437,
+            "validate_usec": 21
+          },
+          "text.catalogs": {
+            "copy_usec": 940405,
+            "validate_usec": 49
+          },
+          "text.fonts": {
+            "copy_usec": 921499,
+            "validate_usec": 41
+          },
+          "world.variants": {
+            "copy_usec": 921965,
+            "validate_usec": 48968
+          }
+        }
+      },
+      "qualification": "Profiling observation only; two fixture routing assertions failed. No memory comparison uses this exploratory run."
+    }
+  },
+  "original_timing_failure_preserved": {
+    "report": "main_project/tests/.runs/verification-headless-4c232847a051401cbbf5afcef187b87b/report.json",
+    "status": "failed",
+    "assertion": "vp9-full presented sync within two frames",
+    "expected": true,
+    "actual": false,
+    "native_assertions_or_tolerances_changed": false,
+    "report_sha256": "0aad418ee1a8b752755385cd7e1b8df17633873d79b3e184d31c399be1f4df61"
+  },
+  "status": "passed",
+  "total_primary_assertions": 5463,
+  "total_relaunch_assertions": 165,
+  "additional_qualification": {
+    "inventory_qualification": {
+      "command": "./main_project/tools/qualify_m1_composition_inventory.ps1",
+      "report": "main_project/tests/.runs/m1-composition-inventory-96693796860d44e28327c0147502738b/result.json",
+      "passed": true,
+      "vectors": 40
+    },
+    "harness_qualification": {
+      "ok": true,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/qualification-5886f3c126e34ab29775489b23b71306/result.json",
+      "checks": [
+        {
+          "actual_exit": 0,
+          "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-b5b5473423be4414b2bfd3d227a41a7b",
+          "case": "pass",
+          "mode": "headless",
+          "actual_status": "passed",
+          "expected_exit": 0,
+          "expected_status": "passed",
+          "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-b5b5473423be4414b2bfd3d227a41a7b/report.json"
+        },
+        {
+          "actual_exit": 1,
+          "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-63dbb84f5ab8496cbf4bfcc34df32765",
+          "case": "fail",
+          "mode": "headless",
+          "actual_status": "failed",
+          "expected_exit": 1,
+          "expected_status": "failed",
+          "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-63dbb84f5ab8496cbf4bfcc34df32765/report.json"
+        },
+        {
+          "actual_exit": 2,
+          "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-6e5b357a9e7540e28b2319a488ec504a",
+          "case": "missing",
+          "mode": "headless",
+          "actual_status": "incomplete",
+          "expected_exit": 2,
+          "expected_status": "incomplete",
+          "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-6e5b357a9e7540e28b2319a488ec504a/report.json"
+        },
+        {
+          "actual_exit": 0,
+          "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-acf9abeb81144471a72240a507e2cce2",
+          "case": "pass",
+          "mode": "rendered",
+          "actual_status": "passed",
+          "expected_exit": 0,
+          "expected_status": "passed",
+          "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-acf9abeb81144471a72240a507e2cce2/report.json"
+        },
+        {
+          "actual_exit": 1,
+          "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-c6eb2fa7e66341358fc126064ed4f3f1",
+          "case": "fail",
+          "mode": "rendered",
+          "actual_status": "failed",
+          "expected_exit": 1,
+          "expected_status": "failed",
+          "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-c6eb2fa7e66341358fc126064ed4f3f1/report.json"
+        },
+        {
+          "actual_exit": 2,
+          "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-23f7fa48424a499899ea2e565b1c51ed",
+          "case": "missing",
+          "mode": "rendered",
+          "actual_status": "incomplete",
+          "expected_exit": 2,
+          "expected_status": "incomplete",
+          "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-23f7fa48424a499899ea2e565b1c51ed/report.json"
+        }
+      ],
+      "command": "./main_project/tools/qualify_verification.ps1"
+    },
+    "composition_unavailable": {
+      "ok": true,
+      "checks": [
+        {
+          "reason": "Explicit available -ClassicSource is required",
+          "expected_exit": 2,
+          "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-4af3a01b0e6e43789e104bb973819595/report.json",
+          "expected_status": "incomplete",
+          "case": "missing-source",
+          "actual_status": "incomplete",
+          "mode": "headless",
+          "actual_exit": 2
+        },
+        {
+          "reason": "Fixture unavailable for selected scenario",
+          "expected_exit": 2,
+          "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-82d11cdde4ab4aae8ea671fdbbc2fb92/report.json",
+          "expected_status": "incomplete",
+          "case": "wrong-fixture",
+          "actual_status": "incomplete",
+          "mode": "headless",
+          "actual_exit": 2
+        },
+        {
+          "reason": "Explicit available -ClassicSource is required",
+          "expected_exit": 2,
+          "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-e5bd28fe25424b589f1c3222176f4d98/report.json",
+          "expected_status": "incomplete",
+          "case": "missing-source",
+          "actual_status": "incomplete",
+          "mode": "rendered",
+          "actual_exit": 2
+        },
+        {
+          "reason": "Fixture unavailable for selected scenario",
+          "expected_exit": 2,
+          "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-936cec02f6764317bdcf3afbe199c968/report.json",
+          "expected_status": "incomplete",
+          "case": "wrong-fixture",
+          "actual_status": "incomplete",
+          "mode": "rendered",
+          "actual_exit": 2
+        }
+      ]
+    }
+  },
+  "non_green_remediation_attempts": [
+    {
+      "reports": [
+        "main_project/tests/.runs/verification-headless-09b22955c69f48efb4f04d09adfc577c/report.json",
+        "main_project/tests/.runs/verification-headless-759961451e2a4168b0933a39f4038c50/report.json"
+      ],
+      "classification": "failed",
+      "reason": "New fixture incorrectly expected optional setup while show_setup remained effective false; corrected controlled routing without changing production timing."
+    },
+    {
+      "reports": [
+        "main_project/tests/.runs/verification-headless-6f9aaea32b5b43fcb1aa0731d49a9f1d/report.json"
+      ],
+      "classification": "incomplete",
+      "reason": "New registration selector needed an explicit bool type; fixed parse error."
+    },
+    {
+      "reports": [
+        "main_project/tests/.runs/verification-headless-4c501926108d46ebb80aa62cdd3bba20/report.json"
+      ],
+      "classification": "incomplete",
+      "reason": "Scoped layout validation omitted media.assets; authored typed media references correctly rejected. Declared the dependency, then reran the complete matrix with unchanged inventories."
+    }
+  ],
+  "retention": {
+    "schema": "m1-remediation-retention-v1",
+    "owned_roots": [
+      {
+        "root": "main_project/tests/.runs/export-42acb55234e24a7795a195411cbaa8d0",
+        "cleanup_sha256": "9152dfc3b7041e6aaf63671188b53b6228d2ec1978298530c3684dfeec5a2dc0"
+      },
+      {
+        "root": "main_project/tests/.runs/export-819be3b2b9c1491ba95ceb06e21a959c",
+        "cleanup_sha256": "fbf90c0ef7398157c295a67f19644eb23de0d82ecf6887863b8404025ea44811"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-09b22955c69f48efb4f04d09adfc577c",
+        "cleanup_sha256": "18c990b2225766b09192bc80e3b84476d2e04e9e2cc12f69732962c5c129a391"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-0d20760964fe44b38d4c80db785a7b2e",
+        "cleanup_sha256": "1425769b80ac7acfe23b8892da00d6ff9abc5bafb23406321cf964ebd185569e"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-2aa025c4180a4ac28bcffd1ce338e06a",
+        "cleanup_sha256": "e15ebd005955dcadc96317ec79a305958fb108e7310c16b430e2192486ca3e8d"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-368119019297447bbfb29b88c4f61b89",
+        "cleanup_sha256": "fc1668afeab21e2542cf21a49b295260e55b2158001b79e7e11a07e11e257e25"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-4af3a01b0e6e43789e104bb973819595",
+        "cleanup_sha256": "78ec608532d1e38841639742117cb11188562d46d0d944fb5f57e5ba251c2307"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-4c501926108d46ebb80aa62cdd3bba20",
+        "cleanup_sha256": "752c3a992b6b251ad223b0813c5e9c4abf347f343ef9e313b9b52fb222646a30"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-5b1fefe825ea471ebb8db6c7d597a97a",
+        "cleanup_sha256": "981dc58563e7917ac23cc6c5606fdf870fa126ed4d637e1a0c503147fa1c1ec9"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-5fb681d80f5741f18c880ebcbfbc008a",
+        "cleanup_sha256": "f9d4a27a51ba682ec16fcf628a21a88d995c5d66d7281337ed148114de3e38d0"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-63dbb84f5ab8496cbf4bfcc34df32765",
+        "cleanup_sha256": "d8371483d1f93dbfa23e5b6c59f4cf781c050cdd34c1260d6280aa151a9d8712"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-694040d5467342479ccc4eea89f0be2c",
+        "cleanup_sha256": "5368f870c7959457847cfd3362eeb7d23907e435a3da844267deec28983a14bb"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-6e5b357a9e7540e28b2319a488ec504a",
+        "cleanup_sha256": "5c8fde29b223f2189a36bbf92b47bf3e3489ef4b590157b53ab7e607e9e37b47"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-6f9aaea32b5b43fcb1aa0731d49a9f1d",
+        "cleanup_sha256": "c566ea9a13e0b1e6627f610b6961b95ded582c6a642dc747c4d9827203835066"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-70b5b9cdde124558aafb3d7c77e9c3c5",
+        "cleanup_sha256": "f3e6a25c967d4b693e5acef6b908fb9b6f44b27c2d7c676a3e1d02fd57cb9aea"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-72aaa668a1e240b7ae14fd7aeaa5f485",
+        "cleanup_sha256": "67e1f1dca03c75834d0fc9f01a5dfda6c497749030dfaacdf19d4155369ea1f1"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-759961451e2a4168b0933a39f4038c50",
+        "cleanup_sha256": "37a201a02a56ba5ac3bf937e3c8bf4e8ec711bd3140d5aac9870d1853c3dc956"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-77406954c72240eba105d1e04f0f9fa5",
+        "cleanup_sha256": "32a9efa57f6cf8c21cd12e5b6bbfbfc9fecaeae5945af8a8b4fdac95ba43a7e1"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-82d11cdde4ab4aae8ea671fdbbc2fb92",
+        "cleanup_sha256": "bd6bc8d507a2a1cea338c19b81b8c5498f14a77d983873492f05dc59dcd3a8c7"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-838679203be84e05ac0e82a7c9c890c3",
+        "cleanup_sha256": "1b35cc7979b59116ff924c9520fd3bda108e6a4c983467bb5e6eb76d339171c4"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-86d804bd831d485faac5ff55f40ed8be",
+        "cleanup_sha256": "2833fe538f7c8fab3c2edabab040a5de2fa7613fb951a69176d31ee4073566c0"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-8bfeefefc6164c0ca4e6f0d535b243d1",
+        "cleanup_sha256": "2956a015fd0d260bed463376ef4e60f05537abf34091138a60a941b7e5c3ca01"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-9aa91e231d63497d9adafb43b6444a21",
+        "cleanup_sha256": "331c8377e402960b811be268b710455f623490068226f3eb56042ace255dc13d"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-acea678958f84b6494fb4102cc49ec82",
+        "cleanup_sha256": "1bad81bafdd34e2a1b5fffd1a0954c68929dbe9bc19f27708dc90a20c89812ac"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-b36f37eb46f44b50ab3e7144ff41b98b",
+        "cleanup_sha256": "98b83de02dcb3cf15ccd15ce5d97ac73d0e28021a0a749a43068d01ea8cc7862"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-b5b5473423be4414b2bfd3d227a41a7b",
+        "cleanup_sha256": "a77e7e4b61039f8d8bb573e2db1b5ec09be67409a7c5ff0e106cc29d3a9a2172"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-b9fd2567ba7e40f4b8dff3237266db10",
+        "cleanup_sha256": "737f86f7fb4f0a1cb4f8bd41c8ea2b8a584cfd7316af8a385dba6e2023ef1ff2"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-headless-c38cd2519d194a1fa698365d9dc96645",
+        "cleanup_sha256": "8aab3ba1a9add76e986a5c8b0dd39d2d54e92e937512624da5bd980ac33fa08f"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-23f7fa48424a499899ea2e565b1c51ed",
+        "cleanup_sha256": "72701d405e8c1ea51d39b780ea6af33603b467ad2404b5300e6a2fe973b0cb26"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-3b7d916919e4489c99fd19e3d732586c",
+        "cleanup_sha256": "5df190d53c177c3c60606c04ee7c528bb8399fe8d0c09f37305ca1da4995125b"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-60894be52fe54ff6880130ce50733c5c",
+        "cleanup_sha256": "ebc70d1eefa3ccc2b9145a457b3a36eed46478065fa01c86fa49b36c63079a5f"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-6a5050547bcf4f0aa2a87bfcd6437c24",
+        "cleanup_sha256": "9f8185c796e0f9f515622a1d9bfb76468bad6c5175f98c2d69eb066caae2ff9a"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-6c5dc51075cd4d7bb14bbc1310348ce9",
+        "cleanup_sha256": "ccdfbb5d7d8c34e380100b2db9c6a5816bd5fe4741e1597241ccd483c5de70ea"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-700d95f65c18457eaea4aeb6b28e10c2",
+        "cleanup_sha256": "d8c960474c8ce3ba2d8156ae7972be6760c3172870a7b948c4db82a21bea2d19"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-8206ee6dc4a74609af0e55f10a9e00e7",
+        "cleanup_sha256": "3368c4bcae6e5e666ba8ed6c3b0c26e3f3c92491b2ea931c701359a0079ea411"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-88dcac773fe349b18181d02e6d67f39b",
+        "cleanup_sha256": "d654e6b003b299494ea34cee116f14b26e595fe25c23803c5a6ce2e9c1e94346"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-8f118ae6ab194fe1958d2619d9527b76",
+        "cleanup_sha256": "6e67744f355a9147fba33f16f4dc6fd626027fbf03d80ffb45643326aa3d3adb"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-936cec02f6764317bdcf3afbe199c968",
+        "cleanup_sha256": "f07986729331b1a6341ff0f33b27f5217635c6dd9d8a441f3343b3f3d4fdf86f"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-a84cd6ed258641c7a96281e4117f1e3c",
+        "cleanup_sha256": "c1a9a1d7e4a2339e38fa2a34c51b88e3f8c3c9cac38164e8e8e37fb247994be4"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-acf9abeb81144471a72240a507e2cce2",
+        "cleanup_sha256": "d77683db2a379e39e52b6acb2852347e95631f6ed1ad821fcf1b004f10a7a6ee"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-c6850ff14bdb4f189db7b28ae7d860bc",
+        "cleanup_sha256": "c12385b642c189f021e13c5a251982c94b1a0e6d34d517a40d39b5c84f8d8206"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-c6eb2fa7e66341358fc126064ed4f3f1",
+        "cleanup_sha256": "d89ccc50bece23085e2f90c5d03c11b594e242c564eb4c3baa539b75af9e11c8"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-e19f83adc7c643a7a3baca190ad4aeec",
+        "cleanup_sha256": "aa82017eb8b34bca59ad80bdc694bf4c54bdc17e02f30c6f1c5a2c8e3b94e058"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-e5bd28fe25424b589f1c3222176f4d98",
+        "cleanup_sha256": "a52686b2cb5fdf2c24cb16600145b90b1b95cd20f60711b8fa68dc782368ee8c"
+      },
+      {
+        "root": "main_project/tests/.runs/verification-rendered-ed748b96575a4a8eb12524a497be27f3",
+        "cleanup_sha256": "46070cf0d9e8cea4bf8a107993f25cb21ef5a784b8fa0163f735e0804fd38f30"
+      }
+    ],
+    "completed_owned_builds_retained": 0,
+    "owned_exe_dll_pck_payloads_retained": 0,
+    "original_failed_native_report_unchanged": true,
+    "activity": "All owned verification, export, refreshed M1 and qualification commands returned; no independent review launch was made. Ordinary non-elevated process inventory checked separately.",
+    "file_count": 61055,
+    "total_bytes": 1802794590
+  },
+  "acceptance": {
+    "M1": "open",
+    "ready_for_acceptance": false,
+    "findings": {
+      "M1-A01": "implemented and stock-handler/relaunch verified",
+      "M1-A02": "profiled and focused optimizations verified; residual synchronous cost explicitly retained",
+      "M1-A03": "maintained named all-adapter gate and Windows exports verified"
+    },
+    "manual": [
+      "Ordinary packaged cold startup using the actual folder picker, cancel/retry recovery and keyboard navigation under disposable storage.",
+      "Human smoke check of corrected cinematic preference choice, reopen and relaunch in the packaged application.",
+      "Windows physical IME composition/Enter/Back remains unqualified; qualify before claiming that input path supported."
+    ],
+    "later_provider_gates": "M2\u2013M5 real input/window, room/collision/spatial audio, SAVE/restore, character/opening and quest checks remain at their assigned checkpoints."
+  },
+  "changed_files": [
+    "design_docs/development/IMPLEMENTATION_READINESS.md",
+    "design_docs/development/MILESTONES.md",
+    "design_docs/development/RUN_ARTIFACT_CLEANUP.md",
+    "design_docs/development/TASK_BACKLOG.md",
+    "design_docs/development/evidence/M1-INTEGRATION-AUDIT-2026-11-22.json",
+    "design_docs/development/evidence/M1-INTEGRATION-AUDIT-2026-11-22.md",
+    "design_docs/development/tasks/IMP-001.md",
+    "design_docs/development/tasks/IMP-003.md",
+    "design_docs/development/tasks/IMP-005.md",
+    "design_docs/development/tasks/IMP-007.md",
+    "design_docs/development/tasks/IMP-008.md",
+    "design_docs/development/tasks/IMP-009.md",
+    "design_docs/development/tasks/IMP-010.md",
+    "main_project/native/media/README.md",
+    "main_project/scripts/av/media_preferences.gd",
+    "main_project/scripts/data/DEFINITION_PUBLICATION.md",
+    "main_project/scripts/data/FACTION_QUEST_INPUTS.md",
+    "main_project/scripts/data/actor_inputs.gd",
+    "main_project/scripts/data/definition_registry.gd",
+    "main_project/scripts/data/faction_quest_inputs.gd",
+    "main_project/scripts/data/geography_inputs.gd",
+    "main_project/scripts/data/item_spell_inputs.gd",
+    "main_project/scripts/data/layout_inputs.gd",
+    "main_project/scripts/data/locale_fonts.gd",
+    "main_project/scripts/data/media_replacements.gd",
+    "main_project/scripts/data/text_catalog.gd",
+    "main_project/scripts/data/variant_inputs.gd",
+    "main_project/scripts/mod/preference_definitions.gd",
+    "main_project/scripts/session/session_shell.gd",
+    "main_project/scripts/startup/startup_controller.gd",
+    "main_project/scripts/startup/startup_shell.gd",
+    "main_project/tests/README.md",
+    "main_project/tools/assertion_values.ps1",
+    "main_project/tools/verify.ps1",
+    "main_project/tools/verify_startup_export.ps1",
+    "design_docs/development/evidence/M1-AUDIT-REMEDIATION-2026-11-22.json",
+    "design_docs/development/evidence/M1-AUDIT-REMEDIATION-2026-11-22.md",
+    "main_project/tests/m1_composition_cases.gd",
+    "main_project/tests/m1_composition_inventory.json",
+    "main_project/tools/qualify_m1_composition_inventory.ps1"
+  ],
+  "final_validation": {
+    "schema": "m1-remediation-final-validation-v1",
+    "changed_files": 40,
+    "utf8_valid": true,
+    "json_valid": true,
+    "local_markdown_links_checked": 519,
+    "new_missing_links": [],
+    "preexisting_missing_historical_handoff_links": [
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-010-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-010-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-010-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-009-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-009-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-009-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-008-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-008-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-008-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-007-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-007-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "target": "handoffs/IMP-007-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-010-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-010-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-010-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-009-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-009-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-009-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-008-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-008-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-008-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-007-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-007-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "target": "handoffs/IMP-007-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-010-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-010-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-010-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-009-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-009-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-009-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-008-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-008-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-008-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-007-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-007-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "target": "handoffs/IMP-007-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-007.md",
+        "target": "../handoffs/IMP-007-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-007.md",
+        "target": "../handoffs/IMP-007-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-007.md",
+        "target": "../handoffs/IMP-007-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-007.md",
+        "target": "../handoffs/IMP-008-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-008.md",
+        "target": "../handoffs/IMP-009-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-008.md",
+        "target": "../handoffs/IMP-008-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-008.md",
+        "target": "../handoffs/IMP-008-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-008.md",
+        "target": "../handoffs/IMP-008-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-009.md",
+        "target": "../handoffs/IMP-010-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-009.md",
+        "target": "../handoffs/IMP-009-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-009.md",
+        "target": "../handoffs/IMP-009-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-009.md",
+        "target": "../handoffs/IMP-009-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-010.md",
+        "target": "../handoffs/IMP-010-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-010.md",
+        "target": "../handoffs/IMP-010-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-010.md",
+        "target": "../handoffs/IMP-010-INCREMENT-1-PROMPT.txt"
+      }
+    ],
+    "runtime_source_snapshot_matches_latest_rendered_M1": true,
+    "source_hashes_checked": 706,
+    "diff_check": "passed",
+    "uncommitted": true,
+    "original_failed_report_sha256": "0aad418ee1a8b752755385cd7e1b8df17633873d79b3e184d31c399be1f4df61"
+  }
+}

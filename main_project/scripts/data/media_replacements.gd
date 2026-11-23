@@ -28,7 +28,7 @@ func bundled_contributions() -> Array:
 	return result
 
 func declaration() -> Dictionary:
-	return {"id":"media-assets","domain":DOMAIN,"operations":["add","replace","patch"],"capabilities":["data.media-v1"]}
+	return {"id":"media-assets","domain":DOMAIN,"reference_domains":[DOMAIN],"operations":["add","replace","patch"],"capabilities":["data.media-v1"]}
 
 func register_target(id: String, type: String, aliases: Array, baseline: Callable) -> Dictionary:
 	if _generation >= 0 or not Paths.valid_id(id) or type not in ["image","model","audio","midi","bank","video"] or _aliases.has(id): return {"ok":false,"reason":"Invalid, ambiguous or late target registration."}

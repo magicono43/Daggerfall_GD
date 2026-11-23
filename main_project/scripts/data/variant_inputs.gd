@@ -18,7 +18,7 @@ func bundled_contributions() -> Array:
 	return [{"root":ROOT,"file":"baseline.json","version":VERSION,"bytes":FileAccess.get_file_as_bytes(ROOT+"baseline.json")}]
 
 func declaration() -> Dictionary:
-	return {"id":VERSION,"domain":DOMAIN,"operations":["add","replace","patch"],"capabilities":["data."+VERSION]}
+	return {"id":VERSION,"domain":DOMAIN,"reference_domains":[DOMAIN,L.DOMAIN,G.DOMAIN],"operations":["add","replace","patch"],"capabilities":["data."+VERSION]}
 
 func begin_candidate(_mods: RefCounted, ticket: int, _registry: RefCounted) -> void:
 	_ticket = ticket

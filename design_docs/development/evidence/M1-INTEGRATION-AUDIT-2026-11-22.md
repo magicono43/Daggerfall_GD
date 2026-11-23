@@ -1,6 +1,6 @@
 # M1 milestone integration audit — 2026-11-22
 
-**Recommendation: NOT READY FOR M1 ACCEPTANCE.** Audit complete. Correct the verified M1-A01 preference defect and close the applicable manual acceptance checks. Address or explicitly disposition the measured responsiveness concern and maintained integration coverage gap before extending these paths. No new implementation task is started here.
+**Current recommendation: NOT READY FOR M1 ACCEPTANCE pending applicable human manual checks.** The authorized [M1-A01–A03 remediation](M1-AUDIT-REMEDIATION-2026-11-22.md) is implemented and independently verified, including maintained complete-composition Windows exports. The original observations, timings and failed native attempt below are retained as historical evidence. This does not start M2 or close later-provider gates.
 
 ## Scope and authority
 
@@ -12,6 +12,8 @@ Authority: the ten task cards and their linked specifications/contracts; approve
 
 ### M1-A01 — P2, verified defect: cinematic skip Apply reports success without applying the choice
 
+**Remediation status:** Addressed: checked media-owner application, truthful rejected/unsaved messages and the stock-handler effective/accepted/disk/relaunch regression pass in independent editor and packaged modes. See [follow-up evidence](M1-AUDIT-REMEDIATION-2026-11-22.md). Original finding retained below.
+
 Locations: `main_project/scripts/session/session_shell.gd:294`, `main_project/scripts/startup/settings_owner.gd:215`, and `main_project/scripts/av/media_preferences.gd:14`.
 
 `media/video_skip` is declared live. Its stock **Apply Cinematic Skip** handler calls `settings.apply` without the live consumer callback. The settings owner correctly rejects that application group, retains its previous value, and successfully persists the unchanged settings. The handler checks only persistence `ok`, then reports **Cinematic skip preference saved.**
@@ -22,6 +24,8 @@ Resolve before acceptance: route this setting through its checked application in
 
 ### M1-A02 — P2, measured performance concern: combined publication stalls the application thread and faction queries copy unrelated domains
 
+**Remediation status:** Addressed in the authorized focused scope: measured scoped validator copies, exact-ticket faction lookup keys, private ownership transfer and same-stack automatic commitment reduce the observed costs. Residual synchronous intake and retained memory are explicitly documented; no universal budget or asynchronous responsiveness claim is made. See [follow-up evidence](M1-AUDIT-REMEDIATION-2026-11-22.md). Original finding retained below.
+
 The all-adapter probe observed approximately 46–48 seconds from constructing the ordinary startup composition through source selection/menu publication, with no process-frame advancement during its synchronous selection call. Godot tracked approximately 1.80 GB static memory after publication and 2.20 GB peak. A single `FactionQuestInputs.children(registry, "packs/dfu", "faction-17")` took approximately 0.97–1.17 seconds in the same composition.
 
 Source evidence explains the amplification: `StartupController.check_content` prepares a candidate and `commit_content_menu` prepares again; `definition_registry.prepare` deep-copies the complete resource dictionary for each domain reference validator; `commit`, `active`, and CORE's published projection copy the catalog again. `FactionQuestInputs.children` calls `registry.active()` and rebuilds its graph, copying geography/layout/text/media data for a faction-only query (`faction_quest_inputs.gd:260`). Normal point `registry.query` already returns a detached individual record.
@@ -29,6 +33,8 @@ Source evidence explains the amplification: `StartupController.check_content` pr
 These are observed costs on this machine, not a proven violation of an approved latency/memory budget, leak, or universal benchmark. Isolated repeats confirmed 47,910 / 47,659 ms through menu publication, 946,849 / 976,270 microseconds for one faction-child query, and 2,177,483,527 / 2,201,545,513 bytes peak tracked static memory (headless / rendered). The ordinary release export's launch log records 41 seconds between initial launch metadata and committed content publication. Resolve or explicitly disposition responsiveness before extending these paths with M2 consumers. Keep fixes narrow and preserve detached public views, atomic publication, exact candidate tickets and the content lock. Broad refactoring is not justified by this audit.
 
 ### M1-A03 — P2, integration coverage gap: the named M1 suite does not exercise the complete ordinary composition
+
+**Remediation status:** Addressed: the named M1 suite now requires the maintained complete-composition inventory, fresh-process remembered startup and consumer handoff; Windows debug/release exports use the same gate. Separate adapter inventories and unavailable/failure classifications remain intact. See [follow-up evidence](M1-AUDIT-REMEDIATION-2026-11-22.md). Original finding retained below.
 
 `verify.ps1:116` selects only qualification/startup/session for `-Suite m1`. Later independent source suites intentionally register different adapter subsets in `startup_shell.gd:45–109`: variant/layout fixtures include geography/media but exclude actor/item/faction/text/preference adapters; geography includes the authored readers but excludes layout/variant/text/preference adapters. Passing those inventories alone cannot certify all enabled adapters together.
 
@@ -125,7 +131,7 @@ Review changes are this report and its JSON, the audit notices in MILESTONES/TAS
 
 ## Acceptance and next milestone
 
-**Keep M1 open.** M1-A01 is a verified behavior/specification defect and should be corrected with a stock-handler persistence/relaunch regression before acceptance. Close the applicable manual startup/recovery checks. M1-A02 needs a focused performance correction or an explicit recorded disposition; M1-A03 is a maintained-coverage follow-up supported by successful current joint runs. Neither cost measurements nor the original non-reproduced timing failure establish an additional functional defect. No P0/P1 product defect, source-data corruption, native-save regression or new ownership violation was verified.
+**Original audit disposition (superseded by the remediation status above; manual M1 acceptance remains open).** M1-A01 is a verified behavior/specification defect and should be corrected with a stock-handler persistence/relaunch regression before acceptance. Close the applicable manual startup/recovery checks. M1-A02 needs a focused performance correction or an explicit recorded disposition; M1-A03 is a maintained-coverage follow-up supported by successful current joint runs. Neither cost measurements nor the original non-reproduced timing failure establish an additional functional defect. No P0/P1 product defect, source-data corruption, native-save regression or new ownership violation was verified.
 
 The accepted IMP-001–010 delivery/prerequisite records remain valid; this audit does not claim full acceptance of their shared later-owner features. Later prerequisite-cleared tasks may be planned in the verified dependency waves, but this audit starts none and does not claim the M2 encounter/save loop is available.
 

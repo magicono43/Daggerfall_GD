@@ -1686,5 +1686,16 @@
     "files": 23,
     "exact_bytes_retained_in": "main_project/tests/.runs/m1-audit-2026-11-22/generated-uid-cleanup.json",
     "source_tree_restored": true
+  },
+  "remediation": {
+    "report": "M1-AUDIT-REMEDIATION-2026-11-22.md",
+    "machine_readable": "M1-AUDIT-REMEDIATION-2026-11-22.json",
+    "findings": {
+      "M1-A01": "implemented and stock-handler/relaunch verified",
+      "M1-A02": "profiled and focused optimizations verified; residual synchronous cost explicitly retained",
+      "M1-A03": "maintained named all-adapter gate and Windows exports verified"
+    },
+    "M1_ready_for_acceptance": false,
+    "original_results_preserved": true
   }
 }

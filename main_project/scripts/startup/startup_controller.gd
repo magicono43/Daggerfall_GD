@@ -85,7 +85,7 @@ func check_content() -> Dictionary:
 		prepared_content = providers.prepare_content(mods)
 		if not prepared_content.ok:
 			return set_route("package_recovery", prepared_content)
-		return set_route("optional_setup", prepared_content) if settings.effective["startup/show_setup"] or mods.dirty() else continue_to_menu("run")
+		return set_route("optional_setup", prepared_content) if settings.effective["startup/show_setup"] or mods.dirty() else _commit_prepared_content("run")
 	var packages: Dictionary = published if menu_entered else providers.publish_packages(classic)
 	if not packages.get("ok", false):
 		packages.plan = plan.duplicate(true)
@@ -150,6 +150,11 @@ func commit_content_menu(profile_choice: String) -> Dictionary:
 	prepared_content = providers.prepare_content(mods) # Always rebuild from clean defaults.
 	if not prepared_content.ok:
 		return set_route("package_recovery", prepared_content)
+	return _commit_prepared_content(profile_choice)
+
+func _commit_prepared_content(profile_choice: String) -> Dictionary:
+	# check_content may enter here in the same synchronous stack as preparation;
+	# interactive Continue still rebuilds through commit_content_menu above.
 	if mods.dirty() and profile_choice not in ["save", "run"]:
 		return set_route("optional_setup", {"ok": false, "kind": "unsaved_profile", "reason": "Save and Continue, or Continue for This Run?", "choices": ["save", "run"]})
 	transition_busy = true
@@ -188,7 +193,8 @@ func commit_content_menu(profile_choice: String) -> Dictionary:
 	if providers.media != null:
 		providers.media.commit_candidate()
 	mods.lock_configuration(content.plan, content.packages)
-	published = content.duplicate(true)
+	# commit returns a detached projection; CORE owns this local return value.
+	published = content
 	published.mods = content.packages.values().map(func(package: Dictionary): return {"id": package.id, "version": package.version})
 	logger.mods_established(published.mods)
 	menu_entered = true

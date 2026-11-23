@@ -47,6 +47,17 @@ func choices() -> Array:
 		for row: Dictionary in media.bank_exports(): result.append(row)
 	return result
 
+func select_skip(value: String) -> Dictionary:
+	# Playback captures the effective policy at admission; existing requests keep
+	# their captured input contract. No active playback needs to be reconfigured.
+	return settings.apply({SKIP_SETTING:value},func(values: Dictionary):
+		return values.size() == 1 and values.get(SKIP_SETTING) in ["authored","any","skip","back"])
+
+func skip_message(result: Dictionary) -> String:
+	if result.get("application", "") != "accepted" or not result.get("rejected", []).is_empty():
+		return "Cinematic skip preference rejected; previous policy retained."
+	return "Cinematic skip preference saved." if result.ok else "Cinematic skip preference applied, not saved; Retry Save."
+
 func dispose() -> void:
 	_default.clear()
 	settings = null

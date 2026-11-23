@@ -146,3 +146,11 @@ for exact qualified debug/release exports and retained obligations. This work do
 not publish a release or make a written source offer. A public binary distributor
 must provide the corresponding-source access required by the retained licenses;
 the pinned source catalog and build recipes support that packaging step.
+
+M1-A01 maintenance (2026-11-22): the stock cinematic skip Apply button calls
+`media_preferences.select_skip`, which supplies the checked live consumer. New
+playback admissions capture effective policy; active requests retain their
+captured policy. The UI reports application rejection independently of successful
+persistence, and distinguishes applied-but-unsaved from saved. The maintained
+`m1-composition-v1` stock-button regression checks effective, accepted, reopened
+on-disk and fresh-process values, rejection, write failure and reverse application.

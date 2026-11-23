@@ -7,7 +7,7 @@ const Tokens = preload("res://scripts/data/text_tokens.gd")
 const Catalog = preload("res://scripts/data/text_catalog.gd")
 
 func declaration() -> Dictionary:
-	return {"id":"mod.preferences.v1","domain":DOMAIN,"operations":["add","replace"],"required_resources":[]}
+	return {"id":"mod.preferences.v1","domain":DOMAIN,"reference_domains":[DOMAIN,Catalog.DOMAIN],"operations":["add","replace"],"required_resources":[]}
 
 func validate_resource_path(path: String) -> String:
 	return "" if path == "installed" else "Preferences require the installed logical resource."

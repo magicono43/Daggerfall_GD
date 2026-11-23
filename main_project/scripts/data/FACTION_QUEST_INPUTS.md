@@ -139,3 +139,14 @@ is distinct from CORE-012 mandatory opening content and optional tutorial policy
 SAVE/FACT/QUEST must validate changed-content compatibility and explicit migrations;
 same ID/name never authorizes state reset, quest restart or repeated rewards.
 Parent IMP-009 and M1 remain open.
+
+## M1 audit query maintenance — 2026-11-22
+
+`validate_references` retains only its validated sorted child keys, explicit
+mapping keys and diagnostics in a ticket-scoped derived index. Candidate begin
+clears it; failed final validation clears it. `children` and `lookup_mapping` use
+`registry.domain_index(DOMAIN)`, which requires the exact actually published
+ticket, then read authoritative records through `lookup`/`query`. They no longer
+request or copy geography/layout/text/media records for a faction-only query.
+Returned index/child arrays are detached. This introduces no FACT/QUEST state,
+new resolution policy, semantic readiness or extra publication callback.

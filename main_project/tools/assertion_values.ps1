@@ -125,3 +125,18 @@ function Test-ScriptDiagnostics([string[]]$Logs, [string]$Scenario, $Result) {
     $location = 'at: FormulaCaseCallbacks.throws (res://tests/formula_case_callbacks.gd:' + $checked[1].line + ')'
     return @(Select-String -Path $Logs -SimpleMatch $location).Count -eq 1
 }
+
+function Get-CompositionExpectedCount([string]$Mode) {
+    $inventory = Get-Content -LiteralPath "$PSScriptRoot/../tests/m1_composition_inventory.json" -Raw | ConvertFrom-Json
+    if ($inventory.schema -cne 'm1-composition-inventory-v1' -or $Mode -notin @('headless','rendered','reload-headless','reload-rendered')) { throw 'M1 composition inventory unavailable' }
+    return @($inventory.$Mode).Count
+}
+function Test-CompositionInventory($Result, [string]$Mode) {
+    $inventory = Get-Content -LiteralPath "$PSScriptRoot/../tests/m1_composition_inventory.json" -Raw | ConvertFrom-Json
+    if ($inventory.schema -cne 'm1-composition-inventory-v1' -or $Result.fixture -cnotin $inventory.fixtures) { return $false }
+    $expected = @($inventory.$Mode)
+    $actual = @($Result.checks.scenario)
+    return $expected.Count -gt 0 -and $actual.Count -eq $expected.Count -and
+        @($actual | Select-Object -Unique).Count -eq $actual.Count -and
+        @(Compare-Object -ReferenceObject $expected -DifferenceObject $actual -CaseSensitive).Count -eq 0
+}

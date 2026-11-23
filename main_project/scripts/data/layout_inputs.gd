@@ -23,7 +23,7 @@ var _baseline := PackedByteArray()
 var _source_paths := {}
 
 func declaration() -> Dictionary:
-	return {"id":VERSION,"domain":DOMAIN,"operations":["add","replace","patch"],"required_resources":[BASE_PATH],"capabilities":["data."+VERSION],"classic_sources":[{"file":"BLOCKS.BSA","format":"bsa-v1"},{"file":"MAPS.BSA","format":"bsa-v1"}]+resource_sources.duplicate(true)}
+	return {"id":VERSION,"domain":DOMAIN,"reference_domains":[DOMAIN,G.DOMAIN,"media.assets"],"operations":["add","replace","patch"],"required_resources":[BASE_PATH],"capabilities":["data."+VERSION],"classic_sources":[{"file":"BLOCKS.BSA","format":"bsa-v1"},{"file":"MAPS.BSA","format":"bsa-v1"}]+resource_sources.duplicate(true)}
 
 func begin_candidate(_mods: RefCounted, ticket: int, _registry: RefCounted) -> void:
 	_ticket = ticket

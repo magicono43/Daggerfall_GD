@@ -291,8 +291,8 @@ func render_settings(top: Dictionary) -> void:
 			if value==host.controller.settings.effective.get(banks.SKIP_SETTING,"authored"): skip_selector.select(skip_selector.item_count-1)
 		host.panel.add_child(skip_selector)
 		host.button("Apply Cinematic Skip",func():
-			var checked: Dictionary = host.controller.settings.apply({banks.SKIP_SETTING:skip_values[skip_selector.selected]})
-			message = "Cinematic skip preference saved." if checked.ok else "Accepted but unsaved; Retry Save."
+			var checked: Dictionary = banks.select_skip(skip_values[skip_selector.selected])
+			message = banks.skip_message(checked)
 			schedule_render())
 	host.button("Cancel / Back", func():
 		if windows.close(top.id).kind == "blocked":

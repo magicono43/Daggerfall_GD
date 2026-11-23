@@ -1,5 +1,20 @@
 # Verification run artifact cleanup
 
+## 2026-11-22 M1 audit remediation
+
+All owned matrix, export and qualification commands returned before compaction.
+Per-root `cleanup.json` files preserve copied evidence hashes and exact removed
+payloads; large JSON archives were verified after decompression. Reproducible
+projects/exports/dependency copies/caches were removed, and installed-template
+junctions were unlinked without traversing their targets. Unique inputs,
+reports/logs/captures, external data and the original timing-failure report were
+preserved. No elevated activity query or security-setting change was introduced.
+
+Final total `.runs` retention: **1,802,794,590 bytes**. Completed owned
+builds/binary payloads retained: **0**. Final scope/activity/path checks and exact
+retention details are in `main_project/tests/.runs/m1-remediation-2026-11-22/`.
+See the [follow-up evidence](evidence/M1-AUDIT-REMEDIATION-2026-11-22.md).
+
 ## 2026-11-22 M1 integration audit
 
 The [M1 audit](evidence/M1-INTEGRATION-AUDIT-2026-11-22.md) compacted its 47 completed verification copies and two Windows exports after all owned matrix, probe, qualification, process and ordinary-start children returned. No completed audit build, EXE, DLL or PCK payload remains. Root reports, child reports/logs, reviewed captures, fixture/build/source hashes and diagnostic support scripts remain. Exact-root cleanup plans and evidence hash checks are retained alongside each run; template junctions and the inactive process alias were unlinked without following their targets.

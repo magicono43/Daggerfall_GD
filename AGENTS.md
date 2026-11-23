@@ -66,6 +66,14 @@ Start with the assigned `design_docs/development/tasks/IMP-NNN.md`. Read its lin
 4. Reuse shared validators and owner contracts. Follow verified dependency waves instead of numeric IMP order. Keep named joint checks open until real providers pass.
 5. Pin new libraries, build options and relevant licenses/provenance. Verify Windows export compatibility where required. Preserve approved media/mod runtime selections. Explain a material dependency or toolchain change before adopting it.
 
+### Integration and performance checks
+
+- When changing shared startup, publication or query paths, assess their cost with the complete current adapter composition and realistic data volumes. Small fixtures alone do not establish acceptable scaling.
+- Avoid whole-catalog copying or repeated graph construction for point queries. Prefer owner-maintained, validated lookup indexes and narrowly scoped detached projections. Preserve ownership, atomic publication, candidate tickets and content locking.
+- Before repeating expensive preparation, identify what could have changed since the previous validation. Reuse preparation only within a verified scope that preserves freshness and failure handling.
+- For preference UI changes, verify the actual stock control handler through its owner interface. Check application outcome independently from persistence, including rejection, failed saving and fresh-process relaunch.
+- When an integration defect or performance problem escapes existing tests, add maintained coverage at the boundary that missed it. Record before/after measurements without inventing budgets or weakening assertions.
+
 ## Git workflow
 
 - The user reviews changes, creates commits, and pushes through GitHub Desktop. Leave changes uncommitted unless explicitly instructed otherwise.

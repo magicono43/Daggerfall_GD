@@ -31,7 +31,7 @@ static func sources() -> Array:
 	return [{"file":"MAPS.BSA","format":"bsa-v1"},{"file":"WOODS.WLD","format":"woods-source-v1"},{"file":"CLIMATE.PAK","format":"geography-pak-v1"},{"file":"POLITIC.PAK","format":"geography-pak-v1"}]
 
 func declaration() -> Dictionary:
-	return {"id":VERSION,"domain":DOMAIN,"operations":["add","replace","patch"],"required_resources":[BASE_PATH],"capabilities":["data."+VERSION],"classic_sources":sources()}
+	return {"id":VERSION,"domain":DOMAIN,"reference_domains":[DOMAIN],"operations":["add","replace","patch"],"required_resources":[BASE_PATH],"capabilities":["data."+VERSION],"classic_sources":sources()}
 
 func validate_resource_path(path: String) -> String:
 	var parts := path.split("/")

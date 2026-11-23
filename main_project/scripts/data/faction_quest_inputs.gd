@@ -8,12 +8,26 @@ const VERSION = "faction-quest-inputs-v1"
 const ROOT = "res://content/faction_quest/"
 const PROFILE_HASH = "cf66ec631c3462417eae0ea6aa7fbe3797d4fa9232e9f1eaaed3cf894962ac56"
 const BASE_PATH = "packs/dfu"
+var _index_ticket := -1
+var _index: Dictionary = {}
+
+func begin_candidate(_mods: RefCounted, ticket: int, _registry: RefCounted) -> void:
+	_index_ticket = ticket
+	_index.clear()
+
+func finish_candidate(_resources: Dictionary, valid: bool) -> void:
+	if not valid: _index.clear()
+
+func read_only_index(ticket: int) -> Dictionary:
+	if ticket != _index_ticket or not _index.get("ok",false): return Formats.fail("before_readiness","Exact committed faction index required.")
+	return _index.duplicate(true)
+
 var _receipts: Dictionary = {}
 var _mappings: Dictionary = {}
 var _kinds: Dictionary = {}
 
 func declaration() -> Dictionary:
-	return {"id":VERSION,"domain":DOMAIN,"operations":["add","replace","patch"],"required_resources":[BASE_PATH],"capabilities":["data."+VERSION]}
+	return {"id":VERSION,"domain":DOMAIN,"reference_domains":[DOMAIN],"operations":["add","replace","patch"],"required_resources":[BASE_PATH],"capabilities":["data."+VERSION]}
 
 func validate_resource_path(path: String) -> String:
 	var parts := path.split("/")
@@ -233,6 +247,9 @@ static func graph(resources: Dictionary) -> Dictionary:
 func validate_references(resources: Dictionary) -> Array:
 	var checked := graph(resources)
 	if resources.get(DOMAIN+":"+BASE_PATH,{}).get("records",{}).is_empty(): checked.issues.append({"source":DOMAIN,"target":BASE_PATH,"reason":"Required source catalog is empty."})
+	# Lookup keys only; authoritative records stay with DATA.
+	_index = checked.duplicate(true)
+	_index.ok = checked.issues.is_empty()
 	return checked.issues
 
 static func lookup(registry: RefCounted, path: String, id: String, use := "structural") -> Dictionary:
@@ -245,9 +262,9 @@ static func lookup(registry: RefCounted, path: String, id: String, use := "struc
 	return result
 
 static func lookup_mapping(registry: RefCounted, mapping: String) -> Dictionary:
-	var active: Dictionary = registry.active()
-	if active.is_empty(): return Formats.fail("before_readiness","Actual menu publication required.")
-	var matches: Array = graph(active.resources).mappings.get(mapping,[])
+	var index: Dictionary = registry.domain_index(DOMAIN)
+	if not index.ok: return index
+	var matches: Array = index.mappings.get(mapping,[])
 	if matches.is_empty(): return Formats.fail("missing","Mapping absent.",DOMAIN,0,"",mapping)
 	if matches.size() != 1: return Formats.fail("ambiguous","Mapping ambiguous.",DOMAIN,0,"",mapping)
 	var parts: PackedStringArray = str(matches[0]).split("#")
@@ -257,7 +274,9 @@ static func children(registry: RefCounted, path: String, id: String) -> Dictiona
 	var record := lookup(registry,path,id)
 	if not record.ok: return record
 	if record.record.value.kind != "faction": return Formats.fail("unsupported","Children require faction metadata.",path,0,id)
-	return {"ok":true,"children":graph(registry.active().resources).children.get(path+"#"+id,[]).duplicate(true),"semantic_ready":false}
+	var index: Dictionary = registry.domain_index(DOMAIN)
+	if not index.ok: return index
+	return {"ok":true,"children":index.children.get(path+"#"+id,[]).duplicate(true),"semantic_ready":false}
 
 static func table_row(registry: RefCounted, path: String, id: String, key: String) -> Dictionary:
 	var record := lookup(registry,path,id)

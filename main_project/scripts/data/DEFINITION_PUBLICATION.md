@@ -325,3 +325,31 @@ The [translation authoring operation](TRANSLATION_AUTHORING.md) publishes only
 separate authoring generations and never calls this registry's prepare/commit APIs
 or bypasses the active MOD/DATA lock. Runtime author CSV uses an explicit new codec
 column under the accepted real-CSV transport; existing brace syntax is unchanged.
+
+## M1 audit remediation — 2026-11-22
+
+Adapter declarations may specify `reference_domains: Array[String]`. DATA passes
+`validate_references` a detached resource dictionary containing those domains;
+absent domains remain absent. A declaration without this field retains the full
+catalog input. Invalid declarations reject registration. This scopes copies, not
+validation policy: each stock adapter declares all domains its validator reads.
+In particular layout includes geography/media, variants include layout/geography, and
+mod preferences include text catalogs. Validators remain synchronous and pure;
+no shared mutable owner catalog crosses this boundary.
+
+DATA transfers its private candidate into its private active slot at commitment,
+then returns the same detached public projection as before. CORE owns that return
+value without another duplicate. Public `active`, `projection`, `query` and
+`domain_index` results remain detached. No fallible step or adapter callback is
+introduced after durable profile commitment.
+
+Automatic startup with no setup/profile choice consumes the candidate just
+prepared in the same synchronous `check_content` stack. It reserves the exact DATA
+and formula tickets through the existing menu transaction. Interactive Continue
+still rebuilds from clean defaults and checks current package files, including
+edits made while setup was open. A prepared projection is never itself authority
+for admission. This qualifies the older statement that every Continue rebuilds:
+automatic startup has no intervening user callback or frame requiring a second
+identical preparation. Recovery, reservations, omissions and run locking retain
+their existing contracts. Diagnostic microsecond measurements are recorded in
+`definitions.timings`; they impose no new gameplay latency budget.

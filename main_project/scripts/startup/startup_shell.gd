@@ -9,6 +9,7 @@ var fixture: Dictionary = {}
 var registered_logger: StartupLaunchLogger
 var logging_status: Label
 var session_shell: RefCounted
+var startup_elapsed_usec := 0 # Diagnostic duration through initial route/render.
 var render_generation := 0
 var locale_editor: OptionButton
 var locale_status: Label
@@ -17,6 +18,7 @@ var preference_view: Control
 var authoring_view: Control
 
 func _ready() -> void:
+	var startup_started := Time.get_ticks_usec()
 	get_tree().auto_accept_quit = false
 	session_shell = preload("res://scripts/session/session_shell.gd").new(self)
 	var background := ColorRect.new()
@@ -44,64 +46,66 @@ func _ready() -> void:
 	inputs = launch_inputs()
 	if inputs.is_empty():
 		return
-	if fixture.is_empty() or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
+	# Combined verification retains every ordinary registration; only roots differ.
+	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["m1-composition","m1-composition_reload"]
+	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 		var resource_sources: Array = []
-		if not fixture.is_empty():
+		if fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 			var observation: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/layout_source_observation.json"))
 			resource_sources = observation.resource_sources
 		var registered: Dictionary = controller.providers.enable_layout_inputs(resource_sources)
 		if not registered.ok:
 			label("Layout registration failed: " + registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["variant-inputs","variant-inputs_reload"]:
+	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload"]:
 		var registered: Dictionary = controller.providers.enable_variant_inputs()
 		if not registered.ok:
 			label("Variant registration failed: " + registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","geography-inputs","layout-inputs","layout-inputs_reload"]:
+	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","geography-inputs","layout-inputs","layout-inputs_reload"]:
 		var registered: Dictionary = controller.providers.enable_geography_inputs()
 		if not registered.ok:
 			label("Geographic registration failed: " + registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["faction-quest-inputs","geography-inputs"]:
+	if ordinary_composition or fixture.get("mode") in ["faction-quest-inputs","geography-inputs"]:
 		var registered: Dictionary = controller.providers.enable_faction_quest_inputs()
 		if not registered.ok:
 			label("Faction/quest input registration failed: " + registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["item-spell-inputs","faction-quest-inputs","geography-inputs"]:
+	if ordinary_composition or fixture.get("mode") in ["item-spell-inputs","faction-quest-inputs","geography-inputs"]:
 		var registered: Dictionary = controller.providers.enable_item_spell_inputs()
 		if not registered.ok:
 			label("Item/spell input registration failed: " + registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["actor-inputs","item-spell-inputs","faction-quest-inputs","geography-inputs"]:
+	if ordinary_composition or fixture.get("mode") in ["actor-inputs","item-spell-inputs","faction-quest-inputs","geography-inputs"]:
 		var registered: Dictionary = controller.providers.enable_actor_inputs()
 		if not registered.ok:
 			label("Actor input registration failed: " + registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload","replacements","replacements_reload","native","native_reload","native-library"]:
+	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload","replacements","replacements_reload","native","native_reload","native-library"]:
 		var registered: Dictionary = controller.providers.enable_media_replacements()
 		if not registered.ok:
 			label("Media adapter registration failed: " + registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["translation-preferences", "translation-preferences_reload"]:
+	if ordinary_composition or fixture.get("mode") in ["translation-preferences", "translation-preferences_reload"]:
 		var registered: Dictionary = controller.providers.enable_mod_preferences()
 		if not registered.ok:
 			label(registered.reason)
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["text", "structured-text", "locale-fonts", "locale-fonts_reload", "translation-preferences", "translation-preferences_reload"]:
+	if ordinary_composition or fixture.get("mode") in ["text", "structured-text", "locale-fonts", "locale-fonts_reload", "translation-preferences", "translation-preferences_reload"]:
 		var registered: Dictionary = controller.providers.register_bundled_text()
 		if not registered.ok:
 			label("Bundled text registration failed: " + registered.reason)
 			essential_button("quit", func(): session_shell.request_quit())
 			return
-	if fixture.is_empty() or fixture.get("mode") in ["locale-fonts", "locale-fonts_reload", "translation-preferences", "translation-preferences_reload"]:
+	if ordinary_composition or fixture.get("mode") in ["locale-fonts", "locale-fonts_reload", "translation-preferences", "translation-preferences_reload"]:
 		var registered: Dictionary = controller.providers.enable_locale_fonts()
 		if not registered.ok:
 			label("Bundled font registration failed: " + registered.reason)
 			essential_button("quit", func(): session_shell.request_quit())
 			return
 		controller.providers.presentation.changed.connect(refresh_language_controls)
-	if fixture.is_empty() or fixture.get("mode") in ["structured-text", "locale-fonts", "locale-fonts_reload", "translation-preferences", "translation-preferences_reload"]:
+	if ordinary_composition or fixture.get("mode") in ["structured-text", "locale-fonts", "locale-fonts_reload", "translation-preferences", "translation-preferences_reload"]:
 		if not controller.providers.enable_structured_text():
 			label("Required structured text reader registration failed.")
 			essential_button("quit", func(): session_shell.request_quit())
@@ -120,6 +124,7 @@ func _ready() -> void:
 	registered_logger = controller.logger
 	OS.add_logger(registered_logger)
 	render()
+	startup_elapsed_usec = Time.get_ticks_usec()-startup_started
 	if not fixture.is_empty():
 		call_deferred("run_fixture")
 
@@ -497,6 +502,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/publication_cases.gd"
 	elif fixture.get("mode") == "publication_reload":
 		script_path = "res://tests/publication_reload_cases.gd"
+	if fixture.get("mode") in ["m1-composition","m1-composition_reload"]:
+		script_path = "res://tests/m1_composition_cases.gd"
 	var suite = load(script_path).new()
 	var returned: Variant = await suite.run(self, fixture)
 	# A failed fixture script must still terminate the owned process. Its original
@@ -508,7 +515,7 @@ func run_fixture() -> void:
 		var music_cleanup: Dictionary = await session_shell.music_playback.shutdown()
 		checks.native_cleanup = {"ok":video_cleanup.ok and music_cleanup.ok,"video":video_cleanup,"music":music_cleanup}
 		checks.ok = checks.ok and checks.native_cleanup.ok
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["m1-composition_reload", "variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()
