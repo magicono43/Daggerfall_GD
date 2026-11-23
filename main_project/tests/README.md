@@ -1,5 +1,16 @@
 # Shared verification — IMP-003 / DEV-014
 
+IMP-011 increment 3 uses independent `-Suite view-cursor -Fixture view-cursor-v1`
+headless/rendered selections. `view_cursor_inventory.json` freezes unique main and
+fresh-process assertion IDs. Production view/camera, source arbitration, smoothing,
+cursor, scoped placement/gesture/rays and stock preference handlers are exercised.
+Rendered-only checks qualify backend capture, actual HUD click refusal and camera
+geometry pixels. A fresh process independently opens the preserved pre-retry disk
+snapshot and the final saved response. Human view review uses `view_review.gd` and
+`prepare_view_review.ps1`; smoke entry is never a human PASS. See the
+[view contract](../scripts/input/VIEW_CURSOR.md) and
+[review checklist](../../design_docs/development/evidence/IMP-011-VIEW-REVIEW-2026-11-23.md).
+
 IMP-010 increment 3 uses `variant-inputs` / `variant-inputs-v1`:
 
 ```powershell

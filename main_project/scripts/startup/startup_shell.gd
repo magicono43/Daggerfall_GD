@@ -25,6 +25,7 @@ func _ready() -> void:
 	get_tree().auto_accept_quit = false
 	session_shell = preload("res://scripts/session/session_shell.gd").new(self)
 	var background := ColorRect.new()
+	background.name = "StartupBackdrop"
 	background.color = Color("17212a")
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -443,6 +444,7 @@ func choose_folder() -> void:
 func _process(_delta: float) -> void:
 	update_logging_warning()
 	if session_shell != null:
+		session_shell.view.advance(_delta)
 		var dispatched: Dictionary = session_shell.windows.dispatch()
 		if dispatched.get("action") == "options" and dispatched.kind == "dispatch":
 			if not close_editor():
@@ -467,6 +469,12 @@ func run_fixture() -> void:
 	var script_path := "res://tests/startup_cases.gd"
 	if fixture.get("mode") == "session":
 		script_path = "res://tests/session_cases.gd"
+	elif fixture.get("mode") == "view-cursor":
+		script_path = "res://tests/view_cursor_cases.gd"
+	elif fixture.get("mode") == "view-cursor_reload":
+		script_path = "res://tests/view_cursor_reload_cases.gd"
+	elif fixture.get("mode") == "view-review":
+		script_path = "res://tests/view_review.gd"
 	elif fixture.get("mode") == "binding-review":
 		script_path = "res://tests/binding_review.gd"
 	elif fixture.get("mode") == "binding-config_reload":
@@ -554,7 +562,7 @@ func run_fixture() -> void:
 		var music_cleanup: Dictionary = await session_shell.music_playback.shutdown()
 		checks.native_cleanup = {"ok":video_cleanup.ok and music_cleanup.ok,"video":video_cleanup,"music":music_cleanup}
 		checks.ok = checks.ok and checks.native_cleanup.ok
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["binding-config_reload", "m1-composition_reload", "variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["view-cursor_reload", "binding-config_reload", "m1-composition_reload", "variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

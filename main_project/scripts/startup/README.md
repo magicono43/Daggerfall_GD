@@ -1,5 +1,11 @@
 # Application settings extensions
 
+IMP-011 increment 3 extends controls response with compatible smoothing-time
+defaults and validated live view/cursor edits. The stock staged handlers publish
+input and view coherently; failed disk saves retain effective response with UNSAVED
+and Retry. Recreated view consumers receive effective values. The
+[view contract](../input/VIEW_CURSOR.md) documents bounds, recovery and ownership.
+
 `StartupSettingsOwner` owns versioned settings.ini recovery, accepted/effective/
 persisted values, staging verification, backups and publication. Declare settings,
 groups and extension hooks before `initialize`. Unknown entries are preserved

@@ -1,5 +1,31 @@
 # Verification run artifact cleanup
 
+## 2026-11-23 IMP-011 increment-3 verification
+
+Twenty inactive automated roots were compacted after all owned engines returned
+and ordinary non-elevated process inspection found no engine active. Checked
+absolute paths/reparse points and post-copy/post-delete hashes protected compact
+reports, logs, captures and settings evidence. Removed **25,537 files /
+4,164,903,468 logical bytes**; verified **244** retained scenario evidence hashes.
+An unused provisional review project/import cache was also removed (**1,221 files /
+207,154,184 bytes**), preserving four root identity/launcher/log files. Its human
+launcher was never invoked; no unique human inputs were present or deleted.
+
+Only `main_project/tests/.runs/imp011-view-review-2026-11-23-final/` remains as a
+full build for the new outstanding view/cursor keyboard/mouse checks, expiring on
+results or **2026-11-30**. Preserve future `project/tests/.runs/review-*` inputs,
+settings/logs/results and reviewed BUILD/launcher identity before compaction.
+The package is **207,279,862 bytes**. Final `.runs` retention measured
+**2,078,133,619 bytes (about 1.94 GiB)**, below the 2 GiB review trigger. Earlier
+unique human state, other-task evidence, installed tools and source/classic data
+remain protected. No cleanup failures remain; no automated full build remains.
+
+Exact local manifests are `main_project/tests/.runs/imp011-increment3-cleanup-final.json`
+and `main_project/tests/.runs/imp011-increment3/provisional-cleanup.json`. See
+[execution evidence](evidence/IMP-011-increment-3-2026-11-23.md) and the
+[new human checklist](evidence/IMP-011-VIEW-REVIEW-2026-11-23.md). All automated
+checks pass; human view acceptance and parent/real-provider gates remain open.
+
 ## 2026-11-23 IMP-011 increment-2 human review closure
 
 The user reports all six keyboard/mouse binding-editor checks **PASS**. The

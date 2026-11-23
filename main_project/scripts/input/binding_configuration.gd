@@ -34,8 +34,14 @@ static func defaults() -> Dictionary:
 	return {"version":1, "actions":actions, "analog":{"movement_pair":0, "look_pair":1, "movement_deadzone":0.15, "look_deadzone":0.10, "movement_invert":false, "look_invert":false}, "response":response_defaults()}
 
 static func response_defaults() -> Dictionary:
-	# Retained preferences for later owners. This increment applies no view/gait.
-	return {"mouse_x":0.10,"mouse_y":0.10,"mouse_invert":false,"mouse_smoothing":false,"controller_x":180.0,"controller_y":120.0,"controller_invert":false,"controller_smoothing":false,"keyboard_look":90.0,"keyboard_smoothing":false,"pitch_limit":89.0,"cursor_speed":800.0,"trigger_press":0.55,"trigger_release":0.45,"run_mode":"hold","sneak_mode":"hold","crouch_mode":"toggle"}
+	# Live view response; gait/posture remain retained until their owners exist.
+	return {"mouse_smoothing_seconds":0.08,"controller_smoothing_seconds":0.08,"keyboard_smoothing_seconds":0.08,"mouse_x":0.10,"mouse_y":0.10,"mouse_invert":false,"mouse_smoothing":false,"controller_x":180.0,"controller_y":120.0,"controller_invert":false,"controller_smoothing":false,"keyboard_look":90.0,"keyboard_smoothing":false,"pitch_limit":89.0,"cursor_speed":800.0,"trigger_press":0.55,"trigger_release":0.45,"run_mode":"hold","sneak_mode":"hold","crouch_mode":"toggle"}
+
+static func response_bounds() -> Dictionary:
+	return {"mouse_x":Vector2(0.001,10.0),"mouse_y":Vector2(0.001,10.0),"controller_x":Vector2(1.0,1440.0),"controller_y":Vector2(1.0,1440.0),"keyboard_look":Vector2(1.0,1440.0),"cursor_speed":Vector2(1.0,5000.0),"mouse_smoothing_seconds":Vector2(0.001,1.0),"controller_smoothing_seconds":Vector2(0.001,1.0),"keyboard_smoothing_seconds":Vector2(0.001,1.0)}
+
+static func editable_response() -> Array:
+	return response_bounds().keys() + ["mouse_invert","controller_invert","mouse_smoothing","controller_smoothing","keyboard_smoothing"]
 
 func declare_settings(owner: StartupSettingsOwner) -> void:
 	settings = owner
@@ -172,7 +178,11 @@ static func validate(candidate: Variant) -> Dictionary:
 		if typeof(value) != typeof(baseline): return {"ok":false,"reason":"Invalid response preference: " + field}
 		if value is float and (not is_finite(value) or value <= 0.0): return {"ok":false,"reason":"Invalid response rate: " + field}
 		if value is String and value not in ["hold","toggle"]: return {"ok":false,"reason":"Unsupported input mode: " + field}
-		if value != baseline: return {"ok":false,"reason":"Response/mode editing awaits its consuming increment: " + field}
+		if field in editable_response():
+			if response_bounds().has(field):
+				var bounds: Vector2 = response_bounds()[field]
+				if value < bounds.x or value > bounds.y: return {"ok":false,"reason":"Response out of range: " + field}
+		elif value != baseline: return {"ok":false,"reason":"Response/mode editing awaits its consuming increment: " + field}
 	if candidate.response.pitch_limit >= 90.0 or candidate.response.trigger_press > 1.0 or candidate.response.trigger_release >= candidate.response.trigger_press: return {"ok":false,"reason":"Invalid pitch or trigger thresholds."}
 	var overlap := conflicts(candidate)
 	return {"ok":overlap.is_empty(),"reason":"Resolve overlapping input assignments with Replace or Cancel." if not overlap.is_empty() else "", "conflicts":overlap}
@@ -186,6 +196,9 @@ func upgrade(value: Variant) -> Variant:
 	var result: Dictionary = value.duplicate(true)
 	var baseline := defaults()
 	if not result.has("response"): result.response = response_defaults()
+	if result.response is Dictionary:
+		for field: String in baseline.response:
+			if not result.response.has(field): result.response[field] = baseline.response[field]
 	var response_probe := baseline.duplicate(true)
 	response_probe.response = result.response
 	if not valid(response_probe):
@@ -296,6 +309,14 @@ func set_analog(edits: Dictionary) -> Dictionary:
 	for field: String in edits:
 		if not candidate.analog.has(field): return {"ok":false,"reason":"Unknown analog preference."}
 		candidate.analog[field] = edits[field]
+	return _stage(candidate)
+
+func set_response(edits: Dictionary) -> Dictionary:
+	var candidate := draft()
+	if candidate.is_empty(): return {"ok":false}
+	for field: String in edits:
+		if field not in editable_response(): return {"ok":false,"reason":"No current response consumer: " + field}
+		candidate.response[field] = edits[field]
 	return _stage(candidate)
 
 func _publish(values: Dictionary) -> bool:

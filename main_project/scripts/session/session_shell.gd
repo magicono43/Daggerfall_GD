@@ -5,6 +5,8 @@ const Windows = preload("res://scripts/session/window_stack.gd")
 var core := Lifecycle.new()
 var windows := Windows.new(core)
 var action_input := preload("res://scripts/input/action_input.gd").new(core, windows)
+var view: RefCounted
+var view_camera: Camera3D
 signal gameplay_edge(edge: Dictionary)
 signal gameplay_cancelled(report: Dictionary)
 var host: Control
@@ -91,6 +93,11 @@ func route_controls(event: InputEvent) -> bool:
 
 func _init(shell: Control) -> void:
 	host = shell
+	view_camera = Camera3D.new()
+	view_camera.name = "ResolvedLookCamera"
+	host.add_child(view_camera)
+	view_camera.current = true
+	view = preload("res://scripts/input/view_cursor.gd").new(action_input,host.get_viewport(),view_camera)
 	Input.joy_connection_changed.connect(controller_connection_changed)
 	action_input.controller_changed.connect(schedule_render)
 	action_input.cancelled.connect(func(report: Dictionary): gameplay_cancelled.emit(report))
@@ -180,6 +187,9 @@ func return_to_setup() -> void:
 func dispose() -> void:
 	Input.joy_connection_changed.disconnect(controller_connection_changed)
 	host.controller.controls.detach(action_input)
+	host.controller.controls.detach(view)
+	view.dispose()
+	view_camera.free()
 	if binding_editor != null: binding_editor.dispose()
 	host.controller.controls.dispose()
 	action_input.dispose()
@@ -242,6 +252,11 @@ func deliver_input() -> Array[Dictionary]:
 	var context := windows.context_generation
 	var scope := core.gates.session
 	var results: Array[Dictionary] = action_input.deliver(func(edge: Dictionary) -> Dictionary:
+		if edge.action in ["center_view","cursor_toggle"]:
+			if edge.kind == "started":
+				if edge.action == "center_view": view.center()
+				else: view.toggle()
+			return {"kind":"view_consumed"}
 		if Windows.PRIORITY.has(edge.action):
 			if edge.kind == "started": shortcuts.append(edge)
 			return {"kind":"shortcut_candidate"}
@@ -282,6 +297,8 @@ func options() -> void:
 		pause()
 
 func render() -> void:
+	var backdrop := host.get_node_or_null("StartupBackdrop")
+	if backdrop != null: backdrop.visible = core.gates.session.is_empty() or not windows.top().is_empty()
 	_render_pending = false
 	host.clear()
 	host.label("Daggerfall GD", 30)
@@ -292,6 +309,7 @@ func render() -> void:
 	var state := core.snapshot()
 	if host.controller.settings != null and host.controller.settings.accepted != null:
 		host.controller.controls.attach(action_input)
+		host.controller.controls.attach(view)
 		if binding_editor == null:
 			binding_editor = preload("res://scripts/input/binding_editor.gd").new(host.controller.controls,action_input,self)
 	if not message.is_empty():
@@ -386,7 +404,7 @@ func render() -> void:
 	if host.controller.providers.get("presentation") != null:
 		host.show_language_settings()
 	restore_focus()
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN if windows.top().get("data",{}).get("cursor")=="hidden" else Input.MOUSE_MODE_VISIBLE
+	view._sync()
 
 func restore_focus() -> void:
 	if windows.top().is_empty() and core.gates.gameplay_input():

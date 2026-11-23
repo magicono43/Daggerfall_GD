@@ -1,5 +1,13 @@
 # Session shell interfaces
 
+IMP-011 increment 3 adds the [production view/cursor owner](../input/VIEW_CURSOR.md).
+SessionShell composes its current Camera3D, consumes Center/Toggle edges and
+attaches input/view to the same effective controls map. Startup admits mouse motion
+after engine GUI refusal and advances view once per presentation update. Only the
+scoped view owner writes gameplay mouse mode; windows/focus/readiness provide its
+eligibility and cursor policy. Facing capture/restore and checked rays are provider
+interfaces, not a native SAVE/activation/COMBAT implementation.
+
 IMP-011 increment 1 composes [logical action delivery](../input/README.md) through
 these same CORE gates and UI context generations. Reserved recovery remains a
 separate UI route; gameplay edges/cancellation never grant simulation eligibility

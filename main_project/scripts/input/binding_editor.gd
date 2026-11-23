@@ -174,6 +174,26 @@ func render(host: Control) -> void:
 		check.button_pressed = analog[field]
 		host.panel.add_child(check)
 		check.toggled.connect(func(value: bool): owner.set_analog({field:value}))
+	host.label("View and cursor · live on Apply. Smoothing time is seconds.",16)
+	for field: String in Configuration.editable_response():
+		if draft.response[field] is bool:
+			var check := CheckBox.new()
+			check.name = field
+			check.text = field.capitalize().replace("_"," ")
+			check.button_pressed = draft.response[field]
+			host.panel.add_child(check)
+			check.toggled.connect(func(value: bool): owner.set_response({field:value}))
+		else:
+			var spin := SpinBox.new()
+			spin.name = field
+			var bounds: Vector2 = Configuration.response_bounds()[field]
+			spin.min_value = bounds.x
+			spin.max_value = bounds.y
+			spin.step = 0.001 if field.begins_with("mouse") or field.ends_with("seconds") else 1.0
+			spin.prefix = field.capitalize().replace("_"," ") + " "
+			spin.value = draft.response[field]
+			host.panel.add_child(spin)
+			spin.value_changed.connect(func(value: float): owner.set_response({field:value}))
 	host.button("Reset This Action",func(): owner.reset_action(action); shell.schedule_render())
 	host.button("Reset All Controls",func(): owner.reset_all(); shell.schedule_render())
 	host.button("Apply Controls",func(): owner.apply(); shell.schedule_render())

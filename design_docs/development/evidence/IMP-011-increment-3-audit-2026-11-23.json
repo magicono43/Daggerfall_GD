@@ -1,0 +1,1135 @@
+{
+  "runs": [
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 8,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 85,
+          "id": "view-cursor",
+          "observations": null
+        }
+      ],
+      "root": "verification-headless-e50c831e71be4bc6b00eca22a83fef9a",
+      "fixture": "view-cursor-v1",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Suite": "view-cursor",
+          "TimeoutSeconds": 120,
+          "Seed": null,
+          "InputSequence": "",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "view-cursor-v1",
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Clock": null
+        }
+      },
+      "mode": "headless",
+      "status": "passed",
+      "source_differences": [
+        "tools\\prepare_view_review.ps1",
+        "tests\\view_review.gd"
+      ],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "FD1C64752C0A86AA53E8C162CFF86E427ED4671A31E4D2BF2531273CF407C2FE",
+      "suite": "view-cursor"
+    },
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 0,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 119,
+          "id": "action-input",
+          "observations": {
+            "capacity_delivery_usec": 2156
+          }
+        }
+      ],
+      "root": "verification-headless-32a2cbb8773e45a79fde025c9f54b932",
+      "fixture": "action-input-v1",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Suite": "action-input",
+          "TimeoutSeconds": 120,
+          "Seed": null,
+          "InputSequence": "",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "action-input-v1",
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Clock": null
+        }
+      },
+      "mode": "headless",
+      "status": "passed",
+      "source_differences": [
+        "tools\\prepare_view_review.ps1",
+        "tests\\view_review.gd"
+      ],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "28B5204725658DD25A466DD9BB1776111FC9F42BF289A15C87B18938AF7A8502",
+      "suite": "action-input"
+    },
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 8,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 72,
+          "id": "binding-config",
+          "observations": {
+            "1000_indexed_ui_queries_usec": 2269,
+            "configuration_validation_usec": 11285
+          }
+        }
+      ],
+      "root": "verification-headless-8da3bcd53b70486aa008103067f850b7",
+      "fixture": "binding-config-v1",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Suite": "binding-config",
+          "TimeoutSeconds": 120,
+          "Seed": null,
+          "InputSequence": "",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "binding-config-v1",
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Clock": null
+        }
+      },
+      "mode": "headless",
+      "status": "passed",
+      "source_differences": [
+        "tools\\prepare_view_review.ps1",
+        "tests\\view_review.gd"
+      ],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "FB9C5E0E8C659957068B45BBAAE5391619DFB534EC68EB97E6A8807C6C41A3B2",
+      "suite": "binding-config"
+    },
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 0,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 2,
+          "id": "qualification",
+          "observations": null
+        },
+        {
+          "reload_assertions": 0,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 84,
+          "id": "startup",
+          "observations": null
+        },
+        {
+          "reload_assertions": 0,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 263,
+          "id": "session",
+          "observations": null
+        },
+        {
+          "reload_assertions": 12,
+          "status": "passed",
+          "reload_observations": {
+            "automatic_publication_phases": {
+              "intake_usec": 12111723,
+              "prepare_serial": 1,
+              "prepare_usec": 15347494,
+              "projection_usec": 758603,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 18786,
+                  "validate_usec": 1432
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 39080,
+                  "validate_usec": 28973
+                },
+                "geography.inputs": {
+                  "copy_usec": 400213,
+                  "validate_usec": 209459
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 203654,
+                  "validate_usec": 4348
+                },
+                "layout.inputs": {
+                  "copy_usec": 708567,
+                  "validate_usec": 126922
+                },
+                "media.assets": {
+                  "copy_usec": 355553,
+                  "validate_usec": 12
+                },
+                "mod.preferences": {
+                  "copy_usec": 220,
+                  "validate_usec": 7
+                },
+                "text.catalogs": {
+                  "copy_usec": 251,
+                  "validate_usec": 23
+                },
+                "text.fonts": {
+                  "copy_usec": 97,
+                  "validate_usec": 22
+                },
+                "world.variants": {
+                  "copy_usec": 710448,
+                  "validate_usec": 52380
+                }
+              }
+            },
+            "initial_startup_usec": 17683530,
+            "memory_peak_bytes": 1789599561,
+            "memory_static_bytes": 1781838271
+          },
+          "assertions": 33,
+          "id": "m1-composition",
+          "observations": {
+            "commit_phases": {
+              "intake_usec": 9525845,
+              "prepare_serial": 3,
+              "prepare_usec": 12589534,
+              "projection_usec": 652935,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 18108,
+                  "validate_usec": 1555
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 79152,
+                  "validate_usec": 44130
+                },
+                "geography.inputs": {
+                  "copy_usec": 396295,
+                  "validate_usec": 211234
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 200638,
+                  "validate_usec": 4592
+                },
+                "layout.inputs": {
+                  "copy_usec": 641079,
+                  "validate_usec": 127749
+                },
+                "media.assets": {
+                  "copy_usec": 318081,
+                  "validate_usec": 13
+                },
+                "mod.preferences": {
+                  "copy_usec": 219,
+                  "validate_usec": 8
+                },
+                "text.catalogs": {
+                  "copy_usec": 236,
+                  "validate_usec": 25
+                },
+                "text.fonts": {
+                  "copy_usec": 92,
+                  "validate_usec": 25
+                },
+                "world.variants": {
+                  "copy_usec": 649988,
+                  "validate_usec": 48953
+                }
+              }
+            },
+            "commit_usec": 14469697,
+            "faction_query_usec": 1186,
+            "initial_startup_usec": 205862,
+            "memory_peak_bytes": 2339304518,
+            "memory_static_bytes": 1784448589,
+            "selection_phases": {
+              "intake_usec": 15450843,
+              "prepare_serial": 1,
+              "prepare_usec": 20397735,
+              "projection_usec": 815143,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 34131,
+                  "validate_usec": 2610
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 92765,
+                  "validate_usec": 58937
+                },
+                "geography.inputs": {
+                  "copy_usec": 1962186,
+                  "validate_usec": 226061
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 203901,
+                  "validate_usec": 3809
+                },
+                "layout.inputs": {
+                  "copy_usec": 735536,
+                  "validate_usec": 137111
+                },
+                "media.assets": {
+                  "copy_usec": 361224,
+                  "validate_usec": 11
+                },
+                "mod.preferences": {
+                  "copy_usec": 226,
+                  "validate_usec": 9
+                },
+                "text.catalogs": {
+                  "copy_usec": 253,
+                  "validate_usec": 24
+                },
+                "text.fonts": {
+                  "copy_usec": 96,
+                  "validate_usec": 23
+                },
+                "world.variants": {
+                  "copy_usec": 696560,
+                  "validate_usec": 51155
+                }
+              }
+            },
+            "selection_usec": 23973611
+          }
+        }
+      ],
+      "root": "verification-headless-8af2bbe642dd47a5a802a49ba3da890b",
+      "fixture": "m1-v1",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Suite": "m1",
+          "TimeoutSeconds": 120,
+          "Seed": null,
+          "InputSequence": "",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "m1-v1",
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Clock": null
+        }
+      },
+      "mode": "headless",
+      "status": "passed",
+      "source_differences": [
+        "tools\\prepare_view_review.ps1",
+        "tests\\view_review.gd"
+      ],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "D76D1BC45D707F4F45AA4D4DCD3B893C0301E35114325343FF9CE4C6D586D694",
+      "suite": "m1"
+    },
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 12,
+          "status": "passed",
+          "reload_observations": {
+            "automatic_publication_phases": {
+              "intake_usec": 11684718,
+              "prepare_serial": 1,
+              "prepare_usec": 17436993,
+              "projection_usec": 747951,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 21027,
+                  "validate_usec": 1720
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 44376,
+                  "validate_usec": 29662
+                },
+                "geography.inputs": {
+                  "copy_usec": 403062,
+                  "validate_usec": 218890
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 205652,
+                  "validate_usec": 3593
+                },
+                "layout.inputs": {
+                  "copy_usec": 669900,
+                  "validate_usec": 119158
+                },
+                "media.assets": {
+                  "copy_usec": 332926,
+                  "validate_usec": 12
+                },
+                "mod.preferences": {
+                  "copy_usec": 225,
+                  "validate_usec": 8
+                },
+                "text.catalogs": {
+                  "copy_usec": 256,
+                  "validate_usec": 23
+                },
+                "text.fonts": {
+                  "copy_usec": 97,
+                  "validate_usec": 23
+                },
+                "world.variants": {
+                  "copy_usec": 3145135,
+                  "validate_usec": 97146
+                }
+              }
+            },
+            "initial_startup_usec": 19691071,
+            "memory_peak_bytes": 1789599601,
+            "memory_static_bytes": 1781838311
+          },
+          "assertions": 33,
+          "id": "m1-composition",
+          "observations": {
+            "commit_phases": {
+              "intake_usec": 9435905,
+              "prepare_serial": 3,
+              "prepare_usec": 12354377,
+              "projection_usec": 659399,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 17379,
+                  "validate_usec": 1415
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 40916,
+                  "validate_usec": 29923
+                },
+                "geography.inputs": {
+                  "copy_usec": 370800,
+                  "validate_usec": 202661
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 193618,
+                  "validate_usec": 3514
+                },
+                "layout.inputs": {
+                  "copy_usec": 615599,
+                  "validate_usec": 128751
+                },
+                "media.assets": {
+                  "copy_usec": 319552,
+                  "validate_usec": 11
+                },
+                "mod.preferences": {
+                  "copy_usec": 215,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 237,
+                  "validate_usec": 21
+                },
+                "text.fonts": {
+                  "copy_usec": 92,
+                  "validate_usec": 22
+                },
+                "world.variants": {
+                  "copy_usec": 612345,
+                  "validate_usec": 50581
+                }
+              }
+            },
+            "commit_usec": 14118452,
+            "faction_query_usec": 1286,
+            "initial_startup_usec": 284494,
+            "memory_peak_bytes": 2339304678,
+            "memory_static_bytes": 1784448749,
+            "selection_phases": {
+              "intake_usec": 12649029,
+              "prepare_serial": 1,
+              "prepare_usec": 18974357,
+              "projection_usec": 896940,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 15942,
+                  "validate_usec": 1444
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 41601,
+                  "validate_usec": 36046
+                },
+                "geography.inputs": {
+                  "copy_usec": 433500,
+                  "validate_usec": 217794
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 341668,
+                  "validate_usec": 5081
+                },
+                "layout.inputs": {
+                  "copy_usec": 993275,
+                  "validate_usec": 231752
+                },
+                "media.assets": {
+                  "copy_usec": 2777478,
+                  "validate_usec": 16
+                },
+                "mod.preferences": {
+                  "copy_usec": 392,
+                  "validate_usec": 10
+                },
+                "text.catalogs": {
+                  "copy_usec": 428,
+                  "validate_usec": 41
+                },
+                "text.fonts": {
+                  "copy_usec": 175,
+                  "validate_usec": 36
+                },
+                "world.variants": {
+                  "copy_usec": 807268,
+                  "validate_usec": 67147
+                }
+              }
+            },
+            "selection_usec": 23342963
+          }
+        }
+      ],
+      "root": "verification-headless-06917aeb918a4a2ea8966beff0e3ed1c",
+      "fixture": "m1-composition-v1",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Suite": "m1-composition",
+          "TimeoutSeconds": 120,
+          "Seed": null,
+          "InputSequence": "",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "m1-composition-v1",
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Clock": null
+        }
+      },
+      "mode": "headless",
+      "status": "passed",
+      "source_differences": [
+        "tools\\prepare_view_review.ps1"
+      ],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "9512BCF54865E09FFFD15C193F27314BBCF310E7FA96F6A531FE39912EE005C7",
+      "suite": "m1-composition"
+    },
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 8,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 89,
+          "id": "view-cursor",
+          "observations": null
+        }
+      ],
+      "root": "verification-rendered-cceda9a093e6402ea6e25f4609266e01",
+      "fixture": "view-cursor-v1",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "InputSequence": "",
+          "Suite": "view-cursor",
+          "Fixture": "view-cursor-v1",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Seed": null,
+          "Clock": null,
+          "TimeoutSeconds": 120,
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "mode": "rendered",
+      "status": "passed",
+      "source_differences": [
+        "tests\\view_review.gd",
+        "tools\\prepare_view_review.ps1"
+      ],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "265B941BD4B4EF2AD093473F74744F00144EE1E600BE5A6E47C4E7AD5E109EB1",
+      "suite": "view-cursor"
+    },
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 0,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 124,
+          "id": "action-input",
+          "observations": {
+            "capacity_delivery_usec": 2283
+          }
+        }
+      ],
+      "root": "verification-rendered-b14ce83468bf48bbb3daa48697b7ef43",
+      "fixture": "action-input-v1",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "InputSequence": "",
+          "Suite": "action-input",
+          "Fixture": "action-input-v1",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Seed": null,
+          "Clock": null,
+          "TimeoutSeconds": 120,
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "mode": "rendered",
+      "status": "passed",
+      "source_differences": [
+        "tests\\view_review.gd",
+        "tools\\prepare_view_review.ps1"
+      ],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "67708E2FE1FA1BB248068C762F3B86C20A59201A3B02DAE494D6F28744D680B6",
+      "suite": "action-input"
+    },
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 8,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 73,
+          "id": "binding-config",
+          "observations": {
+            "1000_indexed_ui_queries_usec": 2292,
+            "configuration_validation_usec": 11373
+          }
+        }
+      ],
+      "root": "verification-rendered-39166b2622f04086bdf30b060f88983e",
+      "fixture": "binding-config-v1",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "InputSequence": "",
+          "Suite": "binding-config",
+          "Fixture": "binding-config-v1",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Seed": null,
+          "Clock": null,
+          "TimeoutSeconds": 120,
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "mode": "rendered",
+      "status": "passed",
+      "source_differences": [
+        "tests\\view_review.gd",
+        "tools\\prepare_view_review.ps1"
+      ],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "760B5D09766E8F0FDA15E2CF160FB211E6AE8E6E7CEE60E0C28708C9FCEC3ED0",
+      "suite": "binding-config"
+    },
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 0,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 3,
+          "id": "qualification",
+          "observations": null
+        },
+        {
+          "reload_assertions": 0,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 92,
+          "id": "startup",
+          "observations": null
+        },
+        {
+          "reload_assertions": 0,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 264,
+          "id": "session",
+          "observations": null
+        },
+        {
+          "reload_assertions": 13,
+          "status": "passed",
+          "reload_observations": {
+            "automatic_publication_phases": {
+              "intake_usec": 12292503,
+              "prepare_serial": 1,
+              "prepare_usec": 15399340,
+              "projection_usec": 727916,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 15950,
+                  "validate_usec": 1422
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 38574,
+                  "validate_usec": 29066
+                },
+                "geography.inputs": {
+                  "copy_usec": 393412,
+                  "validate_usec": 200886
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 211171,
+                  "validate_usec": 4063
+                },
+                "layout.inputs": {
+                  "copy_usec": 681382,
+                  "validate_usec": 122419
+                },
+                "media.assets": {
+                  "copy_usec": 343075,
+                  "validate_usec": 12
+                },
+                "mod.preferences": {
+                  "copy_usec": 244,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 252,
+                  "validate_usec": 26
+                },
+                "text.fonts": {
+                  "copy_usec": 108,
+                  "validate_usec": 27
+                },
+                "world.variants": {
+                  "copy_usec": 676330,
+                  "validate_usec": 51411
+                }
+              }
+            },
+            "initial_startup_usec": 17730829,
+            "memory_peak_bytes": 1812991614,
+            "memory_static_bytes": 1805236052
+          },
+          "assertions": 34,
+          "id": "m1-composition",
+          "observations": {
+            "commit_phases": {
+              "intake_usec": 9982095,
+              "prepare_serial": 3,
+              "prepare_usec": 12876341,
+              "projection_usec": 669524,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 16872,
+                  "validate_usec": 1729
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 41191,
+                  "validate_usec": 28570
+                },
+                "geography.inputs": {
+                  "copy_usec": 360870,
+                  "validate_usec": 206485
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 190428,
+                  "validate_usec": 3498
+                },
+                "layout.inputs": {
+                  "copy_usec": 643776,
+                  "validate_usec": 123220
+                },
+                "media.assets": {
+                  "copy_usec": 307907,
+                  "validate_usec": 9
+                },
+                "mod.preferences": {
+                  "copy_usec": 217,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 232,
+                  "validate_usec": 19
+                },
+                "text.fonts": {
+                  "copy_usec": 93,
+                  "validate_usec": 19
+                },
+                "world.variants": {
+                  "copy_usec": 600709,
+                  "validate_usec": 49939
+                }
+              }
+            },
+            "commit_usec": 14846369,
+            "faction_query_usec": 1430,
+            "initial_startup_usec": 160148,
+            "memory_peak_bytes": 2362321727,
+            "memory_static_bytes": 1807496094,
+            "selection_phases": {
+              "intake_usec": 13905973,
+              "prepare_serial": 1,
+              "prepare_usec": 16786155,
+              "projection_usec": 696400,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 30031,
+                  "validate_usec": 2803
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 48035,
+                  "validate_usec": 28663
+                },
+                "geography.inputs": {
+                  "copy_usec": 362382,
+                  "validate_usec": 195432
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 177540,
+                  "validate_usec": 3466
+                },
+                "layout.inputs": {
+                  "copy_usec": 630488,
+                  "validate_usec": 119310
+                },
+                "media.assets": {
+                  "copy_usec": 311094,
+                  "validate_usec": 9
+                },
+                "mod.preferences": {
+                  "copy_usec": 213,
+                  "validate_usec": 7
+                },
+                "text.catalogs": {
+                  "copy_usec": 233,
+                  "validate_usec": 22
+                },
+                "text.fonts": {
+                  "copy_usec": 89,
+                  "validate_usec": 20
+                },
+                "world.variants": {
+                  "copy_usec": 609167,
+                  "validate_usec": 49403
+                }
+              }
+            },
+            "selection_usec": 20081592
+          }
+        }
+      ],
+      "root": "verification-rendered-539a101f75694eeda05b2b1bf61c9608",
+      "fixture": "m1-v1",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "InputSequence": "",
+          "Suite": "m1",
+          "Fixture": "m1-v1",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Seed": null,
+          "Clock": null,
+          "TimeoutSeconds": 120,
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "mode": "rendered",
+      "status": "passed",
+      "source_differences": [
+        "tests\\view_review.gd",
+        "tools\\prepare_view_review.ps1"
+      ],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "84DF0891F8BCDD6DDD5CA6223B06B1EC63B31982BD017E2423DA3A467FA93710",
+      "suite": "m1"
+    },
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 13,
+          "status": "passed",
+          "reload_observations": {
+            "automatic_publication_phases": {
+              "intake_usec": 11851775,
+              "prepare_serial": 1,
+              "prepare_usec": 14905168,
+              "projection_usec": 722624,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 15666,
+                  "validate_usec": 1320
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 36943,
+                  "validate_usec": 27784
+                },
+                "geography.inputs": {
+                  "copy_usec": 392749,
+                  "validate_usec": 200045
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 192653,
+                  "validate_usec": 3216
+                },
+                "layout.inputs": {
+                  "copy_usec": 668830,
+                  "validate_usec": 120498
+                },
+                "media.assets": {
+                  "copy_usec": 337260,
+                  "validate_usec": 11
+                },
+                "mod.preferences": {
+                  "copy_usec": 208,
+                  "validate_usec": 5
+                },
+                "text.catalogs": {
+                  "copy_usec": 229,
+                  "validate_usec": 21
+                },
+                "text.fonts": {
+                  "copy_usec": 90,
+                  "validate_usec": 22
+                },
+                "world.variants": {
+                  "copy_usec": 669481,
+                  "validate_usec": 50019
+                }
+              }
+            },
+            "initial_startup_usec": 17083001,
+            "memory_peak_bytes": 1812991654,
+            "memory_static_bytes": 1805236092
+          },
+          "assertions": 34,
+          "id": "m1-composition",
+          "observations": {
+            "commit_phases": {
+              "intake_usec": 9711044,
+              "prepare_serial": 3,
+              "prepare_usec": 12546162,
+              "projection_usec": 646720,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 16904,
+                  "validate_usec": 1401
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 40132,
+                  "validate_usec": 29246
+                },
+                "geography.inputs": {
+                  "copy_usec": 361673,
+                  "validate_usec": 207665
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 192508,
+                  "validate_usec": 3476
+                },
+                "layout.inputs": {
+                  "copy_usec": 606010,
+                  "validate_usec": 121578
+                },
+                "media.assets": {
+                  "copy_usec": 306776,
+                  "validate_usec": 10
+                },
+                "mod.preferences": {
+                  "copy_usec": 211,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 241,
+                  "validate_usec": 23
+                },
+                "text.fonts": {
+                  "copy_usec": 97,
+                  "validate_usec": 24
+                },
+                "world.variants": {
+                  "copy_usec": 592382,
+                  "validate_usec": 49238
+                }
+              }
+            },
+            "commit_usec": 14247531,
+            "faction_query_usec": 1156,
+            "initial_startup_usec": 161472,
+            "memory_peak_bytes": 2362321579,
+            "memory_static_bytes": 1807495946,
+            "selection_phases": {
+              "intake_usec": 11923335,
+              "prepare_serial": 1,
+              "prepare_usec": 14839571,
+              "projection_usec": 698383,
+              "validators": {
+                "actor.inputs": {
+                  "copy_usec": 16371,
+                  "validate_usec": 1425
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 39102,
+                  "validate_usec": 28648
+                },
+                "geography.inputs": {
+                  "copy_usec": 360491,
+                  "validate_usec": 203846
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 190973,
+                  "validate_usec": 3696
+                },
+                "layout.inputs": {
+                  "copy_usec": 632825,
+                  "validate_usec": 124594
+                },
+                "media.assets": {
+                  "copy_usec": 316556,
+                  "validate_usec": 11
+                },
+                "mod.preferences": {
+                  "copy_usec": 226,
+                  "validate_usec": 8
+                },
+                "text.catalogs": {
+                  "copy_usec": 250,
+                  "validate_usec": 22
+                },
+                "text.fonts": {
+                  "copy_usec": 94,
+                  "validate_usec": 22
+                },
+                "world.variants": {
+                  "copy_usec": 625381,
+                  "validate_usec": 51936
+                }
+              }
+            },
+            "selection_usec": 18040938
+          }
+        }
+      ],
+      "root": "verification-rendered-7a630fd59a0249318829e191e1e71e08",
+      "fixture": "m1-composition-v1",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "InputSequence": "",
+          "Suite": "m1-composition",
+          "Fixture": "m1-composition-v1",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Seed": null,
+          "Clock": null,
+          "TimeoutSeconds": 120,
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "mode": "rendered",
+      "status": "passed",
+      "source_differences": [
+        "tools\\prepare_view_review.ps1"
+      ],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "C44B20DF6D28450DF772125BA421757ED67370200D47BA92812CCC79FB9E242D",
+      "suite": "m1-composition"
+    },
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 8,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 85,
+          "id": "view-cursor",
+          "observations": null
+        }
+      ],
+      "root": "verification-headless-ffd3e2060a554f40a2cb57ffdb3e2210",
+      "fixture": "view-cursor-v1",
+      "command": {
+        "arguments": {
+          "Scenario": [],
+          "Seed": null,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Suite": "view-cursor",
+          "Clock": null,
+          "InputSequence": "",
+          "TimeoutSeconds": 120,
+          "Fixture": "view-cursor-v1",
+          "ClassicSource": ""
+        },
+        "command": "./main_project/tools/verify_headless.ps1"
+      },
+      "mode": "headless",
+      "status": "passed",
+      "source_differences": [],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "076E936D9B9FAC1415E40AF591C28FEAFAC2429E08B4BB4E57E5DD234373088D",
+      "suite": "view-cursor"
+    },
+    {
+      "scenarios": [
+        {
+          "reload_assertions": 8,
+          "status": "passed",
+          "reload_observations": null,
+          "assertions": 89,
+          "id": "view-cursor",
+          "observations": null
+        }
+      ],
+      "root": "verification-rendered-39db96db9b6b4b66818d0531d44a4584",
+      "fixture": "view-cursor-v1",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "Seed": null,
+          "TimeoutSeconds": 120,
+          "ClassicSource": "",
+          "InputSequence": "",
+          "Suite": "view-cursor",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Fixture": "view-cursor-v1",
+          "Scenario": [],
+          "Clock": null
+        }
+      },
+      "mode": "rendered",
+      "status": "passed",
+      "source_differences": [],
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report_sha256": "C3964219BCD665DC810870659B9BB6572EF1CD1944B41AAE3282539C51BEE78D",
+      "suite": "view-cursor"
+    }
+  ],
+  "revision": "cff2df7f9b34337682af794d3c71ffc391d53121",
+  "human": "UNTESTED; review and acceptance open",
+  "production_hashes": {
+    "scripts/input/view_cursor.gd": "D92BC36CAD03EF856D9BDD36FB6F61B782E408DF7AB85AD9A5AAE5EDB59BCD58",
+    "tests/view_cursor_cases.gd": "5FCB25124A872165F0EF5F664B181143F263368482F53EA28C4CFE4FD077FEDA",
+    "tests/view_cursor_inventory.json": "4FD3AD67A1CB66494889732157E45A5ED6C075D9D6EDDE1104B491FC5C9B2D71",
+    "scripts/input/binding_editor.gd": "1560926C0F6C333665F57C2240FE7D519FC9913274B9CAEEDD3FF098A9B0DB74",
+    "scripts/input/binding_configuration.gd": "3D7CB19A2466F660610928956D3AFBE37BD906CCB2CA70AFE43F7D49CD9541E7",
+    "tests/view_review.gd": "C68467CFC0673B33C7696E63F61AB942D322591E81AAFB60F8CC35369CB23645",
+    "scripts/session/session_shell.gd": "0AC5DF0E33FB7313605B9630DC8512B093ECE3F9C41F6FBD6A3A685BE4F4A76B",
+    "scripts/input/action_input.gd": "EF36882547D49453EFFB5E629C2E542DF9E0AA86D79DA5727F82D676659378B5",
+    "scripts/startup/startup_shell.gd": "08E72B2BA595F7667227D278C14E2E745CE4349F342FD40D278ACBA1FEA11FB4",
+    "tests/view_cursor_reload_cases.gd": "76B4E20FE582A069C5B71BDF50BAEE22E349653FA08CD1CEB3117C833CD85E37",
+    "tools/verify.ps1": "44F38BD867053CA1A1DB8BA4F4F59C5279AB36B1BE61E4861A4BA9CB5C1A2CD9"
+  },
+  "schema": "imp011-view-cursor-audit-v1",
+  "physical_controller_ime": "User-deferred to later M2"
+}

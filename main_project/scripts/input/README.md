@@ -1,4 +1,15 @@
-# Action input — IMP-011 increments 1 and 2
+# Action input — IMP-011 increments 1, 2 and 3
+
+## View and cursor — increment 3
+
+The stock session now composes `view_cursor.gd` and its actual Camera3D. See
+[the view/cursor contract](VIEW_CURSOR.md) for response units/bounds, exact
+smoothing, source priority, cursor handoffs, scoped gesture/ray/placement interfaces,
+compatible preference additions and independent verification. The stock controls
+editor applies view response through the same application settings owner as input.
+The older increment-1/2 descriptions below describe their delivered source scopes;
+statements that view/cursor is unstarted or all response edits are rejected are
+superseded by increment 3. Gait/posture consumers remain undelivered.
 
 ## Application binding configuration — increment 2
 
@@ -235,3 +246,22 @@ Acceptance update, 2026-11-23: the user explicitly accepted increment 2 after al
 six editor checks passed. The increment-3 handoff is prepared; no view/cursor
 implementation begins in this chat. Parent/real-provider gates and physical
 controller/IME deferrals remain open.
+
+
+Human review follow-up, 2026-11-23: the user explicitly reports all six new keyboard/mouse view/cursor checks PASS. Increment 3 is ready for explicit acceptance; formal acceptance remains separate. The bottom-left text visible over Pause/Controls is the review-only diagnostic Label in tests/view_review.gd, outside the stock HUD/panel; this observation is recorded and requires no production change. Physical controller/IME deferrals and parent/real-provider gates remain unchanged.
+
+## Explicit acceptance and next handoff — 2026-11-23
+
+The user explicitly stated: "I accept what you have done in increment 3 and deem
+IMP-011 completed". **Increment 3 and IMP-011 are complete and user-accepted.**
+All six new keyboard/mouse view/cursor checks are user-reported PASS. This
+supersedes earlier acceptance-pending and parent-IMP-011-open statements.
+Physical controller/changed-host IME qualification remains explicitly deferred to
+later M2. Named real locomotion/activation/COMBAT/AV/SAVE joint checks and M2 remain
+open; task acceptance does not claim those providers delivered.
+
+At the user's request, the IMP-061 increment-1 assembly prompt is prepared at
+`design_docs/development/handoffs/IMP-061-INCREMENT-1-PROMPT.txt`. Issuing it in the
+destination chat authorizes that increment only; no IMP-061 implementation starts
+here. Accepted implementation remains uncommitted at preparation (HEAD cff2df7).
+Preserve the latest tree. The reviewed diagnostic overlay remains fixture-only.

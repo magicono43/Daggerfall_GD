@@ -3,6 +3,8 @@ extends RefCounted
 signal cancelled(report: Dictionary)
 signal failure(report: Dictionary)
 signal controller_changed
+signal invalidated(reason: String)
+signal mouse_motion(event: InputEventMouseMotion)
 const Bindings = preload("res://scripts/input/action_bindings.gd")
 const CAPACITY := 256 # Ordered logical edges, not physical events or physics frames.
 const DISCONNECT_OWNER := "action-input-disconnect"
@@ -89,6 +91,8 @@ func _retire(_scope: String) -> void:
 
 func invalidate(reason: String) -> void:
 	_epoch += 1
+	_accepted_axes.clear()
+	invalidated.emit(reason)
 	var pending := _queue.duplicate(true)
 	var delivered := _delivered_holds.values().duplicate(true)
 	_queue.clear()
@@ -149,7 +153,8 @@ func accept(event: InputEvent) -> bool:
 	_synchronize()
 	if event is InputEventMouseMotion:
 		if core.gates.gameplay_input() and not event.relative.is_zero_approx(): last_device = "keyboard_mouse"
-		return false # View/motion consumption belongs to increment 3.
+		if core.gates.gameplay_input(): mouse_motion.emit(event)
+		return false
 	if event is InputEventJoypadMotion:
 		if event.device != selected_controller or not _connected.has(event.device): return false
 		if event.axis not in [JOY_AXIS_TRIGGER_LEFT,JOY_AXIS_TRIGGER_RIGHT]:
@@ -218,6 +223,10 @@ func context_current(edge: Dictionary) -> bool:
 	_synchronize()
 	return core.gates.gameplay_input() and edge.get("session") == core.gates.session and edge.get("context") == windows.context_generation and edge.get("epoch") == _epoch
 
+func context_ticket() -> Dictionary:
+	_synchronize()
+	return {"session":core.gates.session,"context":windows.context_generation,"epoch":_epoch}
+
 func held(action: String) -> bool:
 	return core.gates.gameplay_input() and _logical.has(action)
 
@@ -268,6 +277,14 @@ func movement() -> Vector2:
 	if not directions.is_empty():
 		return Vector2(int(directions.has("strafe_right"))-int(directions.has("strafe_left")),int(directions.has("backward"))-int(directions.has("forward"))).limit_length()
 	return stick(false)
+
+func keyboard_look() -> Dictionary:
+	var directions := {}
+	if core.gates.gameplay_input():
+		for value: Dictionary in _physical.values():
+			if value.device == -1 and value.accepted and value.epoch == _epoch and value.action in ["turn_left","turn_right","look_up","look_down"]:
+				directions[value.action] = true
+	return {"held":not directions.is_empty(), "value":Vector2(int(directions.has("turn_right"))-int(directions.has("turn_left")),int(directions.has("look_down"))-int(directions.has("look_up")))}
 
 func _keyboard_movement_held() -> bool:
 	for value: Dictionary in _physical.values():
