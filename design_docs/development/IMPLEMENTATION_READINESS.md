@@ -1,5 +1,24 @@
 # Implementation readiness
 
+**IMP-016 increment 2 accepted / increment 3 handoff, 2026-11-24:** The user
+accepted increment 2; increments 1/2 are complete in their documented scopes.
+See [acceptance](evidence/IMP-016-INCREMENT-2-ACCEPTANCE-2026-11-24.md) and the
+[activity/collapse prompt](handoffs/IMP-016-INCREMENT-3-PROMPT.txt) prepared for
+another chat. Issuing it authorizes increment 3 only and its narrow supporting
+interfaces, not full unavailable owner systems. This handoff update starts no
+runtime work. Increment 4, parent IMP-016/M2 and named real-provider gates remain
+open. Earlier acceptance-pending statements are historical; raw audits remain unchanged.
+
+**IMP-016 increment 2 implemented and verified, 2026-11-24:** Scoped vital intake,
+actual applied outcomes, retained redelivery/acknowledgment, depletion accounting
+and checked records are delivered through composed CHAR/CORE. All ten final
+commands pass (2,907 assertions, including Windows debug/release in both modes).
+See [execution evidence](evidence/IMP-016-increment-2-2026-11-24.md) and
+[review](evidence/IMP-016-INCREMENT-2-REVIEW-2026-11-24.md). User acceptance is
+pending. Increment 1 remains accepted; increments 3–4, parent IMP-016/M2 and named
+real integrations remain open. Lethal intake rejects unchanged while its owner
+is unavailable. Earlier handoff-only notes retain their historical status.
+
 **IMP-016 increment 1 accepted / increment 2 handoff, 2026-11-24:** The user
 accepted the authoritative actor-state increment; see
 [acceptance](evidence/IMP-016-INCREMENT-1-ACCEPTANCE-2026-11-24.md). The

@@ -1,0 +1,722 @@
+{
+  "schema": "imp016-increment2-audit-v1",
+  "date": "2026-11-24",
+  "timezone": "America/New_York",
+  "base_commit": "dd1630270149df6555a46a98d621e568a8ec6eb4",
+  "initial_git_status": [],
+  "user_acceptance": "pending",
+  "parent_imp016_complete": false,
+  "m2_complete": false,
+  "native_save_ready": false,
+  "persistent_branch_counter_identity_ready": false,
+  "stock_gameplay_entry_ready": false,
+  "all_required_selected_checks_passed": true,
+  "commands": [
+    {
+      "pck_sha256": null,
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-80ae3e154a8f4b5b8c66ebc4275dc6d8",
+      "arguments": {
+        "TimeoutSeconds": 240,
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "actor-state",
+        "Fixture": "actor-state-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-80ae3e154a8f4b5b8c66ebc4275dc6d8\\report.json",
+      "elapsed_ms": 74415,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "assertions": 384.0,
+      "status": "passed",
+      "classic_child_hash_pairs_verified": 115,
+      "counts": [
+        {
+          "assertions": 384,
+          "mode": "actor-state"
+        }
+      ],
+      "executable_sha256": null,
+      "frozen_sources_verified": 800,
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "pck_sha256": null,
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-0d2e1f2a8eb243ff8e630af63e3ff665",
+      "arguments": {
+        "TimeoutSeconds": 240,
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "actor-state",
+        "Fixture": "actor-state-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-0d2e1f2a8eb243ff8e630af63e3ff665\\report.json",
+      "elapsed_ms": 80248,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "assertions": 390.0,
+      "status": "passed",
+      "classic_child_hash_pairs_verified": 115,
+      "counts": [
+        {
+          "assertions": 390,
+          "mode": "actor-state"
+        }
+      ],
+      "executable_sha256": null,
+      "frozen_sources_verified": 800,
+      "tool": "verify_rendered.ps1"
+    },
+    {
+      "pck_sha256": "E187500443C6FC0A0DCFA1A68F89A3C7FC9D938C632B323EABC4472A09A7804F",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-1f0001e9553748afbeb000632ce17e3e",
+      "arguments": {
+        "ActorState": true,
+        "Configuration": "debug",
+        "ClassicSource": "C:/Games/Daggerfall/arena2"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-1f0001e9553748afbeb000632ce17e3e\\result.json",
+      "elapsed_ms": 142535,
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "assertions": 774.0,
+      "status": "passed",
+      "classic_child_hash_pairs_verified": 230,
+      "counts": [
+        {
+          "assertions": 384,
+          "mode": "exported-headless"
+        },
+        {
+          "assertions": 390,
+          "mode": "exported-rendered"
+        }
+      ],
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "frozen_sources_verified": 278,
+      "tool": "verify_startup_export.ps1"
+    },
+    {
+      "pck_sha256": "CFE4F75802C634708FB19F14643D27A10B8451D79ED8337A067C424C4CD176E9",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-80b16e3e4ce14cf09c5aa6c88638299f",
+      "arguments": {
+        "ActorState": true,
+        "Configuration": "release",
+        "ClassicSource": "C:/Games/Daggerfall/arena2"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-80b16e3e4ce14cf09c5aa6c88638299f\\result.json",
+      "elapsed_ms": 131124,
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "assertions": 774.0,
+      "status": "passed",
+      "classic_child_hash_pairs_verified": 230,
+      "counts": [
+        {
+          "assertions": 384,
+          "mode": "exported-headless"
+        },
+        {
+          "assertions": 390,
+          "mode": "exported-rendered"
+        }
+      ],
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "frozen_sources_verified": 278,
+      "tool": "verify_startup_export.ps1"
+    },
+    {
+      "pck_sha256": null,
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-d3effec4efbd4c06bf670c9cfa28d23f",
+      "arguments": {
+        "TimeoutSeconds": 240,
+        "Suite": "session",
+        "Fixture": "m1-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-d3effec4efbd4c06bf670c9cfa28d23f\\report.json",
+      "elapsed_ms": 20837,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "assertions": 263.0,
+      "status": "passed",
+      "classic_child_hash_pairs_verified": 0,
+      "counts": [
+        {
+          "assertions": 263,
+          "mode": "session"
+        }
+      ],
+      "executable_sha256": null,
+      "frozen_sources_verified": 800,
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "pck_sha256": null,
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-7538bed3700b47ddb7663baa8ea0df9c",
+      "arguments": {
+        "TimeoutSeconds": 240,
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "formula",
+        "Fixture": "formula-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-7538bed3700b47ddb7663baa8ea0df9c\\report.json",
+      "elapsed_ms": 27769,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "assertions": 82.0,
+      "status": "passed",
+      "classic_child_hash_pairs_verified": 4,
+      "counts": [
+        {
+          "assertions": 82,
+          "mode": "formula"
+        }
+      ],
+      "executable_sha256": null,
+      "frozen_sources_verified": 800,
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "pck_sha256": null,
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-a5e60c86ff3541e782c0cd2a7b37977a",
+      "arguments": {
+        "TimeoutSeconds": 240,
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "formula-fault",
+        "Fixture": "formula-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-a5e60c86ff3541e782c0cd2a7b37977a\\report.json",
+      "elapsed_ms": 20325,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "assertions": 18.0,
+      "status": "passed",
+      "classic_child_hash_pairs_verified": 4,
+      "counts": [
+        {
+          "assertions": 18,
+          "mode": "formula-fault"
+        }
+      ],
+      "executable_sha256": null,
+      "frozen_sources_verified": 800,
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "pck_sha256": null,
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-55482aa77e264bbcbd60062e7caf5672",
+      "arguments": {
+        "TimeoutSeconds": 240,
+        "Suite": "randomness-session",
+        "Fixture": "randomness-session-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-55482aa77e264bbcbd60062e7caf5672\\report.json",
+      "elapsed_ms": 22348,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "assertions": 130.0,
+      "status": "passed",
+      "classic_child_hash_pairs_verified": 0,
+      "counts": [
+        {
+          "assertions": 115,
+          "mode": "randomness-session"
+        },
+        {
+          "assertions": 15,
+          "mode": "fresh-process"
+        }
+      ],
+      "executable_sha256": null,
+      "frozen_sources_verified": 800,
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "pck_sha256": null,
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-35c7ce628ad042d6a70037e2dae4f5e0",
+      "arguments": {
+        "TimeoutSeconds": 240,
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "m1-composition",
+        "Fixture": "m1-composition-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-35c7ce628ad042d6a70037e2dae4f5e0\\report.json",
+      "elapsed_ms": 90953,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "assertions": 45.0,
+      "status": "passed",
+      "classic_child_hash_pairs_verified": 230,
+      "counts": [
+        {
+          "assertions": 33,
+          "mode": "m1-composition"
+        },
+        {
+          "assertions": 12,
+          "mode": "fresh-process"
+        }
+      ],
+      "executable_sha256": null,
+      "frozen_sources_verified": 800,
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "pck_sha256": null,
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-94dd5eab36004abfa3848d219e5d041f",
+      "arguments": {
+        "TimeoutSeconds": 240,
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "m1-composition",
+        "Fixture": "m1-composition-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-94dd5eab36004abfa3848d219e5d041f\\report.json",
+      "elapsed_ms": 97384,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "assertions": 47.0,
+      "status": "passed",
+      "classic_child_hash_pairs_verified": 230,
+      "counts": [
+        {
+          "assertions": 34,
+          "mode": "m1-composition"
+        },
+        {
+          "assertions": 13,
+          "mode": "fresh-process"
+        }
+      ],
+      "executable_sha256": null,
+      "frozen_sources_verified": 800,
+      "tool": "verify_rendered.ps1"
+    }
+  ],
+  "actor_assertions": 2322.0,
+  "regression_assertions": 585.0,
+  "total_assertions": 2907.0,
+  "source_hashes": {
+    "tests/controlled_vital_consumer.gd": "1E6F5B747E9FE74BC54D7F543D6449DE69C80B25A2EFFB53810215665EA1C3CD",
+    "scripts/char/actor_state.gd": "4DB50C9A316B8923DA20E29D2735467B50B01D516CAD339916BC3F9232900DF0",
+    "tests/vital_mutation_cases.gd": "AAF19319D4F7CBF0BACC79BEC063BB4D64379EC87C1FFBCD6B578EA406552BAD",
+    "tests/actor_state_cases.gd": "700FFE4D66849E86B43E8419308644B31899E1D49D2B18F0A735A92834DC83F8",
+    "tests/actor_state_inventory.json": "1030BFAB843AAA38E9B1172BCC7C377BECDBE99776C8CE6A0862FEEF6A69B493",
+    "scripts/char/vital_records.gd": "9E97A639BB76A5B74C3502998A5DC9A5E245A93DF5073BA9E806EAABE6799DAB",
+    "scripts/session/session_lifecycle.gd": "11EEEF98A22D814D7076C4A158B19920F1A8B69B3B85F7E828B0065E7023710F"
+  },
+  "controlled_providers": [
+    "creation capture",
+    "clock",
+    "modifier-source eligibility",
+    "COMBAT/MAGIC/ITEM intake and continuation",
+    "lifecycle entry orchestration"
+  ],
+  "cleanup": [
+    {
+      "retained_evidence": 42,
+      "roots": 10,
+      "journal": "C:/Godot/Projects/Daggerfall_GD/main_project/tests/.runs/dungeon-cleanup-aafc69e8ca9f4712a6cce7bd4309d74e.json",
+      "removed_bytes": 2120842528,
+      "removed_files": 13595,
+      "failures": []
+    },
+    {
+      "retained_evidence": 14,
+      "roots": 3,
+      "journal": "C:/Godot/Projects/Daggerfall_GD/main_project/tests/.runs/dungeon-cleanup-7397df8fd0b2426da6cea959db550079.json",
+      "removed_bytes": 637335355,
+      "removed_files": 4127,
+      "failures": []
+    },
+    {
+      "retained_evidence": 16,
+      "roots": 3,
+      "journal": "C:/Godot/Projects/Daggerfall_GD/main_project/tests/.runs/dungeon-cleanup-75f504c922c04f82bd39c03293afbf3a.json",
+      "removed_bytes": 950381548,
+      "removed_files": 4805,
+      "failures": []
+    },
+    {
+      "retained_evidence": 70,
+      "roots": 10,
+      "journal": "C:/Godot/Projects/Daggerfall_GD/main_project/tests/.runs/dungeon-cleanup-751d6afbfdfa42a5a34714b18725ae06.json",
+      "removed_bytes": 2747435820,
+      "removed_files": 15032,
+      "failures": []
+    }
+  ],
+  "retained_run_bytes": 2574726656,
+  "build_assets": {
+    "content/media/banks/generaluser-gs-2.0.3.sf2": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+    "native/media/bin/media-runtime.sha256": "E2E9364493D2E877EAAB405CB2742539B9B45935345CB716A4A70D25F3C357CC",
+    "project.godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+    "native/media/bin/media_windows.dll": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+    "native/storage/bin/storage_windows.dll": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7"
+  },
+  "observations": {
+    "actor_count": 138,
+    "actor_projection_2000_usec": 249286,
+    "catalog_records": 33465,
+    "construct_128_actors_16_sources_256_contributions_usec": 779117,
+    "crowd_projection_1000_usec": 406764,
+    "final_publication_phases": {
+      "intake_usec": 9224057,
+      "prepare_serial": 3,
+      "prepare_usec": 11921051,
+      "projection_usec": 613846,
+      "validators": {
+        "actor.baseline": {
+          "copy_usec": 52,
+          "validate_usec": 3
+        },
+        "actor.inputs": {
+          "copy_usec": 15513,
+          "validate_usec": 1317
+        },
+        "faction-quest.inputs": {
+          "copy_usec": 37572,
+          "validate_usec": 28651
+        },
+        "geography.inputs": {
+          "copy_usec": 339882,
+          "validate_usec": 194830
+        },
+        "item-spell.inputs": {
+          "copy_usec": 182049,
+          "validate_usec": 3223
+        },
+        "layout.inputs": {
+          "copy_usec": 563280,
+          "validate_usec": 122745
+        },
+        "media.assets": {
+          "copy_usec": 299312,
+          "validate_usec": 10
+        },
+        "mod.preferences": {
+          "copy_usec": 207,
+          "validate_usec": 5
+        },
+        "text.catalogs": {
+          "copy_usec": 225,
+          "validate_usec": 20
+        },
+        "text.fonts": {
+          "copy_usec": 93,
+          "validate_usec": 22
+        },
+        "world.variants": {
+          "copy_usec": 559424,
+          "validate_usec": 48728
+        }
+      }
+    },
+    "invalid_hook_recheck_usec": 761467,
+    "publication_phases": {},
+    "selection_usec": 615091,
+    "source_count_per_crowd_actor": 16,
+    "vital_mutations": {
+      "dense_mutation_1000_usec": 134188,
+      "initial": {
+        "fatigue": 9280,
+        "health": 31,
+        "magicka": 102
+      },
+      "mutation_1000_usec": 135809,
+      "pending_record": {
+        "actor": "vital-exhaustion-new",
+        "attributes": {
+          "agility": 50,
+          "endurance": 50,
+          "intelligence": 51,
+          "luck": 50,
+          "personality": 50,
+          "speed": 50,
+          "strength": 95,
+          "willpower": 50
+        },
+        "base_health": 31,
+        "breath": {
+          "policy": "activity-owner-pending",
+          "reserve": null,
+          "state": "uninitialized"
+        },
+        "career": "class-00",
+        "choices": {
+          "answers": [],
+          "custom_career": {},
+          "outcomes": [],
+          "template": "fixture"
+        },
+        "content": 3,
+        "current": {
+          "fatigue": 0,
+          "health": 31,
+          "magicka": 102
+        },
+        "identity": {
+          "biography": "biog00t0",
+          "creation_receipt": "controlled-capture-v1",
+          "gender": "female",
+          "name": "Controlled capture",
+          "portrait": "fixture-portrait",
+          "race": "breton",
+          "reflexes": "average"
+        },
+        "obligations": [],
+        "progression": {
+          "activity_baseline": {
+            "instant": 0,
+            "provider": "controlled-clock-v1",
+            "unit": "game-millisecond"
+          },
+          "actual_level": 1,
+          "current_sum": 60,
+          "earned_target": 1,
+          "last_advancement": {
+            "instant": 0,
+            "provider": "controlled-clock-v1",
+            "unit": "game-millisecond"
+          },
+          "pending": [],
+          "policy": {
+            "mode": "vanilla-ranked-v1",
+            "schema": "captured-progression-policy-v1"
+          },
+          "practice": {
+            "added-skill": 0,
+            "alteration": 0,
+            "archery": 0,
+            "axe": 0,
+            "backstabbing": 0,
+            "blunt-weapon": 0,
+            "centaurian": 0,
+            "climbing": 0,
+            "critical-strike": 0,
+            "daedric": 0,
+            "destruction": 0,
+            "dodging": 0,
+            "dragonish": 0,
+            "etiquette": 0,
+            "giantish": 0,
+            "hand-to-hand": 0,
+            "harpy": 0,
+            "illusion": 0,
+            "impish": 0,
+            "jumping": 0,
+            "lockpicking": 0,
+            "long-blade": 0,
+            "medical": 0,
+            "mercantile": 0,
+            "mysticism": 0,
+            "nymph": 0,
+            "orcish": 0,
+            "pickpocket": 0,
+            "restoration": 0,
+            "running": 0,
+            "short-blade": 0,
+            "spriggan": 0,
+            "stealth": 0,
+            "streetwise": 0,
+            "swimming": 0,
+            "thaumaturgy": 0
+          },
+          "progression_skills": [
+            "mysticism",
+            "alteration",
+            "thaumaturgy",
+            "illusion",
+            "destruction",
+            "restoration",
+            "medical",
+            "short-blade",
+            "blunt-weapon",
+            "dragonish",
+            "daedric",
+            "dodging"
+          ],
+          "retained_outcomes": [],
+          "s0": 60,
+          "training": {
+            "state": "never"
+          }
+        },
+        "required_sources": {},
+        "revision": 2,
+        "schema": "actor-state-v2",
+        "session": "session-9",
+        "skills": {
+          "added-skill": 10,
+          "alteration": 10,
+          "archery": 10,
+          "axe": 10,
+          "backstabbing": 10,
+          "blunt-weapon": 10,
+          "centaurian": 10,
+          "climbing": 10,
+          "critical-strike": 10,
+          "daedric": 10,
+          "destruction": 10,
+          "dodging": 10,
+          "dragonish": 10,
+          "etiquette": 10,
+          "giantish": 10,
+          "hand-to-hand": 10,
+          "harpy": 10,
+          "illusion": 10,
+          "impish": 10,
+          "jumping": 10,
+          "lockpicking": 10,
+          "long-blade": 10,
+          "medical": 10,
+          "mercantile": 10,
+          "mysticism": 10,
+          "nymph": 10,
+          "orcish": 10,
+          "pickpocket": 10,
+          "restoration": 10,
+          "running": 10,
+          "short-blade": 10,
+          "spriggan": 10,
+          "stealth": 10,
+          "streetwise": 10,
+          "swimming": 10,
+          "thaumaturgy": 10
+        },
+        "vitals": {
+          "next_transition": 1,
+          "pending_count": 1,
+          "receipt_count": 1,
+          "receipts": {
+            "magic-intake": {
+              "operation-85": {
+                "acknowledged": false,
+                "request": {
+                  "action": "spend",
+                  "actor": "vital-exhaustion-new",
+                  "amount": 9280,
+                  "attribution": {
+                    "cause": "controlled-intake",
+                    "component": "component-1",
+                    "source": "controlled-source"
+                  },
+                  "caller": "magic-intake",
+                  "content": 3,
+                  "operation": "operation-85",
+                  "pool": "fatigue",
+                  "revision": 1,
+                  "schema": "vital-intake-v1",
+                  "session": "session-9",
+                  "unit": "internal-64"
+                },
+                "result": {
+                  "action": "spend",
+                  "actor": "vital-exhaustion-new",
+                  "after": 0,
+                  "applied": 9280,
+                  "attribution": {
+                    "cause": "controlled-intake",
+                    "component": "component-1",
+                    "source": "controlled-source"
+                  },
+                  "before": 9280,
+                  "caller": "magic-intake",
+                  "continuation_allowed": false,
+                  "kind": "applied",
+                  "maximum": 9280,
+                  "ok": true,
+                  "operation": "operation-85",
+                  "phase": "committed",
+                  "pool": "fatigue",
+                  "remainder": 0,
+                  "requested": 9280,
+                  "revision": 2,
+                  "schema": "applied-vital-v1",
+                  "session": "session-9",
+                  "transition_pending": true,
+                  "unit": "internal-64"
+                }
+              }
+            }
+          },
+          "schema": "vital-retention-v1",
+          "transitions": {
+            "1": {
+              "after": 0,
+              "before": 9280,
+              "context": {
+                "attribution": {
+                  "cause": "controlled-intake",
+                  "component": "component-1",
+                  "source": "controlled-source"
+                },
+                "caller": "magic-intake",
+                "kind": "vital-intake",
+                "operation": "operation-85"
+              },
+              "outcome": "owner-unavailable",
+              "pending": true,
+              "pool": "fatigue"
+            }
+          }
+        }
+      },
+      "retained_lookup_2000_usec": 124499,
+      "source": "controlled intake consumers; real CHAR/CORE/DATA/RULE"
+    }
+  },
+  "review": {
+    "inspected": "Actual final composed surface visually inspected; diagnostic, not UI-006",
+    "retained": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-0d2e1f2a8eb243ff8e630af63e3ff665\\evidence\\project\\scenario-1\\vital-intake-review.png",
+    "original": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-0d2e1f2a8eb243ff8e630af63e3ff665\\project\\tests\\.runs\\scenario-1\\vital-intake-review.png",
+    "sha256": "9F01F706F21D3EED04A34BFF442F02588545430198DAC917947CC9E79B1A3B18"
+  },
+  "remaining_gates": [
+    "increment-2 user acceptance",
+    "increments 3 and 4",
+    "parent IMP-016",
+    "M2",
+    "real COMBAT/MAGIC/ITEM ordered settlement",
+    "MOVE activity/practice/recovery/breath",
+    "collapse",
+    "prevention and confirmed death",
+    "AV/UI-006",
+    "creation/CORE-012 grants",
+    "TIME",
+    "progression/training/rewards",
+    "equipment/effect lifecycle",
+    "native SAVE/restore",
+    "GAD-01 branch-counter identity",
+    "complete entry",
+    "IMP-050/051 executable runtimes"
+  ],
+  "increment1_audit_sha256": "9ADF1891049AA2F4B88C1329B40761D857D51D3D375625BCB25AB76989E74A24",
+  "changed_files": [
+    " M design_docs/development/IMPLEMENTATION_READINESS.md",
+    " M design_docs/development/MILESTONES.md",
+    " M design_docs/development/RUN_ARTIFACT_CLEANUP.md",
+    " M design_docs/development/TASK_BACKLOG.md",
+    " M design_docs/development/tasks/IMP-016.md",
+    " M main_project/content/actors/PROVENANCE.md",
+    " M main_project/scripts/char/README.md",
+    " M main_project/scripts/char/actor_state.gd",
+    " M main_project/scripts/session/README.md",
+    " M main_project/scripts/session/session_lifecycle.gd",
+    " M main_project/tests/actor_state_cases.gd",
+    " M main_project/tests/actor_state_inventory.json",
+    "?? design_docs/development/evidence/IMP-016-INCREMENT-2-REVIEW-2026-11-24.md",
+    "?? design_docs/development/evidence/IMP-016-increment-2-2026-11-24.audit.json",
+    "?? design_docs/development/evidence/IMP-016-increment-2-2026-11-24.md",
+    "?? main_project/scripts/char/VITAL_INTAKE.md",
+    "?? main_project/scripts/char/vital_records.gd",
+    "?? main_project/tests/controlled_vital_consumer.gd",
+    "?? main_project/tests/vital_mutation_cases.gd"
+  ]
+}

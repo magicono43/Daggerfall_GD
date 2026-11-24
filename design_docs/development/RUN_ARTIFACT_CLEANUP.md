@@ -1,5 +1,33 @@
 # Verification run artifact cleanup
 
+## 2026-11-24 IMP-016 increment 2
+
+All ten final selected commands passed before final compaction. Four batches
+checked ordinary process inactivity, terminal reports, exact workspace containment
+and reparse points for 26 explicitly owned development/qualification roots.
+Removed **37,559 reproducible files /6,455,995,251 bytes**, preserving **142
+hash-verified child reports/logs/captures** plus root source/build identities and
+the compact schema-debugging input/scripts. No task-owned complete project,
+export, dependency copy or import cache remains. Installed template links were
+unlinked without following or changing their targets; no cleanup failures remain.
+
+Final logical `.runs` retention was **2,574,726,656 bytes (about 2.40 GiB)** before
+small final report writes. The guide's 2 GiB review trigger was reviewed: the
+largest consumers are protected prior human-review state (209,339,669 bytes) and
+earlier compact evidence. Those roots and unique inputs remain untouched; only
+this task's understood outputs were compacted. No external/classic/reference
+input, installed tool, security setting or authoritative file was removed.
+
+Exact manifests are `dungeon-cleanup-aafc69e8ca9f4712a6cce7bd4309d74e.json`,
+`dungeon-cleanup-7397df8fd0b2426da6cea959db550079.json`,
+`dungeon-cleanup-75f504c922c04f82bd39c03293afbf3a.json` and
+`dungeon-cleanup-751d6afbfdfa42a5a34714b18725ae06.json`, under
+`main_project/tests/.runs/`. Final qualification and retention summaries are under
+`main_project/tests/.runs/imp016-increment2-2026-11-24/`. See
+[execution evidence](evidence/IMP-016-increment-2-2026-11-24.md), its machine audit
+and readable review. User acceptance, parent IMP-016/M2 and named real-owner gates
+remain open.
+
 ## 2026-11-24 IMP-016 increment 1
 
 Thirty-five explicitly owned completed roots were compacted after ordinary

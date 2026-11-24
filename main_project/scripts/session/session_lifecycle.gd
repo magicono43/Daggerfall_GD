@@ -40,6 +40,7 @@ var _cleanup_serial := 0
 var _startup_ready := false
 var _finishing := false
 var _formula_bindings: Dictionary = {}
+var _vital_bindings: Dictionary = {}
 
 func _init(material_provider: Callable = Callable()) -> void:
 	randomness = preload("res://scripts/rule/session_randomness.gd").new(gates, material_provider)
@@ -200,6 +201,7 @@ func _cleanup_scope(scope: String, purpose: String) -> void:
 		_commit({"status": "ending", "ready": false}, "scope retiring")
 		randomness.retire(scope)
 		_formula_bindings.clear()
+		_vital_bindings.clear()
 		retiring.emit(scope) # UI disconnects and retires session-owned requests first.
 		gates.retire(scope)
 	var checked: Dictionary = provider.cleanup(cleanup_ticket.duplicate(true), scope)
@@ -299,6 +301,11 @@ func complete_readiness(value: Dictionary, result: Dictionary) -> bool:
 		_commit({"ready":false,"phase":"replacement"},formula_bindings.reason)
 		_cleanup_scope(_state.session,"failure")
 		return true
+	var vital_bindings := _validate_vital_bindings(result.services)
+	if not vital_bindings.ok:
+		_commit({"ready":false,"phase":"replacement"},vital_bindings.reason)
+		_cleanup_scope(_state.session,"failure")
+		return true
 	var activated: Dictionary = randomness.activate(_operation.random_ticket, _state.session, result.services)
 	if not activated.ok:
 		_commit({"ready": false, "phase": "replacement"}, activated.reason)
@@ -311,6 +318,7 @@ func complete_readiness(value: Dictionary, result: Dictionary) -> bool:
 			_cleanup_scope(_state.session, "failure")
 			return true
 	_formula_bindings = formula_bindings.bindings
+	_vital_bindings = vital_bindings.bindings
 	randomness.suspend_operation(false)
 	_death_authority = result.get("death_authority")
 	_commit({"status": "alive", "ready": true, "phase": "ready"}, "session ready", "session_restored" if _operation.intent.mode == "load" else "new_session_ready")
@@ -364,6 +372,26 @@ func formula_owner_valid(scope: String, owner: Object, hook: String) -> bool:
 		return false
 	var binding: Dictionary = _formula_bindings.get(owner.get_instance_id(),{})
 	return not binding.is_empty() and binding.owner.get_ref() == owner and hook in binding.hooks
+
+func _validate_vital_bindings(services: Array) -> Dictionary:
+	var bindings := {}
+	var identities := {}
+	for service: Dictionary in services:
+		if not service.has("vital_intake"): continue
+		var id: Variant = service.vital_intake
+		var owner: Object = service.get("provider")
+		if not id is String or not preload("res://scripts/mod/package_library.gd").valid_id(id) or identities.has(id) or service.owner not in ["COMBAT","MAGIC","ITEM","CHAR"] or service.lifetime != "session" or not is_instance_valid(owner) or not owner.has_method("vital_operation_current") or bindings.has(owner.get_instance_id()):
+			return {"ok":false,"reason":"Vital intake requires one explicit eligible session owner binding and stable consumer handle."}
+		identities[id] = true
+		bindings[owner.get_instance_id()] = {"owner":weakref(owner),"id":id,"domain":service.owner}
+	return {"ok":true,"bindings":bindings}
+
+func vital_consumer(scope: String, owner: Object, id: String) -> Dictionary:
+	if not is_instance_valid(owner) or scope.is_empty() or scope != _state.session or not _state.ready or _state.status != "alive" or not gates.safe or busy() or _publishing or _finishing:
+		return {}
+	var binding: Dictionary = _vital_bindings.get(owner.get_instance_id(),{})
+	if binding.is_empty() or binding.owner.get_ref() != owner or binding.id != id: return {}
+	return {"id":id,"domain":binding.domain}
 
 func required_service_lost(scope: String, role: String) -> bool:
 	if scope != _state.session or scope.is_empty() or _state.status == "ending":
@@ -475,6 +503,7 @@ func dispose() -> void:
 	actors.dispose()
 	randomness.dispose()
 	_formula_bindings.clear()
+	_vital_bindings.clear()
 	formulas = null
 	preferences = null
 	for event: Signal in [state_changed, milestone, terminal, retiring, diagnostic, gates.changed]:

@@ -31,3 +31,12 @@ all other career/creation/biography/appearance semantics remain external gates.
 CLASS18/enemy source-only metadata, ambiguous FLATS alternatives and the accepted
 guarded BIOG correction remain unchanged. No structural semantic_ready flag is
 globally enabled. Original/reference/base inputs remain read-only.
+
+## IMP-016 vital intake, 2026-11-24
+
+The increment-2 request/retention schemas and admission/continuation interfaces
+are project-authored engineering contracts implementing approved CHAR-018/023
+and GAD-02/03/09. They add no source data, copied DFU code, balance parameter,
+library or formula hook. Existing numeric DATA/MOD/loose precedence and licensing
+remain unchanged. Unavailable lethal ownership rejects intake unchanged; this
+does not qualify prevention, death, collapse, native SAVE or executable mods.

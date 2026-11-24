@@ -1,5 +1,13 @@
 # Session shell interfaces
 
+IMP-016 increment 2 adds explicit session `vital_intake` consumer declarations.
+CORE binds actual COMBAT/MAGIC/ITEM/CHAR providers and stable scope-local consumer
+handles at readiness; arbitrary request labels or observers confer no authority.
+Bindings retire with the session and remain distinct from pure formula bindings.
+CHAR owns current pools and retained results, with requester-scoped input,
+simulation and save holds for unresolved zero/fatigue outcomes. Lethal intake is
+currently unavailable and rejected unchanged. See [vital intake](../char/VITAL_INTAKE.md).
+
 IMP-016 increment 1 composes `core.actors`, the [CHAR baseline authority](../char/README.md),
 using the same application's DATA/formula registries. CORE admits its pure actor
 helpers under the exact safe baseline/initialization ticket before full readiness.

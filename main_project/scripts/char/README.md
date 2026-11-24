@@ -1,4 +1,10 @@
-# CHAR baseline owner — IMP-016 increment 1
+# CHAR actor owner — IMP-016 increments 1–2
+
+Increment 2 adds the [vital intake and retained-outcome contract](VITAL_INTAKE.md)
+through this same authority. Its versioned v2 records extend the accepted v1
+baseline without changing progression receipts, formula inputs or MOVE ownership.
+The following sections retain increment 1's baseline choices. Gameplay pool
+changes must use the focused intake contract rather than construction/restore.
 
 `core.actors` is the single composed `actor_state.gd` authority. The normal shell
 binds the application's published DATA registry to it. CHAR creates no Node,
@@ -116,13 +122,15 @@ Endurance)*64 internal units; magicka is max(0, selected base-magicka result +
 resolved magicka modifiers); breath is floor(live Endurance/2). Each vital maximum
 fits 0..1e9, with health positive. Increases preserve current amounts; decreases
 clamp only an amount above the new maximum, including initialized breath reserve.
-There is no percentage preservation, free refill, damage/healing/practice event,
-death/collapse/reward/grant dispatch or gameplay vital mutation API.
+Source reconciliation performs no percentage preservation, free refill or
+damage/healing/practice/death/collapse/reward/grant dispatch. It records and
+notifies genuine depletion separately from outcome ownership under increment 2.
 
 ## Quiescent reconstruction
 
 `reconstruct(scope,original_ticket,record,source_bindings)` accepts `actor-state-v1`
-only during CORE-gated initialization. Its sixteen required fields are schema,
+and the explicit [v2 retention extension](VITAL_INTAKE.md), only during CORE-gated
+initialization. The baseline's sixteen required fields are schema,
 actor, session, content, career, identity, choices, attributes, skills, base_health,
 current, breath, progression, obligations, required_sources and revision. This is
 an in-memory current-application owner boundary, not native SAVE restoration.
@@ -150,4 +158,5 @@ Pending rewards, zero vitals and activity obligations remain visible and gated.
 Every projection says `entry_ready:false` and names missing integrations. No
 Session Restored, full story entry, SAVE, progression, activity, UI-006 or death
 readiness follows from a valid baseline. Later increments retain their approved
-mutation, activity/collapse and death/UI responsibilities.
+activity/collapse and death/UI responsibilities. Increment 2's intake qualification
+does not close those real-owner or native SAVE gates.

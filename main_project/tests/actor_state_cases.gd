@@ -297,7 +297,8 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	var edge := saved.duplicate(true)
 	edge.actor = "revision-edge"
 	edge.revision = 1000000000
-	check("maximum supported revision reconstructs",true,actors.reconstruct(scope,original,edge,bindings).ok)
+	var edge_result: Dictionary = actors.reconstruct(scope,original,edge,bindings)
+	check("maximum supported revision reconstructs",true,edge_result.ok)
 	source_a.revision += 1
 	check("revision exhaustion rejects publication","overflow",actors.reconcile(scope,original,edge.actor,edge.revision,registry.content_ticket()).get("kind"))
 	check("revision exhaustion preserves authoritative record",edge,actors.projection(scope,edge.actor).record)
@@ -424,6 +425,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	actor_core.complete_baseline(original,{"ok":false})
 	callbacks.mode = "baseline"
 	actor_core.gates.release(unrelated,"unrelated-review")
+	observations.vital_mutations = await preload("res://tests/vital_mutation_cases.gd").new().run(self,shell)
 	var ok := true
 	for item in checks: ok = ok and item.expected == item.actual
 	return {"ok":ok,"checks":checks,"count":checks.size(),"fixture":"IMP-016-actor-state-v1","engine":Engine.get_version_info(),"display":DisplayServer.get_name(),"observations":observations,"review_projection":snapshot,"rng_before":rng_before,"checked_callback_errors":monitored.callback_errors,"source":"controlled creation/clock/source providers; real DATA/RULE/CHAR/CORE","inputs":fixture.get("inputs",{})}
