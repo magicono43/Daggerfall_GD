@@ -49,6 +49,11 @@ func validate_resource_path(path: String) -> String:
 static func value(kind: String, data: Dictionary) -> Dictionary:
 	return {"schema":VERSION,"kind":kind,"data":data,"compatibility":{"status":"unverified","remap":{}}}
 
+static func location_annotations() -> Dictionary:
+	var bytes := FileAccess.get_file_as_bytes(ROOT+"location_assembly.json")
+	if Common.sha256(bytes) != "857385862b1989afbf9295c35fbb36106d5deb7d95a43ba75bc8e6e56b20afd2": return F.fail("Pinned location assembly annotations missing/changed.",ROOT,null,null,"source_unavailable")
+	return {"ok":true,"data":JSON.parse_string(bytes.get_string_from_utf8())}
+
 static func context_annotations() -> Dictionary:
 	var bytes := FileAccess.get_file_as_bytes(ROOT+"dungeon_context.json")
 	if Common.sha256(bytes) != CONTEXT_HASH: return F.fail("Pinned dungeon context annotations missing/changed.",ROOT,null,null,"source_unavailable")
@@ -98,6 +103,9 @@ func bundled_contributions() -> Array:
 	if not marker_input.ok: return [{"root":ROOT,"file":"baseline.json","read":marker_input}]
 	var marker_data: Dictionary = marker_input.data
 	if marker_data.get("schema") != "classic-dungeon-arrival-annotations-v1" or marker_data.get("sources") != annotations.sources: return [{"root":ROOT,"file":"baseline.json","read":F.fail("Arrival annotation edition guard differs.",ROOT,null,null,"source_changed")}]
+	var location_input := location_annotations()
+	if not location_input.ok: return [{"root":ROOT,"file":"baseline.json","read":location_input}]
+	if location_input.data.sources != annotations.sources: return [{"root":ROOT,"file":"baseline.json","read":F.fail("Location assembly edition guard differs.",ROOT,null,null,"source_changed")}]
 	# Source edition metadata is immutable for this application. Only serialized
 	# shipped input is reused; final definitions/indexes still rebuild per ticket.
 	if not _baseline.is_empty(): return [{"root":ROOT,"file":"baseline.json","version":VERSION,"bytes":_baseline}]
@@ -115,6 +123,7 @@ func bundled_contributions() -> Array:
 	for location: Dictionary in _profile.locations:
 		_locations[location.id] = location
 		var v := value("layout",{"mode":"classic-source","location":G.ref(location.id),"mapping":location.id})
+		if use_annotations and location_input.data.layouts.has(location.id): v.data.location_assembly = location_input.data.layouts[location.id].duplicate(true)
 		if use_annotations and marker_data.layouts.has(location.id): v.data.arrivals = marker_data.layouts[location.id].duplicate(true)
 		if use_annotations and annotations.layouts.has(location.id):
 			var annotation: Dictionary = annotations.layouts[location.id]
@@ -157,9 +166,15 @@ static func hex_size(v: Variant, size: int) -> bool:
 	return v is String and v.length() == size*2 and v.is_valid_hex_number(false)
 
 static func record_reason(r: Dictionary, format_: String) -> String:
-	var allowed := ["id","type","transform","marker_purpose","resource","model_id","texture","flags","faction_id","object_type","door_model_index","open_rotation","radius","uninterpreted","action","trigger_starting_lock","sound_index","magnitude","description","unused"]
+	var allowed := ["id","type","transform","marker_purpose","marker_roles","resource","model_id","texture","flags","faction_id","object_type","door_model_index","open_rotation","radius","uninterpreted","action","trigger_starting_lock","sound_index","magnitude","description","unused"]
 	for field: String in r:
 		if field not in allowed: return "Unknown required record interpretation: "+field
+	if r.has("marker_roles"):
+		if format_ != "RMB" or r.type != "flat" or not r.marker_roles is Array or r.marker_roles.is_empty(): return "RMB flat marker roles require an explicit nonempty role set."
+		var roles := {}
+		for role in r.marker_roles:
+			if not Paths.valid_id(role) or roles.has(role): return "Distinct authored marker roles required."
+			roles[role] = true
 	if r.has("resource"):
 		if not r.resource is Dictionary or r.resource.size() != 3 or not r.resource.get("provider") is String or not Paths.valid_id(r.resource.get("key")) or r.resource.get("type") != ("model" if r.type in ["model","door"] else "image") or r.type not in ["model","flat","person","door"]: return "Exact typed media provider/export reference required."
 		if r.has("model_id") or r.has("texture") or r.has("door_model_index"): return "Choose one explicit media provider or classic resource reference."
@@ -226,6 +241,10 @@ func validate_record(_id: String, record: Dictionary) -> String:
 	var compatibility: Variant = record.get("compatibility")
 	if not compatibility is Dictionary or compatibility.get("status") != "unverified" or not compatibility.get("remap") is Dictionary: return "Structural remapping does not establish SAVE/LOC/QUEST compatibility."
 	var d: Dictionary = record.data
+	if d.has("location_assembly"):
+		if record.kind != "layout": return "Location assembly belongs to the layout."
+		var reason := preload("res://scripts/data/location_assembly_schema.gd").reason(d.location_assembly)
+		if not reason.is_empty(): return reason
 	if d.has("arrivals"):
 		if record.kind != "layout": return "Arrival declarations belong to the layout."
 		var marker_reason := preload("res://scripts/data/dungeon_marker_schema.gd").reason(d.arrivals)
@@ -245,7 +264,7 @@ func validate_record(_id: String, record: Dictionary) -> String:
 	if d.get("mode") != "authored": return "Explicit source or authored mode required."
 	if record.kind == "layout":
 		for field: String in d:
-			if field not in ["mode","location","placements","assembly","context","arrivals"]: return "Unknown authored layout field: "+field
+			if field not in ["mode","location","placements","assembly","context","arrivals","location_assembly"]: return "Unknown authored layout field: "+field
 		if not G.valid_ref(d.get("location")) or not d.get("placements") is Array: return "Layout requires containing location and placements."
 		var ids := {}
 		for p in d.placements:
@@ -316,6 +335,7 @@ func validate_source_record(id: String, record: Dictionary, _fields: Dictionary,
 				mapped_data.erase("assembly")
 				mapped_data.erase("context")
 				mapped_data.erase("arrivals")
+				mapped_data.erase("location_assembly")
 			if not Common.equal_input(expected,mapped_data): return F.fail("Preserve classic source mapping; replace complete authored data to edit.",path,id)
 	if source.provider == identity.package and not str(source.provider).begins_with("@shipped/") and path != "packs/"+("loose" if source.provider == "@loose" else str(source.provider)): return F.fail("Additions use originating package namespace.",path,id)
 	return {"ok":true}
@@ -494,6 +514,7 @@ func location_inputs(registry: RefCounted, ref_: String) -> Dictionary:
 			p.block = index.names[p.block_name]
 			placements.append(p)
 	var data := {"location":d.location,"placements":placements,"exterior":exterior,"dungeon":dungeon}
+	if d.has("location_assembly"): data.location_assembly = d.location_assembly.duplicate(true)
 	if d.has("assembly"): data.assembly = d.assembly.duplicate(true)
 	if d.has("context"): data.context = d.context.duplicate(true)
 	if d.has("arrivals"): data.arrivals = d.arrivals.duplicate(true)

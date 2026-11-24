@@ -1,5 +1,33 @@
 # Verification run artifact cleanup
 
+## IMP-013 ground-UV user-review follow-up
+
+Five additional inactive owned roots were compacted after sequential qualification:
+8,023 files / 1,688,018,337 logical bytes removed, 49 child evidence files retained
+and verified. The journal is losslessly compressed. All 1,317 protected review
+files and pinned production/source hashes match; no follow-up build remains.
+Final measured retention is 2,341,886,208 bytes (2.181 GiB), including the
+unchanged earlier protected evidence baseline. See the
+[ground-UV audit](evidence/IMP-013-ground-uv-2026-11-23.audit.json).
+
+## 2026-11-23 IMP-013 increment-1 verification
+
+Two completed cleanup boundaries compacted 27 explicitly owned GUID roots after
+ordinary process/path/reparse checks. Removed **39,180 files /
+7,461,338,604 logical bytes**; retained and verified **234 child evidence files**.
+Large resolved-failure reports and the two deletion journals are losslessly
+compressed with recovery hashes. All **1,317** protected IMP-011 human-review
+file hashes match before/after. No task-owned full build remains.
+
+Final measured retention is **2,335,595,454 bytes (2.175 GiB)**;
+owned GUID evidence is about **24.76 MiB**. The 2 GiB trigger was reviewed;
+pre-existing human state and earlier evidence/root manifests account for the
+remaining baseline and were preserved. Temporary source-audit/build retention
+expired at qualification completion. Exact journals, compression/protection
+records and final measurements are linked by the
+[execution evidence](evidence/IMP-013-increment-1-2026-11-23.md) and
+[machine audit](evidence/IMP-013-increment-1-2026-11-23.audit.json).
+
 ## 2026-11-23 IMP-061 classic action-axis follow-up
 
 Six final verification/export commands pass; two earlier attempts retain their

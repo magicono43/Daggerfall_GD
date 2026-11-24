@@ -146,7 +146,7 @@ func schedule_render() -> void:
 
 func synchronize_startup() -> void:
 	if host.controller.providers.get("layouts") != null and dungeon_assembly == null:
-		dungeon_assembly = preload("res://scripts/loc/dungeon_assembly.gd").new()
+		dungeon_assembly = preload("res://scripts/loc/location_assembly.gd").new()
 		dungeon_assembly.layouts = host.controller.providers.layouts
 		dungeon_assembly.registry = host.controller.providers.definitions
 		dungeon_assembly.geography = host.controller.providers.geography

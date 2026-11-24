@@ -1,0 +1,7493 @@
+{
+  "schema": "location-independent-observation-v1",
+  "profile_sha256": "1856fd83d96f96505091b540e9c3d78ffb9e5be8b9fa96a670860770f1f86b23",
+  "sources": {
+    "BLOCKS.BSA": "6f5a4c8d9401c1b00ef83eaac9b0c6c32f53cef6eaa4c7d7027deb739bde4795",
+    "MAPS.BSA": "8b5550bfcac03b6f605842568fdbfb7cc6bbed7ace5999c33c900ad286fc24be",
+    "ARCH3D.BSA": "a51a9e149168814c4a14dc80bb93d38f153be18dc9754be44bc9c7b25dd46a85",
+    "PAL.PAL": "42b8da761c310cfd7f4949e95bbe7dbda19b490dc5e11746857a89808b826f99",
+    "TEXTURE.000": "b6adacc9b6a7f604bb82d82136c593c9d23b59d9c3576a041ecc01951afae680",
+    "TEXTURE.002": "dff169d0b41de31112e7d26ba7651e53d50122afd35b1d113232b6a05e0ebdc4",
+    "TEXTURE.026": "7e02f2c60f4fb95ca7fb36b93d97942ebe648b122a27d5417e9e35202d0e480c",
+    "TEXTURE.042": "65102aafec0b12cd59a4c23e09a63e0ce076b537b3bb81f037afea5f98d17860",
+    "TEXTURE.058": "2c8663e3c3639293c5c2900dcbd0810222f23ccbec7b60d276b0c6e7e49c4cdd",
+    "TEXTURE.067": "0f627b0b9a1437f8e0abb761c111c208dd5ec64b27803aa842a4a204b0c22789",
+    "TEXTURE.069": "1df6024d2e1aacc41b465c0e755cb4708b5c420940ef7434565acec1df51b660",
+    "TEXTURE.071": "b570bb8496cce91bbb1e3cf28b34b253c2a70ab5a4b9cead40faaa23cf50ad38",
+    "TEXTURE.072": "2e84834991840aa816e9e5531fb9976749c45292f1e89494c261eb67faba2835",
+    "TEXTURE.074": "13fcbefcc6409e4551aa4eaa48c5f60361f688b98d6fda32a5846094c56e911e",
+    "TEXTURE.085": "c290c612025f4bfb1f38362c5c40d3cfb0ee03d67acaf912f0926ad50bb4980d",
+    "TEXTURE.087": "d986b6e1c16fb81353ccdbdb127cee86638933609463bc4849fd2c5acd67e553",
+    "TEXTURE.090": "16fca391e4a5139e4fe372eb256b21d36f8f8b57b266535244ec6d69bb494564",
+    "TEXTURE.116": "e3cd886af6836e82c157d327f2ac4e74abd275d9942cda36745062dca48db918",
+    "TEXTURE.144": "b4209193b358c5ba46d56f2d6cb38a3b811b55498ed99fe11f375c7f38b7c00f",
+    "TEXTURE.160": "0d036354c1c58bd2fae4b1eeeecfada81567a4a98273c50dd680329bffb66ca8",
+    "TEXTURE.166": "2012cf595818b9299f23e79f6e1bf7959663671c56fcf318ef19222f615ff212",
+    "TEXTURE.182": "df1902cbcb655b150d9e44b89a6240a4d162858a5d5d3ccac5dfc57bdc9fb9b6",
+    "TEXTURE.184": "61c3b34cc62a4291a5fac9732552993784b7189bd9c4236541457e5a754fc8ca",
+    "TEXTURE.199": "2cff83352dc79e742622b4f289b09d18e8df4cdd8e7b24ca5162d0cb1773d1a3",
+    "TEXTURE.201": "85c8b7a53621b6c2a97153aae526a253c6fd168e26882b9a744ce1f9159eeb96",
+    "TEXTURE.205": "38561ac6ffbc33d4402087ed70f0007a96e91d0128b0a0c8fe757e6bcc286ea9",
+    "TEXTURE.210": "6088cea95c48e8355c04089c9989946dfaec32a40793765f79f33f0a35378f9b",
+    "TEXTURE.212": "3121af472cc18fbfb4d9471c5d23845305ef85de16bd78afa9e2f7a80a748a58",
+    "TEXTURE.301": "1d1c6bc8cb8e285f428a6c674a704271497df8466e370cbdf04e92cff10bcc0a",
+    "TEXTURE.333": "554fac08a53aa5a66bd384d418bf14584e396f90a56e56c3e3f6e084f6a91a2b",
+    "TEXTURE.374": "d224fb90df62685616e9a83357272806f144191e4855feced8a650b7d0cee0e1"
+  },
+  "resource_sources": [
+    {
+      "file": "TEXTURE.000",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.002",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.026",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.042",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.058",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.067",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.069",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.071",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.072",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.074",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.085",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.087",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.090",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.116",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.144",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.160",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.166",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.182",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.184",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.199",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.201",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.205",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.210",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.212",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.301",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.333",
+      "format": "classic-texture-v1"
+    },
+    {
+      "file": "TEXTURE.374",
+      "format": "classic-texture-v1"
+    }
+  ],
+  "uv_vectors": {
+    "546": [
+      {
+        "plane": 10,
+        "encoded": [
+          [
+            1026,
+            0
+          ],
+          [
+            15358,
+            0
+          ],
+          [
+            -16384,
+            2048
+          ]
+        ],
+        "effective": [
+          [
+            1026,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            2048
+          ]
+        ]
+      },
+      {
+        "plane": 12,
+        "encoded": [
+          [
+            1024,
+            0
+          ],
+          [
+            15360,
+            0
+          ],
+          [
+            -16384,
+            2048
+          ]
+        ],
+        "effective": [
+          [
+            1024,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            2048
+          ]
+        ]
+      }
+    ]
+  },
+  "markers": [
+    {
+      "id": "record-00023",
+      "building": "building-0000",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        5.0,
+        0.0,
+        8.4
+      ]
+    },
+    {
+      "id": "record-00024",
+      "building": "building-0000",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        2.0,
+        0.0,
+        -8.200000000000001
+      ]
+    },
+    {
+      "id": "record-00025",
+      "building": "building-0000",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        5.6000000000000005,
+        0.0,
+        -5.2
+      ]
+    },
+    {
+      "id": "record-00026",
+      "building": "building-0000",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        -5.2,
+        0.0,
+        -3.2
+      ]
+    },
+    {
+      "id": "record-00027",
+      "building": "building-0000",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        1.6,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "record-00028",
+      "building": "building-0000",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        -4.800000000000001,
+        0.0,
+        5.2
+      ]
+    },
+    {
+      "id": "record-00033",
+      "building": "building-0000",
+      "context": "interior",
+      "texture": [
+        199,
+        8
+      ],
+      "role": "entry",
+      "position": [
+        4.800000000000001,
+        0.0,
+        -1.6
+      ]
+    },
+    {
+      "id": "record-00034",
+      "building": "building-0000",
+      "context": "interior",
+      "texture": [
+        199,
+        11
+      ],
+      "role": "editor-other",
+      "position": [
+        4.800000000000001,
+        0.0,
+        4.800000000000001
+      ]
+    },
+    {
+      "id": "record-00035",
+      "building": "building-0000",
+      "context": "interior",
+      "texture": [
+        199,
+        18
+      ],
+      "role": "editor-other",
+      "position": [
+        1.6,
+        0.0,
+        -4.800000000000001
+      ]
+    },
+    {
+      "id": "record-00111",
+      "building": "building-0001",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        -5.2,
+        0.0,
+        -5.2
+      ]
+    },
+    {
+      "id": "record-00112",
+      "building": "building-0001",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        5.0,
+        0.0,
+        -1.2000000000000002
+      ]
+    },
+    {
+      "id": "record-00113",
+      "building": "building-0001",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        5.2,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "record-00114",
+      "building": "building-0001",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        -1.6,
+        0.0,
+        0.8
+      ]
+    },
+    {
+      "id": "record-00115",
+      "building": "building-0001",
+      "context": "interior",
+      "texture": [
+        199,
+        18
+      ],
+      "role": "editor-other",
+      "position": [
+        4.800000000000001,
+        0.0,
+        -4.800000000000001
+      ]
+    },
+    {
+      "id": "record-00116",
+      "building": "building-0001",
+      "context": "interior",
+      "texture": [
+        199,
+        8
+      ],
+      "role": "entry",
+      "position": [
+        1.6,
+        0.0,
+        4.800000000000001
+      ]
+    },
+    {
+      "id": "record-00255",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        4.2,
+        3.225,
+        8.200000000000001
+      ]
+    },
+    {
+      "id": "record-00256",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        -4.800000000000001,
+        3.225,
+        8.200000000000001
+      ]
+    },
+    {
+      "id": "record-00258",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        7.2,
+        3.225,
+        -1.8
+      ]
+    },
+    {
+      "id": "record-00259",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        -10.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "id": "record-00260",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        -8.200000000000001,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "id": "record-00261",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        -1.2000000000000002,
+        0.0,
+        4.4
+      ]
+    },
+    {
+      "id": "record-00262",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        8.4,
+        0.0,
+        4.6000000000000005
+      ]
+    },
+    {
+      "id": "record-00263",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        4.2,
+        0.0,
+        7.6000000000000005
+      ]
+    },
+    {
+      "id": "record-00264",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        20
+      ],
+      "role": "editor-other",
+      "position": [
+        -7.4,
+        0.0,
+        3.8000000000000003
+      ]
+    },
+    {
+      "id": "record-00265",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        18
+      ],
+      "role": "editor-other",
+      "position": [
+        -3.8000000000000003,
+        3.225,
+        5.2
+      ]
+    },
+    {
+      "id": "record-00266",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        4
+      ],
+      "role": "rest",
+      "position": [
+        -8.8,
+        0.0,
+        -6.0
+      ]
+    },
+    {
+      "id": "record-00267",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        4
+      ],
+      "role": "rest",
+      "position": [
+        -1.2000000000000002,
+        3.225,
+        7.2
+      ]
+    },
+    {
+      "id": "record-00268",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        4
+      ],
+      "role": "rest",
+      "position": [
+        -7.800000000000001,
+        3.225,
+        -1.0
+      ]
+    },
+    {
+      "id": "record-00269",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        4
+      ],
+      "role": "rest",
+      "position": [
+        8.4,
+        3.225,
+        -4.6000000000000005
+      ]
+    },
+    {
+      "id": "record-00270",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        4
+      ],
+      "role": "rest",
+      "position": [
+        8.200000000000001,
+        0.0,
+        -2.2
+      ]
+    },
+    {
+      "id": "record-00271",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        8
+      ],
+      "role": "entry",
+      "position": [
+        -1.6,
+        0.0,
+        8.0
+      ]
+    },
+    {
+      "id": "record-00272",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        8
+      ],
+      "role": "entry",
+      "position": [
+        -11.200000000000001,
+        0.0,
+        4.800000000000001
+      ]
+    },
+    {
+      "id": "record-00273",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        8
+      ],
+      "role": "entry",
+      "position": [
+        11.200000000000001,
+        0.0,
+        4.800000000000001
+      ]
+    },
+    {
+      "id": "record-00274",
+      "building": "building-0002",
+      "context": "interior",
+      "texture": [
+        199,
+        8
+      ],
+      "role": "entry",
+      "position": [
+        -1.6,
+        0.0,
+        -4.800000000000001
+      ]
+    }
+  ],
+  "location": "place-00001",
+  "placement": "placement-00000",
+  "block": "block-0278",
+  "name": "TVRNBS04.RMB",
+  "block_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+  "buildings": [
+    {
+      "id": "building-0000",
+      "parent": [
+        1408,
+        768,
+        0
+      ]
+    },
+    {
+      "id": "building-0001",
+      "parent": [
+        3200,
+        1152,
+        0
+      ]
+    },
+    {
+      "id": "building-0002",
+      "parent": [
+        2688,
+        2304,
+        0
+      ]
+    }
+  ],
+  "ground": {
+    "side_metres": 102.4,
+    "tile_metres": 6.4,
+    "height_metres": -0.025,
+    "tiles_sha256": "bc67cbe35cb32b4f853f776e0469a5e2fe05e21f903ad0d77fd86ac56f4895fa",
+    "tiles": [
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      11,
+      46,
+      175,
+      139,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      11,
+      46,
+      129,
+      139,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      117,
+      117,
+      117,
+      130,
+      130,
+      11,
+      111,
+      239,
+      202,
+      204,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      117,
+      117,
+      117,
+      130,
+      130,
+      76,
+      74,
+      111,
+      239,
+      139,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      117,
+      117,
+      117,
+      130,
+      130,
+      130,
+      76,
+      74,
+      46,
+      202,
+      204,
+      130,
+      130,
+      130,
+      130,
+      130,
+      117,
+      117,
+      117,
+      117,
+      117,
+      117,
+      130,
+      11,
+      111,
+      239,
+      202,
+      203,
+      204,
+      130,
+      130,
+      130,
+      117,
+      117,
+      117,
+      117,
+      117,
+      117,
+      130,
+      76,
+      74,
+      111,
+      46,
+      239,
+      202,
+      203,
+      203,
+      130,
+      117,
+      117,
+      117,
+      117,
+      117,
+      117,
+      130,
+      130,
+      76,
+      75,
+      74,
+      111,
+      46,
+      46,
+      46,
+      130,
+      117,
+      117,
+      117,
+      117,
+      117,
+      117,
+      130,
+      130,
+      130,
+      130,
+      130,
+      74,
+      1,
+      46,
+      46,
+      130,
+      117,
+      117,
+      117,
+      117,
+      117,
+      117,
+      130,
+      130,
+      130,
+      130,
+      12,
+      10,
+      47,
+      175,
+      138,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      12,
+      203,
+      10,
+      47,
+      175,
+      138,
+      140,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      12,
+      10,
+      47,
+      46,
+      175,
+      138,
+      140,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      12,
+      10,
+      47,
+      46,
+      175,
+      138,
+      75,
+      140,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      11,
+      47,
+      175,
+      138,
+      75,
+      140,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      11,
+      46,
+      129,
+      139,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130,
+      11,
+      46,
+      239,
+      139,
+      130,
+      130,
+      130,
+      130,
+      130,
+      130
+    ]
+  },
+  "records": [
+    {
+      "id": "record-00000",
+      "address": 6793,
+      "context": "exterior",
+      "building": "building-0000",
+      "model": 549,
+      "type": "model",
+      "object_type": 4,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": 0,
+      "model_sha256": "ae6a683b98cb44e6f6b962efabfa475183a763aea0de443accabec24b22f27fa",
+      "bounds": [
+        [
+          28.8,
+          -0.0,
+          -92.80000000000001
+        ],
+        [
+          41.6,
+          3.225,
+          -73.60000000000001
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 0,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              41.6,
+              2.25,
+              -84.80000000000001
+            ],
+            [
+              41.6,
+              2.25,
+              -83.55000000000001
+            ],
+            [
+              41.6,
+              -0.0,
+              -83.55000000000001
+            ],
+            [
+              41.6,
+              -0.0,
+              -84.80000000000001
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00001",
+      "address": 6876,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 11004,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -61,
+        -63,
+        192
+      ],
+      "rotation": 1536,
+      "model_sha256": "5daecf4eb4f6804fe498a4ed4317807f294791bea15a2800d80d8286f5abe507",
+      "bounds": [
+        [
+          -6.250000000000001,
+          -0.0,
+          -9.450000000000001
+        ],
+        [
+          3.1999999999999993,
+          3.1500000000000004,
+          -0.1499999999999993
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00002",
+      "address": 6942,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 8001,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        192,
+        -63,
+        253
+      ],
+      "rotation": 1024,
+      "model_sha256": "0e03494867e6a34eed1d38bafd00e0e61c391ca09dca1ea0c03a27a0954f05bd",
+      "bounds": [
+        [
+          3.35,
+          -0.0,
+          -9.450000000000001
+        ],
+        [
+          6.25,
+          3.1500000000000004,
+          -3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00003",
+      "address": 7008,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 13000,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        125,
+        -63,
+        -253
+      ],
+      "rotation": 512,
+      "model_sha256": "858b04e9f5c24941815a4c45219780c7d6efa51002ebe79401d2b47eccfe8999",
+      "bounds": [
+        [
+          0.0,
+          -0.0,
+          3.2
+        ],
+        [
+          6.25,
+          3.1500000000000004,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00004",
+      "address": 7074,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 31021,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        189,
+        -63,
+        64
+      ],
+      "rotation": 0,
+      "model_sha256": "598bd15bb67d160eb6fb291e2a49ff844811fb9248ad73b8f0b3535d153bc241",
+      "bounds": [
+        [
+          3.2,
+          -0.0,
+          -3.2
+        ],
+        [
+          6.25,
+          3.1500000000000004,
+          -0.0
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 16,
+          "texture": [
+            74,
+            1
+          ],
+          "points": [
+            [
+              6.25,
+              -0.0,
+              -0.35000000000000003
+            ],
+            [
+              6.25,
+              2.25,
+              -0.35000000000000003
+            ],
+            [
+              6.25,
+              2.25,
+              -1.6
+            ],
+            [
+              6.25,
+              -0.0,
+              -1.6
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00005",
+      "address": 7140,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 31026,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        189,
+        -63,
+        -64
+      ],
+      "rotation": 0,
+      "model_sha256": "1431a485ef187b6057b88db2e4f64cbeddf6be65f97c2e6969152e289d395c2d",
+      "bounds": [
+        [
+          3.2,
+          -0.0,
+          -0.0
+        ],
+        [
+          6.25,
+          3.1500000000000004,
+          3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00006",
+      "address": 7206,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 36000,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -189,
+        -64,
+        -189
+      ],
+      "rotation": 1536,
+      "model_sha256": "78c54aa3fd4c0a481ed6a3c07427461514c5a3c20c9be81ac3de3463bd5793b9",
+      "bounds": [
+        [
+          -6.25,
+          -0.0,
+          3.2
+        ],
+        [
+          -3.2,
+          3.1750000000000003,
+          6.25
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00007",
+      "address": 7272,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 31000,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        64,
+        -63,
+        -64
+      ],
+      "rotation": 1536,
+      "model_sha256": "7209e020f9a456ead3c4d2f725e66d9d2a7922626d798e057980b59b036eeaa6",
+      "bounds": [
+        [
+          -3.552713678800501e-16,
+          -0.0,
+          0.14999999999999966
+        ],
+        [
+          3.2,
+          3.1500000000000004,
+          3.0500000000000007
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00008",
+      "address": 7338,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 31004,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -189,
+        -63,
+        -67
+      ],
+      "rotation": 1536,
+      "model_sha256": "d96c024a56b76257161f8d25240389a06e140cffd489eaefa959d6ae59ef1f9f",
+      "bounds": [
+        [
+          -6.25,
+          -0.0,
+          0.14999999999999966
+        ],
+        [
+          -3.1999999999999997,
+          3.1500000000000004,
+          3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00009",
+      "address": 7404,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 31024,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -64,
+        -63,
+        -67
+      ],
+      "rotation": 512,
+      "model_sha256": "7e3d168b1ccb423010ca348e08b7968486838417339d16268744744164b6d8d1",
+      "bounds": [
+        [
+          -3.2,
+          -0.0,
+          0.14999999999999983
+        ],
+        [
+          0.0,
+          3.1500000000000004,
+          3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00010",
+      "address": 7470,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 31016,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -64,
+        -63,
+        -192
+      ],
+      "rotation": 1024,
+      "model_sha256": "500a3a5ca6478a120db34036f0e6ecfb3ce94297c271001fda936c8d44141dbd",
+      "bounds": [
+        [
+          -3.2,
+          -0.0,
+          3.2
+        ],
+        [
+          0.0,
+          3.1500000000000004,
+          6.4
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00011",
+      "address": 7536,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 31018,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -189,
+        -63,
+        -320
+      ],
+      "rotation": 1536,
+      "model_sha256": "5b847a4880ab12ac5e9f9a08c023586f29650152487f33907bb3adaed50a4c0f",
+      "bounds": [
+        [
+          -6.25,
+          -0.0,
+          6.550000000000001
+        ],
+        [
+          -3.2,
+          3.1500000000000004,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00012",
+      "address": 7602,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 31006,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -67,
+        -63,
+        -317
+      ],
+      "rotation": 0,
+      "model_sha256": "012ddfbe4eee9c7dc6877226e764c894ec77836f74e808f98ef74303258b09ba",
+      "bounds": [
+        [
+          -3.2,
+          -0.0,
+          6.4
+        ],
+        [
+          -0.15000000000000002,
+          3.1500000000000004,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00013",
+      "address": 7668,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 41000,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        56,
+        2,
+        -320
+      ],
+      "rotation": 1298,
+      "model_sha256": "84b3d249d75b2282af6d7422bb0e82dc2fc27ac77a584912d1440d87045c45b2",
+      "bounds": [
+        [
+          0.1713965660769784,
+          0.05,
+          6.513820308066231
+        ],
+        [
+          2.8481307665628712,
+          0.53232421875,
+          9.23627629205805
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00014",
+      "address": 7734,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 41012,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        96,
+        2,
+        -152
+      ],
+      "rotation": 19,
+      "model_sha256": "a2b1829db562e9ce2e28e4b736f9146af7451073b6383123cc4eb3264e7961ec",
+      "bounds": [
+        [
+          1.738724114586627,
+          0.05,
+          3.549993049776265
+        ],
+        [
+          3.0539936023508187,
+          1.9000000000000001,
+          3.925219257106999
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00015",
+      "address": 7800,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 41002,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -40,
+        2,
+        216
+      ],
+      "rotation": 20,
+      "model_sha256": "c2d4d3fedff65aa0e8f7a8a4b9870c717392fa8c45046035590a348a51745bc5",
+      "bounds": [
+        [
+          -2.371631216334638,
+          0.05,
+          -6.126079561427186
+        ],
+        [
+          0.11686581063507724,
+          2.17626953125,
+          -4.649854309072336
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00016",
+      "address": 7866,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 41117,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -224,
+        2,
+        32
+      ],
+      "rotation": 1812,
+      "model_sha256": "8097a5a7754413e489fc40e54e27e88f89d225ed8c56fa2b0f71886a278c5795",
+      "bounds": [
+        [
+          -6.179048860524605,
+          0.05,
+          -1.7996886253717541
+        ],
+        [
+          -4.537020894208292,
+          1.6,
+          -0.2526329586108864
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00017",
+      "address": 7932,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 41109,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -208,
+        2,
+        312
+      ],
+      "rotation": 1557,
+      "model_sha256": "ab58d5888d9a200b04c368b9ec5874e248fa609915762bd56d0afc9ab18a63c7",
+      "bounds": [
+        [
+          -5.942106865904503,
+          0.05,
+          -9.337328269350712
+        ],
+        [
+          -4.476604233211722,
+          0.875,
+          -6.261464556319355
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00018",
+      "address": 7998,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 41100,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -216,
+        2,
+        232
+      ],
+      "rotation": 1877,
+      "model_sha256": "430c22c3984cf1b75da95e3b5d08f549f8f71faac8222afcd5479ede1b2cdb6c",
+      "bounds": [
+        [
+          -5.975233095232234,
+          0.05,
+          -6.245415745545398
+        ],
+        [
+          -4.950433840205877,
+          1.3,
+          -5.220616490519041
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00019",
+      "address": 8064,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 41101,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -168,
+        2,
+        352
+      ],
+      "rotation": 790,
+      "model_sha256": "a15f7e8536139ef3e8171b0d28d14f0280c284cfabd58389412bdc6b899b3a69",
+      "bounds": [
+        [
+          -4.673423318052837,
+          0.05,
+          -9.260487560294115
+        ],
+        [
+          -3.7729690665370317,
+          1.425,
+          -8.310205104434596
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00020",
+      "address": 8130,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 41101,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -152,
+        2,
+        288
+      ],
+      "rotation": 598,
+      "model_sha256": "a15f7e8536139ef3e8171b0d28d14f0280c284cfabd58389412bdc6b899b3a69",
+      "bounds": [
+        [
+          -4.219068539910545,
+          0.05,
+          -7.5749156854711535
+        ],
+        [
+          -3.2987409195001955,
+          1.425,
+          -6.773317819523931
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00021",
+      "address": 8196,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 41005,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -40,
+        2,
+        24
+      ],
+      "rotation": 1046,
+      "model_sha256": "c862a9a4f422db1b905c1cf476b62e60083632105596c58e152a051fe419ae90",
+      "bounds": [
+        [
+          -1.654421336280545,
+          0.05,
+          -0.7311393160477484
+        ],
+        [
+          -0.3371481737739969,
+          1.9000000000000001,
+          -0.34414530062172777
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00022",
+      "address": 8262,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 41000,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        184,
+        2,
+        312
+      ],
+      "rotation": 535,
+      "model_sha256": "84b3d249d75b2282af6d7422bb0e82dc2fc27ac77a584912d1440d87045c45b2",
+      "bounds": [
+        [
+          3.7281056042394356,
+          0.05,
+          -8.790887479404839
+        ],
+        [
+          5.498462651967744,
+          0.53232421875,
+          -6.477543392346587
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00081",
+      "address": 9270,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        215,
+        -45,
+        -129
+      ],
+      "rotation": 1024,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          4.2,
+          0.025,
+          3.0500000000000003
+        ],
+        [
+          5.4,
+          2.225,
+          3.2
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              5.4,
+              2.225,
+              3.0500000000000003
+            ],
+            [
+              5.4,
+              0.025,
+              3.0500000000000003
+            ],
+            [
+              4.2,
+              0.025,
+              3.0500000000000003
+            ],
+            [
+              4.2,
+              2.225,
+              3.0500000000000003
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              4.2,
+              2.225,
+              3.2
+            ],
+            [
+              4.2,
+              0.025,
+              3.2
+            ],
+            [
+              5.4,
+              0.025,
+              3.2
+            ],
+            [
+              5.4,
+              2.225,
+              3.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00082",
+      "address": 9289,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        7,
+        -45,
+        -169
+      ],
+      "rotation": 1536,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -2.220446049250313e-16,
+          0.025,
+          4.2
+        ],
+        [
+          0.15000000000000002,
+          2.225,
+          5.4
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              0.0,
+              2.225,
+              4.2
+            ],
+            [
+              0.0,
+              0.025,
+              4.2
+            ],
+            [
+              -2.220446049250313e-16,
+              0.025,
+              5.4
+            ],
+            [
+              -2.220446049250313e-16,
+              2.225,
+              5.4
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              0.14999999999999977,
+              2.225,
+              5.4
+            ],
+            [
+              0.14999999999999977,
+              0.025,
+              5.4
+            ],
+            [
+              0.15000000000000002,
+              0.025,
+              4.2
+            ],
+            [
+              0.15000000000000002,
+              2.225,
+              4.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00083",
+      "address": 9308,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        -121,
+        -45,
+        -169
+      ],
+      "rotation": 1536,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -3.2,
+          0.025,
+          4.2
+        ],
+        [
+          -3.0500000000000003,
+          2.225,
+          5.4
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -3.2,
+              2.225,
+              4.2
+            ],
+            [
+              -3.2,
+              0.025,
+              4.2
+            ],
+            [
+              -3.2,
+              0.025,
+              5.4
+            ],
+            [
+              -3.2,
+              2.225,
+              5.4
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -3.0500000000000007,
+              2.225,
+              5.4
+            ],
+            [
+              -3.0500000000000007,
+              0.025,
+              5.4
+            ],
+            [
+              -3.0500000000000003,
+              0.025,
+              4.2
+            ],
+            [
+              -3.0500000000000003,
+              2.225,
+              4.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00084",
+      "address": 9327,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        215,
+        -45,
+        127
+      ],
+      "rotation": 1024,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          4.2,
+          0.025,
+          -3.35
+        ],
+        [
+          5.4,
+          2.225,
+          -3.2
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              5.4,
+              2.225,
+              -3.35
+            ],
+            [
+              5.4,
+              0.025,
+              -3.35
+            ],
+            [
+              4.2,
+              0.025,
+              -3.35
+            ],
+            [
+              4.2,
+              2.225,
+              -3.35
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              4.2,
+              2.225,
+              -3.2
+            ],
+            [
+              4.2,
+              0.025,
+              -3.2
+            ],
+            [
+              5.4,
+              0.025,
+              -3.2
+            ],
+            [
+              5.4,
+              2.225,
+              -3.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00085",
+      "address": 9346,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        135,
+        -45,
+        87
+      ],
+      "rotation": 1536,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          3.1999999999999997,
+          0.025,
+          -2.2
+        ],
+        [
+          3.35,
+          2.225,
+          -1.0
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              3.2,
+              2.225,
+              -2.2
+            ],
+            [
+              3.2,
+              0.025,
+              -2.2
+            ],
+            [
+              3.1999999999999997,
+              0.025,
+              -1.0
+            ],
+            [
+              3.1999999999999997,
+              2.225,
+              -1.0
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              3.35,
+              2.225,
+              -1.0
+            ],
+            [
+              3.35,
+              0.025,
+              -1.0
+            ],
+            [
+              3.35,
+              0.025,
+              -2.2
+            ],
+            [
+              3.35,
+              2.225,
+              -2.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00086",
+      "address": 9365,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        -7,
+        -45,
+        297
+      ],
+      "rotation": 512,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -0.15000000000000002,
+          0.025,
+          -8.6
+        ],
+        [
+          6.66133814775094e-17,
+          2.225,
+          -7.4
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              0.0,
+              2.225,
+              -7.4
+            ],
+            [
+              0.0,
+              0.025,
+              -7.4
+            ],
+            [
+              6.66133814775094e-17,
+              0.025,
+              -8.6
+            ],
+            [
+              6.66133814775094e-17,
+              2.225,
+              -8.6
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -0.14999999999999994,
+              2.225,
+              -8.6
+            ],
+            [
+              -0.14999999999999994,
+              0.025,
+              -8.6
+            ],
+            [
+              -0.15000000000000002,
+              0.025,
+              -7.4
+            ],
+            [
+              -0.15000000000000002,
+              2.225,
+              -7.4
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00087",
+      "address": 9384,
+      "context": "interior",
+      "building": "building-0000",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        41,
+        -45,
+        257
+      ],
+      "rotation": 0,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          1.0,
+          0.025,
+          -6.4
+        ],
+        [
+          2.2,
+          2.225,
+          -6.25
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              1.0,
+              2.225,
+              -6.25
+            ],
+            [
+              1.0,
+              0.025,
+              -6.25
+            ],
+            [
+              2.2,
+              0.025,
+              -6.25
+            ],
+            [
+              2.2,
+              2.225,
+              -6.25
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              2.2,
+              2.225,
+              -6.4
+            ],
+            [
+              2.2,
+              0.025,
+              -6.4
+            ],
+            [
+              1.0,
+              0.025,
+              -6.4
+            ],
+            [
+              1.0,
+              2.225,
+              -6.4
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00088",
+      "address": 9420,
+      "context": "exterior",
+      "building": "building-0001",
+      "model": 546,
+      "type": "model",
+      "object_type": 4,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": 0,
+      "model_sha256": "076606c19bec6d0fd25e9c3fb887bf3a5ce49e9bf9f11cd03e917723b1d0af00",
+      "bounds": [
+        [
+          73.60000000000001,
+          -0.0,
+          -80.0
+        ],
+        [
+          86.4,
+          3.225,
+          -67.2
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 0,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              81.60000000000001,
+              2.25,
+              -67.2
+            ],
+            [
+              80.35000000000001,
+              2.25,
+              -67.2
+            ],
+            [
+              80.35000000000001,
+              -0.0,
+              -67.2
+            ],
+            [
+              81.60000000000001,
+              -0.0,
+              -67.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00089",
+      "address": 9503,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 31419,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        64,
+        -63,
+        -189
+      ],
+      "rotation": 1024,
+      "model_sha256": "311a3886d34f0f04fd4b99ab6d6a8831b6c402ce995d95b41df9ebfd695d69be",
+      "bounds": [
+        [
+          0.14999999999999983,
+          -0.0,
+          3.2
+        ],
+        [
+          3.0500000000000003,
+          3.1500000000000004,
+          6.25
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 4,
+          "texture": [
+            74,
+            1
+          ],
+          "points": [
+            [
+              0.34999999999999987,
+              -0.0,
+              6.25
+            ],
+            [
+              0.34999999999999987,
+              2.25,
+              6.25
+            ],
+            [
+              1.5999999999999999,
+              2.25,
+              6.25
+            ],
+            [
+              1.5999999999999999,
+              -0.0,
+              6.25
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00090",
+      "address": 9569,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 8407,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        128,
+        -63,
+        125
+      ],
+      "rotation": 1024,
+      "model_sha256": "455f2e17543232e85f653db7130669c05f6532db29155eb512585e7e1bfb4263",
+      "bounds": [
+        [
+          0.14999999999999966,
+          -0.0,
+          -6.25
+        ],
+        [
+          6.25,
+          3.1500000000000004,
+          -0.0
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00091",
+      "address": 9635,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 8407,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -128,
+        -63,
+        125
+      ],
+      "rotation": 1024,
+      "model_sha256": "455f2e17543232e85f653db7130669c05f6532db29155eb512585e7e1bfb4263",
+      "bounds": [
+        [
+          -6.25,
+          -0.0,
+          -6.25
+        ],
+        [
+          -0.14999999999999966,
+          3.1500000000000004,
+          -0.0
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00092",
+      "address": 9701,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 31424,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -64,
+        -63,
+        -67
+      ],
+      "rotation": 512,
+      "model_sha256": "a8deeec0e51b6fb52ceacacffd1a9331e02665529e7ed2c47ae6667b292d4030",
+      "bounds": [
+        [
+          -3.2,
+          -0.0,
+          0.14999999999999983
+        ],
+        [
+          0.0,
+          3.1500000000000004,
+          3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00093",
+      "address": 9767,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 31428,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        64,
+        -63,
+        -64
+      ],
+      "rotation": 1024,
+      "model_sha256": "d4fd5e7833d24e08e1fb638d1ba4cb7ffe3bda40f2a52b24ece2a389b4214d86",
+      "bounds": [
+        [
+          0.0,
+          -0.0,
+          -0.0
+        ],
+        [
+          3.2,
+          3.1500000000000004,
+          3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00094",
+      "address": 9833,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 31404,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        189,
+        -63,
+        -67
+      ],
+      "rotation": 1024,
+      "model_sha256": "6f22545c87d132d5d656a3bb49fbf6c0252067a1f47e9468e4fcb45a2d6d0717",
+      "bounds": [
+        [
+          3.2,
+          -0.0,
+          0.14999999999999983
+        ],
+        [
+          6.25,
+          3.1500000000000004,
+          3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00095",
+      "address": 9899,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 31418,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        192,
+        -63,
+        -189
+      ],
+      "rotation": 0,
+      "model_sha256": "af7cb29f0127663db8a55843d7b800b879112e39aaf3f32bb1e08a05620d7815",
+      "bounds": [
+        [
+          3.35,
+          -0.0,
+          3.2
+        ],
+        [
+          6.25,
+          3.1500000000000004,
+          6.25
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00096",
+      "address": 9965,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 31406,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -189,
+        -63,
+        -189
+      ],
+      "rotation": 1536,
+      "model_sha256": "6c3cb4999ce5b5611ed24922c9ce996dc49602efea6bbe48b3a5ace9918eb942",
+      "bounds": [
+        [
+          -6.25,
+          -0.0,
+          3.1999999999999997
+        ],
+        [
+          -3.2,
+          3.1500000000000004,
+          6.25
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00097",
+      "address": 10031,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 31406,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -67,
+        -63,
+        -189
+      ],
+      "rotation": 0,
+      "model_sha256": "6c3cb4999ce5b5611ed24922c9ce996dc49602efea6bbe48b3a5ace9918eb942",
+      "bounds": [
+        [
+          -3.2,
+          -0.0,
+          3.2
+        ],
+        [
+          -0.15000000000000002,
+          3.1500000000000004,
+          6.25
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00098",
+      "address": 10097,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 31426,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -189,
+        -63,
+        -64
+      ],
+      "rotation": 1024,
+      "model_sha256": "76ebfb4bf7af14e287577b3bf6ba7962223bb79a1a92974abdd657f1cd74be80",
+      "bounds": [
+        [
+          -6.25,
+          -0.0,
+          -0.0
+        ],
+        [
+          -3.2,
+          3.1500000000000004,
+          3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00099",
+      "address": 10163,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 41116,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -120,
+        2,
+        232
+      ],
+      "rotation": 1029,
+      "model_sha256": "680bf6fb82b4b961fda3fc960a39e4c7f823875421307e9a83187dfc9cf0a43d",
+      "bounds": [
+        [
+          -3.8037406795346174,
+          0.05,
+          -6.062241951891544
+        ],
+        [
+          -2.196259320465383,
+          1.3,
+          -5.537758048108457
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00100",
+      "address": 10229,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 41112,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -32,
+        2,
+        120
+      ],
+      "rotation": 518,
+      "model_sha256": "594624d8d7e4c6dc7d62234fb4dd55ad6d618b2d8913962d76bba29393ce2886",
+      "bounds": [
+        [
+          -1.298573196681463,
+          0.05,
+          -4.161034296707226
+        ],
+        [
+          -0.301426803318537,
+          0.7000000000000001,
+          -1.8389657032927744
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00101",
+      "address": 10295,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 41102,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -152,
+        2,
+        168
+      ],
+      "rotation": 774,
+      "model_sha256": "a6f1acfc4f82b621d7b648aac0314d2f18f8f789ced27b9ee5188c2ab9729fd7",
+      "bounds": [
+        [
+          -4.1998762147131385,
+          0.05,
+          -4.658438604512259
+        ],
+        [
+          -3.350841057225724,
+          1.4000000000000001,
+          -3.810704999378431
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00102",
+      "address": 10361,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 41000,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        208,
+        2,
+        128
+      ],
+      "rotation": 6,
+      "model_sha256": "84b3d249d75b2282af6d7422bb0e82dc2fc27ac77a584912d1440d87045c45b2",
+      "bounds": [
+        [
+          3.9166916050175526,
+          0.05,
+          -4.025002627865624
+        ],
+        [
+          6.150805079919988,
+          0.53232421875,
+          -2.3657505068339235
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00103",
+      "address": 10427,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 41034,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        240,
+        2,
+        192
+      ],
+      "rotation": 518,
+      "model_sha256": "7fc0aae6e419fb0b17ffa5841775c0f7136c9bfaab623c4ee0cbdf8afa625270",
+      "bounds": [
+        [
+          5.840570707809973,
+          0.05,
+          -5.252708139212817
+        ],
+        [
+          6.159526931895281,
+          0.92255859375,
+          -4.3472936583194
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00104",
+      "address": 10493,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 41020,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        24,
+        2,
+        184
+      ],
+      "rotation": 519,
+      "model_sha256": "3d881c1d339f9314a3d3cccab10e2f9fa4b21bb9cae2e4ddaa5dd2b5bbf441cb",
+      "bounds": [
+        [
+          0.30858447860532734,
+          0.05,
+          -4.891511058047513
+        ],
+        [
+          0.8914155213946728,
+          0.99482421875,
+          -4.308488941952488
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00105",
+      "address": 10559,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 41102,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -48,
+        2,
+        48
+      ],
+      "rotation": 216,
+      "model_sha256": "a6f1acfc4f82b621d7b648aac0314d2f18f8f789ced27b9ee5188c2ab9729fd7",
+      "bounds": [
+        [
+          -1.5924752554449935,
+          0.05,
+          -1.5896502764363725
+        ],
+        [
+          -0.7460005735945042,
+          1.4000000000000001,
+          -0.7518313364381822
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00106",
+      "address": 10625,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 41827,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        200,
+        2,
+        -192
+      ],
+      "rotation": 349,
+      "model_sha256": "e394187ed50c06bf1b5000851cd9360a5c4ff62d9dd6948f1d4a4760ea86ce10",
+      "bounds": [
+        [
+          4.3554064522629785,
+          0.05,
+          4.155406452262978
+        ],
+        [
+          5.644593547737022,
+          0.65,
+          5.444593547737022
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00107",
+      "address": 10691,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 41822,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        208,
+        2,
+        -136
+      ],
+      "rotation": 605,
+      "model_sha256": "498ad40750c8fa6b57f0e7a2b637ae39ad32de68e0c0d291de4e166925e47542",
+      "bounds": [
+        [
+          4.717644035643476,
+          0.05,
+          2.9176165488331307
+        ],
+        [
+          5.682477159322444,
+          0.8274414062500001,
+          3.8824496725120996
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00147",
+      "address": 11391,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        -169,
+        -45,
+        -1
+      ],
+      "rotation": 1024,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -5.4,
+          0.025,
+          -0.15000000000000013
+        ],
+        [
+          -4.2,
+          2.225,
+          2.7755575615628915e-18
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -4.2,
+              2.225,
+              -0.15000000000000002
+            ],
+            [
+              -4.2,
+              0.025,
+              -0.15000000000000002
+            ],
+            [
+              -5.4,
+              0.025,
+              -0.15000000000000013
+            ],
+            [
+              -5.4,
+              2.225,
+              -0.15000000000000013
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -5.4,
+              2.225,
+              -1.4432899320127036e-16
+            ],
+            [
+              -5.4,
+              0.025,
+              -1.4432899320127036e-16
+            ],
+            [
+              -4.2,
+              0.025,
+              2.7755575615628915e-18
+            ],
+            [
+              -4.2,
+              2.225,
+              2.7755575615628915e-18
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00148",
+      "address": 11410,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        87,
+        -45,
+        -1
+      ],
+      "rotation": 1024,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          1.0,
+          0.025,
+          -0.15000000000000013
+        ],
+        [
+          2.2,
+          2.225,
+          2.7755575615628915e-18
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              2.2,
+              2.225,
+              -0.15000000000000002
+            ],
+            [
+              2.2,
+              0.025,
+              -0.15000000000000002
+            ],
+            [
+              1.0,
+              0.025,
+              -0.15000000000000013
+            ],
+            [
+              1.0,
+              2.225,
+              -0.15000000000000013
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              1.0,
+              2.225,
+              -1.4432899320127036e-16
+            ],
+            [
+              1.0,
+              0.025,
+              -1.4432899320127036e-16
+            ],
+            [
+              2.2,
+              0.025,
+              2.7755575615628915e-18
+            ],
+            [
+              2.2,
+              2.225,
+              2.7755575615628915e-18
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00149",
+      "address": 11429,
+      "context": "interior",
+      "building": "building-0001",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        135,
+        -45,
+        -41
+      ],
+      "rotation": 1536,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          3.1999999999999997,
+          0.025,
+          1.0
+        ],
+        [
+          3.35,
+          2.225,
+          2.2
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              3.2,
+              2.225,
+              1.0
+            ],
+            [
+              3.2,
+              0.025,
+              1.0
+            ],
+            [
+              3.1999999999999997,
+              0.025,
+              2.2
+            ],
+            [
+              3.1999999999999997,
+              2.225,
+              2.2
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              3.35,
+              2.225,
+              2.2
+            ],
+            [
+              3.35,
+              0.025,
+              2.2
+            ],
+            [
+              3.35,
+              0.025,
+              1.0
+            ],
+            [
+              3.35,
+              2.225,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00150",
+      "address": 11465,
+      "context": "exterior",
+      "building": "building-0002",
+      "model": 626,
+      "type": "model",
+      "object_type": 4,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": 0,
+      "model_sha256": "a049210169a021141f2dc20de8e675505599d343185d0509f43e9a6dc6bb32bc",
+      "bounds": [
+        [
+          54.400000000000006,
+          -0.0,
+          -54.400000000000006
+        ],
+        [
+          80.0,
+          9.675,
+          -35.2
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 36,
+          "texture": [
+            374,
+            3
+          ],
+          "points": [
+            [
+              65.60000000000001,
+              2.3000000000000003,
+              -48.0
+            ],
+            [
+              64.35000000000001,
+              2.3000000000000003,
+              -48.0
+            ],
+            [
+              64.35000000000001,
+              0.05,
+              -48.0
+            ],
+            [
+              65.60000000000001,
+              0.05,
+              -48.0
+            ]
+          ]
+        },
+        {
+          "plane": 41,
+          "texture": [
+            374,
+            3
+          ],
+          "points": [
+            [
+              68.8,
+              2.3000000000000003,
+              -41.6
+            ],
+            [
+              70.05,
+              2.3000000000000003,
+              -41.6
+            ],
+            [
+              70.05,
+              0.05,
+              -41.6
+            ],
+            [
+              68.8,
+              0.05,
+              -41.6
+            ]
+          ]
+        },
+        {
+          "plane": 46,
+          "texture": [
+            374,
+            3
+          ],
+          "points": [
+            [
+              65.60000000000001,
+              2.3000000000000003,
+              -35.2
+            ],
+            [
+              64.35000000000001,
+              2.3000000000000003,
+              -35.2
+            ],
+            [
+              64.35000000000001,
+              0.05,
+              -35.2
+            ],
+            [
+              65.60000000000001,
+              0.05,
+              -35.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00151",
+      "address": 11548,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 10700,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        195,
+        -63,
+        -320
+      ],
+      "rotation": 1536,
+      "model_sha256": "31a21f1c81100b4a9b5ced242e22bd82ad34ba04f432ccc0c4095bd5a64b5d2d",
+      "bounds": [
+        [
+          3.35,
+          -0.0,
+          6.550000000000001
+        ],
+        [
+          6.4,
+          3.1500000000000004,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00152",
+      "address": 11614,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 3725,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -384,
+        -129,
+        -378
+      ],
+      "rotation": 1536,
+      "model_sha256": "f0f1b3b3a2f0186b180ed702064a959a51cffa13d1b41329c9fbf54c2235107e",
+      "bounds": [
+        [
+          -12.65,
+          0.025,
+          9.450000000000001
+        ],
+        [
+          -6.550000000000001,
+          6.4,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00153",
+      "address": 11680,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 3701,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        259,
+        -129,
+        -192
+      ],
+      "rotation": 1024,
+      "model_sha256": "ec1c7e7e7b49710b1025dda80142922d4cdff1d89ed3a65e398d8f1967922fd4",
+      "bounds": [
+        [
+          6.4,
+          0.025,
+          3.35
+        ],
+        [
+          6.550000000000001,
+          6.4,
+          6.25
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00154",
+      "address": 11746,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 3710,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        262,
+        -129,
+        -64
+      ],
+      "rotation": 1024,
+      "model_sha256": "617411c9e07cef7b362963bda0eb7c1e2d28660705a8e62148ed76137ccd8e77",
+      "bounds": [
+        [
+          6.550000000000001,
+          0.025,
+          0.15000000000000002
+        ],
+        [
+          6.550000000000001,
+          6.4,
+          3.0500000000000003
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00155",
+      "address": 11812,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 3737,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        384,
+        -129,
+        -6
+      ],
+      "rotation": 512,
+      "model_sha256": "6c1ebf60929233dc98a95aa7095e4e83acace69b9db78807cbc27eecdc0e789a",
+      "bounds": [
+        [
+          6.550000000000001,
+          0.025,
+          0.14999999999999983
+        ],
+        [
+          12.65,
+          6.4,
+          0.1500000000000002
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00156",
+      "address": 11878,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 3737,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -384,
+        -129,
+        -6
+      ],
+      "rotation": 512,
+      "model_sha256": "6c1ebf60929233dc98a95aa7095e4e83acace69b9db78807cbc27eecdc0e789a",
+      "bounds": [
+        [
+          -12.65,
+          0.025,
+          0.14999999999999983
+        ],
+        [
+          -6.550000000000001,
+          6.4,
+          0.1500000000000002
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00157",
+      "address": 11944,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 4705,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        266,
+        -129,
+        -128
+      ],
+      "rotation": 512,
+      "model_sha256": "f716921434c33028c18b94a242d5691202a38919bf3ab3aff96516a2cfd35858",
+      "bounds": [
+        [
+          6.55009765625,
+          0.025,
+          3.0500000000000003
+        ],
+        [
+          6.7000976562500005,
+          6.4,
+          3.35
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00158",
+      "address": 12010,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 4705,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        266,
+        -129,
+        -256
+      ],
+      "rotation": 512,
+      "model_sha256": "f716921434c33028c18b94a242d5691202a38919bf3ab3aff96516a2cfd35858",
+      "bounds": [
+        [
+          6.55009765625,
+          0.025,
+          6.25
+        ],
+        [
+          6.7000976562500005,
+          6.4,
+          6.550000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00159",
+      "address": 12076,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 4705,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -266,
+        -129,
+        -256
+      ],
+      "rotation": 1536,
+      "model_sha256": "f716921434c33028c18b94a242d5691202a38919bf3ab3aff96516a2cfd35858",
+      "bounds": [
+        [
+          -6.7000976562500005,
+          0.025,
+          6.25
+        ],
+        [
+          -6.55009765625,
+          6.4,
+          6.550000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00160",
+      "address": 12142,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8507,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -381,
+        -63,
+        256
+      ],
+      "rotation": 1536,
+      "model_sha256": "76a217928c61902784b8fc4c3bbfea06ef2b3da68c209fffec6b1262af5c6a31",
+      "bounds": [
+        [
+          -12.65,
+          -0.0,
+          -9.450000000000001
+        ],
+        [
+          -6.4,
+          3.1500000000000004,
+          -3.3499999999999996
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00161",
+      "address": 12208,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8500,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -192,
+        -63,
+        317
+      ],
+      "rotation": 1024,
+      "model_sha256": "5c89db61670a016849441bb25c0f8900fd85fc92ffe8aab3470823efcb85adfb",
+      "bounds": [
+        [
+          -6.25,
+          -0.0,
+          -9.450000000000001
+        ],
+        [
+          -3.35,
+          3.1500000000000004,
+          -6.4
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00162",
+      "address": 12274,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8501,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -381,
+        -63,
+        64
+      ],
+      "rotation": 1536,
+      "model_sha256": "d9d009990383b3387fe3f6790daa3202a7d5b208ee022aa50e2b739615b5e24e",
+      "bounds": [
+        [
+          -12.65,
+          -0.0,
+          -3.0500000000000007
+        ],
+        [
+          -6.4,
+          3.1500000000000004,
+          -0.14999999999999947
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00163",
+      "address": 12340,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8501,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        381,
+        -63,
+        64
+      ],
+      "rotation": 512,
+      "model_sha256": "d9d009990383b3387fe3f6790daa3202a7d5b208ee022aa50e2b739615b5e24e",
+      "bounds": [
+        [
+          6.4,
+          -0.0,
+          -3.0500000000000003
+        ],
+        [
+          12.65,
+          3.1500000000000004,
+          -0.14999999999999983
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00164",
+      "address": 12406,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8501,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        381,
+        -63,
+        192
+      ],
+      "rotation": 512,
+      "model_sha256": "d9d009990383b3387fe3f6790daa3202a7d5b208ee022aa50e2b739615b5e24e",
+      "bounds": [
+        [
+          6.4,
+          -0.0,
+          -6.25
+        ],
+        [
+          12.65,
+          3.1500000000000004,
+          -3.35
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00165",
+      "address": 12472,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8512,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        320,
+        -63,
+        317
+      ],
+      "rotation": 1024,
+      "model_sha256": "0e666a8e7c7fa68b11ee31e7719ca5f1973383470acfdbe3ea8ce6a86e974ff7",
+      "bounds": [
+        [
+          3.35,
+          -0.0,
+          -9.450000000000001
+        ],
+        [
+          12.65,
+          3.1500000000000004,
+          -6.4
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00166",
+      "address": 12538,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31528,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -192,
+        -63,
+        192
+      ],
+      "rotation": 1536,
+      "model_sha256": "b9e7067b3ad07b19a01d948381d61cc86ee4b6fe9347900aae260460cff584cf",
+      "bounds": [
+        [
+          -6.4,
+          -0.0,
+          -6.4
+        ],
+        [
+          -3.1999999999999997,
+          3.1500000000000004,
+          -3.1999999999999997
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00167",
+      "address": 12604,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31507,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        195,
+        -63,
+        64
+      ],
+      "rotation": 0,
+      "model_sha256": "2fbd6c546f27335504a244f9aa9c601a63ebfffb496465d5e24d456ec8c9eb7c",
+      "bounds": [
+        [
+          3.35,
+          -0.0,
+          -3.2
+        ],
+        [
+          6.4,
+          3.1500000000000004,
+          -0.0
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00168",
+      "address": 12670,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31500,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        192,
+        -63,
+        -64
+      ],
+      "rotation": 0,
+      "model_sha256": "0916f9c853ca071f86a71e0e0a96c4f5b4d5cde0f77254227188a27388894019",
+      "bounds": [
+        [
+          3.35,
+          -0.0,
+          -0.0
+        ],
+        [
+          6.25,
+          3.1500000000000004,
+          3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00169",
+      "address": 12736,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31503,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -195,
+        -63,
+        67
+      ],
+      "rotation": 0,
+      "model_sha256": "75a59bc3270f839afdabbfb302e1d476c39c3ceda2230baf51b499b01b7ceb27",
+      "bounds": [
+        [
+          -6.4,
+          -0.0,
+          -3.2
+        ],
+        [
+          -3.35,
+          3.1500000000000004,
+          -0.15000000000000002
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00170",
+      "address": 12802,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31523,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -192,
+        -128,
+        -64
+      ],
+      "rotation": 1024,
+      "model_sha256": "aca949bb12fd77e1dbde28ced4acafbd5ec8c5c465d6238d8578a705c3fcf266",
+      "bounds": [
+        [
+          -6.25,
+          -0.0,
+          -0.0
+        ],
+        [
+          -3.35,
+          6.375,
+          3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00171",
+      "address": 12868,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8500,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        64,
+        -63,
+        317
+      ],
+      "rotation": 1024,
+      "model_sha256": "5c89db61670a016849441bb25c0f8900fd85fc92ffe8aab3470823efcb85adfb",
+      "bounds": [
+        [
+          0.14999999999999983,
+          -0.0,
+          -9.450000000000001
+        ],
+        [
+          3.0500000000000003,
+          3.1500000000000004,
+          -6.4
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00172",
+      "address": 12934,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31506,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        61,
+        -63,
+        -317
+      ],
+      "rotation": 0,
+      "model_sha256": "1b2d4bb1a3fd6db3bb51fa7f81f5297e2165bb4681d66f195680a9222e742c4e",
+      "bounds": [
+        [
+          0.0,
+          -0.0,
+          6.4
+        ],
+        [
+          3.0500000000000003,
+          3.1500000000000004,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00173",
+      "address": 13000,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31527,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        192,
+        -63,
+        -189
+      ],
+      "rotation": 512,
+      "model_sha256": "4b1effa64b1dd70241f385d7785a4393969f6a8955c28aedce3281602232ece3",
+      "bounds": [
+        [
+          3.2,
+          -0.0,
+          3.2
+        ],
+        [
+          6.4,
+          3.1500000000000004,
+          6.25
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00174",
+      "address": 13066,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 3701,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        259,
+        -129,
+        -320
+      ],
+      "rotation": 1024,
+      "model_sha256": "ec1c7e7e7b49710b1025dda80142922d4cdff1d89ed3a65e398d8f1967922fd4",
+      "bounds": [
+        [
+          6.4,
+          0.025,
+          6.550000000000001
+        ],
+        [
+          6.550000000000001,
+          6.4,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00175",
+      "address": 13132,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 3725,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        384,
+        -129,
+        -378
+      ],
+      "rotation": 1536,
+      "model_sha256": "f0f1b3b3a2f0186b180ed702064a959a51cffa13d1b41329c9fbf54c2235107e",
+      "bounds": [
+        [
+          6.550000000000001,
+          0.025,
+          9.450000000000001
+        ],
+        [
+          12.65,
+          6.4,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00176",
+      "address": 13198,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 3726,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        506,
+        -129,
+        -192
+      ],
+      "rotation": 0,
+      "model_sha256": "e30d42da0929ff6369fa2986eb8442ea2ff7c9283a6b9f398ff2da5063c0bd17",
+      "bounds": [
+        [
+          12.65,
+          0.025,
+          0.15000000000000002
+        ],
+        [
+          12.65,
+          6.4,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00177",
+      "address": 13264,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 3726,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -506,
+        -129,
+        -192
+      ],
+      "rotation": 1024,
+      "model_sha256": "e30d42da0929ff6369fa2986eb8442ea2ff7c9283a6b9f398ff2da5063c0bd17",
+      "bounds": [
+        [
+          -12.65,
+          0.025,
+          0.15000000000000002
+        ],
+        [
+          -12.65,
+          6.4,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00178",
+      "address": 13330,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 1708,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        384,
+        0,
+        -192
+      ],
+      "rotation": 0,
+      "model_sha256": "ed4f9d2017c3ce8f6598d087c970988b9e708c42cbbcc75605eca18e98b7bb94",
+      "bounds": [
+        [
+          6.4,
+          -0.0,
+          -0.0
+        ],
+        [
+          12.8,
+          -0.0,
+          9.600000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00179",
+      "address": 13396,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 1708,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -384,
+        0,
+        -192
+      ],
+      "rotation": 0,
+      "model_sha256": "ed4f9d2017c3ce8f6598d087c970988b9e708c42cbbcc75605eca18e98b7bb94",
+      "bounds": [
+        [
+          -12.8,
+          -0.0,
+          -0.0
+        ],
+        [
+          -6.4,
+          -0.0,
+          9.600000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00180",
+      "address": 13462,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 2408,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        384,
+        -257,
+        -193
+      ],
+      "rotation": 0,
+      "model_sha256": "49168eef4a0a027efb2b87f2f2df9bb75d99fb3f61b2b71780abb765312b3e1d",
+      "bounds": [
+        [
+          6.4,
+          6.42490234375,
+          9.765625e-05
+        ],
+        [
+          12.8,
+          6.425000000000001,
+          9.600000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00181",
+      "address": 13528,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 2408,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -384,
+        -257,
+        -193
+      ],
+      "rotation": 0,
+      "model_sha256": "49168eef4a0a027efb2b87f2f2df9bb75d99fb3f61b2b71780abb765312b3e1d",
+      "bounds": [
+        [
+          -12.8,
+          6.42490234375,
+          9.765625e-05
+        ],
+        [
+          -6.4,
+          6.425000000000001,
+          9.600000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00182",
+      "address": 13594,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31507,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        195,
+        -192,
+        64
+      ],
+      "rotation": 0,
+      "model_sha256": "2fbd6c546f27335504a244f9aa9c601a63ebfffb496465d5e24d456ec8c9eb7c",
+      "bounds": [
+        [
+          3.35,
+          3.225,
+          -3.2
+        ],
+        [
+          6.4,
+          6.375,
+          -0.0
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00183",
+      "address": 13660,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31507,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -195,
+        -192,
+        64
+      ],
+      "rotation": 1024,
+      "model_sha256": "2fbd6c546f27335504a244f9aa9c601a63ebfffb496465d5e24d456ec8c9eb7c",
+      "bounds": [
+        [
+          -6.4,
+          3.225,
+          -3.2
+        ],
+        [
+          -3.35,
+          6.375,
+          3.552713678800501e-16
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00184",
+      "address": 13726,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8501,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -381,
+        -192,
+        64
+      ],
+      "rotation": 1536,
+      "model_sha256": "d9d009990383b3387fe3f6790daa3202a7d5b208ee022aa50e2b739615b5e24e",
+      "bounds": [
+        [
+          -12.65,
+          3.225,
+          -3.0500000000000007
+        ],
+        [
+          -6.4,
+          6.375,
+          -0.14999999999999947
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00185",
+      "address": 13792,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8501,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        381,
+        -192,
+        64
+      ],
+      "rotation": 512,
+      "model_sha256": "d9d009990383b3387fe3f6790daa3202a7d5b208ee022aa50e2b739615b5e24e",
+      "bounds": [
+        [
+          6.4,
+          3.225,
+          -3.0500000000000003
+        ],
+        [
+          12.65,
+          6.375,
+          -0.14999999999999983
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00186",
+      "address": 13858,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8501,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        381,
+        -192,
+        192
+      ],
+      "rotation": 512,
+      "model_sha256": "d9d009990383b3387fe3f6790daa3202a7d5b208ee022aa50e2b739615b5e24e",
+      "bounds": [
+        [
+          6.4,
+          3.225,
+          -6.25
+        ],
+        [
+          12.65,
+          6.375,
+          -3.35
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00187",
+      "address": 13924,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8519,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        0,
+        -192,
+        -253
+      ],
+      "rotation": 0,
+      "model_sha256": "ec962b55c8f137af3d585dee731c7a5d91130b92f0f028fc525f48970a0b5e48",
+      "bounds": [
+        [
+          -6.25,
+          3.225,
+          3.2
+        ],
+        [
+          6.25,
+          6.375,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00188",
+      "address": 13990,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31507,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -64,
+        -192,
+        195
+      ],
+      "rotation": 512,
+      "model_sha256": "2fbd6c546f27335504a244f9aa9c601a63ebfffb496465d5e24d456ec8c9eb7c",
+      "bounds": [
+        [
+          -3.2,
+          3.225,
+          -6.4
+        ],
+        [
+          0.0,
+          6.375,
+          -3.35
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00189",
+      "address": 14056,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31505,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        192,
+        -192,
+        -64
+      ],
+      "rotation": 0,
+      "model_sha256": "01620080e3b3f4d04250d59285c99735d033fa077b2cb3806ab8e8346aabd58a",
+      "bounds": [
+        [
+          3.35,
+          3.225,
+          -0.0
+        ],
+        [
+          6.25,
+          6.375,
+          3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00190",
+      "address": 14122,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31510,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -320,
+        -192,
+        317
+      ],
+      "rotation": 0,
+      "model_sha256": "17107d5c785e360a51362904839fe6f31fc1e40577cd4857c393422e8125d81a",
+      "bounds": [
+        [
+          -9.600000000000001,
+          3.225,
+          -9.450000000000001
+        ],
+        [
+          -6.4,
+          6.375,
+          -6.4
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00191",
+      "address": 14188,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31526,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        192,
+        -192,
+        189
+      ],
+      "rotation": 512,
+      "model_sha256": "a64cc5adf0dd9e7e381ea8b8ce3b13503b36f94828d7fac09e7fed79ac0ba008",
+      "bounds": [
+        [
+          3.2,
+          3.225,
+          -6.25
+        ],
+        [
+          6.4,
+          6.375,
+          -3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00192",
+      "address": 14254,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31526,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -320,
+        -192,
+        195
+      ],
+      "rotation": 1536,
+      "model_sha256": "a64cc5adf0dd9e7e381ea8b8ce3b13503b36f94828d7fac09e7fed79ac0ba008",
+      "bounds": [
+        [
+          -9.600000000000001,
+          3.225,
+          -6.4
+        ],
+        [
+          -6.4,
+          6.375,
+          -3.35
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00193",
+      "address": 14320,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31524,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -192,
+        -192,
+        189
+      ],
+      "rotation": 512,
+      "model_sha256": "ff3a6aeff2b21f677033c0c6189d9542cd149876316c4303db9b4e07cbdd9d6c",
+      "bounds": [
+        [
+          -6.4,
+          3.225,
+          -6.25
+        ],
+        [
+          -3.2,
+          6.375,
+          -3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00194",
+      "address": 14386,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8500,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -445,
+        -192,
+        192
+      ],
+      "rotation": 1536,
+      "model_sha256": "5c89db61670a016849441bb25c0f8900fd85fc92ffe8aab3470823efcb85adfb",
+      "bounds": [
+        [
+          -12.65,
+          3.225,
+          -6.25
+        ],
+        [
+          -9.600000000000001,
+          6.375,
+          -3.35
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00195",
+      "address": 14452,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8500,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -445,
+        -192,
+        320
+      ],
+      "rotation": 1536,
+      "model_sha256": "5c89db61670a016849441bb25c0f8900fd85fc92ffe8aab3470823efcb85adfb",
+      "bounds": [
+        [
+          -12.65,
+          3.225,
+          -9.450000000000001
+        ],
+        [
+          -9.600000000000001,
+          6.375,
+          -6.550000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00196",
+      "address": 14518,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31507,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        64,
+        -192,
+        195
+      ],
+      "rotation": 512,
+      "model_sha256": "2fbd6c546f27335504a244f9aa9c601a63ebfffb496465d5e24d456ec8c9eb7c",
+      "bounds": [
+        [
+          0.0,
+          3.225,
+          -6.4
+        ],
+        [
+          3.2,
+          6.375,
+          -3.35
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00197",
+      "address": 14584,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31504,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        67,
+        -192,
+        317
+      ],
+      "rotation": 1536,
+      "model_sha256": "0e38e49dfee71267caf576249d38366d55818c49de2321c97efea67bf01998f9",
+      "bounds": [
+        [
+          0.14999999999999983,
+          3.225,
+          -9.450000000000001
+        ],
+        [
+          3.2,
+          6.375,
+          -6.4
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00198",
+      "address": 14650,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31505,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        320,
+        -192,
+        320
+      ],
+      "rotation": 512,
+      "model_sha256": "01620080e3b3f4d04250d59285c99735d033fa077b2cb3806ab8e8346aabd58a",
+      "bounds": [
+        [
+          6.4,
+          3.225,
+          -9.450000000000001
+        ],
+        [
+          9.600000000000001,
+          6.375,
+          -6.550000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00199",
+      "address": 14716,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31500,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        192,
+        -192,
+        320
+      ],
+      "rotation": 512,
+      "model_sha256": "0916f9c853ca071f86a71e0e0a96c4f5b4d5cde0f77254227188a27388894019",
+      "bounds": [
+        [
+          3.2,
+          3.225,
+          -9.450000000000001
+        ],
+        [
+          6.4,
+          6.375,
+          -6.550000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00200",
+      "address": 14782,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31529,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -64,
+        -63,
+        192
+      ],
+      "rotation": 1024,
+      "model_sha256": "adfb9c1856e984f9fbd73a9f47b34c5ff839bd75c375becbdaa9438aef962aea",
+      "bounds": [
+        [
+          -3.2,
+          -0.0,
+          -6.25
+        ],
+        [
+          0.0,
+          3.1500000000000004,
+          -3.35
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 2,
+          "texture": [
+            74,
+            1
+          ],
+          "points": [
+            [
+              -2.85,
+              -0.0,
+              -3.35
+            ],
+            [
+              -2.85,
+              2.25,
+              -3.35
+            ],
+            [
+              -1.6,
+              2.25,
+              -3.35
+            ],
+            [
+              -1.6,
+              -0.0,
+              -3.35
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00201",
+      "address": 14848,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31507,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        64,
+        -63,
+        195
+      ],
+      "rotation": 512,
+      "model_sha256": "2fbd6c546f27335504a244f9aa9c601a63ebfffb496465d5e24d456ec8c9eb7c",
+      "bounds": [
+        [
+          0.0,
+          -0.0,
+          -6.4
+        ],
+        [
+          3.2,
+          3.1500000000000004,
+          -3.35
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00202",
+      "address": 14914,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31528,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        192,
+        -63,
+        192
+      ],
+      "rotation": 1024,
+      "model_sha256": "b9e7067b3ad07b19a01d948381d61cc86ee4b6fe9347900aae260460cff584cf",
+      "bounds": [
+        [
+          3.2,
+          -0.0,
+          -6.4
+        ],
+        [
+          6.4,
+          3.1500000000000004,
+          -3.2
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00203",
+      "address": 14980,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31530,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -64,
+        -63,
+        -317
+      ],
+      "rotation": 1024,
+      "model_sha256": "9cc61447277a1ba9f9bb342c3a607aa08500589cbe111f9706a82135df29fabe",
+      "bounds": [
+        [
+          -3.2,
+          -0.0,
+          6.4
+        ],
+        [
+          0.0,
+          3.1500000000000004,
+          9.450000000000001
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 2,
+          "texture": [
+            74,
+            1
+          ],
+          "points": [
+            [
+              -2.85,
+              -0.0,
+              9.450000000000001
+            ],
+            [
+              -2.85,
+              2.25,
+              9.450000000000001
+            ],
+            [
+              -1.6000000000000005,
+              2.25,
+              9.450000000000001
+            ],
+            [
+              -1.6000000000000005,
+              -0.0,
+              9.450000000000001
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00204",
+      "address": 15046,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 3701,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -259,
+        -129,
+        -320
+      ],
+      "rotation": 0,
+      "model_sha256": "ec1c7e7e7b49710b1025dda80142922d4cdff1d89ed3a65e398d8f1967922fd4",
+      "bounds": [
+        [
+          -6.550000000000001,
+          0.025,
+          6.550000000000001
+        ],
+        [
+          -6.4,
+          6.4,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00205",
+      "address": 15112,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 3737,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -262,
+        -129,
+        -128
+      ],
+      "rotation": 0,
+      "model_sha256": "6c1ebf60929233dc98a95aa7095e4e83acace69b9db78807cbc27eecdc0e789a",
+      "bounds": [
+        [
+          -6.550000000000001,
+          0.025,
+          0.15000000000000002
+        ],
+        [
+          -6.550000000000001,
+          6.4,
+          6.25
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00206",
+      "address": 15178,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31524,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        64,
+        -63,
+        -195
+      ],
+      "rotation": 512,
+      "model_sha256": "ff3a6aeff2b21f677033c0c6189d9542cd149876316c4303db9b4e07cbdd9d6c",
+      "bounds": [
+        [
+          0.0,
+          -0.0,
+          3.35
+        ],
+        [
+          3.2,
+          3.1500000000000004,
+          6.4
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00207",
+      "address": 15244,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31524,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -64,
+        -63,
+        -195
+      ],
+      "rotation": 512,
+      "model_sha256": "ff3a6aeff2b21f677033c0c6189d9542cd149876316c4303db9b4e07cbdd9d6c",
+      "bounds": [
+        [
+          -3.2,
+          -0.0,
+          3.35
+        ],
+        [
+          0.0,
+          3.1500000000000004,
+          6.4
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00208",
+      "address": 15310,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31524,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -189,
+        -63,
+        -192
+      ],
+      "rotation": 1024,
+      "model_sha256": "ff3a6aeff2b21f677033c0c6189d9542cd149876316c4303db9b4e07cbdd9d6c",
+      "bounds": [
+        [
+          -6.25,
+          -0.0,
+          3.1999999999999997
+        ],
+        [
+          -3.2,
+          3.1500000000000004,
+          6.4
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00209",
+      "address": 15376,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 31526,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -192,
+        -63,
+        -317
+      ],
+      "rotation": 1536,
+      "model_sha256": "a64cc5adf0dd9e7e381ea8b8ce3b13503b36f94828d7fac09e7fed79ac0ba008",
+      "bounds": [
+        [
+          -6.4,
+          -0.0,
+          6.4
+        ],
+        [
+          -3.1999999999999997,
+          3.1500000000000004,
+          9.450000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00210",
+      "address": 15442,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8500,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -64,
+        -192,
+        317
+      ],
+      "rotation": 1024,
+      "model_sha256": "5c89db61670a016849441bb25c0f8900fd85fc92ffe8aab3470823efcb85adfb",
+      "bounds": [
+        [
+          -3.0500000000000003,
+          3.225,
+          -9.450000000000001
+        ],
+        [
+          -0.14999999999999983,
+          6.375,
+          -6.4
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00211",
+      "address": 15508,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8500,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        -195,
+        -192,
+        320
+      ],
+      "rotation": 512,
+      "model_sha256": "5c89db61670a016849441bb25c0f8900fd85fc92ffe8aab3470823efcb85adfb",
+      "bounds": [
+        [
+          -6.4,
+          3.225,
+          -9.450000000000001
+        ],
+        [
+          -3.35,
+          6.375,
+          -6.550000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00212",
+      "address": 15574,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 8500,
+      "type": "model",
+      "object_type": 13,
+      "position": [
+        445,
+        -192,
+        320
+      ],
+      "rotation": 512,
+      "model_sha256": "5c89db61670a016849441bb25c0f8900fd85fc92ffe8aab3470823efcb85adfb",
+      "bounds": [
+        [
+          9.600000000000001,
+          3.225,
+          -9.450000000000001
+        ],
+        [
+          12.65,
+          6.375,
+          -6.550000000000001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00213",
+      "address": 15640,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        440,
+        2,
+        64
+      ],
+      "rotation": 0,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          9.80029296875,
+          0.05,
+          -2.13310546875
+        ],
+        [
+          11.8671875,
+          0.66259765625,
+          -1.0876953125
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00214",
+      "address": 15706,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        432,
+        2,
+        200
+      ],
+      "rotation": 0,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          9.60029296875,
+          0.05,
+          -5.5331054687500005
+        ],
+        [
+          11.6671875,
+          0.66259765625,
+          -4.4876953125000005
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00215",
+      "address": 15772,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        432,
+        2,
+        328
+      ],
+      "rotation": 0,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          9.60029296875,
+          0.05,
+          -8.73310546875
+        ],
+        [
+          11.6671875,
+          0.66259765625,
+          -7.687695312500001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00216",
+      "address": 15838,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        64,
+        2,
+        328
+      ],
+      "rotation": 512,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          1.06689453125,
+          0.05,
+          -9.067187500000001
+        ],
+        [
+          2.1123046875,
+          0.66259765625,
+          -7.00029296875
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00217",
+      "address": 15904,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -192,
+        2,
+        328
+      ],
+      "rotation": 512,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          -5.33310546875,
+          0.05,
+          -9.067187500000001
+        ],
+        [
+          -4.2876953125,
+          0.66259765625,
+          -7.00029296875
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00218",
+      "address": 15970,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -64,
+        131,
+        328
+      ],
+      "rotation": 512,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          -2.13310546875,
+          3.2750000000000004,
+          -9.067187500000001
+        ],
+        [
+          -1.0876953125,
+          3.88759765625,
+          -7.00029296875
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00219",
+      "address": 16036,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        424,
+        131,
+        64
+      ],
+      "rotation": 0,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          9.40029296875,
+          3.2750000000000004,
+          -2.13310546875
+        ],
+        [
+          11.467187500000001,
+          3.88759765625,
+          -1.0876953125
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00220",
+      "address": 16102,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        416,
+        131,
+        200
+      ],
+      "rotation": 0,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          9.20029296875,
+          3.2750000000000004,
+          -5.5331054687500005
+        ],
+        [
+          11.2671875,
+          3.88759765625,
+          -4.4876953125000005
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00221",
+      "address": 16168,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -448,
+        131,
+        64
+      ],
+      "rotation": 1024,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          -12.067187500000001,
+          3.2750000000000004,
+          -2.1123046875
+        ],
+        [
+          -10.000292968750001,
+          3.88759765625,
+          -1.0668945312499998
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00222",
+      "address": 16234,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -456,
+        131,
+        192
+      ],
+      "rotation": 1024,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          -12.2671875,
+          3.2750000000000004,
+          -5.3123046875
+        ],
+        [
+          -10.20029296875,
+          3.88759765625,
+          -4.26689453125
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00223",
+      "address": 16300,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -456,
+        131,
+        320
+      ],
+      "rotation": 1024,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          -12.2671875,
+          3.2750000000000004,
+          -8.5123046875
+        ],
+        [
+          -10.20029296875,
+          3.88759765625,
+          -7.46689453125
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00224",
+      "address": 16366,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -96,
+        131,
+        -336
+      ],
+      "rotation": 1536,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          -2.9123046875000003,
+          3.2750000000000004,
+          7.20029296875
+        ],
+        [
+          -1.86689453125,
+          3.88759765625,
+          9.2671875
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00225",
+      "address": 16432,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41001,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        96,
+        131,
+        -336
+      ],
+      "rotation": 1536,
+      "model_sha256": "8c8617a317638b019e27c5d32cfecb6781782df25f39560e8d81a8007defc008",
+      "bounds": [
+        [
+          1.8876953125,
+          3.2750000000000004,
+          7.20029296875
+        ],
+        [
+          2.93310546875,
+          3.88759765625,
+          9.2671875
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00226",
+      "address": 16498,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41801,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -232,
+        131,
+        -256
+      ],
+      "rotation": -511,
+      "model_sha256": "9dd60c33142a53e4e610dfe85d01b96e956e917b20994e838db5560650d94e14",
+      "bounds": [
+        [
+          -6.2302135263661125,
+          3.2750000000000004,
+          4.698397622828316
+        ],
+        [
+          -5.2698846000433415,
+          5.575,
+          8.10129588110054
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00227",
+      "address": 16564,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41117,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -288,
+        2,
+        -32
+      ],
+      "rotation": -1280,
+      "model_sha256": "8097a5a7754413e489fc40e54e27e88f89d225ed8c56fa2b0f71886a278c5795",
+      "bounds": [
+        [
+          -8.233245973329522,
+          0.05,
+          0.2833424866369385
+        ],
+        [
+          -6.683342486636938,
+          1.6,
+          1.833315026726123
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00228",
+      "address": 16630,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41105,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -352,
+        2,
+        -112
+      ],
+      "rotation": -1280,
+      "model_sha256": "269d814a94bb66e016645fd1a3517533dad44e48985221d30f341cf968827f59",
+      "bounds": [
+        [
+          -9.61296563817473,
+          0.05,
+          1.9868962550320708
+        ],
+        [
+          -7.986896255032071,
+          0.6000000000000001,
+          3.6131037449679297
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00229",
+      "address": 16696,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41108,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -456,
+        2,
+        -312
+      ],
+      "rotation": -1024,
+      "model_sha256": "017e4c026deea042668a4aca19380db32b85eff6d59d4c13824ed94f1390054a",
+      "bounds": [
+        [
+          -12.28583984375,
+          0.05,
+          7.20947265625
+        ],
+        [
+          -10.5142578125,
+          0.8176757812500001,
+          8.39052734375
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00230",
+      "address": 16762,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41108,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -456,
+        2,
+        -192
+      ],
+      "rotation": -1024,
+      "model_sha256": "017e4c026deea042668a4aca19380db32b85eff6d59d4c13824ed94f1390054a",
+      "bounds": [
+        [
+          -12.28583984375,
+          0.05,
+          4.20947265625
+        ],
+        [
+          -10.5142578125,
+          0.8176757812500001,
+          5.3905273437500005
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00231",
+      "address": 16828,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41108,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        448,
+        2,
+        -320
+      ],
+      "rotation": -1024,
+      "model_sha256": "017e4c026deea042668a4aca19380db32b85eff6d59d4c13824ed94f1390054a",
+      "bounds": [
+        [
+          10.31416015625,
+          0.05,
+          7.40947265625
+        ],
+        [
+          12.085742187500001,
+          0.8176757812500001,
+          8.59052734375
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00232",
+      "address": 16894,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41108,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        456,
+        2,
+        -200
+      ],
+      "rotation": -1024,
+      "model_sha256": "017e4c026deea042668a4aca19380db32b85eff6d59d4c13824ed94f1390054a",
+      "bounds": [
+        [
+          10.51416015625,
+          0.05,
+          4.40947265625
+        ],
+        [
+          12.2857421875,
+          0.8176757812500001,
+          5.590527343750001
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00233",
+      "address": 16960,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41117,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        288,
+        2,
+        -32
+      ],
+      "rotation": -768,
+      "model_sha256": "8097a5a7754413e489fc40e54e27e88f89d225ed8c56fa2b0f71886a278c5795",
+      "bounds": [
+        [
+          6.683342486636938,
+          0.05,
+          0.2833424866369386
+        ],
+        [
+          8.233315026726123,
+          1.6,
+          1.8332459733295225
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00234",
+      "address": 17026,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41000,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -456,
+        2,
+        328
+      ],
+      "rotation": 1024,
+      "model_sha256": "84b3d249d75b2282af6d7422bb0e82dc2fc27ac77a584912d1440d87045c45b2",
+      "bounds": [
+        [
+          -12.33603515625,
+          0.05,
+          -9.011035156250001
+        ],
+        [
+          -10.13134765625,
+          0.53232421875,
+          -7.39208984375
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00235",
+      "address": 17092,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 41003,
+      "type": "model",
+      "object_type": 3,
+      "position": [
+        -488,
+        2,
+        224
+      ],
+      "rotation": 1536,
+      "model_sha256": "a543c3539882dd0c72f8c0cbe6fb30cf86fdbb23022ee94063b9a0c473a2c9ee",
+      "bounds": [
+        [
+          -12.625,
+          0.05,
+          -6.5
+        ],
+        [
+          -11.675097656250001,
+          2.35,
+          -4.7
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00391",
+      "address": 19684,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        -263,
+        -174,
+        41
+      ],
+      "rotation": 512,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -6.550000000000001,
+          3.25,
+          -2.2
+        ],
+        [
+          -6.4,
+          5.45,
+          -1.0
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -6.4,
+              5.45,
+              -1.0
+            ],
+            [
+              -6.4,
+              3.25,
+              -1.0
+            ],
+            [
+              -6.4,
+              3.25,
+              -2.2
+            ],
+            [
+              -6.4,
+              5.45,
+              -2.2
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -6.550000000000001,
+              5.45,
+              -2.2
+            ],
+            [
+              -6.550000000000001,
+              3.25,
+              -2.2
+            ],
+            [
+              -6.550000000000001,
+              3.25,
+              -1.0
+            ],
+            [
+              -6.550000000000001,
+              5.45,
+              -1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00392",
+      "address": 19703,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        249,
+        -45,
+        -343
+      ],
+      "rotation": 512,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          6.25,
+          0.025,
+          7.4
+        ],
+        [
+          6.4,
+          2.225,
+          8.6
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              6.4,
+              2.225,
+              8.6
+            ],
+            [
+              6.4,
+              0.025,
+              8.6
+            ],
+            [
+              6.4,
+              0.025,
+              7.4
+            ],
+            [
+              6.4,
+              2.225,
+              7.4
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              6.25,
+              2.225,
+              7.4
+            ],
+            [
+              6.25,
+              0.025,
+              7.4
+            ],
+            [
+              6.25,
+              0.025,
+              8.6
+            ],
+            [
+              6.25,
+              2.225,
+              8.6
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00393",
+      "address": 19722,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        263,
+        -45,
+        87
+      ],
+      "rotation": 1536,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          6.4,
+          0.025,
+          -2.2
+        ],
+        [
+          6.550000000000001,
+          2.225,
+          -1.0
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              6.4,
+              2.225,
+              -2.2
+            ],
+            [
+              6.4,
+              0.025,
+              -2.2
+            ],
+            [
+              6.4,
+              0.025,
+              -1.0
+            ],
+            [
+              6.4,
+              2.225,
+              -1.0
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              6.550000000000001,
+              2.225,
+              -1.0
+            ],
+            [
+              6.550000000000001,
+              0.025,
+              -1.0
+            ],
+            [
+              6.550000000000001,
+              0.025,
+              -2.2
+            ],
+            [
+              6.550000000000001,
+              2.225,
+              -2.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00394",
+      "address": 19741,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        263,
+        -45,
+        215
+      ],
+      "rotation": 1536,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          6.4,
+          0.025,
+          -5.4
+        ],
+        [
+          6.550000000000001,
+          2.225,
+          -4.2
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              6.4,
+              2.225,
+              -5.4
+            ],
+            [
+              6.4,
+              0.025,
+              -5.4
+            ],
+            [
+              6.4,
+              0.025,
+              -4.2
+            ],
+            [
+              6.4,
+              2.225,
+              -4.2
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              6.550000000000001,
+              2.225,
+              -4.2
+            ],
+            [
+              6.550000000000001,
+              0.025,
+              -4.2
+            ],
+            [
+              6.550000000000001,
+              0.025,
+              -5.4
+            ],
+            [
+              6.550000000000001,
+              2.225,
+              -5.4
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00395",
+      "address": 19760,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        215,
+        -45,
+        255
+      ],
+      "rotation": 1024,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          4.2,
+          0.025,
+          -6.550000000000001
+        ],
+        [
+          5.4,
+          2.225,
+          -6.4
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              5.4,
+              2.225,
+              -6.550000000000001
+            ],
+            [
+              5.4,
+              0.025,
+              -6.550000000000001
+            ],
+            [
+              4.2,
+              0.025,
+              -6.550000000000001
+            ],
+            [
+              4.2,
+              2.225,
+              -6.550000000000001
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              4.2,
+              2.225,
+              -6.4
+            ],
+            [
+              4.2,
+              0.025,
+              -6.4
+            ],
+            [
+              5.4,
+              0.025,
+              -6.4
+            ],
+            [
+              5.4,
+              2.225,
+              -6.4
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00396",
+      "address": 19779,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        87,
+        -45,
+        255
+      ],
+      "rotation": 1024,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          1.0,
+          0.025,
+          -6.550000000000001
+        ],
+        [
+          2.2,
+          2.225,
+          -6.4
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              2.2,
+              2.225,
+              -6.550000000000001
+            ],
+            [
+              2.2,
+              0.025,
+              -6.550000000000001
+            ],
+            [
+              1.0,
+              0.025,
+              -6.550000000000001
+            ],
+            [
+              1.0,
+              2.225,
+              -6.550000000000001
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              1.0,
+              2.225,
+              -6.4
+            ],
+            [
+              1.0,
+              0.025,
+              -6.4
+            ],
+            [
+              2.2,
+              0.025,
+              -6.4
+            ],
+            [
+              2.2,
+              2.225,
+              -6.4
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00397",
+      "address": 19798,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        -169,
+        -45,
+        255
+      ],
+      "rotation": 1024,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -5.4,
+          0.025,
+          -6.550000000000001
+        ],
+        [
+          -4.2,
+          2.225,
+          -6.4
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -4.2,
+              2.225,
+              -6.550000000000001
+            ],
+            [
+              -4.2,
+              0.025,
+              -6.550000000000001
+            ],
+            [
+              -5.4,
+              0.025,
+              -6.550000000000001
+            ],
+            [
+              -5.4,
+              2.225,
+              -6.550000000000001
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -5.4,
+              2.225,
+              -6.4
+            ],
+            [
+              -5.4,
+              0.025,
+              -6.4
+            ],
+            [
+              -4.2,
+              0.025,
+              -6.4
+            ],
+            [
+              -4.2,
+              2.225,
+              -6.4
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00398",
+      "address": 19817,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        -263,
+        -45,
+        169
+      ],
+      "rotation": 512,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -6.550000000000001,
+          0.025,
+          -5.4
+        ],
+        [
+          -6.4,
+          2.225,
+          -4.2
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -6.4,
+              2.225,
+              -4.2
+            ],
+            [
+              -6.4,
+              0.025,
+              -4.2
+            ],
+            [
+              -6.4,
+              0.025,
+              -5.4
+            ],
+            [
+              -6.4,
+              2.225,
+              -5.4
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -6.550000000000001,
+              2.225,
+              -5.4
+            ],
+            [
+              -6.550000000000001,
+              0.025,
+              -5.4
+            ],
+            [
+              -6.550000000000001,
+              0.025,
+              -4.2
+            ],
+            [
+              -6.550000000000001,
+              2.225,
+              -4.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00399",
+      "address": 19836,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        -263,
+        -45,
+        41
+      ],
+      "rotation": 512,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -6.550000000000001,
+          0.025,
+          -2.2
+        ],
+        [
+          -6.4,
+          2.225,
+          -1.0
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -6.4,
+              2.225,
+              -1.0
+            ],
+            [
+              -6.4,
+              0.025,
+              -1.0
+            ],
+            [
+              -6.4,
+              0.025,
+              -2.2
+            ],
+            [
+              -6.4,
+              2.225,
+              -2.2
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -6.550000000000001,
+              2.225,
+              -2.2
+            ],
+            [
+              -6.550000000000001,
+              0.025,
+              -2.2
+            ],
+            [
+              -6.550000000000001,
+              0.025,
+              -1.0
+            ],
+            [
+              -6.550000000000001,
+              2.225,
+              -1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00400",
+      "address": 19855,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        169,
+        -174,
+        -127
+      ],
+      "rotation": 0,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          4.2,
+          3.25,
+          3.2
+        ],
+        [
+          5.4,
+          5.45,
+          3.35
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              4.2,
+              5.45,
+              3.35
+            ],
+            [
+              4.2,
+              3.25,
+              3.35
+            ],
+            [
+              5.4,
+              3.25,
+              3.35
+            ],
+            [
+              5.4,
+              5.45,
+              3.35
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              5.4,
+              5.45,
+              3.2
+            ],
+            [
+              5.4,
+              3.25,
+              3.2
+            ],
+            [
+              4.2,
+              3.25,
+              3.2
+            ],
+            [
+              4.2,
+              5.45,
+              3.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00401",
+      "address": 19874,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        263,
+        -174,
+        87
+      ],
+      "rotation": 1536,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          6.4,
+          3.25,
+          -2.2
+        ],
+        [
+          6.550000000000001,
+          5.45,
+          -1.0
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              6.4,
+              5.45,
+              -2.2
+            ],
+            [
+              6.4,
+              3.25,
+              -2.2
+            ],
+            [
+              6.4,
+              3.25,
+              -1.0
+            ],
+            [
+              6.4,
+              5.45,
+              -1.0
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              6.550000000000001,
+              5.45,
+              -1.0
+            ],
+            [
+              6.550000000000001,
+              3.25,
+              -1.0
+            ],
+            [
+              6.550000000000001,
+              3.25,
+              -2.2
+            ],
+            [
+              6.550000000000001,
+              5.45,
+              -2.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00402",
+      "address": 19893,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        263,
+        -174,
+        215
+      ],
+      "rotation": 1536,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          6.4,
+          3.25,
+          -5.4
+        ],
+        [
+          6.550000000000001,
+          5.45,
+          -4.2
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              6.4,
+              5.45,
+              -5.4
+            ],
+            [
+              6.4,
+              3.25,
+              -5.4
+            ],
+            [
+              6.4,
+              3.25,
+              -4.2
+            ],
+            [
+              6.4,
+              5.45,
+              -4.2
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              6.550000000000001,
+              5.45,
+              -4.2
+            ],
+            [
+              6.550000000000001,
+              3.25,
+              -4.2
+            ],
+            [
+              6.550000000000001,
+              3.25,
+              -5.4
+            ],
+            [
+              6.550000000000001,
+              5.45,
+              -5.4
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00403",
+      "address": 19912,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        -263,
+        -174,
+        41
+      ],
+      "rotation": 512,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -6.550000000000001,
+          3.25,
+          -2.2
+        ],
+        [
+          -6.4,
+          5.45,
+          -1.0
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -6.4,
+              5.45,
+              -1.0
+            ],
+            [
+              -6.4,
+              3.25,
+              -1.0
+            ],
+            [
+              -6.4,
+              3.25,
+              -2.2
+            ],
+            [
+              -6.4,
+              5.45,
+              -2.2
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -6.550000000000001,
+              5.45,
+              -2.2
+            ],
+            [
+              -6.550000000000001,
+              3.25,
+              -2.2
+            ],
+            [
+              -6.550000000000001,
+              3.25,
+              -1.0
+            ],
+            [
+              -6.550000000000001,
+              5.45,
+              -1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00404",
+      "address": 19931,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        -391,
+        -174,
+        169
+      ],
+      "rotation": 512,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -9.75,
+          3.25,
+          -5.4
+        ],
+        [
+          -9.600000000000001,
+          5.45,
+          -4.2
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -9.600000000000001,
+              5.45,
+              -4.2
+            ],
+            [
+              -9.600000000000001,
+              3.25,
+              -4.2
+            ],
+            [
+              -9.600000000000001,
+              3.25,
+              -5.4
+            ],
+            [
+              -9.600000000000001,
+              5.45,
+              -5.4
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -9.75,
+              5.45,
+              -5.4
+            ],
+            [
+              -9.75,
+              3.25,
+              -5.4
+            ],
+            [
+              -9.75,
+              3.25,
+              -4.2
+            ],
+            [
+              -9.75,
+              5.45,
+              -4.2
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00405",
+      "address": 19950,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        -391,
+        -174,
+        297
+      ],
+      "rotation": 512,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -9.75,
+          3.25,
+          -8.6
+        ],
+        [
+          -9.600000000000001,
+          5.45,
+          -7.4
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -9.600000000000001,
+              5.45,
+              -7.4
+            ],
+            [
+              -9.600000000000001,
+              3.25,
+              -7.4
+            ],
+            [
+              -9.600000000000001,
+              3.25,
+              -8.6
+            ],
+            [
+              -9.600000000000001,
+              5.45,
+              -8.6
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -9.75,
+              5.45,
+              -8.6
+            ],
+            [
+              -9.75,
+              3.25,
+              -8.6
+            ],
+            [
+              -9.75,
+              3.25,
+              -7.4
+            ],
+            [
+              -9.75,
+              5.45,
+              -7.4
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00406",
+      "address": 19969,
+      "context": "interior",
+      "building": "building-0002",
+      "model": 9000,
+      "type": "door",
+      "object_type": -1,
+      "position": [
+        -41,
+        -174,
+        255
+      ],
+      "rotation": 1024,
+      "model_sha256": "26498414af2fbec2a512eed456a18e63288dbb5d706c1baf87f71a47cc72c1c2",
+      "bounds": [
+        [
+          -2.2,
+          3.25,
+          -6.550000000000001
+        ],
+        [
+          -1.0,
+          5.45,
+          -6.4
+        ]
+      ],
+      "doors": [
+        {
+          "plane": 1,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -1.0,
+              5.45,
+              -6.550000000000001
+            ],
+            [
+              -1.0,
+              3.25,
+              -6.550000000000001
+            ],
+            [
+              -2.2,
+              3.25,
+              -6.550000000000001
+            ],
+            [
+              -2.2,
+              5.45,
+              -6.550000000000001
+            ]
+          ]
+        },
+        {
+          "plane": 3,
+          "texture": [
+            74,
+            0
+          ],
+          "points": [
+            [
+              -2.2,
+              5.45,
+              -6.4
+            ],
+            [
+              -2.2,
+              3.25,
+              -6.4
+            ],
+            [
+              -1.0,
+              3.25,
+              -6.4
+            ],
+            [
+              -1.0,
+              5.45,
+              -6.4
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "record-00407",
+      "address": 19989,
+      "context": "exterior",
+      "building": "",
+      "model": 43727,
+      "type": "model",
+      "object_type": 0,
+      "position": [
+        2587,
+        -68,
+        -2927
+      ],
+      "rotation": -1000,
+      "model_sha256": "79f7541ac123343c01355228a3240fd3a5e0aab8dfa1f67393989b5218d4c9b5",
+      "bounds": [
+        [
+          64.50170639073247,
+          -0.0,
+          -30.229646913038653
+        ],
+        [
+          64.84829360926754,
+          3.2,
+          -28.22035308696135
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00408",
+      "address": 20055,
+      "context": "exterior",
+      "building": "",
+      "model": 41106,
+      "type": "model",
+      "object_type": 0,
+      "position": [
+        3354,
+        -17,
+        -1429
+      ],
+      "rotation": 0,
+      "model_sha256": "71698dfe6a54dfdf17d092e6ba5acbeb14546d65cc2efe26be85aea6f7e1b506",
+      "bounds": [
+        [
+          82.95,
+          -0.02490234375,
+          -66.92490234375
+        ],
+        [
+          84.75,
+          0.525,
+          -66.425
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00409",
+      "address": 20121,
+      "context": "exterior",
+      "building": "",
+      "model": 41106,
+      "type": "model",
+      "object_type": 0,
+      "position": [
+        3090,
+        -17,
+        -1429
+      ],
+      "rotation": 0,
+      "model_sha256": "71698dfe6a54dfdf17d092e6ba5acbeb14546d65cc2efe26be85aea6f7e1b506",
+      "bounds": [
+        [
+          76.35000000000001,
+          -0.02490234375,
+          -66.92490234375
+        ],
+        [
+          78.15,
+          0.525,
+          -66.425
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00410",
+      "address": 20187,
+      "context": "exterior",
+      "building": "",
+      "model": 41209,
+      "type": "model",
+      "object_type": 0,
+      "position": [
+        2392,
+        -14,
+        -2723
+      ],
+      "rotation": -504,
+      "model_sha256": "d49921bb7a04ee75fbeca8e8145785639418db632daf92e012a293594161a3a4",
+      "bounds": [
+        [
+          58.76829236556145,
+          -0.0,
+          -34.60015312470432
+        ],
+        [
+          60.829847931312365,
+          0.49990234375000003,
+          -34.04999659348859
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00411",
+      "address": 20253,
+      "context": "exterior",
+      "building": "",
+      "model": 41209,
+      "type": "model",
+      "object_type": 0,
+      "position": [
+        2800,
+        -14,
+        -2715
+      ],
+      "rotation": -512,
+      "model_sha256": "d49921bb7a04ee75fbeca8e8145785639418db632daf92e012a293594161a3a4",
+      "bounds": [
+        [
+          68.97412109375,
+          -0.0,
+          -34.775097656250004
+        ],
+        [
+          71.0240234375,
+          0.49990234375000003,
+          -34.275097656250004
+        ]
+      ],
+      "doors": []
+    },
+    {
+      "id": "record-00412",
+      "address": 20319,
+      "context": "exterior",
+      "building": "",
+      "model": 41206,
+      "type": "model",
+      "object_type": 0,
+      "position": [
+        2091,
+        -41,
+        -2664
+      ],
+      "rotation": -512,
+      "model_sha256": "4add295db221a38ba235382fa8bf4439372851b6c86b77515580c02cffcb7912",
+      "bounds": [
+        [
+          51.083105468750006,
+          -0.0220703125,
+          -35.9955078125
+        ],
+        [
+          54.282812500000006,
+          1.727734375,
+          -35.616015625
+        ]
+      ],
+      "doors": []
+    }
+  ]
+}

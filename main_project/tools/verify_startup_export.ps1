@@ -7,6 +7,7 @@ param(
     [switch]$DungeonAssembly,
     [switch]$DungeonContext,
     [switch]$DungeonMarkers,
+    [switch]$LocationAssembly,
     [switch]$ModDiscovery,
     [switch]$DependencyPlanning,
     [switch]$DefinitionPublication,
@@ -30,7 +31,8 @@ param(
     [switch]$FormulaExtraError
 )
 $ErrorActionPreference = 'Stop'
-if ($DungeonMarkers) { $DungeonContext = $true; $DungeonAssembly = $true; $Fixture = 'dungeon-markers-v1' }
+if ($LocationAssembly) { $DungeonAssembly = $true; $Fixture = 'location-assembly-v1' }
+elseif ($DungeonMarkers) { $DungeonContext = $true; $DungeonAssembly = $true; $Fixture = 'dungeon-markers-v1' }
 elseif ($DungeonContext) { $DungeonAssembly = $true; $Fixture = 'dungeon-context-v1' }
 if ($DungeonAssembly) {
     foreach ($selection in @('M1Composition','ModDiscovery','DependencyPlanning','DefinitionPublication','TextCatalog','StructuredText','LocaleFonts','TranslationPreferences','ActorInputs','ItemSpellInputs','FactionQuestInputs','GeographyInputs','LayoutInputs','VariantInputs','ClassicMedia','MediaReplacements','NativeMedia','Randomness','RandomnessSession','Formula','FormulaFault','FormulaExtraError')) {
@@ -181,6 +183,7 @@ foreach ($mode in @('headless','rendered')) {
                     foreach ($archive in $block.texture_archives) { $contextSources.resource_sources += @{file=('TEXTURE.{0:000}' -f $archive);format='classic-texture-v1'} }
                 }
             }
+            if ($DungeonAssembly -or $M1Composition) { $contextSources.resource_sources += (Get-Content -LiteralPath "$project/tests/location_source_observation.json" -Raw | ConvertFrom-Json).resource_sources }
             foreach ($source in $contextSources.resource_sources) {
                 $name = $source.file
                 if ($before.ContainsKey($name)) { continue }
@@ -234,7 +237,7 @@ foreach ($mode in @('headless','rendered')) {
         $fixture.fixture = if ($FormulaExtraError) { 'formula-extra-error-v1' } else { 'formula-v1' }
     }
     if ($M1Composition) { $fixture.mode = 'm1-composition'; $fixture.fixture = 'm1-composition-v1' }
-    if ($DungeonAssembly) { $fixture.mode = 'dungeon-assembly'; $fixture.fixture = $(if ($DungeonMarkers) { 'dungeon-markers-v1' } elseif ($DungeonContext) { 'dungeon-context-v1' } else { 'dungeon-assembly-v1' }); $report.fixture = $fixture.fixture }
+    if ($DungeonAssembly) { $fixture.mode = 'dungeon-assembly'; $fixture.fixture = $(if ($LocationAssembly) { 'location-assembly-v1' } elseif ($DungeonMarkers) { 'dungeon-markers-v1' } elseif ($DungeonContext) { 'dungeon-context-v1' } else { 'dungeon-assembly-v1' }); $report.fixture = $fixture.fixture }
     $fixture |
         ConvertTo-Json | Set-Content "$sandbox/fixture.json"
     $arguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/fixture.json")

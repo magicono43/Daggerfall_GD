@@ -137,7 +137,7 @@
     "MEDIA1/audio loop isolated",
     "MEDIA1/VID consecutive and tail audio",
     "MEDIA1/texture logical versus physical extent",
-    "MEDIA1/model unverified UV correction rejected"
+    "MEDIA1/model packed UV correction and raw preservation"
   ],
   "headless": [
     "MEDIA1/early sound",
@@ -258,6 +258,6 @@
     "MEDIA1/model named ID rejected",
     "MEDIA1/VID consecutive and tail audio",
     "MEDIA1/texture logical versus physical extent",
-    "MEDIA1/model unverified UV correction rejected"
+    "MEDIA1/model packed UV correction and raw preservation"
   ]
 }

@@ -58,6 +58,9 @@ func _ready() -> void:
 		if fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload"]:
 			var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/dungeon_source_observation.json"))
 			resource_sources = source.resource_sources
+			if fixture.get("fixture") == "location-assembly-v1":
+				var location_source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/location_source_observation.json"))
+				resource_sources += location_source.resource_sources
 		if fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 			var observation: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/layout_source_observation.json"))
 			resource_sources = observation.resource_sources
@@ -67,6 +70,9 @@ func _ready() -> void:
 				label("Dungeon context registration failed: "+contexts.reason)
 				return
 			resource_sources += contexts.data.resource_sources
+			var location_input: Dictionary = preload("res://scripts/data/layout_inputs.gd").location_annotations()
+			if not location_input.ok: return
+			resource_sources += location_input.data.resource_sources
 			if fixture.get("fixture") in ["dungeon-context-v1","dungeon-markers-v1"]:
 				var source_contexts: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/dungeon_context_observation.json"))
 				for source_block: Dictionary in source_contexts.fixture_blocks.values():
@@ -568,6 +574,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/publication_reload_cases.gd"
 	if fixture.get("mode") in ["m1-composition","m1-composition_reload"]:
 		script_path = "res://tests/m1_composition_cases.gd"
+	if fixture.get("fixture") == "location-assembly-v1":
+		script_path = "res://tests/location_cases.gd"
 	var suite = load(script_path).new()
 	var returned: Variant = await suite.run(self, fixture)
 	# A failed fixture script must still terminate the owned process. Its original

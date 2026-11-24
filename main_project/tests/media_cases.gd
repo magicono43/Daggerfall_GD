@@ -189,7 +189,15 @@ func _synthetic(fixture: Dictionary) -> void:
 		check("model golden " + version,[[0,0,0],[256,0,0],[0,256,0]],decoded.value.projection().points_source if decoded.ok else decoded)
 	check("model named ID rejected",false,Model.new().decode({"ok":true,"bytes":mesh,"source":"golden","record":"1000","identity":"1000","offset":0}).ok)
 	mesh[125] = 144
-	check("model unverified UV correction rejected",false,Model.new().decode({"ok":true,"bytes":mesh,"source":"golden","record":100,"identity":100,"offset":0}).ok)
+	# Encoded -28672 is a tie: the documented next-multiple rule gives -4096.
+	# Keep the raw tuple, and do not apply the pre-905 profile at the cutoff.
+	var low_uv: Dictionary = Model.new().decode({"ok":true,"bytes":mesh,"source":"golden","record":100,"identity":100,"offset":0})
+	var cutoff_uv: Dictionary = Model.new().decode({"ok":true,"bytes":mesh,"source":"golden","record":905,"identity":905,"offset":0})
+	var uv_actual := {"low":low_uv,"cutoff":cutoff_uv}
+	if low_uv.ok and cutoff_uv.ok:
+		var low_plane: Dictionary = low_uv.value.projection().planes[0]
+		uv_actual = {"raw":low_plane.encoded_uv[0],"low":low_plane.uv_sixteenths[0],"cutoff":cutoff_uv.value.projection().planes[0].uv_sixteenths[0],"profile":low_plane.uv_profile}
+	check("model packed UV correction and raw preservation",{"raw":[-28672,0],"low":Vector2(-4096,0),"cutoff":Vector2(-28672,0),"profile":"dfu-packed-uv-first-three-pre905-v1"},uv_actual)
 	for length in [0,1,11,12,15]: check("IMG truncate %d" % length,false,decoder.decode(tiny.slice(0,length),"TINY.IMG",0,0).ok)
 	var unsupported := tiny.duplicate()
 	unsupported[8] = 3

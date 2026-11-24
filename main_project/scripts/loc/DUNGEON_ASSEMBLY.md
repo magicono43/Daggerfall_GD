@@ -205,3 +205,14 @@ variant qualification IMP-055. Native SAVE, QUEST/action restoration and other
 required gameplay providers must pass their named joint checks. Controlled CORE
 fixtures qualify cancellation/activation seams only. They close none of these
 gates and do not complete IMP-061 or M2.
+
+## IMP-013 shared owner extension
+
+The normal shell instantiates `location_assembly.gd`, a specialization of this
+owner. Source-selection/pose/metadata hooks reuse this same staging, atomic
+publication, CORE operation, retirement and activation implementation. Requests
+without `area` preserve the dungeon interface and its environment/marker consumers.
+The additive activation version distinguishes committed activation from preparation.
+See [LOCATION_ASSEMBLY.md](LOCATION_ASSEMBLY.md) for RMB-specific contracts and
+task evidence for the shared-hook dungeon regressions and subsequent RMB-only guard. Existing source policies,
+readiness boundaries and full-story/real-owner obligations remain intact.

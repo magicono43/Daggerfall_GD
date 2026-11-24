@@ -7,8 +7,13 @@ const VERSION = "classic-model-v1"
 func _failure(raw: Dictionary, reason: String, position: int) -> Dictionary:
 	return {"ok":false,"kind":"malformed_or_unsupported","reason":reason,"source":raw.get("source"),"record":raw.get("record"),"classic_id":raw.get("identity"),"position":position,"converter":VERSION,"provider":"classic"}
 
-func _requires_unverified_uv_unpack(value: int) -> bool:
-	return value <= -14336 or value >= 14336 or value == -7168
+static func unpack_uv(value: int) -> int:
+	# DFU Arch3dFile.UVunpack, MIT. Input matched to source ID <905 and
+	# first three encoded vertices only. Ties select the next multiple.
+	if value > -14336 and value < 14336 and value != -7168: return value
+	var next_multiple := (((value-1) >> 13)+1) << 13
+	var previous_multiple := next_multiple-8192
+	return value-(previous_multiple if value-previous_multiple < next_multiple-value else next_multiple)
 
 func decode(raw: Dictionary) -> Dictionary:
 	if not raw.get("ok",false):
@@ -65,8 +70,8 @@ func decode(raw: Dictionary) -> Dictionary:
 			var v := cursor.s16()
 			encoded_uv.append([u,v])
 			if int(raw.identity) < 905 and vertex < 3:
-				if _requires_unverified_uv_unpack(u) or _requires_unverified_uv_unpack(v):
-					return _failure(raw,"Older-ID packed UV correction is outside the verified model profile.",cursor.position - 4)
+				u = unpack_uv(u)
+				v = unpack_uv(v)
 			if version == "v2.5": offset *= 3
 			if offset < 0 or offset % 12 != 0 or offset / 12 >= points: return _failure(raw,"Point reference is not an aligned source point.",cursor.position - 8)
 			var point_index: int = offset / 12
@@ -102,6 +107,7 @@ func decode(raw: Dictionary) -> Dictionary:
 		var normals := Cursor.new(bytes,normal_start + index * 12,normal_start + (index + 1) * 12)
 		output.append({"source_plane":index,"point_indices":references,"encoded_uv":encoded_uv,"uv_sixteenths":uv,
 			"normal_source":[normals.s32(),normals.s32(),normals.s32()],"triangles":triangles,
+			"uv_profile":"dfu-packed-uv-first-three-pre905-v1" if int(raw.identity) < 905 else "source-delta-affine-v1",
 			"texture_archive":texture >> 7,"texture_record":texture & 127,"unknown":unknown,"flags":flags,"position":at})
 	if not cursor.reason.is_empty(): return _failure(raw,cursor.reason,cursor.position)
 	return {"ok":true,"kind":"ready","value":Value.new({"schema":Value.SCHEMA,"domain":"model",

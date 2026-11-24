@@ -219,3 +219,23 @@ LOC-only deferred-resource preparation still validates typed references and
 retains all records; LOC must then validate/stage every required resource before
 readiness. Ordinary structural-input preparation retains its existing checks.
 See [dungeon context contract](../loc/DUNGEON_CONTEXT.md).
+
+## IMP-013 increment-1 geometry consumer
+
+The normal session composition now uses the shared LOC
+[location assembly owner](../loc/LOCATION_ASSEMBLY.md) for RMB exteriors and
+building interiors as well as accepted dungeon requests. DATA preserves its
+original raw poses and separate building/record contexts. LOC applies source RMB
+parent/miscellaneous conventions, 4096-unit exterior grid and the existing named
+metre frame; the RDB grid remains unchanged. This does not change DATA's structural
+readiness into physical or gameplay readiness.
+
+Layouts may publish complete `location_assembly` declarations through the same
+add/replace/patch/loose validation paths. Shipped annotations are source/hash guarded
+and cover only `place-00001` / `TVRNBS04.RMB`. The normal composition declares the
+annotation's required texture sources before preparation. `ground_archive` is an
+explicit baseline input; terrain, climate/season integration and route readiness
+remain pending. Optional authored RMB flat `marker_roles` is a nonempty set of
+distinct validated role IDs. It does not automatically bind an entrance or promote
+rest to entry. Classic identity/profile hashes and unknown-action/axis policies
+remain unchanged. MAPS named-building and door-pool associations remain unqualified.

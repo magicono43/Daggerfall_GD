@@ -24,6 +24,43 @@ var _prepared_viewport: SubViewport
 var _prepared_root: Node3D
 var measurements := {}
 
+## Source-specific assembly hooks share the same lifetime and publication owner.
+func _request_extra(_request: Dictionary) -> int:
+	return 0
+
+func _select_placements(input: Dictionary, _request: Dictionary) -> Dictionary:
+	var selected: Array = input.data.placements.filter(func(p: Dictionary): return p.context == "dungeon")
+	if selected.is_empty(): return _result("missing","No dungeon placements; never substitute a destination.")
+	if not input.data.has("assembly"): return _result("unsupported","Required assembly connection declarations unavailable for this layout.")
+	return {"ok":true,"placements":selected,"assembly":input.data.assembly.duplicate(true)}
+
+func _stage_block(block: Dictionary, _p: Dictionary) -> Dictionary:
+	return {"ok":true} if block.definition.format == "RDB" else _result("unsupported","Dungeon requires RDB geometry.")
+
+func _placement_pose(p: Dictionary) -> Transform3D:
+	return Frame.placement(p)
+
+func _records(block: Dictionary, _p: Dictionary) -> Array:
+	return block.definition.records
+
+func _record_pose(record: Dictionary, _block: Dictionary, _p: Dictionary, _resource: Dictionary = {}) -> Transform3D:
+	return Frame.pose(record.transform)
+
+func _geometry_record(record: Dictionary) -> bool:
+	return record.type == "model"
+
+func _binding_identity(p: Dictionary, record: Dictionary) -> Dictionary:
+	return {"layout":_stage.input.identity.duplicate(true),"placement":p.id,"record":record.id}
+
+func _after_record(_binding: Dictionary, _resource: Dictionary, _p: Dictionary) -> Dictionary:
+	return {"ok":true}
+
+func _after_block(_block: Dictionary, _p: Dictionary, _placed: Node3D) -> Dictionary:
+	return {"ok":true}
+
+func _candidate_extension(_candidate: Dictionary) -> void:
+	pass
+
 func _current(request: Dictionary) -> bool:
 	return _content_current(request) and core != null and core.layout_request_current(request.get("session",""),request.get("core_ticket",{}))
 
@@ -40,7 +77,7 @@ func _result(kind: String, reason := "") -> Dictionary:
 func begin(request: Dictionary) -> Dictionary:
 	_purge_obsolete_preparation()
 	if not _stage.is_empty(): return _result("busy")
-	if request.size() != 7+int(request.has("presentation"))+int(request.has("variants"))+int(request.has("arrival")) or not request.get("id") is String or request.id.is_empty() or not request.get("requester") is String or request.requester.is_empty() or not request.get("layout") is String or not request.get("preparation") is String or request.preparation.is_empty() or not request.get("session") is String or not request.get("core_ticket") is Dictionary or not request.get("content_ticket") is int: return _result("invalid","Complete original requester/session/content/preparation identity required.")
+	if request.size() != 7+int(request.has("presentation"))+int(request.has("variants"))+int(request.has("arrival"))+_request_extra(request) or not request.get("id") is String or request.id.is_empty() or not request.get("requester") is String or request.requester.is_empty() or not request.get("layout") is String or not request.get("preparation") is String or request.preparation.is_empty() or not request.get("session") is String or not request.get("core_ticket") is Dictionary or not request.get("content_ticket") is int: return _result("invalid","Complete original requester/session/content/preparation identity required.")
 	if request.has("arrival"):
 		var arrival: Variant = request.arrival
 		if not arrival is Dictionary or arrival.size() != 3 or not preload("res://scripts/mod/package_library.gd").valid_id(arrival.get("route")) or arrival.get("kind") not in ["general","doorway","opening"] or not arrival.get("doorway") is String or (arrival.kind == "doorway" and not preload("res://scripts/mod/package_library.gd").valid_id(arrival.doorway)) or (arrival.kind != "doorway" and not arrival.doorway.is_empty()): return _result("invalid_route_intent","Explicit original route/kind/doorway intent required.")
@@ -60,9 +97,9 @@ func begin(request: Dictionary) -> Dictionary:
 	if not variant.ok: return variant
 	if variant.has("layout_inputs"): input = variant.layout_inputs
 	if request.has("arrival") and not input.data.has("arrivals"): return _result("missing_route","Selected layout has no arrival declarations.")
-	var placements: Array = input.data.placements.filter(func(p: Dictionary): return p.context == "dungeon")
-	if placements.is_empty(): return _result("missing","No dungeon placements; never substitute a destination.")
-	if not input.data.has("assembly"): return _result("unsupported","Required assembly connection declarations unavailable for this layout.")
+	var selection := _select_placements(input,request)
+	if not selection.ok: return selection
+	var placements: Array = selection.placements
 	var palette := {}
 	var environment: RefCounted
 	if input.data.has("context"):
@@ -95,7 +132,7 @@ func begin(request: Dictionary) -> Dictionary:
 	root.name = "DungeonAssembly"
 	viewport.add_child(root)
 	var ticket := {"serial":_serial,"request":request.duplicate(true)}
-	_stage = {"ticket":ticket,"input":input,"placements":placements,"next":0,"viewport":viewport,"root":root,"cache":{},"blocks":{},"bindings":{},"occurrences":[],"doors":{},"suppressed":{},"triangles":0,"started":started,"resource_decodes":0,"assembly":input.data.assembly.duplicate(true),"finishing":false}
+	_stage = {"ticket":ticket,"input":input,"placements":placements,"next":0,"viewport":viewport,"root":root,"cache":{},"blocks":{},"bindings":{},"occurrences":[],"doors":{},"suppressed":{},"triangles":0,"started":started,"resource_decodes":0,"assembly":selection.assembly,"finishing":false}
 	_stage.support = preload("res://scripts/loc/dungeon_support.gd").new()
 	_stage.block_versions = {}
 	_stage.resource_versions = {}
@@ -198,7 +235,8 @@ func step(ticket: Dictionary) -> Dictionary:
 		if _stage.blocks[p.block].ok: _stage.block_versions[p.block] = Hash.digest(_stage.blocks[p.block].definition)
 	var block: Dictionary = _stage.blocks[p.block]
 	if not block.ok: return _discard(block.get("kind","failed"),block.get("reason","Required block failed."),p.id,block)
-	if block.definition.format != "RDB": return _discard("unsupported","Dungeon requires RDB geometry.",p.id)
+	var checked_block := _stage_block(block,p)
+	if not checked_block.ok: return _discard(checked_block.get("kind","unsupported"),checked_block.get("reason","Required block failed."),p.id,checked_block)
 	var expected_environment: Dictionary = _stage.input.data.get("context",{}).get("classic_environment",{})
 	if expected_environment.has(p.id):
 		var observed: Dictionary = block.definition.get("environment_observation",{})
@@ -214,16 +252,16 @@ func step(ticket: Dictionary) -> Dictionary:
 		for role: String in observed.get("special_roles",[]):
 			if not context.areas.any(func(area: Dictionary): return area.source.get("placement") == p.id and area.source.get("block") == block.identity.record and area.source.get("sha256") == expected.sha256 and area.source.get("classic_role") == role): return _discard("missing_environment","Required classic special area has no source-matched explicit scope.",p.id,observed)
 	var placed := Node3D.new()
-	placed.transform = Frame.placement(p)
+	placed.transform = _placement_pose(p)
 	_stage.root.add_child(placed)
 	var fixed_body: StaticBody3D
 	var protected_targets := {}
-	for record: Dictionary in block.definition.records:
+	for record: Dictionary in _records(block,p):
 		if record.get("action",{}).get("kind",0) != 0 and not record.action.target.is_empty(): protected_targets[record.action.target] = true
 	var scoped: Array = []
-	for record: Dictionary in block.definition.records:
+	for record: Dictionary in _records(block,p):
 		var key := record_key(p.id,record.id)
-		var binding := {"identity":{"layout":_stage.input.identity.duplicate(true),"placement":p.id,"record":record.id},"definition":block.identity.duplicate(true),"record":record.duplicate(true),"transform":placed.transform * Frame.pose(record.transform),"instance":"loc-transient:%d:%d:%s" % [get_instance_id(),_serial,key]}
+		var binding := {"identity":_binding_identity(p,record),"definition":block.identity.duplicate(true),"record":record.duplicate(true),"transform":placed.transform * _record_pose(record,block,p),"instance":"loc-transient:%d:%d:%s" % [get_instance_id(),_serial,key]}
 		if record.has("unused_action"):
 			_stage.pending_unknown_action_bindings.append({"identity":binding.identity.duplicate(true),"metadata":record.unused_action.duplicate(true)})
 		if record.has("action_axis_metadata"):
@@ -232,8 +270,8 @@ func step(ticket: Dictionary) -> Dictionary:
 		if not Frame.bounded(binding.transform.origin): return _discard("unsupported_geometry","Local geometry precision extent exceeded.",binding.identity)
 		if record.has("action") and not record.action.target.is_empty(): binding.action_target = record_key(p.id,record.action.target)
 		if record.get("action",{}).get("kind",0) != 0: _stage.pending_action_bindings.append(binding.identity.duplicate(true))
-		if record.type == "model":
-			var resource_key := Hash.digest(record.get("resource",{"model_id":record.get("model_id")}))
+		if _geometry_record(record):
+			var resource_key := Hash.digest(record.get("resource",{"model_id":record.get("model_id"),"door_model_index":record.get("door_model_index")}))
 			if not _stage.cache.has(resource_key):
 				var resource_request := record.duplicate(true)
 				resource_request.definition_identity = block.identity.duplicate(true)
@@ -251,7 +289,8 @@ func step(ticket: Dictionary) -> Dictionary:
 			_stage.geometry_cache[resource_key] = geometry.prototype
 			_stage.resource_versions[resource_key] = {"sha256":geometry.provenance.sha256,"converter":geometry.provenance.get("converter",""),"profile":geometry.provenance.get("profile","")}
 			binding.geometry_provenance = geometry.provenance.duplicate(true)
-			geometry.node.transform = Frame.pose(record.transform)
+			geometry.node.transform = _record_pose(record,block,p,_stage.cache[resource_key])
+			binding.transform = placed.transform * geometry.node.transform
 			geometry.collision.set_meta("scoped_record",key)
 			var separate_body: bool = record.get("door_metadata",{}).get("candidate",false) or record.has("action") or record.has("unused_action") or protected_targets.has(record.id)
 			if separate_body or fixed_body == null:
@@ -270,7 +309,7 @@ func step(ticket: Dictionary) -> Dictionary:
 				geometry.body.remove_child(geometry.collision)
 				geometry.node.remove_child(geometry.body)
 				geometry.body.free()
-				geometry.collision.transform = Frame.pose(record.transform)
+				geometry.collision.transform = geometry.node.transform
 				fixed_body.add_child(geometry.collision)
 				geometry.body = fixed_body
 			placed.add_child(geometry.node)
@@ -291,9 +330,13 @@ func step(ticket: Dictionary) -> Dictionary:
 			_stage.triangles += geometry.triangles
 			_stage.geometry_instances += 1
 			if record.get("door_metadata",{}).get("candidate",false): _stage.doors[key] = true
+			var extra := _after_record(binding,_stage.cache[resource_key],p)
+			if not extra.ok: return _discard(extra.get("kind","failed"),extra.get("reason","Required record metadata failed."),binding.identity,extra)
 		_stage.bindings[key] = binding
 		scoped.append(key)
 	_stage.occurrences.append({"placement":p.duplicate(true),"definition":block.identity.duplicate(true),"transform":placed.transform,"records":scoped})
+	var extra_block := _after_block(block,p,placed)
+	if not extra_block.ok: return _discard(extra_block.get("kind","failed"),extra_block.get("reason","Required block geometry failed."),p.id,extra_block)
 	_stage.next += 1
 	return {"ok":true,"kind":"staged" if _stage.next == _stage.placements.size() else "staging","blocks":_stage.next,"destination_ready":false}
 
@@ -483,6 +526,7 @@ func finish(ticket: Dictionary) -> Dictionary:
 		candidate.environment_version = Hash.digest({"geometry":candidate.geometry_version,"profile":preload("res://scripts/loc/dungeon_environment.gd").PROFILE,"water":definition.water,"areas":definition.areas,"classic_environment":definition.get("classic_environment",{})})
 		candidate.context_version = Hash.digest({"layout":candidate.layout_version,"definition":definition,"palette":_stage.palette.version,"assets":_stage.materials.asset_version(),"material_profile":preload("res://scripts/av/replacement_instances.gd").DUNGEON_SURFACE_PROFILE,"variant":candidate.variant_version,"environment":candidate.environment_version})
 	candidate.layout_provenance = {"winner":_stage.input.winner.duplicate(true),"contributors":_stage.input.contributors.duplicate(true),"content_context":_stage.input.content_context.duplicate(true)}
+	_candidate_extension(candidate)
 	measurements = {"assembly_usec":Time.get_ticks_usec()-_stage.started,"blocks":_stage.next,"unique_block_decodes":_stage.blocks.size(),"unique_resource_decodes":_stage.resource_decodes,"unique_geometry_builds":_stage.geometry_cache.size(),"geometry_instances":_stage.geometry_instances,"physics_bodies":_stage.body_nodes.size(),"physics_body_limit":_stage.body_limit,"triangles":_stage.triangles}
 	measurements.unique_image_resources = _stage.materials.reads
 	# Move coherent geometry out of the isolated staging world in one synchronous
@@ -503,6 +547,7 @@ func finish(ticket: Dictionary) -> Dictionary:
 		add_child(_live)
 		_stage.viewport.free()
 		candidate.activation_session = ticket.request.session
+		candidate.activation_version = Hash.digest([candidate.layout_version,candidate.activation_session,ticket.serial])
 		_committed = candidate
 		_environment = _stage.environment
 		_markers = _stage.markers
@@ -528,7 +573,7 @@ func _view(ticket: Dictionary) -> Dictionary:
 func readiness(ticket: Dictionary) -> Dictionary:
 	var view := _view(ticket)
 	if view.is_empty(): return _result("stale")
-	return {"ok":true,"ticket":ticket.duplicate(true),"layout":view.layout.duplicate(true),"layout_version":view.layout_version,"geometry_version":view.geometry_version,"environment_version":view.get("environment_version",""),"frame":Frame.FRAME,"assembly_ready":true,"geometry_ready":true,"collision_ready":true,"context_ready":view.get("context_ready",false),"context_version":view.get("context_version",""),"destination_ready":false,"owner_state_ready":false,"placement_committed":false,"activated":view.has("activation_session")}
+	return {"ok":true,"ticket":ticket.duplicate(true),"layout":view.layout.duplicate(true),"layout_version":view.layout_version,"geometry_version":view.geometry_version,"environment_version":view.get("environment_version",""),"frame":Frame.FRAME,"assembly_ready":true,"geometry_ready":true,"collision_ready":true,"context_ready":view.get("context_ready",false),"context_version":view.get("context_version",""),"destination_ready":false,"owner_state_ready":false,"placement_committed":false,"activation_version":view.get("activation_version",""),"activated":view.has("activation_session")}
 
 func binding(ticket: Dictionary, placement: String, record: String) -> Dictionary:
 	var current := readiness(ticket)
@@ -659,6 +704,7 @@ func activate(ticket: Dictionary) -> Dictionary:
 	_prepared_viewport = null
 	_prepared_root = null
 	_prepared.activation_session = scope
+	_prepared.activation_version = Hash.digest([_prepared.layout_version,scope,ticket.serial])
 	_committed = _prepared
 	_environment = _prepared_environment
 	_markers = _prepared_markers

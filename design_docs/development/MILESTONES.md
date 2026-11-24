@@ -1,5 +1,21 @@
 # Milestones and validation checkpoints
 
+**IMP-013 increment 1 accepted / increment-2 handoff, 2026-11-23:** The user
+accepted increment 1 after reviewing the corrected ground texture. See the
+[acceptance record](evidence/IMP-013-INCREMENT-1-ACCEPTANCE-2026-11-23.md) and
+[increment-2 prompt](handoffs/IMP-013-INCREMENT-2-PROMPT.txt). Issuing the prompt
+in another chat authorizes entrance/exit resolution only; preparing it starts no
+implementation here. Increment 3, parent IMP-013/M2 and named real-provider gates
+remain open. Earlier pending-acceptance statements are historical.
+
+**IMP-013 increment 1, 2026-11-23:** The issued handoff authorizes and now
+implements location assembly through the normal LOC/DATA/CORE composition.
+See [execution evidence](evidence/IMP-013-increment-1-2026-11-23.md) and the
+[review checklist](evidence/IMP-013-ASSEMBLY-REVIEW-2026-11-23.md) for exact
+qualification and acceptance status. User acceptance remains pending; increments
+2/3 are not authorized here. IMP-013, M2 and named terrain/route/MOVE/owner-state/
+SAVE/story integrations remain open. Earlier handoff-only notes are historical.
+
 **IMP-061 complete and user-accepted, 2026-11-23:** The user inspected the images,
 accepted increment 3 and approved the assigned IMP-061 task complete. All three
 increments are accepted; this is not M2 acceptance. Actual actor placement,

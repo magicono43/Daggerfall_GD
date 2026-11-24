@@ -151,3 +151,28 @@ facing/behavior verification is claimed; source flats contain no orientation.
 Ordinary baseline north-facing is explicit authored policy. Exterior mappings
 currently resolve only the verified MAPS exterior layout/placement context;
 static-door association/geometry/traversal remain pending IMP-013/025.
+
+## IMP-013 increment-1 location assembly, 2026-11-23
+
+`location_assembly.json` is a project-authored replaceable annotation, guarded by
+the pinned BLOCKS/MAPS/ARCH3D edition. It selects `place-00001` / `TVRNBS04.RMB`,
+its original scoped buildings/records, and explicit desert terrain archive 2.
+No classic/reference files or identity ledger are modified. The independent
+observer is `tools/observe_location_assembly.py`; complete hashes/vectors are
+`tests/location_source_observation.json`.
+
+Read-only DFU evidence: `RMBLayout.AddModels/AddProps/AddBlockFlats`,
+`MeshReader.GetSimpleGroundPlaneMesh`, `TextureReader.GetTerrainTilesetTexture`,
+`ImageProcessing.RotateColors/FlipColors`, `DaggerfallInterior.AddModels` and
+`Arch3dFile.UVunpack`. The existing adjacent DFU MIT license applies. The generic
+pre-905 first-three packed-UV correction retains encoded source tuples and exposes
+its named profile. Misc-prop offsets and type-3 interior bottom alignment are
+documented baseline interpretations. This adopts no new library/toolchain.
+
+Full WORLD terrain/climate, source named-service/door-pool pairing, entry/exit
+mappings, MOVE placement, actor/action state and SAVE compatibility remain pending.
+
+User visual review follow-up: the ground image orientation now explicitly composes
+`BaseImageFile.GetColor32` bottom-up upload with the tile shader flag matrices,
+while DATA retains top-left-first images. Source bytes, tile positions, identities
+and collision are unchanged. See the IMP-013 ground-UV follow-up evidence.
