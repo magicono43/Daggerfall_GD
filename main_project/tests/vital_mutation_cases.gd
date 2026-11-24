@@ -10,6 +10,7 @@ var item := Consumer.new()
 var scope := ""
 var serial := 0
 var observed: Array = []
+var prevention := preload("res://tests/controlled_prevention.gd").new()
 
 func view(actor := "vital-player") -> Dictionary:
 	return actors.projection(scope,actor)
@@ -107,7 +108,7 @@ func run(test_suite: RefCounted, shell: Control) -> Dictionary:
 	check("reconstruction never replays transition notification",0,transition_notices.size())
 	var source_calls := [0]
 	for binding in crowd_sources: binding.provider.callback = func(): source_calls[0] += 1
-	var services := [actors.service_binding(scope),magic.binding("magic-intake","MAGIC"),combat.binding("combat-intake","COMBAT"),item.binding("item-intake","ITEM")]
+	var services := [actors.service_binding(scope),magic.binding("magic-intake","MAGIC"),combat.binding("combat-intake","COMBAT"),item.binding("item-intake","ITEM"),prevention.binding()]
 	check("UI authority declaration rejected",false,core._validate_vital_bindings([magic.binding("ui","UI")]).ok)
 	check("duplicate consumer binding rejected",false,core._validate_vital_bindings([magic.binding("a","MAGIC"),magic.binding("b","MAGIC")]).ok)
 	core.complete_baseline(original,{"ok":true,"services":services})
@@ -164,10 +165,14 @@ func run(test_suite: RefCounted, shell: Control) -> Dictionary:
 	var magical := apply(request("damage","health",3))
 	check("separate magical loss",[24,21,3,"magic-intake"],[magical.before,magical.after,magical.applied,magical.caller])
 	var lethal_before := view()
-	var lethal := apply(request("damage","health",1000000000,"vital-player","combat-intake"),combat)
-	check("lethal unavailable unchanged",["unavailable",lethal_before],[lethal.kind,view()])
+	var lethal_request := request("damage","health",1000000000,"vital-player","combat-intake")
+	var lethal := apply(lethal_request,combat)
+	check("lethal unavailable unchanged",["sources",21,true],[lethal.phase,view().record.current.health,core.gates.blocked("save")])
 	var ordered_components := {"physical":physical,"magical":magical,"remainder":lethal}
-	check("ordered components preserve earlier settlement",[7,3,"unavailable",21],[ordered_components.physical.applied,ordered_components.magical.applied,ordered_components.remainder.kind,view().record.current.health])
+	check("ordered components preserve earlier settlement",[7,3,"lethal",21],[ordered_components.physical.applied,ordered_components.magical.applied,ordered_components.remainder.kind,view().record.current.health])
+	prevention.ready = true
+	var prevented := apply(lethal_request,combat)
+	check("pending lethal resumes to positive survival",["prevented",21,3,3],[prevented.phase,prevented.applied,prevented.after,view().record.current.health])
 	check("failed continuation leaves acknowledgment pending",false,view().record.vitals.receipts["combat-intake"][physical_request.operation].acknowledged)
 	check("component retry cannot repeat earlier loss",physical,actors.vital_intake(combat,physical_request))
 	check("failed remainder retains consumer safety hold",true,core.gates._holds.has(consumer_hold) and core.gates._holds[consumer_hold].owner == "controlled-COMBAT:continuation")
@@ -178,7 +183,7 @@ func run(test_suite: RefCounted, shell: Control) -> Dictionary:
 	check("combat healing ineligible","ineligible",ineligible.kind)
 	r = request("fill","health",0,"vital-player","item-intake")
 	var fill := apply(r,item)
-	check("eligible health fill",[21,31,10,0],[fill.before,fill.after,fill.applied,fill.remainder])
+	check("eligible health fill",[3,31,28,0],[fill.before,fill.after,fill.applied,fill.remainder])
 	for pool in ["health","fatigue","magicka"]:
 		var full := apply(request("fill",pool,0,"vital-player","item-intake"),item)
 		check("full fill "+pool,[true,2 if pool == "magicka" else 0,0],[full.ok,full.applied,full.remainder])

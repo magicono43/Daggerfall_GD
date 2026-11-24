@@ -1,5 +1,17 @@
 # Implementation dependencies
 
+**IMP-016 complete and accepted / IMP-012 increment-1 handoff, 2026-11-24:**
+The user explicitly accepted increment 4 and parent IMP-016. All four increments
+and the parent delivery/dependency edge are closed in their documented scopes.
+See [acceptance](evidence/IMP-016-ACCEPTANCE-2026-11-24.md). Earlier pending-user/
+parent-open statements and raw audits retain delivery-time status; acceptance
+supersedes that status without rewriting raw evidence. M2 and named real-provider,
+native SAVE, full-entry and cinematic joint checks remain open.
+IMP-012's listed IMP-011/013/016 prerequisites are accepted. Its
+[ground motor/gait prompt](handoffs/IMP-012-INCREMENT-1-PROMPT.txt) is prepared for
+another chat; issuing it authorizes increment 1 and narrow supporting interfaces
+only. This handoff starts no runtime implementation. Changes remain uncommitted.
+
 **IMP-013 complete / IMP-016 handoff, 2026-11-24:** The user accepted increment 3
 and approved parent IMP-013; its delivery/dependency edge is closed in the
 [accepted scope](evidence/IMP-013-ACCEPTANCE-2026-11-24.md). Other dependencies and

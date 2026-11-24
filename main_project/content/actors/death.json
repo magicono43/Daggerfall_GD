@@ -1,0 +1,11 @@
+{
+  "domain": "actor.baseline",
+  "path": "death",
+  "operation": "add",
+  "entries": [{"id": "player", "value": {
+    "schema": "actor-death-policy-v1",
+    "numerator": 1, "denominator": 10, "minimum": 1,
+    "priorities": {}, "fade_seconds": 2, "return_seconds": 3,
+    "audio": "classic-ordinal-405"
+  }}]
+}

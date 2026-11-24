@@ -12,6 +12,12 @@ var preferences: RefCounted
 var ambience: RefCounted
 var _attempt: Dictionary = {}
 var _held: Dictionary = {}
+var _handoff_keys: Dictionary = {}
+
+func fence_initial_input(keys: Dictionary) -> void:
+	# Transfer only physical input already consumed by the initial sequence.
+	# Merge with playback-owned fences; a later release retires each key once.
+	for key: String in keys: _handoff_keys[key] = true
 var _classic_thread: Thread
 var _mutex := Mutex.new()
 var _classic_queue: Array = []
@@ -104,6 +110,14 @@ func admit(resource: Dictionary, scope: Dictionary, current: Callable, skip := "
 func request_classic(access: RefCounted, file: String, scope: Dictionary, current: Callable, aspect: float, skip := "any") -> Dictionary:
 	if not is_finite(aspect) or aspect<=0: return Native.failure("invalid_request","Classic caller must supply its verified display aspect.")
 	var source: Dictionary = access.video_source(file)
+	return _classic_source(source,scope,current,aspect,skip)
+
+func request_death_classic(access: RefCounted, scope: Dictionary, current: Callable) -> Dictionary:
+	if not _attempt.is_empty() or not _ending.is_empty(): return Native.failure("busy","Playback or cleanup already owns this consumer.")
+	if not current.is_valid() or not current.call(scope.duplicate(true)): return Native.failure("stale","Current CORE death presentation required.")
+	return _classic_source(access.death_video_source(),scope,current,1.6,"any")
+
+func _classic_source(source: Dictionary, scope: Dictionary, current: Callable, aspect: float, skip: String) -> Dictionary:
 	if not source.ok: return source
 	var began := _begin(scope,current,skip)
 	if not began.ok: return began
@@ -362,6 +376,11 @@ func _input(event: InputEvent) -> void:
 	var held: bool = _held.has(key)
 	if event.is_pressed(): _held[key] = true
 	else: _held.erase(key)
+	if _handoff_keys.has(key) or not _ending.is_empty():
+		if event.is_pressed(): _handoff_keys[key] = true
+		else: _handoff_keys.erase(key)
+		get_viewport().set_input_as_handled()
+		return
 	if _attempt.is_empty(): return
 	get_viewport().set_input_as_handled()
 	if not event.is_pressed() or held or event.is_echo(): return
@@ -378,6 +397,7 @@ func retire_scope(session: String) -> void:
 
 func _finish(kind: String, reason := "") -> void:
 	if _attempt.is_empty(): return
+	_handoff_keys = _held.duplicate()
 	var attempt := _attempt
 	_attempt = {} # Reentrant/late completion cannot settle the attempt twice.
 	_mutex.lock()

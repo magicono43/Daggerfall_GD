@@ -1,5 +1,11 @@
 # Activity and exhaustion — IMP-016 increment 3
 
+Increment 4 routes exhaustion through the same [CHAR lethal resolver](DEATH.md)
+as ordinary health damage. V4 adds a checked `lethal.v4` continuation without
+rewriting the accepted unavailable request/result. Prevention leaving fatigue
+zero stays incapacitated; death preserves the unresolved fatigue obligation.
+Older controlled prevention-continuation applies only to legacy v3 episodes.
+
 `core.actors` remains the sole CHAR authority. `activity_owner.gd` is its
 implementation helper: actor facts, clocks, receipts and episodes live in the
 same actor record. It owns no physical pose, collider, global clock or second

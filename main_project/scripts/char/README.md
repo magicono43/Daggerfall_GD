@@ -1,4 +1,10 @@
-# CHAR actor owner — IMP-016 increments 1–3
+# CHAR actor owner — IMP-016 increments 1–4
+
+Increment 4 adds the shared [lethal/prevention/death contract](DEATH.md), v4
+retention and the actual [vitals/disclosed-effects view](VITALS_VIEW.md). Earlier
+sections describing unavailable lethal ownership record historical increment scope.
+Real benefit/effect/equipment composition, native SAVE and full cinematic/entry
+milestone qualification remain separate gates. User acceptance is not inferred.
 
 Increment 3 adds [committed activity, breath scheduling and exhaustion
 settlement](ACTIVITY.md) through this same authority. Versioned v3 records retain

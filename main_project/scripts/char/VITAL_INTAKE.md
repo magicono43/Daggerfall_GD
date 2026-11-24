@@ -1,5 +1,11 @@
 # Vital intake — IMP-016 increment 2
 
+Increment 4 replaces the previously unavailable lethal boundary with the shared
+[versioned lethal event contract](DEATH.md). Nonlethal applied-vital-v1 receipts
+remain unchanged. Lethal outcomes report saturating debit and prevention restore
+separately, retain indexed progress and acknowledge only coherent survival.
+The unavailable-boundary descriptions below preserve increment-2 delivery history.
+
 Increment 3 extends current continuation through the [activity/exhaustion
 contract](ACTIVITY.md). The increment-2 applied outcome, transition and historical
 pending_count remain immutable. V3 retains separate checked episode settlement,

@@ -1,5 +1,28 @@
 # Milestones and validation checkpoints
 
+**IMP-016 complete and accepted / IMP-012 increment-1 handoff, 2026-11-24:**
+The user explicitly accepted increment 4 and parent IMP-016. All four increments
+and the parent delivery/dependency edge are closed in their documented scopes.
+See [acceptance](evidence/IMP-016-ACCEPTANCE-2026-11-24.md). Earlier pending-user/
+parent-open statements and raw audits retain delivery-time status; acceptance
+supersedes that status without rewriting raw evidence. M2 and named real-provider,
+native SAVE, full-entry and cinematic joint checks remain open.
+IMP-012's listed IMP-011/013/016 prerequisites are accepted. Its
+[ground motor/gait prompt](handoffs/IMP-012-INCREMENT-1-PROMPT.txt) is prepared for
+another chat; issuing it authorizes increment 1 and narrow supporting interfaces
+only. This handoff starts no runtime implementation. Changes remain uncommitted.
+
+**IMP-016 increment 4 delivered and verified, 2026-11-24; acceptance pending:**
+Shared CHAR lethal/prevention and exhaustion settlement, scoped CORE death return,
+independent initial presentation, real optional ANIM0012 playback, and actual
+UI-006 vitals/disclosed effects pass all 12 final commands (6,884
+assertions). See [execution evidence](evidence/IMP-016-increment-4-2026-11-24.md)
+and [review](evidence/IMP-016-INCREMENT-4-REVIEW-2026-11-24.md). Controlled benefit/
+disclosure/entry providers qualify their interfaces. Real FACT/MAGIC/ITEM,
+MOVE/TIME/trait/threat/recovery, native SAVE, voice mapping and full cinematic/
+entry checks remain open. Increments 1–3 stay accepted; parent IMP-016/M2 remain
+open. Earlier handoff/foundation statements are historical; raw audits unchanged.
+
 **IMP-016 increment 3 accepted / increment 4 handoff, 2026-11-24:** The user
 explicitly accepted increment 3; increments 1/2/3 are complete in their documented
 scopes. See [acceptance](evidence/IMP-016-INCREMENT-3-ACCEPTANCE-2026-11-24.md)

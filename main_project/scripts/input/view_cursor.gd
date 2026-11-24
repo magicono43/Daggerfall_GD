@@ -19,6 +19,30 @@ var _fence := true
 var _scope := ""
 var _serial := 0
 var _gestures := {}
+var _death_scope := ""
+var _death_position := Vector3.ZERO
+
+func death_lower(scope: String, progress: float) -> bool:
+	if scope != input.core.snapshot().session or input.core.snapshot().status != "dead" or not is_finite(progress) or progress < 0 or progress > 1: return false
+	if not is_instance_valid(camera): return false
+	if _death_scope.is_empty():
+		_death_scope = scope
+		_death_position = camera.global_position
+	if _death_scope != scope: return false
+	# Cosmetic local camera offset only; MOVE's physical pose never changes.
+	var target := _death_position+Vector3(0,-0.65*progress,0)
+	if progress > 0 and camera.is_inside_tree():
+		var world := camera.get_world_3d()
+		if world != null:
+			var hit := world.direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(_death_position,target))
+			if not hit.is_empty(): target.y = minf(_death_position.y,hit.position.y+0.05)
+	camera.global_position = target
+	return true
+
+func clear_death_view(scope: String) -> void:
+	if scope != _death_scope: return
+	if is_instance_valid(camera): camera.global_position = _death_position
+	_death_scope = ""
 
 func _init(actions: RefCounted, target: Viewport, presentation: Camera3D) -> void:
 	input = actions
@@ -58,6 +82,7 @@ func _invalidated(_reason: String) -> void:
 	_sync()
 
 func _retire(_old_scope: String) -> void:
+	clear_death_view(_old_scope)
 	cursor_mode = false
 	_scope = ""
 	facing = Vector2.ZERO

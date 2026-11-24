@@ -1,5 +1,11 @@
 # Actor and character input profile — IMP-009 increment 1
 
+IMP-016 increment 4 separately publishes checked `actor.baseline:death#player`
+and `actor.baseline:vitals#player`; see [lethal](../char/DEATH.md) and
+[presentation](../char/VITALS_VIEW.md) schemas. The structural catalog and its
+semantic readiness remain unchanged. Both policies use the existing locked
+shipped/MOD/captured-loose precedence; no new package loader is enabled.
+
 IMP-016 increment 3 also publishes separately typed
 `actor.baseline:activity#player` and `actor.baseline:recovery#player` policies;
 see [activity scope](../char/ACTIVITY.md). These do not extend the structural

@@ -50,7 +50,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	var callbacks := preload("res://tests/actor_formula_callbacks.gd").new()
 	var policy_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://content/actors/baseline.json")).entries[0].value
 	var packaged := manifest("actor.formula")
-	packaged.content = ["actor-policy.json", "activity-policy.json"]
+	packaged.content = ["actor-policy.json", "activity-policy.json", "death-policy.json", "vitals-policy.json"]
 	packaged.capabilities = ["data.actor-baseline-v1"]
 	write(controller.mods.root.path_join("Mods/Actor/mod.json"),JSON.stringify(packaged))
 	policy_data.attributes.strength.max = 150
@@ -58,6 +58,12 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	var activity_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://content/actors/activity.json")).entries[0].value
 	activity_data.practice_cap = 25000
 	write(controller.mods.root.path_join("Mods/Actor/activity-policy.json"),JSON.stringify({"domain":Baseline.DOMAIN,"path":"activity","operation":"patch","entries":[{"id":"player","value":activity_data}]}))
+	var death_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://content/actors/death.json")).entries[0].value
+	death_data.numerator = 2
+	write(controller.mods.root.path_join("Mods/Actor/death-policy.json"),JSON.stringify({"domain":Baseline.DOMAIN,"path":"death","operation":"patch","entries":[{"id":"player","value":death_data}]}))
+	var vitals_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://content/actors/vitals.json")).entries[0].value
+	vitals_data.view = "numbers"
+	write(controller.mods.root.path_join("Mods/Actor/vitals-policy.json"),JSON.stringify({"domain":Baseline.DOMAIN,"path":"vitals","operation":"patch","entries":[{"id":"player","value":vitals_data}]}))
 	controller.mods.rescan()
 	controller.mods.edit("actor.formula","toggle")
 	policy_data.attributes.strength.max = 200
@@ -65,6 +71,11 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	write(controller.mods.root.path_join("Overrides/actor-policy.json"),JSON.stringify({"domain":Baseline.DOMAIN,"path":"policy","operation":"patch","entries":[{"id":"player","value":policy_data}]}))
 	activity_data.practice_cap = 20000
 	write(controller.mods.root.path_join("Overrides/activity-policy.json"),JSON.stringify({"domain":Baseline.DOMAIN,"path":"activity","operation":"patch","entries":[{"id":"player","value":activity_data}]}))
+	death_data.numerator = 1
+	write(controller.mods.root.path_join("Overrides/death-policy.json"),JSON.stringify({"domain":Baseline.DOMAIN,"path":"death","operation":"patch","entries":[{"id":"player","value":death_data}]}))
+	vitals_data.view = "stock-bars"
+	vitals_data.width = 320
+	write(controller.mods.root.path_join("Overrides/vitals-policy.json"),JSON.stringify({"domain":Baseline.DOMAIN,"path":"vitals","operation":"patch","entries":[{"id":"player","value":vitals_data}]}))
 	controller.providers.formulas.stage("actor.formula","1.0.0",[{"hook":"char.damage","contract":"integer-formula-v1","callback":callbacks.integer}])
 	var started := Time.get_ticks_usec()
 	controller.select_folder(fixture.classic_source)
@@ -434,6 +445,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	preload("res://tests/activity_math_cases.gd").new().run(self,registry)
 	preload("res://tests/breath_schedule_cases.gd").new().run(self)
 	observations.activity = await preload("res://tests/activity_owner_cases.gd").new().run(self,shell,fixture)
+	observations.lethal = await preload("res://tests/lethal_event_cases.gd").new().run(self,shell,fixture)
 	var ok := true
 	for item in checks: ok = ok and item.expected == item.actual
 	return {"ok":ok,"checks":checks,"count":checks.size(),"fixture":"IMP-016-actor-state-v1","engine":Engine.get_version_info(),"display":DisplayServer.get_name(),"observations":observations,"review_projection":snapshot,"rng_before":rng_before,"checked_callback_errors":monitored.callback_errors,"source":"controlled creation/clock/source providers; real DATA/RULE/CHAR/CORE","inputs":fixture.get("inputs",{})}

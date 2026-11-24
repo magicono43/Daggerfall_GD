@@ -34,6 +34,23 @@ var _ui_triggers: Dictionary = {}
 var _keyboard_layout := -1
 var dungeon_assembly: Node
 var placement: Node3D
+var vitals_view: Control
+var death_view: ColorRect
+var _death_movie_ticket: Dictionary = {}
+
+func advance_actor_presentation(delta: float) -> void:
+	death_view.advance(delta)
+	if not core.player_actor.is_empty() and vitals_view.scope != core.snapshot().session: vitals_view.bind(core.snapshot().session,core.player_actor)
+	vitals_view.refresh()
+
+func death_movie(value: Dictionary) -> Dictionary:
+	if video_playback == null: return {"ok":true,"outcome":"Failed"}
+	_death_movie_ticket = value.duplicate(true)
+	var context := {"session":"","operation":value.id,"attempt":"death-"+str(value.generation)}
+	var current := func(_context: Dictionary): return core.ticket() == value and core.snapshot().phase == "presentation"
+	var begun: Dictionary = video_playback.request_death_classic(host.controller.providers.classic,context,current)
+	if not begun.ok: _death_movie_ticket = {}
+	return {"pending":true} if begun.ok else {"ok":true,"outcome":"Failed","reason":begun.get("reason","")}
 
 func refresh_control_labels() -> void:
 	if windows.top().get("window") != "controls" or DisplayServer.get_name() == "headless": return
@@ -104,6 +121,16 @@ func _init(shell: Control, material_provider: Callable = Callable()) -> void:
 	host.add_child(view_camera)
 	view_camera.current = true
 	view = preload("res://scripts/input/view_cursor.gd").new(action_input,host.get_viewport(),view_camera)
+	vitals_view = preload("res://scripts/char/vitals_view.gd").new()
+	vitals_view.core = core
+	vitals_view.windows = windows
+	host.add_child(vitals_view)
+	death_view = preload("res://scripts/char/death_presentation.gd").new()
+	death_view.shell = self
+	host.add_child(death_view)
+	core.actors.lethal_committed.connect(death_view.observe)
+	core.retiring.connect(vitals_view.retire)
+	core.retiring.connect(death_view.retire)
 	Input.joy_connection_changed.connect(controller_connection_changed)
 	action_input.controller_changed.connect(schedule_render)
 	action_input.cancelled.connect(func(report: Dictionary): gameplay_cancelled.emit(report))
@@ -151,6 +178,7 @@ func schedule_render() -> void:
 		host.call_deferred("render")
 
 func synchronize_startup() -> void:
+	vitals_view.media = host.controller.providers.get("media")
 	if host.controller.providers.get("layouts") != null and dungeon_assembly == null:
 		dungeon_assembly = preload("res://scripts/loc/location_assembly.gd").new()
 		dungeon_assembly.layouts = host.controller.providers.layouts
@@ -186,6 +214,12 @@ func synchronize_startup() -> void:
 		video_playback.ambience = ambience_requests
 		host.add_child(video_playback)
 		core.retiring.connect(video_playback.retire_scope)
+		video_playback.terminal.connect(func(result: Dictionary):
+			if not _death_movie_ticket.is_empty() and result.get("scope",{}).get("operation") == _death_movie_ticket.id:
+				var original := _death_movie_ticket
+				_death_movie_ticket = {}
+				core.complete_presentation(original,result))
+	core.provider.death_video = death_movie
 	if host.controller.providers.get("preferences") != null and core.preferences == null:
 		core.preferences = host.controller.providers.preferences
 		core.preferences.register_boundary("next_session", core)
@@ -212,6 +246,8 @@ func return_to_setup() -> void:
 			setup_pending = false
 
 func dispose() -> void:
+	death_view.free()
+	vitals_view.free()
 	if is_instance_valid(placement): placement.free()
 	if is_instance_valid(dungeon_assembly):
 		dungeon_assembly.dispose()
@@ -220,7 +256,7 @@ func dispose() -> void:
 	host.controller.controls.detach(action_input)
 	host.controller.controls.detach(view)
 	view.dispose()
-	view_camera.free()
+	if is_instance_valid(view_camera): view_camera.free()
 	if binding_editor != null: binding_editor.dispose()
 	host.controller.controls.dispose()
 	action_input.dispose()
@@ -295,6 +331,9 @@ func deliver_input() -> Array[Dictionary]:
 			core.gates.hud_preference = not core.gates.hud_preference
 			schedule_render()
 			return {"kind":"applied"}
+		if edge.action == "status" and edge.kind == "started":
+			vitals_view.open_details()
+			return {"kind":"applied"}
 		edge.make_read_only()
 		gameplay_edge.emit(edge)
 		return {"kind":"intent_delivered"})
@@ -356,6 +395,11 @@ func render() -> void:
 				host.button("Select Controller %d · %s" % [device,Input.get_joy_name(device)], func(): action_input.select_controller(device))
 	if not quit_phase.is_empty():
 		render_quit()
+		return
+	if windows.top().get("window") == "vitals_details":
+		host.label("Vitals and disclosed effects")
+		host.button("Close details",vitals_view.close_details)
+		restore_focus()
 		return
 	if windows.top().get("window") == "controls":
 		binding_editor.render(host)

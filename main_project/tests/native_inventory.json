@@ -345,7 +345,8 @@
     "no cinematic input hold remains",
     "native decoder workers all joined",
     "preparation deadline terminal exactly once",
-    "preparation deadline fails and joins"
+    "preparation deadline fails and joins",
+    "native locked rebuild never prepares"
   ],
   "rendered": [
     "native editable setup",
@@ -721,7 +722,8 @@
     "vp9-full rendered fit rectangle",
     "vp9-full rendered corner presentation",
     "preparation deadline terminal exactly once",
-    "preparation deadline fails and joins"
+    "preparation deadline fails and joins",
+    "native locked rebuild never prepares"
   ],
   "reload": [
     "native fresh process setup",

@@ -8,12 +8,12 @@ const F = preload("res://scripts/data/actor_input_formats.gd")
 const P = preload("res://scripts/mod/package_library.gd")
 
 func declaration() -> Dictionary:
-	return {"id":VERSION,"domain":DOMAIN,"reference_domains":[DOMAIN],"operations":["add","replace","patch"],"required_resources":["policy","activity","recovery"],"capabilities":["data."+VERSION]}
+	return {"id":VERSION,"domain":DOMAIN,"reference_domains":[DOMAIN],"operations":["add","replace","patch"],"required_resources":["policy","activity","recovery","death","vitals"],"capabilities":["data."+VERSION]}
 func validate_resource_path(path: String) -> String:
-	return "" if path in ["policy", "activity", "recovery"] else "Only policy, activity and recovery are supported."
+	return "" if path in ["policy", "activity", "recovery", "death", "vitals"] else "Only declared actor policies are supported."
 func bundled_contributions() -> Array:
 	var contributions: Array = []
-	for file in ["baseline.json","activity.json","recovery.json"]:
+	for file in ["baseline.json","activity.json","recovery.json","death.json","vitals.json"]:
 		contributions.append({"root":"res://content/actors","file":file,"version":VERSION,"bytes":FileAccess.get_file_as_bytes("res://content/actors/"+file)})
 	return contributions
 func patch_record(previous: Dictionary, fields: Dictionary) -> Dictionary:
@@ -21,6 +21,8 @@ func patch_record(previous: Dictionary, fields: Dictionary) -> Dictionary:
 	for field in fields: next[field] = fields[field]
 	return {"ok":true,"value":next}
 func validate_record(id: String, v: Dictionary) -> String:
+	if v.get("schema") == "vitals-view-v1": return preload("res://scripts/data/vitals_policy.gd").validate(v) if id == "player" else "Only player vitals view supported."
+	if v.get("schema") == "actor-death-policy-v1": return preload("res://scripts/data/death_policy.gd").validate(v) if id == "player" else "Only player death policy supported."
 	if v.get("schema") == "actor-recovery-policy-v1": return preload("res://scripts/data/recovery_policy.gd").validate(v) if id == "player" else "Only player recovery policy supported."
 	if v.get("schema") == "actor-activity-policy-v1":
 		return preload("res://scripts/data/activity_policy.gd").validate(v) if id == "player" else "Only player activity policy is supported."
@@ -43,9 +45,10 @@ func validate_record(id: String, v: Dictionary) -> String:
 		if not ratio is Dictionary or ratio.size() != 2 or not F.integer(ratio.get("numerator"),0,1000000) or not F.integer(ratio.get("denominator"),1,1000000): return "Exact bounded rational career multipliers required."
 	return ""
 func validate_references(resources: Dictionary) -> Array:
-	for resource in ["policy", "activity", "recovery"]:
+	for resource in ["policy", "activity", "recovery", "death", "vitals"]:
 		var record: Dictionary = resources.get(DOMAIN+":"+resource,{}).get("records",{}).get("player",{})
-		var expected := VERSION if resource == "policy" else ("actor-activity-policy-v1" if resource == "activity" else "actor-recovery-policy-v1")
+		var expected: String = VERSION if resource == "policy" else "actor-"+resource+"-policy-v1"
+		if resource == "vitals": expected = "vitals-view-v1"
 		if record.get("value",{}).get("schema") != expected:
 			return [{"source":DOMAIN,"reason":"Required typed player "+resource+" policy absent."}]
 	return []

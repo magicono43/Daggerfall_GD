@@ -111,6 +111,7 @@ func intake(owners: Dictionary, r: Dictionary) -> Dictionary:
 	var state: Dictionary = record.get("activity",{})
 	var old: Dictionary = state.get("receipts",{}).get(r.caller,{}).get(r.operation,{})
 	if not old.is_empty(): return old.result.duplicate(true) if old.request == r else fail("Activity identity reused with changed intent.","identity_conflict")
+	if r.kind != "exhaustion" and not record.get("lethal",{}).get("active",{}).is_empty(): return fail("Lethal event requires resolution.","busy")
 	if r.revision != record.revision: return fail("Obsolete actor revision.","stale")
 	if record.revision > LIMIT-32 or state.get("count",0) >= RETENTION: return fail("Activity revision/retention exhausted.","overflow")
 	admitted = current(owners,r,roles)
@@ -229,7 +230,7 @@ func intake(owners: Dictionary, r: Dictionary) -> Dictionary:
 	if record.current.fatigue > 0 and candidate.current.fatigue == 0: candidate.vitals.transitions = candidate.vitals.transitions.duplicate(true)
 	var transition: Dictionary = a._record_transitions(candidate,record.current,{"kind":"activity","caller":r.caller,"operation":r.operation,"attribution":r.source.duplicate(true)})
 	if not transition.ok: return transition
-	candidate.schema = "actor-state-v3"
+	candidate.schema = "actor-state-v4" if record.has("lethal") else "actor-state-v3"
 	candidate.revision += 1
 	next.game = r.clock.end_game
 	next.simulation = r.clock.end_sim
@@ -257,9 +258,14 @@ static func unresolved(record: Dictionary) -> int:
 	return record.get("vitals",{}).get("pending_count",0)-record.get("activity",{}).get("resolved_count",0)
 
 static func settled(record: Dictionary, caller: String, operation: String) -> bool:
-	var s: Dictionary = record.get("activity",{})
-	var id: String = s.get("settlements",{}).get(caller,{}).get(operation,"")
-	return not id.is_empty() and s.get("episodes",{}).get(id,{}).get("phase") == "resolved"
+	var s: Variant = record.get("activity",{})
+	if not s is Dictionary or not s.get("settlements",{}) is Dictionary or not s.get("episodes",{}) is Dictionary: return false
+	var ledger: Variant = s.get("settlements",{}).get(caller,{})
+	if not ledger is Dictionary: return false
+	var id: Variant = ledger.get(operation,"")
+	if not id is String or id.is_empty(): return false
+	var e: Variant = s.get("episodes",{}).get(id,{})
+	return e is Dictionary and e.get("phase") == "resolved"
 
 func exhaustion(owners: Dictionary, r: Dictionary) -> Dictionary:
 	var a: RefCounted = _owner.get_ref()
@@ -274,7 +280,7 @@ func exhaustion(owners: Dictionary, r: Dictionary) -> Dictionary:
 		state = empty(record)
 		state.interval_owner = r.caller
 		record["activity"] = state
-		record.schema = "actor-state-v3"
+		record.schema = "actor-state-v4" if record.has("lethal") else "actor-state-v3"
 	if state.interval_owner != r.caller: return fail("Exhaustion must retain the authoritative interval owner.","stale")
 	var episode: Dictionary = state.episodes.get(c.transition,{})
 	if episode.is_empty():
@@ -297,11 +303,17 @@ func exhaustion(owners: Dictionary, r: Dictionary) -> Dictionary:
 		record.revision += 1
 		retain(state,r,result)
 		a._sync_vital_hold(r.actor)
-		a.activity_committed.emit(result.duplicate(true))
+		if episode.phase != "dead": a.activity_committed.emit(result.duplicate(true))
 	return result
 
 func episode_result(e: Dictionary, ok := false) -> Dictionary:
-	return {"ok":ok,"kind":"exhaustion","phase":e.phase,"episode":e.transition,"elapsed":e.elapsed,"reason":e.reason,"continuation_allowed":e.phase == "resolved"}
+	var result := {"ok":ok,"kind":"exhaustion","phase":e.phase,"episode":e.transition,"elapsed":e.elapsed,"reason":e.reason,"continuation_allowed":e.phase == "resolved"}
+	if e.lethal.has("v4"):
+		result["schema"] = "exhaustion-outcome-v2"
+		result["lethal_phase"] = e.lethal.v4.phase
+		result["session"] = e.lethal.v4.session
+		result["actor"] = e.lethal.v4.actor
+	return result
 
 func query(owners: Dictionary, r: Dictionary, role: String, method := "activity_snapshot", payload: Dictionary = {}) -> Dictionary:
 	var checked := current(owners,r,[role])
@@ -323,6 +335,7 @@ func query(owners: Dictionary, r: Dictionary, role: String, method := "activity_
 func continue_episode(owners: Dictionary, r: Dictionary, record: Dictionary, state: Dictionary, e: Dictionary) -> Dictionary:
 	if e.phase == "resolved": return episode_result(e,true)
 	if r.context.action == "prevention-continuation":
+		if e.lethal.has("v4"): return episode_result(e) # New events resolve only through CHAR-023.
 		if e.phase != "lethal-unavailable" or not e.lethal.get("continuation",{}).is_empty(): return episode_result(e)
 		var prevented := query(owners,r,"lethal")
 		if not prevented.ok or prevented.value != {"ok":true,"revision":r.providers.lethal.revision,"episode":e.transition,"phase":"prevented"}: return episode_result(e)
@@ -359,13 +372,31 @@ func continue_episode(owners: Dictionary, r: Dictionary, record: Dictionary, sta
 		e.classification_context = {"motion":m.duplicate(true),"threat":t.duplicate(true),"providers":{"motion":r.providers.motion.duplicate(true),"threat":r.providers.threat.duplicate(true)}}
 		e.phase = "classified"
 	if e.classification == "lethal":
-		# CHAR-023 is not delivered. No terminal health write, rescue roll or safe fallback.
-		if e.lethal.is_empty():
-			var owner: RefCounted = _owner.get_ref()
-			e.lethal = {"request":{"session":r.session,"actor":r.actor,"operation":"exhaustion-"+e.transition,"attribution":r.source.duplicate(true)},"result":owner.lethal_boundary(r.session,r.actor,"exhaustion-"+e.transition,r.source)}
-		e.phase = "lethal-unavailable"
-		e.reason = "CHAR-023-required"
-		return episode_result(e)
+		var owner: RefCounted = _owner.get_ref()
+		# Legacy v3 unavailable receipts remain immutable history. V4 continuation
+		# points to the same authoritative event rather than treating them as kills.
+		if e.lethal.is_empty(): e.lethal = {"request":{"session":r.session,"actor":r.actor,"operation":"exhaustion-"+e.transition,"attribution":r.source.duplicate(true)},"result":{"ok":false,"kind":"unavailable","reason":"CHAR-023 resolution pending."}}
+		var intent: Dictionary = e.lethal.request
+		var lethal_result: Dictionary = owner.lethal_boundary(r.session,r.actor,intent.operation,intent.attribution)
+		if lethal_result.get("schema") != "lethal-outcome-v1":
+			e.phase = "lethal-unavailable"
+			e.reason = "lethal-admission-"+str(lethal_result.get("kind","unavailable"))
+			return episode_result(e)
+		e.lethal["v4"] = lethal_result
+		match lethal_result.get("phase",""):
+			"prevented":
+				e.phase = "incapacitated" if record.current.fatigue == 0 else "resolved"
+				e.reason = "prevention-fatigue-zero" if record.current.fatigue == 0 else "prevention-settled"
+				if e.phase == "resolved":
+					e.resolution = {"kind":"lethal-owner-prevented"}
+					state.active = ""
+			"dead":
+				e.phase = "dead" # Unresolved fatigue obligation survives death.
+				e.reason = "confirmed-death"
+			_:
+				e.phase = "lethal-pending"
+				e.reason = "CHAR-023-required"
+		return episode_result(e,e.phase == "resolved")
 	if e.recovery.is_empty():
 		var time_settled: bool = e.time.get("events") == [true,true,true] and e.time.get("ok") == true and e.time.get("phase") in ["completed","interrupted"]
 		if not time_settled:
@@ -442,6 +473,7 @@ static func recovery_context_valid(context: Variant) -> bool:
 
 func valid(record: Dictionary) -> bool:
 	if not prepare().ok: return false
+	if not record.get("vitals") is Dictionary or not record.vitals.get("receipts") is Dictionary or not record.vitals.get("transitions") is Dictionary or not record.get("progression") is Dictionary or not record.progression.get("practice") is Dictionary or not record.progression.get("activity_baseline") is Dictionary or not F.integer(record.progression.activity_baseline.get("instant"),0,INSTANT/1000): return false
 	var s: Variant = record.get("activity")
 	if not s is Dictionary or s.size() != 19 or s.get("schema") != "activity-retention-v1" or s.get("policy") != _policy or not F.integer(s.get("resolved_count"),0,RETENTION) or not s.get("settlements") is Dictionary: return false
 	for key in ["game","simulation"]:
@@ -474,7 +506,13 @@ func valid(record: Dictionary) -> bool:
 			var result: Dictionary = receipt.result
 			if r.caller != caller or r.operation != operation or r.actor != record.actor or r.session != record.session or r.content != record.content or not r.providers.has("interval") or r.providers.interval.id != caller or r.revision >= record.revision: return false
 			if r.kind == "exhaustion":
-				if r.context.size() != 2 or not s.episodes.has(r.context.get("transition")) or result.size() != 7 or typeof(result.get("ok")) != TYPE_BOOL or result.get("kind") != "exhaustion" or result.get("episode") != r.context.transition or not F.integer(result.get("elapsed"),0,s.episodes[r.context.transition].elapsed) or typeof(result.get("continuation_allowed")) != TYPE_BOOL or result.continuation_allowed != (result.get("phase") == "resolved"): return false
+				var v2: bool = result.get("schema") == "exhaustion-outcome-v2"
+				if r.context.size() != 2 or not s.episodes.has(r.context.get("transition")) or result.size() != (11 if v2 else 7) or typeof(result.get("ok")) != TYPE_BOOL or result.get("kind") != "exhaustion" or result.get("episode") != r.context.transition or not F.integer(result.get("elapsed"),0,s.episodes[r.context.transition].elapsed) or typeof(result.get("continuation_allowed")) != TYPE_BOOL or result.continuation_allowed != (result.get("phase") == "resolved"): return false
+				if v2:
+					var phase: Variant = result.get("lethal_phase")
+					if result.get("session") != record.session or result.get("actor") != record.actor: return false
+					if not s.episodes[r.context.transition].lethal.has("v4") or not phase is String or phase not in ["sources","evaluation","prevented","dead"] or result.ok != (result.phase == "resolved"): return false
+					if (phase in ["sources","evaluation"] and result.phase != "lethal-pending") or (phase == "dead" and result.phase != "dead") or (phase == "prevented" and result.phase not in ["incapacitated","resolved"]): return false
 				continue
 			if result.size() != 18 or result.get("ok") != true or result.get("schema") != "applied-activity-v1" or result.get("phase") != "committed" or result.get("kind") != r.kind or result.get("session") != r.session or result.get("actor") != r.actor or result.get("caller") != caller or result.get("operation") != operation or not F.integer(result.get("revision"),r.revision+1,r.revision+1) or revisions.has(result.revision) or not result.get("rates") is Dictionary: return false
 			for value: Variant in result.rates.values():
@@ -515,7 +553,7 @@ func valid(record: Dictionary) -> bool:
 	for id in s.episodes:
 		var e: Variant = s.episodes[id]
 		var transition: Dictionary = record.vitals.transitions.get(id,{})
-		if not id is String or transition.is_empty() or transition.pool != "fatigue" or not e is Dictionary or e.size() != 12 or e.get("transition") != id or not e.get("phase") is String or e.phase not in ["admitted","classified","time-pending","incapacitated","resolved","lethal-unavailable"] or typeof(e.get("stopped")) != TYPE_BOOL or e.get("classification") not in ["","safe","lethal"] or not F.integer(e.get("elapsed"),0,HOUR) or not Paths.valid_id(e.get("reason")): return false
+		if not id is String or transition.is_empty() or transition.pool != "fatigue" or not e is Dictionary or e.size() != 12 or e.get("transition") != id or not e.get("phase") is String or e.phase not in ["admitted","classified","time-pending","incapacitated","resolved","lethal-unavailable","lethal-pending","dead"] or typeof(e.get("stopped")) != TYPE_BOOL or e.get("classification") not in ["","safe","lethal"] or not F.integer(e.get("elapsed"),0,HOUR) or not Paths.valid_id(e.get("reason")): return false
 		for key in ["time","recovery","medical","resolution","lethal"]:
 			if not e.get(key) is Dictionary: return false
 		if not e.get("classification_context") is Dictionary: return false
@@ -554,12 +592,17 @@ func valid(record: Dictionary) -> bool:
 			if s.active != id: return false
 		else: resolved += 1
 		if e.classification == "lethal":
-			if e.lethal.size() != (3 if e.lethal.has("continuation") else 2): return false
+			if e.lethal.size() != 2+int(e.lethal.has("continuation"))+int(e.lethal.has("v4")): return false
+			if e.lethal.has("v4"):
+				var retained: Dictionary = record.get("lethal",{}).get("events",{}).get("char-exhaustion",{}).get("exhaustion-"+id,{})
+				if retained.is_empty() or e.lethal.v4 != _owner.get_ref().lethal.outcome(retained): return false
+				if (retained.phase in ["sources","evaluation"] and e.phase != "lethal-pending") or (retained.phase == "dead" and e.phase != "dead") or (retained.phase == "prevented" and e.phase not in ["incapacitated","resolved"]): return false
+			elif e.phase in ["lethal-pending","dead"]: return false
 			if e.elapsed != 0 or not e.recovery.is_empty() or not e.lethal.get("request") is Dictionary or e.lethal.request.get("actor") != record.actor or e.lethal.request.get("session") != record.session or e.lethal.request.get("operation") != "exhaustion-"+id or e.lethal.get("result",{}).get("kind") != "unavailable": return false
 			if e.lethal.request.size() != 4 or not e.lethal.request.get("attribution") is Dictionary or e.lethal.request.attribution.size() != 3 or not e.lethal.get("result") is Dictionary or e.lethal.result.size() != 3 or typeof(e.lethal.result.get("ok")) != TYPE_BOOL or e.lethal.result.ok or not e.lethal.result.get("reason") is String: return false
 			for field in ["source","cause","component"]:
 				if not Paths.valid_id(e.lethal.request.attribution.get(field)): return false
-			if e.phase != "lethal-unavailable" and (e.lethal.get("continuation",{}).get("phase") != "prevented" or e.lethal.continuation.get("episode") != id): return false
+			if not e.lethal.has("v4") and e.phase != "lethal-unavailable" and (e.lethal.get("continuation",{}).get("phase") != "prevented" or e.lethal.continuation.get("episode") != id): return false
 			if e.lethal.has("continuation") and (not e.lethal.continuation is Dictionary or e.lethal.continuation.size() != 4 or typeof(e.lethal.continuation.get("ok")) != TYPE_BOOL or not e.lethal.continuation.ok or not F.integer(e.lethal.continuation.get("revision"),1,LIMIT) or e.lethal.continuation.get("episode") != id or e.lethal.continuation.get("phase") != "prevented"): return false
 		if e.elapsed > 0 and (e.classification != "safe" or not e.stopped or e.time.get("elapsed_usec") != e.elapsed): return false
 		if not e.recovery.is_empty():

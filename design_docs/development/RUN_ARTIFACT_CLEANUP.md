@@ -1,5 +1,16 @@
 # Verification run artifact cleanup
 
+## 2026-11-24 IMP-016 increment 4
+
+At completed verification checkpoints and after the final matrix, ordinary engine inactivity, exact containment, terminal reports and reparse checks qualified **45 owned roots** across three batches. Removed **67,867 reproducible files /11,206,824,311 logical bytes**, preserving **463 hash-verified child reports/logs/captures**, root build identities, exact typed inputs and reviewed images. No selected full copied project, export, dependency copy or cache remains. Installed template junctions were unlinked without following or modifying their targets.
+
+Final-batch post-cleanup logical retention is **2,882,005,564 bytes**. Its conservative pre-cleanup upper bound is **7,041,569,295 bytes** before small final documentation/audit writes. Threshold review preserved earlier accepted evidence and the existing protected IMP-011 human-review root; those other-task artifacts are outside the owned cleanup list. The audit retains all three exact cleanup journals and post-cleanup source/report/checkpoint/evidence checks. Archived report paths describe executed builds now removed; rerun the maintained commands to rebuild them.
+
+The final cleanup helper completed and verified its evidence, but its wrapper then incorrectly checked native LASTEXITCODE after a PowerShell helper. The completed journal was independently verified; no deletion was repeated. The original pre-cleanup measurement was not persisted, so the report records an upper bound (post-cleanup bytes plus journalled removed bytes), not a fabricated exact before measurement. Cleanup added retained evidence/journal files, making that bound conservative.
+
+See [execution evidence](evidence/IMP-016-increment-4-2026-11-24.md) and
+[machine audit](evidence/IMP-016-increment-4-2026-11-24.audit.json).
+
 ## 2026-11-24 IMP-016 increment-3 final delivery
 
 All ten final commands passed before compaction. Ordinary engine/process

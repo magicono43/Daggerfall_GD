@@ -1,5 +1,25 @@
 # Actor input profile
 
+## IMP-016 death and projections, 2026-11-24
+
+`death.json` and `vitals.json` are project-authored CC0-1.0 policies encoding
+approved CHAR-023/UI-006 defaults and bounded supported presentation choices.
+They redistribute no classic sound/movie/texture bytes. Survival's 1/10 fraction
+with minimum one intentionally corrects zero-health small-maximum prevention;
+it is approved policy, not original-executable parity. Default fade/total return
+are 2/3 presentation seconds. Default eight compact effects, coloured bars,
+280-pixel width, generic diamond and camera lowering distances are project
+engineering defaults, all within the documented supported interfaces.
+
+Default audio `classic-ordinal-405` is grounded in read-only local DFU
+`Assets/Scripts/Game/PlayerDeath.cs:31`, `SoundClips.cs:503` and
+`API/SndFile.cs:GetSound`: WoodElfMalePain1 is 405 and sounds use physical BSA
+ordinals, not directory record IDs. The existing classic reader retains both
+identities. DFU's MIT notice remains at `scripts/rule/DFU_LICENSE.txt`.
+Race/form-dependent voice selection is not inferred. ANIM0012.VID is requested
+from the original external source once through the existing AV consumer;
+unavailable playback is reported Failed, never substitute success or death text.
+
 `profile.json` is project-authored structural format metadata, created 2026-11-21
 for IMP-009 increment 1. Dedicated to the public domain under CC0-1.0. It contains
 no copied classic payload, DFU biography text, gameplay values or executable code.

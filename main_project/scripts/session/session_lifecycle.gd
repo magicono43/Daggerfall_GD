@@ -42,6 +42,9 @@ var _finishing := false
 var _formula_bindings: Dictionary = {}
 var _vital_bindings: Dictionary = {}
 var _activity_bindings: Dictionary = {}
+var _prevention_binding: Dictionary = {}
+var _effects_binding: WeakRef
+var player_actor := ""
 
 func _init(material_provider: Callable = Callable()) -> void:
 	randomness = preload("res://scripts/rule/session_randomness.gd").new(gates, material_provider)
@@ -204,6 +207,9 @@ func _cleanup_scope(scope: String, purpose: String) -> void:
 		_formula_bindings.clear()
 		_vital_bindings.clear()
 		_activity_bindings.clear()
+		_prevention_binding.clear()
+		_effects_binding = null
+		player_actor = ""
 		retiring.emit(scope) # UI disconnects and retires session-owned requests first.
 		gates.retire(scope)
 	var checked: Dictionary = provider.cleanup(cleanup_ticket.duplicate(true), scope)
@@ -327,6 +333,28 @@ func complete_readiness(value: Dictionary, result: Dictionary) -> bool:
 	_formula_bindings = formula_bindings.bindings
 	_vital_bindings = vital_bindings.bindings
 	_activity_bindings = activity_bindings.bindings
+	_prevention_binding = {}
+	_effects_binding = null
+	player_actor = ""
+	for service: Dictionary in result.services:
+		if service.has("disclosed_effects"):
+			if typeof(service.disclosed_effects) != TYPE_BOOL or (service.disclosed_effects and (_effects_binding != null or service.owner != "MAGIC" or service.lifetime != "session" or typeof(service.get("ready")) != TYPE_BOOL or not service.ready or not service.provider.has_method("disclosed_effects") or not service.provider.has_method("disclosed_effects_revision"))):
+				_commit({"ready":false,"phase":"replacement"},"Malformed disclosed-effect binding.")
+				_cleanup_scope(_state.session,"failure")
+				return true
+			if service.disclosed_effects: _effects_binding = weakref(service.provider)
+		if service.has("player_actor"):
+			if service.provider != actors or not service.player_actor is String or not actors.vital_projection(_state.session,service.player_actor).ok:
+				_commit({"ready":false,"phase":"replacement"},"Malformed player HUD binding.")
+				_cleanup_scope(_state.session,"failure")
+				return true
+			player_actor = service.player_actor
+		if service.has("death_prevention"):
+			if not _prevention_binding.is_empty() or service.owner not in ["FACT","MAGIC","ITEM","CHAR"] or service.lifetime != "session" or typeof(service.get("ready")) != TYPE_BOOL or not service.ready or not service.death_prevention is String or not preload("res://scripts/mod/package_library.gd").valid_id(service.death_prevention) or not service.provider.has_method("lethal_sources") or not service.provider.has_method("lethal_evaluate") or not service.provider.has_method("lethal_consume"):
+				_commit({"ready":false,"phase":"replacement"},"Malformed prevention-directory binding.")
+				_cleanup_scope(_state.session,"failure")
+				return true
+			_prevention_binding = {"id":service.death_prevention,"owner":weakref(service.provider)}
 	randomness.suspend_operation(false)
 	_death_authority = result.get("death_authority")
 	_commit({"status": "alive", "ready": true, "phase": "ready"}, "session ready", "session_restored" if _operation.intent.mode == "load" else "new_session_ready")
@@ -440,6 +468,41 @@ func confirm_death(scope: String, authority: RefCounted) -> bool:
 		return false # Actual CHAR provider must own this entry authority at integration.
 	_commit({"status": "dead", "ready": false}, "authoritative death", "confirmed_death")
 	return true
+
+func lethal_consumer(scope: String, owner: Object, id: String) -> bool:
+	if not is_instance_valid(owner) or scope.is_empty() or scope != _state.session or _state.status not in ["alive","dead"] or not gates.safe or busy() or _publishing or _finishing: return false
+	var binding: Dictionary = _vital_bindings.get(owner.get_instance_id(),{})
+	return not binding.is_empty() and binding.owner.get_ref() == owner and binding.id == id
+
+func lethal_resolution_current(scope: String, authority: RefCounted, allow_dead := false) -> bool:
+	return authority == actors and not scope.is_empty() and scope == _state.session and (_state.status == "alive" or (allow_dead and _state.status == "dead")) and gates.safe and not busy() and not _publishing and not _finishing
+
+func prevention_provider(scope: String) -> Dictionary:
+	if scope != _state.session or _state.status != "alive" or _prevention_binding.is_empty(): return {}
+	var owner: Object = _prevention_binding.owner.get_ref()
+	return {} if owner == null else {"id":_prevention_binding.id,"provider":owner}
+
+func confirm_actor_death(scope: String, authority: RefCounted, actor: String, event: Dictionary) -> bool:
+	# This narrow authority belongs exclusively to the lifecycle's composed CHAR.
+	if authority != actors or scope != _state.session or _state.status != "alive": return false
+	if not actors.death_fact_current(scope,actor,event): return false
+	if _publishing or _finishing: return false
+	_commit({"status":"dead","ready":false},"authoritative CHAR death","confirmed_death")
+	return true
+
+func disclosed_effects(scope: String, actor: String) -> Dictionary:
+	if scope != _state.session or scope.is_empty() or _effects_binding == null: return {}
+	var provider: Object = _effects_binding.get_ref()
+	if provider == null or not provider.has_method("disclosed_effects"): return {}
+	var result: Variant = provider.disclosed_effects(scope,actor)
+	return result.duplicate(true) if result is Dictionary else {}
+
+func disclosed_effects_revision(scope: String, actor: String) -> int:
+	if scope != _state.session or scope.is_empty() or _effects_binding == null: return -1
+	var provider: Object = _effects_binding.get_ref()
+	if provider == null or not provider.has_method("disclosed_effects_revision"): return -1
+	var revision: Variant = provider.disclosed_effects_revision(scope,actor)
+	return revision if typeof(revision) == TYPE_INT and revision >= 0 and revision <= 1000000000 else -1
 
 func _plain_data(value: Variant, owner_ticket := false) -> bool:
 	if value is Dictionary:

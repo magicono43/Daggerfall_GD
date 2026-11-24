@@ -163,7 +163,9 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	shell.render()
 	check("native actual menu lock",true,mods.locked)
 	check("native committed MIDI resolves",true,media.resolve("asset.native.song","midi").ok)
+	var locked_preparation := [data.timings.prepare_serial,controller.providers.formulas._serial]
 	check("native post-menu rebuild rejects","locked",rebuild().kind)
+	check("native locked rebuild never prepares",locked_preparation,[data.timings.prepare_serial,controller.providers.formulas._serial])
 	var preferences: RefCounted = controller.providers.media_preferences
 	var music: Node = shell.session_shell.music_playback
 	var music_events: Array = []

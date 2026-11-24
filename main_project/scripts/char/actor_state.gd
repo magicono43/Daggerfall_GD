@@ -21,11 +21,14 @@ var _vital_holds: Dictionary = {}
 const Vital = preload("res://scripts/char/vital_records.gd")
 const Activity = preload("res://scripts/char/activity_owner.gd")
 var activity: RefCounted
+var lethal: RefCounted
+signal lethal_committed(outcome: Dictionary)
 signal activity_committed(outcome: Dictionary)
 
 func _init(core: SessionLifecycle) -> void:
 	_core = weakref(core)
 	activity = Activity.new(self)
+	lethal = preload("res://scripts/char/lethal_events.gd").new(self)
 
 func fail(reason: String, kind := "invalid_actor") -> Dictionary:
 	return {"ok":false,"kind":kind,"reason":reason}
@@ -292,6 +295,7 @@ func _publish(record: Dictionary, derived: Dictionary, sources: Array) -> Dictio
 
 func reconcile(scope: String, ticket: Dictionary, actor: String, revision: int, content: int) -> Dictionary:
 	if _vital_busy: return fail("Vital publication in progress.","busy")
+	if _actors.has(actor) and not _actors[actor].record.get("lethal",{}).get("active",{}).is_empty(): return fail("Source reconciliation waits for lethal settlement.","busy")
 	var begun := _begin(scope,ticket,actor)
 	if not begun.ok: return begun
 	if not _actors.has(actor) or _actors[actor].record.session != scope or _actors[actor].record.revision != revision or content != _content: return _end(fail("Stale actor/session/content revision.","stale"))
@@ -319,10 +323,31 @@ func reconcile(scope: String, ticket: Dictionary, actor: String, revision: int, 
 		_vital_busy = false
 	return published
 
+func _restore_headers(record: Dictionary) -> bool:
+	if not record.has_all(["schema","actor","session","content","career","identity","choices","attributes","skills","base_health","current","breath","progression","obligations","required_sources","revision"]): return false
+	if not record.current is Dictionary or record.current.size() != 3 or not record.current.has_all(["health","fatigue","magicka"]): return false
+	for amount: Variant in record.current.values():
+		if not _number(amount): return false
+	if not record.progression is Dictionary or not record.progression.get("practice") is Dictionary or not _clock(record.progression.get("activity_baseline")): return false
+	if not record.breath is Dictionary or record.breath.size() != 3 or not record.breath.has_all(["state","reserve","policy"]) or not record.obligations is Array or not record.required_sources is Dictionary: return false
+	if record.has("vitals") and not record.vitals is Dictionary: return false
+	if record.has("lethal") and not record.lethal is Dictionary: return false
+	if record.has("activity"):
+		if not record.has("vitals") or not record.activity is Dictionary: return false
+		for key in ["receipts","episodes","settlements"]:
+			if not record.activity.get(key) is Dictionary: return false
+	return true
+
 func reconstruct(scope: String, ticket: Dictionary, input: Dictionary, sources: Array) -> Dictionary:
 	var begun := _begin(scope,ticket,input.get("actor",""))
 	if not begun.ok: return begun
-	if not _plain(input) or not ((input.size() == 16 and input.get("schema") == SCHEMA) or (input.size() == 17 and input.get("schema") == "actor-state-v2" and Vital.valid(input)) or (input.size() == 18 and input.get("schema") == "actor-state-v3" and Vital.valid(input) and activity.valid(input))) or input.get("session") != scope or input.get("content") != _content or not _identity(input.get("identity")) or not _choices(input.get("choices")) or not _number(input.get("revision"),1,MAXIMUM) or not _number(input.get("base_health"),1,MAXIMUM) or not _permanent(input.get("attributes"),_policy.value.attributes) or not _permanent(input.get("skills"),_policy.value.skills): return _end(fail("Complete compatible authoritative record required."))
+	if not _plain(input) or not _restore_headers(input): return _end(fail("Complete typed authoritative record headers required."))
+	# Capture before any external source query can mutate the caller's request.
+	input = input.duplicate(true)
+	var compatible: bool = (input.size() == 16 and input.get("schema") == SCHEMA) or (input.size() == 17 and input.get("schema") == "actor-state-v2" and Vital.valid(input)) or (input.size() == 18 and input.get("schema") == "actor-state-v3" and Vital.valid(input) and activity.valid(input))
+	if input.get("schema") == "actor-state-v4": compatible = input.size() == 17+int(input.has("vitals"))+int(input.has("activity")) and lethal.valid(input) and (not input.has("vitals") or Vital.valid(input)) and (not input.has("activity") or activity.valid(input))
+	if not _plain(input) or not compatible or input.get("session") != scope or input.get("content") != _content or not _identity(input.get("identity")) or not _choices(input.get("choices")) or not _number(input.get("revision"),1,MAXIMUM) or not _number(input.get("base_health"),1,MAXIMUM) or not _permanent(input.get("attributes"),_policy.value.attributes) or not _permanent(input.get("skills"),_policy.value.skills): return _end(fail("Complete compatible authoritative record required."))
+	if _actors.has(input.actor) and _actors[input.actor].record.has("lethal") and _actors[input.actor].record.lethal != input.get("lethal"): return _end(fail("Reconstruction cannot erase lethal progress.","busy"))
 	if _vital_busy or (_actors.has(input.actor) and _actors[input.actor].record.has("vitals") and _actors[input.actor].record.vitals != input.get("vitals")): return _end(fail("Reconstruction cannot erase retained mutations or replace an active actor.","busy"))
 	if _actors.has(input.actor) and _actors[input.actor].record.has("activity") and _actors[input.actor].record.activity != input.get("activity"): return _end(fail("Reconstruction cannot erase activity debt or episodes.","busy"))
 	# Quiescent replacement requires a CORE initialization ticket; ready-session
@@ -334,7 +359,7 @@ func reconstruct(scope: String, ticket: Dictionary, input: Dictionary, sources: 
 	var resolved := _resolve(sources,{})
 	if not resolved.ok: return _end(resolved)
 	if _source_receipts(resolved.sources) != input.required_sources: return _end(fail("Required reconstructed source receipts differ.","source_unavailable"))
-	var record := input.duplicate(true)
+	var record := input # Already captured before validation/source callbacks.
 	var derived := _derive(record,resolved.sources,career)
 	if not derived.ok: return _end(derived)
 	if not record.get("current") is Dictionary or record.current.size() != 3: return _end(fail("Saved current vital pools required."))
@@ -364,6 +389,22 @@ func vital_projection(scope: String, actor: String) -> Dictionary:
 	if core == null or core.snapshot().session != scope or not _actors.has(actor) or _actors[actor].record.session != scope: return fail("Unknown or retired actor.","stale")
 	var entry: Dictionary = _actors[actor]
 	return {"ok":true,"actor":actor,"session":scope,"content":entry.record.content,"revision":entry.record.revision,"current":entry.record.current.duplicate(),"maximum":entry.derived.limits.duplicate(),"units":entry.derived.units.duplicate(),"pending_outcomes":Activity.unresolved(entry.record),"zero_health":entry.record.current.health == 0,"zero_fatigue":entry.record.current.fatigue == 0}
+
+func presentation_projection(scope: String, actor: String) -> Dictionary:
+	var view := vital_projection(scope,actor)
+	if not view.ok: return view
+	var record: Dictionary = _actors[actor].record
+	var holding: bool = record.get("activity",{}).get("breath",{}).get("holding",false)
+	var reserve: int = record.breath.reserve if record.breath.reserve != null else 0
+	var gradual: bool = record.breath.policy is Dictionary and record.breath.policy.get("mode") == "gradual"
+	view["breath"] = {"reserve":reserve,"holding":holding,"visible":holding or (gradual and reserve < view.maximum.breath)}
+	return view
+
+func death_fact_current(scope: String, actor: String, event: Dictionary) -> bool:
+	if not _actors.has(actor): return false
+	var record: Dictionary = _actors[actor].record
+	var state: Dictionary = record.get("lethal",{})
+	return record.session == scope and record.current.health == 0 and not event.is_empty() and state.get("dead") == event and state.get("events",{}).get(event.get("caller"),{}).get(event.get("operation"),{}).get("phase") == "dead"
 
 func retire_scope(scope: String) -> void:
 	for actor in _actors.keys():
@@ -396,6 +437,7 @@ func _sync_vital_hold(actor: String) -> void:
 	var record: Dictionary = _actors[actor].record
 	var pending: bool = record.current.health == 0 or record.current.fatigue == 0
 	pending = pending or Activity.unresolved(record) > 0
+	pending = pending or not record.get("lethal",{}).get("active",{}).is_empty() or not record.get("lethal",{}).get("dead",{}).is_empty()
 	if pending and not _vital_holds.has(actor):
 		var core: SessionLifecycle = _core.get_ref()
 		# Install sentinel before changed observers can reenter. Mutations stay busy.
@@ -412,7 +454,7 @@ func _record_transitions(record: Dictionary, before: Dictionary, context: Dictio
 	for pool in ["health","fatigue","magicka"]:
 		if before[pool] <= 0 or record.current[pool] != 0: continue
 		if not record.has("vitals"):
-			record.schema = "actor-state-v2"
+			record.schema = "actor-state-v4" if record.has("lethal") else "actor-state-v2"
 			record["vitals"] = Vital.empty()
 		if record.vitals.next_transition >= MAXIMUM or record.vitals.transitions.size() >= 4096: return fail("Transition identity/retention exhausted.","overflow")
 		record.vitals.next_transition += 1
@@ -449,6 +491,11 @@ func vital_intake(owner: Object, raw: Variant) -> Dictionary:
 	return result
 
 func _intake(owner: Object, request: Dictionary) -> Dictionary:
+	# Technical lethal redelivery is allowed after CORE confirmed this actor dead.
+	# Admission still verifies the original bound consumer and current scope.
+	if _actors.has(request.actor) and _actors[request.actor].record.get("lethal",{}).get("events",{}).get(request.caller,{}).has(request.operation):
+		if not _core.get_ref().lethal_consumer(request.session,owner,request.caller): return fail("Retired lethal consumer.","stale")
+		return lethal.resolve(request)
 	if not _vital_context(owner,request): return fail("Unbound or stale vital consumer/session/content/actor.","stale")
 	var entry: Dictionary = _actors[request.actor]
 	var record: Dictionary = entry.record
@@ -457,6 +504,7 @@ func _intake(owner: Object, request: Dictionary) -> Dictionary:
 	var retained: Dictionary = record.get("vitals",{}).get("receipts",{}).get(request.caller,{}).get(request.operation,{})
 	if not retained.is_empty():
 		return retained.result.duplicate(true) if retained.request == request else fail("Operation identity reused with changed intent.","identity_conflict")
+	if not record.get("lethal",{}).get("active",{}).is_empty(): return fail("Lethal resolution pending.","busy")
 	if record.revision != request.revision: return fail("Obsolete actor revision.","stale")
 	var monitor := preload("res://scripts/rule/formula_error_monitor.gd").new()
 	OS.add_logger(monitor)
@@ -481,11 +529,11 @@ func _intake(owner: Object, request: Dictionary) -> Dictionary:
 			# Both operands <=1e9: intermediate <=2e9, safely signed int64.
 			after = mini(maximum,before+request.amount)
 		"fill": after = maximum
-	if request.pool == "health" and before > 0 and after == 0: return lethal_boundary(request.session,request.actor,request.operation,request.attribution)
+	if request.pool == "health" and before > 0 and after == 0: return lethal.resolve(request)
 	var candidate: Dictionary = record.duplicate(false)
 	candidate.current = record.current.duplicate()
 	candidate.current[request.pool] = after
-	candidate.schema = "actor-state-v3" if record.has("activity") else "actor-state-v2"
+	candidate.schema = "actor-state-v4" if record.has("lethal") else ("actor-state-v3" if record.has("activity") else "actor-state-v2")
 	# Copy only the small transition set when a new transition is possible.
 	# The receipt index is owner-maintained and never cloned for a point write.
 	var state: Dictionary = record.get("vitals",Vital.empty())
@@ -513,8 +561,21 @@ func acknowledge_vital(owner: Object, raw: Variant) -> Dictionary:
 	if not Vital.request_valid(raw): return fail("Original complete request required.")
 	var request: Dictionary = raw.duplicate(true)
 	if _vital_busy or not _operation.is_empty(): return fail("CHAR publication in progress.","busy")
+	if _actors.has(request.actor) and _actors[request.actor].record.get("lethal",{}).get("events",{}).get(request.caller,{}).has(request.operation):
+		if not _core.get_ref().lethal_consumer(request.session,owner,request.caller): return fail("Retired lethal consumer.","stale")
+		var e: Dictionary = _actors[request.actor].record.lethal.events[request.caller][request.operation]
+		if e.request != request: return fail("Changed lethal intent.","identity_conflict")
+		if e.phase != "prevented": return fail("Lethal event cannot continue.","unavailable")
+		if not e.acknowledged:
+			var lethal_record: Dictionary = _actors[request.actor].record
+			if not lethal_record.lethal.active.is_empty() and lethal_record.revision >= MAXIMUM-1: return fail("Revision reserved for pending lethal settlement.","overflow")
+			if lethal_record.revision >= MAXIMUM: return fail("Actor revision exhausted.","overflow")
+			e.acknowledged = true
+			lethal_record.revision += 1
+		return {"ok":true,"phase":"acknowledged","operation":request.operation,"result":lethal.outcome(e)}
 	if not _vital_context(owner,request): return fail("Obsolete consumer lifetime.","stale")
 	var record: Dictionary = _actors[request.actor].record
+	if not record.get("lethal",{}).get("active",{}).is_empty() and record.revision >= MAXIMUM-1: return fail("Revision reserved for pending lethal settlement.","overflow")
 	var receipt: Dictionary = record.get("vitals",{}).get("receipts",{}).get(request.caller,{}).get(request.operation,{})
 	if receipt.is_empty() or receipt.request != request: return fail("Unknown or changed operation.")
 	if not receipt.result.continuation_allowed and not (receipt.result.ok and Activity.settled(record,request.caller,request.operation)): return fail("Intake cannot continue; rejected or unresolved outcome.","unavailable")
@@ -529,15 +590,27 @@ func activity_intake(owners: Dictionary, raw: Variant) -> Dictionary:
 	var r: Dictionary = raw.duplicate(true)
 	var begun := _begin(r.session,{},r.actor)
 	if not begun.ok: return begun
+	var was_dead: bool = not _actors.get(r.actor,{}).get("record",{}).get("lethal",{}).get("dead",{}).is_empty()
 	_vital_busy = true
 	var result: Dictionary = activity.intake(owners,r)
+	if not was_dead and _actors.has(r.actor) and _actors[r.actor].record.session == r.session and not _actors[r.actor].record.get("lethal",{}).get("dead",{}).is_empty():
+		if _core.get_ref().snapshot().status == "alive":
+			var dead: Dictionary = _actors[r.actor].record.lethal.dead
+			var notice: Dictionary = lethal.outcome(_actors[r.actor].record.lethal.events[dead.caller][dead.operation])
+			_core.get_ref().confirm_actor_death(r.session,self,r.actor,dead)
+			if _actors.has(r.actor) and _actors[r.actor].record.session == r.session:
+				lethal_committed.emit(notice)
+				if _actors.has(r.actor) and _actors[r.actor].record.session == r.session: activity_committed.emit(result.duplicate(true))
 	_vital_busy = false
 	return _end(result)
 
 func lethal_boundary(_scope: String, _actor: String, _operation_id: String, _attribution: Dictionary) -> Dictionary:
-	# Shared CHAR-018/023 handoff. Increment 4 must supply prevention/death;
-	# no caller may write a provisional health zero or select survival here.
-	return fail("Required CHAR-023 lethal owner unavailable; health unchanged.","unavailable")
+	if not _actors.has(_actor): return fail("Retired exhaustion actor.","stale")
+	var record: Dictionary = _actors[_actor].record
+	var retained: Dictionary = record.get("lethal",{}).get("events",{}).get("char-exhaustion",{}).get(_operation_id,{})
+	var request: Dictionary = retained.request.duplicate(true) if not retained.is_empty() else {"schema":"vital-intake-v1","session":_scope,"actor":_actor,"caller":"char-exhaustion","operation":_operation_id,"content":record.content,"revision":record.revision,"action":"drain","pool":"health","unit":"points","amount":record.current.health,"attribution":_attribution.duplicate(true)}
+	if request.attribution != _attribution: return fail("Changed exhaustion attribution.","identity_conflict")
+	return lethal.resolve(request)
 
 func activity_projection(scope: String, actor: String, caller := "", operation := "", episode := "") -> Dictionary:
 	var view := vital_projection(scope,actor)

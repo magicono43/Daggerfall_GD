@@ -1,5 +1,11 @@
 # View and cursor contract — IMP-011 increment 3
 
+IMP-016 increment 4 adds `death_lower(session,progress)` and
+`clear_death_view(session)`. Only the same CORE-confirmed dead scope may lower
+the cosmetic camera, by up to 0.65 metres with a ray-clipped 0.05-metre surface
+clearance. This neither changes physical pose nor assigns gameplay facing.
+Missing camera is harmless; retirement restores only this owned offset.
+
 `SessionShell.view` is the application-composed MOVE view/cursor owner. Its
 `ResolvedLookCamera` is the actual current Camera3D. Startup's normal unhandled
 input route admits mouse motion after GUI refusal; the existing action owner

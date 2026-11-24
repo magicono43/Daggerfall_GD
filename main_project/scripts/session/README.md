@@ -1,5 +1,15 @@
 # Session shell interfaces
 
+IMP-016 increment 4 adds scoped prevention-directory and disclosed-effect
+bindings, CHAR's checked actor/event death confirmation, the real
+[vitals/effects view](../char/VITALS_VIEW.md) and an independent
+[death observer/return](../char/DEATH.md). A provider's CHAR service may declare
+`player_actor` for the stock HUD. Initial presentation never decides death.
+The stock session provider invokes the shell's real classic video consumer for
+ANIM0012.VID from the selected published root through an optional read, without
+adding a startup requirement; missing/failed playback remains classified Failed
+bypass. No ordinary death-state SAVE or complete IMP-035 readiness is implied.
+
 IMP-016 increment 3 adds requester-scoped `actor_activity:{id,roles}` service
 declarations. CORE validates actual ready session Objects and allowed owner
 domains, with weak bindings retired alongside vital/formula bindings. The

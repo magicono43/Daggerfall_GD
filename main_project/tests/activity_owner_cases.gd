@@ -17,6 +17,7 @@ var lethal := Provider.new("controlled-lethal-continuation","CHAR",["lethal"])
 var vital := Consumer.new()
 var dense_calls: Array = [0]
 var collapse_source := preload("res://tests/controlled_actor_source.gd").new()
+var prevention := preload("res://tests/controlled_prevention.gd").new()
 
 func check(label: String, expected: Variant, actual: Variant) -> void:
 	suite.check("activity owner "+label,expected,actual)
@@ -70,7 +71,7 @@ func run(test_suite: RefCounted, shell: Control, fixture: Dictionary) -> Diction
 	for index in 256: dense.contributions.append({"id":"dense-"+str(index),"kind":"skill","target":"medical","value":0})
 	var dense_bindings: Array = []
 	for index in 16: dense_bindings.append({"id":"dense-source-"+str(index),"provider":dense})
-	for id in ["active","split","swimmer","argonian","jump","safe","partial","danger","water","unrecoverable","breath","reentrant","swim-zero","swim-hundred","practice-cap","interrupted","event-failure","point-dense","source-collapse","activity-edge","rapid-general","rapid-light-miss","rapid-darkness","queued"]:
+	for id in ["active","split","swimmer","argonian","jump","safe","partial","danger","water","unrecoverable","breath","reentrant","swim-zero","swim-hundred","practice-cap","interrupted","event-failure","point-dense","source-collapse","activity-edge","rapid-general","rapid-light-miss","rapid-darkness","queued","prevention-positive"]:
 		var capture: Dictionary = suite.captured(id)
 		if id == "swim-zero": capture.skills.swimming = 0
 		if id == "swim-hundred": capture.skills.swimming = 100
@@ -96,6 +97,7 @@ func run(test_suite: RefCounted, shell: Control, fixture: Dictionary) -> Diction
 		actors.vital_transition.disconnect(observe)
 		check("restore emits no depletion",[],notices)
 	var services: Array = [actors.service_binding(scope),vital.binding("activity-vitals","CHAR")]
+	services.append(prevention.binding())
 	for provider in [motion,clock,traits,threat,recovery,resolution,lethal]: services.append(provider.binding())
 	core.complete_baseline(ticket,{"ok":true,"services":services})
 	core.complete_readiness(ticket,{"ok":true,"services":services})
@@ -103,6 +105,9 @@ func run(test_suite: RefCounted, shell: Control, fixture: Dictionary) -> Diction
 	check("focused activity MOD hook selected","actor.formula",core.formulas.active().winners["char.activity-rate"])
 	if fixture.has("restore_from"):
 		var before: Dictionary = core.randomness.snapshot()
+		var restored_deaths: Array = []
+		var observe_death := func(value: Dictionary): restored_deaths.append(value)
+		actors.lethal_committed.connect(observe_death)
 		for id: String in restored:
 			var record: Dictionary = restored[id]
 			var matches := true
@@ -111,10 +116,13 @@ func run(test_suite: RefCounted, shell: Control, fixture: Dictionary) -> Diction
 					var receipt: Dictionary = record.activity.receipts[caller][operation]
 					matches = matches and receipt.result == apply(receipt.request)
 			check("restore retained retries "+id,true,matches)
+		actors.lethal_committed.disconnect(observe_death)
+		check("restore retained queries emit no new death",[],restored_deaths)
+		check("restored dead query never starts presentation","idle",shell.session_shell.death_view.phase)
 		check("restore query retry consumes no RNG",before,core.randomness.snapshot())
 		check("restore resolved Medical once",1,view("safe").practice.medical)
 		check("restore pending incapacitation",1,view("unrecoverable").unresolved)
-		check("restore pending water health",31,view("water").current.health)
+		check("restore pending water health",3,view("water").current.health)
 		check("restore pending gates",true,core.gates.blocked("save"))
 		retire()
 		return {"source":"fresh process owner reconstruction, real composed CHAR; not native SAVE"}
@@ -398,16 +406,31 @@ func run(test_suite: RefCounted, shell: Control, fixture: Dictionary) -> Diction
 	check("malformed threat stays unresolved","admitted",episode("danger").phase)
 	threat.malformed = false
 	threat.threat = true
-	check("threat lethal unavailable","lethal-unavailable",episode("danger").phase)
+	check("threat lethal unavailable","lethal-pending",episode("danger").phase)
 	check("threat health unchanged",31,view("danger").current.health)
 	threat.threat = false
 	drain("water",1000000000)
 	motion.swimming = true
-	check("surface swimming lethal unavailable","lethal-unavailable",episode("water").phase)
+	check("surface swimming lethal unavailable","lethal-pending",episode("water").phase)
 	check("water no safe hour",0,view("water").practice.medical)
-	check("controlled prevention-zero continuation","incapacitated",episode("water","1","prevention-continuation").phase)
+	prevention.ready = true
+	check("controlled prevention-zero continuation","incapacitated",episode("water").phase)
 	check("prevention zero cannot replay lethal","incapacitated",episode("water").phase)
 	check("prevention zero no safe fallback",0,view("water").practice.medical)
+	var positive_depletion := drain("prevention-positive",1000000000)
+	var positive_fill: Dictionary = drain("prevention-positive",0).request
+	positive_fill.operation += "-fill"
+	positive_fill.revision = view("prevention-positive").revision
+	positive_fill.action = "fill"
+	vital.active = positive_fill.duplicate(true)
+	actors.vital_intake(vital,positive_fill)
+	motion.swimming = false
+	threat.threat = true
+	var positive := episode("prevention-positive")
+	check("prevention positive fatigue checked settlement",[true,"resolved","prevented"],[positive.ok,positive.phase,positive.lethal_phase])
+	check("prevention settled original vital acknowledges",true,actors.acknowledge_vital(vital,positive_depletion.request).ok)
+	check("prevention positive record validates",true,actors.activity.valid(actors.projection(scope,"prevention-positive").record))
+	threat.threat = false
 	check("unresolved gate remains",true,core.gates.blocked("save"))
 	var snapshot: Dictionary = actors.projection(scope,"active").record
 	check("activity record validates",true,actors.activity.valid(snapshot))
@@ -432,7 +455,23 @@ func run(test_suite: RefCounted, shell: Control, fixture: Dictionary) -> Diction
 	var checkpoint_file := FileAccess.open(str(fixture.sandbox).path_join("activity-checkpoint.bin"),FileAccess.WRITE)
 	checkpoint_file.store_var(checkpoint_records)
 	checkpoint_file.close()
-	retire()
+	prevention.sources = []
+	var death_notices: Array = []
+	var coherent_death := func(outcome: Dictionary):
+		if outcome.get("phase") == "dead": death_notices.append(core.snapshot().status)
+	actors.activity_committed.connect(coherent_death)
+	var dead := episode("danger")
+	actors.activity_committed.disconnect(coherent_death)
+	check("death notification observes coherent CORE state",["dead"],death_notices)
+	check("exhaustion real lethal death",["exhaustion-outcome-v2","dead","dead","dead"],[dead.schema,dead.phase,dead.lethal_phase,core.snapshot().status])
+	check("dead exhaustion preserves pending fatigue",1,view("danger").unresolved)
+	check("dead exhaustion complete schema validates",true,actors.activity.valid(actors.projection(scope,"danger").record))
+	checkpoint_records["danger"] = actors.projection(scope,"danger").record
+	checkpoint_file = FileAccess.open(str(fixture.sandbox).path_join("activity-checkpoint.bin"),FileAccess.WRITE)
+	checkpoint_file.store_var(checkpoint_records)
+	checkpoint_file.close()
+	await shell.get_tree().create_timer(3.2).timeout
+	check("exhaustion actual death return completes","",core.snapshot().session)
 	check("retired activity rejected","stale",apply(r).kind)
 	return {"source":"controlled MOVE/TIME/traits/threat/restrictions; real composed CHAR/CORE/DATA/RULE/RNG","safe_record":safe_state,"activity_record":snapshot,"dense_activity_1000_usec":integration_usec,"retained_activity_2000_usec":lookup_usec,"dense_sources":16,"contributions_per_source":256}
 

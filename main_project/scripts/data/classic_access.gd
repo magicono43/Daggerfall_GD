@@ -218,6 +218,18 @@ func video_source(file: String) -> Dictionary:
 		return {"ok":false,"kind":"source_unavailable","reason":"An active, explicitly declared VID source is required."}
 	return _active[file.to_upper()].video_source()
 
+func death_video_source() -> Dictionary:
+	# CORE-008 explicitly consumes this optional original after teardown. It is
+	# not a required startup manifest entry and cannot make missing videos block
+	# source/menu readiness. No directory discovery or alternate movie fallback.
+	if not ready(): return {"ok":false,"kind":"before_readiness","reason":"Published classic source required for death video."}
+	var reader := MediaReader.new("classic-vid-v1")
+	var checked: Dictionary = reader.initialize(_active_source.path_join("ANIM0012.VID"))
+	if not checked.ok: return checked
+	var source: Dictionary = reader.video_source()
+	reader.close()
+	return source
+
 func dispose() -> void:
 	discard_prepared()
 	for reader: RefCounted in _active.values():

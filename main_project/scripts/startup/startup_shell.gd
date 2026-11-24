@@ -467,6 +467,7 @@ func _process(_delta: float) -> void:
 	update_logging_warning()
 	if session_shell != null:
 		session_shell.view.advance(_delta)
+		session_shell.advance_actor_presentation(_delta)
 		var dispatched: Dictionary = session_shell.windows.dispatch()
 		if dispatched.get("action") == "options" and dispatched.kind == "dispatch":
 			if not close_editor():

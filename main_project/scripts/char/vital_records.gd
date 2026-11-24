@@ -100,7 +100,12 @@ static func valid(record: Dictionary) -> bool:
 				var source_receipt: Variant = context.sources[source]
 				if not Paths.valid_id(source) or not source_receipt is Dictionary or source_receipt.size() != 2 or not F.integer(source_receipt.get("revision"),0,LIMIT) or not hash_valid(source_receipt.get("sha256")): return false
 		elif context.get("kind") == "activity":
-			var receipt: Dictionary = record.get("activity",{}).get("receipts",{}).get(context.get("caller"),{}).get(context.get("operation"),{})
+			var activity: Variant = record.get("activity")
+			if not activity is Dictionary or not activity.get("receipts") is Dictionary: return false
+			var ledger: Variant = activity.receipts.get(context.get("caller"),{})
+			if not ledger is Dictionary: return false
+			var receipt: Variant = ledger.get(context.get("operation"),{})
+			if not receipt is Dictionary or not receipt.get("request") is Dictionary or not receipt.get("result") is Dictionary: return false
 			if context.size() != 4 or receipt.is_empty() or context.get("attribution") != receipt.request.source or t.pool != "fatigue" or receipt.result.before != t.before or receipt.result.after != 0: return false
 		else: return false
 	return pending_count == s.pending_count and required_transitions.values().all(func(found): return found)
