@@ -1,5 +1,12 @@
 # Layout structural inputs — v1
 
+IMP-013 increment 3 permits optional complete
+`location_assembly.placement_policy`, validated by `placement_policy.gd` through
+the existing DATA/MOD/loose transaction. The default is project-authored
+`content/layouts/placement.json`; LOC captures its resolved small projection once
+per preparation. See [MOVE placement](../move/PLACEMENT.md) for units, envelopes,
+anchor conversion and ownership. This definition qualifies no physical pose.
+
 IMP-013 increment 2 adds optional validated `location_assembly.doorways` using
 `location-doorways-v1`. Complete interior/link declarations and source guards use
 the existing publication/MOD/loose precedence and source locks. See

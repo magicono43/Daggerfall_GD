@@ -1,5 +1,12 @@
 # Dungeon marker handoff — IMP-061 increment 3
 
+IMP-013 increment 3 now composes a real [MOVE placement authority](../move/PLACEMENT.md)
+using this consumer boundary for qualified RMB doorway handoffs. RDB marker
+selection is unchanged; this slice requires doorway aperture/physical context,
+so it does not qualify RDB arrival execution, ordinary Privateer's Hold assembly,
+WORLD geography, native SAVE or full story entry. Stock access and required
+gameplay providers remain unavailable.
+
 IMP-013 increment 2 now reuses this scoped `marker_candidate` /
 `check_marker_candidate` consumer boundary for qualified RMB doorway links in
 the single composed LOC owner. See [LOCATION_DOORWAYS.md](LOCATION_DOORWAYS.md).

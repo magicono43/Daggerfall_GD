@@ -32,6 +32,7 @@ var _ui_controller_down: Dictionary = {}
 var _ui_triggers: Dictionary = {}
 var _keyboard_layout := -1
 var dungeon_assembly: Node
+var placement: Node3D
 
 func refresh_control_labels() -> void:
 	if windows.top().get("window") != "controls" or DisplayServer.get_name() == "headless": return
@@ -155,6 +156,16 @@ func synchronize_startup() -> void:
 		host.add_child(dungeon_assembly)
 		core.retiring.connect(dungeon_assembly.retire_scope)
 		core.terminal.connect(dungeon_assembly.operation_terminal)
+		placement = preload("res://scripts/move/placement_authority.gd").new()
+		placement.core = core
+		placement.assembly = dungeon_assembly
+		core.placement = placement
+		host.add_child(placement)
+		core.retiring.connect(placement.retire_scope)
+		placement.pose_committed.connect(func(state: Dictionary):
+			view.place_facing(state.session,{"version":1,"yaw":rad_to_deg(atan2(state.forward.x,-state.forward.z)),"pitch":0.0})
+			view_camera.position = state.position
+			view_camera.reset_physics_interpolation())
 	if host.controller.providers.get("media") != null and music_playback == null:
 		music_playback = preload("res://scripts/av/music_playback.gd").new()
 		music_playback.media = host.controller.providers.media
@@ -196,6 +207,7 @@ func return_to_setup() -> void:
 			setup_pending = false
 
 func dispose() -> void:
+	if is_instance_valid(placement): placement.free()
 	if is_instance_valid(dungeon_assembly):
 		dungeon_assembly.dispose()
 		dungeon_assembly.free()

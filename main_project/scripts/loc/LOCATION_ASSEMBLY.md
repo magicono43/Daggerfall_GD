@@ -1,4 +1,10 @@
-# Location assembly — IMP-013 increments 1/2
+# Location assembly — IMP-013 increments 1–3
+
+Increment 3 composes the real [MOVE placement authority](../move/PLACEMENT.md).
+LOC exposes the scoped prepared/active `placement_space` query surface and
+captures optional DATA `placement_policy` in each RMB handoff. Binding and
+geometry readiness remain independent of physical commitment and destination
+readiness. Earlier increment-3-pending statements below are historical.
 
 Increment 2 adds [explicit entrance/exit bindings](LOCATION_DOORWAYS.md) inside
 this same owner and transaction. That contract supersedes increment-1 pending

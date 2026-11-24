@@ -1,4 +1,10 @@
-# Location doorway bindings — IMP-013 increment 2
+# Location doorway bindings — IMP-013 increments 2/3
+
+Increment 3 supplies the composed [MOVE placement authority](../move/PLACEMENT.md)
+through this unchanged scoped consumer interface. Handoffs additionally capture
+the validated resolved DATA placement policy in their fingerprint. Queries
+remain non-committing; MOVE owns its separate checked commitment. Real access,
+WORLD, gameplay reactions and native SAVE retain their named integration gates.
 
 The normal `location_assembly.gd` owner prepares these indexes inside its inherited
 staging transaction. DATA supplies optional `location_assembly.doorways` using

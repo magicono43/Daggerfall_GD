@@ -1,5 +1,13 @@
 # Implementation dependencies
 
+**IMP-013 complete / IMP-016 handoff, 2026-11-24:** The user accepted increment 3
+and approved parent IMP-013; its delivery/dependency edge is closed in the
+[accepted scope](evidence/IMP-013-ACCEPTANCE-2026-11-24.md). Other dependencies and
+named real integrations remain distinct; this does not dispatch IMP-012 or close
+M2. IMP-016's listed prerequisites remain IMP-006/009, both accepted. Its
+[increment-1 handoff](handoffs/IMP-016-INCREMENT-1-PROMPT.txt) starts implementation
+only when issued in the receiving chat. Earlier parent-pending notes are historical.
+
 **IMP-013 increment 2 accepted, 2026-11-24:** Increments 1/2 are user-accepted.
 The [acceptance record](evidence/IMP-013-INCREMENT-2-ACCEPTANCE-2026-11-24.md)
 links the [increment-3 handoff](handoffs/IMP-013-INCREMENT-3-PROMPT.txt).

@@ -652,6 +652,13 @@ func check_marker_candidate(ticket: Dictionary, route: String, index: int, acces
 	# pose, WORLD state, entry effect or SAVE readiness is committed by this API.
 	return selected
 
+## Borrowed physics query surface, valid only for the current synchronous query.
+## MOVE must recheck the marker handoff after every external callback.
+func placement_space(ticket: Dictionary) -> PhysicsDirectSpaceState3D:
+	if _view(ticket).is_empty(): return null
+	var viewport: Viewport = _prepared_viewport if _prepared.get("ticket") == ticket else get_viewport()
+	return viewport.find_world_3d().direct_space_state
+
 func geometry_ray(ticket: Dictionary, from: Vector3, to: Vector3) -> Dictionary:
 	var current := readiness(ticket)
 	if not current.ok: return current

@@ -267,6 +267,7 @@ func _hit_region_exists(id: String) -> bool:
 func _candidate_extension(candidate: Dictionary) -> void:
 	if not _rmb(): return
 	candidate.schema = "location-assembly-v1"
+	candidate.placement_policy = preload("res://scripts/data/placement_policy.gd").resolved(_stage.input.data.location_assembly.get("placement_policy",preload("res://scripts/data/placement_policy.gd").baseline()))
 	candidate.area = _stage.ticket.request.area.duplicate(true)
 	candidate.buildings = _stage.location_buildings.duplicate(true)
 	candidate.doors = _stage.location_doors.duplicate(true)
@@ -509,7 +510,8 @@ func marker_candidate(ticket: Dictionary, route: String, index := 0) -> Dictiona
 	var marker: Dictionary = link.landing.marker.duplicate(true) if entering else {"layout":view.layout.duplicate(true),"placement":link.exterior.placement,"record":link.exterior.record,"plane":link.exterior.plane,"kind":"exterior-door-anchor"}
 	var result := {"ok":true,"kind":"marker_anchor","ticket":ticket.duplicate(true),"route":route,"route_kind":"doorway","doorway":route,"entrance":link.exterior.duplicate(true),"exit":link.exit.duplicate(true),"interior":link.interior.duplicate(true),"marker":marker,"return":link.exterior.duplicate(true),"position":link.landing.position if entering else link.outside_position,"forward":link.landing.forward if entering else link.outside_forward,"frame":Frame.FRAME,"pose_kind":"source-marker-anchor" if entering else "authored-doorway-anchor","desired_context":{"space":link.interior.duplicate(true) if entering else {"layout":view.layout.duplicate(true),"kind":"exterior"},"doorway_side":"interior" if entering else "exterior","movement_owner_pending":true},"layout_version":view.layout_version,"geometry_version":view.geometry_version,"context_version":view.context_version,"marker_version":view.doorway_version,"activation_session":view.get("activation_session",""),"geometry_ready":true,"context_ready":true,"binding_ready":true,"route_intent_bound":ticket.request.has("arrival"),"destination_ready":false,"owner_state_ready":false,"placement_validated":false,"placement_committed":false,"save_compatible":false,"events":[],"provenance":link.provenance.duplicate(true)}
 	result.activation_version = view.get("activation_version","")
-	result.handoff_id = Hash.digest([ticket,result.activation_session,result.activation_version,result.layout_version,result.marker_version,route,marker,result.desired_context,link.exterior.id,link.exit.id])
+	result.placement_policy = view.placement_policy.duplicate(true)
+	result.handoff_id = Hash.digest([ticket,result.activation_session,result.activation_version,result.layout_version,result.marker_version,route,marker,result.desired_context,link.exterior.id,link.exit.id,result.placement_policy])
 	result.template = link.template.duplicate(true)
 	if link.has("entry_alias_of"):
 		result.entry_alias_of = link.entry_alias_of

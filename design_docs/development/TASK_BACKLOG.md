@@ -1,5 +1,21 @@
 # Implementation backlog
 
+**IMP-013 complete / IMP-016 handoff, 2026-11-24:** The user accepted increment 3
+and approved parent IMP-013 as complete; see [acceptance](evidence/IMP-013-ACCEPTANCE-2026-11-24.md).
+Earlier parent-acceptance-pending notes are historical. Named real integrations
+and M2 remain open. Accepted IMP-006/009 clear IMP-016's listed prerequisites;
+its [increment-1 prompt](handoffs/IMP-016-INCREMENT-1-PROMPT.txt) is prepared for
+another chat. Issuing it authorizes authoritative actor state only. Preparing
+the handoff starts no IMP-016 implementation or later increment.
+
+**IMP-013 increment 3 implementation, 2026-11-24:** The issued placement prompt
+now has the normal composed MOVE authority, full-shape Jolt validation,
+replaceable bounded policy, explicit anchor conversion and checked commitment.
+CORE still gates required initialization. See
+[execution evidence](evidence/IMP-013-increment-3-2026-11-24.md). Increment-3 user
+acceptance, named real-provider integrations, native SAVE and parent IMP-013/M2
+remain open. Earlier unstarted notes are historical.
+
 **IMP-013 increment 2 accepted / increment-3 handoff, 2026-11-24:** The user
 accepted the doorway binding delivery, including the tavern follow-up. See
 [acceptance](evidence/IMP-013-INCREMENT-2-ACCEPTANCE-2026-11-24.md) and the

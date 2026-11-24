@@ -195,3 +195,14 @@ or original-executable claim. Exact source model/payload/pose guards still apply
 Geometry and original marker positions/roles are unchanged. There is no runtime
 nearest-marker fallback or invented MAPS association. Marker/door anchors do not certify actor
 clearance, committed placement, gameplay readiness or original executable facing.
+
+## IMP-013 increment 3 placement profile
+
+`placement.json` is project-authored, replaceable engineering data for the
+standing doorway slice. Its 0.30 m radius/1.80 m capsule fits the independently
+observed 1.25 × 2.25 m classic aperture. Units are metres/degrees; the 0.025 m
+step follows the common classic unit. No DFU controller offsets, third-party
+code or original-executable gameplay policy were copied. Complete layout
+`placement_policy` replacements use existing MOD/loose precedence. Source
+markers and accepted source geometry/UV conversion remain unchanged. See
+`scripts/move/PLACEMENT.md` and increment-3 execution evidence for qualification.

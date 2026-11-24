@@ -209,6 +209,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		return terminal(fixture)
 	write(str(fixture.sandbox).path_join("location-reconstruction.json"),JSON.stringify({"exterior":version,"interior":interior.geometry_version}))
 	await doorway_cases.run(self,owner,false,fixture,shell)
+	await preload("res://tests/placement_cases.gd").new().run(self,owner,shell,fixture)
 	if DisplayServer.get_name() != "headless": await tavern_visuals(owner,shell,fixture)
 	await native_and_failures(owner,layout,interior_area)
 	await exterior_scaling(owner)
@@ -423,6 +424,41 @@ func operation_checks(owner: Node, layout: String) -> void:
 	check("doorway late preactivation provider rejects","invalid_placement_result",owner.check_marker_candidate(prepared.ticket,"home-east",0,allowed,late).kind)
 	check("activation retry idempotent",true,owner.activate(prepared.ticket).ok)
 	check("activated geometry cannot release destination",false,owner.readiness(prepared.ticket).destination_ready)
+	var move: Node3D = owner.get_parent().session_shell.placement
+	await owner.get_tree().physics_frame
+	await owner.get_tree().physics_frame
+	var active_marker: Dictionary = owner.marker_candidate(prepared.ticket,"home-east")
+	var physical: Dictionary = preload("res://tests/placement_cases.gd").new().physical()
+	var validated: Dictionary = move.validate(active_marker,physical)
+	observations.placement_activation = validated
+	check("placement activated exterior exact","exact",validated.kind)
+	check("placement unresolved blocks CORE success",false,core.complete_readiness(core.ticket(),{"ok":true,"services":provider.bindings(),"death_authority":provider}))
+	if validated.kind in ["exact","corrected"]:
+		check("placement access rejection leaves no pose","access_rejected",move.commit(active_marker,validated,func(v: Dictionary): return {"ok":false,"handoff_id":v.handoff_id}).reason)
+		check("placement rejected commitment unchanged",false,move.snapshot().get("placement_committed",false))
+		var unrelated: int = core.gates.acquire("placement-test-modal","",["simulation","input","save"])
+		var commit_access := func(v: Dictionary):
+			check("placement reentrant commit rejected","commit_in_progress",move.commit(active_marker,validated,allowed).reason)
+			return {"ok":true,"handoff_id":v.handoff_id}
+		var committed: Dictionary = move.commit(active_marker,validated,commit_access)
+		check("placement actual MOVE commitment",true,committed.get("placement_committed",false))
+		check("placement committed pose equals validated",validated.position,move.snapshot().get("position"))
+		check("placement stock camera faces committed direction",true,(-owner.get_parent().session_shell.view_camera.basis.z).distance_to(validated.forward) < 0.000001)
+		var body: CharacterBody3D = move.get_node("PlacementActor")
+		check("placement real actor pose and velocity",true,body.position.distance_to(validated.position) < 0.000001 and (-body.basis.z).distance_to(validated.forward) < 0.000001 and body.velocity == Vector3.ZERO)
+		await owner.get_tree().physics_frame
+		await owner.get_tree().physics_frame
+		check("placement actual Jolt body and shape registered",true,PhysicsServer3D.body_get_space(body.get_rid()) == owner.get_viewport().find_world_3d().space and PhysicsServer3D.body_get_shape_count(body.get_rid()) == 1)
+		var physical_pose: Transform3D = PhysicsServer3D.body_get_state(body.get_rid(),PhysicsServer3D.BODY_STATE_TRANSFORM)
+		check("placement actual Jolt pose equals committed",true,physical_pose.origin.distance_to(validated.position) < 0.000001)
+		check("placement commitment leaves CORE initializing","initializing",core.snapshot().phase)
+		check("placement does not release save restriction",true,core.gates.blocked("save"))
+		check("placement duplicate commits once",committed.get("commit_serial"),move.commit(active_marker,validated,allowed).get("commit_serial"))
+		var changed := validated.duplicate(true)
+		changed.position += Vector3(0.1,0,0)
+		check("placement changed duplicate rejects","identity_reused_with_changed_placement",move.commit(active_marker,changed,allowed).reason)
+		check("placement unrelated hold retained",true,core.gates.blocked("simulation"))
+		core.gates.release(unrelated,"placement-test-modal")
 	core.complete_readiness(core.ticket(),{"ok":true,"services":provider.bindings(),"death_authority":provider})
 	check("post-terminal activated receipt valid",true,owner.readiness(prepared.ticket).ok)
 	last_live_ticket = prepared.ticket

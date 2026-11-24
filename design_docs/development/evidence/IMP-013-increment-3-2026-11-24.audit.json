@@ -1,0 +1,554 @@
+{
+  "schema": "imp013-placement-increment3-v1",
+  "date": "2026-11-24",
+  "user_acceptance": "pending",
+  "base_commit": "e18105b0aa090be2dcbbe816e690b2f219220daa",
+  "initial_git_status": "observed clean",
+  "all_final_sources_frozen": true,
+  "parent_imp013_complete": false,
+  "m2_complete": false,
+  "stock_gameplay_entry_ready": false,
+  "native_save_ready": false,
+  "supported_scope": "Standing Foot doorway placement with empty fall/effect relationships; exact/corrected/failure; real Jolt and MOVE commitment",
+  "penetration_escape_ready": false,
+  "native_restore_ready": false,
+  "controlled_providers": [
+    "fixture session lifecycle/baseline services",
+    "fixture access authorization"
+  ],
+  "real_providers": [
+    "CORE operation/gates",
+    "DATA/MOD publication",
+    "LOC geometry/bindings",
+    "Jolt full-shape queries",
+    "MOVE actor/shape/pose",
+    "stock view/camera"
+  ],
+  "remaining_integrations": [
+    "Real access policy/revocation",
+    "WORLD terrain/routes/residency and ordinary traversal coordination",
+    "CHAR/transport/posture/effect relationships",
+    "QUEST/LAW required reactions",
+    "Full locomotion and specialized movement",
+    "Native SAVE/restore",
+    "Parent IMP-013/M2 user acceptance"
+  ],
+  "source_snapshot": {
+    "main_project\\scripts\\mod\\package_library.gd": "6632F3C50129645FC9E79FE4937F5BE6E0BFB7E2A1223737FEB209BA62BD7437",
+    "main_project\\tests\\native_reload_cases.gd": "59F8E6E2323EB873E91A34C5CFF71962627FA54C26EF5D254A1C96EB9FCF633E",
+    "main_project\\scripts\\data\\classic_image.gd": "4D3957DAE946B736A9F66611C3A1067E713F704754BD11F4957995D4415EC30E",
+    "main_project\\scripts\\mod\\preferences_view.gd": "867A675327288E90CB91D72E6D7BCC8FE164F44A83AA05C28C9C068C66352D82",
+    "main_project\\scripts\\session\\text_layout.gd": "8E85399FBC7F1C3CFBD33156FCB802FAF13113883CEF42AC05B89A3D0F5B921F",
+    "main_project\\scripts\\data\\geography_formats.gd": "8741C2FA759E5B67E0DAE7C8DF09D77AE3F174E6B3031B5026AE5A2C7CAA8DF0",
+    "main_project\\tests\\dungeon_context_observation.json": "24673E640C542A97515CC1FC5F245E40CF7179AA02700CE0B43FDCD4ADA6597A",
+    "main_project\\scripts\\data\\classic_model.gd": "9D697C66637A44E89DF36D63F656378DDDAAB5F02711DB7EF7C3EF25498AD870",
+    "main_project\\tests\\dungeon_marker_reload_cases.gd": "B79121F7BCCD9AA8833140C0B0D89B2DC465C9B218C8CEBD1FC13C82EFE2738C",
+    "main_project\\scripts\\data\\variant_inputs.gd": "8117A4575E9D12273423C4D69DC7D9BD8404017F1EA679A874F5BBA82257D050",
+    "main_project\\scripts\\rule\\random_mapping.gd": "8AC3996B018425DAEB0493F0B6C112E60CC8D31B8FE39B795EAB021D7A5AC17B",
+    "main_project\\tests\\replacement_inventory.json": "1EFE2AA4C937159B89D02D6112A68D760EB4A2B318895030995003762EEB0E54",
+    "main_project\\scripts\\data\\item_spell_source_reader.gd": "FD04DAFF667A9344D4479EE92F878165EAEDCDECF27AC8C19FFE25636F6B85EC",
+    "main_project\\scripts\\session\\session_lifecycle.gd": "211264520ED90DA0E6066F9BCE5FF8F2AAC87F5C6C6B771578A8B546D1F933FA",
+    "main_project\\tests\\geography_source_observation.json": "6196C1223B5F6A71CA6BC1FF6A9BB40A7805EFAF34AE7EC6B7343CFE5E569CDF",
+    "main_project\\scripts\\data\\classic_sound.gd": "BACB71C5517716465AF4334CCE99664F4381E609A67257BED7FA002AB45E7EE1",
+    "main_project\\tests\\controlled_startup_provider.gd": "EF64C9AA6E5BC2F39142CDB98712D0055E917300C459503695289967088DEE4F",
+    "main_project\\tests\\replacement_reload_cases.gd": "7D63C29097902691DF34044AD99ED178F6A7989410B8ACE10474EE220E1D3336",
+    "main_project\\scripts\\data\\text_author.gd": "20B18A93BDB1E25A7AB4401190AF6A31E56AE8470F7315A8DE60279A345F2D55",
+    "main_project\\scripts\\av\\video_playback.gd": "A39429421D9BA8939C45C32303EE6D20408363C039B9E9A118697216EB70B8C4",
+    "main_project\\tests\\text_cases.gd": "0706710059FD1F530981E357D518F694DFFAA4D1FABD97EECA655CCCFAFBB34C",
+    "main_project\\scripts\\data\\item_spell_inputs.gd": "C779909E8C3E534EA5D34D812AB9423C66CEC0E45ECCA6F7647EEAFD122BE53A",
+    "main_project\\scripts\\rule\\formula_registry.gd": "EBC410A68317DF9E0F2640E35C32E578CFE465BC4DDBCE3BD9B476DDBFB39678",
+    "main_project\\scripts\\rule\\unsigned64.gd": "E7C570B9901560ADBB4BCDA77EB39D9728E524FD1F58E6AC15EF61F0AB644858",
+    "main_project\\scripts\\data\\item_spell_formats.gd": "595083A7F637499D71FEAC01B1CBB869B594D3378030003AF4CB2A96E4CFDE33",
+    "main_project\\scripts\\input\\action_bindings.gd": "EE769F5ACC88ABCB5CA2CA6F7B52EA518A5C777A3E4B0C2D73B3BD95860F38BE",
+    "main_project\\tests\\media_cases.gd": "891C1DD67AA371B6B34C9B4DC558136924BA35F08B21F4F570F615C51A0E51B6",
+    "main_project\\tests\\dungeon_marker_resolved_observation.json": "94CA2D142CDE1E419484E80835029DECBC61C28E5EBEBD4BBD3C5E3B02136827",
+    "main_project\\scripts\\data\\classic_access.gd": "3BADD2FE33F7486A902B6CFF20AEFF60AF90839F96162225ACB12BEFD4E3D9EE",
+    "main_project\\tests\\dependency_cases.gd": "220907DBE842519B83D5CAC1AA6A1DB4C3FB56FEB59A5AF93A7F783293942FEE",
+    "main_project\\tests\\dungeon_surface_render.gd": "B05AE97389573A397A143370C7A6F4952867491D071FD3FC720887386BF5BA3F",
+    "main_project\\tests\\view_cursor_cases.gd": "5FCB25124A872165F0EF5F664B181143F263368482F53EA28C4CFE4FD077FEDA",
+    "main_project\\scripts\\data\\bsa_reader.gd": "0F82994B11AF327AE9ED04540C1899206EC23BD1D6024979B67435CCD2C35657",
+    "main_project\\scripts\\data\\actor_source_reader.gd": "FA18B865865B9D273B4F589F7CEAF512C7D61E000080AF9CC4C1CD17E19A775A",
+    "main_project\\tests\\publication_reload_cases.gd": "2EC63EA2CCCC8FA46EFA46CD2FAD64D53E2722759985E8D0967751B9C329DB43",
+    "main_project\\scripts\\data\\actor_inputs.gd": "9EF8482B0EC1AEE136B6698B1A4ED21FF2CC8D46CCEE36D138C15976544C71E5",
+    "main_project\\tests\\geography_inventory.json": "79F1602E2E50C34F85DFD37E9D8337D70BCBF5AD9C70B1BA98DA51CB1FC2BFD9",
+    "main_project\\tests\\dungeon_marker_source_audit.gd": "526C69428ADC10CD8F6AC4E4716B056FEB85C60F3CE47BBB8F7C4B196A4622B6",
+    "main_project\\scripts\\data\\replacement_codec.gd": "FD65898CE351082ADF130BCA977D08E893211A17FE9BD32A8BDA189703D23D1C",
+    "main_project\\tests\\item_spell_inventory.json": "BE7126C68CB1B3ACC44FA103A996C5F64AC417A1044F1F89B0B853B099FBD51F",
+    "main_project\\scripts\\rule\\pcg32.gd": "E3B4F6726F706FDCF477499CFA8C7E38DF26209F1862F3D00D6DCF1DDDAAF6E9",
+    "main_project\\scripts\\data\\location_assembly_schema.gd": "9393F9B1310DDA4670A1846D32A175ECAC1BBD883926E3AA0598D6193BA9CF77",
+    "main_project\\tests\\formula_cases.gd": "70B8E9624E74BF1145B9DA82556F8A752CB1FAC9A6C0504EFB699ADA4A5DD2C3",
+    "main_project\\scripts\\data\\text_csv.gd": "8729B18F935B8A40A5A1BDA20DE726768C149D8C20E293C12719C1FAD69D2F42",
+    "main_project\\tests\\controlled_session_provider.gd": "64EF6ABE462B078A77351967F1E3343E624D2E94B2915CF69E802DD44A131CC2",
+    "main_project\\tests\\dependency_reload_cases.gd": "F329D3F9EFCC3DCB5A9CDD01F1E8B8035222448F734CA097F8D021C60A6F08B2",
+    "main_project\\scripts\\rule\\classic_random.gd": "C38CE533F7BC7DBA99BCCAF9B1537EC92C25FCE4E124C9C732A6B49221146173",
+    "main_project\\tests\\replacement_fixture.gd": "97C56F9BDFDCE9D6D74E37D5EDDF782E8292FAB5578EEF5DF8E3C34C78D720CD",
+    "main_project\\scripts\\av\\music_playback.gd": "4B0A4551EBA76C526FEC13A2EEB2FDCFA7E580CEE2F475249AD2474EA56E4609",
+    "main_project\\scripts\\data\\layout_placements.gd": "B6CCD3804FFC9BFAE5F06A43D916BD4CE45C9B2D8DBB013687F113D48F3F70CF",
+    "main_project\\tests\\dungeon_context_cases.gd": "775396EEC4DBE443245C323BD9462733331C38885CE2093A38EB1B8B0C99A152",
+    "main_project\\scripts\\data\\geography_source_reader.gd": "3533F990696EB254FA39A379FBF316C685FD98CBBD98F1581962A87BD60B9898",
+    "main_project\\scripts\\data\\classic_hmi.gd": "BF6DCED970BAB77BB89E48D1F5285AE879DAFDD67D72DB9C4D80CAA724FD0B10",
+    "main_project\\scripts\\session\\session_shell.gd": "942F523442F11C7701777DE24A440445EBAF1DB2FBCD5AFDA9D526C555D2916E",
+    "main_project\\scripts\\loc\\dungeon_geometry.gd": "E656D86025A33C74DC7DE525D5A50AB8D1EFFDF9CEF4C6EABAC4DB3C31A41527",
+    "main_project\\tests\\formula_case_callbacks.gd": "89749F0B0431809C2B7F5881EFF551895FD142DE084424C29ED77E3AF77A47E8",
+    "main_project\\tests\\controlled_random_owner.gd": "A6CC652E974CBCAC9B00A086EE4B3DE190E9C5C32774C26633C8148094E8D095",
+    "main_project\\scripts\\data\\geography_inputs.gd": "C09B406830B5E5ABC444132A84DD5979F12488950266EF333A1F692059C89AF5",
+    "main_project\\tests\\native_fault_inventory.json": "8F66A0BF5BD9C476EC18DF34F27EFBE11A4E854C503DFB591E68DCEBE092C474",
+    "main_project\\tests\\publication_cases.gd": "F1A64799614B5E58B7982FDD521922560D97403578B37E0EE4E34FAF2873B217",
+    "main_project\\scripts\\data\\classic_media_source.gd": "2200F6914662CFF8516FA3D1650687A00386702B1C4F53B259BC7AD353F207F6",
+    "main_project\\scripts\\loc\\dungeon_markers.gd": "57E37A1AB3750EBFCEB96DF7626CA1A4503947EFAEFB08579846905219947B7C",
+    "main_project\\tests\\actor_input_inventory.json": "2BCD58BA520209F16CB8EDA4F877F7B3DABA78A3C2265E0801BC5A62A3241752",
+    "main_project\\tests\\formula_fault_cases.gd": "71EB0A9A6F1C08E5E269D145B0566D73A5C08D3CE3E6618B358FCD59DCD2E093",
+    "main_project\\tests\\dungeon_inventory.json": "688E9641E75CE32A2B4176373AEE104199510315CA20A3148867E78E7E058C5C",
+    "main_project\\tests\\formula_fixture.gd": "4CC795A49443EB7FAA6D70FBDAAF7E5E0E15026635FC6D6F74BDFB7091DFF125",
+    "main_project\\scripts\\data\\dungeon_context_schema.gd": "C65558ECBA9E3FF06EBBD226F53A59BE8CC18F1131994AEFFB2A4B499C9281CA",
+    "main_project\\tests\\structured_text_cases.gd": "419B59F278DBB6855AD1F4BEF20BCDA1907EB0F159006E5101373BCD4B2DA0E9",
+    "main_project\\tests\\native_library_cases.gd": "C4C42897024892AFA243A4DBB5C9A1B6B20C7D8EC61645650181E4276E61E734",
+    "main_project\\scripts\\data\\media_cursor.gd": "CA0D09C44E442DD924573A75D4BA441E5C60CE45FF69A2AE1DD5F7CFC5CDB1D8",
+    "main_project\\tests\\randomness_vectors.json": "830C1C2692212F2CC144414F04C2E65985747078ABAD2FC727368ADB6ADE6A91",
+    "main_project\\tests\\binding_review.gd": "902F2830B6580EB8D9CECE4ED100C9A5EF64ED51CE31A523E545E95D0BC27CD5",
+    "main_project\\scripts\\input\\action_input.gd": "EF36882547D49453EFFB5E629C2E542DF9E0AA86D79DA5727F82D676659378B5",
+    "main_project\\tests\\faction_quest_source_observation.json": "646C496A590A8205DE345A98148853D06DB77459FCB0CCDB2982FAD2AFD23C14",
+    "main_project\\tests\\mod_reload_cases.gd": "C6712D9503FB73C8EFAF21371E1FE66D82E1FFD65F46D6496A379E05BA001B0D",
+    "main_project\\tests\\actor_input_source_observation.json": "0F2DBD899970B5FDF5C7B99B9DE8EFD13D421F93B6342CDAB28C1CE1356488B1",
+    "main_project\\scripts\\rule\\random_source.gd": "FBC87E175FDBC6EF94EF8B567B38CF8F9C5A652BC2E862511D0A4791F1280ED4",
+    "main_project\\scripts\\mod\\preference_definitions.gd": "CC2A57CBF2150E27F0EEAF1076FA627E193BC825F3DD237E03755402D76A6A8A",
+    "main_project\\scripts\\startup\\provider_boundary.gd": "39AC2699C946AED63C614BE6E046D763DCB381F5F3B947B4124D5C325585A58E",
+    "main_project\\tests\\location_inventory.json": "132C8DF2A55CA1DC9EA577D558CBE210634B774723E394DD9439D0F1AE434038",
+    "main_project\\scripts\\av\\classic_media_inspector.gd": "21313F7920E94EAA3C3E979635EFE67C32FB35E537E54984612F793B86F30DE5",
+    "main_project\\scripts\\input\\binding_editor.gd": "1560926C0F6C333665F57C2240FE7D519FC9913274B9CAEEDD3FF098A9B0DB74",
+    "main_project\\tests\\controlled_formula_owner.gd": "BEB20615B38D95ACF98D1DD98495E2210636B164D6D6348F46F148F360E6DC41",
+    "main_project\\tests\\layout_reload_cases.gd": "43C6971F155F5EA8633F0FD67E2A86787BCF5309B6874D010BFF86CCE4862F6E",
+    "main_project\\tests\\variant_reload_cases.gd": "11C83CE396BF97EE0BB838247D375525A9B4A176E2BFE6AD3628E999A1EBBD01",
+    "main_project\\scripts\\startup\\settings_owner.gd": "FC283DF63BA3FFF44A4101DCD911BE1CB366044063A0F894E2F217E32D5151CE",
+    "main_project\\tests\\native_cases.gd": "933DB8C15422ECD800016D40E2CBA89261C564606BF83FAA7C77EF9D5269F345",
+    "main_project\\scripts\\data\\text_tokens.gd": "E8274C126D39F51D1B32BAA13299CEA0913BCAE862DE1A737E8B708090B7A8A9",
+    "main_project\\tests\\action_input_cases.gd": "AADB72B8749E9825971899FC176C92E049F513F877BE88E2B1062E3861F67820",
+    "main_project\\scripts\\rule\\formula_error_monitor.gd": "DFCB75B820EA34FFD4165AB45E1F328872044DAB8D6EFE0E38031C7B67C6308D",
+    "main_project\\tests\\verification_cases.gd": "05D68FEDFDD1160051C4AAC751CC2C562E102060B8F6A346DF647719FBBA5C77",
+    "main_project\\scripts\\mod\\dependency_planner.gd": "F805E886A6AD8EA417F175080785E9D8CDB765ABE9A4ACDB757792E7ECEC7FD5",
+    "main_project\\tests\\mod_cases.gd": "523227241AEA4C2DB2D1064DEE39DA97898D7EF185F2AD41C289F76774EBEFA3",
+    "main_project\\scripts\\startup\\storage_adapter.gd": "252BEF2783C759C96A74132E0CFEE1390E95771A6ED660C4897467D72406EB83",
+    "main_project\\scripts\\mod\\content_diagnostics.gd": "7421288BD89274CE9A9DAD0A2C9596E5010B70572E6EB970C01ABB2197E2F187",
+    "main_project/content/layouts/placement.json": "8263C1DE6F429422A1882C385AE25C3CA48F3C30026B112F20E49DD6319FDB61",
+    "main_project\\tests\\layout_cases.gd": "9A619A08CDDD671E02E1E3CA9C2A333106F1280EFD298DCE74E4B25BDF035788",
+    "main_project\\tests\\layout_corpus.gd": "8C61E852CF7010C48C305C664D8CE7F0314CDE112D725EB70DE6604F9792E861",
+    "main_project\\scripts\\loc\\dungeon_assembly.gd": "AA26D4DE6E80183C829F649C56E7413A11DE79D4B6F0221DBA286A427054118F",
+    "main_project\\tests\\random_session_reload_cases.gd": "0D900E3271FF947E6872ACF332A481BA67A56388FC2408C6B7F1D8C3487FEE33",
+    "main_project\\scripts\\data\\faction_quest_formats.gd": "8B3F81A738EC2FC79BCAAA6468496D3AA35D6ABA203E84A634F967E6CF594C2B",
+    "main_project\\tests\\translation_preference_reload_cases.gd": "DC67239DBADEE99C29EB33EC68EC685E8F493451C78153222382A27BEAB841A7",
+    "main_project\\tests\\dungeon_opening_floor_observation.json": "AC283A60759C68CEB629903D94BD974B948E1F53B698AD046DC8FB7680201F9A",
+    "main_project\\scripts\\input\\view_cursor.gd": "D92BC36CAD03EF856D9BDD36FB6F61B782E408DF7AB85AD9A5AAE5EDB59BCD58",
+    "main_project\\tests\\binding_config_inventory.json": "0BB73DC97A16F508E1CF1D1C4C7F6531BFBB38951BF98EAA51C90B3109F5AE2A",
+    "main_project\\tests\\location_source_observation.json": "277590515DA1CDA1F50DC0258C90D9B9914BDCE5EFC69B6DE0E2F3DC8EE48D8C",
+    "main_project\\scripts\\data\\locale_fonts.gd": "643804A7D4B93D06C1D56BFC643E5EE4E41AFBEA634597B82DB330E38D7DC5BD",
+    "main_project\\scripts\\data\\location_doorway_schema.gd": "3CFA15E4BD7178EE0394204D814C551D56C95E8845936C68537B0F1F63D0341B",
+    "main_project\\tests\\controlled_preference_consumer.gd": "D2C67FA583336BD0410562B161A5ABE6AFD79B54519900F5787DF14F77E7C3C5",
+    "main_project\\tests\\dungeon_marker_observation.json": "1B1118926097E9818DA90C0D55283A01653C075056D6AD7DBCED565CED448E7C",
+    "main_project\\scripts\\av\\replacement_instances.gd": "1644A27DEEC0898B56CC417FDFEBBBAFB82886A43E3FCF603FD66471AA52DD90",
+    "main_project\\tests\\media_inventory.json": "B527AD2A04D238977D4CD845339AF2E9A27CB9F53EE56DBA104052A7D9AC56E2",
+    "main_project\\tests\\variant_inventory.json": "EF26D8CCEF6A81C7039F1394931DB8A8A9C4F954E03C9834D07C60E62DD09EE4",
+    "main_project\\tests\\random_session_cases.gd": "AFA7E834DE9AA0C908AC17D923D6B98A09043C6276C1BA5B5F4ECA3EF8C0D0E2",
+    "main_project\\scripts\\data\\layout_formats.gd": "12370881E404FE0087C9A55C34B52928A203C21339400D454C43CD359056E35D",
+    "main_project\\scripts\\session\\session_provider.gd": "905972BB0D81E5F47F304E335531BDBFA66D70FFB7BA45C1509B9B5279ADF5DE",
+    "main_project\\tests\\variant_cases.gd": "E5017FFE13B383BA6F29540CE5AA1E2F020E933ECC5CE9B43A647EA8C79BFAD3",
+    "main_project\\scripts\\data\\placement_policy.gd": "ADAB5064A16EB326A6D0D0955D1FD12D2E09E7BE7581F2D922B738C563CB0AA5",
+    "main_project\\scripts\\loc\\dungeon_support.gd": "DBF1291E96DFF7140B866B335EF339A85B081C4EB5A9DDDEEE93AE97D7B062CE",
+    "main_project\\scripts\\move\\placement_authority.gd": "98BD24CACCC0750B61993C7E5DF6376443BBB182D0A4421826B534C2210BA6D4",
+    "main_project\\tests\\observe_dungeon_context.gd": "5BDF7952409609635BF44F95BD08BB364482F90FE2315AC7F3557647BE642A99",
+    "main_project\\tests\\location_doorway_cases.gd": "5F801CFDE28A9C2E01A811618F19ADBE8133A47085A585FA294B3532490D0562",
+    "main_project\\tests\\dungeon_context_reload_cases.gd": "6CDB369115299580ED2EB61924E78C867E93FE3F3A8FDA50DF794C16DA8079BE",
+    "main_project\\scripts\\startup\\storage_owner.gd": "63140AC505BFB5527174115057BE867C9439368EF8D81D90BE216F99C6FDFA31",
+    "main_project\\tests\\replacement_cases.gd": "C6F987F263554AAD9D8DAED7F857E577DF1D0E5E92679A6E16348789E8611BD3",
+    "main_project\\tests\\dungeon_reload_cases.gd": "03BAADB3F9ABA0EB52B16EBB8F188A6A32705C251ED29999EFD24C1C9E1547B9",
+    "main_project\\tests\\layout_source_observation.json": "649677BCAB76FBAC3C00458D868EE197863CA2A5487A03539D3E9CDB0E2B7C52",
+    "main_project\\tests\\locale_font_cases.gd": "1D084B8B8AE06A535A91CB7E5096E400AC3ABC1CEB61315B80B628A7D7E39B0F",
+    "main_project\\scripts\\data\\translation_view.gd": "DF8FEF619DFF8D8523EE074E995E5C8D5431C502DD4145DAFBB97E2BEAC30888",
+    "main_project\\scripts\\startup\\launch_logger.gd": "07BB10DAE97FF6C370799189CB0CD6C5EE52C3D52060BF87EC02DB238CFB83F5",
+    "main_project\\tests\\fixture_definition_adapter.gd": "B21D378C4A6A2748A0DD3FFFF1B9F9E31A9FE0D304AB9288688FDC2D4A4E1E5E",
+    "main_project\\scripts\\rule\\session_random_source.gd": "5F54136D31770B479B91E06B504B866214FA9EDB09F954F8E74938259D8A93D8",
+    "main_project\\tests\\translation_preference_cases.gd": "F1EFAAC99FC64620CDD11696D38821773D451A05A808D64E54E6AA8A27596551",
+    "main_project\\tests\\dungeon_opening_geometry_observation.json": "F22F3575AC02878A8BAEB3D2726A4EBB8AF7BA48F89E8D5ECB45358046D5EDCD",
+    "main_project\\tests\\classic_action_axes_audit.gd": "6758A21DB0EF625E75DC3CD16B4EF4C556A2E93A8540A043456AE35DEF5463C3",
+    "main_project\\scripts\\session\\session_gates.gd": "15818F8EA1E33CA946282556D804EB0231D671F884424C9744FBEF250773F383",
+    "main_project\\scripts\\mod\\preference_store.gd": "21DEA734D886F5C16B2C2EF6BC2477862FB386E6DD4442C4A65BA84EBD106813",
+    "main_project\\tests\\native_fixture.gd": "E674DCD7C5F0107B98D9B148BC3A19555A4DB71DB7C8B32C9B6D0BB1F3D8ACEF",
+    "main_project\\scripts\\data\\media_replacements.gd": "AE72794CCDF6A4F095346B54FB7C039505BF93DD0E2C7DD080A6E698FE1CF064",
+    "main_project\\tests\\dungeon_context_inventory.json": "FDAEE8DDE6FAE449E6696ADF3BAD2799FD6464B964BEF24EF15B79D1745A06B6",
+    "main_project\\tests\\geography_cases.gd": "64AFB25E696D2D28DF133B06C4810139F9F7D36422FC9AE7DBC62A1FF2277DDB",
+    "main_project\\scripts\\data\\native_media.gd": "8CA743B440BD2F8A1EBD0C76E2907865243792D4C574C327C7151A19E329C036",
+    "main_project\\tests\\layout_probe.gd": "C6937A88B279153D4A7AF711A9C8CCC238461584BFB94D4857EFC811D5AD8638",
+    "main_project\\scripts\\data\\dungeon_marker_schema.gd": "671253D398B842598494D9FEFD399B2FB7B20F3DB80B675D6F69B58F3C9EF007",
+    "main_project\\tests\\view_cursor_inventory.json": "4FD3AD67A1CB66494889732157E45A5ED6C075D9D6EDDE1104B491FC5C9B2D71",
+    "main_project\\tests\\dungeon_cases.gd": "96E5191F9B895D876B4FC137C4E5D0A2830C3F555C46F2279DE91D2161B93893",
+    "main_project\\tests\\randomness_cases.gd": "4274133A3426BA7CFC2B16602083C8A7213ADEDA8038292C723C0D8F4B3BDF24",
+    "main_project\\tests\\view_review.gd": "C68467CFC0673B33C7696E63F61AB942D322591E81AAFB60F8CC35369CB23645",
+    "main_project\\scripts\\data\\actor_input_formats.gd": "2BCA4EE6765438CE637B288D83E1AD2802A9186819EB2A73A4EC7DA3D68ECDE4",
+    "main_project\\tests\\location_doorway_observation.json": "13E2B44F0BED18186A02C91DE8F0F81EA62EA06D695E084B66F8CFADBA02EF53",
+    "main_project\\tests\\placement_cases.gd": "5F1460B4F1881700ADFA65F80E593F6C8620258210D0D8B019DE2FA55DAA1DF3",
+    "main_project\\tests\\startup_cases.gd": "D23D0E2A7B9E67229E906577C5B17DC543383872D0700E7E952127A0B633AEA7",
+    "main_project\\tests\\layout_inventory.json": "6DCBA68CF4998FBB6B5938C546061B10C23E01C4E302B53C599D43BDA13B6A42",
+    "main_project\\tests\\location_cases.gd": "D55EC0491428D0EC6E497F9F0E21A1CDBB4FD174F8E0695914B507DB86077520",
+    "main_project\\tests\\dungeon_marker_cases.gd": "AC281582B2523CA653BBB9287F1149176247A84B5A13A5342752761723E3F6A9",
+    "main_project\\scripts\\session\\session_cadence.gd": "005BC16AC9EA7A70E737D75BEED282C670C03F88D81087C0DB2538423180DA03",
+    "main_project\\tests\\classic_unknown_action_audit.gd": "37441748D1F86791A1FBDDF06CDEB05AA1BBC1B2BD488FB44C5DD8205E69F7FE",
+    "main_project\\scripts\\av\\media_preferences.gd": "60834A6EBB1ABEDE17C714BB877E95CC92A29F3FB8B4F0995D8523DC116D9EE6",
+    "main_project\\scripts\\loc\\location_assembly.gd": "17910C0D199233551CB35C18F2810A4E1F322B45BB798DB60A4DCDF779E33B9F",
+    "main_project\\tests\\publication_fixture.gd": "16FBB05C407359756D997B8DE3ADF07F7EB41C2319B7970DC205351DB18141C5",
+    "main_project\\scripts\\data\\layout_inputs.gd": "7AAC3332E792806A66E5E20F598A3ED4B1A01AE34AF4F304D06F98988D8AF5FE",
+    "main_project\\scripts\\rule\\session_randomness.gd": "005130637011BCA0D5C0235E9EC7B63F2025E3911EC3D144B9B5E01E2657C8B5",
+    "main_project\\scripts\\mod\\mod_setup_view.gd": "3DE690DB7CF6C0804A72BBCBD4A655346E463F8D58B2F96DB72783C34044B061",
+    "main_project\\scripts\\av\\ambience_requests.gd": "398A41362D6DD1C303E05B42B8D16096C6402BB120A48AC835D2E67BBD70473B",
+    "main_project\\tests\\placement_physics_cases.gd": "EC6CC304D4636571CA84DD46CD7E102429CC7A70261F0C6DEFEB70DA91A640C4",
+    "main_project\\scripts\\data\\faction_quest_source_reader.gd": "2B670B81A658AB491E1B01608DA374F8D5A1E556F38DB1024336654527E6D39A",
+    "main_project\\tests\\dungeon_marker_inventory.json": "F904000BEB8F9A3621D1CDF3861111D251AF75EBECD08F79A2598F74D466343F",
+    "main_project\\scripts\\session\\session_prompt.gd": "89EB3C5592784AD93ED43DF8EC88B7A4C7CE6EBDE805C8589872F63DA3E57D04",
+    "main_project\\scripts\\session\\text_presentation.gd": "1FEBBE96F3EF441705433735D1F8B35A2A75314195DC7B628DE08C229D0B8A31",
+    "main_project\\tests\\faction_quest_inventory.json": "D09D28013AD60270E0320EE6B8B261990630DAFBAF0AB239911549E74AC15D05",
+    "main_project\\scripts\\data\\definition_registry.gd": "48524A34985F2E1BAEBC5BC59449D8C8203940A240691C3DBFA9BF3DCE1415D8",
+    "main_project\\tests\\locale_font_reload_cases.gd": "9E2E36222FC7FF00356A8F51A422F72D68F9D53F42257B27310B383D2E969487",
+    "main_project\\scripts\\mod\\mod_configuration.gd": "3EB4F41F5B50F6A3DBA18719B53739A2CC5EC2042999DB63AE1A213D3FDB4C23",
+    "main_project\\scripts\\input\\binding_configuration.gd": "3D7CB19A2466F660610928956D3AFBE37BD906CCB2CA70AFE43F7D49CD9541E7",
+    "main_project\\tests\\native_inventory.json": "D14341D822E7D95D67AB19F3A564C799EE1FE345C78F9B1567CECE76C4F1A3B4",
+    "main_project\\tests\\dungeon_context_policy.gd": "B1B9B8793CACF845999A5A2855E7C1D6C37B8CA94774D15C2433BE41D736206F",
+    "main_project\\scripts\\data\\translation_import.gd": "95700212D3A4C24795F2CD4D5268D40176E23E1E69B2C80BB8B51201814C4EB8",
+    "main_project\\tests\\view_cursor_reload_cases.gd": "76B4E20FE582A069C5B71BDF50BAEE22E349653FA08CD1CEB3117C833CD85E37",
+    "main_project\\tests\\binding_config_cases.gd": "B543B66E3143D6DCE91F711DCDA96AF3806387DC3633366CC7AE93C71B63DE27",
+    "main_project\\scripts\\data\\faction_quest_inputs.gd": "B8FF92885F7035DA0331C87F634EF3330DD26479D8E9CAECD56E631CA6799B9B",
+    "main_project\\scripts\\data\\variant_resolution.gd": "BF46334D1380254E34343FEB67D5D58C9126881D20B2074E8600192E4514B912",
+    "main_project\\tests\\faction_quest_cases.gd": "057DBD2377AF46672D131ACE761A9CA3ACBDEA67425C9BEAB9641A490DE27C73",
+    "main_project\\tests\\classic_action_axes_observation.json": "03A46EAF3878B9EEF09DB58DDD870E26FCF36DF3DF8720AF00E7E5F456EF17DA",
+    "main_project\\scripts\\data\\structured_text.gd": "7D4F4A50EC70B135553E9C373B7A20F047D7D4E9E65270F472CFA348F7B073C1",
+    "main_project\\tests\\dungeon_fixture_geometry.gd": "8FA2DEB2872AFE52C419285225B0E1F9D550436F34C7E880E74D06CA5F135C1D",
+    "main_project\\scripts\\session\\window_stack.gd": "01FB85ED370AC6C90CD90F20ECA378D33BD2CBBB96BCD10F5CA74D4B4242D42F",
+    "main_project\\tests\\actor_input_cases.gd": "609B5A42B2B4506C69CFD8015B062EF468B4D1BCB0A83773C03D9422C92E0844",
+    "main_project\\scripts\\loc\\dungeon_environment.gd": "5E8637E914FFD57C94597498A8F208DA4D2CBC1128790E7A1E44D0FB7B1C576E",
+    "main_project\\tests\\dungeon_source_observation.json": "D7457B87442C8FE692548F910DE72BEDB6BDCDC8FDEBC0C5FFEDC24553515E1C",
+    "main_project\\tests\\classic_unknown_action_observation.json": "A49C451A1D148D538AF4A658485534A72DAF7C2440F0F585C43CEB1772A1AA34",
+    "main_project\\tests\\session_cases.gd": "4D37BA007B6CDB014290823D62C0CFC0965F796BE448CD70AB628C4AEAFB2172",
+    "main_project\\scripts\\data\\layout_geometry_frame.gd": "2C864BF46B3254C6C8235B998746DC7499B4910CE9F85A45066BAA882EB09B24",
+    "main_project\\tests\\classic_cases.gd": "3ED8251E1717FAC9EC160FF2BAA735EDCED1454BD36C833A94D79CEC9E60C045",
+    "main_project\\scripts\\loc\\dungeon_materials.gd": "FAE6CFB2E11664EC1A992D4A3FE5F4B1D012260D9D55E80F11B52B393A0E7425",
+    "main_project\\scripts\\data\\text_catalog.gd": "CC9CD72EDA215ACD9181224506FB58C4E43D5424C7A719A747CAD5FB175E0868",
+    "main_project\\scripts\\startup\\startup_shell.gd": "C5FB598753165FD39792A8BC1E830064177F1422AB47179805481DA3355075EB",
+    "main_project\\scripts\\startup\\startup_controller.gd": "A3A1BE1E01D89910A18E33DF73D50551559E6489682EBBC0ECBFDF86880382A0",
+    "main_project\\tests\\item_spell_cases.gd": "0180AEE96594015D3A35657AD36B452891F2AE487EDCD94A42B10EFC7D052D75",
+    "main_project\\tests\\m1_composition_cases.gd": "F264C79EF3775AFE5BF43000350F0B5E83A27EA810F1A638D0785BA61F978440",
+    "main_project\\tests\\action_input_inventory.json": "867D83AB06CB2F0023B8813B0799B6719CF3127E29EB0A2298B1A7477B2A50C3",
+    "main_project\\scripts\\data\\dungeon_assembly_schema.gd": "35988CC2526EF340F676EAC5CE4797EE1C78412A6F99E5522CCC87B1E6070BD5",
+    "main_project\\scripts\\rule\\seed_derivation.gd": "DDCD7351C8F8126FA79AA9166C776E35422B4FC5F82ABE07560629C10FF7C18F",
+    "main_project\\scripts\\loc\\dungeon_palette.gd": "45B4CF6477FBA4859940EA051E7B3EE9FD8DD7F093DC56C0D2167305F1845E02",
+    "main_project\\scripts\\data\\classic_vid.gd": "B2CE166272C601A3C8760E76147B3E1A8D199746C59A870C1930EDC6C8E7ECF8",
+    "main_project\\tests\\classic_startup_provider.gd": "2478CF9DA64B824FE36DDCBCAD912AAB054B55681D3851BE6DEA001482F2C638",
+    "main_project\\scripts\\data\\decoded_media.gd": "1D1B18DCA98F956EE7D43369513BE6FE52D073AB184BE99FD82C0E3A56D43165",
+    "main_project\\scripts\\mod\\preferences.gd": "42D05EF95274820134FFE2E193260E9C73C784C7EF75F961E54895F9ADBB0FAD",
+    "main_project\\tests\\native_library_fixture.gd": "406E80C638D6EF43CC8BE3E5B594B8A999A17BBB6DAC2BA0E677FEE59DD7CF2D",
+    "main_project\\tests\\m1_composition_inventory.json": "5FA7948520F3B74C505CE04984E009DA730A124BB31B953399C8F6BACA4F4A24",
+    "main_project\\scripts\\data\\replacement_glb.gd": "D6D2B29CE883C26E69E31164FF90DB5466DF5F25387482069E4248B0D841C571",
+    "main_project\\tests\\binding_config_reload_cases.gd": "98DBF628615F37626BB6C342AFCF586F0C328416ECDE35D19C0066AAF32EDC3C",
+    "main_project\\scripts\\data\\text_rsc_reader.gd": "80B98F8451625A43BCF507798DFC4A41E15BEDAADDB411934BEB3285443EC2EB"
+  },
+  "qualification": "main_project/tests/.runs/imp013-placement-2026-11-24/qualification.json",
+  "checks": [
+    {
+      "name": "headless-location",
+      "root": "verification-headless-1df0155beeeb4c93bd2289fb885d5ba7",
+      "report": "main_project/tests/.runs/verification-headless-1df0155beeeb4c93bd2289fb885d5ba7/report.json",
+      "report_sha256": "3C3277462F51D7D5125C5A014D4F643121C6775A4E5907385E31255905784C89",
+      "status": "passed",
+      "counts": [
+        {
+          "process_exit": 0,
+          "fresh_process": 1136,
+          "scenario": "dungeon-assembly",
+          "primary": 1417
+        }
+      ]
+    },
+    {
+      "name": "rendered-location",
+      "root": "verification-rendered-2459ce5c1e14451baeba09e9db80ad1a",
+      "report": "main_project/tests/.runs/verification-rendered-2459ce5c1e14451baeba09e9db80ad1a/report.json",
+      "report_sha256": "24D128AC0D9E502771380CE95CB26C72B815D5F379977D3284AA5A0E2A8FD325",
+      "status": "passed",
+      "counts": [
+        {
+          "process_exit": 0,
+          "fresh_process": 1144,
+          "scenario": "dungeon-assembly",
+          "primary": 1437
+        }
+      ]
+    },
+    {
+      "name": "windows-debug",
+      "root": "export-00eb918d64084e3b8d715f66f4f05a73",
+      "report": "main_project/tests/.runs/export-00eb918d64084e3b8d715f66f4f05a73/result.json",
+      "report_sha256": "1B46C5A0B72E72EDB2EB436511393D392C789A962865D40391ED828401ADE1B6",
+      "status": "passed",
+      "counts": [
+        {
+          "process_exit": 0,
+          "fresh_process": 1136,
+          "mode": "exported-headless",
+          "primary": 1417
+        },
+        {
+          "process_exit": 0,
+          "fresh_process": 1144,
+          "mode": "exported-rendered",
+          "primary": 1437
+        }
+      ],
+      "configuration": "debug",
+      "exe_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "pck_sha256": "68571AB05E61C5ADE921EFD8578D0AF052FBC57713BB311EDAE891F164BB6D8D"
+    },
+    {
+      "name": "windows-release",
+      "root": "export-1123bb1bd5d14977a49854870f625191",
+      "report": "main_project/tests/.runs/export-1123bb1bd5d14977a49854870f625191/result.json",
+      "report_sha256": "4C475E6301D8F955ABE68C7FEB09EAD07311D8635D1D9490056245AD3B335BF3",
+      "status": "passed",
+      "counts": [
+        {
+          "process_exit": 0,
+          "fresh_process": 1136,
+          "mode": "exported-headless",
+          "primary": 1417
+        },
+        {
+          "process_exit": 0,
+          "fresh_process": 1144,
+          "mode": "exported-rendered",
+          "primary": 1437
+        }
+      ],
+      "configuration": "release",
+      "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "pck_sha256": "F03E2ABB7C7245BE63F12E281B03CB40163F6B9CD70C52BB023742C13EB7A535"
+    },
+    {
+      "name": "headless-session",
+      "root": "verification-headless-e17a6b5859f1487093643b01b884c7a0",
+      "report": "main_project/tests/.runs/verification-headless-e17a6b5859f1487093643b01b884c7a0/report.json",
+      "report_sha256": "670A3C6FC87F8CFD68CD176DB1169FDDE120E6101C673BBCC3A6A403BD1C1BB2",
+      "status": "passed",
+      "counts": [
+        {
+          "process_exit": 0,
+          "fresh_process": null,
+          "scenario": "session",
+          "primary": 263
+        }
+      ]
+    },
+    {
+      "name": "headless-dungeon-markers",
+      "root": "verification-headless-10d93f257f37434b85afb24e6267e9ea",
+      "report": "main_project/tests/.runs/verification-headless-10d93f257f37434b85afb24e6267e9ea/report.json",
+      "report_sha256": "37512BB4DB43F832C660594A0CCAB3441AF554FA5965C10BD3D70BC6C425CA06",
+      "status": "passed",
+      "counts": [
+        {
+          "process_exit": 0,
+          "fresh_process": 35,
+          "scenario": "dungeon-assembly",
+          "primary": 2277
+        }
+      ]
+    },
+    {
+      "name": "headless-layout-inputs",
+      "root": "verification-headless-07b664623d0e48dca540fc65300f392d",
+      "report": "main_project/tests/.runs/verification-headless-07b664623d0e48dca540fc65300f392d/report.json",
+      "report_sha256": "C95AB6CD453A59B9F4F99F6703B2B2731C6D1DEB6B3D823B45AB15F1B6C647F2",
+      "status": "passed",
+      "counts": [
+        {
+          "process_exit": 0,
+          "fresh_process": 15,
+          "scenario": "layout-inputs",
+          "primary": 369
+        }
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "agent_visual_qa": "inspected",
+      "path": "main_project/tests/.runs/verification-rendered-2459ce5c1e14451baeba09e9db80ad1a/project/tests/.runs/scenario-1/location-placement-home-east.png",
+      "height": 800,
+      "sha256": "7F2BCE48D7A3CFFB20F846B59F2E93F8F422770E8FE0084344BBAC84EA9C2777",
+      "user_acceptance": "pending",
+      "width": 1200
+    },
+    {
+      "agent_visual_qa": "inspected",
+      "path": "main_project/tests/.runs/verification-rendered-2459ce5c1e14451baeba09e9db80ad1a/project/tests/.runs/scenario-1/location-placement-corrected.png",
+      "height": 800,
+      "sha256": "FE8A10184ED6CBEF5ED8405250F9F871B5C468537CEBBD1BDC1B3883852DEB40",
+      "user_acceptance": "pending",
+      "width": 1200
+    },
+    {
+      "agent_visual_qa": "inspected",
+      "path": "main_project/tests/.runs/verification-rendered-2459ce5c1e14451baeba09e9db80ad1a/project/tests/.runs/scenario-1/location-placement-tavern-courtyard.png",
+      "height": 800,
+      "sha256": "FA61811B46F472C23CE13BFBFD7DAFFE3370EF79D8D747ECBCF0F6AF9A078BFB",
+      "user_acceptance": "pending",
+      "width": 1200
+    }
+  ],
+  "cleanup": [
+    {
+      "retained_files": 316,
+      "roots": [
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-00eb918d64084e3b8d715f66f4f05a73",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-1123bb1bd5d14977a49854870f625191",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-07b664623d0e48dca540fc65300f392d",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-10d93f257f37434b85afb24e6267e9ea",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-1953a528c72f463fa5c3d0e7eacef1e9",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-1df0155beeeb4c93bd2289fb885d5ba7",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-213bc302450c4f3698b036f06522fa2f",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-3a422d0e1a2940d6bacb7df9dd478ba7",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-3f9375d0af24427da30fd47b9c971964",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-4320c54acd5d43fa89d8d41bbf0dc99e",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-5e372198975f42738e3fe590aa05ec60",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-822078f14c0c440593d7d1235be2643a",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-90c40ec1d33d4b74824c5cd4a7dbc4a3",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-9e7b84be6a254982be1fccd1b13486e1",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e17a6b5859f1487093643b01b884c7a0",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-ed871f7d143c4b6cb9d39082f607e102",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-2459ce5c1e14451baeba09e9db80ad1a",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-5eb57ad6dda54ede8b32ab8b83c1c156"
+      ],
+      "deleted_bytes": 4433169734,
+      "journal": "main_project/tests/.runs/imp013-placement-2026-11-24/cleanup-cd9e7321c69b4431ba0affa9afc2c7a8.json",
+      "sha256": "914308899C5B908BE631A6C2AE7B86E3E90FA5099ADF9A8A8CCA1D00405BE015",
+      "deleted_files": 25374
+    }
+  ],
+  "changed_files": [
+    "design_docs/development/evidence/IMP-013-increment-3-2026-11-24.audit.json",
+    "design_docs/development/evidence/IMP-013-increment-3-2026-11-24.md",
+    "design_docs/development/evidence/IMP-013-PLACEMENT-REVIEW-2026-11-24.md",
+    "design_docs/development/IMPLEMENTATION_READINESS.md",
+    "design_docs/development/MILESTONES.md",
+    "design_docs/development/RUN_ARTIFACT_CLEANUP.md",
+    "design_docs/development/TASK_BACKLOG.md",
+    "design_docs/development/tasks/IMP-013.md",
+    "main_project/content/layouts/placement.json",
+    "main_project/content/layouts/PROVENANCE.md",
+    "main_project/scripts/data/LAYOUT_INPUTS.md",
+    "main_project/scripts/data/location_assembly_schema.gd",
+    "main_project/scripts/data/placement_policy.gd",
+    "main_project/scripts/loc/dungeon_assembly.gd",
+    "main_project/scripts/loc/DUNGEON_MARKERS.md",
+    "main_project/scripts/loc/location_assembly.gd",
+    "main_project/scripts/loc/LOCATION_ASSEMBLY.md",
+    "main_project/scripts/loc/LOCATION_DOORWAYS.md",
+    "main_project/scripts/move/placement_authority.gd",
+    "main_project/scripts/move/PLACEMENT.md",
+    "main_project/scripts/session/README.md",
+    "main_project/scripts/session/session_lifecycle.gd",
+    "main_project/scripts/session/session_shell.gd",
+    "main_project/tests/location_cases.gd",
+    "main_project/tests/location_doorway_cases.gd",
+    "main_project/tests/location_inventory.json",
+    "main_project/tests/placement_cases.gd",
+    "main_project/tests/placement_physics_cases.gd"
+  ],
+  "template_link_cleanup": {
+    "journal": "main_project/tests/.runs/imp013-placement-2026-11-24/template-link-cleanup.json",
+    "sha256": "7F37E54FE8E8633F1E7AB343D16868217757A63271A5B7B7BAFFA465C9FB8179",
+    "targets_preserved": 2
+  },
+  "retention": {
+    "largest": [
+      {
+        "root": "imp011-view-review-2026-11-23-final",
+        "bytes": 209339669
+      },
+      {
+        "root": "verification-rendered-2e84f6de05364ff29d5ce9611e4b065b",
+        "bytes": 64616492
+      },
+      {
+        "root": "verification-headless-6ef31e46a2f64fed9296fa303ff8567b",
+        "bytes": 64593287
+      },
+      {
+        "root": "verification-rendered-692de3dbe0854b34b9056e99a009e67f",
+        "bytes": 40743183
+      },
+      {
+        "root": "verification-headless-5e7d6fe3492940b3989c9d0e90f0a0ea",
+        "bytes": 40719960
+      },
+      {
+        "root": "verification-headless-79ead312eb74452985db8c4e7979f44f",
+        "bytes": 40712726
+      },
+      {
+        "root": "verification-headless-72336eb061c545b2a33e73850370daf4",
+        "bytes": 40710986
+      },
+      {
+        "root": "verification-rendered-41be0817a20e44faace4f0e0036c8c1a",
+        "bytes": 40588333
+      },
+      {
+        "root": "verification-headless-14471d25705843c38377f3960eec99fb",
+        "bytes": 40565110
+      },
+      {
+        "root": "export-a042b5a74f424fe695173783991896ee",
+        "bytes": 33415935
+      },
+      {
+        "root": "export-6ab565c653264f07b19476b8371ab27e",
+        "bytes": 33415931
+      },
+      {
+        "root": "verification-rendered-0b85c23d1ac24bb48989f12a7906bc6c",
+        "bytes": 33195782
+      },
+      {
+        "root": "verification-rendered-d3e2623f1d7746189700bc574a2f040c",
+        "bytes": 26628192
+      },
+      {
+        "root": "compaction-plan-2026-11-21.json",
+        "bytes": 25751763
+      },
+      {
+        "root": "export-c20d40eaaece4abf90d19ff382c63175",
+        "bytes": 25469087
+      },
+      {
+        "root": "export-55b2a97ecd804bde93e8ec0eecbcf374",
+        "bytes": 25468717
+      },
+      {
+        "root": "export-083f282135b0424ea69741d27c199278",
+        "bytes": 25466838
+      },
+      {
+        "root": "export-0d74b5d2e6c743d8807286280fb2998d",
+        "bytes": 25466693
+      },
+      {
+        "root": "export-908d44c8848049e6a35aeba8a26a7b0f",
+        "bytes": 25429959
+      },
+      {
+        "root": "export-f391ec85e66a44238f094f39ae4fab52",
+        "bytes": 25419268
+      }
+    ],
+    "bytes": 2436444412,
+    "label": "final",
+    "files": 69914,
+    "skipped_reparse_points": []
+  }
+}

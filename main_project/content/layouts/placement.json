@@ -1,0 +1,17 @@
+{
+  "id": "standing-doorway-v1",
+  "anchor_mode": "door-aperture-clearance",
+  "radius": 0.30,
+  "height": 1.80,
+  "margin": 0.005,
+  "support_depth": 0.08,
+  "max_slope_degrees": 45.0,
+  "max_distance": 0.60,
+  "offsets": [[0, 0, 0.025], [0, 0, -0.025], [0, 0.10, 0], [0, 0.25, 0], [0, 0.50, 0]],
+  "provenance": {
+    "owner": "MOVE",
+    "units": "metres; offsets right/inward/up",
+    "basis": "Observed classic doorway 1.25m wide by 2.25m high; classic unit 0.025m. Engineering standing profile; no DFU controller constants copied.",
+    "license": "Project-authored data"
+  }
+}

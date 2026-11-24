@@ -1,5 +1,19 @@
 # Milestones and validation checkpoints
 
+**IMP-013 user-approved complete, 2026-11-24:** The user accepted increment 3
+and parent IMP-013. See [acceptance](evidence/IMP-013-ACCEPTANCE-2026-11-24.md).
+M2 remains open for its other tasks and named real integrations/native SAVE.
+The [IMP-016 increment-1 handoff](handoffs/IMP-016-INCREMENT-1-PROMPT.txt) is
+prepared with its accepted IMP-006/009 prerequisites; no implementation starts
+here. Earlier parent/user-acceptance-pending notes are historical.
+
+**IMP-013 increment 3 implementation, 2026-11-24:** The normal composition now
+contains real standing MOVE placement, full Jolt shape validation and checked
+commitment with CORE placement/save gating. See
+[execution evidence](evidence/IMP-013-increment-3-2026-11-24.md). This does not
+close M2: user acceptance, real access/WORLD/gameplay-owner integrations and
+native SAVE remain open. Advanced movement/native restoration remain unavailable.
+
 **IMP-013 increment 2 user-accepted, 2026-11-24:** The user accepted increments
 1/2 in their documented scopes. See the
 [acceptance record](evidence/IMP-013-INCREMENT-2-ACCEPTANCE-2026-11-24.md) and

@@ -1,5 +1,21 @@
 # Implementation readiness
 
+**IMP-013 complete / IMP-016 increment-1 handoff, 2026-11-24:** The user explicitly
+accepted increment 3 and parent IMP-013; see [acceptance](evidence/IMP-013-ACCEPTANCE-2026-11-24.md).
+This closes that delivery in its documented scope, not named real integrations or
+M2. IMP-016's listed IMP-006/009 deliveries are accepted; its
+[authoritative actor-state prompt](handoffs/IMP-016-INCREMENT-1-PROMPT.txt) is
+prepared for another chat. Issuing it authorizes increment 1; preparation here
+starts no actor implementation. Earlier pending/not-dispatchable notes are historical.
+
+**IMP-013 increment 3 implementation, 2026-11-24:** The issued prompt now has
+real MOVE capsule placement/commitment under the original CORE/LOC request,
+explicit conversion and DATA policy. CORE rechecks required placement before
+completion and retains unrelated holds. See
+[execution evidence](evidence/IMP-013-increment-3-2026-11-24.md) for exact
+qualification and unavailable providers. User acceptance, real integrations,
+native SAVE and parent IMP-013/M2 remain open; READY remains planning status.
+
 **IMP-013 increment 2 accepted / increment-3 handoff, 2026-11-24:** The user
 accepted increment 2, including tavern bindings. See the
 [acceptance record](evidence/IMP-013-INCREMENT-2-ACCEPTANCE-2026-11-24.md) and

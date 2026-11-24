@@ -60,6 +60,15 @@ func publish(cases: RefCounted, entries: Array, mods: RefCounted) -> void:
 	# value() copies inputs, so publish the completed declaration explicitly.
 	layout.data.location_assembly = declarations.duplicate(true)
 	entries.append({"id":"doorways","value":layout})
+	var raised_block := block.duplicate(true)
+	for record: Dictionary in raised_block.data.records:
+		if record.id == "marker-front": record.transform.position[1] = -3
+	entries.append({"id":"placement-raised-block","value":raised_block})
+	var raised_layout := layout.duplicate(true)
+	for placed: Dictionary in raised_layout.data.placements: placed.block = "packs/location.test#placement-raised-block"
+	for raised_link: Dictionary in raised_layout.data.location_assembly.doorways.links:
+		if raised_link.landing.record == "marker-front": raised_link.landing.guard.transform.position[1] = -3
+	entries.append({"id":"placement-raised","value":raised_layout})
 	# Patch a different shipped RMB's complete authored data, preserving DATA's
 	# genuine immutable source receipt. Fabricated receipts must never qualify.
 	var profile: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://content/layouts/profile.json"))
@@ -77,10 +86,13 @@ func publish(cases: RefCounted, entries: Array, mods: RefCounted) -> void:
 	mod_declaration.doorways.links[0].outside_offset = [1.5,0,0]
 	var mod_data: Dictionary = layout.data.duplicate(true)
 	mod_data.location_assembly = mod_declaration
+	mod_data.location_assembly.placement_policy = preload("res://scripts/data/placement_policy.gd").baseline()
+	mod_data.location_assembly.placement_policy.radius = 0.28
 	var patch := {"domain":"layout.inputs","path":"packs/location.test","operation":"patch","entries":[{"id":"doorways-precedence","value":{"data":mod_data}}]}
 	cases.write(mods.root.path_join("Mods/location/z-doorway-patch.json"),JSON.stringify(patch))
 	var loose: Dictionary = patch.duplicate(true)
 	loose.entries[0].value.data.location_assembly.doorways.links[0].outside_offset = [2.5,0,0]
+	loose.entries[0].value.data.location_assembly.placement_policy.radius = 0.26
 	cases.write(mods.root.path_join("Overrides/doorway-patch.json"),JSON.stringify(loose))
 	var scaling: Dictionary = layout.duplicate(true)
 	scaling.data.placements = []

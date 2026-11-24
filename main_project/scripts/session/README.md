@@ -1,5 +1,12 @@
 # Session shell interfaces
 
+IMP-013 increment 3 composes the [MOVE placement owner](../move/PLACEMENT.md)
+beside the single LOC assembly owner. `require_placement` retains an exact LOC
+ticket on the current CORE operation; successful readiness checks require the
+corresponding currently valid committed physical pose. The operation hold now
+also restricts save eligibility. MOVE cannot complete CORE or release another
+requester's holds. Stock unavailable gameplay providers remain unavailable.
+
 IMP-011 increment 3 adds the [production view/cursor owner](../input/VIEW_CURSOR.md).
 SessionShell composes its current Camera3D, consumes Center/Toggle edges and
 attaches input/view to the same effective controls map. Startup admits mouse motion

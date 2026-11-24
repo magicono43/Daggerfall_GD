@@ -6,6 +6,14 @@ signal milestone(name: String, context: Dictionary)
 signal terminal(result: Dictionary)
 signal retiring(scope: String)
 var preferences: RefCounted
+var placement: Node # Composed MOVE authority; never a replacement lifecycle.
+
+func require_placement(original: Dictionary, layout_ticket: Dictionary) -> bool:
+	if not layout_operation_owns(original): return false
+	if not _plain_data(layout_ticket,true) or not layout_ticket.get("request") is Dictionary or layout_ticket.request.get("core_ticket") != original: return false
+	if _operation.has("placement_ticket"): return _operation.placement_ticket == layout_ticket
+	_operation.placement_ticket = layout_ticket.duplicate(true)
+	return true
 
 func preferences_boundary_current(value: Dictionary) -> bool:
 	return not _operation.is_empty() and _matches(value, "initializing") and _state.phase == "initializing"
@@ -99,7 +107,7 @@ func request(intent: Dictionary) -> Dictionary:
 	last_intent = captured.duplicate(true)
 	_receipts[id] = {"intent": captured, "result": {"kind": "pending", "id": id}}
 	randomness.suspend_operation(true)
-	_operation_hold = gates.acquire("operation:" + id, "", ["simulation", "input"])
+	_operation_hold = gates.acquire("operation:" + id, "", ["simulation", "input", "save"])
 	_commit({"operation": id, "phase": "preflight"}, "request admitted")
 	if not busy() or _operation.intent.id != id or _state.phase != "preflight":
 		return _receipts[id].result.duplicate(true)
@@ -266,6 +274,10 @@ func complete_readiness(value: Dictionary, result: Dictionary) -> bool:
 		return true
 	if not _matches(value, "initializing"):
 		return false
+	if result.get("ok",false) and _operation.has("placement_ticket"):
+		if not is_instance_valid(placement) or not placement.placement_ready(_operation.placement_ticket,_state.session):
+			diagnostic.emit("Required MOVE placement is unresolved; initialization remains gated.")
+			return false
 	var checked := validate_bindings(result.get("services", []))
 	if not result.get("ok", false) or not checked.ok:
 		_commit({"ready": false, "phase": "replacement"}, result.get("reason", checked.get("reason", "Required readiness failed.")))
@@ -361,15 +373,17 @@ func confirm_death(scope: String, authority: RefCounted) -> bool:
 	_commit({"status": "dead", "ready": false}, "authoritative death", "confirmed_death")
 	return true
 
-func _plain_data(value: Variant) -> bool:
+func _plain_data(value: Variant, owner_ticket := false) -> bool:
 	if value is Dictionary:
 		for key: Variant in value:
-			if not key is String or not _plain_data(value[key]):
+			# GDScript dot assignment gives owner receipts StringName keys. They
+			# are immutable values; raw external session intents keep String keys.
+			if not (key is String or (owner_ticket and key is StringName)) or not _plain_data(value[key],owner_ticket):
 				return false
 		return true
 	if value is Array:
 		for item: Variant in value:
-			if not _plain_data(item):
+			if not _plain_data(item,owner_ticket):
 				return false
 		return true
 	return typeof(value) in [TYPE_NIL, TYPE_BOOL, TYPE_INT, TYPE_FLOAT, TYPE_STRING]

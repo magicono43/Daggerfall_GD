@@ -1,5 +1,32 @@
 # Verification run artifact cleanup
 
+## 2026-11-24 IMP-013 increment 3 placement
+
+All seven final qualification commands passed before compaction. Ordinary
+non-elevated process checks found no Godot/exported Startup/FFmpeg child active.
+Eighteen explicitly owned completed roots were verified as strict descendants of
+this workspace's `.runs`; two disposable export-template junctions were unlinked
+without recursion and their installed targets remain present. No reparse point
+was followed during inventory or payload deletion.
+
+Removed **25,374 reproducible files /4,433,169,734 logical bytes (4.129 GiB)**.
+Retained **316 necessary report/log/fixture/capture files /27,560,592 bytes**, with
+before/after SHA-256 verification. Exact deletion/retention journal:
+`main_project/tests/.runs/imp013-placement-2026-11-24/cleanup-cd9e7321c69b4431ba0affa9afc2c7a8.json`.
+The same folder retains qualification/source hashes, executable/PCK identities,
+template-link cleanup and focused development reproductions. All 212 frozen
+runtime/fixture files still match after cleanup. No task-owned complete runnable
+project, export, copied dependency or cache remains; debugging retention expired
+at qualification and capture review completion.
+
+Measured total retention fell from **6,863,570,555** to **2,436,444,412 bytes
+(2.269 GiB)** before small final summary writes. The 2 GiB trigger was reviewed:
+pre-existing evidence and protected IMP-011 human-review state dominate the
+remaining total and were left outside this cleanup. No other-task root, unique
+input, source/reference/classic data, installed template or security setting was
+changed. See [execution evidence](evidence/IMP-013-increment-3-2026-11-24.md), its
+machine audit and readable review captures. User acceptance remains pending.
+
 ## 2026-11-24 IMP-013 tavern binding follow-up
 
 Eight completed owned roots (the initial source inspection, one corrected test
