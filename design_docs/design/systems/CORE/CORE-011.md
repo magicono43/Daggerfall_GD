@@ -95,6 +95,12 @@ Persist the outside-start preference as application configuration through CORE-0
 
 ## Technical constraints
 
+**Later source authorization, 2026-11-23:** During IMP-061 increment3 the user
+explicitly allowed a documented DFU north-facing opening baseline. Source flat
+records contain no orientation; original-executable facing is not claimed verified.
+See PROJECT-DATA-D02 and LOC-011's implementation note. This source choice changes
+no CORE opening-option ownership, safe-placement gate, calendar or grant rule.
+
 Project target: Godot 4.7.2. Translate original layout units/axes through explicit WORLD/LOC/MOVE contracts rather than copying Unity vectors blindly. Read original content without modifying it. Verify actual original deep-cave marker/facing before claiming placement fidelity. Perform required collision readiness checks while gameplay remains gated. Specific import/marker IDs, engine APIs, physics tolerances, loading fade and mod hooks remain deferred.
 
 ## Acceptance criteria

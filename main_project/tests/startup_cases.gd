@@ -402,6 +402,10 @@ func rendered_cases() -> void:
 	shell.render()
 
 func click_button(text: String) -> void:
+	# Stock preference/presentation signals can queue another render. Resolve the
+	# actual control only after those renders, rather than retaining a freed one.
+	await shell.get_tree().process_frame
+	await shell.get_tree().process_frame
 	var target: BaseButton
 	for item in shell.panel.get_children():
 		if item is BaseButton and item.text == text:
@@ -412,6 +416,9 @@ func click_button(text: String) -> void:
 		return
 	(shell.panel.get_parent() as ScrollContainer).ensure_control_visible(target)
 	await shell.get_tree().process_frame
+	if not is_instance_valid(target):
+		check("rendered input target " + text, false)
+		return
 	var event := InputEventMouseButton.new()
 	event.button_index = MOUSE_BUTTON_LEFT
 	event.position = target.get_global_rect().get_center()

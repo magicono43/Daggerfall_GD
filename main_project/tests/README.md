@@ -1110,3 +1110,47 @@ DATA session or gameplay integration:
 ```powershell
 & 'C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe' --path main_project --script res://tests/dungeon_surface_render.gd -- C:/absolute/new-raster-report.json
 ```
+
+
+## Dungeon arrival markers — IMP-061 increment 3
+
+The normal ten-adapter composition runs complete strict independent marker/context/
+assembly inventories, real DATA/MOD/loose publication, CORE lifetime checks and
+controlled access/MOVE handoffs. Full actor placement, exterior traversal, native
+SAVE and original-executable opening/facing are not claimed.
+
+```powershell
+& ./main_project/tools/verify_headless.ps1 -Suite dungeon-markers -Fixture dungeon-markers-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 240
+& ./main_project/tools/verify_rendered.ps1 -Suite dungeon-markers -Fixture dungeon-markers-v1 -ClassicSource C:/Games/Daggerfall/arena2 -TimeoutSeconds 240
+& ./main_project/tools/verify_startup_export.ps1 -Configuration debug -DungeonMarkers -ClassicSource C:/Games/Daggerfall/arena2
+& ./main_project/tools/verify_startup_export.ps1 -Configuration release -DungeonMarkers -ClassicSource C:/Games/Daggerfall/arena2
+```
+
+`dungeon_marker_inventory.json` pins all unique primary and fresh-process IDs,
+source inventories, annotations, opening model bounds and floor witnesses. The
+rendered source-opening inspection preserves all five original placements and
+labels its cave marker/facing. Empty source-inspection connections do not qualify
+full story traversal; the original unqualified story layout still fails closed.
+
+Independent read-only observations use `tools/observe_dungeon_markers.py` with an
+explicit source root and NEW absolute output: default mode inventories all source
+editor markers in the two pinned locations; `--unknown-actions` inventories the
+entire original RDB corpus; `--opening-floor` supplies the cave triangle witness.
+`tests/classic_unknown_action_audit.gd` checks the production decoder against the
+independent full corpus and all unknown-byte values (473 unique checks after all
+187 RDBs qualify; the earlier 478 included nine rejection checks). The
+supplementary nine-check `dungeon_marker_source_audit.gd` verifies the now-supported
+central block and retained metadata, not real entry readiness. Both audit scripts
+take an explicit source root and NEW absolute JSON report path after `--`.
+
+See [marker owner contract](../scripts/loc/DUNGEON_MARKERS.md) for schemas,
+source guards, ordered general candidates and remaining real-provider gates.
+
+`tools/observe_dungeon_action_axes.py` independently inventories all 187 RDB
+record counts and all 11 exceptional motion-axis records. It takes an absolute
+classic source root and NEW absolute JSON output. `tests/classic_action_axes_audit.gd`
+takes the same arguments after `--` and checks all source hashes/counts, complete
+stable IDs, original action parameters/model tags, retained known links and pending
+DFU interpretation and missing required-link rejection (808 unique checks). The normal marker suites additionally
+exercise DATA decoding for all nine formerly rejected blocks and real LOC geometry
+preparation for N0000007; this does not qualify action execution or story traversal.

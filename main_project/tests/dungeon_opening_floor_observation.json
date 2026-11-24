@@ -1,0 +1,40 @@
+{
+  "schema": "opening-source-floor-observation-v1",
+  "location": "place-04310",
+  "placement": "placement-00001",
+  "record": "record-00286",
+  "model": 60200,
+  "source_sha256": "a51a9e149168814c4a14dc80bb93d38f153be18dc9754be44bc9c7b25dd46a85",
+  "model_sha256": "192f449e46e373ff5b9d4cdf6f7ad982b80d2191d0fa9f0eb4b3519439a3ea25",
+  "anchor": [
+    12.75,
+    0.625,
+    -41.8
+  ],
+  "nearest_floor": -0.0,
+  "hits": [
+    {
+      "plane": 14,
+      "triangle": 1,
+      "height": -0.0,
+      "vertices": [
+        [
+          12.674999999999997,
+          -0.0,
+          -41.125
+        ],
+        [
+          17.662988281249994,
+          -0.0,
+          -45.086523437500006
+        ],
+        [
+          12.599999999999994,
+          -0.0,
+          -47.525000000000006
+        ]
+      ]
+    }
+  ],
+  "actor_clearance_verified": false
+}

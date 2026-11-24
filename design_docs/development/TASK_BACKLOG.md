@@ -1,5 +1,37 @@
 # Implementation backlog
 
+**IMP-061 complete and user-accepted, 2026-11-23:** The user found both increment-3
+images satisfactory, explicitly accepted increment 3 and approved IMP-061 complete.
+All three increments are accepted; the documented prerequisite delivery to IMP-013
+is satisfied. See [acceptance evidence](evidence/IMP-061-ACCEPTANCE-2026-11-23.md).
+The requested [IMP-013 increment-1 prompt](handoffs/IMP-013-INCREMENT-1-PROMPT.txt)
+is prepared for another chat; issuing it authorizes location assembly only.
+No IMP-013 implementation starts here. Later named real-provider checks and M2
+remain open. Earlier review-pending/no-IMP-061-closure notes are historical.
+
+IMP-061's user-authorized [axis follow-up](evidence/IMP-061-classic-action-axes-2026-11-23.md)
+removes the remaining vanilla RDB structural-import rejections. All 187 source
+blocks qualify; action execution and existing gameplay/placement/SAVE gates remain
+pending. Increment-3 human review/acceptance and IMP-061/M2 closure are unchanged.
+
+**IMP-061 increment 3 implemented/verified, 2026-11-23; review pending:**
+Scoped marker/route/return handoffs and authorized non-executing unknown-action
+metadata are delivered. Independent 2257/2272 marker checks, 35/41 fresh-process
+checks, Windows debug/release exports, corpus checks and affected regressions pass.
+See [execution evidence](evidence/IMP-061-increment-3-2026-11-23.md) and
+[review](evidence/IMP-061-MARKERS-REVIEW-2026-11-23.md). Increments 1/2 stay accepted.
+Real placement/exterior/native-state, full story connections and deferred physical
+qualifications remain open. No IMP-061/M2 closure or next-task start is inferred.
+Earlier source-blocked/undelivered notes below describe historical checkpoints.
+
+**IMP-061 increment 3 source investigation, 2026-11-23:** Authorized and started;
+not delivered. The user allows a documented DFU north-facing baseline. Actual
+DATA decode rejects Privateer's Hold's central S0000999.RDB at record19568 /
+unknown action27; its runtime record ledger is empty. See the independent
+[source inventories and dependency audit](evidence/IMP-061-increment-3-source-investigation-2026-11-23.md).
+Source treatment remains unresolved. Increments1/2 stay accepted; no IMP-061/M2
+or prerequisite/provider gate closes.
+
 **IMP-061 increment 2 user-accepted, 2026-11-23:** The user explicitly stated, "I accept what you have done in increment 2". Increments 1/2 are complete and accepted. At their request, the [increment-3 handoff](handoffs/IMP-061-INCREMENT-3-PROMPT.txt) is prepared for another chat; issuing it authorizes LOC-011 markers and return-reference handoff only. Preparation starts no increment-3 implementation here. Parent IMP-061/M2 and named real-provider gates remain open. Earlier acceptance-pending statements are historical.
 
 

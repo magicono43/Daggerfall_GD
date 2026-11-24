@@ -67,7 +67,7 @@ func _ready() -> void:
 				label("Dungeon context registration failed: "+contexts.reason)
 				return
 			resource_sources += contexts.data.resource_sources
-			if fixture.get("fixture") == "dungeon-context-v1":
+			if fixture.get("fixture") in ["dungeon-context-v1","dungeon-markers-v1"]:
 				var source_contexts: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/dungeon_context_observation.json"))
 				for source_block: Dictionary in source_contexts.fixture_blocks.values():
 					for archive: int in source_block.texture_archives: resource_sources.append({"file":"TEXTURE.%03d" % archive,"format":"classic-texture-v1"})
@@ -535,9 +535,9 @@ func run_fixture() -> void:
 	elif fixture.get("mode") == "geography-inputs":
 		script_path = "res://tests/geography_cases.gd"
 	elif fixture.get("mode") == "dungeon-assembly":
-		script_path = "res://tests/dungeon_context_cases.gd" if fixture.get("fixture") == "dungeon-context-v1" else "res://tests/dungeon_cases.gd"
+		script_path = "res://tests/dungeon_marker_cases.gd" if fixture.get("fixture") == "dungeon-markers-v1" else ("res://tests/dungeon_context_cases.gd" if fixture.get("fixture") == "dungeon-context-v1" else "res://tests/dungeon_cases.gd")
 	elif fixture.get("mode") == "dungeon-assembly_reload":
-		script_path = "res://tests/dungeon_context_reload_cases.gd" if fixture.get("fixture") == "dungeon-context-v1" else "res://tests/dungeon_reload_cases.gd"
+		script_path = "res://tests/dungeon_marker_reload_cases.gd" if fixture.get("fixture") == "dungeon-markers-v1" else ("res://tests/dungeon_context_reload_cases.gd" if fixture.get("fixture") == "dungeon-context-v1" else "res://tests/dungeon_reload_cases.gd")
 	elif fixture.get("mode") == "layout-inputs":
 		script_path = "res://tests/layout_cases.gd"
 	elif fixture.get("mode") == "layout-inputs_reload":

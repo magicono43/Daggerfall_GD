@@ -1,5 +1,31 @@
 # Milestones and validation checkpoints
 
+**IMP-061 complete and user-accepted, 2026-11-23:** The user inspected the images,
+accepted increment 3 and approved the assigned IMP-061 task complete. All three
+increments are accepted; this is not M2 acceptance. Actual actor placement,
+entrance/exit/exterior traversal, native state and the other named real-provider
+joint checks remain required at their owning integrations. See
+[acceptance](evidence/IMP-061-ACCEPTANCE-2026-11-23.md) and the requested
+[IMP-013 increment-1 prompt](handoffs/IMP-013-INCREMENT-1-PROMPT.txt). The prompt
+is prepared only; no IMP-013 implementation starts here. Earlier open-IMP-061
+and pending-acceptance notes are historical.
+
+**IMP-061 increment 3 implemented/verified, 2026-11-23; review pending:**
+Markers/return context and authorized unknown-classic-action metadata pass the
+independent suites and Windows debug/release exports. See
+[execution evidence](evidence/IMP-061-increment-3-2026-11-23.md) and
+[review checklist](evidence/IMP-061-MARKERS-REVIEW-2026-11-23.md). Source inspection
+does not establish full Privateer's Hold story traversal or actor clearance.
+Increments 1/2 stay accepted; M2, real-provider gates and deferred physical
+controller/IME qualifications remain open. Earlier source-blocked notes are history.
+
+**IMP-061 increment 3 source investigation, 2026-11-23:** Source qualification
+started; marker delivery and M2 acceptance remain open. The actual DATA decoder
+rejects Privateer's Hold's central source block (unknown action27); no opening
+readiness is inferred. A documented DFU north-facing baseline is user-authorized.
+See [dependency evidence](evidence/IMP-061-increment-3-source-investigation-2026-11-23.md).
+Increments1/2 remain accepted; no named real-provider gate closes.
+
 **IMP-061 increment 2 user-accepted, 2026-11-23:** The user explicitly stated, "I accept what you have done in increment 2". Increments 1/2 are complete and accepted. At their request, the [increment-3 handoff](handoffs/IMP-061-INCREMENT-3-PROMPT.txt) is prepared for another chat; issuing it authorizes LOC-011 markers and return-reference handoff only. Preparation starts no increment-3 implementation here. Parent IMP-061/M2 and named real-provider gates remain open. Earlier acceptance-pending statements are historical.
 
 

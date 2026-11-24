@@ -4,6 +4,33 @@ Individual decisions can be confirmed before a complete feature specification is
 
 ## Standing project data policy
 
+- **PROJECT-DATA-D03 — 2026-11-23 — Vanilla motion axes do not block structural import.**
+  The user requested resolution of the remaining axis rejection and stated that
+  vanilla dungeon blocks should not be rejected. Out-of-enum axis bytes in
+  otherwise structurally valid classic model actions are retained alongside their
+  recognized action/required links, with separate pending interpretation metadata.
+  Record DFU's TRP rotation/13 NegativeX/magnitude-400 special case and generic
+  zero-motion default; do not infer a universal bitmask or execute unqualified
+  behavior. All 187 pinned RDB blocks must pass structural decoding. This supersedes
+  D02's axis rejection requirement only; malformed data, resources, required links
+  and authored-action validation remain checked. RDI auxiliary data is not RDB
+  geometry. Gameplay-owner, placement and SAVE readiness remain separate.
+
+- **PROJECT-DATA-D02 — 2026-11-23 — Unknown classic actions remain metadata.**
+  During IMP-061 increment3, the user authorized: "Extend DATA to retain the
+  unknown action as non-executing metadata with gameplay readiness pending" and
+  requested consistent treatment of unknown vanilla actions and an AGENTS.md
+  update. Preserve their raw code, parameters, target address and provenance;
+  omit executable dispatch/outgoing edges without discarding their records or
+  inventing behavior. Known actions, malformed-source checks, unsupported required
+  axes, resources and required bindings retain their validation. Unknown-action
+  owner state remains explicitly pending. This is a structural import policy,
+  not approval to execute unknown authored mod actions or claim SAVE/gameplay
+  readiness. The same user authorized a documented DFU north-facing opening
+  baseline; original executable facing is not claimed verified. Prior source
+  rejection evidence remains historical, superseded by this authorized policy.
+  D03 supersedes the original unsupported-axis rejection requirement.
+
 - **PROJECT-DATA-D01 — 2026-11-21 — User-authorized source/correction discretion.**
   The user clarified that DFU data and corrections are allowed and agents should
   use whichever source makes the most sense, keeping related content reasonably

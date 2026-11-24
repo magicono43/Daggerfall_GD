@@ -41,6 +41,34 @@ See `PROJECT-DATA-D01` in
 approvals and execution evidence describe what was adopted at the time; they are
 not a standing ban on adopting further DFU data or corrections.
 
+### Unknown classic action records
+
+**User clarification, 2026-11-23:** Unknown action codes in vanilla data must
+not by themselves prevent structural import. Retain their original code,
+parameters, target address, source identity and provenance as explicitly
+non-executing metadata; ignore them for action dispatch and outgoing executable
+links. Do not guess behavior, silently turn them into a known action or discard
+their records. Keep unknown-action/gameplay-owner readiness pending and expose
+the retained records to diagnostics and future mod/owner qualification. Apply
+this consistently across the pinned classic corpus, including Privateer's Hold,
+and verify the inventory. Known actions retain their required-link checks;
+malformed bytes, invalid resources and missing required bindings still fail.
+This policy does not automatically permit unknown authored
+mod actions to execute or establish gameplay, SAVE or milestone readiness.
+
+The user also authorized DFU's north-facing opening as a documented baseline
+difference; do not claim that facing was verified against the original executable.
+
+**User clarification, 2026-11-23 (axis follow-up):** Vanilla dungeon blocks must
+not be rejected merely because an action's raw axis lies outside the known enum.
+Keep the recognized action, original parameters and required graph-link checks.
+Retain exceptional-axis interpretation/provenance separately with gameplay-owner
+readiness pending; document applicable DFU defaults and special cases rather than
+guessing motion or discarding the action. Verify the complete pinned RDB corpus
+and preserve existing identities. Structural import does not certify action
+execution, geometry resources, connections, actor placement or SAVE. This does
+not waive malformed-data checks or authorize unknown authored action semantics.
+
 ## Read the relevant documents
 
 Start with the assigned `design_docs/development/tasks/IMP-NNN.md`. Read its linked feature specifications, applicable approved GAD decisions, prerequisites and supporting contracts. Inspect the affected implementation and callers. Expand into adjacent owners or source analysis when a dependency, ambiguity or failure requires it. Avoid loading the entire design catalog for each task.
@@ -85,6 +113,10 @@ Start with the assigned `design_docs/development/tasks/IMP-NNN.md`. Read its lin
 
 ## Verification and completion
 
+- Select checks for the changed behavior and its affected callers; unrelated IMP
+  work does not automatically require the dungeon stress suite. Run heavy suites
+  and exports one at a time to reduce desktop hitches (user preference discussed
+  2026-11-23). Parallelize lightweight independent inspection where useful.
 - Run the task's automated and manual checks through production interfaces with disposable storage. Control seed, clock and input where relevant.
 - Use independent headless and rendered commands under IMP-003/DEV-014. Run the rendered suite for frame, presentation or playback behavior and exported checks where the task requires them.
 - Assert rejected, interrupted, repeated and restored outcomes as specified. Record fixture/build identity, expected/actual results, and unavailable or skipped checks.

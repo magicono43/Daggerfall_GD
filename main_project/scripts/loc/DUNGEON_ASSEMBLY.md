@@ -8,8 +8,12 @@ water, palette selection, arrival marker selection or entry outcome is fabricate
 
 ## Requests, publication and lifetime
 
-`begin` takes exactly `id`, `requester`, `preparation`, `session`, `core_ticket`,
-`content_ticket` and `layout`. The latter is a published `layout.inputs` reference.
+`begin` requires `id`, `requester`, `preparation`, `session`, `core_ticket`,
+`content_ticket` and `layout`. Optional `presentation`/`variants` retain their
+context contracts; optional `arrival={route,kind,doorway}` binds the original
+arrival intent under the [marker contract](DUNGEON_MARKERS.md). Omission is
+inspection/reconstruction, never authorization to place an actor.
+`layout` is a published `layout.inputs` reference.
 The content ticket is obtained through DATA's constant-cost `content_ticket()`;
 an unpublished candidate cannot prepare a dungeon. `session` and `core_ticket`
 are checked by CORE, not supplied by an independent LOC session registry.
@@ -195,7 +199,7 @@ and material IDs in inspection projections are diagnostics, never durable IDs.
 
 Increment 2 adds LOC-010/012 palette/story, water and special-area preparation;
 see [DUNGEON_CONTEXT.md](DUNGEON_CONTEXT.md) for its bounded spatial contract.
-Increment 3 retains LOC-011 route/start/return resolution. Actual placement and
+Increment 3 adds [LOC-011 marker/return handoff](DUNGEON_MARKERS.md). Actual placement and
 entry require IMP-013/MOVE; exterior return IMP-025; swimming IMP-040; edited
 variant qualification IMP-055. Native SAVE, QUEST/action restoration and other
 required gameplay providers must pass their named joint checks. Controlled CORE

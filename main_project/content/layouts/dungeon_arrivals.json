@@ -1,0 +1,259 @@
+{
+  "schema": "classic-dungeon-arrival-annotations-v1",
+  "sources": {
+    "MAPS.BSA": "8b5550bfcac03b6f605842568fdbfb7cc6bbed7ace5999c33c900ad286fc24be",
+    "BLOCKS.BSA": "6f5a4c8d9401c1b00ef83eaac9b0c6c32f53cef6eaa4c7d7027deb739bde4795",
+    "ARCH3D.BSA": "a51a9e149168814c4a14dc80bb93d38f153be18dc9754be44bc9c7b25dd46a85"
+  },
+  "layouts": {
+    "place-00032": {
+      "schema": "dungeon-arrivals-v1",
+      "landings": [
+        {
+          "id": "main",
+          "placement": "placement-00003",
+          "record": "record-00220",
+          "purpose": "dungeon-start",
+          "frame": "classic-block-local-v1",
+          "forward": [
+            0,
+            0,
+            1
+          ],
+          "guard": {
+            "block": "packs/classic#block-1006",
+            "transform": {
+              "frame": "classic-block-local-v1",
+              "position": [
+                1680,
+                -1304,
+                1416
+              ],
+              "position_unit": "classic-layout-integer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "rotation_unit": "classic-angle-2048",
+              "scale": [
+                1,
+                1,
+                1
+              ]
+            },
+            "payload_sha256": "22186fee8adbca14c27caa67ffd7a0811086d8df8cc9b0de0463a605452b68e7"
+          },
+          "provenance": {
+            "policy": "authored-north-baseline-v1",
+            "source_record": 28728,
+            "source_role": 10,
+            "original_facing_verified": false,
+            "opening_original_role_verified": false,
+            "qualification": "explicit-source-matched-binding-v1"
+          }
+        },
+        {
+          "id": "backup",
+          "placement": "placement-00006",
+          "record": "record-00005",
+          "purpose": "dungeon-start",
+          "frame": "classic-block-local-v1",
+          "forward": [
+            0,
+            0,
+            1
+          ],
+          "guard": {
+            "block": "packs/classic#block-1000",
+            "transform": {
+              "frame": "classic-block-local-v1",
+              "position": [
+                218,
+                -1307,
+                637
+              ],
+              "position_unit": "classic-layout-integer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "rotation_unit": "classic-angle-2048",
+              "scale": [
+                1,
+                1,
+                1
+              ]
+            },
+            "payload_sha256": "2e21f86c59423cc93d3597f5d8e7d125a6b9e36aaa198e9a66df9bef4f1a41ef"
+          },
+          "provenance": {
+            "policy": "authored-north-baseline-v1",
+            "source_record": 24879,
+            "source_role": 10,
+            "original_facing_verified": false,
+            "opening_original_role_verified": false,
+            "qualification": "explicit-source-matched-binding-v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "general",
+          "kind": "general",
+          "doorway": "",
+          "default": "main",
+          "backups": [
+            "backup"
+          ],
+          "selection": "authored-order",
+          "return": {
+            "id": "exterior-general",
+            "location": "packs/classic#place-00032",
+            "layout": "packs/classic#place-00032",
+            "placement": "placement-00000",
+            "record": "",
+            "provenance": {
+              "policy": "verified-MAPS-exterior-placement-v1",
+              "doorway_geometry": "IMP-025-pending"
+            }
+          }
+        }
+      ]
+    },
+    "place-04310": {
+      "schema": "dungeon-arrivals-v1",
+      "landings": [
+        {
+          "id": "entrance",
+          "placement": "placement-00001",
+          "record": "record-00118",
+          "purpose": "dungeon-start",
+          "frame": "classic-block-local-v1",
+          "forward": [
+            0,
+            0,
+            1
+          ],
+          "guard": {
+            "block": "packs/classic#block-1094",
+            "transform": {
+              "frame": "classic-block-local-v1",
+              "position": [
+                1135,
+                -1559,
+                496
+              ],
+              "position_unit": "classic-layout-integer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "rotation_unit": "classic-angle-2048",
+              "scale": [
+                1,
+                1,
+                1
+              ]
+            },
+            "payload_sha256": "761f5118289b237842045f110bca2d0b9384af55339e3a89950b3c1cae75818d"
+          },
+          "provenance": {
+            "policy": "authored-north-baseline-v1",
+            "source_record": 32778,
+            "source_role": 10,
+            "original_facing_verified": false,
+            "opening_original_role_verified": false,
+            "qualification": "explicit-source-matched-binding-v1"
+          }
+        },
+        {
+          "id": "opening",
+          "placement": "placement-00001",
+          "record": "record-00216",
+          "purpose": "dungeon-entrance",
+          "frame": "classic-block-local-v1",
+          "forward": [
+            0,
+            0,
+            1
+          ],
+          "guard": {
+            "block": "packs/classic#block-1094",
+            "transform": {
+              "frame": "classic-block-local-v1",
+              "position": [
+                510,
+                -25,
+                1672
+              ],
+              "position_unit": "classic-layout-integer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "rotation_unit": "classic-angle-2048",
+              "scale": [
+                1,
+                1,
+                1
+              ]
+            },
+            "payload_sha256": "761f5118289b237842045f110bca2d0b9384af55339e3a89950b3c1cae75818d"
+          },
+          "provenance": {
+            "policy": "dfu-north-baseline-v1",
+            "source_record": 32814,
+            "source_role": 8,
+            "original_facing_verified": false,
+            "opening_original_role_verified": false,
+            "qualification": "explicit-source-matched-binding-v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "general",
+          "kind": "general",
+          "doorway": "",
+          "default": "entrance",
+          "backups": [],
+          "selection": "authored-order",
+          "return": {
+            "id": "exterior-general",
+            "location": "packs/classic#place-04310",
+            "layout": "packs/classic#place-04310",
+            "placement": "placement-00000",
+            "record": "",
+            "provenance": {
+              "policy": "verified-MAPS-exterior-placement-v1",
+              "doorway_geometry": "IMP-025-pending"
+            }
+          }
+        },
+        {
+          "id": "new-game-opening",
+          "kind": "opening",
+          "doorway": "",
+          "default": "opening",
+          "backups": [],
+          "selection": "authored-order",
+          "return": {
+            "id": "exterior-new-game-opening",
+            "location": "packs/classic#place-04310",
+            "layout": "packs/classic#place-04310",
+            "placement": "placement-00000",
+            "record": "",
+            "provenance": {
+              "policy": "verified-MAPS-exterior-placement-v1",
+              "doorway_geometry": "IMP-025-pending"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

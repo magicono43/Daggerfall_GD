@@ -1,5 +1,31 @@
 # Implementation dependencies
 
+**IMP-061 complete and user-accepted, 2026-11-23:** Explicit user acceptance of
+increment 3 and IMP-061 satisfies its prerequisite delivery to IMP-013 in the
+documented DATA/LOC scope. IMP-002/008/010 deliveries are also accepted for their
+assigned scopes. The dependency relationships below remain; this records provider
+delivery, not completion of the dependent's real integration tests. M2 and named
+MOVE, exterior, native-state and other joint checks remain open. See
+[acceptance](evidence/IMP-061-ACCEPTANCE-2026-11-23.md) and the
+[IMP-013 increment-1 handoff](handoffs/IMP-013-INCREMENT-1-PROMPT.txt). Preparing
+the handoff starts no implementation; issuing it authorizes increment 1 only.
+Earlier no-edge-closure/pending-review statements are historical.
+
+**IMP-061 increment 3 implemented/verified, 2026-11-23; review pending:**
+The authorized marker/return interface and unknown-classic-action metadata extension
+are delivered; [execution evidence](evidence/IMP-061-increment-3-2026-11-23.md)
+records qualified scopes. No dependency edge closes: IMP-013/MOVE placement,
+IMP-025 exterior/static-door association, full story connections and native
+SAVE/QUEST/action integrations remain real-provider obligations. Increments 1/2
+retain acceptance; no IMP-061/M2 closure or further task starts. Prior source
+rejection notes below are historical and superseded by PROJECT-DATA-D02.
+
+**IMP-061 increment 3 source investigation, 2026-11-23:** The issued prompt is
+authorized, but source qualification found an actual DATA failure for Privateer's
+Hold's central block (unknown action27 and absent runtime record ledger). See
+[source dependency evidence](evidence/IMP-061-increment-3-source-investigation-2026-11-23.md).
+No prerequisite edge changes or IMP-061/IMP-013/M2 closure is inferred.
+
 **IMP-010 task user-accepted, 2026-11-22:** The user confirmed: "I also accept IMP-010 itself". IMP-010 is complete and accepted for its documented DATA scope: geographic records (`3b9e4bd`), layouts (`e324d54`) and variants (`c4d50e7`). Its DATA deliverable is an accepted prerequisite for dependent work; remaining prerequisites and task-specific real-provider joint checks still apply. WORLD/LOC/MOVE/QUEST/SAVE/CORE-opening integrations and M1 remain open. This acceptance authorizes no new task. Earlier statements leaving parent IMP-010 open are historical. See [task record](tasks/IMP-010.md) and [evidence](evidence/IMP-010-increment-3-2026-11-22.md).
 
 **IMP-010 increment 3 user-accepted, 2026-11-22:** The user accepted the DATA variants implementation committed at `c4d50e7` (`Implementation Task 010, Part 3 Completed, 11-22-2026`): "I accept what you have done in increment 3." See [increment-3 evidence](evidence/IMP-010-increment-3-2026-11-22.md). All three assigned DATA increments are now accepted. Parent IMP-010, real WORLD/LOC/MOVE/QUEST/SAVE/CORE-opening integrations and M1 remain open; acceptance starts no further implementation and closes no named real-provider gate. Earlier pending-acceptance notes are historical.

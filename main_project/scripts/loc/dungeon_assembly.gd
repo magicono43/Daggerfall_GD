@@ -12,6 +12,8 @@ var geography: RefCounted
 var variants: RefCounted
 var _environment: RefCounted
 var _prepared_environment: RefCounted
+var _markers: RefCounted
+var _prepared_markers: RefCounted
 var _serial := 0
 var _stage := {}
 var _committed := {}
@@ -38,7 +40,10 @@ func _result(kind: String, reason := "") -> Dictionary:
 func begin(request: Dictionary) -> Dictionary:
 	_purge_obsolete_preparation()
 	if not _stage.is_empty(): return _result("busy")
-	if request.size() != 7+int(request.has("presentation"))+int(request.has("variants")) or not request.get("id") is String or request.id.is_empty() or not request.get("requester") is String or request.requester.is_empty() or not request.get("layout") is String or not request.get("preparation") is String or request.preparation.is_empty() or not request.get("session") is String or not request.get("core_ticket") is Dictionary or not request.get("content_ticket") is int: return _result("invalid","Complete original requester/session/content/preparation identity required.")
+	if request.size() != 7+int(request.has("presentation"))+int(request.has("variants"))+int(request.has("arrival")) or not request.get("id") is String or request.id.is_empty() or not request.get("requester") is String or request.requester.is_empty() or not request.get("layout") is String or not request.get("preparation") is String or request.preparation.is_empty() or not request.get("session") is String or not request.get("core_ticket") is Dictionary or not request.get("content_ticket") is int: return _result("invalid","Complete original requester/session/content/preparation identity required.")
+	if request.has("arrival"):
+		var arrival: Variant = request.arrival
+		if not arrival is Dictionary or arrival.size() != 3 or not preload("res://scripts/mod/package_library.gd").valid_id(arrival.get("route")) or arrival.get("kind") not in ["general","doorway","opening"] or not arrival.get("doorway") is String or (arrival.kind == "doorway" and not preload("res://scripts/mod/package_library.gd").valid_id(arrival.doorway)) or (arrival.kind != "doorway" and not arrival.doorway.is_empty()): return _result("invalid_route_intent","Explicit original route/kind/doorway intent required.")
 	if not _current(request): return _result("stale")
 	if _boot_body_limit < 1: return _result("physics_unavailable","The qualified Jolt body-capacity setting is unavailable.")
 	var key := Hash.digest([request.requester,request.id])
@@ -54,6 +59,7 @@ func begin(request: Dictionary) -> Dictionary:
 	var variant: Dictionary = _variant_input(request,input)
 	if not variant.ok: return variant
 	if variant.has("layout_inputs"): input = variant.layout_inputs
+	if request.has("arrival") and not input.data.has("arrivals"): return _result("missing_route","Selected layout has no arrival declarations.")
 	var placements: Array = input.data.placements.filter(func(p: Dictionary): return p.context == "dungeon")
 	if placements.is_empty(): return _result("missing","No dungeon placements; never substitute a destination.")
 	if not input.data.has("assembly"): return _result("unsupported","Required assembly connection declarations unavailable for this layout.")
@@ -94,6 +100,8 @@ func begin(request: Dictionary) -> Dictionary:
 	_stage.block_versions = {}
 	_stage.resource_versions = {}
 	_stage.pending_action_bindings = []
+	_stage.pending_unknown_action_bindings = []
+	_stage.pending_action_axis_bindings = []
 	_stage.geometry_instances = 0
 	_stage.geometry_cache = {}
 	_stage.body_nodes = {}
@@ -106,6 +114,7 @@ func begin(request: Dictionary) -> Dictionary:
 	_stage.materials.ticket = registry.content_ticket()
 	_stage.material_bindings = {}
 	_stage.variant = variant
+	_stage.markers = null
 	return {"ok":true,"kind":"staging","ticket":ticket.duplicate(true),"destination_ready":false}
 
 func _variant_input(request: Dictionary, baseline: Dictionary) -> Dictionary:
@@ -127,7 +136,7 @@ func _variant_input(request: Dictionary, baseline: Dictionary) -> Dictionary:
 	var new_placements := {}
 	for p: Dictionary in baseline.data.placements: old_placements[p.id] = p
 	for p: Dictionary in effective.data.placements: new_placements[p.id] = p
-	if Hash.digest(old_placements) != Hash.digest(new_placements) or Hash.digest(baseline.data.get("assembly")) != Hash.digest(effective.data.get("assembly")): return _variant_pending(proposal,"Changed structural layout needs its real geometry/owner compatibility gates; LOC-010 grants no migration.")
+	if Hash.digest(old_placements) != Hash.digest(new_placements) or Hash.digest(baseline.data.get("assembly")) != Hash.digest(effective.data.get("assembly")) or Hash.digest(baseline.data.get("arrivals")) != Hash.digest(effective.data.get("arrivals")): return _variant_pending(proposal,"Changed structural layout/arrival meaning needs its real geometry/owner compatibility gates; LOC-010 grants no migration.")
 	for receipt: Dictionary in proposal.compatibility:
 		if receipt.scope.scope != "location-layout" or not receipt.changed_payloads.is_empty(): return _variant_pending(proposal,"Changed block/record meaning requires the named IMP-055 and gameplay owner integrations.")
 	return proposal
@@ -215,6 +224,10 @@ func step(ticket: Dictionary) -> Dictionary:
 	for record: Dictionary in block.definition.records:
 		var key := record_key(p.id,record.id)
 		var binding := {"identity":{"layout":_stage.input.identity.duplicate(true),"placement":p.id,"record":record.id},"definition":block.identity.duplicate(true),"record":record.duplicate(true),"transform":placed.transform * Frame.pose(record.transform),"instance":"loc-transient:%d:%d:%s" % [get_instance_id(),_serial,key]}
+		if record.has("unused_action"):
+			_stage.pending_unknown_action_bindings.append({"identity":binding.identity.duplicate(true),"metadata":record.unused_action.duplicate(true)})
+		if record.has("action_axis_metadata"):
+			_stage.pending_action_axis_bindings.append({"identity":binding.identity.duplicate(true),"metadata":record.action_axis_metadata.duplicate(true)})
 		binding.state_slot = {"identity":binding.identity.duplicate(true),"owner_state_ready":false}
 		if not Frame.bounded(binding.transform.origin): return _discard("unsupported_geometry","Local geometry precision extent exceeded.",binding.identity)
 		if record.has("action") and not record.action.target.is_empty(): binding.action_target = record_key(p.id,record.action.target)
@@ -240,7 +253,7 @@ func step(ticket: Dictionary) -> Dictionary:
 			binding.geometry_provenance = geometry.provenance.duplicate(true)
 			geometry.node.transform = Frame.pose(record.transform)
 			geometry.collision.set_meta("scoped_record",key)
-			var separate_body: bool = record.get("door_metadata",{}).get("candidate",false) or record.has("action") or protected_targets.has(record.id)
+			var separate_body: bool = record.get("door_metadata",{}).get("candidate",false) or record.has("action") or record.has("unused_action") or protected_targets.has(record.id)
 			if separate_body or fixed_body == null:
 				if _stage.body_nodes.size() >= _stage.body_limit:
 					Geometry.release(geometry.node)
@@ -307,6 +320,7 @@ func _doors() -> Dictionary:
 			if _stage.suppressed.has(retained) or _stage.suppressed.has(removed): return _result("invalid","Chained duplicate relations unsupported.")
 			if removed in _stage.suppressed.values(): return _result("invalid","Previously retained door cannot be suppressed.")
 			if _stage.bindings[removed].record.has("action") and _stage.bindings[removed].record.action.kind != 0: return _result("provider_pending","Suppressed action-bearing door needs its real owner compatibility check.")
+			if _stage.bindings[removed].record.has("unused_action"): return _result("provider_pending","Suppressed unknown-action door retains a pending owner compatibility gate.")
 			for binding: Dictionary in _stage.bindings.values():
 				if binding.get("action_target","") == removed and binding.record.get("action",{}).get("kind",0) != 0: return _result("provider_pending","Suppressed door is a required action target; real owner compatibility required.")
 			for required: Dictionary in _stage.assembly.required_bindings:
@@ -428,6 +442,14 @@ func finish(ticket: Dictionary) -> Dictionary:
 	for required: Dictionary in _stage.assembly.required_bindings:
 		if not _stage.bindings.has(required.record): return _discard("missing","Required structural binding absent.",required)
 		if required.owner != "LOC-structure": return _discard("provider_pending","Required gameplay binding/state needs its real owner.",required)
+	if _stage.input.data.has("arrivals"):
+		_stage.markers = preload("res://scripts/loc/dungeon_markers.gd").new()
+		var checked_markers: Dictionary = _stage.markers.prepare(_stage.input.data.arrivals,_stage.input,_stage.bindings,_stage.blocks,func(ref_: String): return layouts.location_inputs(registry,ref_),func(ref_: String): return layouts.decode_block(registry,ref_))
+		if not checked_markers.ok: return _discard(checked_markers.kind,checked_markers.reason,checked_markers.get("referring"))
+		if ticket.request.has("arrival"):
+			var intended: Dictionary = ticket.request.arrival
+			var route: Dictionary = _stage.markers.routes.get(intended.route,{})
+			if route.is_empty() or route.kind != intended.kind or route.doorway != intended.doorway: return _discard("invalid_route_intent","Original route kind/doorway does not match its effective binding.",intended)
 	var bindings := {}
 	for key: String in _stage.bindings:
 		var binding: Dictionary = _stage.bindings[key].duplicate(true)
@@ -437,9 +459,16 @@ func finish(ticket: Dictionary) -> Dictionary:
 	var candidate := {"ok":true,"kind":"assembled","schema":"dungeon-assembly-v1","ticket":ticket.duplicate(true),"layout":_stage.input.identity.duplicate(true),"layout_version":Hash.digest({"layout":_stage.input.data,"blocks":_stage.block_versions,"resources":_stage.resource_versions,"frame":Frame.FRAME}),"block_versions":_stage.block_versions.duplicate(true),"frame":Frame.FRAME,"assembly_ready":true,"geometry_ready":true,"collision_ready":true,"destination_ready":false,"owner_state_ready":false,"placement_committed":false,"save_compatible":false,"occurrences":_stage.occurrences.duplicate(true),"bindings":bindings,"connections":connections,"suppressed":_stage.suppressed.duplicate(true)}
 	candidate.required_bindings = _stage.assembly.required_bindings.duplicate(true)
 	candidate.pending_action_bindings = _stage.pending_action_bindings.duplicate(true)
+	candidate.pending_unknown_action_bindings = _stage.pending_unknown_action_bindings.duplicate(true)
+	candidate.unknown_action_owner_ready = _stage.pending_unknown_action_bindings.is_empty()
+	candidate.pending_action_axis_bindings = _stage.pending_action_axis_bindings.duplicate(true)
+	candidate.action_axis_owner_ready = _stage.pending_action_axis_bindings.is_empty()
+	candidate.marker_ready = _stage.markers != null
+	candidate.marker_version = _stage.markers.version if _stage.markers != null else ""
 	candidate.pending_door_bindings = _stage.doors.keys().duplicate()
 	var geometry_input: Dictionary = _stage.input.data.duplicate(true)
 	geometry_input.erase("context")
+	geometry_input.erase("arrivals")
 	candidate.geometry_version = Hash.digest({"layout":geometry_input,"blocks":_stage.block_versions,"resources":_stage.resource_versions,"frame":Frame.FRAME})
 	candidate.context_ready = _stage.environment != null
 	candidate.palette = _stage.palette.duplicate(true)
@@ -465,6 +494,7 @@ func finish(ticket: Dictionary) -> Dictionary:
 		_prepared_viewport = _stage.viewport
 		_prepared_root = _stage.root
 		_prepared_environment = _stage.environment
+		_prepared_markers = _stage.markers
 	else:
 		var prior := _live
 		if prior != null: remove_child(prior)
@@ -475,6 +505,7 @@ func finish(ticket: Dictionary) -> Dictionary:
 		candidate.activation_session = ticket.request.session
 		_committed = candidate
 		_environment = _stage.environment
+		_markers = _stage.markers
 		if prior != null: Geometry.release(prior)
 	_stage.clear()
 	var result := projection(ticket)
@@ -506,6 +537,72 @@ func binding(ticket: Dictionary, placement: String, record: String) -> Dictionar
 	var view := _view(ticket)
 	if not view.bindings.has(key): return _result("missing","Scoped binding absent.")
 	return {"ok":true,"binding":view.bindings[key].duplicate(true)}
+
+func marker_candidate(ticket: Dictionary, route: String, index := 0) -> Dictionary:
+	var view := _view(ticket)
+	if view.is_empty(): return _result("stale")
+	if ticket.request.has("arrival") and route != ticket.request.arrival.route: return _result("route_mismatch","Original named/opening/general route intent cannot be retargeted.")
+	var markers: RefCounted = _prepared_markers if _prepared.get("ticket") == ticket else _markers
+	if markers == null: return preload("res://scripts/loc/dungeon_markers.gd").failed("missing_route","No qualified arrival declarations for this effective layout.",route)
+	var selected: Dictionary = markers.candidate(route,index)
+	selected.ticket = ticket.duplicate(true)
+	selected.activation_session = view.get("activation_session","")
+	selected.layout_version = view.layout_version
+	selected.geometry_version = view.geometry_version
+	selected.context_version = view.get("context_version","")
+	selected.geometry_ready = view.geometry_ready
+	selected.context_ready = view.get("context_ready",false)
+	selected.owner_state_ready = false
+	selected.unknown_action_owner_ready = view.get("unknown_action_owner_ready",false)
+	selected.pending_unknown_action_count = view.get("pending_unknown_action_bindings",[]).size()
+	selected.action_axis_owner_ready = view.get("action_axis_owner_ready",false)
+	selected.pending_action_axis_count = view.get("pending_action_axis_bindings",[]).size()
+	selected.native_restore_ready = false
+	selected.route_intent_bound = ticket.request.has("arrival")
+	selected.events = []
+	if selected.ok:
+		selected.marker.layout_version = view.layout_version
+		selected.marker.marker_version = view.marker_version
+	selected.handoff_id = Hash.digest({"ticket":ticket,"activation_session":selected.activation_session,"route":route,"index":index,"marker":selected.get("marker",{}),"return":selected.get("return",{})})
+	return selected
+
+func _marker_handoff_current(ticket: Dictionary, route: String, index: int, handoff_id: String) -> bool:
+	return marker_candidate(ticket,route,index).get("handoff_id","") == handoff_id
+
+## WORLD chooses the ordered index; LOC never advances to a backup itself.
+## Controlled providers qualify this boundary until real WORLD/MOVE arrive.
+func check_marker_candidate(ticket: Dictionary, route: String, index: int, access: Callable, placement: Callable) -> Dictionary:
+	var selected := marker_candidate(ticket,route,index)
+	if selected.get("kind") in ["stale","route_mismatch"]: return selected
+	if not selected.get("route_intent_bound",false): return _result("route_intent_pending","Inspection preparation has no original WORLD/CORE arrival intent; placement handoff is unavailable.")
+	if not access.is_valid(): return _result("access_provider_unavailable","Access must be rechecked for each authored candidate.")
+	var access_result: Variant = access.call(selected.duplicate(true))
+	if not _marker_handoff_current(ticket,route,index,selected.handoff_id): return _result("stale")
+	if not access_result is Dictionary or not access_result.get("ok",false) or access_result.get("handoff_id") != selected.handoff_id: return _result("access_rejected","Route authorization failed, changed scope or was revoked.")
+	if not selected.get("ok",false): return selected
+	if not selected.context_ready:
+		selected.kind = "context_pending"
+		return selected
+	if not placement.is_valid():
+		selected.kind = "placement_provider_unavailable"
+		selected.placement_validated = false
+		return selected
+	var checked: Variant = placement.call(selected.duplicate(true))
+	if not _marker_handoff_current(ticket,route,index,selected.handoff_id): return _result("stale")
+	if not checked is Dictionary or checked.get("handoff_id") != selected.handoff_id or checked.get("marker") != selected.marker or checked.get("frame") != Frame.FRAME: return _result("invalid_placement_result","MOVE result must retain exact operation/route/candidate identity and frame.")
+	if checked.get("kind") not in ["exact","corrected","rejected","pending"]: return _result("invalid_placement_result","Explicit MOVE outcome required.")
+	if checked.kind in ["exact","corrected"]:
+		if not checked.get("position") is Vector3 or not Frame.bounded(checked.position) or not checked.get("forward") is Vector3 or not checked.forward.is_finite() or absf(checked.forward.length()-1.0) > 0.000001: return _result("invalid_placement_result","Finite MOVE actor pose and unit facing required.")
+		if checked.kind == "corrected" and (not checked.get("provenance") is Dictionary or checked.provenance.is_empty()): return _result("invalid_placement_result","MOVE-owned correction provenance required.")
+	var rechecked: Variant = access.call(selected.duplicate(true))
+	if not _marker_handoff_current(ticket,route,index,selected.handoff_id): return _result("stale")
+	if not rechecked is Dictionary or not rechecked.get("ok",false) or rechecked.get("handoff_id") != selected.handoff_id: return _result("access_rejected","Route authorization revoked or changed scope during placement.")
+	selected.placement = checked.duplicate(true)
+	selected.placement_validated = checked.kind in ["exact","corrected"]
+	selected.kind = "placement_"+checked.kind
+	# The provider alone owns active shape/support/correction validation. No actor
+	# pose, WORLD state, entry effect or SAVE readiness is committed by this API.
+	return selected
 
 func geometry_ray(ticket: Dictionary, from: Vector3, to: Vector3) -> Dictionary:
 	var current := readiness(ticket)
@@ -564,6 +661,8 @@ func activate(ticket: Dictionary) -> Dictionary:
 	_prepared.activation_session = scope
 	_committed = _prepared
 	_environment = _prepared_environment
+	_markers = _prepared_markers
+	_prepared_markers = null
 	_prepared_environment = null
 	_prepared = {}
 	if prior != null: Geometry.release(prior)
@@ -575,6 +674,7 @@ func _drop_prepared() -> void:
 	_prepared_root = null
 	_prepared.clear()
 	_prepared_environment = null
+	_prepared_markers = null
 
 func operation_terminal(result: Dictionary) -> void:
 	if not _stage.is_empty() and _stage.ticket.request.core_ticket.get("id","") == result.id: _discard("cancelled")
@@ -588,6 +688,7 @@ func retire_scope(scope: String) -> void:
 		_live = null
 		_committed.clear()
 		_environment = null
+		_markers = null
 		_receipts.clear()
 
 func dispose() -> void:
@@ -597,4 +698,5 @@ func dispose() -> void:
 	_live = null
 	_committed.clear()
 	_environment = null
+	_markers = null
 	_receipts.clear()

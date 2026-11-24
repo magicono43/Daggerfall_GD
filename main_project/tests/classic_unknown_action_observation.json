@@ -1,0 +1,199 @@
+{
+  "schema": "classic-unknown-actions-observation-v1",
+  "source_sha256": "6f5a4c8d9401c1b00ef83eaac9b0c6c32f53cef6eaa4c7d7027deb739bde4795",
+  "profile_sha256": "1856fd83d96f96505091b540e9c3d78ffb9e5be8b9fa96a670860770f1f86b23",
+  "counts": {
+    "27": 6,
+    "32": 4,
+    "100": 2,
+    "50": 1
+  },
+  "records": [
+    {
+      "block": "block-0923",
+      "name": "N0000000.RDB",
+      "sha256": "4458917ca2a2f7a61ce4b1c2e0a8fb05abed116cc6818a0f33de2e970aace412",
+      "address": 19568,
+      "record": "record-00332",
+      "qualification": "decoded",
+      "type": "flat",
+      "raw": {
+        "kind": 27,
+        "target_address": -2
+      }
+    },
+    {
+      "block": "block-0924",
+      "name": "N0000001.RDB",
+      "sha256": "7d924c6906110952ce1df6c6bf078549f6c1cb1607d731e42ee68d579139fe71",
+      "address": 19568,
+      "record": "record-00358",
+      "qualification": "decoded",
+      "type": "flat",
+      "raw": {
+        "kind": 27,
+        "target_address": -2
+      }
+    },
+    {
+      "block": "block-0925",
+      "name": "N0000002.RDB",
+      "sha256": "bc505a1aedf9aba0857acca5f84b2a4e3636a44a9e0f5d7f93ac011f40e49eb7",
+      "address": 19568,
+      "record": "record-00382",
+      "qualification": "decoded",
+      "type": "flat",
+      "raw": {
+        "kind": 27,
+        "target_address": -2
+      }
+    },
+    {
+      "block": "block-0930",
+      "name": "N0000007.RDB",
+      "sha256": "82658832f9620660cdfa2fe2bbc25deabdbe031380a3e5b73901fc3ee6f541bc",
+      "address": 20251,
+      "record": "record-00138",
+      "qualification": "decoded",
+      "type": "flat",
+      "raw": {
+        "kind": 27,
+        "target_address": 0
+      }
+    },
+    {
+      "block": "block-0971",
+      "name": "N0000048.RDB",
+      "sha256": "e023f5fb548760cb4c8f7e3d0f3d78cf143afad2c728ef9610d235d4477ce415",
+      "address": 19121,
+      "record": "record-00162",
+      "qualification": "decoded",
+      "type": "model",
+      "raw": {
+        "kind": 32,
+        "target_address": 16178,
+        "axis": 0,
+        "duration": 0,
+        "magnitude": 0
+      }
+    },
+    {
+      "block": "block-0975",
+      "name": "N0000052.RDB",
+      "sha256": "1724f41d56e688a0ba1d5316af0cd2830e4b1a4055a8a5e143befe124281d77b",
+      "address": 20955,
+      "record": "record-00086",
+      "qualification": "decoded",
+      "type": "flat",
+      "raw": {
+        "kind": 32,
+        "target_address": 22645
+      }
+    },
+    {
+      "block": "block-1017",
+      "name": "W0000001.RDB",
+      "sha256": "0937d321728c21dcff74c0776a52c0a2854fe438e219b7d9ef4a4a36126def33",
+      "address": 19568,
+      "record": "record-00335",
+      "qualification": "decoded",
+      "type": "flat",
+      "raw": {
+        "kind": 27,
+        "target_address": -2
+      }
+    },
+    {
+      "block": "block-1041",
+      "name": "W0000025.RDB",
+      "sha256": "f031d370f50f49f626234a8515bb41a521ed626a8b8ef7cb10d3863e936125e6",
+      "address": 12330,
+      "record": "record-00109",
+      "qualification": "decoded",
+      "type": "model",
+      "raw": {
+        "kind": 32,
+        "target_address": 11772,
+        "axis": 0,
+        "duration": 0,
+        "magnitude": 0
+      }
+    },
+    {
+      "block": "block-1062",
+      "name": "S0000020.RDB",
+      "sha256": "3052fa66f24ae8b959e4125da2e5873dff8d7bac78d17d2c91d55d7ea41fc2f5",
+      "address": 23031,
+      "record": "record-00128",
+      "qualification": "decoded",
+      "type": "flat",
+      "raw": {
+        "kind": 100,
+        "target_address": 0
+      }
+    },
+    {
+      "block": "block-1077",
+      "name": "S0000082.RDB",
+      "sha256": "ca798987b2c15ec1be25719ddb581bd0a9103235ca246ef9342a7a720fd67e9c",
+      "address": 13311,
+      "record": "record-00069",
+      "qualification": "decoded",
+      "type": "model",
+      "raw": {
+        "kind": 50,
+        "target_address": -2,
+        "axis": 50,
+        "duration": 0,
+        "magnitude": 0
+      }
+    },
+    {
+      "block": "block-1082",
+      "name": "S0000140.RDB",
+      "sha256": "57e89f5cf017b7530b41a057e3cf9337ef33aae2eb06efa773df2f0bc45fdbad",
+      "address": 11715,
+      "record": "record-00165",
+      "qualification": "decoded",
+      "type": "model",
+      "raw": {
+        "kind": 32,
+        "target_address": 11834,
+        "axis": 0,
+        "duration": 0,
+        "magnitude": 0
+      }
+    },
+    {
+      "block": "block-1084",
+      "name": "S0000160.RDB",
+      "sha256": "ba48182f1848c59e467103a4a43cb9ec8d702e5a14e42dc49867a55399aa1b67",
+      "address": 21004,
+      "record": "record-00043",
+      "qualification": "decoded",
+      "type": "model",
+      "raw": {
+        "kind": 100,
+        "target_address": -2,
+        "axis": 50,
+        "duration": 0,
+        "magnitude": 0
+      }
+    },
+    {
+      "block": "block-1094",
+      "name": "S0000999.RDB",
+      "sha256": "761f5118289b237842045f110bca2d0b9384af55339e3a89950b3c1cae75818d",
+      "address": 19568,
+      "record": "record-00371",
+      "qualification": "decoded",
+      "type": "flat",
+      "raw": {
+        "kind": 27,
+        "target_address": -2
+      }
+    }
+  ],
+  "policy": "classic-unknown-action-metadata-v1",
+  "execution_verified": false
+}

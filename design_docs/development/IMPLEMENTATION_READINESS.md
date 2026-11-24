@@ -1,5 +1,40 @@
 # Implementation readiness
 
+**IMP-061 complete and user-accepted, 2026-11-23:** Satisfactory review of both
+images and explicit acceptance close increment 3 and the assigned IMP-061 task.
+All three increments retain acceptance, including the authorized source-policy
+follow-ups. IMP-002/008/010/061 deliveries satisfy the listed IMP-013 prerequisites
+for their documented scopes. See [acceptance evidence](evidence/IMP-061-ACCEPTANCE-2026-11-23.md)
+and the [increment-1 handoff](handoffs/IMP-013-INCREMENT-1-PROMPT.txt). Issuing that
+prompt authorizes location assembly in the destination chat; preparation starts
+no implementation here. M2 and named later real integrations remain open. Earlier
+pending-review/no-closure notes retain their historical meaning.
+
+**IMP-061 vanilla RDB axis follow-up, 2026-11-23:** All 187 pinned RDB blocks now
+structurally decode, including all 13 retained unknown actions and 11 exceptional
+known-motion records with pending owner interpretation. Normal marker suites pass
+2277/2292 primary checks. See the [follow-up evidence](evidence/IMP-061-classic-action-axes-2026-11-23.md)
+for final regression/export qualification. Human review and named gameplay,
+placement, story-connection and native-state gates remain open.
+
+**IMP-061 increment 3 implemented/verified, 2026-11-23; review pending:**
+DATA/LOC markers and route/return handoffs pass independent 2257/2272 primary and
+35/41 fresh-process checks plus Windows debug/release, corpus and affected
+regressions. User-authorized unknown-action metadata preserves all existing IDs;
+the prior source rejection is resolved without executable behavior. See
+[execution evidence](evidence/IMP-061-increment-3-2026-11-23.md). Increments 1/2
+remain accepted; real MOVE/access/exterior/native-state and full story-connection
+gates stay open. No IMP-061/M2 or prerequisite-edge closure is inferred. Earlier
+source-investigation status below is historical.
+
+**IMP-061 increment 3 source investigation, 2026-11-23:** Authorized; production
+markers not delivered. Privateer's Hold's central block fails accepted DATA decode
+on unknown action27 and has no allocated runtime record IDs. User-authorized DFU
+north-facing resolves only the orientation baseline. See
+[source dependency evidence](evidence/IMP-061-increment-3-source-investigation-2026-11-23.md).
+Source treatment needs resolution; accepted increments1/2 and open IMP-061/M2 /
+real-provider gates are preserved.
+
 **IMP-061 increment 2 user-accepted, 2026-11-23:** The user explicitly stated, "I accept what you have done in increment 2". Increments 1/2 are complete and accepted. At their request, the [increment-3 handoff](handoffs/IMP-061-INCREMENT-3-PROMPT.txt) is prepared for another chat; issuing it authorizes LOC-011 markers and return-reference handoff only. Preparation starts no increment-3 implementation here. Parent IMP-061/M2 and named real-provider gates remain open. Earlier acceptance-pending statements are historical.
 
 

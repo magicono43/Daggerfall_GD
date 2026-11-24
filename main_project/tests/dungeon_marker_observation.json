@@ -1,0 +1,3083 @@
+{
+  "schema": "dungeon-marker-source-observation-v1",
+  "sources": {
+    "MAPS.BSA": "8b5550bfcac03b6f605842568fdbfb7cc6bbed7ace5999c33c900ad286fc24be",
+    "BLOCKS.BSA": "6f5a4c8d9401c1b00ef83eaac9b0c6c32f53cef6eaa4c7d7027deb739bde4795",
+    "ARCH3D.BSA": "a51a9e149168814c4a14dc80bb93d38f153be18dc9754be44bc9c7b25dd46a85"
+  },
+  "profile_sha256": "a2e629e5d085b3d0ed58f3c17958f4accec4910e9204b6967203ab55af717b75",
+  "frame": "dungeon-geometry-metres-v1",
+  "locations": {
+    "place-00032": {
+      "name": "Ruins of Cyeghtan Manor",
+      "mapping": {
+        "count": 344,
+        "id": "place-00032",
+        "location_id": 26743,
+        "ordinal": 32,
+        "pitem_offset": 38938,
+        "placements": {
+          "dungeon/0": "placement-00001",
+          "dungeon/1": "placement-00002",
+          "dungeon/2": "placement-00003",
+          "dungeon/3": "placement-00004",
+          "dungeon/4": "placement-00005",
+          "dungeon/5": "placement-00006",
+          "dungeon/6": "placement-00007",
+          "dungeon/7": "placement-00008",
+          "exterior/0": "placement-00000"
+        },
+        "region": 0
+      },
+      "placements": [
+        {
+          "id": "placement-00001",
+          "block": "block-0918",
+          "name": "B0000010.RDB",
+          "grid": [
+            -1,
+            0
+          ],
+          "starting": false,
+          "sha256": "2e71589307a0d9d98ecde03becc8a480ef357325ed3b158f17a0b67187a3a211",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00013",
+              "address": 11348,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1528,
+                -535,
+                62
+              ],
+              "anchor_metres": [
+                -13.0,
+                13.375,
+                -1.55
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00012",
+              "address": 11384,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1926,
+                -1302,
+                408
+              ],
+              "anchor_metres": [
+                -3.0500000000000003,
+                32.550000000000004,
+                -10.200000000000001
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        },
+        {
+          "id": "placement-00002",
+          "block": "block-0909",
+          "name": "B0000001.RDB",
+          "grid": [
+            0,
+            -1
+          ],
+          "starting": false,
+          "sha256": "77cd9c187699fb60a9f70bcaca44a9e484153273760aaa1e30d7b4574bc5a697",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00000",
+              "address": 12567,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                581,
+                -1047,
+                792
+              ],
+              "anchor_metres": [
+                14.525,
+                26.175,
+                31.400000000000002
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00052",
+              "address": 12603,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1983,
+                -535,
+                1513
+              ],
+              "anchor_metres": [
+                49.575,
+                13.375,
+                13.375
+              ],
+              "flags": 2,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00051",
+              "address": 12639,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1130,
+                -535,
+                1227
+              ],
+              "anchor_metres": [
+                28.25,
+                13.375,
+                20.525000000000002
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00029",
+              "address": 12675,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                667,
+                -791,
+                1788
+              ],
+              "anchor_metres": [
+                16.675,
+                19.775000000000002,
+                6.5
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 6,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00019",
+              "address": 12711,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1337,
+                -537,
+                367
+              ],
+              "anchor_metres": [
+                33.425000000000004,
+                13.425,
+                42.025000000000006
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        },
+        {
+          "id": "placement-00003",
+          "block": "block-1006",
+          "name": "N0000083.RDB",
+          "grid": [
+            0,
+            0
+          ],
+          "starting": true,
+          "sha256": "22186fee8adbca14c27caa67ffd7a0811086d8df8cc9b0de0463a605452b68e7",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00006",
+              "address": 28440,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                498,
+                -33,
+                453
+              ],
+              "anchor_metres": [
+                12.450000000000001,
+                0.8250000000000001,
+                -11.325000000000001
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00174",
+              "address": 28476,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                531,
+                -26,
+                1518
+              ],
+              "anchor_metres": [
+                13.275,
+                0.65,
+                -37.95
+              ],
+              "flags": 6,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00005",
+              "address": 28512,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                725,
+                -538,
+                535
+              ],
+              "anchor_metres": [
+                18.125,
+                13.450000000000001,
+                -13.375
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00004",
+              "address": 28548,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                129,
+                -1065,
+                384
+              ],
+              "anchor_metres": [
+                3.225,
+                26.625,
+                -9.600000000000001
+              ],
+              "flags": 2,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00162",
+              "address": 28584,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                971,
+                -1326,
+                1407
+              ],
+              "anchor_metres": [
+                24.275000000000002,
+                33.15,
+                -35.175000000000004
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00224",
+              "address": 28620,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1654,
+                -1561,
+                1248
+              ],
+              "anchor_metres": [
+                41.35,
+                39.025000000000006,
+                -31.200000000000003
+              ],
+              "flags": 5,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00072",
+              "address": 28656,
+              "archive": 199,
+              "record": 11,
+              "local_position": [
+                1600,
+                -30,
+                456
+              ],
+              "anchor_metres": [
+                40.0,
+                0.75,
+                -11.4
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00003",
+              "address": 28692,
+              "archive": 199,
+              "record": 18,
+              "local_position": [
+                916,
+                -798,
+                899
+              ],
+              "anchor_metres": [
+                22.900000000000002,
+                19.950000000000003,
+                -22.475
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00220",
+              "address": 28728,
+              "archive": 199,
+              "record": 10,
+              "local_position": [
+                1680,
+                -1304,
+                1416
+              ],
+              "anchor_metres": [
+                42.0,
+                32.6,
+                -35.4
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00173",
+              "address": 29132,
+              "archive": 199,
+              "record": 20,
+              "local_position": [
+                430,
+                -35,
+                1417
+              ],
+              "anchor_metres": [
+                10.75,
+                0.875,
+                -35.425000000000004
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00082",
+              "address": 29275,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                1027,
+                -794,
+                781
+              ],
+              "anchor_metres": [
+                25.675,
+                19.85,
+                -19.525000000000002
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00002",
+              "address": 29311,
+              "archive": 199,
+              "record": 20,
+              "local_position": [
+                752,
+                -1059,
+                127
+              ],
+              "anchor_metres": [
+                18.8,
+                26.475,
+                -3.1750000000000003
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00225",
+              "address": 29418,
+              "archive": 199,
+              "record": 20,
+              "local_position": [
+                1529,
+                -1570,
+                1351
+              ],
+              "anchor_metres": [
+                38.225,
+                39.25,
+                -33.775
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00075",
+              "address": 29454,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                1056,
+                -1560,
+                407
+              ],
+              "anchor_metres": [
+                26.400000000000002,
+                39.0,
+                -10.175
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00080",
+              "address": 29811,
+              "archive": 199,
+              "record": 20,
+              "local_position": [
+                1638,
+                -548,
+                876
+              ],
+              "anchor_metres": [
+                40.95,
+                13.700000000000001,
+                -21.900000000000002
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00237",
+              "address": 29847,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                1408,
+                -299,
+                1280
+              ],
+              "anchor_metres": [
+                35.2,
+                7.4750000000000005,
+                -32.0
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00236",
+              "address": 29883,
+              "archive": 199,
+              "record": 20,
+              "local_position": [
+                1149,
+                -1067,
+                1406
+              ],
+              "anchor_metres": [
+                28.725,
+                26.675,
+                -35.15
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00078",
+              "address": 30566,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1192,
+                -1568,
+                488
+              ],
+              "anchor_metres": [
+                29.8,
+                39.2,
+                -12.200000000000001
+              ],
+              "flags": 5,
+              "magnitude": 0,
+              "sound": 1,
+              "target": -2,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00166",
+              "address": 30602,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                312,
+                -280,
+                1176
+              ],
+              "anchor_metres": [
+                7.800000000000001,
+                7.0,
+                -29.400000000000002
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00165",
+              "address": 30638,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                424,
+                -288,
+                1216
+              ],
+              "anchor_metres": [
+                10.600000000000001,
+                7.2,
+                -30.400000000000002
+              ],
+              "flags": 6,
+              "magnitude": 0,
+              "sound": 1,
+              "target": -2,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00077",
+              "address": 30745,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                1475,
+                -1047,
+                1001
+              ],
+              "anchor_metres": [
+                36.875,
+                26.175,
+                -25.025000000000002
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00073",
+              "address": 30925,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                1720,
+                -1568,
+                654
+              ],
+              "anchor_metres": [
+                43.0,
+                39.2,
+                -16.35
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        },
+        {
+          "id": "placement-00004",
+          "block": "block-0918",
+          "name": "B0000010.RDB",
+          "grid": [
+            0,
+            1
+          ],
+          "starting": false,
+          "sha256": "2e71589307a0d9d98ecde03becc8a480ef357325ed3b158f17a0b67187a3a211",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00013",
+              "address": 11348,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1528,
+                -535,
+                62
+              ],
+              "anchor_metres": [
+                38.2,
+                13.375,
+                -52.75
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00012",
+              "address": 11384,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1926,
+                -1302,
+                408
+              ],
+              "anchor_metres": [
+                48.150000000000006,
+                32.550000000000004,
+                -61.400000000000006
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        },
+        {
+          "id": "placement-00005",
+          "block": "block-0919",
+          "name": "B0000011.RDB",
+          "grid": [
+            1,
+            -1
+          ],
+          "starting": false,
+          "sha256": "5dddca5f9e0332de776539479a6fb29882ee6487d37775de23edae375dac80cf",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00030",
+              "address": 12041,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                246,
+                -792,
+                1913
+              ],
+              "anchor_metres": [
+                57.35,
+                19.8,
+                3.375
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 6,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00000",
+              "address": 12077,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                383,
+                -1303,
+                402
+              ],
+              "anchor_metres": [
+                60.775000000000006,
+                32.575,
+                41.150000000000006
+              ],
+              "flags": 6,
+              "magnitude": 0,
+              "sound": 6,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00020",
+              "address": 12113,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1664,
+                -533,
+                688
+              ],
+              "anchor_metres": [
+                92.80000000000001,
+                13.325000000000001,
+                34.0
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 3,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00019",
+              "address": 12149,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1979,
+                -1302,
+                895
+              ],
+              "anchor_metres": [
+                100.67500000000001,
+                32.550000000000004,
+                28.825000000000003
+              ],
+              "flags": 2,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        },
+        {
+          "id": "placement-00006",
+          "block": "block-1000",
+          "name": "N0000077.RDB",
+          "grid": [
+            1,
+            0
+          ],
+          "starting": false,
+          "sha256": "2e21f86c59423cc93d3597f5d8e7d125a6b9e36aaa198e9a66df9bef4f1a41ef",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00217",
+              "address": 18818,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1208,
+                -1560,
+                1408
+              ],
+              "anchor_metres": [
+                81.4,
+                39.0,
+                -35.2
+              ],
+              "flags": 2,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00153",
+              "address": 18854,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                848,
+                -1560,
+                1152
+              ],
+              "anchor_metres": [
+                72.4,
+                39.0,
+                -28.8
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00152",
+              "address": 18890,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                888,
+                -1568,
+                1864
+              ],
+              "anchor_metres": [
+                73.4,
+                39.2,
+                -46.6
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00095",
+              "address": 18926,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1920,
+                -1312,
+                816
+              ],
+              "anchor_metres": [
+                99.2,
+                32.800000000000004,
+                -20.400000000000002
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00151",
+              "address": 18962,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                384,
+                -280,
+                1216
+              ],
+              "anchor_metres": [
+                60.800000000000004,
+                7.0,
+                -30.400000000000002
+              ],
+              "flags": 6,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00000",
+              "address": 20000,
+              "archive": 199,
+              "record": 18,
+              "local_position": [
+                784,
+                -792,
+                1008
+              ],
+              "anchor_metres": [
+                70.8,
+                19.8,
+                -25.200000000000003
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00089",
+              "address": 20036,
+              "archive": 199,
+              "record": 20,
+              "local_position": [
+                1048,
+                -1560,
+                632
+              ],
+              "anchor_metres": [
+                77.4,
+                39.0,
+                -15.8
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00148",
+              "address": 20143,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                832,
+                -1608,
+                1152
+              ],
+              "anchor_metres": [
+                72.0,
+                40.2,
+                -28.8
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00141",
+              "address": 20465,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                416,
+                -1568,
+                1232
+              ],
+              "anchor_metres": [
+                61.6,
+                39.2,
+                -30.8
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00083",
+              "address": 20975,
+              "archive": 199,
+              "record": 20,
+              "local_position": [
+                1704,
+                -1560,
+                824
+              ],
+              "anchor_metres": [
+                93.80000000000001,
+                39.0,
+                -20.6
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00213",
+              "address": 21011,
+              "archive": 199,
+              "record": 20,
+              "local_position": [
+                1664,
+                -1560,
+                1152
+              ],
+              "anchor_metres": [
+                92.80000000000001,
+                39.0,
+                -28.8
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": -2,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00035",
+              "address": 21331,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                864,
+                -1304,
+                128
+              ],
+              "anchor_metres": [
+                72.8,
+                32.6,
+                -3.2
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00034",
+              "address": 21403,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                992,
+                -1560,
+                896
+              ],
+              "anchor_metres": [
+                76.0,
+                39.0,
+                -22.400000000000002
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00033",
+              "address": 21439,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                104,
+                -1304,
+                960
+              ],
+              "anchor_metres": [
+                53.800000000000004,
+                32.6,
+                -24.0
+              ],
+              "flags": 5,
+              "magnitude": 0,
+              "sound": 6,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00132",
+              "address": 21809,
+              "archive": 199,
+              "record": 11,
+              "local_position": [
+                984,
+                -1312,
+                1144
+              ],
+              "anchor_metres": [
+                75.8,
+                32.800000000000004,
+                -28.6
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00022",
+              "address": 22132,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                928,
+                -1048,
+                672
+              ],
+              "anchor_metres": [
+                74.4,
+                26.200000000000003,
+                -16.8
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00131",
+              "address": 22168,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                960,
+                -1304,
+                1720
+              ],
+              "anchor_metres": [
+                75.2,
+                32.6,
+                -43.0
+              ],
+              "flags": 2,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00016",
+              "address": 23058,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                672,
+                -24,
+                888
+              ],
+              "anchor_metres": [
+                68.0,
+                0.6000000000000001,
+                -22.200000000000003
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00126",
+              "address": 23094,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                120,
+                -88,
+                1120
+              ],
+              "anchor_metres": [
+                54.2,
+                2.2,
+                -28.0
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 5,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00015",
+              "address": 23130,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                128,
+                -536,
+                696
+              ],
+              "anchor_metres": [
+                54.400000000000006,
+                13.4,
+                -17.400000000000002
+              ],
+              "flags": 2,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00125",
+              "address": 23237,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                880,
+                -280,
+                1472
+              ],
+              "anchor_metres": [
+                73.2,
+                7.0,
+                -36.800000000000004
+              ],
+              "flags": 5,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00199",
+              "address": 23926,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1152,
+                -536,
+                1256
+              ],
+              "anchor_metres": [
+                80.0,
+                13.4,
+                -31.400000000000002
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00198",
+              "address": 23962,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1248,
+                -544,
+                1144
+              ],
+              "anchor_metres": [
+                82.4,
+                13.600000000000001,
+                -28.6
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 2,
+              "target": -2,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00121",
+              "address": 24665,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                880,
+                -808,
+                1112
+              ],
+              "anchor_metres": [
+                73.2,
+                20.200000000000003,
+                -27.8
+              ],
+              "flags": 5,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00195",
+              "address": 24843,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1432,
+                -600,
+                1408
+              ],
+              "anchor_metres": [
+                87.0,
+                15.0,
+                -35.2
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 5,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00005",
+              "address": 24879,
+              "archive": 199,
+              "record": 10,
+              "local_position": [
+                218,
+                -1307,
+                637
+              ],
+              "anchor_metres": [
+                56.650000000000006,
+                32.675000000000004,
+                -15.925
+              ],
+              "flags": 16,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00073",
+              "address": 25835,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1408,
+                -1312,
+                1000
+              ],
+              "anchor_metres": [
+                86.4,
+                32.800000000000004,
+                -25.0
+              ],
+              "flags": 6,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00117",
+              "address": 25871,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                672,
+                -536,
+                1920
+              ],
+              "anchor_metres": [
+                68.0,
+                13.4,
+                -48.0
+              ],
+              "flags": 6,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00186",
+              "address": 25907,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1152,
+                -280,
+                1384
+              ],
+              "anchor_metres": [
+                80.0,
+                7.0,
+                -34.6
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00185",
+              "address": 26014,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                1152,
+                -296,
+                1096
+              ],
+              "anchor_metres": [
+                80.0,
+                7.4,
+                -27.400000000000002
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        },
+        {
+          "id": "placement-00007",
+          "block": "block-0918",
+          "name": "B0000010.RDB",
+          "grid": [
+            1,
+            1
+          ],
+          "starting": false,
+          "sha256": "2e71589307a0d9d98ecde03becc8a480ef357325ed3b158f17a0b67187a3a211",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00013",
+              "address": 11348,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1528,
+                -535,
+                62
+              ],
+              "anchor_metres": [
+                89.4,
+                13.375,
+                -52.75
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00012",
+              "address": 11384,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1926,
+                -1302,
+                408
+              ],
+              "anchor_metres": [
+                99.35000000000001,
+                32.550000000000004,
+                -61.400000000000006
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        },
+        {
+          "id": "placement-00008",
+          "block": "block-0908",
+          "name": "B0000000.RDB",
+          "grid": [
+            2,
+            0
+          ],
+          "starting": false,
+          "sha256": "77cd9c187699fb60a9f70bcaca44a9e484153273760aaa1e30d7b4574bc5a697",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00000",
+              "address": 12567,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                581,
+                -1047,
+                792
+              ],
+              "anchor_metres": [
+                116.92500000000001,
+                26.175,
+                -19.8
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00052",
+              "address": 12603,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1983,
+                -535,
+                1513
+              ],
+              "anchor_metres": [
+                151.975,
+                13.375,
+                -37.825
+              ],
+              "flags": 2,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00051",
+              "address": 12639,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1130,
+                -535,
+                1227
+              ],
+              "anchor_metres": [
+                130.65,
+                13.375,
+                -30.675
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00029",
+              "address": 12675,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                667,
+                -791,
+                1788
+              ],
+              "anchor_metres": [
+                119.075,
+                19.775000000000002,
+                -44.7
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 6,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00019",
+              "address": 12711,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1337,
+                -537,
+                367
+              ],
+              "anchor_metres": [
+                135.82500000000002,
+                13.425,
+                -9.175
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        }
+      ],
+      "unique_editor_markers": 72,
+      "original_opening_role_verified": false,
+      "original_facing_verified": false
+    },
+    "place-04310": {
+      "name": "Privateer's Hold",
+      "mapping": {
+        "count": 1331,
+        "id": "place-04310",
+        "location_id": 50049,
+        "ordinal": 179,
+        "pitem_offset": 280567,
+        "placements": {
+          "dungeon/0": "placement-00001",
+          "dungeon/1": "placement-00002",
+          "dungeon/2": "placement-00003",
+          "dungeon/3": "placement-00004",
+          "dungeon/4": "placement-00005",
+          "exterior/0": "placement-00000"
+        },
+        "region": 17
+      },
+      "placements": [
+        {
+          "id": "placement-00001",
+          "block": "block-1094",
+          "name": "S0000999.RDB",
+          "grid": [
+            0,
+            0
+          ],
+          "starting": true,
+          "sha256": "761f5118289b237842045f110bca2d0b9384af55339e3a89950b3c1cae75818d",
+          "qualification": "unsupported",
+          "diagnostic": {
+            "kind": "unsupported",
+            "ok": false,
+            "provider": "classic",
+            "reason": "Unsupported required action interpretation.",
+            "record": 19568,
+            "schema": "classic-layout-source-v1",
+            "source": "S0000999.RDB",
+            "target": 27
+          },
+          "markers": [
+            {
+              "id": null,
+              "address": 27347,
+              "archive": 199,
+              "record": 20,
+              "local_position": [
+                512,
+                -808,
+                1881
+              ],
+              "anchor_metres": [
+                12.8,
+                20.200000000000003,
+                -47.025000000000006
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 27942,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                316,
+                -1302,
+                2007
+              ],
+              "anchor_metres": [
+                7.9,
+                32.550000000000004,
+                -50.175000000000004
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 27978,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                318,
+                -1302,
+                1965
+              ],
+              "anchor_metres": [
+                7.95,
+                32.550000000000004,
+                -49.125
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 30872,
+              "archive": 199,
+              "record": 20,
+              "local_position": [
+                678,
+                -1816,
+                746
+              ],
+              "anchor_metres": [
+                16.95,
+                45.400000000000006,
+                -18.650000000000002
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 31903,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                448,
+                -800,
+                1664
+              ],
+              "anchor_metres": [
+                11.200000000000001,
+                20.0,
+                -41.6
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 32047,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                331,
+                -1311,
+                78
+              ],
+              "anchor_metres": [
+                8.275,
+                32.775,
+                -1.9500000000000002
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 32671,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                1285,
+                -63,
+                528
+              ],
+              "anchor_metres": [
+                32.125,
+                1.5750000000000002,
+                -13.200000000000001
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 32778,
+              "archive": 199,
+              "record": 10,
+              "local_position": [
+                1135,
+                -1559,
+                496
+              ],
+              "anchor_metres": [
+                28.375,
+                38.975,
+                -12.4
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 32814,
+              "archive": 199,
+              "record": 8,
+              "local_position": [
+                510,
+                -25,
+                1672
+              ],
+              "anchor_metres": [
+                12.75,
+                0.625,
+                -41.800000000000004
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 32850,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1040,
+                -24,
+                511
+              ],
+              "anchor_metres": [
+                26.0,
+                0.6000000000000001,
+                -12.775
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 32886,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1937,
+                -315,
+                509
+              ],
+              "anchor_metres": [
+                48.425000000000004,
+                7.875,
+                -12.725000000000001
+              ],
+              "flags": 0,
+              "magnitude": 3,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 32922,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1649,
+                -297,
+                864
+              ],
+              "anchor_metres": [
+                41.225,
+                7.425000000000001,
+                -21.6
+              ],
+              "flags": 0,
+              "magnitude": 1,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 32958,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1485,
+                -297,
+                1347
+              ],
+              "anchor_metres": [
+                37.125,
+                7.425000000000001,
+                -33.675000000000004
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 32994,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1389,
+                -41,
+                1539
+              ],
+              "anchor_metres": [
+                34.725,
+                1.0250000000000001,
+                -38.475
+              ],
+              "flags": 0,
+              "magnitude": 138,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33030,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                141,
+                -329,
+                771
+              ],
+              "anchor_metres": [
+                3.5250000000000004,
+                8.225,
+                -19.275000000000002
+              ],
+              "flags": 0,
+              "magnitude": 3,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33066,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                769,
+                -553,
+                227
+              ],
+              "anchor_metres": [
+                19.225,
+                13.825000000000001,
+                -5.675000000000001
+              ],
+              "flags": 0,
+              "magnitude": 141,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33102,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1435,
+                -553,
+                407
+              ],
+              "anchor_metres": [
+                35.875,
+                13.825000000000001,
+                -10.175
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33138,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1307,
+                -553,
+                151
+              ],
+              "anchor_metres": [
+                32.675000000000004,
+                13.825000000000001,
+                -3.7750000000000004
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 2,
+              "target": -2,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33210,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1135,
+                -585,
+                1399
+              ],
+              "anchor_metres": [
+                28.375,
+                14.625,
+                -34.975
+              ],
+              "flags": 0,
+              "magnitude": 3,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33246,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1609,
+                -1047,
+                763
+              ],
+              "anchor_metres": [
+                40.225,
+                26.175,
+                -19.075
+              ],
+              "flags": 0,
+              "magnitude": 15,
+              "sound": 3,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33318,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                455,
+                -1073,
+                1680
+              ],
+              "anchor_metres": [
+                11.375,
+                26.825000000000003,
+                -42.0
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33354,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                817,
+                -1069,
+                203
+              ],
+              "anchor_metres": [
+                20.425,
+                26.725,
+                -5.075
+              ],
+              "flags": 0,
+              "magnitude": 7,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33390,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1661,
+                -553,
+                673
+              ],
+              "anchor_metres": [
+                41.525000000000006,
+                13.825000000000001,
+                -16.825
+              ],
+              "flags": 0,
+              "magnitude": 3,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33426,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                611,
+                -809,
+                1723
+              ],
+              "anchor_metres": [
+                15.275,
+                20.225,
+                -43.075
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33462,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                751,
+                -1321,
+                1893
+              ],
+              "anchor_metres": [
+                18.775000000000002,
+                33.025,
+                -47.325
+              ],
+              "flags": 0,
+              "magnitude": 1,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33498,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                129,
+                -1353,
+                761
+              ],
+              "anchor_metres": [
+                3.225,
+                33.825,
+                -19.025000000000002
+              ],
+              "flags": 0,
+              "magnitude": 3,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33534,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                443,
+                -1321,
+                275
+              ],
+              "anchor_metres": [
+                11.075000000000001,
+                33.025,
+                -6.875
+              ],
+              "flags": 0,
+              "magnitude": 138,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33570,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1354,
+                -1577,
+                127
+              ],
+              "anchor_metres": [
+                33.85,
+                39.425000000000004,
+                -3.1750000000000003
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 6,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33606,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1669,
+                -1583,
+                514
+              ],
+              "anchor_metres": [
+                41.725,
+                39.575,
+                -12.850000000000001
+              ],
+              "flags": 0,
+              "magnitude": 1,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33642,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1513,
+                -1577,
+                612
+              ],
+              "anchor_metres": [
+                37.825,
+                39.425000000000004,
+                -15.3
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": -2,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33678,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1267,
+                -1577,
+                1019
+              ],
+              "anchor_metres": [
+                31.675,
+                39.425000000000004,
+                -25.475
+              ],
+              "flags": 0,
+              "magnitude": 3,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33714,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1910,
+                -1705,
+                450
+              ],
+              "anchor_metres": [
+                47.75,
+                42.625,
+                -11.25
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 6,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33750,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                540,
+                -1833,
+                700
+              ],
+              "anchor_metres": [
+                13.5,
+                45.825,
+                -17.5
+              ],
+              "flags": 0,
+              "magnitude": 15,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33786,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1269,
+                -1833,
+                1336
+              ],
+              "anchor_metres": [
+                31.725,
+                45.825,
+                -33.4
+              ],
+              "flags": 0,
+              "magnitude": 138,
+              "sound": 5,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33822,
+              "archive": 199,
+              "record": 16,
+              "local_position": [
+                1323,
+                -1833,
+                1810
+              ],
+              "anchor_metres": [
+                33.075,
+                45.825,
+                -45.25
+              ],
+              "flags": 0,
+              "magnitude": 15,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33858,
+              "archive": 199,
+              "record": 18,
+              "local_position": [
+                1428,
+                -1824,
+                1699
+              ],
+              "anchor_metres": [
+                35.7,
+                45.6,
+                -42.475
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 33894,
+              "archive": 199,
+              "record": 11,
+              "local_position": [
+                645,
+                -41,
+                1585
+              ],
+              "anchor_metres": [
+                16.125,
+                1.0250000000000001,
+                -39.625
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 34002,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                1479,
+                -22,
+                1519
+              ],
+              "anchor_metres": [
+                36.975,
+                0.55,
+                -37.975
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": null,
+              "address": 34074,
+              "archive": 199,
+              "record": 19,
+              "local_position": [
+                1298,
+                -296,
+                989
+              ],
+              "anchor_metres": [
+                32.45,
+                7.4,
+                -24.725
+              ],
+              "flags": 0,
+              "magnitude": 0,
+              "sound": 0,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        },
+        {
+          "id": "placement-00002",
+          "block": "block-0917",
+          "name": "B0000009.RDB",
+          "grid": [
+            -1,
+            0
+          ],
+          "starting": false,
+          "sha256": "c3acc53a584480a42d7b7c2d5feacc9d42d4a07f37e85c2499d3a6eeaf1c1c53",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00017",
+              "address": 11396,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                926,
+                -1160,
+                1918
+              ],
+              "anchor_metres": [
+                -28.05,
+                29.0,
+                -47.95
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 6,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00027",
+              "address": 11432,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1975,
+                -534,
+                1173
+              ],
+              "anchor_metres": [
+                -1.8250000000000002,
+                13.350000000000001,
+                -29.325000000000003
+              ],
+              "flags": 6,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00000",
+              "address": 11468,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                857,
+                -1303,
+                429
+              ],
+              "anchor_metres": [
+                -29.775000000000002,
+                32.575,
+                -10.725000000000001
+              ],
+              "flags": 2,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        },
+        {
+          "id": "placement-00003",
+          "block": "block-0914",
+          "name": "B0000006.RDB",
+          "grid": [
+            0,
+            -1
+          ],
+          "starting": false,
+          "sha256": "083a6ebc5e0f1781cb1b950fc0531e6ae7deea2fc1fd2e883b3fc553a4caf2f2",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00025",
+              "address": 12569,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                448,
+                -1303,
+                1719
+              ],
+              "anchor_metres": [
+                11.200000000000001,
+                32.575,
+                8.225
+              ],
+              "flags": 6,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00000",
+              "address": 12605,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                387,
+                -534,
+                700
+              ],
+              "anchor_metres": [
+                9.675,
+                13.350000000000001,
+                33.7
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00024",
+              "address": 12641,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                317,
+                -790,
+                1152
+              ],
+              "anchor_metres": [
+                7.925000000000001,
+                19.75,
+                22.400000000000002
+              ],
+              "flags": 2,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00014",
+              "address": 12677,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1922,
+                -1303,
+                314
+              ],
+              "anchor_metres": [
+                48.050000000000004,
+                32.575,
+                43.35
+              ],
+              "flags": 5,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00054",
+              "address": 12713,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1759,
+                -536,
+                1401
+              ],
+              "anchor_metres": [
+                43.975,
+                13.4,
+                16.175
+              ],
+              "flags": 3,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        },
+        {
+          "id": "placement-00004",
+          "block": "block-0911",
+          "name": "B0000003.RDB",
+          "grid": [
+            1,
+            0
+          ],
+          "starting": false,
+          "sha256": "e2f17ecaf5ca29953e2026be243aadb33dd17ce2c64e795b0de0c65e63373070",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00016",
+              "address": 13166,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1419,
+                -535,
+                81
+              ],
+              "anchor_metres": [
+                86.67500000000001,
+                13.375,
+                -2.025
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00029",
+              "address": 13202,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                691,
+                -665,
+                1916
+              ],
+              "anchor_metres": [
+                68.47500000000001,
+                16.625,
+                -47.900000000000006
+              ],
+              "flags": 2,
+              "magnitude": 0,
+              "sound": 6,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00028",
+              "address": 13238,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                308,
+                -1302,
+                1611
+              ],
+              "anchor_metres": [
+                58.900000000000006,
+                32.550000000000004,
+                -40.275000000000006
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00001",
+              "address": 13274,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                947,
+                -534,
+                900
+              ],
+              "anchor_metres": [
+                74.875,
+                13.350000000000001,
+                -22.5
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00000",
+              "address": 13310,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                385,
+                -533,
+                708
+              ],
+              "anchor_metres": [
+                60.825,
+                13.325000000000001,
+                -17.7
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 1,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        },
+        {
+          "id": "placement-00005",
+          "block": "block-0920",
+          "name": "B0000012.RDB",
+          "grid": [
+            0,
+            1
+          ],
+          "starting": false,
+          "sha256": "467608670d4188fd9833839daf2f7b02a4e8e52e130c9f2c1d4f48946e891cb4",
+          "qualification": "decoded",
+          "diagnostic": null,
+          "markers": [
+            {
+              "id": "record-00057",
+              "address": 13066,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1136,
+                -535,
+                1638
+              ],
+              "anchor_metres": [
+                28.400000000000002,
+                13.375,
+                -92.15
+              ],
+              "flags": 1,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00024",
+              "address": 13102,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                330,
+                -534,
+                1034
+              ],
+              "anchor_metres": [
+                8.25,
+                13.350000000000001,
+                -77.05000000000001
+              ],
+              "flags": 5,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00000",
+              "address": 13138,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                913,
+                -533,
+                973
+              ],
+              "anchor_metres": [
+                22.825000000000003,
+                13.325000000000001,
+                -75.525
+              ],
+              "flags": 5,
+              "magnitude": 0,
+              "sound": 3,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            },
+            {
+              "id": "record-00056",
+              "address": 13174,
+              "archive": 199,
+              "record": 15,
+              "local_position": [
+                1771,
+                -534,
+                1297
+              ],
+              "anchor_metres": [
+                44.275000000000006,
+                13.350000000000001,
+                -83.625
+              ],
+              "flags": 4,
+              "magnitude": 0,
+              "sound": 2,
+              "target": 0,
+              "action": 0,
+              "orientation_encoded": false
+            }
+          ]
+        }
+      ],
+      "unique_editor_markers": 56,
+      "original_opening_role_verified": false,
+      "original_facing_verified": false
+    }
+  }
+}

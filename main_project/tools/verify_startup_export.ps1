@@ -6,6 +6,7 @@ param(
     [switch]$M1Composition,
     [switch]$DungeonAssembly,
     [switch]$DungeonContext,
+    [switch]$DungeonMarkers,
     [switch]$ModDiscovery,
     [switch]$DependencyPlanning,
     [switch]$DefinitionPublication,
@@ -29,7 +30,8 @@ param(
     [switch]$FormulaExtraError
 )
 $ErrorActionPreference = 'Stop'
-if ($DungeonContext) { $DungeonAssembly = $true; $Fixture = 'dungeon-context-v1' }
+if ($DungeonMarkers) { $DungeonContext = $true; $DungeonAssembly = $true; $Fixture = 'dungeon-markers-v1' }
+elseif ($DungeonContext) { $DungeonAssembly = $true; $Fixture = 'dungeon-context-v1' }
 if ($DungeonAssembly) {
     foreach ($selection in @('M1Composition','ModDiscovery','DependencyPlanning','DefinitionPublication','TextCatalog','StructuredText','LocaleFonts','TranslationPreferences','ActorInputs','ItemSpellInputs','FactionQuestInputs','GeographyInputs','LayoutInputs','VariantInputs','ClassicMedia','MediaReplacements','NativeMedia','Randomness','RandomnessSession','Formula','FormulaFault','FormulaExtraError')) {
         if ((Get-Variable -Name $selection -ValueOnly)) { throw 'DungeonAssembly requires its independent export selection.' }
@@ -64,7 +66,7 @@ $priorLocal = $env:LOCALAPPDATA
 $report = @{ ok = $false; status = 'incomplete'; configuration = $Configuration; classic_source = $ClassicSource
     fixture = $(if ($FormulaExtraError) {'formula-extra-error-v1'} elseif ($Formula -or $FormulaFault) {'formula-v1'} elseif ($RandomnessSession) {'randomness-session-v1'} elseif ($Randomness) {'randomness-v1'} elseif ($DefinitionPublication) {'publication-v1'} elseif ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
     reproduction = @{ command = './main_project/tools/verify_startup_export.ps1'; arguments = @{
-        DungeonContext = [bool]$DungeonContext; DungeonAssembly = [bool]$DungeonAssembly; M1Composition = [bool]$M1Composition; VariantInputs = [bool]$VariantInputs; LayoutInputs = [bool]$LayoutInputs; Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; RandomnessSession = [bool]$RandomnessSession; Formula = [bool]$Formula; FormulaFault = [bool]$FormulaFault; FormulaExtraError = [bool]$FormulaExtraError; Godot = $Godot; Templates = $Templates } } }
+        DungeonMarkers = [bool]$DungeonMarkers; DungeonContext = [bool]$DungeonContext; DungeonAssembly = [bool]$DungeonAssembly; M1Composition = [bool]$M1Composition; VariantInputs = [bool]$VariantInputs; LayoutInputs = [bool]$LayoutInputs; Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; RandomnessSession = [bool]$RandomnessSession; Formula = [bool]$Formula; FormulaFault = [bool]$FormulaFault; FormulaExtraError = [bool]$FormulaExtraError; Godot = $Godot; Templates = $Templates } } }
 function Copy-ExportResources([string]$Source, [string]$Destination) {
     New-Item -ItemType Directory -Force $Destination | Out-Null
     foreach ($entry in Get-ChildItem -LiteralPath $Source) {
@@ -232,7 +234,7 @@ foreach ($mode in @('headless','rendered')) {
         $fixture.fixture = if ($FormulaExtraError) { 'formula-extra-error-v1' } else { 'formula-v1' }
     }
     if ($M1Composition) { $fixture.mode = 'm1-composition'; $fixture.fixture = 'm1-composition-v1' }
-    if ($DungeonAssembly) { $fixture.mode = 'dungeon-assembly'; $fixture.fixture = $(if ($DungeonContext) { 'dungeon-context-v1' } else { 'dungeon-assembly-v1' }); $report.fixture = $fixture.fixture }
+    if ($DungeonAssembly) { $fixture.mode = 'dungeon-assembly'; $fixture.fixture = $(if ($DungeonMarkers) { 'dungeon-markers-v1' } elseif ($DungeonContext) { 'dungeon-context-v1' } else { 'dungeon-assembly-v1' }); $report.fixture = $fixture.fixture }
     $fixture |
         ConvertTo-Json | Set-Content "$sandbox/fixture.json"
     $arguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/fixture.json")

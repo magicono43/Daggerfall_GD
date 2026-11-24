@@ -130,7 +130,12 @@ func focus_current(target: Control) -> void:
 		target.grab_focus()
 
 func _process(_delta: float) -> void:
-	if field == null or not field.has_focus() or DisplayServer.get_name() == "headless":
+	if not is_instance_valid(field) or not field.has_focus() or DisplayServer.get_name() == "headless":
+		return
+	# Control focus survives native window focus loss. On Windows, polling IME
+	# with no focused native window can hit the backend's invalid-window lookup.
+	# Retain composition state until this prompt's own window regains focus.
+	if not get_window().has_focus():
 		return
 	var composing := not DisplayServer.ime_get_text().is_empty()
 	if _composition and not composing:

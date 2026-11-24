@@ -390,6 +390,35 @@ func shell_cases(shell: Control, fixture: Dictionary) -> void:
 	if prompt != null:
 		prompt.field.grab_focus()
 		await shell.get_tree().process_frame
+		if DisplayServer.get_name() != "headless":
+			# Exercise local LineEdit focus with another actual native window owning
+			# OS focus. This checks safe polling, not physical IME qualification.
+			var main_window: Window = shell.get_window()
+			var embedded_before: bool = main_window.gui_embed_subwindows
+			main_window.gui_embed_subwindows = false
+			var focus_peer := Window.new()
+			focus_peer.title = "Controlled native focus fixture"
+			focus_peer.size = Vector2i(64,64)
+			focus_peer.position = Vector2i(-32000,-32000)
+			main_window.add_child(focus_peer)
+			focus_peer.show()
+			focus_peer.grab_focus()
+			await shell.get_tree().process_frame
+			await shell.get_tree().process_frame
+			var composition_before: bool = prompt._composition
+			var composition_frame_before: int = prompt._composition_end_frame
+			# Controlled pending composition must not end from another window's
+			# empty IME buffer. No physical IME input is being certified here.
+			prompt._composition = true
+			prompt._process(0.0)
+			check("rendered unfocused prompt preserves modal and draft",not main_window.has_focus() and prompt.field.has_focus() and prompt._composition and prompt._composition_end_frame == composition_frame_before and ui.windows.top().id == prompt_id and submissions[0] == 0)
+			prompt._composition = composition_before
+			prompt._composition_end_frame = composition_frame_before
+			focus_peer.queue_free()
+			await shell.get_tree().process_frame
+			main_window.gui_embed_subwindows = embedded_before
+			main_window.grab_focus()
+			prompt.field.grab_focus()
 		ui.windows.update_data(prompt_id, {"draft": "Rejected"})
 		prompt.field.text = "Rejected"
 		prompt.submit("submit")

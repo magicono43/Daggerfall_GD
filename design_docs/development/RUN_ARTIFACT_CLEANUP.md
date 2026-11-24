@@ -1,5 +1,59 @@
 # Verification run artifact cleanup
 
+## 2026-11-23 IMP-061 classic action-axis follow-up
+
+Six final verification/export commands pass; two earlier attempts retain their
+obsolete fixture-expectation failures. The eight explicitly owned GUID roots were
+inactive and checked for workspace containment/reparse points before cleanup.
+Removed 12,131 reproducible payload files / 2,323,584,977 bytes; retained 115 child
+evidence files with verified hashes. No task full build remains. The losslessly
+verified cleanup journal is
+`main_project/tests/.runs/dungeon-cleanup-35387e55a14546abac6dd75a1c04ccec.json.gz`
+(2,915,892 to 150,113 bytes). The exact earlier uncommitted identity ledger remains
+in a verified 3,542,198-byte gzip archive; redundant working profile copies were
+removed after verification. No unique input was discarded.
+
+Final measured retention is about 2.15 GiB (2,308,437,691 bytes before final summary
+writes). The earlier threshold review remains applicable: other-task retained
+evidence and protected human state were preserved. All 1,317 protected IMP-011
+review file hashes match before/after. No elevated process-query dependency,
+security change or other-task cleanup was introduced. See the
+[follow-up evidence](evidence/IMP-061-classic-action-axes-2026-11-23.md) and
+[machine audit](evidence/IMP-061-classic-action-axes-2026-11-23.audit.json).
+
+## 2026-11-23 IMP-061 increment-3 verification
+
+All required final commands pass. Ordinary non-elevated activity checks found no
+engine active before cleanup. Thirty-one explicitly owned GUID roots were checked
+for absolute workspace containment and reparse points. Cleanup removed **46,756
+files /8,758,047,119 logical bytes**, retaining **471 child reports/logs/captures**
+with before/after hashes. Two reproducible profile copies additionally removed
+**38,119,072 bytes** after preserving the complete old/new identity comparison.
+
+The cleanup journal was archived losslessly and verified byte-for-byte:
+`main_project/tests/.runs/dungeon-cleanup-6d0b8d066c9e4fb39eec46a8c06b8e8f.zip`
+(11,300,210→557,912 bytes). Its archive/entry SHA-256 and counts are in
+`main_project/tests/.runs/imp061-marker-source-audit/run-cleanup-archive.json`.
+Eight compact before-fix source snapshots preserve escaped integration boundaries.
+No task-owned full project/export/cache remains and no new build exception/expiry
+is needed; compact labelled captures support user review.
+
+Final measured total retention is **2,294,194,740 bytes (about 2.137 GiB)**,
+including all regular root files and excluding reparse traversal. Task-owned
+compact retention is **32,913,101 bytes (about 31.4 MiB)**. The preliminary
+directory-only pre-cleanup measurement was 10,946,613,564 bytes (root evidence files
+excluded), so the 8 GiB review threshold was addressed by removing understood owned
+payloads. The remaining 2 GiB task review trigger is exceeded by earlier retained
+evidence/unique human state; the largest non-owned roots were reviewed and retained
+unchanged rather than deleted blindly.
+
+The protected `imp011-view-review-2026-11-23-final` remains **209,339,669 bytes**;
+**all 1,317 file hashes** match the pre-cleanup snapshot, including unique human
+state/BUILD/logs. Classic/reference data, installed tools/templates, authoritative
+files and other-task roots were not removed. Exact retention/protection records
+are in the compact task audit root and the
+[increment-3 machine audit](evidence/IMP-061-increment-3-2026-11-23.audit.json).
+
 ## 2026-11-23 IMP-061 increment-1 verification
 
 All 14 final commands passed before the last cleanup. Ordinary non-elevated

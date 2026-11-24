@@ -46,9 +46,11 @@ func publish_synthetic(mods: RefCounted) -> void:
 	var unsupported := test_layout("corridor",declared)
 	unsupported.data.placements[1].block = "packs/assembly.test#missing-model"
 	entries.append({"id":"late-resource","value":unsupported})
-	var unsupported_axis := test_layout("corridor",declared)
-	unsupported_axis.data.placements[1].block = "packs/classic#"+observation.unsupported_axis.block
-	entries.append({"id":"unsupported-axis","value":unsupported_axis})
+	var axis_connection := test_layout("corridor",declared)
+	# This source now decodes. It still cannot satisfy the synthetic corridor's
+	# declared walk-support connection; failure must occur after both blocks stage.
+	axis_connection.data.placements[1].block = "packs/classic#"+observation.unsupported_axis.block
+	entries.append({"id":"unqualified-axis-connection","value":axis_connection})
 	var hole := test_layout("corridor",declared)
 	hole.data.placements[1].block = "packs/assembly.test#no-support"
 	entries.append({"id":"missing-support","value":hole})
@@ -168,6 +170,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("assembly declaration schema","",Layout.AssemblySchema.reason(assembly))
 	var data := {"mode":"classic-source","location":"packs/classic#"+source.location,"mapping":source.location,"assembly":assembly}
 	data.context = Layout.context_annotations().data.layouts[source.location].duplicate(true)
+	data.arrivals = Layout.arrival_annotations().data.layouts[source.location].duplicate(true)
 	write(mods.root.path_join("Overrides/assembly.json"),JSON.stringify({"domain":Layout.DOMAIN,"path":"packs/classic","operation":"patch","entries":[{"id":source.location,"value":{"data":data}}]}))
 	controller.settings.apply({"startup/show_setup":true})
 	controller.settings.effective["startup/show_setup"] = true
@@ -176,7 +179,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	if not controller.prepared_content.get("ok",false):
 		observations.failure = {"reason":selected.get("reason"),"issues":selected.get("issues",[])}
 		return terminal(fixture)
-	check("actual content publication",true,controller.continue_to_menu("save" if fixture.fixture == "dungeon-context-v1" else "run").ok)
+	check("actual content publication",true,controller.continue_to_menu("save" if fixture.fixture in ["dungeon-context-v1","dungeon-markers-v1"] else "run").ok)
 	await shell.get_tree().process_frame
 	shell.session_shell.synchronize_startup()
 	observations.publication = registry.timings.duplicate(true)
@@ -308,13 +311,13 @@ func synthetic_checks(owner: Node, _fixture: Dictionary) -> void:
 	check("vertical stair collision seam",true,vertical.ok)
 	if not vertical.ok: observations.vertical_failure = vertical
 	else: retained_ticket = vertical.ticket
-	for vector in [["broken","broken_connection"],["missing-connector","missing"],["late-resource","record_not_found"],["unsupported-axis","unsupported"],["missing-support","unsupported_connection"],["narrow-support-gap","unsupported_connection"],["required-state","provider_pending"],["conflict","door_conflict"],["required-reference","provider_pending"],["required-action","provider_pending"],["required-save","provider_pending"],["missing-binding","missing"],["unsupported-mechanism","unsupported_connection"]]:
+	for vector in [["broken","broken_connection"],["missing-connector","missing"],["late-resource","record_not_found"],["unqualified-axis-connection","unsupported_connection"],["missing-support","unsupported_connection"],["narrow-support-gap","unsupported_connection"],["required-state","provider_pending"],["conflict","door_conflict"],["required-reference","provider_pending"],["required-action","provider_pending"],["required-save","provider_pending"],["missing-binding","missing"],["unsupported-mechanism","unsupported_connection"]]:
 		var failed: Dictionary = await assemble(owner,request(owner,"packs/assembly.test#"+vector[0]))
 		check("reject "+vector[0],false,failed.ok)
 		check("classify "+vector[0],vector[1],failed.kind)
 		check("preserve destination after "+vector[0],true,owner.projection(retained_ticket).ok)
 		check("release staging resources after "+vector[0],1,owner.get_child_count())
-		if vector[0] in ["late-resource","unsupported-axis"]: check("earlier block staged before "+vector[0],1,failed.get("staged_blocks",-1))
+		if vector[0] in ["late-resource","unqualified-axis-connection"]: check("earlier block staged before "+vector[0],2 if vector[0] == "unqualified-axis-connection" else 1,failed.get("staged_blocks",-1))
 	for kind in ["intentional-pair","duplicate"]:
 		var doors: Dictionary = await assemble(owner,request(owner,"packs/assembly.test#"+kind))
 		check("door relationship "+kind,true,doors.ok)

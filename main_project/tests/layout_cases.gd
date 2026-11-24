@@ -402,7 +402,8 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	cycle_bytes[a.resource_offset+10] = 14
 	check("teleport requires real destination",false,LF.decode(cycle_bytes,raw.identity).ok)
 	cycle_bytes[a.resource_offset+10] = 27
-	check("unsupported required action rejects",false,LF.decode(cycle_bytes,raw.identity).ok)
+	var unknown_action := LF.decode(cycle_bytes,raw.identity)
+	check("unknown classic action is non-executing metadata",true,unknown_action.ok and unknown_action.records.any(func(r: Dictionary): return r.address == a.address and not r.has("action") and r.get("unused_action",{}).get("raw",{}).get("kind") == 27))
 	cycle_bytes[a.resource_offset+10] = 0
 	cycle_bytes.encode_s32(a.resource_offset+6,2147483647)
 	var unused_link := LF.decode(cycle_bytes,raw.identity)

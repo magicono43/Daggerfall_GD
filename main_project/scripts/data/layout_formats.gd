@@ -24,7 +24,9 @@ static func flat_texture(bits: int) -> Dictionary:
 
 static func marker(texture: Dictionary) -> String:
 	if texture.archive != 199: return ""
-	return {8:"dungeon-entrance",10:"dungeon-start",11:"quest",18:"quest-item"}.get(texture.record,"editor-other")
+	# Authored JSON numbers are floats after validation; dictionary key lookup
+	# must use the checked integral record identity, like the binary decoder.
+	return {8:"dungeon-entrance",10:"dungeon-start",11:"quest",18:"quest-item"}.get(int(texture.record),"editor-other")
 
 static func environment(records: Array) -> Dictionary:
 	# Metadata observation is independent of arrival role selection. All matching
@@ -218,8 +220,21 @@ static func rdb(b: PackedByteArray, source: String) -> Dictionary:
 				r.unknown = [c.u32(),c.u32()]
 				r.radius = c.u16()
 		if r.has("action"):
-			if r.action.kind not in ACTIONS: return fail("Unsupported required action interpretation.",source,r.address,r.action.kind,"unsupported")
-			if r.type == "model" and r.action.kind in [1,8] and r.action.axis > 6: return fail("Unsupported required action axis.",source,r.address,r.action.axis,"unsupported")
+			if r.action.kind not in ACTIONS:
+				# Unknown vanilla bytes are evidence, never executable graph edges.
+				# Preserve the complete payload and original target without claiming
+				# that a missing destination is required by an unknown operation.
+				r.unused_action = {"policy":"classic-unknown-action-metadata-v1","non_executing":true,"gameplay_owner_ready":false,"raw":r.action.duplicate(true)}
+				r.erase("action")
+				continue
+			if r.type == "model" and r.action.kind in [1,8] and r.action.axis > 6:
+				# A raw byte outside the axis enum is not structural corruption.
+				# DFU RDBLayout accepts it: TRP rotation/13 uses NegativeX, magnitude
+				# 400; other unrecognised values leave the motion vector zero.
+				# Keep the known action and required graph edges; a future action
+				# owner must implement/qualify the documented interpretation.
+				var baseline := "rotation-negative-x-magnitude-400" if r.action.kind == 8 and r.action.axis == 13 and r.model.description == "TRP" else "zero-motion-vector"
+				r.action_axis_metadata = {"policy":"classic-action-axis-metadata-v1","gameplay_owner_ready":false,"raw":r.action.duplicate(true),"dfu_baseline":baseline}
 			var target: int = r.action.target_address
 			# Object address zero is the file header. Classic consumers leave it unbound.
 			# Teleport explicitly requires a destination; other kinds may terminate here.

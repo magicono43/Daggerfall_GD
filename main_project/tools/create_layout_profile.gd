@@ -9,7 +9,7 @@ const INITIAL_EDITION = {"BLOCKS.BSA":"6f5a4c8d9401c1b00ef83eaac9b0c6c32f53cef6e
 
 func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
-	if args.size() != 2 or FileAccess.file_exists(args[1]):
+	if args.size() not in [2,3] or (args.size() == 3 and args[2] not in ["--allocate-newly-supported-actions","--allocate-newly-supported-axes"]) or FileAccess.file_exists(args[1]):
 		push_error("Explicit classic source and NEW output profile required.")
 		quit(2)
 		return
@@ -51,11 +51,13 @@ func _initialize() -> void:
 		if decoded.ok:
 			for j in decoded.records.size():
 				var address := str(decoded.records[j].address)
-				if not prior.is_empty() and not prior.records.has(address):
+				var allowed_prior := "Unsupported required action axis." if args.size() == 3 and args[2] == "--allocate-newly-supported-axes" else "Unsupported required action interpretation."
+				var allocate_new: bool = args.size() == 3 and not prior.is_empty() and prior.records.is_empty() and prior.get("diagnostic",{}).get("reason") == allowed_prior
+				if not prior.is_empty() and not prior.records.has(address) and not allocate_new:
 					push_error("Record address lacks an explicit existing identity.")
 					quit(2)
 					return
-				entry.records[address] = prior.records[address] if not prior.is_empty() else "record-%05d" % j
+				entry.records[address] = prior.records[address] if prior.get("records",{}).has(address) else "record-%05d" % j
 			if decoded.format == "RMB":
 				entry.buildings = {}
 				for j in decoded.subrecords.size(): entry.buildings[str(j)] = prior.get("buildings",{}).get(str(j),"building-%04d" % j)

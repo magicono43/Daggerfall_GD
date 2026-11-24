@@ -10,9 +10,10 @@ const DOMAIN = "layout.inputs"
 const VERSION = "layout-inputs-v1"
 const ROOT = "res://content/layouts/"
 const BASE_PATH = "packs/classic"
-const PROFILE_HASH = "a2e629e5d085b3d0ed58f3c17958f4accec4910e9204b6967203ab55af717b75"
+const PROFILE_HASH = "1856fd83d96f96505091b540e9c3d78ffb9e5be8b9fa96a670860770f1f86b23"
 const ASSEMBLY_HASH = "386895efaecb1af6c9a3e89974bafaec441d16cfeb1556a09693c130b5a1f056"
 const CONTEXT_HASH = "e22bc403672a2980ab9555c93dfe5eaf3e67ad864a2b725ca136f43ff9b69612"
+const ARRIVAL_HASH = "8f195636e56ea5d4aaaaf4c2cf18c6bd1e10d79c3087428cd78e1e3fc5c95596"
 var classic: RefCounted
 var media: RefCounted
 var resource_sources: Array = [] # Declared by the consumer before classic preparation.
@@ -53,6 +54,11 @@ static func context_annotations() -> Dictionary:
 	if Common.sha256(bytes) != CONTEXT_HASH: return F.fail("Pinned dungeon context annotations missing/changed.",ROOT,null,null,"source_unavailable")
 	return {"ok":true,"data":JSON.parse_string(bytes.get_string_from_utf8())}
 
+static func arrival_annotations() -> Dictionary:
+	var bytes := FileAccess.get_file_as_bytes(ROOT+"dungeon_arrivals.json")
+	if Common.sha256(bytes) != ARRIVAL_HASH: return F.fail("Pinned arrival annotations missing/changed.",ROOT,null,null,"source_unavailable")
+	return {"ok":true,"data":JSON.parse_string(bytes.get_string_from_utf8())}
+
 static func context_assets(context: Dictionary) -> Array:
 	var palettes: Array = [context.baseline,context.override]
 	for pool: Array in context.climates.values(): palettes.append_array(pool)
@@ -88,6 +94,10 @@ func bundled_contributions() -> Array:
 	var contexts: Dictionary = context_input.data
 	if contexts.schema != "classic-dungeon-context-annotations-v1" or contexts.sources != annotations.sources: return [{"root":ROOT,"file":"baseline.json","read":F.fail("Dungeon context source guard differs.",ROOT,null,null,"source_changed")}]
 	_context_annotations = contexts
+	var marker_input := arrival_annotations()
+	if not marker_input.ok: return [{"root":ROOT,"file":"baseline.json","read":marker_input}]
+	var marker_data: Dictionary = marker_input.data
+	if marker_data.get("schema") != "classic-dungeon-arrival-annotations-v1" or marker_data.get("sources") != annotations.sources: return [{"root":ROOT,"file":"baseline.json","read":F.fail("Arrival annotation edition guard differs.",ROOT,null,null,"source_changed")}]
 	# Source edition metadata is immutable for this application. Only serialized
 	# shipped input is reused; final definitions/indexes still rebuild per ticket.
 	if not _baseline.is_empty(): return [{"root":ROOT,"file":"baseline.json","version":VERSION,"bytes":_baseline}]
@@ -105,6 +115,7 @@ func bundled_contributions() -> Array:
 	for location: Dictionary in _profile.locations:
 		_locations[location.id] = location
 		var v := value("layout",{"mode":"classic-source","location":G.ref(location.id),"mapping":location.id})
+		if use_annotations and marker_data.layouts.has(location.id): v.data.arrivals = marker_data.layouts[location.id].duplicate(true)
 		if use_annotations and annotations.layouts.has(location.id):
 			var annotation: Dictionary = annotations.layouts[location.id]
 			for block: Dictionary in _profile.blocks:
@@ -215,6 +226,10 @@ func validate_record(_id: String, record: Dictionary) -> String:
 	var compatibility: Variant = record.get("compatibility")
 	if not compatibility is Dictionary or compatibility.get("status") != "unverified" or not compatibility.get("remap") is Dictionary: return "Structural remapping does not establish SAVE/LOC/QUEST compatibility."
 	var d: Dictionary = record.data
+	if d.has("arrivals"):
+		if record.kind != "layout": return "Arrival declarations belong to the layout."
+		var marker_reason := preload("res://scripts/data/dungeon_marker_schema.gd").reason(d.arrivals)
+		if not marker_reason.is_empty(): return marker_reason
 	if d.has("context"):
 		if record.kind != "layout": return "Dungeon context belongs to the effective layout."
 		var context_reason := preload("res://scripts/data/dungeon_context_schema.gd").reason(d.context)
@@ -230,7 +245,7 @@ func validate_record(_id: String, record: Dictionary) -> String:
 	if d.get("mode") != "authored": return "Explicit source or authored mode required."
 	if record.kind == "layout":
 		for field: String in d:
-			if field not in ["mode","location","placements","assembly","context"]: return "Unknown authored layout field: "+field
+			if field not in ["mode","location","placements","assembly","context","arrivals"]: return "Unknown authored layout field: "+field
 		if not G.valid_ref(d.get("location")) or not d.get("placements") is Array: return "Layout requires containing location and placements."
 		var ids := {}
 		for p in d.placements:
@@ -300,6 +315,7 @@ func validate_source_record(id: String, record: Dictionary, _fields: Dictionary,
 			if expected_kind == "layout":
 				mapped_data.erase("assembly")
 				mapped_data.erase("context")
+				mapped_data.erase("arrivals")
 			if not Common.equal_input(expected,mapped_data): return F.fail("Preserve classic source mapping; replace complete authored data to edit.",path,id)
 	if source.provider == identity.package and not str(source.provider).begins_with("@shipped/") and path != "packs/"+("loose" if source.provider == "@loose" else str(source.provider)): return F.fail("Additions use originating package namespace.",path,id)
 	return {"ok":true}
@@ -320,6 +336,11 @@ func validate_references(resources: Dictionary) -> Array:
 			if names.has(name): issues.append({"source":key,"target":name,"reason":"Ambiguous classic block mapping."})
 			names[name] = key
 		if r.value.kind != "layout": continue
+		if d.has("arrivals"):
+			for route: Dictionary in d.arrivals.routes:
+				var linked: Dictionary = route["return"]
+				if linked.location != d.location or not catalog.has(linked.layout) or catalog[linked.layout].value.kind != "layout" or catalog[linked.layout].value.data.location != linked.location:
+					issues.append({"source":key,"record":route.id,"target":linked,"provider":r.winner,"reason":"Required return layout/site reference absent or incompatible."})
 		if d.has("context"):
 			for asset: Dictionary in context_assets(d.context):
 				var exports: Dictionary = resources.get("media.assets:exports/"+asset.provider,{}).get("records",{})
@@ -431,7 +452,9 @@ func decode_block(registry: RefCounted, ref_: String) -> Dictionary:
 			if not special.is_empty():
 				if special.sha256 != v.input.payload_sha256: return F.fail("Classic special-area annotation input mismatch.",ref_,null,null,"source_changed")
 				definition.environment_observation.special_roles.append_array(special.roles)
-	return {"ok":true,"definition":definition.duplicate(true),"identity":read.record.identity.duplicate(true),"contributors":read.record.contributors.duplicate(true),"winner":read.record.winner.duplicate(true),"content_context":{"ticket":_ticket,"profile":PROFILE_HASH},"physics_ready":false,"location_ready":false,"save_compatible":false}
+	var pending_unknown: Array = definition.records.filter(func(r: Dictionary): return r.has("unused_action")).map(func(r: Dictionary): return r.id)
+	var pending_axes: Array = definition.records.filter(func(r: Dictionary): return r.has("action_axis_metadata")).map(func(r: Dictionary): return r.id)
+	return {"ok":true,"definition":definition.duplicate(true),"identity":read.record.identity.duplicate(true),"contributors":read.record.contributors.duplicate(true),"winner":read.record.winner.duplicate(true),"content_context":{"ticket":_ticket,"profile":PROFILE_HASH},"physics_ready":false,"location_ready":false,"save_compatible":false,"unknown_action_owner_ready":pending_unknown.is_empty(),"pending_unknown_action_records":pending_unknown,"action_axis_owner_ready":pending_axes.is_empty(),"pending_action_axis_records":pending_axes}
 
 func location_inputs(registry: RefCounted, ref_: String) -> Dictionary:
 	var committed_index: Dictionary = registry.domain_index(DOMAIN)
@@ -473,6 +496,7 @@ func location_inputs(registry: RefCounted, ref_: String) -> Dictionary:
 	var data := {"location":d.location,"placements":placements,"exterior":exterior,"dungeon":dungeon}
 	if d.has("assembly"): data.assembly = d.assembly.duplicate(true)
 	if d.has("context"): data.context = d.context.duplicate(true)
+	if d.has("arrivals"): data.arrivals = d.arrivals.duplicate(true)
 	return {"ok":true,"identity":read.record.identity,"data":data,"physics_ready":false,"winner":read.record.winner.duplicate(true),"contributors":read.record.contributors.duplicate(true),"content_context":{"ticket":_ticket,"profile":PROFILE_HASH}}
 
 func prepare_location(registry: RefCounted, ref_: String, resource_provider: Callable, required: Array = []) -> Dictionary:

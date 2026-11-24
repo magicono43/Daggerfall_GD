@@ -20,17 +20,22 @@ Future real LOC consumers must declare their resource dependencies before prepar
 ## Source edition and identity
 
 `content/layouts/profile.json` is explicit `classic-layout-profile-v1` metadata,
-fingerprinted by `layout_inputs.gd`. It assigns 1,295 block keys, 615,448 reserved
+fingerprinted by `layout_inputs.gd`. It assigns 1,295 block keys, 618,798 reserved
 object-record keys, 9,005 building keys and 85,690 placement keys across
 15,251 accepted locations. IDs were allocated once during authoring. Runtime
 queries consult this table, never reconstruct identity from offsets, coordinates,
 names or source order. Unknown source editions fail, requiring curated mappings.
 The profile contains metadata, addresses, hashes and identities, not block bytes.
-Stricter qualification never retires reserved keys: eight formerly decoded RDBs
-are now explicitly unsupported for required unknown rotation/translation axes.
-The current decoder supports 920 RMB / 166 RDB and rejects 21 RDB, 187 RDI and
-one extensionless entry. Unknown axis corrections and DFU's TRP/LID/WHE runtime
-rotation hacks are not adopted. Raw parameters remain evidence, not guessed motion.
+Qualification never retires reserved keys. The current decoder structurally
+supports all 920 RMB / 187 RDB blocks in the pinned edition. The 187 RDI entries
+(unknown auxiliary data, also ignored for layout geometry by DFU) and one
+extensionless archive entry are not decoded as layouts.
+Exceptional motion axes retain known actions and required graph links, with
+`action_axis_metadata` recording raw parameters, DFU interpretation and pending
+gameplay-owner readiness. DFU rotates TRP/axis-13 using NegativeX and magnitude
+400; its generic unknown-axis branch leaves a zero motion vector. No motion is
+executed by DATA, and no generic bitmask correction is inferred. Authored model
+motion axes remain restricted to the explicitly supported enum.
 The authoring tool accepts only the observed edition, reuses the pinned ledger,
 checks source hashes before/after, refuses an existing output, and preserves
 all prior keys even when a stricter decoder rejects their source block.
@@ -72,7 +77,14 @@ Source addresses remain diagnostics/mapping inputs, never public durable IDs.
 | RDI/extensionless FOO | Inventory only, never supported preparation. A required reference fails explicitly |
 
 RDB action kinds currently recognized structurally: 0–9, 11, 12, 14, 16–18,
-20–26, 28–31, 99. Unknown researched kinds such as 27/32/50 fail required decode.
+20–26, 28–31, 99. Unknown classic kinds remain explicitly non-executing metadata
+under user-authorized PROJECT-DATA-D02; they do not fail structural import solely
+because their behavior is unknown. All raw code/parameters/target addresses remain
+in `unused_action`, with no executable outgoing edge. The pinned corpus contains
+13 such records: 27×6,32×4,100×2,50×1. Twelve are in supported blocks; N0000007
+still fails an independent required-axis gate. Gameplay-owner readiness remains
+pending. Unknown authored executable actions remain rejected. Known actions keep
+all required-link checks, and malformed extents/unsupported axes still reject.
 Recognition supplies parameters/links only; it does not execute actions or prove
 the corresponding gameplay owner available. Door tags DOR/DDR/NEW/CAV and the
 72100 red-brick exclusion are DFU structural classification evidence, not an
