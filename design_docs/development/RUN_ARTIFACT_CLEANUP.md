@@ -1,5 +1,22 @@
 # Verification run artifact cleanup
 
+## 2026-11-24 IMP-016 increment 1
+
+Thirty-five explicitly owned completed roots were compacted after ordinary
+non-elevated activity checks, exact workspace containment and reparse checks.
+Removed **52,767 reproducible files /9,902,197,553 bytes**, preserving **392
+hash-verified reports/logs/fixtures/review captures**. Disposable template junctions
+were unlinked without traversing or altering installed targets. No task full
+project/export/cache remains. Final `.runs` retention measured **2,513,296,591
+bytes (2.341 GiB)** before final report rewrites; protected prior human-review
+inputs and other-task archives remain unchanged. No external input, installed tool
+or security setting changed. All thirteen final commands passed before final
+compaction. Exact journals, retained hashes and measurements are in
+`main_project/tests/.runs/imp016-2026-11-24/`; see
+[execution evidence](evidence/IMP-016-increment-1-2026-11-24.md) and its machine
+audit. Increment-1 user acceptance, parent IMP-016 and M2 remain open.
+
+
 ## 2026-11-24 IMP-013 increment 3 placement
 
 All seven final qualification commands passed before compaction. Ordinary

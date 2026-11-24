@@ -77,6 +77,16 @@ function Test-NativeFaultInventory($Result, [string]$Selection) {
 function Test-ScriptDiagnostics([string[]]$Logs, [string]$Scenario, $Result) {
     if (@(Select-String -Path $Logs -Pattern 'ObjectDB.*leaked|resources still in use at exit|Leaked instance:').Count -gt 0) { return $false }
     if ($Scenario -in @('native','native-libraries') -and @(Select-String -Path $Logs -Pattern '^WARNING: |^fluidsynth|^\[[^\]]+ @ [^\]]+\]').Count -gt 0) { return $false }
+    if ($Scenario -ceq 'actor-state') {
+        if ($Result.fixture -cne 'IMP-016-actor-state-v1' -or @($Result.checked_callback_errors).Count -ne 1) { return $false }
+        $errorRecord = $Result.checked_callback_errors[0]
+        $text = "Parse JSON failed. Error at line 0: Expected '}'"
+        if ($errorRecord.rationale -cne $text -or $errorRecord.source -cne 'core/io/json.cpp' -or $errorRecord.function -cne 'parse_string' -or $errorRecord.line -le 0) { return $false }
+        $native = @(Select-String -Path $Logs -Pattern '^ERROR: ' -CaseSensitive | Where-Object { $_.Line -cne 'ERROR: Failed to read the root certificate store.' })
+        return $native.Count -eq 1 -and $native[0].Line -ceq ('ERROR: ' + $text) -and
+            @(Select-String -Path $Logs -Pattern '^SCRIPT ERROR: ' -CaseSensitive).Count -eq 0 -and
+            @(Select-String -Path $Logs -SimpleMatch ('at: parse_string (core/io/json.cpp:' + $errorRecord.line + ')')).Count -eq 1
+    }
     # Existing startup recovery deliberately parses three damaged active files
     # and one damaged backup. Qualify only that fixture's exact four diagnostics.
     $configLines = @()

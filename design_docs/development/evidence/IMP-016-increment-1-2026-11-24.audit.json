@@ -1,0 +1,1206 @@
+{
+  "schema": "imp016-increment1-v1",
+  "date": "2026-11-24",
+  "base_commit": "d9768b7248ea32e7f151a8ee3ee00ebe7183fe65",
+  "initial_git_status": "observed clean",
+  "user_acceptance": "pending",
+  "parent_imp016_complete": false,
+  "m2_complete": false,
+  "native_save_ready": false,
+  "stock_gameplay_entry_ready": false,
+  "persistent_branch_counter_identity_ready": false,
+  "supported_scope": "Scoped baseline player authority, exact typed pure helpers, atomic owner-resolved source reconciliation, fresh level-1 capture and current-application quiescent owner records",
+  "controlled_providers": [
+    "creation capture",
+    "game-millisecond clock",
+    "ITEM/MAGIC eligibility snapshots",
+    "lifecycle orchestration"
+  ],
+  "qualification": [
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-bd74d4fc067e488fbb66132294d3f37f",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-bd74d4fc067e488fbb66132294d3f37f\\report.json",
+      "report_sha256": "90b5996a2428c068c9df07cc173d3058f20c1fd0c3049de4f29863f7c23b16b3",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Fixture": "actor-state-v1",
+          "Suite": "actor-state",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "InputSequence": "",
+          "Clock": null,
+          "Scenario": [],
+          "TimeoutSeconds": 240,
+          "Seed": null
+        }
+      },
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "cases": [
+        {
+          "scenario": "actor-state",
+          "count": 212,
+          "fixture": "IMP-016-actor-state-v1",
+          "process_exit": 0,
+          "observations": {
+            "actor_count": 138,
+            "actor_projection_2000_usec": 246758,
+            "catalog_records": 33465,
+            "construct_128_actors_16_sources_256_contributions_usec": 824367,
+            "crowd_projection_1000_usec": 438981,
+            "final_publication_phases": {
+              "intake_usec": 9357877,
+              "prepare_serial": 3,
+              "prepare_usec": 12139568,
+              "projection_usec": 632068,
+              "validators": {
+                "actor.baseline": {
+                  "copy_usec": 57,
+                  "validate_usec": 4
+                },
+                "actor.inputs": {
+                  "copy_usec": 16683,
+                  "validate_usec": 1469
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 40320,
+                  "validate_usec": 30560
+                },
+                "geography.inputs": {
+                  "copy_usec": 348309,
+                  "validate_usec": 201981
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 188546,
+                  "validate_usec": 3602
+                },
+                "layout.inputs": {
+                  "copy_usec": 584747,
+                  "validate_usec": 125020
+                },
+                "media.assets": {
+                  "copy_usec": 305960,
+                  "validate_usec": 10
+                },
+                "mod.preferences": {
+                  "copy_usec": 210,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 227,
+                  "validate_usec": 20
+                },
+                "text.fonts": {
+                  "copy_usec": 89,
+                  "validate_usec": 21
+                },
+                "world.variants": {
+                  "copy_usec": 579000,
+                  "validate_usec": 49440
+                }
+              }
+            },
+            "invalid_hook_recheck_usec": 842274,
+            "publication_phases": {},
+            "selection_usec": 615616,
+            "source_count_per_crowd_actor": 16
+          },
+          "classic_source_count": 115
+        }
+      ],
+      "all_runtime_and_actor_test_sources_match": true
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-bc978e12c16d4621b8b62f0ff864088f",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-bc978e12c16d4621b8b62f0ff864088f\\report.json",
+      "report_sha256": "e02365160eb469ed88c5153c5029fe2b0c76121c173b03486d54f486ceabf312",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "Fixture": "actor-state-v1",
+          "Suite": "actor-state",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "InputSequence": "",
+          "Clock": null,
+          "Scenario": [],
+          "TimeoutSeconds": 240,
+          "Seed": null
+        }
+      },
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "cases": [
+        {
+          "scenario": "actor-state",
+          "count": 215,
+          "fixture": "IMP-016-actor-state-v1",
+          "process_exit": 0,
+          "observations": {
+            "actor_count": 138,
+            "actor_projection_2000_usec": 246187,
+            "catalog_records": 33465,
+            "construct_128_actors_16_sources_256_contributions_usec": 812715,
+            "crowd_projection_1000_usec": 426096,
+            "final_publication_phases": {
+              "intake_usec": 9342845,
+              "prepare_serial": 3,
+              "prepare_usec": 12209238,
+              "projection_usec": 654137,
+              "validators": {
+                "actor.baseline": {
+                  "copy_usec": 62,
+                  "validate_usec": 4
+                },
+                "actor.inputs": {
+                  "copy_usec": 16470,
+                  "validate_usec": 1420
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 39468,
+                  "validate_usec": 29028
+                },
+                "geography.inputs": {
+                  "copy_usec": 350390,
+                  "validate_usec": 204467
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 187735,
+                  "validate_usec": 3624
+                },
+                "layout.inputs": {
+                  "copy_usec": 590091,
+                  "validate_usec": 125228
+                },
+                "media.assets": {
+                  "copy_usec": 316422,
+                  "validate_usec": 10
+                },
+                "mod.preferences": {
+                  "copy_usec": 211,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 239,
+                  "validate_usec": 20
+                },
+                "text.fonts": {
+                  "copy_usec": 92,
+                  "validate_usec": 21
+                },
+                "world.variants": {
+                  "copy_usec": 588600,
+                  "validate_usec": 54748
+                }
+              }
+            },
+            "invalid_hook_recheck_usec": 787475,
+            "publication_phases": {},
+            "selection_usec": 620155,
+            "source_count_per_crowd_actor": 16
+          },
+          "classic_source_count": 115
+        }
+      ],
+      "all_runtime_and_actor_test_sources_match": true
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-9e4848f504d242babc017acbeeccdd12",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-9e4848f504d242babc017acbeeccdd12\\result.json",
+      "report_sha256": "d85b0306974de2e93eb0a5a575dc0a63befc5510fbdebf7a7dba294ef82422c2",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_startup_export.ps1",
+        "arguments": {
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "RandomnessSession": false,
+          "DungeonAssembly": false,
+          "ActorState": true,
+          "DungeonMarkers": false,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Configuration": "debug",
+          "LayoutInputs": false,
+          "DungeonContext": false,
+          "FormulaFault": false,
+          "DefinitionPublication": false,
+          "VariantInputs": false,
+          "FormulaExtraError": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "Formula": false,
+          "ModDiscovery": false,
+          "M1Composition": false,
+          "DependencyPlanning": false,
+          "Randomness": false
+        }
+      },
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "cases": [
+        {
+          "scenario": "exported-headless",
+          "count": 212,
+          "fixture": "IMP-016-actor-state-v1",
+          "process_exit": 0,
+          "observations": {
+            "actor_count": 138,
+            "actor_projection_2000_usec": 245970,
+            "catalog_records": 33465,
+            "construct_128_actors_16_sources_256_contributions_usec": 814989,
+            "crowd_projection_1000_usec": 422508,
+            "final_publication_phases": {
+              "intake_usec": 9508837,
+              "prepare_serial": 3,
+              "prepare_usec": 12515477,
+              "projection_usec": 661528,
+              "validators": {
+                "actor.baseline": {
+                  "copy_usec": 52,
+                  "validate_usec": 3
+                },
+                "actor.inputs": {
+                  "copy_usec": 15956,
+                  "validate_usec": 1381
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 39804,
+                  "validate_usec": 29308
+                },
+                "geography.inputs": {
+                  "copy_usec": 353332,
+                  "validate_usec": 210284
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 190404,
+                  "validate_usec": 3904
+                },
+                "layout.inputs": {
+                  "copy_usec": 677295,
+                  "validate_usec": 136707
+                },
+                "media.assets": {
+                  "copy_usec": 339799,
+                  "validate_usec": 11
+                },
+                "mod.preferences": {
+                  "copy_usec": 213,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 228,
+                  "validate_usec": 19
+                },
+                "text.fonts": {
+                  "copy_usec": 91,
+                  "validate_usec": 21
+                },
+                "world.variants": {
+                  "copy_usec": 621117,
+                  "validate_usec": 52552
+                }
+              }
+            },
+            "invalid_hook_recheck_usec": 842106,
+            "publication_phases": {},
+            "selection_usec": 620107,
+            "source_count_per_crowd_actor": 16
+          },
+          "classic_source_count": 115
+        },
+        {
+          "scenario": "exported-rendered",
+          "count": 215,
+          "fixture": "IMP-016-actor-state-v1",
+          "process_exit": 0,
+          "observations": {
+            "actor_count": 138,
+            "actor_projection_2000_usec": 242718,
+            "catalog_records": 33465,
+            "construct_128_actors_16_sources_256_contributions_usec": 854060,
+            "crowd_projection_1000_usec": 439513,
+            "final_publication_phases": {
+              "intake_usec": 9443361,
+              "prepare_serial": 3,
+              "prepare_usec": 12261833,
+              "projection_usec": 632556,
+              "validators": {
+                "actor.baseline": {
+                  "copy_usec": 99,
+                  "validate_usec": 6
+                },
+                "actor.inputs": {
+                  "copy_usec": 29941,
+                  "validate_usec": 1466
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 40095,
+                  "validate_usec": 30510
+                },
+                "geography.inputs": {
+                  "copy_usec": 362376,
+                  "validate_usec": 204137
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 187424,
+                  "validate_usec": 3562
+                },
+                "layout.inputs": {
+                  "copy_usec": 586581,
+                  "validate_usec": 127754
+                },
+                "media.assets": {
+                  "copy_usec": 304849,
+                  "validate_usec": 11
+                },
+                "mod.preferences": {
+                  "copy_usec": 209,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 228,
+                  "validate_usec": 20
+                },
+                "text.fonts": {
+                  "copy_usec": 91,
+                  "validate_usec": 21
+                },
+                "world.variants": {
+                  "copy_usec": 581895,
+                  "validate_usec": 49343
+                }
+              }
+            },
+            "invalid_hook_recheck_usec": 849249,
+            "publication_phases": {},
+            "selection_usec": 615290,
+            "source_count_per_crowd_actor": 16
+          },
+          "classic_source_count": 115
+        }
+      ],
+      "all_runtime_and_actor_test_sources_match": true,
+      "configuration": "debug",
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "pck_sha256": "780B061EAE64E9818A13E7E847FC9DD3F16A72EE4BDC6A52603BC36C8969D37B"
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-cb90583aaf014ba29051a85aa115c277",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-cb90583aaf014ba29051a85aa115c277\\result.json",
+      "report_sha256": "bd7c249dc2ea4871e34b6ec63a82f853ba98d4a5f967edc27c18d165ecb48e02",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_startup_export.ps1",
+        "arguments": {
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "RandomnessSession": false,
+          "DungeonAssembly": false,
+          "ActorState": true,
+          "DungeonMarkers": false,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Configuration": "release",
+          "LayoutInputs": false,
+          "DungeonContext": false,
+          "FormulaFault": false,
+          "DefinitionPublication": false,
+          "VariantInputs": false,
+          "FormulaExtraError": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "Formula": false,
+          "ModDiscovery": false,
+          "M1Composition": false,
+          "DependencyPlanning": false,
+          "Randomness": false
+        }
+      },
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "cases": [
+        {
+          "scenario": "exported-headless",
+          "count": 212,
+          "fixture": "IMP-016-actor-state-v1",
+          "process_exit": 0,
+          "observations": {
+            "actor_count": 138,
+            "actor_projection_2000_usec": 201963,
+            "catalog_records": 33465,
+            "construct_128_actors_16_sources_256_contributions_usec": 696967,
+            "crowd_projection_1000_usec": 358620,
+            "final_publication_phases": {
+              "intake_usec": 8851647,
+              "prepare_serial": 3,
+              "prepare_usec": 11287084,
+              "projection_usec": 533930,
+              "validators": {
+                "actor.baseline": {
+                  "copy_usec": 50,
+                  "validate_usec": 3
+                },
+                "actor.inputs": {
+                  "copy_usec": 14131,
+                  "validate_usec": 1228
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 34556,
+                  "validate_usec": 24600
+                },
+                "geography.inputs": {
+                  "copy_usec": 302125,
+                  "validate_usec": 189230
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 162801,
+                  "validate_usec": 2871
+                },
+                "layout.inputs": {
+                  "copy_usec": 502968,
+                  "validate_usec": 109168
+                },
+                "media.assets": {
+                  "copy_usec": 279078,
+                  "validate_usec": 10
+                },
+                "mod.preferences": {
+                  "copy_usec": 186,
+                  "validate_usec": 5
+                },
+                "text.catalogs": {
+                  "copy_usec": 200,
+                  "validate_usec": 17
+                },
+                "text.fonts": {
+                  "copy_usec": 80,
+                  "validate_usec": 17
+                },
+                "world.variants": {
+                  "copy_usec": 504134,
+                  "validate_usec": 42193
+                }
+              }
+            },
+            "invalid_hook_recheck_usec": 725007,
+            "publication_phases": {},
+            "selection_usec": 573968,
+            "source_count_per_crowd_actor": 16
+          },
+          "classic_source_count": 115
+        },
+        {
+          "scenario": "exported-rendered",
+          "count": 215,
+          "fixture": "IMP-016-actor-state-v1",
+          "process_exit": 0,
+          "observations": {
+            "actor_count": 138,
+            "actor_projection_2000_usec": 219491,
+            "catalog_records": 33465,
+            "construct_128_actors_16_sources_256_contributions_usec": 711830,
+            "crowd_projection_1000_usec": 366772,
+            "final_publication_phases": {
+              "intake_usec": 8114933,
+              "prepare_serial": 3,
+              "prepare_usec": 10713676,
+              "projection_usec": 553950,
+              "validators": {
+                "actor.baseline": {
+                  "copy_usec": 48,
+                  "validate_usec": 3
+                },
+                "actor.inputs": {
+                  "copy_usec": 16768,
+                  "validate_usec": 1477
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 36013,
+                  "validate_usec": 25393
+                },
+                "geography.inputs": {
+                  "copy_usec": 311222,
+                  "validate_usec": 177571
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 164580,
+                  "validate_usec": 3464
+                },
+                "layout.inputs": {
+                  "copy_usec": 551521,
+                  "validate_usec": 120162
+                },
+                "media.assets": {
+                  "copy_usec": 278832,
+                  "validate_usec": 11
+                },
+                "mod.preferences": {
+                  "copy_usec": 194,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 214,
+                  "validate_usec": 18
+                },
+                "text.fonts": {
+                  "copy_usec": 84,
+                  "validate_usec": 21
+                },
+                "world.variants": {
+                  "copy_usec": 547056,
+                  "validate_usec": 48260
+                }
+              }
+            },
+            "invalid_hook_recheck_usec": 679861,
+            "publication_phases": {},
+            "selection_usec": 551418,
+            "source_count_per_crowd_actor": 16
+          },
+          "classic_source_count": 115
+        }
+      ],
+      "all_runtime_and_actor_test_sources_match": true,
+      "configuration": "release",
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "pck_sha256": "04E82C433EA3FC8F29475559D48C1A2B86099EF23E5A54A5AFC2C43AFDDA313B"
+    }
+  ],
+  "regressions": [
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-af7560874021435e9ad9c043a1306c7c",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-af7560874021435e9ad9c043a1306c7c\\report.json",
+      "report_sha256": "ea422b9584b655180cf7f966c30b4c01c16adec54ab49e6a139a631543886358",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Scenario": [],
+          "Seed": null,
+          "Clock": null,
+          "Suite": "formula",
+          "InputSequence": "",
+          "Fixture": "formula-v1",
+          "TimeoutSeconds": 240,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "cases": [
+        {
+          "scenario": "formula",
+          "count": 82,
+          "fixture": "IMP-006-formula-v1",
+          "process_exit": 0,
+          "observations": {},
+          "classic_source_count": 4
+        }
+      ],
+      "shared_CORE_RULE_DATA_composition_sources_match": true
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-f1e01c7acc6b4ebab8323b91c559549f",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-f1e01c7acc6b4ebab8323b91c559549f\\report.json",
+      "report_sha256": "9d3fe887aa2f1027c5f2ff812c958aab7821f3d7673090fa787e509b37b1d91c",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Scenario": [],
+          "Seed": null,
+          "Clock": null,
+          "Suite": "formula-fault",
+          "InputSequence": "",
+          "Fixture": "formula-v1",
+          "TimeoutSeconds": 240,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "cases": [
+        {
+          "scenario": "formula-fault",
+          "count": 18,
+          "fixture": "IMP-006-formula-fault-v1",
+          "process_exit": 0,
+          "observations": {},
+          "classic_source_count": 4
+        }
+      ],
+      "shared_CORE_RULE_DATA_composition_sources_match": true
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-6d6f8183be9d42fba5f7d5620708a6ef",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-6d6f8183be9d42fba5f7d5620708a6ef\\report.json",
+      "report_sha256": "5da9cf2c2742f99dd2e4470e11af45e92efe696830d7fa1dbbef7e313303028b",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Scenario": [],
+          "Seed": null,
+          "Clock": null,
+          "Suite": "actor-inputs",
+          "InputSequence": "",
+          "Fixture": "actor-inputs-v1",
+          "TimeoutSeconds": 240,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "cases": [
+        {
+          "scenario": "actor-inputs",
+          "count": 236,
+          "fixture": "actor-inputs-v1",
+          "process_exit": 0,
+          "observations": {},
+          "classic_source_count": 45
+        }
+      ],
+      "shared_CORE_RULE_DATA_composition_sources_match": true
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-4e05b32cd22a4dcda5fc62b685c23025",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-4e05b32cd22a4dcda5fc62b685c23025\\report.json",
+      "report_sha256": "32b19b6e72ad057fa769fcbf5ac8233f682eee5f8c2b15d9f20cdb5dde800560",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Scenario": [],
+          "Seed": null,
+          "Clock": null,
+          "Suite": "publication",
+          "InputSequence": "",
+          "Fixture": "publication-v1",
+          "TimeoutSeconds": 240,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "cases": [
+        {
+          "scenario": "publication",
+          "count": 111,
+          "fixture": "publication-v1",
+          "process_exit": 0,
+          "observations": {},
+          "classic_source_count": 4,
+          "fresh_process_count": 8
+        }
+      ],
+      "shared_CORE_RULE_DATA_composition_sources_match": true
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-40c6ecc62cc443b2a99e43ae749fa7b3",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-40c6ecc62cc443b2a99e43ae749fa7b3\\report.json",
+      "report_sha256": "fbe433a7c1cf85596af977cad046687feeb51e7387489d5d74d68e032920c165",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Scenario": [],
+          "Seed": null,
+          "Clock": null,
+          "Suite": "session",
+          "InputSequence": "",
+          "Fixture": "m1-v1",
+          "TimeoutSeconds": 240,
+          "ClassicSource": "",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "cases": [
+        {
+          "scenario": "session",
+          "count": 263,
+          "fixture": "IMP-002-session-v1",
+          "process_exit": 0,
+          "observations": {},
+          "classic_source_count": 0
+        }
+      ],
+      "shared_CORE_RULE_DATA_composition_sources_match": true
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e3b9cb105aef4b139906553f12184efa",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e3b9cb105aef4b139906553f12184efa\\report.json",
+      "report_sha256": "29488e50d94afe9eba3762c2fc1789a0d29fe2cecd19417763e3217c965227c6",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Scenario": [],
+          "Seed": null,
+          "Clock": null,
+          "Suite": "randomness",
+          "InputSequence": "",
+          "Fixture": "randomness-v1",
+          "TimeoutSeconds": 240,
+          "ClassicSource": "",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "cases": [
+        {
+          "scenario": "randomness",
+          "count": 108,
+          "fixture": "IMP-006-numeric-v1",
+          "process_exit": 0,
+          "observations": {},
+          "classic_source_count": 0
+        }
+      ],
+      "shared_CORE_RULE_DATA_composition_sources_match": true
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-d2cf72095efb4e80a5d122e1c5d39285",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-d2cf72095efb4e80a5d122e1c5d39285\\report.json",
+      "report_sha256": "4513eb983145bc9f36c4c4be24daeeb7877c6b88a98753a03d7c887a4c6c4e99",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Scenario": [],
+          "Seed": null,
+          "Clock": null,
+          "Suite": "randomness-session",
+          "InputSequence": "",
+          "Fixture": "randomness-session-v1",
+          "TimeoutSeconds": 240,
+          "ClassicSource": "",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "cases": [
+        {
+          "scenario": "randomness-session",
+          "count": 115,
+          "fixture": "IMP-006-session-v1",
+          "process_exit": 0,
+          "observations": {},
+          "classic_source_count": 0,
+          "fresh_process_count": 15
+        }
+      ],
+      "shared_CORE_RULE_DATA_composition_sources_match": true
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-c6ad89277a5d4bac9b8d9ccedee3c144",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-c6ad89277a5d4bac9b8d9ccedee3c144\\report.json",
+      "report_sha256": "d5835b4b5062aec2178bae3d4f7e87dbd28a3e0f960b80ce4a9e22654cf2fb27",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Scenario": [],
+          "Seed": null,
+          "Clock": null,
+          "Suite": "m1-composition",
+          "InputSequence": "",
+          "Fixture": "m1-composition-v1",
+          "TimeoutSeconds": 240,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "cases": [
+        {
+          "scenario": "m1-composition",
+          "count": 33,
+          "fixture": "m1-composition-v1",
+          "process_exit": 0,
+          "observations": {
+            "commit_phases": {
+              "intake_usec": 9777973,
+              "prepare_serial": 3,
+              "prepare_usec": 12729516,
+              "projection_usec": 760420,
+              "validators": {
+                "actor.baseline": {
+                  "copy_usec": 66,
+                  "validate_usec": 4
+                },
+                "actor.inputs": {
+                  "copy_usec": 16770,
+                  "validate_usec": 1393
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 39856,
+                  "validate_usec": 29344
+                },
+                "geography.inputs": {
+                  "copy_usec": 355753,
+                  "validate_usec": 213944
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 190266,
+                  "validate_usec": 3466
+                },
+                "layout.inputs": {
+                  "copy_usec": 650223,
+                  "validate_usec": 128390
+                },
+                "media.assets": {
+                  "copy_usec": 318880,
+                  "validate_usec": 9
+                },
+                "mod.preferences": {
+                  "copy_usec": 206,
+                  "validate_usec": 7
+                },
+                "text.catalogs": {
+                  "copy_usec": 228,
+                  "validate_usec": 20
+                },
+                "text.fonts": {
+                  "copy_usec": 90,
+                  "validate_usec": 20
+                },
+                "world.variants": {
+                  "copy_usec": 606640,
+                  "validate_usec": 52019
+                }
+              }
+            },
+            "commit_usec": 14602627,
+            "faction_query_usec": 1102,
+            "initial_startup_usec": 320729,
+            "memory_peak_bytes": 2344408171,
+            "memory_static_bytes": 1789201208,
+            "selection_phases": {
+              "intake_usec": 11781029,
+              "prepare_serial": 1,
+              "prepare_usec": 15011016,
+              "projection_usec": 755116,
+              "validators": {
+                "actor.baseline": {
+                  "copy_usec": 66,
+                  "validate_usec": 5
+                },
+                "actor.inputs": {
+                  "copy_usec": 15463,
+                  "validate_usec": 1366
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 37463,
+                  "validate_usec": 28995
+                },
+                "geography.inputs": {
+                  "copy_usec": 396032,
+                  "validate_usec": 205874
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 254166,
+                  "validate_usec": 4875
+                },
+                "layout.inputs": {
+                  "copy_usec": 687692,
+                  "validate_usec": 130463
+                },
+                "media.assets": {
+                  "copy_usec": 347815,
+                  "validate_usec": 11
+                },
+                "mod.preferences": {
+                  "copy_usec": 207,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 230,
+                  "validate_usec": 21
+                },
+                "text.fonts": {
+                  "copy_usec": 91,
+                  "validate_usec": 21
+                },
+                "world.variants": {
+                  "copy_usec": 714688,
+                  "validate_usec": 53933
+                }
+              }
+            },
+            "selection_usec": 18517970
+          },
+          "classic_source_count": 115,
+          "fresh_process_count": 12
+        }
+      ],
+      "shared_CORE_RULE_DATA_composition_sources_match": true
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-1d5eaa18de0f4a559605d24da5d4c3a1",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-1d5eaa18de0f4a559605d24da5d4c3a1\\report.json",
+      "report_sha256": "d5e885717260b756851c2e077d6619c3bfc1fb442b8cba6642c8f506648c699d",
+      "status": "passed",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "Scenario": [],
+          "Seed": null,
+          "Clock": null,
+          "Suite": "m1-composition",
+          "InputSequence": "",
+          "Fixture": "m1-composition-v1",
+          "TimeoutSeconds": 240,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "cases": [
+        {
+          "scenario": "m1-composition",
+          "count": 34,
+          "fixture": "m1-composition-v1",
+          "process_exit": 0,
+          "observations": {
+            "commit_phases": {
+              "intake_usec": 9583094,
+              "prepare_serial": 3,
+              "prepare_usec": 12455593,
+              "projection_usec": 668782,
+              "validators": {
+                "actor.baseline": {
+                  "copy_usec": 70,
+                  "validate_usec": 4
+                },
+                "actor.inputs": {
+                  "copy_usec": 16553,
+                  "validate_usec": 1390
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 39256,
+                  "validate_usec": 28776
+                },
+                "geography.inputs": {
+                  "copy_usec": 350392,
+                  "validate_usec": 199012
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 197874,
+                  "validate_usec": 3801
+                },
+                "layout.inputs": {
+                  "copy_usec": 616849,
+                  "validate_usec": 132388
+                },
+                "media.assets": {
+                  "copy_usec": 327643,
+                  "validate_usec": 11
+                },
+                "mod.preferences": {
+                  "copy_usec": 213,
+                  "validate_usec": 6
+                },
+                "text.catalogs": {
+                  "copy_usec": 230,
+                  "validate_usec": 20
+                },
+                "text.fonts": {
+                  "copy_usec": 94,
+                  "validate_usec": 21
+                },
+                "world.variants": {
+                  "copy_usec": 602168,
+                  "validate_usec": 49400
+                }
+              }
+            },
+            "commit_usec": 14223126,
+            "faction_query_usec": 1091,
+            "initial_startup_usec": 157290,
+            "memory_peak_bytes": 2367428244,
+            "memory_static_bytes": 1812251505,
+            "selection_phases": {
+              "intake_usec": 11359047,
+              "prepare_serial": 1,
+              "prepare_usec": 14164457,
+              "projection_usec": 679424,
+              "validators": {
+                "actor.baseline": {
+                  "copy_usec": 60,
+                  "validate_usec": 5
+                },
+                "actor.inputs": {
+                  "copy_usec": 15501,
+                  "validate_usec": 1331
+                },
+                "faction-quest.inputs": {
+                  "copy_usec": 37233,
+                  "validate_usec": 27237
+                },
+                "geography.inputs": {
+                  "copy_usec": 328035,
+                  "validate_usec": 193350
+                },
+                "item-spell.inputs": {
+                  "copy_usec": 177364,
+                  "validate_usec": 3210
+                },
+                "layout.inputs": {
+                  "copy_usec": 615515,
+                  "validate_usec": 120551
+                },
+                "media.assets": {
+                  "copy_usec": 318300,
+                  "validate_usec": 11
+                },
+                "mod.preferences": {
+                  "copy_usec": 212,
+                  "validate_usec": 5
+                },
+                "text.catalogs": {
+                  "copy_usec": 237,
+                  "validate_usec": 23
+                },
+                "text.fonts": {
+                  "copy_usec": 94,
+                  "validate_usec": 22
+                },
+                "world.variants": {
+                  "copy_usec": 604198,
+                  "validate_usec": 51643
+                }
+              }
+            },
+            "selection_usec": 17309922
+          },
+          "classic_source_count": 115,
+          "fresh_process_count": 13
+        }
+      ],
+      "shared_CORE_RULE_DATA_composition_sources_match": true
+    }
+  ],
+  "production_sources": {
+    "scripts/char/actor_state.gd": "e1f2e246d4186bd1dd0ae1e6a9645ff11f723d58cfb657ff6ae3168f3fb776bb",
+    "scripts/data/actor_baseline.gd": "36c51854ebc31f40c57076689a4b4ac00b48e90353685ae72b07b97264238547",
+    "scripts/rule/actor_formulas.gd": "d9a605fec1a07c8380d6be447dc04c7b6645dc0277f9944df35f004761a224cd",
+    "scripts/rule/formula_registry.gd": "deb2d924dd3287c89de757308f00ef9b593609788c08cffd5a2e7669892ffde2",
+    "scripts/session/session_lifecycle.gd": "6b9e4d7ca30b9e80360e4de6e573f773abd0a7cecc67812e50ccb045e989f41f",
+    "scripts/session/session_shell.gd": "151b6966784a0b1fcd2e8924a8f58e997f9098d5a86ce175ffe65b462ea6107c",
+    "scripts/startup/provider_boundary.gd": "fdfae70f1dec91ce0d8eb308674bc5c403a9269634f6c2a010caf2db5bd9af27",
+    "scripts/startup/startup_shell.gd": "daa5ede2ec82d0f125e010b5c648743e28d3adfe96cfc2c972a4222b1fd0d4a5",
+    "content/actors/baseline.json": "fbae0eca64e942663f0ba300f8a82887b6e3f2fd7493c66ba492fd17c39cb496"
+  },
+  "actor_test_sources": {
+    "tests/actor_state_cases.gd": "8f631f5b1417e458c10fb436cefbf6bce613c31d6bc0ac5ec370d78c8d0e0c8e",
+    "tests/actor_formula_callbacks.gd": "20df4b8e92bc8a9c84ec52d9889f14a2f05dbaeaf1abded6b9e05d9983a400d8",
+    "tests/controlled_actor_entry.gd": "a149612fb75fed8431d8058133700ffad01b7c889b14364e0752af68e0d0bc3f",
+    "tests/controlled_actor_source.gd": "63dec4a38a700de42ffd821d87eb84a4b12f33d1286c62d45b0b95def2f35241",
+    "tests/actor_state_inventory.json": "2a8e81494a7b4c8cecdd7f261f6211c1e5fd2abe7109a825703e444f41b90713",
+    "tests/actor_state_observation.json": "e4d6feba857a971c97ff1893cfb06cc6be87afa4da4c629926def5d73e32d854"
+  },
+  "reference_source_hashes_unchanged": true,
+  "cleanup": [
+    {
+      "journal": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp016-2026-11-24\\cleanup-1795533214437553800.json",
+      "sha256": "20b4f9df14fc624bcd979eeddf53b92d3627f29a5aeaaab4fdfae4e11f09e36e",
+      "removed_files": 10692,
+      "removed_bytes": 1684532571,
+      "kept_files": 80,
+      "all_preserved_hashes_verified": true
+    },
+    {
+      "journal": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp016-2026-11-24\\cleanup-1795534824036012400.json",
+      "sha256": "9f421b71ce609aef9fcd7a61421fddba47444f01d0f410a58853d4bf83c3cb5b",
+      "removed_files": 16374,
+      "removed_bytes": 3372591043,
+      "kept_files": 112,
+      "all_preserved_hashes_verified": true
+    },
+    {
+      "journal": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp016-2026-11-24\\cleanup-1795535744740374200.json",
+      "sha256": "1f689728a3c78768c16d497a671cb81f629cfda4278dea1429cec7ac898ce758",
+      "removed_files": 6780,
+      "removed_bytes": 1473878198,
+      "kept_files": 45,
+      "all_preserved_hashes_verified": true
+    },
+    {
+      "journal": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp016-2026-11-24\\cleanup-1795535846099962200.json",
+      "sha256": "3d81d0cb02c3d4b0122020105fee81c4c998b6cd2a7eeb37cce4d20c20907cf3",
+      "removed_files": 18921,
+      "removed_bytes": 3371195741,
+      "kept_files": 155,
+      "all_preserved_hashes_verified": true
+    }
+  ],
+  "changed_files": [
+    "design_docs/development/IMPLEMENTATION_READINESS.md",
+    "design_docs/development/MILESTONES.md",
+    "design_docs/development/RUN_ARTIFACT_CLEANUP.md",
+    "design_docs/development/TASK_BACKLOG.md",
+    "design_docs/development/evidence/IMP-016-REVIEW-2026-11-24.md",
+    "design_docs/development/evidence/IMP-016-increment-1-2026-11-24.audit.json",
+    "design_docs/development/evidence/IMP-016-increment-1-2026-11-24.md",
+    "design_docs/development/tasks/IMP-016.md",
+    "main_project/content/actors/PROVENANCE.md",
+    "main_project/content/actors/baseline.json",
+    "main_project/scripts/char/README.md",
+    "main_project/scripts/char/actor_state.gd",
+    "main_project/scripts/char/actor_state.gd.uid",
+    "main_project/scripts/data/ACTOR_INPUTS.md",
+    "main_project/scripts/data/actor_baseline.gd",
+    "main_project/scripts/data/actor_baseline.gd.uid",
+    "main_project/scripts/rule/FORMULA_DISPATCH.md",
+    "main_project/scripts/rule/actor_formulas.gd",
+    "main_project/scripts/rule/actor_formulas.gd.uid",
+    "main_project/scripts/rule/formula_registry.gd",
+    "main_project/scripts/session/README.md",
+    "main_project/scripts/session/session_lifecycle.gd",
+    "main_project/scripts/session/session_shell.gd",
+    "main_project/scripts/startup/provider_boundary.gd",
+    "main_project/scripts/startup/startup_shell.gd",
+    "main_project/tests/actor_formula_callbacks.gd",
+    "main_project/tests/actor_state_cases.gd",
+    "main_project/tests/actor_state_inventory.json",
+    "main_project/tests/actor_state_observation.json",
+    "main_project/tests/controlled_actor_entry.gd",
+    "main_project/tests/controlled_actor_source.gd",
+    "main_project/tests/formula_cases.gd",
+    "main_project/tests/m1_composition_cases.gd",
+    "main_project/tools/actor_state_fixture.ps1",
+    "main_project/tools/assertion_values.ps1",
+    "main_project/tools/verify.ps1",
+    "main_project/tools/verify_startup_export.ps1"
+  ],
+  "remaining_gates": [
+    "increment 2 vital intake and retained mutations",
+    "increment 3 MOVE activity/practice/collapse",
+    "increment 4 death/prevention/UI-006",
+    "real creation and CORE-012 grants",
+    "GAD-01 native branch-counter identity/claims",
+    "real TIME",
+    "progression/reward/training owners",
+    "real ITEM/MAGIC/equipment/effect lifecycle",
+    "IMP-023 native SAVE/restore",
+    "IMP-050/051 executable mod runtimes",
+    "complete entry and M2"
+  ],
+  "all_required_selected_checks_passed": true
+}

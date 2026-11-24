@@ -1,5 +1,15 @@
 # Session shell interfaces
 
+IMP-016 increment 1 composes `core.actors`, the [CHAR baseline authority](../char/README.md),
+using the same application's DATA/formula registries. CORE admits its pure actor
+helpers under the exact safe baseline/initialization ticket before full readiness.
+Ready session consumers retain ordinary declared hook admission. This exception
+grants no RNG, gameplay entry, SAVE eligibility or release of other owners' holds.
+Source/formula callbacks recheck original session/operation/content before CHAR
+publication. Stock creation/restore handlers remain unavailable. CHAR's owner
+record reconstruction is an in-memory quiescent interface, not Session Restored.
+MOVE retains its sole body/shape/physical-pose authority.
+
 IMP-013 increment 3 composes the [MOVE placement owner](../move/PLACEMENT.md)
 beside the single LOC assembly owner. `require_placement` retains an exact LOC
 ticket on the current CORE operation; successful readiness checks require the

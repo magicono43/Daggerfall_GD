@@ -1,5 +1,14 @@
 # Actor and character input profile — IMP-009 increment 1
 
+IMP-016 increment 1 adds the separate `actor.baseline` numeric policy and
+[real CHAR owner](../char/README.md). The structural catalog below remains
+unchanged and `semantic_ready:false`. CHAR qualifies only a published playable
+class record's HP-per-level, explicit multiplier bits and unique mapped career
+skill groups for its supported baseline. It does not execute biography effects,
+qualify source-only careers, resolve ambiguous FLATS or certify creation/entry.
+The numeric policy uses normal registry/MOD/loose precedence and locked provenance;
+supported permanent bounds/caps/added skill IDs/ratio domains are documented by CHAR.
+
 Version: `actor-inputs-v1`, Windows / Godot 4.7.2, 2026-11-21.
 DATA-007/008 and approved GAD-01/10 govern this implementation. This is a
 structural input contract. Nothing here constructs an actor, selects a custom

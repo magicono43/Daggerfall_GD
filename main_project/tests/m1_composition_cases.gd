@@ -1,7 +1,7 @@
 extends "res://tests/mod_cases.gd"
 const Factions = preload("res://scripts/data/faction_quest_inputs.gd")
 var observations := {}
-const DOMAINS = ["actor.inputs","faction-quest.inputs","geography.inputs","item-spell.inputs","layout.inputs","media.assets","mod.preferences","text.catalogs","text.fonts","world.variants"]
+const DOMAINS = ["actor.baseline","actor.inputs","faction-quest.inputs","geography.inputs","item-spell.inputs","layout.inputs","media.assets","mod.preferences","text.catalogs","text.fonts","world.variants"]
 
 func domains(registry: RefCounted) -> Array:
 	var names: Array = registry._adapters.keys()

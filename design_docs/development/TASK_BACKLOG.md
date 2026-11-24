@@ -1,5 +1,14 @@
 # Implementation backlog
 
+**IMP-016 increment 1 accepted / increment 2 handoff, 2026-11-24:** The user
+accepted the authoritative actor-state increment; see
+[acceptance](evidence/IMP-016-INCREMENT-1-ACCEPTANCE-2026-11-24.md). The
+[vital-mutation prompt](handoffs/IMP-016-INCREMENT-2-PROMPT.txt) is prepared for
+another chat. Issuing it authorizes increment 2 only; no runtime work starts in
+this acceptance/handoff update. Parent IMP-016, remaining increments, named real
+integrations and M2 remain open. Earlier pending-user/handoff notes are historical.
+
+
 **IMP-013 complete / IMP-016 handoff, 2026-11-24:** The user accepted increment 3
 and approved parent IMP-013 as complete; see [acceptance](evidence/IMP-013-ACCEPTANCE-2026-11-24.md).
 Earlier parent-acceptance-pending notes are historical. Named real integrations

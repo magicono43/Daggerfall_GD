@@ -23,6 +23,7 @@ func material(_ticket: Dictionary, _mode: String) -> Dictionary:
 
 func scratch(callbacks: Dictionary) -> RefCounted:
 	var registry := Registry.new()
+	preload("res://scripts/rule/actor_formulas.gd").new().declare(registry)
 	registry.declare_integer_hook(Fixture.HOOK,callbacks.builtin.builtin)
 	return registry
 

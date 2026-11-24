@@ -108,6 +108,7 @@ func _init(shell: Control) -> void:
 		host.controller.logger.message("WARNING", report.reason)
 		schedule_render())
 	core.formulas = host.controller.providers.formulas
+	core.actors.definitions = host.controller.providers.definitions
 	core.gates.changed.connect(schedule_render)
 	core.state_changed.connect(func(_old: Dictionary, _new: Dictionary, _reason: String): schedule_render())
 	core.terminal.connect(func(result: Dictionary):

@@ -52,7 +52,7 @@ func _ready() -> void:
 	if inputs.is_empty():
 		return
 	# Combined verification retains every ordinary registration; only roots differ.
-	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload"]
+	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","actor-state"]
 	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 		var resource_sources: Array = []
 		if fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload"]:
@@ -534,6 +534,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/text_cases.gd"
 	elif fixture.get("mode") == "structured-text":
 		script_path = "res://tests/structured_text_cases.gd"
+	elif fixture.get("mode") == "actor-state":
+		script_path = "res://tests/actor_state_cases.gd"
 	elif fixture.get("mode") == "actor-inputs":
 		script_path = "res://tests/actor_input_cases.gd"
 	elif fixture.get("mode") == "item-spell-inputs":

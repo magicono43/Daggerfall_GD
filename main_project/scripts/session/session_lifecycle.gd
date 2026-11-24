@@ -7,6 +7,7 @@ signal terminal(result: Dictionary)
 signal retiring(scope: String)
 var preferences: RefCounted
 var placement: Node # Composed MOVE authority; never a replacement lifecycle.
+var actors: RefCounted # CHAR owns no physical body/pose.
 
 func require_placement(original: Dictionary, layout_ticket: Dictionary) -> bool:
 	if not layout_operation_owns(original): return false
@@ -42,6 +43,16 @@ var _formula_bindings: Dictionary = {}
 
 func _init(material_provider: Callable = Callable()) -> void:
 	randomness = preload("res://scripts/rule/session_randomness.gd").new(gates, material_provider)
+	actors = preload("res://scripts/char/actor_state.gd").new(self)
+	retiring.connect(actors.retire_scope)
+
+func actor_formula_valid(scope: String, owner: Object, hook: String, operation: Dictionary) -> bool:
+	# Only the composed CHAR owner may derive a baseline while entry is gated.
+	if owner != actors or hook not in preload("res://scripts/rule/actor_formulas.gd").HOOKS or scope.is_empty() or scope != _state.session or _publishing or _finishing or _blocked or not gates.safe: return false
+	var original: Variant = operation.get("core_ticket")
+	if not original is Dictionary: return false
+	if _state.phase in ["baseline","initializing"]: return original == ticket() and busy()
+	return false # Ready-session consumers use the ordinary declared hook bindings.
 
 func snapshot() -> Dictionary:
 	var view := _state.duplicate(true)
@@ -461,6 +472,7 @@ func _finish(kind: String, reason: String, unsafe_cleanup := false) -> void:
 
 func dispose() -> void:
 	# Application/test owner invokes after scopes end; break owned subscriptions.
+	actors.dispose()
 	randomness.dispose()
 	_formula_bindings.clear()
 	formulas = null

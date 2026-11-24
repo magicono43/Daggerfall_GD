@@ -1,6 +1,55 @@
 # Formula dispatch — IMP-006 increment 3
 
-This is the bounded `integer-formula-v1` interface. RULE owns declarations,
+## IMP-016 production actor contracts
+
+`StartupProviderBoundary` declares all actor hooks before preparation. DATA's
+`actor.baseline:policy#player` publishes permanent bounds, attribute caps and the
+career multiplier table through shipped → MOD → captured loose publication. No
+second registry, post-lock declaration or expression language exists.
+
+`actor-rational-v1` reflects exactly `(Dictionary) -> int`, standard unbound
+RefCounted method, no defaults/varargs. Input has exactly `value` (integer ±1e9),
+`numerator` (integer 0..1e6), `denominator` (integer 1..1e6). Ratios are exact;
+decimal career multipliers cannot silently use the fixture integer signature.
+CHAR supplies 1/1 except for magicka. Inputs are detached before calling. Output
+is integer ±1e15, with CHAR compatibility checks for positive health, nonnegative
+capacity/base magicka and vital maxima ≤1e9. All built-in products fit int64;
+division corrects negative remainders to implement mathematical floor.
+
+| Hook | Built-in | Input context |
+| --- | --- | --- |
+| char.damage | floor((value−50)/5) | live Strength |
+| char.capacity | floor(3×value/2) | live Strength; final encumbrance stays ITEM/MOVE |
+| char.magicka | floor(value×numerator/denominator) | live Intelligence, career ratio |
+| char.resistance | floor(value/10) | live Willpower; not resistance chance |
+| char.agility | floor(value/10)−5 | live Agility; not complete attack resolution |
+| char.growth | floor(value/10)−5 | permanent Endurance; prospective only |
+| char.healing | floor(value/10)−5 | live Endurance; not complete recovery |
+| char.initial-health | 25+value | career HP-per-level, ordinary level 1 |
+
+Callbacks are pure/synchronous and receive no owners, RNG or session objects.
+The existing registry selects one provider in checked MOD order, locks it with
+DATA at actual menu entry, monitors runtime errors and rechecks CORE/owner context
+after calling. Errors/invalid results/retired callbacks never fall back. Built-in
+objects are retained for application lifetime: Callables do not retain RefCounted
+receivers. Projections expose per-hook contracts and locked provider provenance.
+
+`replace_stage` repairs one provider's whole staged contribution before lock. It
+invalidates candidates/omissions; duplicate ordinary staging still fails. Invalid
+hook selection returns before expensive DATA preparation, preserving any prior
+valid DATA candidate. Valid requests still rebuild clean DATA under exact-ticket
+commit checks. No published candidate is edited or reused without validation.
+
+CORE's narrow `actor_formula_valid` admission recognizes only composed CHAR,
+these hooks, a safe current scope and exact baseline/initialization ticket. It
+grants no RNG or full-entry readiness. Ready sessions use ordinary declared
+formula service bindings. CHAR checks its own operation/content around callbacks.
+Retirement/failure preserves consistent state; CORE controls milestones/holds.
+See the [CHAR schema](../char/README.md), actor provenance and independent
+`tests/actor_state_observation.json`. IMP-050/051 executable admission remains open.
+
+The initial bounded interface is `integer-formula-v1`; IMP-016 adds the focused
+`actor-rational-v1` contracts below in the same registry. RULE owns declarations,
 validation, selection, checked invocation and provenance; MOD owns selected package
 identity, eligibility and resolved order; CORE owns menu publication and current
 session/owner admission. DATA retains its existing schema/publication authority.
@@ -8,8 +57,8 @@ No executable package code is loaded by this interface.
 
 ## Initial hook contract
 
-Only the isolated fixtures declare `fixture.integer`; the ordinary application
-has no speculative combat, stacking, price, spell or other production hooks.
+Only isolated fixtures declare `fixture.integer`. The ordinary application now
+declares the eight approved actor helpers below, without complete action rules.
 `declare_integer_hook(id, builtin)` declares a replacement hook using this exact
 contract before contributions are staged. Stable IDs reuse the MOD ID validator.
 

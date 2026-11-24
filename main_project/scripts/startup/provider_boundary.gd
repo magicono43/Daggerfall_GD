@@ -15,6 +15,12 @@ var _preference_stores: Dictionary = {}
 var layouts: RefCounted
 var variants: RefCounted
 var geography: RefCounted
+var _baseline_setup: Dictionary = {}
+
+func _init() -> void:
+	# Application hooks and numeric DATA policy exist before any candidate/lock.
+	_baseline_setup = preload("res://scripts/rule/actor_formulas.gd").new().declare(formulas)
+	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/actor_baseline.gd").new(),"",[])
 
 func enable_variant_inputs() -> Dictionary:
 	if layouts == null: return {"ok":false,"reason":"Register layout provider before variants."}
@@ -105,12 +111,15 @@ func register_content_adapter(adapter: RefCounted, root: String, files: Array) -
 	return definitions.register_adapter(adapter, root, files)
 
 func prepare_content(mods: RefCounted) -> Dictionary:
+	if not _baseline_setup.get("ok",false): return _baseline_setup.duplicate(true)
 	var hooks: Dictionary = formulas.prepare(mods)
+	# An invalid executable selection cannot be published. Reject it before the
+	# expensive full DATA preparation; valid requests still rebuild fresh DATA.
+	if not hooks.ok:
+		return {"ok":false,"kind":"formula_preflight","source":"formula_hooks","reason":"Repair or explicitly omit invalid formula contributions before entry.","formulas":hooks}
 	var content: Dictionary = definitions.prepare(mods)
 	if not content.ok:
 		return content
-	if not hooks.ok:
-		return {"ok":false,"kind":"formula_preflight","source":"formula_hooks","reason":"Repair or explicitly omit invalid formula contributions before entry.","formulas":hooks}
 	if presentation != null:
 		var fonts: Dictionary = presentation.prepare(content.resources,content.ticket)
 		if not fonts.ok:
