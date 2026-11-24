@@ -1,5 +1,46 @@
 # Verification run artifact cleanup
 
+## 2026-11-24 IMP-013 tavern binding follow-up
+
+Eight completed owned roots (the initial source inspection, one corrected test
+expectation failure, and six final passing qualifications) were compacted after
+ordinary activity, terminal-report, absolute-path and reparse checks. Removed
+**12,191 files /2,336,073,103 logical bytes**, preserving **134 hash-verified child
+reports/logs/captures**. A redundant, reproducible whole-catalog DFU diagnostic dump
+of **8,927,776 bytes** was also removed; its relevant compact template and geometry
+analysis remain. No source/reference file or installed tool was removed.
+
+The cleanup journal is losslessly archived as
+`main_project/tests/.runs/dungeon-cleanup-66dcf9a8e52146f3bf073cd2982e3e45.json.gz`
+(2,926,149 →147,791 bytes), with archive/recovery hashes and a round-trip check.
+All 31 classic source and 1,317 protected earlier human-review file hashes match;
+all 107 frozen runtime/test/data files match all six final build manifests.
+No follow-up full project/export/cache remains. Regular logical `.runs` retention
+measured **2,402,580,558 bytes (about 2.238 GiB)** before final report rewrites.
+The existing 2 GiB review trigger remains addressed by preserving earlier unique
+human state and other-task evidence rather than deleting unrelated roots.
+See [follow-up evidence](evidence/IMP-013-TAVERN-BINDINGS-2026-11-24.md) and its
+[machine audit](evidence/IMP-013-TAVERN-BINDINGS-2026-11-24.audit.json).
+
+## 2026-11-24 IMP-013 increment-2 verification
+
+Three completed ordinary activity/path/reparse-checked batches compacted 26 owned
+GUID roots, removing **39,006 files /7,648,853,006 logical bytes** and preserving
+**321 hash-verified child reports/logs/captures**. The exact journals and two large
+resolved-failure reports are losslessly archived with recovery hashes. No task
+full project/export/cache remains; compact review captures remain available.
+
+All **31 classic source**, **101 current production-script** and **1,317 protected
+earlier human-review file** hashes verify. The protected review package remains
+209,339,669 bytes. Regular logical `.runs` retention measured **2,384,364,381 bytes
+(about 2.221 GiB)** before the measurement-summary rewrite, excluding reparse
+traversal. The 2 GiB trigger was reviewed; larger remaining consumers are earlier
+review state and other-task evidence, preserved unchanged. No elevated process
+query, security change, installed-tool or external-data deletion was introduced.
+See [execution evidence](evidence/IMP-013-increment-2-2026-11-23.md) and its
+[machine audit](evidence/IMP-013-increment-2-2026-11-23.audit.json) for exact roots,
+archive/protection hashes, source/build identities and measurements.
+
 ## IMP-013 ground-UV user-review follow-up
 
 Five additional inactive owned roots were compacted after sequential qualification:

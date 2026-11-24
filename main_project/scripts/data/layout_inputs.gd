@@ -51,7 +51,7 @@ static func value(kind: String, data: Dictionary) -> Dictionary:
 
 static func location_annotations() -> Dictionary:
 	var bytes := FileAccess.get_file_as_bytes(ROOT+"location_assembly.json")
-	if Common.sha256(bytes) != "857385862b1989afbf9295c35fbb36106d5deb7d95a43ba75bc8e6e56b20afd2": return F.fail("Pinned location assembly annotations missing/changed.",ROOT,null,null,"source_unavailable")
+	if Common.sha256(bytes) != "3d7f394bdfcbed334bc02a5d9ea9623e94458e9819b6bd3f815807d9e4c170b9": return F.fail("Pinned location assembly annotations missing/changed.",ROOT,null,null,"source_unavailable")
 	return {"ok":true,"data":JSON.parse_string(bytes.get_string_from_utf8())}
 
 static func context_annotations() -> Dictionary:

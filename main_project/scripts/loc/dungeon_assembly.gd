@@ -28,6 +28,9 @@ var measurements := {}
 func _request_extra(_request: Dictionary) -> int:
 	return 0
 
+func _has_arrivals(input: Dictionary, _request: Dictionary) -> bool:
+	return input.data.has("arrivals")
+
 func _select_placements(input: Dictionary, _request: Dictionary) -> Dictionary:
 	var selected: Array = input.data.placements.filter(func(p: Dictionary): return p.context == "dungeon")
 	if selected.is_empty(): return _result("missing","No dungeon placements; never substitute a destination.")
@@ -96,7 +99,7 @@ func begin(request: Dictionary) -> Dictionary:
 	var variant: Dictionary = _variant_input(request,input)
 	if not variant.ok: return variant
 	if variant.has("layout_inputs"): input = variant.layout_inputs
-	if request.has("arrival") and not input.data.has("arrivals"): return _result("missing_route","Selected layout has no arrival declarations.")
+	if request.has("arrival") and not _has_arrivals(input,request): return _result("missing_route","Selected layout has no arrival declarations.")
 	var selection := _select_placements(input,request)
 	if not selection.ok: return selection
 	var placements: Array = selection.placements
@@ -173,7 +176,7 @@ func _variant_input(request: Dictionary, baseline: Dictionary) -> Dictionary:
 	var new_placements := {}
 	for p: Dictionary in baseline.data.placements: old_placements[p.id] = p
 	for p: Dictionary in effective.data.placements: new_placements[p.id] = p
-	if Hash.digest(old_placements) != Hash.digest(new_placements) or Hash.digest(baseline.data.get("assembly")) != Hash.digest(effective.data.get("assembly")) or Hash.digest(baseline.data.get("arrivals")) != Hash.digest(effective.data.get("arrivals")): return _variant_pending(proposal,"Changed structural layout/arrival meaning needs its real geometry/owner compatibility gates; LOC-010 grants no migration.")
+	if Hash.digest(old_placements) != Hash.digest(new_placements) or Hash.digest(baseline.data.get("assembly")) != Hash.digest(effective.data.get("assembly")) or Hash.digest(baseline.data.get("arrivals")) != Hash.digest(effective.data.get("arrivals")) or Hash.digest(baseline.data.get("location_assembly")) != Hash.digest(effective.data.get("location_assembly")): return _variant_pending(proposal,"Changed structural layout/arrival meaning needs its real geometry/owner compatibility gates; LOC-010 grants no migration.")
 	for receipt: Dictionary in proposal.compatibility:
 		if receipt.scope.scope != "location-layout" or not receipt.changed_payloads.is_empty(): return _variant_pending(proposal,"Changed block/record meaning requires the named IMP-055 and gameplay owner integrations.")
 	return proposal

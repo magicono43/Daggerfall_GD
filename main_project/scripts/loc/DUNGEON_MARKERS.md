@@ -1,5 +1,12 @@
 # Dungeon marker handoff — IMP-061 increment 3
 
+IMP-013 increment 2 now reuses this scoped `marker_candidate` /
+`check_marker_candidate` consumer boundary for qualified RMB doorway links in
+the single composed LOC owner. See [LOCATION_DOORWAYS.md](LOCATION_DOORWAYS.md).
+RDB selection/return semantics below remain unchanged. Real access/MOVE providers,
+RDB exterior static-door association, physical pose and SAVE remain open; a
+controlled pending callback does not qualify those providers.
+
 `dungeon-arrivals-v1` is optional immutable `layout.inputs` layout data. It uses
 the existing shipped → checked MOD → captured loose publication path. There is
 no new registry or startup adapter. DATA validates complete declarations, typed

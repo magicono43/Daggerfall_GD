@@ -176,3 +176,22 @@ User visual review follow-up: the ground image orientation now explicitly compos
 `BaseImageFile.GetColor32` bottom-up upload with the tile shader flag matrices,
 while DATA retains top-left-first images. Source bytes, tile positions, identities
 and collision are unchanged. See the IMP-013 ground-UV follow-up evidence.
+
+## IMP-013 increment-2 doorway annotations, 2026-11-23
+
+`location_assembly.json` includes four source-guarded explicit doorway pairs
+for place-00001 / TVRNBS04.RMB. The complete schema, independent source vectors,
+model/record/payload guards, 0.15 m panel separation, marker roles and authored
+inward-facing/outward-anchor interpretation are documented in
+[LOCATION_DOORWAYS.md](../../scripts/loc/LOCATION_DOORWAYS.md). The maintained
+observer is `tools/observe_location_doorways.py`; its separate observation file
+preserves the accepted increment-1 observation unchanged. Existing DFU MIT
+licensing and classic-data provenance apply; no source/reference bytes changed.
+The 2026-11-24 tavern follow-up adds the front/rear pairs and an entry-only alias
+from courtyard plane41 to rear landing00271 / exit00203 / exterior plane46.
+The alias follows the user's observed DFU entry and immediate return at door #3;
+it is an explicit replaceable compatibility choice, not a source geometry repair
+or original-executable claim. Exact source model/payload/pose guards still apply.
+Geometry and original marker positions/roles are unchanged. There is no runtime
+nearest-marker fallback or invented MAPS association. Marker/door anchors do not certify actor
+clearance, committed placement, gameplay readiness or original executable facing.

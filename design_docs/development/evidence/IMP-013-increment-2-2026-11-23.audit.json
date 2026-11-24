@@ -1,0 +1,1022 @@
+{
+  "schema": "imp013-increment-2-execution-v1",
+  "implementation_started": "2026-11-23",
+  "verification_continued": "2026-11-24",
+  "user_acceptance": "pending",
+  "parent_imp013_complete": false,
+  "placement_committed": false,
+  "source_snapshot": {
+    "main_project/scripts/av/ambience_requests.gd": "398a41362d6dd1c303e05b42b8d16096c6402bb120a48ac835d2e67bbd70473b",
+    "main_project/scripts/av/classic_media_inspector.gd": "21313f7920e94eaa3c3e979635efe67c32fb35e537e54984612f793b86f30de5",
+    "main_project/scripts/av/media_preferences.gd": "60834a6ebb1abede17c714bb877e95cc92a29f3fb8b4f0995d8523dc116d9ee6",
+    "main_project/scripts/av/music_playback.gd": "4b0a4551eba76c526fec13a2eeb2fdcfa7e580cee2f475249ad2474ea56e4609",
+    "main_project/scripts/av/replacement_instances.gd": "1644a27deec0898b56cc417fdfebbbafb82886a43e3fcf603fd66471aa52dd90",
+    "main_project/scripts/av/video_playback.gd": "a39429421d9ba8939c45c32303ee6d20408363c039b9e9a118697216eb70b8c4",
+    "main_project/scripts/data/actor_inputs.gd": "9ef8482b0ec1aee136b6698b1a4ed21ff2cc8d46ccee36d138c15976544c71e5",
+    "main_project/scripts/data/actor_input_formats.gd": "2bca4ee6765438ce637b288d83e1ad2802a9186819eb2a73a4ec7da3d68ecde4",
+    "main_project/scripts/data/actor_source_reader.gd": "fa18b865865b9d273b4f589f7ceaf512c7d61e000080af9cc4c1cd17e19a775a",
+    "main_project/scripts/data/bsa_reader.gd": "0f82994b11af327ae9ed04540c1899206ec23bd1d6024979b67435ccd2c35657",
+    "main_project/scripts/data/classic_access.gd": "3badd2fe33f7486a902b6cff20aeff60af90839f96162225acb12befd4e3d9ee",
+    "main_project/scripts/data/classic_hmi.gd": "bf6dced970bab77bb89e48d1f5285ae879dafdd67d72db9c4d80caa724fd0b10",
+    "main_project/scripts/data/classic_image.gd": "4d3957dae946b736a9f66611c3a1067e713f704754bd11f4957995d4415ec30e",
+    "main_project/scripts/data/classic_media_source.gd": "2200f6914662cff8516fa3d1650687a00386702b1c4f53b259bc7ad353f207f6",
+    "main_project/scripts/data/classic_model.gd": "9d697c66637a44e89df36d63f656378dddaab5f02711db7ef7c3ef25498ad870",
+    "main_project/scripts/data/classic_sound.gd": "bacb71c5517716465af4334cce99664f4381e609a67257bed7fa002ab45e7ee1",
+    "main_project/scripts/data/classic_vid.gd": "b2ce166272c601a3c8760e76147b3e1a8d199746c59a870c1930edc6c8e7ecf8",
+    "main_project/scripts/data/decoded_media.gd": "1d1b18dca98f956ee7d43369513be6fe52d073ab184be99fd82c0e3a56d43165",
+    "main_project/scripts/data/definition_registry.gd": "48524a34985f2e1baebc5bc59449d8c8203940a240691c3dbfa9bf3dce1415d8",
+    "main_project/scripts/data/dungeon_assembly_schema.gd": "35988cc2526ef340f676eac5ce4797ee1c78412a6f99e5522ccc87b1e6070bd5",
+    "main_project/scripts/data/dungeon_context_schema.gd": "c65558ecba9e3ff06ebbd226f53a59be8cc18f1131994aeffb2a4b499c9281ca",
+    "main_project/scripts/data/dungeon_marker_schema.gd": "671253d398b842598494d9fefd399b2fb7b20f3db80b675d6f69b58f3c9ef007",
+    "main_project/scripts/data/faction_quest_formats.gd": "8b3f81a738ec2fc79bcaaa6468496d3aa35d6aba203e84a634f967e6cf594c2b",
+    "main_project/scripts/data/faction_quest_inputs.gd": "b8ff92885f7035da0331c87f634ef3330dd26479d8e9caecd56e631ca6799b9b",
+    "main_project/scripts/data/faction_quest_source_reader.gd": "2b670b81a658ab491e1b01608da374f8d5a1e556f38db1024336654527e6d39a",
+    "main_project/scripts/data/geography_formats.gd": "8741c2fa759e5b67e0dae7c8df09d77ae3f174e6b3031b5026ae5a2c7caa8df0",
+    "main_project/scripts/data/geography_inputs.gd": "c09b406830b5e5abc444132a84dd5979f12488950266ef333a1f692059c89af5",
+    "main_project/scripts/data/geography_source_reader.gd": "3533f990696eb254fa39a379fbf316c685fd98cbbd98f1581962a87bd60b9898",
+    "main_project/scripts/data/item_spell_formats.gd": "595083a7f637499d71feac01b1cbb869b594d3378030003af4cb2a96e4cfde33",
+    "main_project/scripts/data/item_spell_inputs.gd": "c779909e8c3e534ea5d34d812ab9423c66cec0e45ecca6f7647eeafd122be53a",
+    "main_project/scripts/data/item_spell_source_reader.gd": "fd04daff667a9344d4479ee92f878165eaedcdecf27ac8c19ffe25636f6b85ec",
+    "main_project/scripts/data/layout_formats.gd": "12370881e404fe0087c9a55c34b52928a203c21339400d454c43cd359056e35d",
+    "main_project/scripts/data/layout_geometry_frame.gd": "2c864bf46b3254c6c8235b998746dc7499b4910ce9f85a45066baa882eb09b24",
+    "main_project/scripts/data/layout_inputs.gd": "dfeba4035a45e862132de8f1cc41a24eb3ebfdafe54dc38cef36c55cc4674895",
+    "main_project/scripts/data/layout_placements.gd": "b6ccd3804ffc9bfae5f06a43d916bd4ce45c9b2d8dbb013687f113d48f3f70cf",
+    "main_project/scripts/data/locale_fonts.gd": "643804a7d4b93d06c1d56bfc643e5ee4e41afbea634597b82db330e38d7dc5bd",
+    "main_project/scripts/data/location_assembly_schema.gd": "27eafff38b9890fc92b543a5e8662d193b3a5629c66d39e1c87b8688c86401df",
+    "main_project/scripts/data/location_doorway_schema.gd": "9ebd1f4543e7a3d7ee5b379a6206821f773a57dd6e149c348ca761a2b74740e7",
+    "main_project/scripts/data/media_cursor.gd": "ca0d09c44e442dd924573a75d4ba441e5c60ce45ff69a2ae1dd5f7cfc5cdb1d8",
+    "main_project/scripts/data/media_replacements.gd": "ae72794ccdf6a4f095346b54fb7c039505bf93dd0e2c7dd080a6e698fe1cf064",
+    "main_project/scripts/data/native_media.gd": "8ca743b440bd2f8a1ebd0c76e2907865243792d4c574c327c7151a19e329c036",
+    "main_project/scripts/data/replacement_codec.gd": "fd65898ce351082adf130bca977d08e893211a17fe9bd32a8bda189703d23d1c",
+    "main_project/scripts/data/replacement_glb.gd": "d6d2b29ce883c26e69e31164ff90db5466df5f25387482069e4248b0d841c571",
+    "main_project/scripts/data/structured_text.gd": "7d4f4a50ec70b135553e9c373b7a20f047d7d4e9e65270f472cfa348f7b073c1",
+    "main_project/scripts/data/text_author.gd": "20b18a93bdb1e25a7ab4401190af6a31e56ae8470f7315a8de60279a345f2d55",
+    "main_project/scripts/data/text_catalog.gd": "cc9cd72eda215acd9181224506fb58c4e43d5424c7a719a747cad5fb175e0868",
+    "main_project/scripts/data/text_csv.gd": "8729b18f935b8a40a5a1bda20de726768c149d8c20e293c12719c1fad69d2f42",
+    "main_project/scripts/data/text_rsc_reader.gd": "80b98f8451625a43bcf507798dfc4a41e15bedaaddb411934beb3285443ec2eb",
+    "main_project/scripts/data/text_tokens.gd": "e8274c126d39f51d1b32baa13299cea0913bcae862de1a737e8b708090b7a8a9",
+    "main_project/scripts/data/translation_import.gd": "95700212d3a4c24795f2cd4d5268d40176e23e1e69b2c80bb8b51201814c4eb8",
+    "main_project/scripts/data/translation_view.gd": "df8fef619dff8d8523ee074e995e5c8d5431c502dd4145dafbb97e2beac30888",
+    "main_project/scripts/data/variant_inputs.gd": "8117a4575e9d12273423c4d69dc7d9bd8404017f1ea679a874f5bba82257d050",
+    "main_project/scripts/data/variant_resolution.gd": "bf46334d1380254e34343feb67d5d58c9126881d20b2074e8600192e4514b912",
+    "main_project/scripts/input/action_bindings.gd": "ee769f5acc88abcb5ca2ca6f7b52ea518a5c777a3e4b0c2d73b3bd95860f38be",
+    "main_project/scripts/input/action_input.gd": "ef36882547d49453effb5e629c2e542df9e0aa86d79da5727f82d676659378b5",
+    "main_project/scripts/input/binding_configuration.gd": "3d7cb19a2466f660610928956d3afbe37bd906ccb2ca70afe43f7d49cd9541e7",
+    "main_project/scripts/input/binding_editor.gd": "1560926c0f6c333665f57c2240fe7d519fc9913274b9caeedd3ff098a9b0db74",
+    "main_project/scripts/input/view_cursor.gd": "d92bc36cad03ef856d9bdd36fb6f61b782e408df7ab85ad9a5aae5edb59bcd58",
+    "main_project/scripts/loc/dungeon_assembly.gd": "da4dff3e1528946ef59cbe8cf2bdc762f192fe119c260c69edeb853d4803aeaf",
+    "main_project/scripts/loc/dungeon_environment.gd": "5e8637e914ffd57c94597498a8f208da4d2cbc1128790e7a1e44d0fb7b1c576e",
+    "main_project/scripts/loc/dungeon_geometry.gd": "e656d86025a33c74dc7de525d5a50ab8d1effdf9cef4c6eabac4db3c31a41527",
+    "main_project/scripts/loc/dungeon_markers.gd": "57e37a1ab3750ebfceb96df7626ca1a4503947efaefb08579846905219947b7c",
+    "main_project/scripts/loc/dungeon_materials.gd": "fae6cfb2e11664ec1a992d4a3fe5f4b1d012260d9d55e80f11b52b393a0e7425",
+    "main_project/scripts/loc/dungeon_palette.gd": "45b4cf6477fba4859940ea051e7b3ee9fd8dd7f093dc56c0d2167305f1845e02",
+    "main_project/scripts/loc/dungeon_support.gd": "dbf1291e96dff7140b866b335ef339a85b081c4eb5a9dddeee93ae97d7b062ce",
+    "main_project/scripts/loc/location_assembly.gd": "04a71878653a9fefd24edc14ce2b57aa6ff4058763624dc7a4512048c3c1b5df",
+    "main_project/scripts/mod/content_diagnostics.gd": "7421288bd89274ce9a9dad0a2c9596e5010b70572e6eb970c01abb2197e2f187",
+    "main_project/scripts/mod/dependency_planner.gd": "f805e886a6ad8ea417f175080785e9d8cdb765abe9a4acdb757792e7ecec7fd5",
+    "main_project/scripts/mod/mod_configuration.gd": "3eb4f41f5b50f6a3dba18719b53739a2cc5ec2042999db63ae1a213d3fdb4c23",
+    "main_project/scripts/mod/mod_setup_view.gd": "3de690db7cf6c0804a72bbcbd4a655346e463f8d58b2f96db72783c34044b061",
+    "main_project/scripts/mod/package_library.gd": "6632f3c50129645fc9e79fe4937f5be6e0bfb7e2a1223737feb209ba62bd7437",
+    "main_project/scripts/mod/preferences.gd": "42d05ef95274820134ffe2e193260e9c73c784c7ef75f961e54895f9adbb0fad",
+    "main_project/scripts/mod/preferences_view.gd": "867a675327288e90cb91d72e6d7bcc8fe164f44a83aa05c28c9c068c66352d82",
+    "main_project/scripts/mod/preference_definitions.gd": "cc2a57cbf2150e27f0eeaf1076fa627e193bc825f3dd237e03755402d76a6a8a",
+    "main_project/scripts/mod/preference_store.gd": "21dea734d886f5c16b2c2ef6bc2477862fb386e6dd4442c4a65ba84ebd106813",
+    "main_project/scripts/rule/classic_random.gd": "c38ce533f7bc7dba99bccaf9b1537ec92c25fce4e124c9c732a6b49221146173",
+    "main_project/scripts/rule/formula_error_monitor.gd": "dfcb75b820ea34ffd4165ab45e1f328872044dab8d6efe0e38031c7b67c6308d",
+    "main_project/scripts/rule/formula_registry.gd": "ebc410a68317df9e0f2640e35c32e578cfe465bc4ddbce3bd9b476ddbfb39678",
+    "main_project/scripts/rule/pcg32.gd": "e3b4f6726f706fdcf477499cfa8c7e38df26209f1862f3d00d6dcf1dddaaf6e9",
+    "main_project/scripts/rule/random_mapping.gd": "8ac3996b018425daeb0493f0b6c112e60cc8d31b8fe39b795eab021d7a5ac17b",
+    "main_project/scripts/rule/random_source.gd": "fbc87e175fdbc6ef94ef8b567b38cf8f9c5a652bc2e862511d0a4791f1280ed4",
+    "main_project/scripts/rule/seed_derivation.gd": "ddcd7351c8f8126fa79aa9166c776e35422b4fc5f82abe07560629c10ff7c18f",
+    "main_project/scripts/rule/session_randomness.gd": "005130637011bca0d5c0235e9ec7b63f2025e3911ec3d144b9b5e01e2657c8b5",
+    "main_project/scripts/rule/session_random_source.gd": "5f54136d31770b479b91e06b504b866214fa9edb09f954f8e74938259d8a93d8",
+    "main_project/scripts/rule/unsigned64.gd": "e7c570b9901560adbb4bcda77eb39d9728e524fd1f58e6ac15ef61f0ab644858",
+    "main_project/scripts/session/session_cadence.gd": "005bc16ac9ea7a70e737d75beed282c670c03f88d81087c0db2538423180da03",
+    "main_project/scripts/session/session_gates.gd": "15818f8ea1e33ca946282556d804eb0231d671f884424c9744fbef250773f383",
+    "main_project/scripts/session/session_lifecycle.gd": "84273ecf00e0e55927bb6d1ca0c6f218bdd2833ab5ca4b14d3566c181d940ac7",
+    "main_project/scripts/session/session_prompt.gd": "89eb3c5592784ad93ed43df8ec88b7a4c7ce6ebde805c8589872f63da3e57d04",
+    "main_project/scripts/session/session_provider.gd": "905972bb0d81e5f47f304e335531bdbfa66d70ffb7ba45c1509b9b5279adf5de",
+    "main_project/scripts/session/session_shell.gd": "8e361f5c91daa438ea6e8126c47db3b388d9f7a4c223f54436d439a3507a749f",
+    "main_project/scripts/session/text_layout.gd": "8e85399fbc7f1c3cfbd33156fcb802faf13113883cef42ac05b89a3d0f5b921f",
+    "main_project/scripts/session/text_presentation.gd": "1febbe96f3ef441705433735d1f8b35a2a75314195dc7b628de08c229d0b8a31",
+    "main_project/scripts/session/window_stack.gd": "01fb85ed370ac6c90cd90f20eca378d33bd2cbbb96bcd10f5ca74d4b4242d42f",
+    "main_project/scripts/startup/launch_logger.gd": "07bb10dae97ff6c370799189cb0cd6c5ee52c3d52060bf87ec02db238cfb83f5",
+    "main_project/scripts/startup/provider_boundary.gd": "39ac2699c946aed63c614be6e046d763dcb381f5f3b947b4124d5c325585a58e",
+    "main_project/scripts/startup/settings_owner.gd": "fc283df63ba3fff44a4101dcd911be1cb366044063a0f894e2f217e32d5151ce",
+    "main_project/scripts/startup/startup_controller.gd": "a3a1be1e01d89910a18e33df73d50551559e6489682ebbc0ecbfdf86880382a0",
+    "main_project/scripts/startup/startup_shell.gd": "c5fb598753165fd39792a8bc1e830064177f1422ab47179805481da3355075eb",
+    "main_project/scripts/startup/storage_adapter.gd": "252bef2783c759c96a74132e0cfee1390e95771a6ed660c4897467d72406eb83",
+    "main_project/scripts/startup/storage_owner.gd": "63140ac505bfb5527174115057be867c9439368ef8d81d90be216f99c6fdfa31",
+    "main_project/tests/location_cases.gd": "577dad0190dae5bcc02d675a9b226891e299c9fb312c5b548777a84e45d58850",
+    "main_project/tests/location_doorway_cases.gd": "f7973000a7d00b140a390c8f8185c88515e1b1576061866bc29505497ce5c1e6",
+    "main_project/tests/location_inventory.json": "abe8438d81f140714524e892f3ac684e5eb211e3cc1e2c11d7e6491b9d379035",
+    "main_project/tests/location_source_observation.json": "277590515da1cda1f50dc0258c90d9b9914bdce5efc69b6de0e2f3dc8ee48d8c",
+    "main_project/tests/location_doorway_observation.json": "6a1ada5c068133c70932156412bb671f6b27318e7dbfa1765146e7b8ca87f5dc",
+    "main_project/content/layouts/location_assembly.json": "fcdc1a557f8395cb5884fdfcb233cb91bc24c567a830210906cdaeb9e9699add"
+  },
+  "qualified": [
+    {
+      "role": "location-headless",
+      "run": "verification-headless-dd2df42f95474d18bfe42cf77f639357",
+      "status": "passed",
+      "report_sha256": "012aaff5a6fc6e82c53268b2edfa60c862212215413acc9e65dd6f10ba2f047c",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "fixture": "location-assembly-v1",
+      "checks": [
+        {
+          "mode": "dungeon-assembly",
+          "primary": 1251,
+          "fresh_process": 1102
+        }
+      ],
+      "current_production_scripts_matched": 101,
+      "current_runtime_test_data_files_matched": 107,
+      "complete_source_manifest_sha256": "c5fb798ce2c22a33cfbcfbd45c2592a1cd4ffffc09475f9581fd3a93928137bb",
+      "reproduction": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "InputSequence": "",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "location-assembly-v1",
+          "TimeoutSeconds": 240,
+          "Clock": null,
+          "Seed": null,
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Suite": "location-assembly"
+        }
+      },
+      "project_sha256": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+      "source_revision": "8311d8c7e2629b5aeb8802b47809bda1d44c2920",
+      "measurements": {
+        "publication": {
+          "intake_usec": 12206433,
+          "prepare_serial": 1,
+          "prepare_usec": 15456284,
+          "projection_usec": 777194,
+          "validators": {
+            "actor.inputs": {
+              "copy_usec": 14674,
+              "validate_usec": 1270
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 34649,
+              "validate_usec": 27828
+            },
+            "geography.inputs": {
+              "copy_usec": 445088,
+              "validate_usec": 202147
+            },
+            "item-spell.inputs": {
+              "copy_usec": 200487,
+              "validate_usec": 3197
+            },
+            "layout.inputs": {
+              "copy_usec": 714016,
+              "validate_usec": 125042
+            },
+            "media.assets": {
+              "copy_usec": 344751,
+              "validate_usec": 11
+            },
+            "mod.preferences": {
+              "copy_usec": 209,
+              "validate_usec": 6
+            },
+            "text.catalogs": {
+              "copy_usec": 226,
+              "validate_usec": 22
+            },
+            "text.fonts": {
+              "copy_usec": 92,
+              "validate_usec": 24
+            },
+            "world.variants": {
+              "copy_usec": 725309,
+              "validate_usec": 53768
+            }
+          }
+        },
+        "exterior": {
+          "assembly_usec": 296560,
+          "blocks": 1,
+          "geometry_instances": 9,
+          "physics_bodies": 2,
+          "physics_body_limit": 10240,
+          "triangles": 1307,
+          "unique_block_decodes": 1,
+          "unique_geometry_builds": 7,
+          "unique_image_resources": 27,
+          "unique_resource_decodes": 42
+        },
+        "interior": {
+          "assembly_usec": 282409,
+          "blocks": 1,
+          "geometry_instances": 29,
+          "physics_bodies": 1,
+          "physics_body_limit": 10240,
+          "triangles": 835,
+          "unique_block_decodes": 1,
+          "unique_geometry_builds": 21,
+          "unique_image_resources": 30,
+          "unique_resource_decodes": 38
+        },
+        "scaling": {
+          "assembly_usec": 1542378,
+          "blocks": 64,
+          "geometry_instances": 576,
+          "memory_peak_bytes": 2764768501,
+          "memory_static_bytes": 2601061157,
+          "physics_bodies": 128,
+          "physics_body_limit": 10240,
+          "query_usec": 51354,
+          "triangles": 83648,
+          "unique_block_decodes": 1,
+          "unique_geometry_builds": 7,
+          "unique_image_resources": 27,
+          "unique_resource_decodes": 7
+        },
+        "doorway_unbound_scaling": {
+          "assembly_usec": 1134292,
+          "blocks": 64,
+          "geometry_instances": 128,
+          "physics_bodies": 128,
+          "physics_body_limit": 10240,
+          "triangles": 48512,
+          "unique_block_decodes": 1,
+          "unique_geometry_builds": 1,
+          "unique_image_resources": 6,
+          "unique_resource_decodes": 1
+        },
+        "doorway_bound_scaling": {
+          "assembly_usec": 1339129,
+          "blocks": 64,
+          "doorway_prepare_usec": 136642,
+          "geometry_instances": 128,
+          "physics_bodies": 128,
+          "physics_body_limit": 10240,
+          "query_1000_usec": 122463,
+          "triangles": 48512,
+          "unique_block_decodes": 1,
+          "unique_geometry_builds": 1,
+          "unique_image_resources": 6,
+          "unique_resource_decodes": 2
+        }
+      }
+    },
+    {
+      "role": "location-rendered",
+      "run": "verification-rendered-b1a4093099db4ca7a6152f8d04d281a3",
+      "status": "passed",
+      "report_sha256": "f353870b9e436c68fd318c560f7ee7f587b73081eaa11bd10e85b19ed7b00868",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "fixture": "location-assembly-v1",
+      "checks": [
+        {
+          "mode": "dungeon-assembly",
+          "primary": 1257,
+          "fresh_process": 1108
+        }
+      ],
+      "current_production_scripts_matched": 101,
+      "current_runtime_test_data_files_matched": 107,
+      "complete_source_manifest_sha256": "c5fb798ce2c22a33cfbcfbd45c2592a1cd4ffffc09475f9581fd3a93928137bb",
+      "reproduction": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "InputSequence": "",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "location-assembly-v1",
+          "TimeoutSeconds": 240,
+          "Clock": null,
+          "Seed": null,
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Suite": "location-assembly"
+        }
+      },
+      "project_sha256": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+      "source_revision": "8311d8c7e2629b5aeb8802b47809bda1d44c2920",
+      "measurements": {
+        "publication": {
+          "intake_usec": 12259884,
+          "prepare_serial": 1,
+          "prepare_usec": 15111362,
+          "projection_usec": 664099,
+          "validators": {
+            "actor.inputs": {
+              "copy_usec": 15787,
+              "validate_usec": 1430
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 36946,
+              "validate_usec": 28726
+            },
+            "geography.inputs": {
+              "copy_usec": 349437,
+              "validate_usec": 198618
+            },
+            "item-spell.inputs": {
+              "copy_usec": 184297,
+              "validate_usec": 3480
+            },
+            "layout.inputs": {
+              "copy_usec": 649604,
+              "validate_usec": 125746
+            },
+            "media.assets": {
+              "copy_usec": 303550,
+              "validate_usec": 13
+            },
+            "mod.preferences": {
+              "copy_usec": 210,
+              "validate_usec": 8
+            },
+            "text.catalogs": {
+              "copy_usec": 229,
+              "validate_usec": 25
+            },
+            "text.fonts": {
+              "copy_usec": 94,
+              "validate_usec": 26
+            },
+            "world.variants": {
+              "copy_usec": 600876,
+              "validate_usec": 50722
+            }
+          }
+        },
+        "exterior": {
+          "assembly_usec": 1055976,
+          "blocks": 1,
+          "geometry_instances": 9,
+          "physics_bodies": 2,
+          "physics_body_limit": 10240,
+          "triangles": 1307,
+          "unique_block_decodes": 1,
+          "unique_geometry_builds": 7,
+          "unique_image_resources": 27,
+          "unique_resource_decodes": 42
+        },
+        "interior": {
+          "assembly_usec": 305620,
+          "blocks": 1,
+          "geometry_instances": 29,
+          "physics_bodies": 1,
+          "physics_body_limit": 10240,
+          "triangles": 835,
+          "unique_block_decodes": 1,
+          "unique_geometry_builds": 21,
+          "unique_image_resources": 30,
+          "unique_resource_decodes": 38
+        },
+        "scaling": {
+          "assembly_usec": 1548892,
+          "blocks": 64,
+          "geometry_instances": 576,
+          "memory_peak_bytes": 2787785646,
+          "memory_static_bytes": 2645494879,
+          "physics_bodies": 128,
+          "physics_body_limit": 10240,
+          "query_usec": 44239,
+          "triangles": 83648,
+          "unique_block_decodes": 1,
+          "unique_geometry_builds": 7,
+          "unique_image_resources": 27,
+          "unique_resource_decodes": 7
+        },
+        "doorway_unbound_scaling": {
+          "assembly_usec": 1145625,
+          "blocks": 64,
+          "geometry_instances": 128,
+          "physics_bodies": 128,
+          "physics_body_limit": 10240,
+          "triangles": 48512,
+          "unique_block_decodes": 1,
+          "unique_geometry_builds": 1,
+          "unique_image_resources": 6,
+          "unique_resource_decodes": 1
+        },
+        "doorway_bound_scaling": {
+          "assembly_usec": 1330406,
+          "blocks": 64,
+          "doorway_prepare_usec": 137065,
+          "geometry_instances": 128,
+          "physics_bodies": 128,
+          "physics_body_limit": 10240,
+          "query_1000_usec": 123610,
+          "triangles": 48512,
+          "unique_block_decodes": 1,
+          "unique_geometry_builds": 1,
+          "unique_image_resources": 6,
+          "unique_resource_decodes": 2
+        }
+      }
+    },
+    {
+      "role": "windows-debug",
+      "run": "export-720786eac31a4200aa654ba00044a302",
+      "status": "passed",
+      "report_sha256": "420eea80fa0a621e1274f9f5c92aef0fea832d7a528c9fbf428a089f97d0065d",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "fixture": "location-assembly-v1",
+      "checks": [
+        {
+          "mode": "exported-headless",
+          "primary": 1251,
+          "fresh_process": 1102
+        },
+        {
+          "mode": "exported-rendered",
+          "primary": 1257,
+          "fresh_process": 1108
+        }
+      ],
+      "current_production_scripts_matched": 101,
+      "current_runtime_test_data_files_matched": 107,
+      "complete_source_manifest_sha256": "c067e9f2abfa7a84fb3de3416d674d0e73bdaadef90e73d0ffd721dee171e378",
+      "reproduction": {
+        "command": "./main_project/tools/verify_startup_export.ps1",
+        "arguments": {
+          "M1Composition": false,
+          "DungeonMarkers": false,
+          "LayoutInputs": false,
+          "VariantInputs": false,
+          "FormulaExtraError": false,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "DependencyPlanning": false,
+          "FormulaFault": false,
+          "Formula": false,
+          "RandomnessSession": false,
+          "ModDiscovery": false,
+          "DungeonAssembly": true,
+          "Randomness": false,
+          "Configuration": "debug",
+          "DefinitionPublication": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "DungeonContext": false
+        }
+      },
+      "pck_sha256": "6390EFE0F448568F3564CF2302BB70F1873D0F00197FAAAECB1A570754203D45",
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "native_sha256": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+      "native_media_sha256": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2"
+    },
+    {
+      "role": "windows-release",
+      "run": "export-91ae6c0aecb8473e8db87b8117189ed9",
+      "status": "passed",
+      "report_sha256": "c6b7a0e97762880632ca365c5b68da0258270d653188b66c4010d21c44a2107a",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "fixture": "location-assembly-v1",
+      "checks": [
+        {
+          "mode": "exported-headless",
+          "primary": 1251,
+          "fresh_process": 1102
+        },
+        {
+          "mode": "exported-rendered",
+          "primary": 1257,
+          "fresh_process": 1108
+        }
+      ],
+      "current_production_scripts_matched": 101,
+      "current_runtime_test_data_files_matched": 107,
+      "complete_source_manifest_sha256": "c067e9f2abfa7a84fb3de3416d674d0e73bdaadef90e73d0ffd721dee171e378",
+      "reproduction": {
+        "command": "./main_project/tools/verify_startup_export.ps1",
+        "arguments": {
+          "M1Composition": false,
+          "DungeonMarkers": false,
+          "LayoutInputs": false,
+          "VariantInputs": false,
+          "FormulaExtraError": false,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "DependencyPlanning": false,
+          "FormulaFault": false,
+          "Formula": false,
+          "RandomnessSession": false,
+          "ModDiscovery": false,
+          "DungeonAssembly": true,
+          "Randomness": false,
+          "Configuration": "release",
+          "DefinitionPublication": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "DungeonContext": false
+        }
+      },
+      "pck_sha256": "DCD3C083E1AA061CDF9860C53E1384C0A65F7DEFB23608302693F0727B908615",
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "native_sha256": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+      "native_media_sha256": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2"
+    },
+    {
+      "role": "dungeon-markers",
+      "run": "verification-headless-17d5c18e1b194283ada0ad30584a72ed",
+      "status": "passed",
+      "report_sha256": "2027637ead48f00f4c14cce3a4b583e1b420f7ac48de82972ad3aa0a3c4e9804",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "fixture": "dungeon-markers-v1",
+      "checks": [
+        {
+          "mode": "dungeon-assembly",
+          "primary": 2277,
+          "fresh_process": 35
+        }
+      ],
+      "current_production_scripts_matched": 101,
+      "current_runtime_test_data_files_matched": 107,
+      "complete_source_manifest_sha256": "c5fb798ce2c22a33cfbcfbd45c2592a1cd4ffffc09475f9581fd3a93928137bb",
+      "reproduction": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "InputSequence": "",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "dungeon-markers-v1",
+          "TimeoutSeconds": 240,
+          "Clock": null,
+          "Seed": null,
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Suite": "dungeon-markers"
+        }
+      },
+      "project_sha256": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+      "source_revision": "8311d8c7e2629b5aeb8802b47809bda1d44c2920"
+    },
+    {
+      "role": "layout-inputs",
+      "run": "verification-headless-21ea98f2ab21445caf1b1ecb32b2b48b",
+      "status": "passed",
+      "report_sha256": "1b31f1eecda686b9fe157af08957678298b379f0940f3f3cc15a7b1ed01a65ca",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "fixture": "layout-inputs-v1",
+      "checks": [
+        {
+          "mode": "layout-inputs",
+          "primary": 369,
+          "fresh_process": 15
+        }
+      ],
+      "current_production_scripts_matched": 101,
+      "current_runtime_test_data_files_matched": 107,
+      "complete_source_manifest_sha256": "c5fb798ce2c22a33cfbcfbd45c2592a1cd4ffffc09475f9581fd3a93928137bb",
+      "reproduction": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "InputSequence": "",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "layout-inputs-v1",
+          "TimeoutSeconds": 240,
+          "Clock": null,
+          "Seed": null,
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Suite": "layout-inputs"
+        }
+      },
+      "project_sha256": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+      "source_revision": "8311d8c7e2629b5aeb8802b47809bda1d44c2920"
+    }
+  ],
+  "changed_files": [
+    "design_docs/development/DEPENDENCY_GRAPH.md",
+    "design_docs/development/IMPLEMENTATION_READINESS.md",
+    "design_docs/development/MILESTONES.md",
+    "design_docs/development/RUN_ARTIFACT_CLEANUP.md",
+    "design_docs/development/TASK_BACKLOG.md",
+    "design_docs/development/evidence/IMP-013-DOORWAYS-REVIEW-2026-11-24.md",
+    "design_docs/development/evidence/IMP-013-increment-2-2026-11-23.audit.json",
+    "design_docs/development/evidence/IMP-013-increment-2-2026-11-23.md",
+    "design_docs/development/tasks/IMP-013.md",
+    "main_project/content/layouts/PROVENANCE.md",
+    "main_project/content/layouts/location_assembly.json",
+    "main_project/scripts/data/LAYOUT_INPUTS.md",
+    "main_project/scripts/data/layout_inputs.gd",
+    "main_project/scripts/data/location_assembly_schema.gd",
+    "main_project/scripts/data/location_doorway_schema.gd",
+    "main_project/scripts/loc/DUNGEON_MARKERS.md",
+    "main_project/scripts/loc/LOCATION_ASSEMBLY.md",
+    "main_project/scripts/loc/LOCATION_DOORWAYS.md",
+    "main_project/scripts/loc/dungeon_assembly.gd",
+    "main_project/scripts/loc/location_assembly.gd",
+    "main_project/tests/location_cases.gd",
+    "main_project/tests/location_doorway_cases.gd",
+    "main_project/tests/location_doorway_observation.json",
+    "main_project/tests/location_inventory.json",
+    "main_project/tools/build_location_inventory.py",
+    "main_project/tools/dungeon_fixture.ps1",
+    "main_project/tools/observe_location_doorways.py"
+  ],
+  "inventory_policy": {
+    "ok": true,
+    "count": 24,
+    "checks": [
+      {
+        "actual": true,
+        "expected": true,
+        "scenario": "headless/complete"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "headless/missing"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "headless/duplicate"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "headless/unknown"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "headless/wrong-fixture"
+      },
+      {
+        "actual": true,
+        "expected": true,
+        "scenario": "rendered/complete"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "rendered/missing"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "rendered/duplicate"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "rendered/unknown"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "rendered/wrong-fixture"
+      },
+      {
+        "actual": true,
+        "expected": true,
+        "scenario": "reload-headless/complete"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "reload-headless/missing"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "reload-headless/duplicate"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "reload-headless/unknown"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "reload-headless/wrong-fixture"
+      },
+      {
+        "actual": true,
+        "expected": true,
+        "scenario": "reload-rendered/complete"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "reload-rendered/missing"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "reload-rendered/duplicate"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "reload-rendered/unknown"
+      },
+      {
+        "actual": false,
+        "expected": false,
+        "scenario": "reload-rendered/wrong-fixture"
+      },
+      {
+        "actual": 1251,
+        "expected": 1251,
+        "scenario": "export-switch/headless"
+      },
+      {
+        "actual": 1257,
+        "expected": 1257,
+        "scenario": "export-switch/rendered"
+      },
+      {
+        "actual": 1102,
+        "expected": 1102,
+        "scenario": "export-switch/reload-headless"
+      },
+      {
+        "actual": 1108,
+        "expected": 1108,
+        "scenario": "export-switch/reload-rendered"
+      }
+    ],
+    "schema": "location-inventory-policy-v1"
+  },
+  "review": {
+    "fresh_process": 1108,
+    "fixture": "location-assembly-v1",
+    "schema": "location-doorway-review-v1",
+    "run": "verification-rendered-b1a4093099db4ca7a6152f8d04d281a3",
+    "images": [
+      {
+        "sha256": "7CF39B7BB6D937ADB139B5380B63AD065475AE99F89BB40E88DB14965CC1D3DD",
+        "identical_to_inspected_capture": true,
+        "retained": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp013-doorway-review-2026-11-24\\classic-north.png",
+        "source": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-b1a4093099db4ca7a6152f8d04d281a3\\project\\tests\\.runs\\scenario-1\\location-doorway-home-north.png"
+      },
+      {
+        "sha256": "CE4000394B96F7FA1F2F6CFCF6D1983E10CC4403ADB428B73EF6F7259ADCDCE3",
+        "identical_to_inspected_capture": true,
+        "retained": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp013-doorway-review-2026-11-24\\native-back.png",
+        "source": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-b1a4093099db4ca7a6152f8d04d281a3\\project\\tests\\.runs\\scenario-1\\location-doorway-native-back.png"
+      },
+      {
+        "sha256": "725C8F160BC457C59BF4488014F28F93F9872EF644306397FCA65543289073BD",
+        "identical_to_inspected_capture": true,
+        "retained": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp013-doorway-review-2026-11-24\\classic-east.png",
+        "source": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-b1a4093099db4ca7a6152f8d04d281a3\\project\\tests\\.runs\\scenario-1\\location-doorway-home-east.png"
+      },
+      {
+        "sha256": "80F869FE2749B150DBDD3AD66BB0772FB13F8686A09EF99E31BCE64AD06387EA",
+        "identical_to_inspected_capture": true,
+        "retained": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp013-doorway-review-2026-11-24\\native-front.png",
+        "source": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-b1a4093099db4ca7a6152f8d04d281a3\\project\\tests\\.runs\\scenario-1\\location-doorway-native-front.png"
+      }
+    ],
+    "placement_committed": false,
+    "primary": 1257,
+    "acceptance": "pending user review"
+  },
+  "protected_before_manifest_sha256": "f209ba8399d9bbf43088f21b3315309ce1b00b94d77634dd82d7c90003d34c8e",
+  "protected_after_manifest_sha256": "32267f6fb8d0933810f3078fa7c8d1103838e13fadab2697b9fa5774af29904c",
+  "protection": {
+    "production_current": 101,
+    "classic_unchanged": 31,
+    "protected_unchanged": 1317,
+    "retention_before_bytes": 4915019803,
+    "retention_after_bytes": 2384364381,
+    "largest_retained": [
+      {
+        "name": "imp011-view-review-2026-11-23-final",
+        "bytes": 209339669
+      },
+      {
+        "name": "verification-rendered-2e84f6de05364ff29d5ce9611e4b065b",
+        "bytes": 64616492
+      },
+      {
+        "name": "verification-headless-6ef31e46a2f64fed9296fa303ff8567b",
+        "bytes": 64593287
+      },
+      {
+        "name": "verification-rendered-692de3dbe0854b34b9056e99a009e67f",
+        "bytes": 40743183
+      },
+      {
+        "name": "verification-headless-5e7d6fe3492940b3989c9d0e90f0a0ea",
+        "bytes": 40719960
+      },
+      {
+        "name": "verification-headless-79ead312eb74452985db8c4e7979f44f",
+        "bytes": 40712726
+      },
+      {
+        "name": "verification-headless-72336eb061c545b2a33e73850370daf4",
+        "bytes": 40710986
+      },
+      {
+        "name": "verification-rendered-41be0817a20e44faace4f0e0036c8c1a",
+        "bytes": 40588333
+      },
+      {
+        "name": "verification-headless-14471d25705843c38377f3960eec99fb",
+        "bytes": 40565110
+      },
+      {
+        "name": "export-a042b5a74f424fe695173783991896ee",
+        "bytes": 33415935
+      }
+    ],
+    "retention_measurement": "Regular logical bytes without reparse traversal, before this summary rewrite; other-task evidence preserved unchanged."
+  },
+  "compression": [
+    {
+      "path": "verification-headless-5ebc28987cae4a4fbabe9e5bf86af539\\evidence\\project\\scenario-1\\result.json",
+      "bytes": 120180902,
+      "sha256": "71245d7c3f2fa555095a0a81b566b515ecf842043657f414a76f9912f9356402",
+      "archive": "verification-headless-5ebc28987cae4a4fbabe9e5bf86af539\\evidence\\project\\scenario-1\\result.json.gz",
+      "archive_bytes": 3889426,
+      "archive_sha256": "cf52cfba9da3dd7720e88e2436000d92e1fc9bbb4ed39c9afe660dfb72459b6c",
+      "round_trip_verified": true
+    },
+    {
+      "path": "verification-headless-b1402cd868c746a8b5844c068ed19ec5\\evidence\\project\\scenario-1\\result.json",
+      "bytes": 121061890,
+      "sha256": "802115b793138dca8d687a0d48735b5a14fb1e08605b3608098208dd8b59e6b1",
+      "archive": "verification-headless-b1402cd868c746a8b5844c068ed19ec5\\evidence\\project\\scenario-1\\result.json.gz",
+      "archive_bytes": 3909110,
+      "archive_sha256": "6fa4bba2095447c2860b46af79fc6dee0c0864d571bcf8775471e88950bac3c0",
+      "round_trip_verified": true
+    },
+    {
+      "kind": "cleanup-journal",
+      "path": "dungeon-cleanup-b0867950df474f92aa22af9c02ad2607.json",
+      "archive": "dungeon-cleanup-b0867950df474f92aa22af9c02ad2607.json.gz",
+      "sha256": "6074dc7ab202da70a8790a3d6b1593458ce5d7996d479b731d9e86ba2e08dcb0",
+      "bytes": 3199171,
+      "archive_bytes": 159142,
+      "archive_sha256": "1c44a861b1d8953725f0ad6be7178b7bd4cf065b7786dca1974e1bc6e8087ff8",
+      "removed_files": 13371,
+      "removed_bytes": 2357357890,
+      "retained_evidence": 95,
+      "roots": [
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-484389947dd3409193abe3e9b2c91179",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-5ebc28987cae4a4fbabe9e5bf86af539",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-2f553ba777824171b070a6d1ef3f94e9",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-906cb3ac7618473299fcf6ca378e5020",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b1402cd868c746a8b5844c068ed19ec5",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-fb9dafc63ef643f3868341c379fdf9f5",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-daca405047ef414787d410ea6baaa1ca",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-87527467083d4d579621dd8c0efa57a9",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-7e4109c9da64453d9fb3ead9f20b3d64",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-2a291b08c41843a68a199e96c0ab95d5"
+      ],
+      "failures": [],
+      "round_trip_verified": true
+    },
+    {
+      "kind": "cleanup-journal",
+      "path": "dungeon-cleanup-32e6d067b2564feba15fde55164b80a4.json",
+      "archive": "dungeon-cleanup-32e6d067b2564feba15fde55164b80a4.json.gz",
+      "sha256": "36141dbe5eec369845e6061dcee9464e2f3839a5896a68e906670baa17e8317a",
+      "bytes": 3850754,
+      "archive_bytes": 206593,
+      "archive_sha256": "4ca210962f1db300bab2878420517076038bcbc83530f0096311e79493f47371",
+      "removed_files": 16200,
+      "removed_bytes": 3387074013,
+      "retained_evidence": 144,
+      "roots": [
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-30ca42da606e49e1b16d422aab510f4e",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-a5444bf043d94fdd9f65af13e816f408",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-8b28a7426d9b4a4b928243d13c66b798",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-9fff485b7d7d4e19a3aa230999880547",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-9bc5da2075b5435d9e63dfcdf8134469",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cf2982a0b70e47aba56b69842d0714ed",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-ccf371f013e6478abd5c0bd5c074e801",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-bd117f9b5d04442292406fc01861b1c3",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-2618226904004b8b914f3c72c7423632",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-837b74afe0d34c16ba4aaeba1988dad8"
+      ],
+      "failures": [],
+      "round_trip_verified": true
+    },
+    {
+      "kind": "cleanup-journal",
+      "path": "dungeon-cleanup-71804287b44e4d5da43a50b170a4cb91.json",
+      "archive": "dungeon-cleanup-71804287b44e4d5da43a50b170a4cb91.json.gz",
+      "sha256": "2aae01bec62afe1a2ba66f44dbcef460731c5c9aa66d3c12fb1c17bbd19b57d0",
+      "bytes": 2242588,
+      "archive_bytes": 118948,
+      "archive_sha256": "815582047325decd1e6d9f014589a404c449df22c7802e9393e9c452aed25779",
+      "removed_files": 9435,
+      "removed_bytes": 1904421103,
+      "retained_evidence": 82,
+      "roots": [
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-dd2df42f95474d18bfe42cf77f639357",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-b1a4093099db4ca7a6152f8d04d281a3",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-720786eac31a4200aa654ba00044a302",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-91ae6c0aecb8473e8db87b8117189ed9",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-17d5c18e1b194283ada0ad30584a72ed",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-21ea98f2ab21445caf1b1ecb32b2b48b"
+      ],
+      "failures": [],
+      "round_trip_verified": true
+    }
+  ],
+  "cleanup": {
+    "journals": [
+      {
+        "path": "dungeon-cleanup-b0867950df474f92aa22af9c02ad2607.json",
+        "archive": "dungeon-cleanup-b0867950df474f92aa22af9c02ad2607.json.gz",
+        "sha256": "6074dc7ab202da70a8790a3d6b1593458ce5d7996d479b731d9e86ba2e08dcb0",
+        "bytes": 3199171,
+        "archive_bytes": 159142,
+        "archive_sha256": "1c44a861b1d8953725f0ad6be7178b7bd4cf065b7786dca1974e1bc6e8087ff8",
+        "removed_files": 13371,
+        "removed_bytes": 2357357890,
+        "retained_evidence": 95,
+        "roots": [
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-484389947dd3409193abe3e9b2c91179",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-5ebc28987cae4a4fbabe9e5bf86af539",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-2f553ba777824171b070a6d1ef3f94e9",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-906cb3ac7618473299fcf6ca378e5020",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b1402cd868c746a8b5844c068ed19ec5",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-fb9dafc63ef643f3868341c379fdf9f5",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-daca405047ef414787d410ea6baaa1ca",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-87527467083d4d579621dd8c0efa57a9",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-7e4109c9da64453d9fb3ead9f20b3d64",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-2a291b08c41843a68a199e96c0ab95d5"
+        ],
+        "failures": [],
+        "round_trip_verified": true
+      },
+      {
+        "path": "dungeon-cleanup-32e6d067b2564feba15fde55164b80a4.json",
+        "archive": "dungeon-cleanup-32e6d067b2564feba15fde55164b80a4.json.gz",
+        "sha256": "36141dbe5eec369845e6061dcee9464e2f3839a5896a68e906670baa17e8317a",
+        "bytes": 3850754,
+        "archive_bytes": 206593,
+        "archive_sha256": "4ca210962f1db300bab2878420517076038bcbc83530f0096311e79493f47371",
+        "removed_files": 16200,
+        "removed_bytes": 3387074013,
+        "retained_evidence": 144,
+        "roots": [
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-30ca42da606e49e1b16d422aab510f4e",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-a5444bf043d94fdd9f65af13e816f408",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-8b28a7426d9b4a4b928243d13c66b798",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-9fff485b7d7d4e19a3aa230999880547",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-9bc5da2075b5435d9e63dfcdf8134469",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cf2982a0b70e47aba56b69842d0714ed",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-ccf371f013e6478abd5c0bd5c074e801",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-bd117f9b5d04442292406fc01861b1c3",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-2618226904004b8b914f3c72c7423632",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-837b74afe0d34c16ba4aaeba1988dad8"
+        ],
+        "failures": [],
+        "round_trip_verified": true
+      },
+      {
+        "path": "dungeon-cleanup-71804287b44e4d5da43a50b170a4cb91.json",
+        "archive": "dungeon-cleanup-71804287b44e4d5da43a50b170a4cb91.json.gz",
+        "sha256": "2aae01bec62afe1a2ba66f44dbcef460731c5c9aa66d3c12fb1c17bbd19b57d0",
+        "bytes": 2242588,
+        "archive_bytes": 118948,
+        "archive_sha256": "815582047325decd1e6d9f014589a404c449df22c7802e9393e9c452aed25779",
+        "removed_files": 9435,
+        "removed_bytes": 1904421103,
+        "retained_evidence": 82,
+        "roots": [
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-dd2df42f95474d18bfe42cf77f639357",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-b1a4093099db4ca7a6152f8d04d281a3",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-720786eac31a4200aa654ba00044a302",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-91ae6c0aecb8473e8db87b8117189ed9",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-17d5c18e1b194283ada0ad30584a72ed",
+          "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-21ea98f2ab21445caf1b1ecb32b2b48b"
+        ],
+        "failures": [],
+        "round_trip_verified": true
+      }
+    ],
+    "owned_roots": 26,
+    "removed_files": 39006,
+    "removed_bytes": 7648853006,
+    "retained_evidence": 321,
+    "retained_full_builds": 0
+  }
+}

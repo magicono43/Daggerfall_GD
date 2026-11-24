@@ -9,6 +9,8 @@ text = (project/'tests/location_cases.gd').read_text()
 source_path = project/'tests/location_source_observation.json'
 source = json.loads(source_path.read_text())
 functions = dict(re.findall(r'^func (\w+)\([^\n]*\n(.*?)(?=^func |\Z)',text,re.M|re.S))
+doorway_text = (project/'tests/location_doorway_cases.gd').read_text()
+doorway = json.loads((project/'tests/location_doorway_observation.json').read_text())
 
 
 def names(reload=False,rendered=False):
@@ -50,12 +52,31 @@ def names(reload=False,rendered=False):
         for bad in ('missing-binding','missing-selector','required-owner','late-failure'):
             result += [kind+' '+bad for kind in ('reject','preserve geometry','release staging')]
     if rendered: result += ['render capture exterior','render capture interior']
+    if rendered and not reload:
+        result += re.findall(r'check\("([^"\n]+)"\s*,',functions['tavern_visuals'])
+        result += ['render capture tavern-exterior-'+str(p) for p in (36,41,46)]
+        result += ['render capture tavern-interior-'+r for r in ('record-00200','record-00203','courtyard-wall')]
+    doorway_run = doorway_text.split('func run(', 1)[1]
+    if reload:
+        doorway_run = doorway_run.split('\tcases.write(path,')[0]
+    for name in re.findall(r'cases.check\("([^"\n]+)"\s*,', doorway_run):
+        if not reload and name == 'doorway fresh-process reconstruction': continue
+        result.append(name)
+    for vector in doorway['vectors']:
+        result += ['doorway classic '+kind+' '+vector['id'] for kind in ('assembly','explicit marker','source anchor','facing','target identity','real readiness gated')]
+        if rendered: result += ['render capture doorway-'+vector['id']]
+    if rendered: result += ['render capture doorway-native-front','render capture doorway-native-back']
+    if not reload:
+        for variant in ('missing','missing-exit','incompatible','wrong-side','out-of-frame','coincident','replaced-guard'):
+            result += ['doorway '+kind+' '+variant for kind in ('reject','rollback','failure diagnostic')]
     assert len(set(result)) == len(result), 'Duplicate declared scenarios'
     return sorted(result)
 
 
 inventory = dict(schema='location-assembly-inventory-v1',fixture='location-assembly-v1',
-                 source_observation_sha256=hashlib.sha256(source_path.read_bytes()).hexdigest())
+                 source_observation_sha256=hashlib.sha256(source_path.read_bytes()).hexdigest(),
+                 doorway_observation_sha256=hashlib.sha256((project/'tests/location_doorway_observation.json').read_bytes()).hexdigest(),
+                 annotation_sha256=hashlib.sha256((project/'content/layouts/location_assembly.json').read_bytes()).hexdigest())
 for reload in (False,True):
     for rendered in (False,True):
         mode=('reload-' if reload else '')+('rendered' if rendered else 'headless')

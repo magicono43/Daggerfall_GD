@@ -1,5 +1,25 @@
 # Milestones and validation checkpoints
 
+**IMP-013 increment 2 user-accepted, 2026-11-24:** The user accepted increments
+1/2 in their documented scopes. See the
+[acceptance record](evidence/IMP-013-INCREMENT-2-ACCEPTANCE-2026-11-24.md) and
+[increment-3 handoff](handoffs/IMP-013-INCREMENT-3-PROMPT.txt). Preparing it starts
+no implementation or milestone closure. Placement commitment, real-provider
+integrations, native SAVE and parent IMP-013/M2 remain open. Earlier
+acceptance-pending notes are historical.
+
+**IMP-013 tavern follow-up, 2026-11-24:** The remaining fixture tavern mapping is
+explicitly defined, including the DFU-observed courtyard #2 → rear landing →
+exterior #3 redirect. See [follow-up evidence](evidence/IMP-013-TAVERN-BINDINGS-2026-11-24.md).
+Increment-2 user acceptance is pending. Actor placement/transition commitment,
+real-owner integrations, native SAVE and parent IMP-013/M2 remain open.
+
+**IMP-013 increment 2, 2026-11-23:** Explicit guarded doorway bindings and scoped
+handoffs are implemented under the issued prompt; see
+[execution evidence](evidence/IMP-013-increment-2-2026-11-23.md). User acceptance
+is pending. No actor pose or transition is committed, and increment 3, real-owner
+integrations, native SAVE and parent IMP-013/M2 acceptance remain open.
+
 **IMP-013 increment 1 accepted / increment-2 handoff, 2026-11-23:** The user
 accepted increment 1 after reviewing the corrected ground texture. See the
 [acceptance record](evidence/IMP-013-INCREMENT-1-ACCEPTANCE-2026-11-23.md) and

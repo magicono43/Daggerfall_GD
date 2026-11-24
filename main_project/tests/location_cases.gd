@@ -1,6 +1,7 @@
 extends "res://tests/dungeon_cases.gd"
 const Location = preload("res://scripts/loc/location_assembly.gd")
 var source := {}
+var doorway_cases := preload("res://tests/location_doorway_cases.gd").new()
 
 func declarations() -> Dictionary:
 	return {"schema":"location-assembly-declarations-v1","ground_archive":2,"required_bindings":[],"hit_rules":[]}
@@ -28,7 +29,7 @@ func publish_location(mods: RefCounted) -> void:
 	var late := layout.duplicate(true)
 	late.data.placements[1].block = "packs/location.test#broken"
 	var pack := manifest("location.test")
-	pack.content = ["layout.json"]
+	pack.content = ["layout.json","z-classic-replacement.json","z-doorway-patch.json"]
 	write(mods.root.path_join("Mods/location/mod.json"),JSON.stringify(pack))
 	var entries := [{"id":"native","value":layout},{"id":"reordered","value":reordered},{"id":"missing-binding","value":bad},{"id":"missing-selector","value":selector},{"id":"required-owner","value":required_owner},{"id":"broken","value":broken},{"id":"late-failure","value":late}]
 	var shared := broken.duplicate(true)
@@ -60,6 +61,7 @@ func publish_location(mods: RefCounted) -> void:
 	var other_town := layout.duplicate(true)
 	other_town.data.location = "packs/classic#place-00002"
 	entries.append({"id":"other-town","value":other_town})
+	doorway_cases.publish(self,entries,mods)
 	write(mods.root.path_join("Mods/location/layout.json"),JSON.stringify({"domain":Layout.DOMAIN,"path":"packs/location.test","operation":"add","entries":entries}))
 	mods.rescan()
 	mods.edit("location.test","toggle")
@@ -173,6 +175,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	last_live_ticket = interior.ticket
 	await vectors(owner,interior,"interior",building)
 	check("interior instance retained","suite-alpha",interior.area.instance)
+	check("doorway unrelated inspection instance stays unbound",false,interior.doors.values().any(func(door: Dictionary): return door.binding_ready))
 	var action_count: int = source.records.filter(func(r: Dictionary): return r.context == "interior" and r.building == building and r.type == "door").size()
 	check("independent action-door inventory",action_count,interior.action_doors.size())
 	check("action doors retain pending owner",true,interior.action_doors.values().all(func(r: Dictionary): return not r.gameplay_owner_ready))
@@ -202,8 +205,11 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		check("fresh-process geometry version",stored.exterior,version)
 		check("fresh-process interior geometry version",stored.interior,interior.geometry_version)
 		check("reconstruction grants no SAVE",false,interior.save_compatible)
+		await doorway_cases.run(self,owner,true,fixture,shell)
 		return terminal(fixture)
 	write(str(fixture.sandbox).path_join("location-reconstruction.json"),JSON.stringify({"exterior":version,"interior":interior.geometry_version}))
+	await doorway_cases.run(self,owner,false,fixture,shell)
+	if DisplayServer.get_name() != "headless": await tavern_visuals(owner,shell,fixture)
 	await native_and_failures(owner,layout,interior_area)
 	await exterior_scaling(owner)
 	await operation_checks(owner,layout)
@@ -239,6 +245,30 @@ func vectors(owner: Node, result: Dictionary, context: String, building: String)
 			check(context+" exact hit region "+key,true,hit.get("candidates",[]).has(key))
 			check(context+" unresolved door never dispatches "+key,false,hit.get("door_action",true))
 	check(context+" independent door inventory",expected_doors,result.doors.size())
+
+func tavern_visuals(owner: Node, shell: Control, fixture: Dictionary) -> void:
+	var layout := "packs/classic#"+str(source.location)
+	var exterior: Dictionary = await assemble(owner,area_request(owner,layout,{"kind":"exterior"}))
+	check("tavern inspection exterior",true,exterior.ok)
+	if not exterior.ok: return
+	for plane in [36,41,46]:
+		var door: Dictionary = exterior.doors["%s/record-00150/plane-%d" % [source.placement,plane]]
+		var centre := Vector3.ZERO
+		for point: Vector3 in door.triangles: centre += point
+		centre /= door.triangles.size()
+		await location_capture(owner,shell,fixture,"tavern-exterior-%d" % plane,centre+door.normal*3+Vector3.UP*0.3,centre)
+	var interior: Dictionary = await assemble(owner,area_request(owner,layout,{"kind":"interior","placement":source.placement,"building":"building-0002","instance":"tavern-inspection"}))
+	check("tavern inspection interior",true,interior.ok)
+	if not interior.ok: return
+	check("tavern inspection never grants binding readiness",false,interior.binding_ready)
+	for id in ["record-00200","record-00203"]:
+		var door: Dictionary = interior.doors["%s/%s/plane-2" % [source.placement,id]]
+		var centre := Vector3.ZERO
+		for point: Vector3 in door.triangles: centre += point
+		centre /= door.triangles.size()
+		await location_capture(owner,shell,fixture,"tavern-interior-"+id,centre+door.normal*3+Vector3.UP*0.3,centre)
+	await location_capture(owner,shell,fixture,"tavern-interior-courtyard-wall",Vector3(2.225,1.5,6),Vector3(2.225,1.175,3.35))
+	last_live_ticket = interior.ticket
 
 func native_and_failures(owner: Node, layout: String, interior_area: Dictionary) -> void:
 	var native_request := area_request(owner,"packs/location.test#native",{"kind":"exterior"})
@@ -370,6 +400,7 @@ func operation_checks(owner: Node, layout: String) -> void:
 	var input := area_request(owner,layout,{"kind":"exterior"})
 	input.core_ticket = original
 	input.session = original.scope
+	input.arrival = {"route":"home-east","kind":"doorway","doorway":"home-east"}
 	var prepared: Dictionary = await assemble(owner,input)
 	check("isolated original-ticket geometry",true,prepared.ok)
 	if not prepared.ok:
@@ -377,6 +408,7 @@ func operation_checks(owner: Node, layout: String) -> void:
 		core.cancel(original)
 		return
 	check("original ticket retains admission scope",original,prepared.ticket.request.core_ticket)
+	var marker: Dictionary = owner.marker_candidate(prepared.ticket,"home-east")
 	check("preflight activation rejects","pending",owner.activate(prepared.ticket).kind)
 	provider.hold_readiness = true
 	core.complete_preflight(original,{"ok":true})
@@ -385,6 +417,10 @@ func operation_checks(owner: Node, layout: String) -> void:
 	check("prepared survives outgoing retirement",true,owner.readiness(prepared.ticket).ok)
 	check("activation under original operation",true,owner.activate(prepared.ticket).ok)
 	check("activation epoch separate from admission",true,owner.projection(prepared.ticket).activation_session != original.scope)
+	check("doorway activation invalidates prepared handoff",false,owner._marker_handoff_current(prepared.ticket,"home-east",0,marker.handoff_id))
+	var allowed := func(value: Dictionary): return {"ok":true,"handoff_id":value.handoff_id}
+	var late := func(_value: Dictionary): return {"kind":"pending","handoff_id":marker.handoff_id,"marker":marker.marker,"frame":Frame.FRAME}
+	check("doorway late preactivation provider rejects","invalid_placement_result",owner.check_marker_candidate(prepared.ticket,"home-east",0,allowed,late).kind)
 	check("activation retry idempotent",true,owner.activate(prepared.ticket).ok)
 	check("activated geometry cannot release destination",false,owner.readiness(prepared.ticket).destination_ready)
 	core.complete_readiness(core.ticket(),{"ok":true,"services":provider.bindings(),"death_authority":provider})
@@ -415,6 +451,7 @@ func source_checks(owner: Node, providers: RefCounted, fixture: Dictionary, layo
 	providers.definitions.dispose()
 	check("content retirement invalidates staged result","stale",owner.step(staged.ticket).kind)
 	check("content retirement invalidates committed result","stale",owner.readiness(retry.ticket).kind)
+	check("doorway content retirement invalidates handoff","stale",owner.marker_candidate(retry.ticket,"home-east").kind)
 
 func exterior_scaling(owner: Node) -> void:
 	var result: Dictionary = await assemble(owner,area_request(owner,"packs/location.test#scaling",{"kind":"exterior"}))

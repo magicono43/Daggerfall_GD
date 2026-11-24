@@ -120,7 +120,578 @@
       "schema": "location-assembly-declarations-v1",
       "ground_archive": 2,
       "required_bindings": [],
-      "hit_rules": []
+      "hit_rules": [],
+      "doorways": {
+        "schema": "location-doorways-v1",
+        "interiors": [
+          {
+            "id": "building-0000-interior",
+            "placement": "placement-00000",
+            "building": "building-0000",
+            "parent": {
+              "frame": "classic-block-local-v1",
+              "position": [
+                1408,
+                0,
+                768
+              ],
+              "position_unit": "classic-layout-integer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "rotation_unit": "classic-angle-2048",
+              "scale": [
+                1,
+                1,
+                1
+              ]
+            },
+            "provenance": {
+              "source": "TVRNBS04.RMB",
+              "policy": "explicit-source-door-plane-pair-v1"
+            }
+          },
+          {
+            "id": "building-0001-interior",
+            "placement": "placement-00000",
+            "building": "building-0001",
+            "parent": {
+              "frame": "classic-block-local-v1",
+              "position": [
+                3200,
+                0,
+                1152
+              ],
+              "position_unit": "classic-layout-integer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "rotation_unit": "classic-angle-2048",
+              "scale": [
+                1,
+                1,
+                1
+              ]
+            },
+            "provenance": {
+              "source": "TVRNBS04.RMB",
+              "policy": "explicit-source-door-plane-pair-v1"
+            }
+          },
+          {
+            "id": "building-0002-interior",
+            "placement": "placement-00000",
+            "building": "building-0002",
+            "parent": {
+              "frame": "classic-block-local-v1",
+              "position": [
+                2688,
+                0,
+                2304
+              ],
+              "position_unit": "classic-layout-integer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "rotation_unit": "classic-angle-2048",
+              "scale": [
+                1,
+                1,
+                1
+              ]
+            },
+            "provenance": {
+              "source": "TVRNBS04.RMB",
+              "policy": "explicit-source-door-plane-pair-v1"
+            }
+          }
+        ],
+        "links": [
+          {
+            "id": "home-east",
+            "interior": "building-0000-interior",
+            "exterior": {
+              "placement": "placement-00000",
+              "record": "record-00000",
+              "plane": 0,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "model_sha256": "ae6a683b98cb44e6f6b962efabfa475183a763aea0de443accabec24b22f27fa"
+              }
+            },
+            "exit": {
+              "placement": "placement-00000",
+              "record": "record-00004",
+              "plane": 16,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    189,
+                    -63,
+                    64
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "model_sha256": "598bd15bb67d160eb6fb291e2a49ff844811fb9248ad73b8f0b3535d153bc241"
+              }
+            },
+            "landing": {
+              "record": "record-00033",
+              "forward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "additional_entry": false,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    192,
+                    0,
+                    64
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "texture": {
+                  "archive": 199,
+                  "record": 8
+                }
+              }
+            },
+            "outside_offset": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "provenance": {
+              "source": "TVRNBS04.RMB",
+              "source_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+              "observation": "location_doorway_observation.json",
+              "policy": "explicit-opposite-plane-and-entry-side-v1"
+            }
+          },
+          {
+            "id": "home-north",
+            "interior": "building-0001-interior",
+            "exterior": {
+              "placement": "placement-00000",
+              "record": "record-00088",
+              "plane": 0,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "model_sha256": "076606c19bec6d0fd25e9c3fb887bf3a5ce49e9bf9f11cd03e917723b1d0af00"
+              }
+            },
+            "exit": {
+              "placement": "placement-00000",
+              "record": "record-00089",
+              "plane": 4,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    64,
+                    -63,
+                    -189
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    1024,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "model_sha256": "311a3886d34f0f04fd4b99ab6d6a8831b6c402ce995d95b41df9ebfd695d69be"
+              }
+            },
+            "landing": {
+              "record": "record-00116",
+              "forward": [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ],
+              "additional_entry": false,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    64,
+                    0,
+                    -192
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "texture": {
+                  "archive": 199,
+                  "record": 8
+                }
+              }
+            },
+            "outside_offset": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "provenance": {
+              "source": "TVRNBS04.RMB",
+              "source_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+              "observation": "location_doorway_observation.json",
+              "policy": "explicit-opposite-plane-and-entry-side-v1"
+            }
+          },
+          {
+            "id": "tavern-front",
+            "interior": "building-0002-interior",
+            "exterior": {
+              "placement": "placement-00000",
+              "record": "record-00150",
+              "plane": 36,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "model_sha256": "a049210169a021141f2dc20de8e675505599d343185d0509f43e9a6dc6bb32bc"
+              }
+            },
+            "exit": {
+              "placement": "placement-00000",
+              "record": "record-00200",
+              "plane": 2,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    -64,
+                    -63,
+                    192
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    1024,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "model_sha256": "adfb9c1856e984f9fbd73a9f47b34c5ff839bd75c375becbdaa9438aef962aea"
+              }
+            },
+            "landing": {
+              "record": "record-00274",
+              "forward": [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ],
+              "additional_entry": false,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    -64,
+                    0,
+                    192
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "texture": {
+                  "archive": 199,
+                  "record": 8
+                }
+              }
+            },
+            "outside_offset": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "provenance": {
+              "source": "TVRNBS04.RMB",
+              "source_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+              "observation": "location_doorway_observation.json",
+              "policy": "explicit-opposite-plane-and-entry-side-v1"
+            }
+          },
+          {
+            "id": "tavern-rear",
+            "interior": "building-0002-interior",
+            "exterior": {
+              "placement": "placement-00000",
+              "record": "record-00150",
+              "plane": 46,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "model_sha256": "a049210169a021141f2dc20de8e675505599d343185d0509f43e9a6dc6bb32bc"
+              }
+            },
+            "exit": {
+              "placement": "placement-00000",
+              "record": "record-00203",
+              "plane": 2,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    -64,
+                    -63,
+                    -317
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    1024,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "model_sha256": "9cc61447277a1ba9f9bb342c3a607aa08500589cbe111f9706a82135df29fabe"
+              }
+            },
+            "landing": {
+              "record": "record-00271",
+              "forward": [
+                1.2246467991473532e-16,
+                0.0,
+                -1.0
+              ],
+              "additional_entry": false,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    -64,
+                    0,
+                    -320
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "texture": {
+                  "archive": 199,
+                  "record": 8
+                }
+              }
+            },
+            "outside_offset": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "provenance": {
+              "source": "TVRNBS04.RMB",
+              "source_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+              "observation": "location_doorway_observation.json",
+              "policy": "explicit-opposite-plane-and-entry-side-v1"
+            }
+          },
+          {
+            "id": "tavern-courtyard",
+            "exterior": {
+              "placement": "placement-00000",
+              "record": "record-00150",
+              "plane": 41,
+              "guard": {
+                "payload_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+                "transform": {
+                  "frame": "classic-block-local-v1",
+                  "position": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "position_unit": "classic-layout-integer",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation_unit": "classic-angle-2048",
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "model_sha256": "a049210169a021141f2dc20de8e675505599d343185d0509f43e9a6dc6bb32bc"
+              }
+            },
+            "entry_alias_of": "tavern-rear",
+            "provenance": {
+              "source": "TVRNBS04.RMB",
+              "source_sha256": "bb2b27e80c6c2b14fa3815690758d8b17dcac7e3c68bfa832ca2bae608a74e89",
+              "policy": "explicit-entry-alias-v1",
+              "observation": "User DFU test 2026-11-24: enter courtyard door #2, arrive at rear interior entrance, immediately exit to outer rear door #3.",
+              "original_executable_verified": false,
+              "geometry_changed": false
+            }
+          }
+        ]
+      }
     }
   },
   "provenance": {

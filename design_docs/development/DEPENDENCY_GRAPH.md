@@ -1,5 +1,24 @@
 # Implementation dependencies
 
+**IMP-013 increment 2 accepted, 2026-11-24:** Increments 1/2 are user-accepted.
+The [acceptance record](evidence/IMP-013-INCREMENT-2-ACCEPTANCE-2026-11-24.md)
+links the [increment-3 handoff](handoffs/IMP-013-INCREMENT-3-PROMPT.txt).
+Preparing it starts no implementation. No parent dependency edge closes:
+placement commitment, named real-provider integrations and IMP-013/M2 remain open.
+Earlier pending-acceptance notes are historical.
+
+**IMP-013 tavern follow-up, 2026-11-24:** The fixture's remaining tavern mapping
+uses two canonical links and an explicit courtyard entry alias to the rear
+landing/exit. See [follow-up evidence](evidence/IMP-013-TAVERN-BINDINGS-2026-11-24.md).
+No dependency edge closes: increment-2 user acceptance is pending; increment 3,
+real MOVE/WORLD/gameplay/SAVE integrations and parent IMP-013/M2 remain open.
+
+**IMP-013 increment 2, 2026-11-23:** Guarded doorway binding preparation and the
+IMP-061 consumer interface now share the normal LOC owner. See
+[execution evidence](evidence/IMP-013-increment-2-2026-11-23.md). User acceptance
+is pending. No prerequisite edge closes: increment 3, real MOVE placement,
+WORLD/gameplay/SAVE integration and parent IMP-013/M2 remain open.
+
 **IMP-013 increment 1 accepted / increment-2 handoff, 2026-11-23:** The user
 accepted increment 1 after reviewing the corrected ground texture. See the
 [acceptance record](evidence/IMP-013-INCREMENT-1-ACCEPTANCE-2026-11-23.md) and

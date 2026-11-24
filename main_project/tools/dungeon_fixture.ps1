@@ -9,6 +9,8 @@ function Test-DungeonInventory($Result,[string]$Mode) {
         $actual = @($Result.checks.scenario)
         return $inventory.schema -ceq 'location-assembly-inventory-v1' -and $inventory.fixture -ceq $Result.fixture -and
             (Get-FileHash -LiteralPath "$PSScriptRoot/../tests/location_source_observation.json").Hash -ieq $inventory.source_observation_sha256 -and
+            (Get-FileHash -LiteralPath "$PSScriptRoot/../tests/location_doorway_observation.json").Hash -ieq $inventory.doorway_observation_sha256 -and
+            (Get-FileHash -LiteralPath "$PSScriptRoot/../content/layouts/location_assembly.json").Hash -ieq $inventory.annotation_sha256 -and
             $expected.Count -gt 0 -and $actual.Count -eq $expected.Count -and @($actual | Select-Object -Unique).Count -eq $actual.Count -and
             @(Compare-Object -ReferenceObject $expected -DifferenceObject $actual -CaseSensitive).Count -eq 0
     }

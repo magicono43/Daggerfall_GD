@@ -1,7 +1,10 @@
 extends RefCounted
 ## Validated replaceable assembly inputs; gameplay bindings remain later owners.
 static func reason(value: Variant) -> String:
-	if not value is Dictionary or value.size() != 4 or value.get("schema") != "location-assembly-declarations-v1" or not preload("res://scripts/data/actor_input_formats.gd").integer(value.get("ground_archive"),0,511) or not value.get("required_bindings") is Array or not value.get("hit_rules") is Array: return "Complete location assembly declarations required."
+	if not value is Dictionary or value.size() != 4+int(value.has("doorways")) or value.get("schema") != "location-assembly-declarations-v1" or not preload("res://scripts/data/actor_input_formats.gd").integer(value.get("ground_archive"),0,511) or not value.get("required_bindings") is Array or not value.get("hit_rules") is Array: return "Complete location assembly declarations required."
+	if value.has("doorways"):
+		var problem := preload("res://scripts/data/location_doorway_schema.gd").reason(value.doorways)
+		if not problem.is_empty(): return problem
 	var owners := {}
 	for binding in value.required_bindings:
 		if not binding is Dictionary or binding.size() != 2 or not binding.get("record") is String or binding.record.is_empty() or not binding.get("owner") is String or binding.owner.is_empty() or owners.has(binding.record): return "Distinct complete required scoped binding required."

@@ -1,5 +1,12 @@
 # Layout structural inputs — v1
 
+IMP-013 increment 2 adds optional validated `location_assembly.doorways` using
+`location-doorways-v1`. Complete interior/link declarations and source guards use
+the existing publication/MOD/loose precedence and source locks. See
+[LOCATION_DOORWAYS.md](../loc/LOCATION_DOORWAYS.md) for exact fields, qualified
+classic pairs, source transforms, preparation failures and scoped handoffs.
+DATA validation establishes declarations, not live LOC bindings, actor pose or SAVE.
+
 IMP-010 increment 2, DATA-005. Qualification evidence is recorded separately;
 this contract does not establish user acceptance. Increment-3 variant definitions
 and pure scoped proposals are specified separately in [VARIANT_INPUTS.md](VARIANT_INPUTS.md).
@@ -239,3 +246,11 @@ remain pending. Optional authored RMB flat `marker_roles` is a nonempty set of
 distinct validated role IDs. It does not automatically bind an entrance or promote
 rest to entry. Classic identity/profile hashes and unknown-action/axis policies
 remain unchanged. MAPS named-building and door-pool associations remain unqualified.
+
+Doorway declarations also support guarded entry-only aliases with exactly `id`,
+`exterior`, `entry_alias_of` and `provenance`. They target a canonical link directly
+in the same building occurrence; missing targets, chains, cycles, duplicate exterior
+planes and changed source guards reject. LOC resolves aliases after canonical links
+and preserves the alias entrance separately from the canonical exit/return. The
+TVRNBS04 courtyard alias is a documented DFU-observed baseline; it changes no source
+geometry or original marker role/position. See `loc/LOCATION_DOORWAYS.md`.

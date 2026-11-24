@@ -1,4 +1,12 @@
-# Location assembly — IMP-013 increment 1
+# Location assembly — IMP-013 increments 1/2
+
+Increment 2 adds [explicit entrance/exit bindings](LOCATION_DOORWAYS.md) inside
+this same owner and transaction. That contract supersedes increment-1 pending
+binding statements below for its qualified pairs and explicit entry-only aliases.
+The TVRNBS04 tavern uses two actual interior exits and a courtyard entry alias
+to the rear landing; no geometry or original marker role/position changes.
+MOVE commitment retains
+increment 3; neither delivery establishes parent IMP-013/M2 acceptance.
 
 `location_assembly.gd` specializes the existing dungeon assembly owner. The normal
 session shell composes one instance with the existing DATA/media/geography/variant

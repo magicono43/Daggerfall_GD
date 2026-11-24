@@ -5,6 +5,9 @@ const PROFILE = "rmb-assembly-metres-v1"
 const GROUND_UV_PROFILE = "rmb-ground-top-left-uv-v1"
 var _directories := {}
 
+func _has_arrivals(input: Dictionary, request: Dictionary) -> bool:
+	return input.data.get("location_assembly",{}).has("doorways") if request.has("area") else super._has_arrivals(input,request)
+
 func _request_extra(request: Dictionary) -> int:
 	return int(request.has("area"))
 
@@ -62,8 +65,10 @@ func _records(block: Dictionary, p: Dictionary) -> Array:
 
 func _record_pose(record: Dictionary, block: Dictionary, p: Dictionary, resource: Dictionary = {}) -> Transform3D:
 	if not _rmb(): return super._record_pose(record,block,p,resource)
+	return _rmb_record_pose(record,block,_stage.ticket.request.area,resource)
+
+static func _rmb_record_pose(record: Dictionary, block: Dictionary, area: Dictionary, resource: Dictionary = {}) -> Transform3D:
 	var result := Frame.pose(record.transform)
-	var area: Dictionary = _stage.ticket.request.area
 	if area.kind == "exterior" and block.definition.get("mode") != "authored" and not record.has("building_id"):
 		# RMBLayout.AddProps uses a different block-local origin from building
 		# models. The -4 source-unit prop offset is a documented DFU baseline.
@@ -226,10 +231,38 @@ func _doors() -> Dictionary:
 	# Static regions are selected against actual hit triangles. Ambiguity is a
 	# checked no-action result, never enumeration-order selection.
 	if not _rmb(): return super._doors()
+	var started := Time.get_ticks_usec()
+	var prepared := _prepare_doorways()
+	if not prepared.ok: return prepared
 	for rule: Dictionary in _stage.input.data.location_assembly.hit_rules:
 		for id: String in rule.candidates:
-			if not _stage.location_doors.has(id): return _result("missing","Declared hit selector region absent: "+id)
-	return {"ok":true}
+			if not _hit_region_exists(id): return _result("missing","Declared hit selector region absent: "+id)
+	if prepared.ok: _stage.doorway_prepare_usec = Time.get_ticks_usec()-started
+	return prepared
+
+func _hit_region_exists(id: String) -> bool:
+	if _stage.location_doors.has(id): return true
+	# A shared layout's selector can qualify an exterior while an interior is
+	# staged. Validate the named source plane without instantiating that space.
+	if not _stage.input.data.location_assembly.has("doorways"): return false
+	var parts := id.split("/")
+	if parts.size() != 3 or not parts[2].begins_with("plane-") or not parts[2].trim_prefix("plane-").is_valid_int(): return false
+	var placements := {}
+	for p: Dictionary in _stage.input.data.placements: placements[p.id] = p
+	if not placements.has(parts[0]): return false
+	var p: Dictionary = placements[parts[0]]
+	var block := _link_block(p)
+	if not block.ok: return false
+	var records: Array = block.definition.records.filter(func(r: Dictionary): return r.id == parts[1])
+	if records.size() != 1 or records[0].type != "model": return false
+	var r: Dictionary = records[0]
+	var resource := _link_resource(r,block)
+	if not resource.get("ok",false) or not resource.has("value"): return false
+	var published: Dictionary = layouts.lookup(registry,p.block)
+	if not published.ok: return false
+	var payload: String = published.record.value.get("input",{}).get("payload_sha256","") if published.record.value.data.mode == "classic-source" else ""
+	var guard := {"payload_sha256":payload,"transform":r.transform,"model_sha256":resource.value.projection().provenance.sha256}
+	return _link_door({"placement":p.id,"record":r.id,"plane":int(parts[2].trim_prefix("plane-")),"guard":guard},r.get("building_id",""),r.get("record_context","exterior"),placements).ok
 
 func _candidate_extension(candidate: Dictionary) -> void:
 	if not _rmb(): return
@@ -244,6 +277,28 @@ func _candidate_extension(candidate: Dictionary) -> void:
 	candidate.context_version = Hash.digest({"area":candidate.area,"layout":candidate.layout_version,"profile":PROFILE})
 	candidate.binding_ready = false
 	candidate.pending_providers = ["WORLD-terrain","WORLD-routes","MOVE-placement","entrance-exit-bindings","gameplay-owner-state"]
+	candidate.doorway_links = _stage.get("doorway_links",{}).duplicate(true)
+	candidate.doorway_version = Hash.digest(candidate.doorway_links)
+	candidate.doorway_prepare_usec = _stage.get("doorway_prepare_usec",0)
+	candidate.declared_bindings_ready = not candidate.doorway_links.is_empty()
+	candidate.pending_static_door_bindings = candidate.doors.keys().filter(func(id: String): return candidate.bindings[record_key(candidate.doors[id].identity.placement,candidate.doors[id].identity.record)].record.type == "model")
+	candidate.binding_ready = not candidate.doorway_links.is_empty() and (candidate.area.kind == "exterior" or candidate.doorway_links.values().any(func(link: Dictionary): return link.interior.id == candidate.area.instance and link.interior.placement == candidate.area.placement and link.interior.building == candidate.area.building))
+	for link: Dictionary in candidate.doorway_links.values():
+		if candidate.area.kind == "interior" and link.has("entry_alias_of"): continue
+		if candidate.area.kind == "interior" and (candidate.area.instance != link.interior.id or candidate.area.placement != link.interior.placement or candidate.area.building != link.interior.building): continue
+		var door_id: String = link.exterior.id if candidate.area.kind == "exterior" else link.exit.id
+		if candidate.doors.has(door_id):
+			candidate.doors[door_id].binding_ready = true
+			candidate.doors[door_id].link = link.id
+			candidate.pending_door_bindings.erase(door_id)
+			candidate.pending_static_door_bindings.erase(door_id)
+		if candidate.area.kind == "interior" and candidate.area.get("instance") == link.interior.id:
+			var key: String = record_key(link.landing.marker.placement,link.landing.marker.record)
+			if candidate.markers.has(key):
+				candidate.markers[key].binding_ready = true
+				if link.landing.additional_entry and not candidate.markers[key].roles.has("entry"): candidate.markers[key].roles.append("entry")
+	candidate.binding_ready = candidate.binding_ready and candidate.pending_static_door_bindings.is_empty()
+	if candidate.binding_ready: candidate.pending_providers.erase("entrance-exit-bindings")
 	candidate.geometry_version = Hash.digest([candidate.geometry_version,PROFILE,_stage.materials.asset_version()])
 	if candidate.area.kind == "exterior":
 		candidate.ground_uv_profile = GROUND_UV_PROFILE
@@ -262,6 +317,218 @@ func _candidate_extension(candidate: Dictionary) -> void:
 		candidate.door_index[key] = candidates
 	# A declared selector must refer to actual regions in this exact preparation.
 	# Validation happens before publication through _doors().
+
+func _link_failure(kind: String, link: Variant, target: Variant, reason: String) -> Dictionary:
+	return _result(kind,"Doorway %s -> %s: %s" % [str(link),str(target),reason])
+
+## Preparation-only resource reuse. Point queries use the published narrow index.
+func _link_block(p: Dictionary) -> Dictionary:
+	if not _stage.blocks.has(p.block):
+		_stage.blocks[p.block] = _stage.variant.blocks[p.id] if _stage.variant.get("blocks",{}).has(p.id) else layouts.decode_block(registry,p.block)
+		if _stage.blocks[p.block].ok: _stage.block_versions[p.block] = Hash.digest(_stage.blocks[p.block].definition)
+	return _stage.blocks[p.block]
+
+func _link_record(p: Dictionary, building: String, record: String, context: String, guard: Dictionary) -> Dictionary:
+	var block := _link_block(p)
+	if not block.ok: return block
+	var found: Array = block.definition.records.filter(func(r: Dictionary): return r.id == record and r.get("building_id","") == building and r.get("record_context","") == context)
+	if found.size() != 1: return _result("missing","Required scoped record absent: "+record)
+	var r: Dictionary = found[0]
+	var published: Dictionary = layouts.lookup(registry,p.block)
+	if not published.ok: return published
+	var payload: String = published.record.value.get("input",{}).get("payload_sha256","") if published.record.value.data.mode == "classic-source" else ""
+	if payload != guard.payload_sha256 or not preload("res://scripts/data/actor_input_formats.gd").equal_input(r.transform,guard.transform): return _result("incompatible_binding","Effective source/record pose differs from its explicit guard: "+record)
+	return {"ok":true,"record":r,"block":block}
+
+func _link_resource(r: Dictionary, block: Dictionary) -> Dictionary:
+	var key := Hash.digest(r.get("resource",{"model_id":r.get("model_id"),"door_model_index":r.get("door_model_index")}))
+	if not _stage.cache.has(key):
+		var request: Dictionary = r.duplicate(true)
+		request.definition_identity = block.identity.duplicate(true)
+		request.content_context = block.content_context.duplicate(true)
+		var resource: Dictionary = layouts.classic_resource(request)
+		if not resource.ok: return resource
+		_stage.cache[key] = resource
+		_stage.resource_decodes += 1
+	return _stage.cache[key]
+
+func _link_door(endpoint: Dictionary, building: String, context: String, placements: Dictionary) -> Dictionary:
+	if not placements.has(endpoint.placement): return _result("missing","Required placed doorway absent.")
+	var p: Dictionary = placements[endpoint.placement]
+	if context == "exterior" and p.context != "exterior": return _result("incompatible_binding","Exterior target is not an exterior occurrence.")
+	var checked := _link_record(p,building,endpoint.record,context,endpoint.guard)
+	if not checked.ok: return checked
+	var r: Dictionary = checked.record
+	if r.type != "model": return _result("incompatible_binding","Action doors cannot substitute for static traversal exits.")
+	var resource := _link_resource(r,checked.block)
+	if not resource.ok: return resource
+	if not resource.has("value"): return _result("incompatible_binding","Replacement needs qualified static-door topology.")
+	var model: Dictionary = resource.value.projection()
+	if model.provenance.sha256 != endpoint.guard.model_sha256: return _result("incompatible_binding","Static-door model changed.")
+	var planes: Array = model.planes.filter(func(plane: Dictionary): return int(plane.source_plane) == int(endpoint.plane))
+	if planes.size() != 1: return _result("missing","Required original model plane absent.")
+	var plane: Dictionary = planes[0]
+	var archive := int(plane.texture_archive)
+	var base := archive % 100 if archive > 100 and archive not in [331,156] else archive
+	if base not in [74,56,95] and not (archive == 331 and plane.texture_record > 0): return _result("incompatible_binding","Plane is not a source static doorway.")
+	var occurrence := Transform3D.IDENTITY if context == "interior" and p.context == "exterior" else _rmb_placement(p)
+	var pose := occurrence * _rmb_record_pose(r,checked.block,{"kind":context},resource)
+	var points := PackedVector3Array()
+	for index: int in plane.point_indices: points.append(pose*Frame.model_point(model.points_source[index]))
+	if points.size() < 3: return _result("incompatible_binding","Degenerate doorway.")
+	var centre := Vector3.ZERO
+	for point: Vector3 in points:
+		if not Frame.bounded(point): return _result("unsupported_geometry","Doorway exceeds local precision extent.")
+		centre += point
+	centre /= points.size()
+	return {"ok":true,"id":"%s/%s/plane-%d" % [p.id,r.id,endpoint.plane],"layout":_stage.input.identity.duplicate(true),"location":_stage.input.data.location,"placement":p.id,"record":r.id,"building":building,"plane":int(endpoint.plane),"position":centre,"normal":(pose.basis*Frame.normal(plane.normal_source)).normalized(),"points":points,"provenance":{"model":model.provenance.duplicate(true),"guard":endpoint.guard.duplicate(true)},"geometry_ready":false}
+
+static func _rmb_placement(p: Dictionary) -> Transform3D:
+	return Frame.pose(p.transform) if p.has("transform") else Transform3D(Basis.IDENTITY,Frame.point([int(p.grid[0])*RMB_SIDE,0,int(p.grid[1])*RMB_SIDE]))
+
+func _prepare_doorways() -> Dictionary:
+	_stage.doorway_links = {}
+	var definition: Dictionary = _stage.input.data.location_assembly.get("doorways",{})
+	if definition.is_empty():
+		return _result("missing_binding","Arrival requires explicit location doorway declarations.") if _stage.ticket.request.has("arrival") else {"ok":true}
+	var placements := {}
+	for p: Dictionary in _stage.input.data.placements: placements[p.id] = p
+	var interiors := {}
+	var templates := {}
+	for item: Dictionary in definition.interiors:
+		if not placements.has(item.placement): return _link_failure("missing",item.id,item.placement,"Interior occurrence absent.")
+		var block := _link_block(placements[item.placement])
+		if not block.ok: return block
+		var building: Dictionary = block.definition.get("building_inputs",{}).get(item.building,{})
+		if building.is_empty() or not preload("res://scripts/data/actor_input_formats.gd").equal_input(building.transform,item.parent): return _link_failure("incompatible_binding",item.id,item.building,"Building/parent guard mismatch.")
+		interiors[item.id] = {"id":item.id,"location":_stage.input.data.location,"layout":_stage.input.identity.duplicate(true),"placement":item.placement,"building":item.building}
+		templates[item.id] = {"identity":{"block":block.identity.duplicate(true),"building":item.building},"provenance":item.provenance.duplicate(true)}
+	for link: Dictionary in definition.links:
+		if link.has("entry_alias_of"): continue
+		var interior: Dictionary = interiors[link.interior]
+		if link.exit.placement != interior.placement: return _link_failure("incompatible_binding",link.id,link.exit,"Exit leaves its declared interior occurrence.")
+		var exterior := _link_door(link.exterior,interior.building,"exterior",placements)
+		if not exterior.ok: return _link_failure(exterior.kind,link.id,link.exterior,exterior.reason)
+		var exit := _link_door(link.exit,interior.building,"interior",placements)
+		if not exit.ok: return _link_failure(exit.kind,link.id,link.exit,exit.reason)
+		exit.interior = interior.duplicate(true)
+		var p: Dictionary = placements[interior.placement]
+		var marker := _link_record(p,interior.building,link.landing.record,"interior",link.landing.guard)
+		if not marker.ok: return _link_failure(marker.kind,link.id,link.landing.record,marker.reason)
+		var r: Dictionary = marker.record
+		var roles := _marker_roles(r,"interior")
+		if r.type != "flat" or r.get("texture",{}).get("archive") != link.landing.guard.texture.archive or r.get("texture",{}).get("record") != link.landing.guard.texture.record or (not roles.has("entry") and not (roles.has("rest") and link.landing.additional_entry)): return _link_failure("incompatible_binding",link.id,r.id,"Entry role/texture mismatch; rest promotion requires explicit evidence.")
+		var occurrence := Transform3D.IDENTITY if p.context == "exterior" else _rmb_placement(p)
+		var pose := occurrence*Frame.pose(r.transform)
+		if not Frame.bounded(pose.origin): return _link_failure("unsupported_geometry",link.id,r.id,"Required marker anchor exceeds the qualified local coordinate extent.")
+		var forward := (occurrence.basis*Frame.vector(link.landing.forward)).normalized()
+		# Side is geometric; explicit authored unit facing is a separate fact.
+		if (pose.origin-exit.position).dot(exit.normal) <= Frame.POSITION_TOLERANCE: return _link_failure("incompatible_binding",link.id,r.id,"Landing is not on the declared interior doorway side.")
+		var projected: Vector3 = pose.origin-exit.normal*(pose.origin-exit.position).dot(exit.normal)
+		var in_aperture := false
+		for at in range(1,exit.points.size()-1):
+			if _on_triangle(projected,exit.points[0],exit.points[at],exit.points[at+1]): in_aperture = true
+		if not in_aperture: return _link_failure("incompatible_binding",link.id,r.id,"Marker's perpendicular projection misses the intended door aperture.")
+		var offset := Frame.vector(link.outside_offset)
+		# Offset is authored in the exterior occurrence frame, independent of live nodes.
+		offset = _rmb_placement(placements[link.exterior.placement]).basis*offset
+		if not Frame.bounded(exterior.position+offset): return _link_failure("unsupported_geometry",link.id,exterior.id,"Required exterior anchor exceeds the qualified local coordinate extent.")
+		if offset.dot(exterior.normal) <= Frame.POSITION_TOLERANCE: return _link_failure("incompatible_binding",link.id,exterior.id,"Exterior landing must remain on the outward doorway side.")
+		var landing := {"marker":{"layout":_stage.input.identity.duplicate(true),"placement":p.id,"record":r.id,"interior":interior.duplicate(true)},"position":pose.origin,"forward":forward,"roles":roles,"additional_entry":link.landing.additional_entry,"provenance":link.provenance.duplicate(true)}
+		_stage.doorway_links[link.id] = {"id":link.id,"interior":interior.duplicate(true),"template":templates[interior.id].identity.duplicate(true),"interior_provenance":templates[interior.id].provenance.duplicate(true),"exterior":exterior,"exit":exit,"landing":landing,"outside_position":exterior.position+offset,"outside_forward":exterior.normal,"provenance":link.provenance.duplicate(true)}
+	# Entry aliases inherit a qualified landing and return destination, never a new exit.
+	# Resolve in a second pass so declaration order cannot select the destination.
+	for link: Dictionary in definition.links:
+		if not link.has("entry_alias_of"): continue
+		var canonical: Dictionary = _stage.doorway_links[link.entry_alias_of]
+		var exterior := _link_door(link.exterior,canonical.interior.building,"exterior",placements)
+		if not exterior.ok: return _link_failure(exterior.kind,link.id,link.exterior,exterior.reason)
+		if link.exterior.placement != canonical.interior.placement: return _link_failure("incompatible_binding",link.id,link.exterior,"Entry alias leaves its declared building occurrence.")
+		var alias: Dictionary = canonical.duplicate(true)
+		alias.id = link.id
+		alias.entry_alias_of = link.entry_alias_of
+		alias.return_exterior = canonical.exterior.duplicate(true)
+		alias.exterior = exterior
+		alias.provenance = link.provenance.duplicate(true)
+		_stage.doorway_links[link.id] = alias
+	# Every static exit in a supported interior must retain its own return link.
+	# Action-door surfaces remain gameplay metadata, not traversal exits.
+	for interior: Dictionary in interiors.values():
+		var p: Dictionary = placements[interior.placement]
+		var block := _link_block(p)
+		for r: Dictionary in block.definition.records:
+			if r.type != "model" or r.get("building_id") != interior.building or r.get("record_context") != "interior": continue
+			var resource := _link_resource(r,block)
+			if not resource.ok: return resource
+			if not resource.has("value"): return _link_failure("incompatible_binding",interior.id,r.id,"Unqualified replacement exit topology.")
+			var model: Dictionary = resource.value.projection()
+			for plane: Dictionary in model.planes:
+				var archive := int(plane.texture_archive)
+				var base := archive % 100 if archive > 100 and archive not in [331,156] else archive
+				if base not in [74,56,95] and not (archive == 331 and plane.texture_record > 0): continue
+				var id := "%s/%s/plane-%d" % [p.id,r.id,plane.source_plane]
+				if not _stage.doorway_links.values().any(func(link: Dictionary): return link.interior.id == interior.id and link.exit.id == id): return _link_failure("missing_binding",interior.id,id,"Usable static interior exit has no explicit exterior destination.")
+	for link: Dictionary in _stage.doorway_links.values():
+		var area: Dictionary = _stage.ticket.request.area
+		if area.kind == "interior" and link.has("entry_alias_of"): continue
+		if area.kind == "interior" and (area.instance != link.interior.id or area.placement != link.interior.placement or area.building != link.interior.building): continue
+		var selected: Dictionary = link.exterior if _stage.ticket.request.area.kind == "exterior" else link.exit
+		if not _stage.location_doors.has(selected.id): continue
+		var coincident: Array = []
+		for door: Dictionary in _stage.location_doors.values():
+			if not _on_triangle(selected.position,door.triangles[0],door.triangles[1],door.triangles[2]): continue
+			coincident.append(door.id)
+		if coincident.size() > 1:
+			coincident.sort()
+			var qualified := false
+			for rule: Dictionary in _stage.input.data.location_assembly.hit_rules:
+				var candidates: Array = rule.candidates.duplicate()
+				candidates.sort()
+				if candidates == coincident and rule.selected == selected.id: qualified = true
+			if not qualified: return _link_failure("ambiguous_binding",link.id,coincident,"Coincident doorway requires an exact validated hit selector.")
+	var request: Dictionary = _stage.ticket.request
+	if request.has("arrival"):
+		var intended: Dictionary = request.arrival
+		if intended.kind != "doorway" or intended.doorway != intended.route or not _stage.doorway_links.has(intended.route): return _link_failure("missing_binding",intended.route,intended.doorway,"Original selected entrance/exit is not bound.")
+		if request.area.kind == "exterior" and _stage.doorway_links[intended.route].has("entry_alias_of"): return _link_failure("entry_only",intended.route,intended.doorway,"Entry alias has no independent interior exit; select the canonical exit for return.")
+		var target: Dictionary = _stage.doorway_links[intended.route].interior
+		if request.area.kind == "interior" and (request.area.placement != target.placement or request.area.building != target.building or request.area.instance != target.id): return _link_failure("incompatible_binding",intended.route,request.area,"Arrival cannot retarget interior identity.")
+	return {"ok":true}
+
+func marker_candidate(ticket: Dictionary, route: String, index := 0) -> Dictionary:
+	var view := _view(ticket)
+	if view.is_empty(): return _result("stale")
+	if view.get("schema") != "location-assembly-v1": return super.marker_candidate(ticket,route,index)
+	if ticket.request.has("arrival") and route != ticket.request.arrival.route: return _result("route_mismatch","Original selected doorway cannot be retargeted.")
+	if index != 0: return _result("exhausted","Doorway links have one intended landing, no fallback.")
+	if not view.doorway_links.has(route): return _result("missing_binding","Selected doorway has no verified binding: "+route)
+	var link: Dictionary = view.doorway_links[route]
+	var entering: bool = view.area.kind == "interior"
+	if not entering and link.has("entry_alias_of"): return _result("entry_only","Entry alias has no independent interior exit.")
+	if entering and (view.area.instance != link.interior.id or view.area.building != link.interior.building or view.area.placement != link.interior.placement): return _result("incompatible_binding","Prepared geometry belongs to another interior instance.")
+	var marker: Dictionary = link.landing.marker.duplicate(true) if entering else {"layout":view.layout.duplicate(true),"placement":link.exterior.placement,"record":link.exterior.record,"plane":link.exterior.plane,"kind":"exterior-door-anchor"}
+	var result := {"ok":true,"kind":"marker_anchor","ticket":ticket.duplicate(true),"route":route,"route_kind":"doorway","doorway":route,"entrance":link.exterior.duplicate(true),"exit":link.exit.duplicate(true),"interior":link.interior.duplicate(true),"marker":marker,"return":link.exterior.duplicate(true),"position":link.landing.position if entering else link.outside_position,"forward":link.landing.forward if entering else link.outside_forward,"frame":Frame.FRAME,"pose_kind":"source-marker-anchor" if entering else "authored-doorway-anchor","desired_context":{"space":link.interior.duplicate(true) if entering else {"layout":view.layout.duplicate(true),"kind":"exterior"},"doorway_side":"interior" if entering else "exterior","movement_owner_pending":true},"layout_version":view.layout_version,"geometry_version":view.geometry_version,"context_version":view.context_version,"marker_version":view.doorway_version,"activation_session":view.get("activation_session",""),"geometry_ready":true,"context_ready":true,"binding_ready":true,"route_intent_bound":ticket.request.has("arrival"),"destination_ready":false,"owner_state_ready":false,"placement_validated":false,"placement_committed":false,"save_compatible":false,"events":[],"provenance":link.provenance.duplicate(true)}
+	result.activation_version = view.get("activation_version","")
+	result.handoff_id = Hash.digest([ticket,result.activation_session,result.activation_version,result.layout_version,result.marker_version,route,marker,result.desired_context,link.exterior.id,link.exit.id])
+	result.template = link.template.duplicate(true)
+	if link.has("entry_alias_of"):
+		result.entry_alias_of = link.entry_alias_of
+		result["return"] = link.return_exterior.duplicate(true)
+	return result
+
+func readiness(ticket: Dictionary) -> Dictionary:
+	var result := super.readiness(ticket)
+	if result.ok:
+		var view := _view(ticket)
+		result.binding_ready = view.get("binding_ready",false)
+		result.doorway_version = view.get("doorway_version","")
+	return result
+
+func check_marker_candidate(ticket: Dictionary, route: String, index: int, access: Callable, placement: Callable) -> Dictionary:
+	if _view(ticket).get("schema") == "location-assembly-v1":
+		var selected := marker_candidate(ticket,route,index)
+		if not selected.ok: return selected
+	return super.check_marker_candidate(ticket,route,index,access,placement)
 
 func _directory(layout: String) -> Dictionary:
 	if registry == null or layouts == null or not layouts.classic.ready(): return _result("stale")
@@ -369,4 +636,4 @@ func marker_candidates(ticket: Dictionary, interior: String, role: String) -> Di
 	keys.sort()
 	for key: String in keys:
 		if view.markers[key].roles.has(role): records.append(view.markers[key].duplicate(true))
-	return {"ok":true,"records":records,"layout_version":view.layout_version,"content_ticket":ticket.request.content_ticket,"activation":view.get("activation_session",""),"binding_ready":false,"placement_committed":false}
+	return {"ok":true,"records":records,"layout_version":view.layout_version,"content_ticket":ticket.request.content_ticket,"activation":view.get("activation_session",""),"activation_version":view.get("activation_version",""),"binding_ready":view.get("binding_ready",false),"placement_committed":false}

@@ -1,5 +1,26 @@
 # Implementation readiness
 
+**IMP-013 increment 2 accepted / increment-3 handoff, 2026-11-24:** The user
+accepted increment 2, including tavern bindings. See the
+[acceptance record](evidence/IMP-013-INCREMENT-2-ACCEPTANCE-2026-11-24.md) and
+[increment-3 prompt](handoffs/IMP-013-INCREMENT-3-PROMPT.txt). Preparing the prompt
+starts no implementation; issuing it authorizes placement commitment only.
+Increment 3, real-provider integrations and parent IMP-013/M2 remain open.
+Earlier acceptance-pending notes are historical.
+
+**IMP-013 tavern follow-up, 2026-11-24:** Two canonical tavern links and the
+explicit entry-only courtyard alias (#2 → rear landing → exterior #3) resolve the
+remaining fixture mapping, preserving geometry and original markers. See the
+[follow-up evidence](evidence/IMP-013-TAVERN-BINDINGS-2026-11-24.md) for current
+qualification. Increment-2 acceptance remains pending; increment 3, real-owner
+integrations and parent IMP-013/M2 remain open.
+
+**IMP-013 increment 2, 2026-11-23:** The issued prompt now has an implementation
+of guarded entrance/exit bindings and scoped handoffs in the normal LOC owner.
+See [execution evidence](evidence/IMP-013-increment-2-2026-11-23.md). Acceptance
+is pending. Increment 3 and named real MOVE/WORLD/gameplay/SAVE integrations
+remain open; READY still describes planning, not parent IMP-013/M2 completion.
+
 **IMP-013 increment 1 accepted / increment-2 handoff, 2026-11-23:** The user
 accepted increment 1 after reviewing the corrected ground texture. See the
 [acceptance record](evidence/IMP-013-INCREMENT-1-ACCEPTANCE-2026-11-23.md) and
