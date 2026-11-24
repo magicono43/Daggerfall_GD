@@ -1,5 +1,15 @@
 # Vital intake — IMP-016 increment 2
 
+Increment 3 extends current continuation through the [activity/exhaustion
+contract](ACTIVITY.md). The increment-2 applied outcome, transition and historical
+pending_count remain immutable. V3 retains separate checked episode settlement,
+resolved count and indexed operation/transition links. A formerly pending intake
+can acknowledge only after its own episode resolves; other pending episodes and
+zero conditions continue to hold. `vital_projection.pending_outcomes` reports
+current unresolved work. The increment-2-only unavailable statements below
+describe the accepted earlier boundary; they do not override this extension.
+The shared CHAR-023 lethal boundary still rejects unchanged until increment 4.
+
 `core.actors.vital_intake(consumer, request)` is the production CHAR mutation
 boundary. It never derives formulas, resolves modifier sources, moves an actor,
 draws randomness or performs COMBAT/MAGIC gameplay. The current CORE mode owner

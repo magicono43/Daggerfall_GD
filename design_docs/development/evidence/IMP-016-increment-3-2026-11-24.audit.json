@@ -1,0 +1,494 @@
+{
+  "schema": "imp016-increment3-audit-v1",
+  "date": "2026-11-24",
+  "head": "4268e3a7b435e2838f6321b53bf109ee05082c99",
+  "status": "qualified-awaiting-user-acceptance",
+  "native_save": false,
+  "real_move_time_threat_trait_lethal_providers": false,
+  "critical_source_sha256": {
+    "scripts/char/actor_state.gd": "E15EAC50AC3A1DD8FE468A8D0A077BF55BEE36C36CE45EC298019CE8A03E4F58",
+    "scripts/char/activity_owner.gd": "BD3BFBC85D8DF9833E00780CC10C98F23644E2F45D6838E3A306FDEDA6C54679",
+    "scripts/char/vital_records.gd": "F65E716870AAEEC7DA3A8211C7469838CCA1C5F85AAB2F8B72F932555439E644",
+    "scripts/char/activity_math.gd": "C5672326F97F5DBDFF9750E2F2FFC3EB82078BFF19D303422019D0A65F6F5C11",
+    "scripts/char/breath_schedule.gd": "1E0266E871B50780DD84C67722FA56CBC944F6BB101D26024A872809C8F899CA",
+    "scripts/char/activity_diagnostics.gd": "4EC7597E3FB0564BD398956C1BBD6C5F8E8DA9151A4B0FDC478FB720C85D6D7E",
+    "scripts/data/actor_baseline.gd": "9E0D03662A685AB8AD1FD56E5D11A42D5DAA9F2F44A65D03F6ED5F8FAB2FD9E9",
+    "scripts/data/activity_policy.gd": "149B0855BBA47364B3CA3F3AAA17CD2C0D0618F9E26BE40BFFAAC33146783612",
+    "scripts/data/recovery_policy.gd": "8B7F5B98AF99B5786CD828E3895A2D37C51F8AD5411A176F3B50A7C095360DB3",
+    "scripts/rule/activity_formulas.gd": "B2D47D9B935C706EB6274FCC31B0B2471AC71FD91A42702A9CCFEBA0EED1CCB4",
+    "scripts/rule/formula_registry.gd": "B220E33258C54F7C2CF5537AB3FB89EDE5EAB29C19D49F90C7EDCEA4715ADF2F",
+    "scripts/session/session_shell.gd": "AE068CA84D034FFADF5C1A13D4E4E044A2A41F603DE3AE5B6CDAF05640332D60",
+    "scripts/session/session_lifecycle.gd": "622E620759803DE8B72034474936FD297924C2590587340EEF186EF832521C3B",
+    "scripts/session/session_gates.gd": "39B59611E42E19946893061BE4B900D599960D02B5FFE518D7BA3AD50B9CD5C0",
+    "scripts/startup/provider_boundary.gd": "C5993FB38549725272B58ED624458DF2BE3F201D24A162C4B1466CC6E3F1F602",
+    "scripts/startup/startup_shell.gd": "2CD02613FB51B04DE4D1BC28E1ABAED3FB208F5216EE2A1A9276CEC8891F622C",
+    "content/actors/activity.json": "86BC1F9196BA6D114C20C29E58ACA5B1396E7416DFEBA4D6FCE9174A1362761C",
+    "content/actors/recovery.json": "9832E7FD70698B9063FBA072E13C7376518708CCCC7DE9C3D4C8AD14C909E9EE",
+    "tests/actor_state_cases.gd": "9BC5DC15D48585CB828642CF02877EDBDC5FAC3365A6EDE6E4E5233FFA3C1C82",
+    "tests/activity_owner_cases.gd": "E20BF483B927E5B28EAAF621165FB29A144231D10C54CBA00E8A51820B77DFEB",
+    "tests/activity_math_cases.gd": "D768F9C91FDCFA83AC3C1C63056E50240E5775952809B17F7E5963F083D8CF5C",
+    "tests/breath_schedule_cases.gd": "7B82ECB8297827A897D70635483F75C866B7CAD0590787289F7DA30DB2C0EB30",
+    "tests/controlled_activity_provider.gd": "99686473B7EC0ACC8E7D59CF4A584F1D3570D9460916C8F74CDEA33386CD1C1D",
+    "tests/actor_formula_callbacks.gd": "18471E1D3E26CD6A578156B5B7E27C72D647D699EB3F5ADB7FBEA6FD802A4304",
+    "tests/actor_state_inventory.json": "FA2ABFD418E7632152EEE7EC1E3CEFB51648F08BB17D041377EBE4FA64FCF9A4",
+    "tests/formula_cases.gd": "C2BFEAA66D7C1462F47C0B8945DD04FB353453714A230DE0401BEF948348FF9A"
+  },
+  "reports": [
+    {
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "critical_sources_match": true,
+      "pck_sha256": null,
+      "captured_source_count": 813,
+      "arguments": [
+        "-Suite",
+        "actor-state",
+        "-Fixture",
+        "actor-state-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "tool": "verify_headless.ps1",
+      "selection": "actor-headless",
+      "status": "passed",
+      "sha256": "95A4D54620660A5C2A16F24AEAB75C4F069AFC2DC7CF56E53EFBBABEEBE9D989",
+      "children": [
+        {
+          "display": "headless",
+          "kind": "primary",
+          "count": 592
+        },
+        {
+          "display": "headless",
+          "kind": "fresh-process",
+          "count": 495
+        }
+      ],
+      "executable_sha256": null,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-d1ed51c794dc45c19f6d3da43944c91a\\report.json"
+    },
+    {
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "critical_sources_match": true,
+      "pck_sha256": null,
+      "captured_source_count": 813,
+      "arguments": [
+        "-Suite",
+        "actor-state",
+        "-Fixture",
+        "actor-state-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "tool": "verify_rendered.ps1",
+      "selection": "actor-rendered",
+      "status": "passed",
+      "sha256": "887178AED09CE68EDCA1EDFE8031054B325C38E4BE023F10EDAEE66922C5CBF5",
+      "children": [
+        {
+          "display": "Windows",
+          "kind": "primary",
+          "count": 602
+        },
+        {
+          "display": "Windows",
+          "kind": "fresh-process",
+          "count": 501
+        }
+      ],
+      "executable_sha256": null,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-78df01c1d74842d288bc7f1a960bdd32\\report.json"
+    },
+    {
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "critical_sources_match": true,
+      "pck_sha256": "33F20E6E72143A3B210FFEC538B55E0C5FD70613378B95810CA57F12C53BE9C0",
+      "captured_source_count": 291,
+      "arguments": [
+        "-Configuration",
+        "debug",
+        "-ActorState",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "tool": "verify_startup_export.ps1",
+      "selection": "actor-debug-export",
+      "status": "passed",
+      "sha256": "EF457689EA8F6AD961CF24ACCE8972243589A965160A3F2B3AF033BFB2117B54",
+      "children": [
+        {
+          "display": "headless",
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-395f1e0a00b141f89762cf30a27bb354/build/tests/.runs/headless/result.json",
+          "sha256": "33E086CC629EDA74B69B3842A46B5E47BB8E1575E43297D58BBF1ED841A48F1D",
+          "count": 592
+        },
+        {
+          "display": "Windows",
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-395f1e0a00b141f89762cf30a27bb354/build/tests/.runs/rendered/result.json",
+          "sha256": "37FCE00E2ADA6C7795C0AE0D37115A39876A1EAEE2FFB12A045DC8B6F09F2E89",
+          "count": 602
+        }
+      ],
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-395f1e0a00b141f89762cf30a27bb354\\result.json"
+    },
+    {
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "critical_sources_match": true,
+      "pck_sha256": "FAD119DF21D7EAB88127134F1FA4A3C451FDDE3CA66308A08FD1D7EB56BECB06",
+      "captured_source_count": 291,
+      "arguments": [
+        "-Configuration",
+        "release",
+        "-ActorState",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "tool": "verify_startup_export.ps1",
+      "selection": "actor-release-export",
+      "status": "passed",
+      "sha256": "0F5C2E864DEB9F248AAB1F4CA7A27E44E94C0B084BD0A6503C447CBBB420E390",
+      "children": [
+        {
+          "display": "headless",
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-2d7e359e175447acbd83beec88a86b4e/build/tests/.runs/headless/result.json",
+          "sha256": "96BBF0A03C9E23326E76F1640F5DEAAA46F57ECB2CF8C43939353831B78B4F7B",
+          "count": 592
+        },
+        {
+          "display": "Windows",
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-2d7e359e175447acbd83beec88a86b4e/build/tests/.runs/rendered/result.json",
+          "sha256": "50F79269D7F7DECADD319618D06ED4C5AAAC96585D6051828A7D55804374F12E",
+          "count": 602
+        }
+      ],
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-2d7e359e175447acbd83beec88a86b4e\\result.json"
+    },
+    {
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "critical_sources_match": true,
+      "pck_sha256": null,
+      "captured_source_count": 813,
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "tool": "verify_headless.ps1",
+      "selection": "session",
+      "status": "passed",
+      "sha256": "AD8BD8AC937AA5006DE4E99A144DF89A95BA02424B20B7E2FC67ACB89396D44A",
+      "children": [
+        {
+          "display": "headless",
+          "kind": "primary",
+          "count": 263
+        }
+      ],
+      "executable_sha256": null,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-74a68a68426a4db3916dce02af442997\\report.json"
+    },
+    {
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "critical_sources_match": true,
+      "pck_sha256": null,
+      "captured_source_count": 813,
+      "arguments": [
+        "-Suite",
+        "formula",
+        "-Fixture",
+        "formula-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "tool": "verify_headless.ps1",
+      "selection": "formula",
+      "status": "passed",
+      "sha256": "CE79A3B3D61CD7DEA447EDF196DA76F59A02F11D8EDE34427F7F5EDBC124DB9A",
+      "children": [
+        {
+          "display": "headless",
+          "kind": "primary",
+          "count": 82
+        }
+      ],
+      "executable_sha256": null,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-88a6cbb7a1a5414f8f4e88ce72586fa1\\report.json"
+    },
+    {
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "critical_sources_match": true,
+      "pck_sha256": null,
+      "captured_source_count": 813,
+      "arguments": [
+        "-Suite",
+        "formula-fault",
+        "-Fixture",
+        "formula-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "tool": "verify_headless.ps1",
+      "selection": "formula-fault",
+      "status": "passed",
+      "sha256": "ED9AAE7C0E0A4B92B81872F1D53D452C573823BBD9B8246D39464FF9CC7DCBB0",
+      "children": [
+        {
+          "display": "headless",
+          "kind": "primary",
+          "count": 18
+        }
+      ],
+      "executable_sha256": null,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b4c927122ee846c39e083ee780561817\\report.json"
+    },
+    {
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "critical_sources_match": true,
+      "pck_sha256": null,
+      "captured_source_count": 813,
+      "arguments": [
+        "-Suite",
+        "randomness-session",
+        "-Fixture",
+        "randomness-session-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "tool": "verify_headless.ps1",
+      "selection": "randomness-session",
+      "status": "passed",
+      "sha256": "1F6EED04EB7B906DA639B6F2C35D85DF63A480283AE91AC4D484BC8ED8509E4D",
+      "children": [
+        {
+          "display": "headless",
+          "kind": "primary",
+          "count": 115
+        },
+        {
+          "display": "headless",
+          "kind": "fresh-process",
+          "count": 15
+        }
+      ],
+      "executable_sha256": null,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-77efd016c71b4bfea87447a8b5dcb4b0\\report.json"
+    },
+    {
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "critical_sources_match": true,
+      "pck_sha256": null,
+      "captured_source_count": 813,
+      "arguments": [
+        "-Suite",
+        "m1-composition",
+        "-Fixture",
+        "m1-composition-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "tool": "verify_headless.ps1",
+      "selection": "composition-headless",
+      "status": "passed",
+      "sha256": "DCA80F0BF22703E874734C59CF391CBC91F8861CB4D97BE8020D1FDB9FAF3F4D",
+      "children": [
+        {
+          "display": "headless",
+          "kind": "primary",
+          "count": 33
+        },
+        {
+          "display": "headless",
+          "kind": "fresh-process",
+          "count": 12
+        }
+      ],
+      "executable_sha256": null,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b4f87d22dec44e34869f63af5cb8b30f\\report.json"
+    },
+    {
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "critical_sources_match": true,
+      "pck_sha256": null,
+      "captured_source_count": 813,
+      "arguments": [
+        "-Suite",
+        "m1-composition",
+        "-Fixture",
+        "m1-composition-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "tool": "verify_rendered.ps1",
+      "selection": "composition-rendered",
+      "status": "passed",
+      "sha256": "14242E456446E79A52DEAA18C94359647B55F05832E934DE55E6DB621F9F05D0",
+      "children": [
+        {
+          "display": "Windows",
+          "kind": "primary",
+          "count": 34
+        },
+        {
+          "display": "Windows",
+          "kind": "fresh-process",
+          "count": 13
+        }
+      ],
+      "executable_sha256": null,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-4997cdaad4e04a30809ba8f0ae1aff85\\report.json"
+    }
+  ],
+  "assertions": 5163,
+  "checkpoint_inputs": [
+    {
+      "source": "C:/Godot/Projects/Daggerfall_GD/main_project/tests/.runs/verification-headless-d1ed51c794dc45c19f6d3da43944c91a/project/tests/.runs/scenario-1/activity-checkpoint.bin",
+      "retained": "C:/Godot/Projects/Daggerfall_GD/main_project/tests/.runs/imp016-increment3-final/checkpoints/actor-headless.bin",
+      "reason": "Exact typed owner-record input used by the fresh process; not native SAVE.",
+      "sha256": "B6A5CC1F18865A3A0CD7377916F4CF2B9205B30373A9E45532C338FBBC22EE2D"
+    },
+    {
+      "source": "C:/Godot/Projects/Daggerfall_GD/main_project/tests/.runs/verification-rendered-78df01c1d74842d288bc7f1a960bdd32/project/tests/.runs/scenario-1/activity-checkpoint.bin",
+      "retained": "C:/Godot/Projects/Daggerfall_GD/main_project/tests/.runs/imp016-increment3-final/checkpoints/actor-rendered.bin",
+      "reason": "Exact typed owner-record input used by the fresh process; not native SAVE.",
+      "sha256": "B6A5CC1F18865A3A0CD7377916F4CF2B9205B30373A9E45532C338FBBC22EE2D"
+    }
+  ],
+  "observations": {
+    "activity_lookup_2000_usec": 652288,
+    "dense_vital_mutation_1000_usec": 137285,
+    "actor_count": 138,
+    "activity_sources": 16,
+    "dense_actor_projection_1000_usec": 397356,
+    "publication": {
+      "intake_usec": 8800533,
+      "prepare_serial": 3,
+      "prepare_usec": 11431078,
+      "projection_usec": 601058,
+      "validators": {
+        "actor.baseline": {
+          "copy_usec": 102,
+          "validate_usec": 9
+        },
+        "actor.inputs": {
+          "copy_usec": 15088,
+          "validate_usec": 1506
+        },
+        "faction-quest.inputs": {
+          "copy_usec": 36200,
+          "validate_usec": 26313
+        },
+        "geography.inputs": {
+          "copy_usec": 324355,
+          "validate_usec": 191686
+        },
+        "item-spell.inputs": {
+          "copy_usec": 175105,
+          "validate_usec": 3121
+        },
+        "layout.inputs": {
+          "copy_usec": 555368,
+          "validate_usec": 116713
+        },
+        "media.assets": {
+          "copy_usec": 304459,
+          "validate_usec": 10
+        },
+        "mod.preferences": {
+          "copy_usec": 199,
+          "validate_usec": 5
+        },
+        "text.catalogs": {
+          "copy_usec": 220,
+          "validate_usec": 20
+        },
+        "text.fonts": {
+          "copy_usec": 87,
+          "validate_usec": 20
+        },
+        "world.variants": {
+          "copy_usec": 539293,
+          "validate_usec": 45716
+        }
+      }
+    },
+    "vital_mutation_1000_usec": 132335,
+    "catalog_records": 33467,
+    "actor_projection_2000_usec": 241955,
+    "vital_lookup_2000_usec": 126179,
+    "activity_contributions_per_source": 256,
+    "activity_1000_usec": 787999
+  },
+  "native_startup_failure": {
+    "assertions": 0,
+    "diagnosis": "Unconfirmed native startup failure; D3D12 Intel UHD 630 banner, no fixture storage/assertions; unchanged command retry passed.",
+    "process_exit": -1073740940,
+    "root": "verification-rendered-29b3d985ac264320b05e903e0583e8ce"
+  },
+  "acceptance": "pending",
+  "parent_imp016_m2": "open",
+  "cleanup": {
+    "status": "completed",
+    "retained_child_evidence": 309,
+    "source_and_report_hashes_rechecked": true,
+    "retention_after": {
+      "bytes": 2691083740,
+      "files": 71154,
+      "observed_utc": "2026-11-24T19:34:19.8470581Z",
+      "reparse_points_skipped": 0
+    },
+    "removed_bytes": 9550784160,
+    "unique_checkpoint_inputs_preserved": true,
+    "journal": "C:/Godot/Projects/Daggerfall_GD/main_project/tests/.runs/dungeon-cleanup-3bdd60dec5c74db193cfef735fedcc3d.json",
+    "journal_sha256": "E55EA645518A631A299CD4741A0C20C2C9E0E4FFA0979B4B10BD6CD0AB124ED1",
+    "removed_files": 54483,
+    "payload_expiry": "Final ten-command verification completed; no active debugging/review build required.",
+    "roots": 36,
+    "retention_before": {
+      "schema": "imp016-run-retention-observation-v1",
+      "logical_bytes": 10905086646,
+      "status": "qualification running; no active payload deleted",
+      "reparse_points_skipped": 6,
+      "utc": "2026-11-24T19:25:52.7130889Z",
+      "files": 116936,
+      "above_8_gib": true
+    },
+    "remaining_retention_review": "2 GiB guide trigger reviewed: prior accepted reports/evidence and protected imp011-view-review-2026-11-23-final human-review project retained; all 36 owned disposable payloads removed."
+  },
+  "final_diff_check": "passed"
+}

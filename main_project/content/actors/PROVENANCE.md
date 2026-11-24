@@ -40,3 +40,36 @@ and GAD-02/03/09. They add no source data, copied DFU code, balance parameter,
 library or formula hook. Existing numeric DATA/MOD/loose precedence and licensing
 remain unchanged. Unavailable lethal ownership rejects intake unchanged; this
 does not qualify prevention, death, collapse, native SAVE or executable mods.
+
+## IMP-016 activity policy foundation, 2026-11-24
+
+`activity.json` is project-authored CC0-1.0 data encoding the approved CHAR-020
+rates, priority, Athleticism ratios, jump cost, 0.25 simulated-second Running
+cadence and CHAR-012 raw practice cap of 20,000. The specification documents
+DFU's source baseline and intentional corrections to frame/minute accounting.
+This adds no copied source code or classic bytes and makes no original-executable
+parity claim. Existing DFU attribution/license remains above. All values use
+the existing checked DATA/MOD/loose publication; numeric envelopes and exact
+microsecond rational arithmetic are project engineering choices. This incomplete
+foundation does not execute movement, checks, practice or collapse.
+
+## IMP-016 increment 3 activity/collapse, 2026-11-24
+
+The earlier incomplete foundation is now extended by the composed CHAR intake
+and retained episode implementation. `recovery.json` is project-authored CC0-1.0
+data encoding approved CHAR-021/022 coefficients (60/100 health terms, divisor
+1000, pool divisor 8, minimum 1, Medical +1 and a single 60-minute safe hour).
+Default exhaustion outcomes remain safe-hour on safe land and the normal lethal
+request for swimming/threat. Breath recovery defaults instant; explicit gradual
+rate/delay overrides use the supported scheduling contract. No consumption or
+drowning cadence, threat distance, prevention chance or racial bonus is invented.
+
+Recovery formulas follow the approved specification's DFU-derived integer
+baseline; `activity_formulas.gd` is project-authored implementation, with the
+existing DFU MIT attribution/notice retained. The corrected interval/remainder,
+event-identity, completed-hour and once-only episode behavior are intentional
+recreation differences, not original-executable verification. MOVE-012's approved
+one-successful-transition rappel practice supersedes ambiguous per-update source
+behavior. Classic/reference/base files remain unchanged and read-only. No new
+library, native adapter, executable MOD language or globally enabled semantic
+readiness is introduced.

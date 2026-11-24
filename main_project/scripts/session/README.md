@@ -1,5 +1,19 @@
 # Session shell interfaces
 
+IMP-016 increment 3 adds requester-scoped `actor_activity:{id,roles}` service
+declarations. CORE validates actual ready session Objects and allowed owner
+domains, with weak bindings retired alongside vital/formula bindings. The
+[CHAR activity contract](../char/ACTIVITY.md) defines exact role methods and
+continuation receipts. No binding certifies delivered locomotion/TIME/NPC/death.
+Forced advancement excludes only the requesting actor's CHAR simulation hold;
+independent suspension holds still block it. No other token can be released.
+
+`SessionShell.new(host,material_provider=Callable())` forwards the existing CORE
+fixture material seam while constructing exactly one lifecycle. Ordinary launch
+retains OS entropy. Validated actor-suite fixture modes supply a labelled 32-byte
+zero material vector to the real session RNG; no player seed preference, new
+stream or alternate random implementation is added.
+
 IMP-016 increment 2 adds explicit session `vital_intake` consumer declarations.
 CORE binds actual COMBAT/MAGIC/ITEM/CHAR providers and stable scope-local consumer
 handles at readiness; arbitrary request labels or observers confer no authority.

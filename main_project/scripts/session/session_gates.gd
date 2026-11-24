@@ -39,6 +39,11 @@ func blocked(channel: String) -> bool:
 func simulation() -> bool:
 	return ready and safe and not session.is_empty() and not blocked("simulation")
 
+func blocked_except(channel: String, owner: String) -> bool:
+	for hold: Dictionary in _holds.values():
+		if hold.owner != owner and (hold.scope.is_empty() or hold.scope == session) and channel in hold.channels: return true
+	return false
+
 func gameplay_input() -> bool:
 	return ready and safe and not session.is_empty() and not blocked("input")
 

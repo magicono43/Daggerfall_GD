@@ -1,0 +1,52 @@
+{
+  "domain": "actor.baseline",
+  "path": "activity",
+  "operation": "add",
+  "entries": [
+    {
+      "id": "player",
+      "value": {
+        "schema": "actor-activity-policy-v1",
+        "rates": {
+          "ordinary": 11,
+          "climbing": 22,
+          "running": 88,
+          "swimming": 11,
+          "swimming-failure": 44
+        },
+        "priority": [
+          "climbing",
+          "running",
+          "swimming",
+          "ordinary"
+        ],
+        "athleticism": [
+          {
+            "numerator": 1,
+            "denominator": 1
+          },
+          {
+            "numerator": 9,
+            "denominator": 10
+          },
+          {
+            "numerator": 8,
+            "denominator": 10
+          }
+        ],
+        "jump_cost": 11,
+        "practice_cap": 20000,
+        "running_cadence_usec": 250000,
+        "game_minute_unit": "game-microsecond",
+        "simulation_unit": "simulated-microsecond",
+        "practice_amounts": {
+          "swimming": 1,
+          "climbing": 1,
+          "rappel": 1,
+          "running": 1,
+          "jumping": 1
+        }
+      }
+    }
+  ]
+}

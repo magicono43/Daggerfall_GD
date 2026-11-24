@@ -1,5 +1,41 @@
 # Verification run artifact cleanup
 
+## 2026-11-24 IMP-016 increment-3 final delivery
+
+All ten final commands passed before compaction. Ordinary engine/process
+inactivity, terminal reports, exact workspace containment and reparse checks
+qualified 36 explicitly owned development/verification roots. The existing tool
+removed **54,483 reproducible files /9,550,784,160 bytes**, preserving **309
+hash-verified child reports/logs/captures**, root reports/source/build identities
+and exact typed fresh-process checkpoint inputs. Template links were unlinked
+without following or modifying their installed targets. No cleanup failures or
+task-owned copied projects/exports/caches remain.
+
+Journal: `main_project/tests/.runs/dungeon-cleanup-3bdd60dec5c74db193cfef735fedcc3d.json`.
+Before cleanup, logical retention measured 10,905,086,646 bytes, exceeding the
+8 GiB standing review threshold; the excess was reviewed as understood disposable
+run payloads. Unique debugging/checkpoint inputs and earlier accepted evidence
+were protected. Final retention and post-cleanup identity checks are recorded in
+the [execution audit](evidence/IMP-016-increment-3-2026-11-24.audit.json).
+Final logical retention was **2,691,083,740 bytes (about 2.51 GiB)**, with no
+reparse points followed. The guide's 2 GiB trigger was reviewed: remaining large
+files include prior accepted reports/evidence and the protected
+`imp011-view-review-2026-11-23-final` human-review project. These are outside the
+36 owned disposable roots and were preserved. Post-cleanup checks verified all
+26 critical source hashes, ten root reports, exact checkpoint inputs and 309
+retained child evidence hashes; every selected payload directory is absent.
+Archived reports describe executed paths now removed; rebuild through the
+maintained runners rather than treating archives as runnable copies.
+
+## 2026-11-24 IMP-016 increment-3 foundation checkpoint
+
+Four understood inactive verification roots were compacted through the existing
+path/activity/reparse-checked cleanup tool. Removed 5,516 reproducible files /
+848,126,039 bytes, preserving 18 hash-verified child reports/logs/captures and
+root reports/build identities. Journal: `main_project/tests/.runs/dungeon-cleanup-9e34e2013a594b6083194d3dc11786b8.json`.
+No task-owned full copied project/export/cache remains. Prior review roots and
+external inputs were untouched. See [incomplete checkpoint evidence](evidence/IMP-016-INCREMENT-3-FOUNDATION-2026-11-24.md).
+
 ## 2026-11-24 IMP-016 increment 2
 
 All ten final selected commands passed before final compaction. Four batches

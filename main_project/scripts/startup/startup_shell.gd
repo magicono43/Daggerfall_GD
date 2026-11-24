@@ -23,7 +23,10 @@ func _ready() -> void:
 	# Actual controls still consume their own clicks.
 	mouse_filter = Control.MOUSE_FILTER_PASS
 	get_tree().auto_accept_quit = false
-	session_shell = preload("res://scripts/session/session_shell.gd").new(self)
+	var fixture_material := Callable()
+	for argument: String in OS.get_cmdline_user_args():
+		if argument.begins_with("--startup-fixture="): fixture_material = Callable(self,"fixture_actor_material")
+	session_shell = preload("res://scripts/session/session_shell.gd").new(self,fixture_material)
 	var background := ColorRect.new()
 	background.name = "StartupBackdrop"
 	background.color = Color("17212a")
@@ -52,7 +55,7 @@ func _ready() -> void:
 	if inputs.is_empty():
 		return
 	# Combined verification retains every ordinary registration; only roots differ.
-	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","actor-state"]
+	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","actor-state","actor-state_reload"]
 	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 		var resource_sources: Array = []
 		if fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload"]:
@@ -470,6 +473,15 @@ func _process(_delta: float) -> void:
 				session_shell.options()
 		session_shell.finish_recovery_dispatch()
 
+func fixture_actor_material(_ticket: Dictionary, _mode: String) -> Dictionary:
+	# Pass through the existing CORE constructor seam; no second lifecycle/RNG.
+	var seeds = preload("res://scripts/rule/seed_derivation.gd")
+	if fixture.get("mode") in ["actor-state","actor-state_reload"]:
+		var material := PackedByteArray()
+		material.resize(32)
+		return seeds.validate_material(material)
+	return seeds.material_from_os()
+
 func close_editor() -> bool:
 	if is_instance_valid(preference_view):
 		preference_view.close()
@@ -534,7 +546,7 @@ func run_fixture() -> void:
 		script_path = "res://tests/text_cases.gd"
 	elif fixture.get("mode") == "structured-text":
 		script_path = "res://tests/structured_text_cases.gd"
-	elif fixture.get("mode") == "actor-state":
+	elif fixture.get("mode") in ["actor-state","actor-state_reload"]:
 		script_path = "res://tests/actor_state_cases.gd"
 	elif fixture.get("mode") == "actor-inputs":
 		script_path = "res://tests/actor_input_cases.gd"
@@ -589,7 +601,7 @@ func run_fixture() -> void:
 		var music_cleanup: Dictionary = await session_shell.music_playback.shutdown()
 		checks.native_cleanup = {"ok":video_cleanup.ok and music_cleanup.ok,"video":video_cleanup,"music":music_cleanup}
 		checks.ok = checks.ok and checks.native_cleanup.ok
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["dungeon-assembly_reload", "view-cursor_reload", "binding-config_reload", "m1-composition_reload", "variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["actor-state_reload","dungeon-assembly_reload", "view-cursor_reload", "binding-config_reload", "m1-composition_reload", "variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

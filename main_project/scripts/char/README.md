@@ -1,4 +1,10 @@
-# CHAR actor owner — IMP-016 increments 1–2
+# CHAR actor owner — IMP-016 increments 1–3
+
+Increment 3 adds [committed activity, breath scheduling and exhaustion
+settlement](ACTIVITY.md) through this same authority. Versioned v3 records retain
+activity/check/practice receipts and episode progress separately from immutable
+vital history. Real locomotion/TIME/threat/trait/death/native SAVE integrations
+remain explicitly unavailable; controlled providers qualify their interfaces.
 
 Increment 2 adds the [vital intake and retained-outcome contract](VITAL_INTAKE.md)
 through this same authority. Its versioned v2 records extend the accepted v1

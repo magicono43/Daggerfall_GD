@@ -1,0 +1,31 @@
+{
+  "domain": "actor.baseline",
+  "path": "recovery",
+  "operation": "add",
+  "entries": [
+    {
+      "id": "player",
+      "value": {
+        "schema": "actor-recovery-policy-v1",
+        "health_term": 60,
+        "rapid_term": 100,
+        "health_divisor": 1000,
+        "pool_divisor": 8,
+        "minimum": 1,
+        "medical_amount": 1,
+        "collapse_duration_usec": 3600000000,
+        "breath": {
+          "mode": "instant",
+          "rate": 1,
+          "delay_usec": 0,
+          "unit": "simulated-microsecond"
+        },
+        "outcomes": {
+          "threat": "lethal",
+          "swimming": "lethal",
+          "safe": "safe-hour"
+        }
+      }
+    }
+  ]
+}

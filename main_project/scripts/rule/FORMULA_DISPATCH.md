@@ -1,5 +1,14 @@
 # Formula dispatch — IMP-006 increment 3
 
+IMP-016 increment 3 additionally declares the focused `activity-formula-v1`
+Dictionary->integer hooks `char.activity-rate`, `char.recovery-health` and
+`char.recovery-pool` before preparation. `activity_formulas.gd` defines complete
+hook-specific raw input domains and pure integer arithmetic. The existing
+registry stages/validates/selects/locks these through the same MOD plan; actor
+rational and legacy integer contracts retain their envelopes. Runtime output,
+callback and current-operation checks still reject without fallback. See
+[activity contract](../char/ACTIVITY.md) for publication, units and consumers.
+
 ## IMP-016 production actor contracts
 
 `StartupProviderBoundary` declares all actor hooks before preparation. DATA's

@@ -41,6 +41,7 @@ var _startup_ready := false
 var _finishing := false
 var _formula_bindings: Dictionary = {}
 var _vital_bindings: Dictionary = {}
+var _activity_bindings: Dictionary = {}
 
 func _init(material_provider: Callable = Callable()) -> void:
 	randomness = preload("res://scripts/rule/session_randomness.gd").new(gates, material_provider)
@@ -202,6 +203,7 @@ func _cleanup_scope(scope: String, purpose: String) -> void:
 		randomness.retire(scope)
 		_formula_bindings.clear()
 		_vital_bindings.clear()
+		_activity_bindings.clear()
 		retiring.emit(scope) # UI disconnects and retires session-owned requests first.
 		gates.retire(scope)
 	var checked: Dictionary = provider.cleanup(cleanup_ticket.duplicate(true), scope)
@@ -307,6 +309,11 @@ func complete_readiness(value: Dictionary, result: Dictionary) -> bool:
 		_cleanup_scope(_state.session,"failure")
 		return true
 	var activated: Dictionary = randomness.activate(_operation.random_ticket, _state.session, result.services)
+	var activity_bindings := _validate_activity_bindings(result.services)
+	if not activity_bindings.ok:
+		_commit({"ready":false,"phase":"replacement"},activity_bindings.reason)
+		_cleanup_scope(_state.session,"failure")
+		return true
 	if not activated.ok:
 		_commit({"ready": false, "phase": "replacement"}, activated.reason)
 		_cleanup_scope(_state.session, "failure")
@@ -319,6 +326,7 @@ func complete_readiness(value: Dictionary, result: Dictionary) -> bool:
 			return true
 	_formula_bindings = formula_bindings.bindings
 	_vital_bindings = vital_bindings.bindings
+	_activity_bindings = activity_bindings.bindings
 	randomness.suspend_operation(false)
 	_death_authority = result.get("death_authority")
 	_commit({"status": "alive", "ready": true, "phase": "ready"}, "session ready", "session_restored" if _operation.intent.mode == "load" else "new_session_ready")
@@ -402,6 +410,27 @@ func required_service_lost(scope: String, role: String) -> bool:
 		return true
 	_commit({"ready": false, "application": "recovery"}, "Required service lost: " + role)
 	return true
+
+func _validate_activity_bindings(services: Array) -> Dictionary:
+	var bindings := {}
+	var domains := {"motion":["MOVE"],"interval":["TIME"],"traits":["CHAR","MAGIC"],"threat":["NPC","COMBAT"],"time":["TIME"],"recovery":["CHAR","MAGIC"],"resolution":["CHAR"],"lethal":["CHAR"]}
+	for service: Dictionary in services:
+		if not service.has("actor_activity"): continue
+		var declaration: Variant = service.actor_activity
+		var owner: Object = service.get("provider")
+		if not declaration is Dictionary or declaration.size() != 2 or not preload("res://scripts/mod/package_library.gd").valid_id(declaration.get("id")) or bindings.has(declaration.id) or not declaration.get("roles") is Array or declaration.roles.is_empty() or not is_instance_valid(owner) or not owner.has_method("activity_current") or service.lifetime != "session" or not service.get("ready",false):
+			return {"ok":false,"reason":"Explicit ready activity owner and complete binding required."}
+		var seen := {}
+		for role: Variant in declaration.roles:
+			if not role is String or not domains.has(role) or service.owner not in domains[role] or seen.has(role): return {"ok":false,"reason":"Invalid activity role/domain."}
+			seen[role] = true
+		bindings[declaration.id] = {"owner":weakref(owner),"roles":declaration.roles.duplicate()}
+	return {"ok":true,"bindings":bindings}
+
+func activity_owner(scope: String, owner: Object, id: String, role: String) -> bool:
+	if not is_instance_valid(owner) or scope.is_empty() or scope != _state.session or not _state.ready or _state.status != "alive" or not gates.safe or busy() or _publishing or _finishing: return false
+	var binding: Dictionary = _activity_bindings.get(id,{})
+	return not binding.is_empty() and binding.owner.get_ref() == owner and role in binding.roles
 
 func confirm_death(scope: String, authority: RefCounted) -> bool:
 	if _publishing:
@@ -504,6 +533,7 @@ func dispose() -> void:
 	randomness.dispose()
 	_formula_bindings.clear()
 	_vital_bindings.clear()
+	_activity_bindings.clear()
 	formulas = null
 	preferences = null
 	for event: Signal in [state_changed, milestone, terminal, retiring, diagnostic, gates.changed]:

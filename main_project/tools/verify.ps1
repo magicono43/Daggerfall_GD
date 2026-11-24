@@ -203,10 +203,15 @@ try {
             if ($sourceBefore.Count -gt 0) {
                 $item['child_source_samples'] = @(@{ child='primary'; before=$sourceBefore; after=(Get-LayoutSourceHashes $sourceBefore $selectedRoot) })
             }
-            if ($id -in @('dungeon-assembly','view-cursor','binding-config','m1-composition','variant-inputs','layout-inputs','native','replacements','mods','planning','publication','randomness-session','locale-fonts','translation-preferences') -and $outcome.exit -eq 0) {
+            if ($id -in @('actor-state','dungeon-assembly','view-cursor','binding-config','m1-composition','variant-inputs','layout-inputs','native','replacements','mods','planning','publication','randomness-session','locale-fonts','translation-preferences') -and $outcome.exit -eq 0) {
                 $reloadFixture = Get-Content "$caseRoot/fixture.json" -Raw | ConvertFrom-Json
                 $reloadFixture.mode = $id + '_reload'
                 if ($id -eq 'locale-fonts') { $reloadFixture.sandbox = "$caseRoot/relaunch".Replace('\','/') }
+                if ($id -eq 'actor-state') {
+                    $reloadFixture.sandbox = "$caseRoot/relaunch".Replace('\','/')
+                    $reloadFixture | Add-Member -NotePropertyName restore_from -NotePropertyValue "$caseRoot/activity-checkpoint.bin".Replace('\','/')
+                    New-Item -ItemType Directory -Force $reloadFixture.sandbox | Out-Null
+                }
                 $reloadFixture | ConvertTo-Json -Depth 10 | Set-Content "$caseRoot/reload-fixture.json"
                 $reloadArguments = @('--path',$runtimeProject,'--max-fps','60','--quit-after','1800','--',"--startup-fixture=$caseRoot/reload-fixture.json")
                 if ($Mode -eq 'headless') { $reloadArguments = @('--headless') + $reloadArguments }
@@ -239,10 +244,11 @@ try {
             $item.reason = 'Malformed terminal report'; continue
         }
         $item.result = $result
-        if ($id -in @('dungeon-assembly','view-cursor','binding-config','m1-composition','variant-inputs','layout-inputs','native','replacements','mods','planning','publication','randomness-session','locale-fonts','translation-preferences') -and $result.ok) {
-            $reloadReport = if ($id -eq 'locale-fonts') { "$caseRoot/relaunch/reload-result.json" } else { "$caseRoot/reload-result.json" }
+        if ($id -in @('actor-state','dungeon-assembly','view-cursor','binding-config','m1-composition','variant-inputs','layout-inputs','native','replacements','mods','planning','publication','randomness-session','locale-fonts','translation-preferences') -and $result.ok) {
+            $reloadReport = if ($id -in @('locale-fonts','actor-state')) { "$caseRoot/relaunch/reload-result.json" } else { "$caseRoot/reload-result.json" }
             if (!(Test-Path $reloadReport)) { $item.reason = 'Missing fresh-process terminal result'; continue }
             $reloadResult = Get-Content $reloadReport -Raw | ConvertFrom-Json
+            if ($id -eq 'actor-state' -and !(Test-ActorStateInventory $reloadResult ('reload-' + $Mode))) { $item.reason = 'Incomplete actor reconstruction inventory'; continue }
             if ($id -eq 'dungeon-assembly' -and !(Test-DungeonInventory $reloadResult ('reload-' + $Mode))) { $item.reason = 'Incomplete dungeon restart inventory'; continue }
             if ($id -in @('binding-config','view-cursor')) {
                 $inventory = Get-Content -LiteralPath "$PSScriptRoot/../tests/$(if ($id -eq 'view-cursor') { 'view_cursor' } else { 'binding_config' })_inventory.json" -Raw | ConvertFrom-Json
@@ -260,10 +266,10 @@ try {
             if ($id -eq 'native' -and !(Test-NativeInventory $reloadResult 'reload')) { $item.reason = 'Incomplete native reload terminal inventory'; continue }
             if ($id -eq 'm1-composition' -and !(Test-CompositionInventory $reloadResult ('reload-' + $Mode))) { $item.reason = 'Incomplete M1 composition relaunch inventory'; continue }
             $item.reload_result = $reloadResult
-            $reloadExpected = if ($id -eq 'dungeon-assembly') { Get-DungeonExpectedCount ('reload-' + $Mode) } elseif ($id -eq 'm1-composition') { Get-CompositionExpectedCount ('reload-' + $Mode) } elseif ($id -eq 'variant-inputs') { Get-VariantExpectedCount 'reload' } elseif ($id -eq 'layout-inputs') { 15 } elseif ($id -eq 'native') { Get-NativeExpectedCount 'reload' } elseif ($id -in @('replacements','locale-fonts','translation-preferences')) { 10 } elseif ($id -eq 'randomness-session') { 15 } else { 8 }
+            $reloadExpected = if ($id -eq 'actor-state') { @((Get-Content "$PSScriptRoot/../tests/actor_state_inventory.json" -Raw | ConvertFrom-Json).('reload-' + $Mode)).Count } elseif ($id -eq 'dungeon-assembly') { Get-DungeonExpectedCount ('reload-' + $Mode) } elseif ($id -eq 'm1-composition') { Get-CompositionExpectedCount ('reload-' + $Mode) } elseif ($id -eq 'variant-inputs') { Get-VariantExpectedCount 'reload' } elseif ($id -eq 'layout-inputs') { 15 } elseif ($id -eq 'native') { Get-NativeExpectedCount 'reload' } elseif ($id -in @('replacements','locale-fonts','translation-preferences')) { 10 } elseif ($id -eq 'randomness-session') { 15 } else { 8 }
             if ($reloadOutcome.timed_out -or $null -eq $reloadResult.ok -or $reloadResult.count -ne $reloadExpected -or $reloadResult.checks.Count -ne $reloadExpected -or
                 !$reloadResult.engine -or ($Mode -eq 'rendered' -and $reloadResult.display -eq 'headless') -or
-                !(Test-ScriptDiagnostics @((Get-Item "$caseRoot/reload-console.*.log").FullName) '' $reloadResult)) {
+                !(Test-ScriptDiagnostics @((Get-Item "$caseRoot/reload-console.*.log").FullName) $(if ($id -eq 'actor-state') { 'actor-state' } else { '' }) $reloadResult)) {
                 $item.reason = 'Fresh-process restore incomplete'; continue
             }
             if (!$reloadResult.ok -or @($reloadResult.checks | Where-Object { !(Test-AssertionValue $_.expected $_.actual) }).Count -gt 0) {

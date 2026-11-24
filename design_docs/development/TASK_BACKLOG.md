@@ -1,5 +1,24 @@
 # Implementation backlog
 
+**IMP-016 increment 3 accepted / increment 4 handoff, 2026-11-24:** The user
+explicitly accepted increment 3; increments 1/2/3 are complete in their documented
+scopes. See [acceptance](evidence/IMP-016-INCREMENT-3-ACCEPTANCE-2026-11-24.md)
+and [death/projections prompt](handoffs/IMP-016-INCREMENT-4-PROMPT.txt). Issuing
+the prompt authorizes increment 4 and narrow supporting interfaces only.
+Preparation starts no runtime work. Increment 4, parent IMP-016/M2 and named
+real-provider/native SAVE gates remain open. Earlier acceptance-pending text
+is historical; raw audits are unchanged.
+
+**IMP-016 increment 3 implemented and verified, 2026-11-24; acceptance pending:**
+Composed CHAR activity/practice, supported breath scheduling, retained exhaustion
+settlement and safe-hour recovery are delivered. All ten final commands pass:
+5,163 assertions, including independent rendered/headless, fresh-process and
+Windows debug/release export checks. See [execution evidence](evidence/IMP-016-increment-3-2026-11-24.md)
+and [review](evidence/IMP-016-INCREMENT-3-REVIEW-2026-11-24.md).
+Controlled providers qualify unavailable integrations only. Increment 4, parent
+IMP-016/M2, real MOVE/TIME/threat/trait/prevention and native SAVE gates remain
+open. Earlier foundation-only status is historical; increments 1/2 remain accepted.
+
 **IMP-016 increment 2 accepted / increment 3 handoff, 2026-11-24:** The user
 accepted increment 2; increments 1/2 are complete in their documented scopes.
 See [acceptance](evidence/IMP-016-INCREMENT-2-ACCEPTANCE-2026-11-24.md) and the

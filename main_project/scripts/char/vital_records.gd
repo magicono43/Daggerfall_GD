@@ -76,7 +76,8 @@ static func valid(record: Dictionary) -> bool:
 			if r.pool == "health" and out.before > 0 and after == 0: return false
 			if out.before > 0 and after == 0: required_transitions[r.caller+"/"+r.operation] = false
 			if out.after != after or out.applied != absi(after-out.before) or out.remainder != (out.maximum-after if r.action == "fill" else r.amount-out.applied): return false
-			if typeof(out.get("ok")) != TYPE_BOOL or out.ok != sufficient or out.get("kind") != ("applied" if sufficient else "insufficient") or out.get("phase") != ("committed" if sufficient else "rejected") or typeof(out.get("transition_pending")) != TYPE_BOOL or out.transition_pending != pending or typeof(out.get("continuation_allowed")) != TYPE_BOOL or out.continuation_allowed != (sufficient and not pending) or (receipt.acknowledged and not out.continuation_allowed): return false
+			if typeof(out.get("ok")) != TYPE_BOOL or out.ok != sufficient or out.get("kind") != ("applied" if sufficient else "insufficient") or out.get("phase") != ("committed" if sufficient else "rejected") or typeof(out.get("transition_pending")) != TYPE_BOOL or out.transition_pending != pending or typeof(out.get("continuation_allowed")) != TYPE_BOOL or out.continuation_allowed != (sufficient and not pending): return false
+			if receipt.acknowledged and not out.continuation_allowed and not (out.ok and preload("res://scripts/char/activity_owner.gd").settled(record,caller,operation)): return false
 	if count != s.receipt_count or s.transitions.size() != s.next_transition: return false
 	var pending_count := 0
 	for id in s.transitions:
@@ -98,5 +99,8 @@ static func valid(record: Dictionary) -> bool:
 			for source in context.sources:
 				var source_receipt: Variant = context.sources[source]
 				if not Paths.valid_id(source) or not source_receipt is Dictionary or source_receipt.size() != 2 or not F.integer(source_receipt.get("revision"),0,LIMIT) or not hash_valid(source_receipt.get("sha256")): return false
+		elif context.get("kind") == "activity":
+			var receipt: Dictionary = record.get("activity",{}).get("receipts",{}).get(context.get("caller"),{}).get(context.get("operation"),{})
+			if context.size() != 4 or receipt.is_empty() or context.get("attribution") != receipt.request.source or t.pool != "fatigue" or receipt.result.before != t.before or receipt.result.after != 0: return false
 		else: return false
 	return pending_count == s.pending_count and required_transitions.values().all(func(found): return found)

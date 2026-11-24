@@ -1,5 +1,10 @@
 # Actor and character input profile — IMP-009 increment 1
 
+IMP-016 increment 3 also publishes separately typed
+`actor.baseline:activity#player` and `actor.baseline:recovery#player` policies;
+see [activity scope](../char/ACTIVITY.md). These do not extend the structural
+actor catalog's semantic readiness.
+
 IMP-016 increment 1 adds the separate `actor.baseline` numeric policy and
 [real CHAR owner](../char/README.md). The structural catalog below remains
 unchanged and `semantic_ready:false`. CHAR qualifies only a published playable

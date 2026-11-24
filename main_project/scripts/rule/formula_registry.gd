@@ -68,6 +68,16 @@ func stage(provider: String, version: String, entries: Array, integration := "")
 	_omissions.clear()
 	return {"ok":true,"stage":"unvalidated"}
 
+func declare_activity_hook(id: String, builtin: Callable) -> Dictionary:
+	var activity = preload("res://scripts/rule/activity_formulas.gd")
+	if not _editable() or not _contributions.is_empty() or not _candidate.is_empty(): return failure("registration_closed","Declare before preparation.")
+	if id not in activity.HOOKS or _hooks.has(id) or not signature(builtin,activity.CONTRACT): return failure("invalid_declaration","Expected focused activity hook.")
+	_hooks[id] = builtin
+	_contracts[id] = activity.CONTRACT
+	_builtin_owners[id] = builtin.get_object()
+	_revision += 1
+	return {"ok":true}
+
 func replace_stage(provider: String, version: String, entries: Array, integration := "") -> Dictionary:
 	if not _editable(): return failure("locked","Repair requires an editable application candidate.",provider)
 	_contributions = _contributions.filter(func(c: Dictionary): return c.provider != provider)
@@ -196,7 +206,8 @@ func invoke(hook: String, value: Variant, core: SessionLifecycle, owner: Object,
 	if _invoking or not _context(core,owner,hook,scope,captured):
 		return failure("stale_context","Current bound owner operation required.","",hook)
 	var actor_contract: bool = _contracts[hook] != CONTRACT
-	if (actor_contract and not preload("res://scripts/rule/actor_formulas.gd").valid_input(value)) or (not actor_contract and (typeof(value) != TYPE_INT or value < -1000 or value > 1000)):
+	var valid: bool = preload("res://scripts/rule/activity_formulas.gd").valid_input(hook,value) if _contracts[hook] == "activity-formula-v1" else (preload("res://scripts/rule/actor_formulas.gd").valid_input(value) if actor_contract else typeof(value) == TYPE_INT and value >= -1000 and value <= 1000)
+	if not valid:
 		return failure("invalid_input","Input violates the published " + _contracts[hook] + " domain.","",hook)
 	var selected: Dictionary = _active.winners[hook]
 	if not selected.callback.is_valid():

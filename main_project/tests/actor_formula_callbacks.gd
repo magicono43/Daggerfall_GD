@@ -1,4 +1,7 @@
 extends RefCounted
+
+func activity_rate(input: Dictionary) -> int:
+	return preload("res://scripts/rule/actor_formulas.gd").floor_ratio(input.base*input.numerator,input.denominator)
 var calls := 0
 var mode := "baseline"
 var callback := Callable()

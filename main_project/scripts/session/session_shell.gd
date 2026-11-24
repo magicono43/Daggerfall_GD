@@ -2,9 +2,10 @@ extends RefCounted
 ## Stock title/pause/modal presentation in the existing application shell.
 const Lifecycle = preload("res://scripts/session/session_lifecycle.gd")
 const Windows = preload("res://scripts/session/window_stack.gd")
-var core := Lifecycle.new()
-var windows := Windows.new(core)
-var action_input := preload("res://scripts/input/action_input.gd").new(core, windows)
+const Actions = preload("res://scripts/input/action_input.gd")
+var core: SessionLifecycle
+var windows: Windows
+var action_input: Actions
 var view: RefCounted
 var view_camera: Camera3D
 signal gameplay_edge(edge: Dictionary)
@@ -93,7 +94,10 @@ func route_controls(event: InputEvent) -> bool:
 		if focused is Button and not focused.disabled: focused.pressed.emit()
 	return true
 
-func _init(shell: Control) -> void:
+func _init(shell: Control, material_provider: Callable = Callable()) -> void:
+	core = Lifecycle.new(material_provider)
+	windows = Windows.new(core)
+	action_input = Actions.new(core,windows)
 	host = shell
 	view_camera = Camera3D.new()
 	view_camera.name = "ResolvedLookCamera"
