@@ -3,8 +3,8 @@ $ErrorActionPreference = 'Stop'
 $runs = [IO.Path]::GetFullPath("$PSScriptRoot/../tests/.runs")
 $auditPath = Join-Path $runs ('imp012-matrix-' + [Guid]::NewGuid().ToString('N') + '.json')
 $jobs = @(
-    @{tool='verify_headless.ps1';parameters=@{Suite='ground-movement';Fixture='ground-movement-v1';ClassicSource=$ClassicSource;TimeoutSeconds=240}},
-    @{tool='verify_rendered.ps1';parameters=@{Suite='ground-movement';Fixture='ground-movement-v1';ClassicSource=$ClassicSource;TimeoutSeconds=240}},
+    @{tool='verify_headless.ps1';parameters=@{Suite='ground-movement';Fixture='ground-movement-v1';ClassicSource=$ClassicSource;TimeoutSeconds=360}},
+    @{tool='verify_rendered.ps1';parameters=@{Suite='ground-movement';Fixture='ground-movement-v1';ClassicSource=$ClassicSource;TimeoutSeconds=360}},
     @{tool='verify_headless.ps1';parameters=@{Suite='action-input';Fixture='action-input-v1'}},
     @{tool='verify_headless.ps1';parameters=@{Suite='binding-config';Fixture='binding-config-v1'}},
     @{tool='verify_rendered.ps1';parameters=@{Suite='view-cursor';Fixture='view-cursor-v1'}},
@@ -20,7 +20,7 @@ $jobs = @(
     @{tool='verify_startup_export.ps1';parameters=@{Configuration='release';GroundMovement=$true;ClassicSource=$ClassicSource}}
 )
 if ($GroundOnly) { $jobs = @($jobs | Where-Object { $_.parameters.Suite -eq 'ground-movement' -or $_.parameters.GroundMovement }) }
-$audit = [ordered]@{schema='IMP-012-increment-1-matrix-v1';ground_only=[bool]$GroundOnly;started=[DateTime]::UtcNow.ToString('o');source_revision=(& git -C "$PSScriptRoot/../.." rev-parse HEAD);commands=@();status='running'}
+$audit = [ordered]@{schema='IMP-012-increment-2-matrix-v1';ground_only=[bool]$GroundOnly;started=[DateTime]::UtcNow.ToString('o');source_revision=(& git -C "$PSScriptRoot/../.." rev-parse HEAD);commands=@();status='running'}
 Write-Output "Ground matrix audit: $auditPath"
 foreach ($job in $jobs) {
     $before = @(Get-ChildItem -LiteralPath $runs -Directory | Select-Object -ExpandProperty Name)

@@ -235,6 +235,14 @@ func advance(delta: float) -> void:
 func _present() -> void:
 	if is_instance_valid(camera): camera.rotation = Vector3(deg_to_rad(-facing.y),deg_to_rad(-facing.x),0.0)
 
+## Radius enclosing the perspective near plane, including its corners. MOVE's
+## validated eye-clearance envelope must contain it before physical commitment.
+func origin_clearance_radius() -> float:
+	if not is_instance_valid(camera) or not camera.is_inside_tree(): return INF
+	var projection := camera.get_camera_projection()
+	if camera.projection != Camera3D.PROJECTION_PERSPECTIVE or not is_finite(projection.x.x) or not is_finite(projection.y.y) or projection.x.x <= 0 or projection.y.y <= 0: return INF
+	return Vector3(camera.near/projection.x.x,camera.near/projection.y.y,camera.near).length()
+
 func ray_context(scope: String) -> Dictionary:
 	_sync()
 	if scope != _scope or scope.is_empty() or not _eligible or not is_instance_valid(camera) or not camera.is_inside_tree(): return {"ok":false}
@@ -243,4 +251,4 @@ func ray_context(scope: String) -> Dictionary:
 
 func ray_context_current(value: Dictionary) -> bool:
 	var point := cursor if cursor_mode else viewport.get_visible_rect().get_center()
-	return value.get("ok",false) and input.context_current(value.get("ticket",{})) and value.get("yaw") == facing.x and value.get("pitch") == facing.y and value.get("point") == point and value.get("cursor_mode") == cursor_mode
+	return is_instance_valid(camera) and camera.is_inside_tree() and value.get("origin") == camera.project_ray_origin(point) and value.get("direction") == camera.project_ray_normal(point) and value.get("ok",false) and input.context_current(value.get("ticket",{})) and value.get("yaw") == facing.x and value.get("pitch") == facing.y and value.get("point") == point and value.get("cursor_mode") == cursor_mode

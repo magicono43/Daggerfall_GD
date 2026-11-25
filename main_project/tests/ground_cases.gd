@@ -8,6 +8,7 @@ var restriction_provider := Supplier.new("controlled-ground-restrictions","CHAR"
 var course: Node3D
 var measurements: Array = []
 var performance: Dictionary = {}
+var committed_capsules_clear := true
 var source_calls := 0
 var fatigue_source := preload("res://tests/controlled_vital_consumer.gd").new()
 class MissingTraitIdentity extends RefCounted:
@@ -27,9 +28,17 @@ func step(delta: float, count := 1) -> Dictionary:
 	var result := {}
 	for index in count:
 		result = motor.physics_step(delta)
+		if result.get("ok",false) and result.has("gait"):
+			var body: Node3D = shell_ref.session_shell.placement
+			var query := PhysicsShapeQueryParameters3D.new()
+			query.shape = body._shape.shape
+			query.transform.origin = body.snapshot().position
+			query.margin = motor.profile.surface.motion_margin
+			query.exclude = [body._actor.get_rid()]
+			committed_capsules_clear = committed_capsules_clear and body._actor.get_world_3d().direct_space_state.intersect_shape(query,1).is_empty()
 		if not result.has("gait"):
 			print("GROUND STEP WITHOUT GAIT ",result,"; focus hold ",shell_ref.session_shell._focus_hold,"; reason ",motor.reason)
-		if not result.get("ok",false): break
+		if not result.get("ok",false) or result.get("suspended",false): break
 	return result
 func middle() -> void:
 	for down in [true,false]:
@@ -243,15 +252,21 @@ func bootstrap(shell: Control, fixture: Dictionary) -> bool:
 	shell.set_physics_process(false) # Deterministic controlled scheduling of the stock handler.
 	var controller: RefCounted = shell.controller
 	var package := manifest("ground.tuning")
-	package.content = ["ground-policy.json"]
-	package.capabilities = ["data.ground-motor-v1"]
+	package.content = ["ground-policy.json","connector-layout.json"]
+	package.capabilities = ["data.ground-motor-v1","data.layout-inputs-v1"]
 	write(controller.mods.root.path_join("Mods/Ground/mod.json"),JSON.stringify(package))
-	write(controller.mods.root.path_join("Mods/Ground/ground-policy.json"),JSON.stringify({"domain":"move.ground","path":"policy","operation":"patch","entries":[{"id":"player","value":{"maximum":90.0}}]}))
+	write(controller.mods.root.path_join("Mods/Ground/ground-policy.json"),JSON.stringify({"domain":"move.ground","path":"policy","operation":"patch","entries":[{"id":"player","value":{"maximum":90.0,"connectors":[]}}]}))
+	preload("res://tests/connector_placement_cases.gd").publish(self,controller)
 	controller.mods.rescan()
-	controller.mods.edit("ground.tuning","toggle")
-	write(controller.mods.root.path_join("Overrides/ground-policy.json"),JSON.stringify({"domain":"move.ground","path":"policy","operation":"patch","entries":[{"id":"player","value":{"maximum":100.0}}]}))
+	if not fixture.get("reuse_ground_content",false): controller.mods.edit("ground.tuning","toggle")
+	var bundled: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://content/move/ground.json"))
+	write(controller.mods.root.path_join("Overrides/ground-policy.json"),JSON.stringify({"domain":"move.ground","path":"policy","operation":"patch","entries":[{"id":"player","value":{"maximum":100.0,"connectors":bundled.entries[0].value.connectors}}]}))
 	controller.select_folder(fixture.classic_source)
-	check("ground published composition",true,controller.continue_to_menu("run").ok)
+	var publication: Dictionary = controller.continue_to_menu("run")
+	check("ground published composition",true,publication.ok)
+	if not publication.ok:
+		print("GROUND PUBLICATION FAILED ",publication)
+		return false
 	var published: Dictionary = controller.providers.definitions.query("move.ground","policy","player").record
 	check("ground checked loose overrides MOD",["@loose",100.0],[published.winner.provider,float(published.value.maximum)])
 	check("ground shipped and MOD provenance retained",true,published.contributors.any(func(source): return source.provider == "ground.tuning") and published.contributors.any(func(source): return source.provider == "@shipped/ground-motor-v1"))
@@ -263,7 +278,10 @@ func bootstrap(shell: Control, fixture: Dictionary) -> bool:
 	actors = actor_core.actors
 	motor = shell.session_shell.ground
 	actor_core.provider = ActorEntry.new()
-	check("ground controlled entry","pending",actor_core.request({"id":"ground-entry","mode":"new","origin":""}).kind)
+	var entry_id := "connector-entry-%d" % int(fixture.connector_model) if fixture.has("connector_model") else "ground-entry"
+	if fixture.get("connector_full_block",false): entry_id += "-source-"+str(fixture.get("connector_source_placement","")).replace("/","-")
+	if fixture.has("ground_entry_id"): entry_id = str(fixture.ground_entry_id)
+	check("ground controlled entry","pending",actor_core.request({"id":entry_id,"mode":"new","origin":""}).kind)
 	scope = actor_core.snapshot().session
 	original = actor_core.ticket()
 	var capture := captured("ground-player")
@@ -276,19 +294,37 @@ func bootstrap(shell: Control, fixture: Dictionary) -> bool:
 	check("ground suppliers explicitly bound",true,motor.bind(scope,"ground-player",clock_provider,trait_provider,restriction_provider).ok)
 	var services := [actors.service_binding(scope),motor.service_binding(scope),clock_provider.binding(),trait_provider.binding(),fatigue_source.binding("ground-test-fatigue","CHAR")]
 	actor_core.complete_baseline(original,{"ok":true,"services":services})
-	course = preload("res://tests/ground_course.gd").new()
+	if fixture.has("connector_model"):
+		course = preload("res://tests/connector_course.gd").new()
+		course.full_block = fixture.get("connector_full_block",false)
+		if not course.prepare(controller.providers.layouts,controller.providers.definitions,int(fixture.connector_model),published.value.connectors,str(fixture.get("connector_source_placement",""))): return false
+	else:
+		course = preload("res://tests/ground_course.gd").new()
 	shell.add_child(course)
 	course.build()
+	# Review geometry participates in the same gated physics preparation and
+	# placement validation, never a post-readiness batch of unsynchronised solids.
+	if fixture.get("mode") == "ground-review" and not fixture.has("connector_model"): course.build_surfaces()
 	var body: Node3D = shell.session_shell.placement
 	body.assembly = course
 	var door := {"position":Vector3(0,0,1),"normal":Vector3.FORWARD,"points":[Vector3(-2,0,1),Vector3(2,3,1)]}
 	course.candidate = {"route_intent_bound":true,"ticket":{"request":{"core_ticket":original.duplicate(true)}},"route":"ground-course","handoff_id":"ground-course-entry","activation_session":scope,"frame":"dungeon-geometry-metres-v1","position":Vector3.ZERO,"forward":Vector3.FORWARD,"pose_kind":"ground-course-sole","desired_context":{"doorway_side":"interior","space":"ground-course"},"entrance":door,"exit":door,"return":{},"marker":{},"placement_policy":body.baseline_policy()}
+	if fixture.has("connector_model"): course.candidate.position = course.spawn_sole
 	await shell.get_tree().physics_frame
 	await shell.get_tree().physics_frame
+	if fixture.get("connector_full_block",false):
+		# A neighbouring source landing need not share the ramp's lower height.
+		# Observe its actual floor before requesting the normal placement owner.
+		var anchor: Vector3 = course.candidate.position
+		var spawn_floor: Dictionary = course.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(anchor+Vector3.UP,anchor+Vector3.DOWN*2))
+		if spawn_floor.is_empty() or spawn_floor.normal.y < cos(deg_to_rad(course.candidate.placement_policy.max_slope_degrees)):
+			print("GROUND SOURCE REVIEW SPAWN has no ordinary supporting floor: ",spawn_floor)
+			return false
+		course.candidate.position.y = spawn_floor.position.y
 	var candidate: Dictionary = course.candidate
 	var physical := preload("res://tests/placement_cases.gd").new().physical()
 	var validated: Dictionary = body.validate(candidate,physical)
-	if validated.kind == "rejected": print("GROUND PLACEMENT ",validated)
+	if validated.kind != "exact": print("GROUND PLACEMENT ",validated)
 	check("ground course placement validated","exact",validated.kind)
 	var placed: Dictionary = body.commit(candidate,validated,func(value: Dictionary): return {"ok":true,"handoff_id":value.handoff_id})
 	check("ground existing body placed",true,placed.get("placement_committed",false))
@@ -306,6 +342,9 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		var coherent: Array = [true]
 		var char_observer := func(_outcome: Dictionary): coherent[0] = coherent[0] and motor.last.get("position") == body.snapshot().position and motor.last.has("gait") and motor.last.has("activity")
 		actors.activity_committed.connect(char_observer)
+		await preload("res://tests/ground_posture_cases.gd").new().run(self)
+		await preload("res://tests/ground_surface_cases.gd").new().run(self)
+		await preload("res://tests/connector_placement_cases.gd").new().run(self)
 		var starting: Vector3 = body.snapshot().position
 		shell.notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
 		check("ground host focus loss suspends automation",true,step(0.02).get("suspended",false))
@@ -350,6 +389,9 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		sneak_choice.select(1)
 		sneak_choice.item_selected.emit(1)
 		check("ground stock toggle edit",true,controls.draft().response.run_mode == "toggle" and controls.draft().response.sneak_mode == "toggle")
+		var crouch_choice: OptionButton = shell.find_child("crouch_mode",true,false)
+		crouch_choice.select(0)
+		crouch_choice.item_selected.emit(0)
 		var persisted := FileAccess.get_file_as_string(shell.controller.settings.path)
 		shell.controller.settings.adapter.faults.settings_stage = true
 		press_control("Apply Controls")
@@ -421,6 +463,10 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		source_a.contributions = [{"id":"live-speed","kind":"attribute","target":"speed","value":10},{"id":"live-running","kind":"skill","target":"running","value":20}]
 		check("ground live CHAR reconciliation",true,actors.reconcile(scope,{},"ground-player",cap.revision,cap.content).ok)
 		near("ground next eligible step uses live stats",(210.0/39.5)*1.5,step(0.02).gait.target_metres_per_second)
+		key(KEY_CTRL,true)
+		near("ground live CHAR crouched Run baseline",165.0/39.5,step(0.02).gait.target_metres_per_second)
+		key(KEY_CTRL,false)
+		step(0.02)
 		var calls_before := source_calls
 		motor.retry_activity()
 		var retained_before: int = actors.ground_capabilities(scope,"ground-player").activity_count
@@ -485,7 +531,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		key(KEY_W,false)
 		near("ground actual facing moves east metres",(210.0/39.5)*1.5*.02,body.snapshot().position.x-facing_start.x)
 		near("ground actual facing has no north travel",0.0,body.snapshot().position.z-facing_start.z)
-		check("ground camera follows committed body",body.snapshot().position,shell.session_shell.view_camera.position)
+		check("ground camera follows committed body",motor.last.view_position,shell.session_shell.view_camera.position)
 		# A wall slide can reach a different endpoint than its first sweep. The
 		# bounded ground-only course must not slide into unowned air at its corner.
 		motor.retry_activity()
@@ -507,7 +553,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		contribution(edge_source,"edge-speed",2,{})
 		check("ground sliding performed debt settles",true,motor.retry_activity().ok)
 		check("ground sliding settlement never replays travel",guarded,body.snapshot().position)
-		shell.session_shell.view.place_facing(scope,{"version":1,"yaw":90.0,"pitch":0.0})
+		shell.session_shell.view.place_facing(scope,{"version":1,"yaw":-90.0,"pitch":0.0})
 		motor.retry_activity()
 		var vital: Dictionary = actors.vital_projection(scope,"ground-player")
 		var drain := {"schema":"vital-intake-v1","session":scope,"actor":"ground-player","caller":"ground-test-fatigue","operation":"ground-predepletion-setup","content":vital.content,"revision":vital.revision,"action":"drain","pool":"fatigue","unit":"internal-64","amount":vital.current.fatigue-1,"attribution":{"source":"controlled-fatigue-setup","cause":"ground-exhaustion-boundary","component":"setup"}}
@@ -529,10 +575,35 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 			await RenderingServer.frame_post_draw
 			shell.get_viewport().get_texture().get_image().save_png(sandbox.path_join("ground-course.png"))
 			check("ground rendered frame observed",true,not shell.get_viewport().get_texture().get_image().is_empty())
+		check("ground all committed motion capsules clear",true,committed_capsules_clear)
 		actor_core.request({"id":"ground-return","mode":"return","origin":scope})
 		if actor_core.snapshot().phase == "confirmation": actor_core.confirm(actor_core.ticket(),true)
 		source_a.callback = Callable()
 		course.queue_free()
+	for model in [61030,67027,67029]:
+		var connector_case: RefCounted = load("res://tests/connector_cases.gd").new()
+		var connector_fixture := fixture.duplicate(true)
+		connector_fixture.connector_model = model
+		connector_fixture.reuse_ground_content = true
+		var connector_result: Dictionary = await connector_case.run(shell,connector_fixture)
+		checks.append_array(connector_result.checks)
+		measurements.append_array(connector_result.get("measurements",[]))
+	var stair_case: RefCounted = load("res://tests/source_stair_cases.gd").new()
+	var stair_fixture := fixture.duplicate(true)
+	stair_fixture.connector_model = 67027
+	stair_fixture.connector_source_placement = "block-0917/record-00028"
+	stair_fixture.connector_full_block = true
+	stair_fixture.reuse_ground_content = true
+	var stair_result: Dictionary = await stair_case.run(shell,stair_fixture)
+	checks.append_array(stair_result.checks)
+	measurements.append_array(stair_result.get("measurements",[]))
+	var contact_case: RefCounted = load("res://tests/source_stair_cases.gd").new()
+	var contact_fixture := stair_fixture.duplicate(true)
+	contact_fixture.ground_entry_id = "source-stair-contacts-entry"
+	contact_fixture.stair_contacts = true
+	var contact_result: Dictionary = await contact_case.run(shell,contact_fixture)
+	checks.append_array(contact_result.checks)
+	measurements.append_array(contact_result.get("measurements",[]))
 	var ok := true
 	for item in checks: ok = ok and item.expected == item.actual
 	return {"ok":ok,"checks":checks,"count":checks.size(),"fixture":"IMP-012-ground-v1","engine":Engine.get_version_info(),"display":DisplayServer.get_name(),"measurements":measurements,"performance":performance,"source":"Real SessionShell input/view/body/CHAR/DATA/CORE; controlled flat course LOC readiness, entry, TIME, traits, restrictions","inputs":fixture.get("inputs",{})}

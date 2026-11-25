@@ -1,12 +1,525 @@
 {
-  "domain": "move.ground", "path": "policy", "operation": "add",
-  "entries": [{"id": "player", "value": {
-    "schema": "ground-motor-v1",
-    "divisor": 39.5, "walk_add": 150.0, "drag": 0.5,
-    "drag_threshold": 30.0, "run_base": 1.35, "running_divisor": 200.0,
-    "sneak_divisor": 2.0, "sneak_subtract": 1.0,
-    "metres_per_speed_unit": 1.0, "maximum": 100.0,
-    "moving_metres_per_second": 0.0001,
-    "provenance": {"formula": "MOVE-005 approved standing baseline; DFU PlayerSpeedChanger.cs", "license": "MIT; scripts/rule/DFU_LICENSE.txt", "mapping": "one gait unit per second = one engine metre per second; classic geometry already converted at 0.025 m/source unit", "scope": "standing flat ground; posture and air owners pending"}
-  }}]
+  "domain": "move.ground",
+  "path": "policy",
+  "operation": "add",
+  "entries": [
+    {
+      "id": "player",
+      "value": {
+        "schema": "ground-motor-v1",
+        "divisor": 39.5,
+        "walk_add": 150.0,
+        "drag": 0.5,
+        "drag_threshold": 30.0,
+        "run_base": 1.35,
+        "running_divisor": 200.0,
+        "sneak_divisor": 2.0,
+        "sneak_subtract": 1.0,
+        "metres_per_speed_unit": 1.0,
+        "maximum": 100.0,
+        "moving_metres_per_second": 0.0001,
+        "provenance": {
+          "formula": "MOVE-005 approved standing baseline; DFU PlayerSpeedChanger.cs",
+          "license": "DFU-derived gait formula: MIT, scripts/rule/DFU_LICENSE.txt; posture/surface tuning: project-authored",
+          "mapping": "one gait unit per second = one engine metre per second; classic geometry already converted at 0.025 m/source unit",
+          "scope": "MOVE-005 standing/crouched baselines; project-authored metre/second surface and posture tuning; standing capsule remains placement-owned",
+          "connectors": "User-confirmed three corridor floor designs, 2026-11-24; 25 pinned source records, IMP-012-STEEP-RAMP-LIST-2026-11-24.md; source hashes/poses must still match. Project-authored selection; classic source geometry remains external.",
+          "steps": "User-approved DFU-style 0.50 m automatic stair allowance, 2026-11-25. Upward reference: PlayerAdvanced/PlayerStandalone m_StepOffset=0.5. Downward 0.50 m is project-authored ground following for the same ordinary stairs; DFU uses controller/gravity, not this separate parameter. Oversized ledges retain air/jump/climb ownership."
+        },
+        "crouch_add": 50.0,
+        "surface": {
+          "crouch_height": 0.9,
+          "standing_eye": 1.6,
+          "crouched_eye": 0.75,
+          "posture_seconds": 0.18,
+          "stair_seconds": 0.12,
+          "walk_degrees": 45.0,
+          "support_degrees": 80.0,
+          "step_up": 0.5,
+          "step_down": 0.5,
+          "contact_gap": 0.01,
+          "probe_stride": 0.05,
+          "camera_radius": 0.1,
+          "motion_margin": 0.001
+        },
+        "connectors": [
+          {
+            "block": "block-0913",
+            "record": "record-00052",
+            "block_sha256": "ad52a9a888ca83bce910d593fa775796389fb4fffd3e3b48ac3741b6b3cf71fe",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 11750,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              1152,
+              -768,
+              1920
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-0914",
+            "record": "record-00002",
+            "block_sha256": "083a6ebc5e0f1781cb1b950fc0531e6ae7deea2fc1fd2e883b3fc553a4caf2f2",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 9644,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              128,
+              -1024,
+              896
+            ],
+            "rotation_source": [
+              0,
+              -1024,
+              0
+            ]
+          },
+          {
+            "block": "block-0914",
+            "record": "record-00055",
+            "block_sha256": "083a6ebc5e0f1781cb1b950fc0531e6ae7deea2fc1fd2e883b3fc553a4caf2f2",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 11846,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              1152,
+              -768,
+              1920
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-0915",
+            "record": "record-00007",
+            "block_sha256": "94239dbf8a8e23062bf880ad2bd822edb1c8f1cb73c6abffe9a942831b3674c7",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 9859,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              128,
+              -1024,
+              896
+            ],
+            "rotation_source": [
+              0,
+              -1024,
+              0
+            ]
+          },
+          {
+            "block": "block-0915",
+            "record": "record-00035",
+            "block_sha256": "94239dbf8a8e23062bf880ad2bd822edb1c8f1cb73c6abffe9a942831b3674c7",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 11032,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              1152,
+              -768,
+              1920
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-0916",
+            "record": "record-00001",
+            "block_sha256": "b3a78084b960d79076bcc48d42cb8e4947212db8129097ccaaff036b776c00ae",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 9644,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              128,
+              -1024,
+              896
+            ],
+            "rotation_source": [
+              0,
+              -1024,
+              0
+            ]
+          },
+          {
+            "block": "block-0916",
+            "record": "record-00023",
+            "block_sha256": "b3a78084b960d79076bcc48d42cb8e4947212db8129097ccaaff036b776c00ae",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 10506,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              896,
+              -1280,
+              1664
+            ],
+            "rotation_source": [
+              0,
+              -3072,
+              0
+            ]
+          },
+          {
+            "block": "block-0916",
+            "record": "record-00036",
+            "block_sha256": "b3a78084b960d79076bcc48d42cb8e4947212db8129097ccaaff036b776c00ae",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 11080,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              1152,
+              -768,
+              1920
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-0917",
+            "record": "record-00007",
+            "block_sha256": "c3acc53a584480a42d7b7c2d5feacc9d42d4a07f37e85c2499d3a6eeaf1c1c53",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 9859,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              128,
+              -1024,
+              896
+            ],
+            "rotation_source": [
+              0,
+              -1024,
+              0
+            ]
+          },
+          {
+            "block": "block-0917",
+            "record": "record-00028",
+            "block_sha256": "c3acc53a584480a42d7b7c2d5feacc9d42d4a07f37e85c2499d3a6eeaf1c1c53",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 10696,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              1152,
+              -768,
+              1920
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-0918",
+            "record": "record-00006",
+            "block_sha256": "2e71589307a0d9d98ecde03becc8a480ef357325ed3b158f17a0b67187a3a211",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 9859,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              128,
+              -1024,
+              896
+            ],
+            "rotation_source": [
+              0,
+              -1024,
+              0
+            ]
+          },
+          {
+            "block": "block-0918",
+            "record": "record-00026",
+            "block_sha256": "2e71589307a0d9d98ecde03becc8a480ef357325ed3b158f17a0b67187a3a211",
+            "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+            "source_address": 10648,
+            "model": 67029,
+            "floor_plane": 6,
+            "position_source": [
+              1024,
+              -896,
+              1920
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-0919",
+            "record": "record-00046",
+            "block_sha256": "5dddca5f9e0332de776539479a6fb29882ee6487d37775de23edae375dac80cf",
+            "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+            "source_address": 11412,
+            "model": 61030,
+            "floor_plane": 1,
+            "position_source": [
+              1024,
+              -960,
+              1920
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-0920",
+            "record": "record-00002",
+            "block_sha256": "467608670d4188fd9833839daf2f7b02a4e8e52e130c9f2c1d4f48946e891cb4",
+            "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+            "source_address": 9644,
+            "model": 61030,
+            "floor_plane": 1,
+            "position_source": [
+              512,
+              -960,
+              640
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-0921",
+            "record": "record-00002",
+            "block_sha256": "453afd13675163d587e184b91df60829023b5767abb097b82171efc07c3dc902",
+            "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+            "source_address": 9644,
+            "model": 61030,
+            "floor_plane": 1,
+            "position_source": [
+              512,
+              -960,
+              640
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-0941",
+            "record": "record-00015",
+            "block_sha256": "8b7a2e9736dc6a9a27bc57e5bfc1884784418b630a88bac5ac7e022b35ed9543",
+            "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+            "source_address": 9955,
+            "model": 61030,
+            "floor_plane": 1,
+            "position_source": [
+              512,
+              -960,
+              640
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-0980",
+            "record": "record-00065",
+            "block_sha256": "aa307f555b69152b37319148cef1b747ba57752fca5113c48bbaaa7da2669288",
+            "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+            "source_address": 11306,
+            "model": 67029,
+            "floor_plane": 6,
+            "position_source": [
+              1536,
+              -896,
+              640
+            ],
+            "rotation_source": [
+              0,
+              -512,
+              0
+            ]
+          },
+          {
+            "block": "block-0981",
+            "record": "record-00079",
+            "block_sha256": "928bfd55a3aa37e577ee738bd9deac1e046841be400b0f90882ec4be28a488cc",
+            "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+            "source_address": 11797,
+            "model": 67029,
+            "floor_plane": 6,
+            "position_source": [
+              1536,
+              -896,
+              640
+            ],
+            "rotation_source": [
+              0,
+              -512,
+              0
+            ]
+          },
+          {
+            "block": "block-0982",
+            "record": "record-00070",
+            "block_sha256": "b4cdd15a68b0c38cab7e6317076c7741890f4065979b16d04497343e62dbd2da",
+            "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+            "source_address": 11797,
+            "model": 67029,
+            "floor_plane": 6,
+            "position_source": [
+              1536,
+              -896,
+              640
+            ],
+            "rotation_source": [
+              0,
+              -512,
+              0
+            ]
+          },
+          {
+            "block": "block-1030",
+            "record": "record-00080",
+            "block_sha256": "3cafda050d2357e2548b79c5854de438e9b7fd1968b25ba10c112c1d0e042e6d",
+            "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+            "source_address": 11306,
+            "model": 67029,
+            "floor_plane": 6,
+            "position_source": [
+              1536,
+              -896,
+              640
+            ],
+            "rotation_source": [
+              0,
+              -512,
+              0
+            ]
+          },
+          {
+            "block": "block-1041",
+            "record": "record-00032",
+            "block_sha256": "f031d370f50f49f626234a8515bb41a521ed626a8b8ef7cb10d3863e936125e6",
+            "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+            "source_address": 9955,
+            "model": 61030,
+            "floor_plane": 1,
+            "position_source": [
+              512,
+              -960,
+              640
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-1059",
+            "record": "record-00016",
+            "block_sha256": "ee0c010ca125b4e3fe5cd85c87166b693cdae2d9c03cac23d5837acf0efae304",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 33110,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              640,
+              -3072,
+              128
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-1059",
+            "record": "record-00017",
+            "block_sha256": "ee0c010ca125b4e3fe5cd85c87166b693cdae2d9c03cac23d5837acf0efae304",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 33062,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              384,
+              -3584,
+              128
+            ],
+            "rotation_source": [
+              0,
+              -1536,
+              0
+            ]
+          },
+          {
+            "block": "block-1059",
+            "record": "record-00089",
+            "block_sha256": "ee0c010ca125b4e3fe5cd85c87166b693cdae2d9c03cac23d5837acf0efae304",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 32966,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              1152,
+              -3072,
+              128
+            ],
+            "rotation_source": [
+              0,
+              -512,
+              0
+            ]
+          },
+          {
+            "block": "block-1059",
+            "record": "record-00090",
+            "block_sha256": "ee0c010ca125b4e3fe5cd85c87166b693cdae2d9c03cac23d5837acf0efae304",
+            "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+            "source_address": 32918,
+            "model": 67027,
+            "floor_plane": 6,
+            "position_source": [
+              1408,
+              -3584,
+              128
+            ],
+            "rotation_source": [
+              0,
+              -512,
+              0
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }

@@ -1,3 +1,11 @@
+# Posture-origin extension — IMP-012 increment 2
+
+MOVE changes the existing camera's eye origin after physical posture commitment
+and applies geometry-safe stair smoothing. Facing remains owned here. Aim samples
+also expire when their displayed origin or direction changes. The actual camera
+projection exposes an enclosing near-plane radius for MOVE's checked clearance
+envelope. See [POSTURE_SURFACES.md](../move/POSTURE_SURFACES.md).
+
 # View and cursor contract — IMP-011 increment 3
 
 IMP-016 increment 4 adds `death_lower(session,progress)` and
@@ -46,7 +54,8 @@ debt. These are engineering response choices, not copied DFU smoothing constants
 Editable ranges: mouse axes 0.001–10 degrees/reported unit; controller axes and
 keyboard rate 1–1440 degrees/second; controller cursor 1–5000 reference pixels/
 second. Nonfinite/out-of-range values reject, rather than clamp configuration.
-Pitch/trigger and gait/posture retained defaults cannot be edited here.
+Pitch/trigger defaults remain retained. IMP-012 enables independent gait/posture
+modes through their stock Controls consumers.
 
 ## Cursor and handoffs
 

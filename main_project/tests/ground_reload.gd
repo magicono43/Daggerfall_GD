@@ -9,6 +9,8 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("ground reload Sneak Toggle","toggle",config.response.sneak_mode)
 	check("ground reload actual Run consumer","toggle",shell.session_shell.ground.gait.run_mode)
 	check("ground reload actual Sneak consumer","toggle",shell.session_shell.ground.gait.sneak_mode)
-	check("ground reload preserves crouch default","toggle",config.response.crouch_mode)
+	check("ground reload preserves crouch default","toggle",preload("res://scripts/input/binding_configuration.gd").defaults().response.crouch_mode)
+	check("ground reload saved Crouch Hold","hold",config.response.crouch_mode)
+	check("ground reload actual Crouch consumer","hold",shell.session_shell.ground.gait.crouch_mode)
 	check("ground reload cannot revive Autorun",false,shell.session_shell.ground.gait.autorun)
 	return {"ok":checks.all(func(item): return item.expected == item.actual),"checks":checks,"count":checks.size(),"fixture":"IMP-012-ground-v1","engine":Engine.get_version_info(),"display":DisplayServer.get_name()}

@@ -248,12 +248,16 @@ foreach ($mode in @('headless','rendered')) {
     $fixture |
         ConvertTo-Json | Set-Content "$sandbox/fixture.json"
     $arguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/fixture.json")
+    # Ground now includes a separate source-block entry and all stair gaits.
+    # Match DEV-014's maintained ground frame allowance; keep full inventories.
+    if ($GroundMovement) { $arguments[3] = '1800' }
     if ($NativeMedia) { $arguments[3] = '12000' }
     if ($mode -eq 'headless') { $arguments = @('--headless') + $arguments }
     $engineExit = Invoke-IsolatedExport "$build/Startup.console.exe" $arguments "$run/$mode.log"
+    if ($GroundMovement) { $report.child_source_samples += @{ child="$mode-process"; process_exit=$engineExit; frame_limit=1800; result_present=(Test-Path -LiteralPath "$sandbox/result.json") } }
     if ($DungeonAssembly -or $LayoutInputs) { $report.child_source_samples += @{ child="$mode-primary"; before=$before; after=(Get-LayoutSourceHashes $before $selectedRoot) } }
-    if (($DungeonAssembly -or $M1Composition -or $LayoutInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) -and $engineExit -eq 0) {
-        $fixture.mode = if ($DungeonAssembly) { 'dungeon-assembly_reload' } elseif ($M1Composition) { 'm1-composition_reload' } elseif ($VariantInputs) { 'variant-inputs_reload' } elseif ($LayoutInputs) { 'layout-inputs_reload' } elseif ($NativeMedia) { 'native_reload' } elseif ($MediaReplacements) { 'replacements_reload' } elseif ($TranslationPreferences) { 'translation-preferences_reload' } elseif ($LocaleFonts) { 'locale-fonts_reload' } elseif ($RandomnessSession) { 'randomness-session_reload' } elseif ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
+    if (($GroundMovement -or $DungeonAssembly -or $M1Composition -or $LayoutInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) -and $engineExit -eq 0) {
+        $fixture.mode = if ($GroundMovement) { 'ground-movement_reload' } elseif ($DungeonAssembly) { 'dungeon-assembly_reload' } elseif ($M1Composition) { 'm1-composition_reload' } elseif ($VariantInputs) { 'variant-inputs_reload' } elseif ($LayoutInputs) { 'layout-inputs_reload' } elseif ($NativeMedia) { 'native_reload' } elseif ($MediaReplacements) { 'replacements_reload' } elseif ($TranslationPreferences) { 'translation-preferences_reload' } elseif ($LocaleFonts) { 'locale-fonts_reload' } elseif ($RandomnessSession) { 'randomness-session_reload' } elseif ($DefinitionPublication) { 'publication_reload' } elseif ($DependencyPlanning) { 'planning_reload' } else { 'mods_reload' }
         if ($LocaleFonts) { $fixture.sandbox = "$sandbox/relaunch".Replace('\','/') }
         $fixture | ConvertTo-Json -Depth 10 | Set-Content "$sandbox/reload-fixture.json"
         $reloadArguments = @('--max-fps','60','--quit-after','900','--',"--startup-fixture=$sandbox/reload-fixture.json")
@@ -264,13 +268,14 @@ foreach ($mode in @('headless','rendered')) {
         $reloadReport = if ($LocaleFonts) { "$sandbox/relaunch/reload-result.json" } else { "$sandbox/reload-result.json" }
         if (!(Test-Path $reloadReport)) { throw 'Missing exported fresh-process result' }
         $reloadResult = Get-Content $reloadReport -Raw | ConvertFrom-Json
+        if ($GroundMovement -and !(Test-GroundInventory $reloadResult 'reload')) { throw 'Incomplete exported ground reload inventory' }
         if ($DungeonAssembly -and !(Test-DungeonInventory $reloadResult ('reload-' + $mode))) { throw 'Incomplete exported dungeon restart inventory' }
         if ($VariantInputs -and !(Test-VariantInventory $reloadResult 'reload')) { throw 'Incomplete exported variant reload inventory' }
         if ($LayoutInputs -and !$VariantInputs -and !(Test-LayoutInventory $reloadResult 'reload')) { throw 'Incomplete exported layout reload inventory' }
         if ($MediaReplacements -and !(Test-ReplacementInventory $reloadResult 'reload')) { throw 'Incomplete exported replacement reload terminal inventory' }
         if ($NativeMedia -and !(Test-NativeInventory $reloadResult 'reload')) { throw 'Incomplete exported native reload inventory' }
         if ($M1Composition -and !(Test-CompositionInventory $reloadResult ('reload-' + $mode))) { throw 'Incomplete exported M1 relaunch inventory' }
-        $reloadExpected = if ($DungeonAssembly) { Get-DungeonExpectedCount ('reload-' + $mode) } elseif ($M1Composition) { Get-CompositionExpectedCount ('reload-' + $mode) } elseif ($VariantInputs) { Get-VariantExpectedCount 'reload' } elseif ($LayoutInputs) { 15 } elseif ($NativeMedia) { Get-NativeExpectedCount 'reload' } elseif ($MediaReplacements -or $TranslationPreferences -or $LocaleFonts) { 10 } elseif ($RandomnessSession) { 15 } else { 8 }
+        $reloadExpected = if ($GroundMovement) { Get-GroundExpectedCount 'reload' } elseif ($DungeonAssembly) { Get-DungeonExpectedCount ('reload-' + $mode) } elseif ($M1Composition) { Get-CompositionExpectedCount ('reload-' + $mode) } elseif ($VariantInputs) { Get-VariantExpectedCount 'reload' } elseif ($LayoutInputs) { 15 } elseif ($NativeMedia) { Get-NativeExpectedCount 'reload' } elseif ($MediaReplacements -or $TranslationPreferences -or $LocaleFonts) { 10 } elseif ($RandomnessSession) { 15 } else { 8 }
         if ($null -eq $reloadResult.ok -or $reloadResult.count -ne $reloadExpected -or $reloadResult.checks.Count -ne $reloadExpected -or !$reloadResult.engine -or
             ($mode -eq 'rendered' -and $reloadResult.display -eq 'headless') -or
             !(Test-ScriptDiagnostics @("$run/$mode-reload.log") '' $reloadResult)) { throw 'Exported fresh-process restore incomplete' }
@@ -324,7 +329,7 @@ foreach ($mode in @('headless','rendered')) {
     if ($ClassicSource -and !$Formula -and !$FormulaFault -and $result.count -ne $expected) { throw 'Incomplete owner export result' }
     $checks += @{ scenario = "exported-$mode"; actual = 'pass'; assertions = $result.count; process_exit = $engineExit
         source_before = $before; source_after = $after; result = "$sandbox/result.json" }
-    if ($DungeonAssembly -or $M1Composition -or $LayoutInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) { $checks[-1].reload = @{ assertions = $reloadExpected; process_exit = $reloadExit; result = $reloadReport } }
+    if ($GroundMovement -or $DungeonAssembly -or $M1Composition -or $LayoutInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $RandomnessSession) { $checks[-1].reload = @{ assertions = $reloadExpected; process_exit = $reloadExit; result = $reloadReport } }
     if ($NativeMedia) {
         if (!$result.native_cleanup.ok) { throw 'Exported native consumer cleanup failed.' }
         $checks[-1].capabilities = $result.observations.capabilities

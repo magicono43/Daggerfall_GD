@@ -1,3 +1,10 @@
+# Increment-2 locomotion extension
+
+Ground locomotion resizes this existing capsule through detached preparation and
+coordinated revalidation/commitment. Standing dimensions remain placement-owned.
+See [POSTURE_SURFACES.md](POSTURE_SURFACES.md). Doorway placement keeps its accepted
+standing/reset contract; this does not enable native restoration or special modes.
+
 # MOVE placement — IMP-013 increment 3
 
 IMP-012 increment 1 extends this same body through the checked

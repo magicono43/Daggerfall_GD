@@ -1,3 +1,15 @@
+# Increment-2 extension
+
+Posture and surfaces now extend this same coordinator/body; see
+[POSTURE_SURFACES.md](POSTURE_SURFACES.md) for the current shape, control, speed,
+support, stair, camera and future-owner contracts. Earlier standing/flat-only
+boundaries below describe the accepted increment-1 build.
+
+The current surface motor commits full-capsule-qualified route fragments under
+the same MOVE authority. The increment-1 `move_and_collide` description below is
+historical; the ordinary-stair follow-up preserves across/follow fragments rather
+than sending their diagonal chord through a second collision recovery.
+
 # Ground motor and gait — IMP-012 increment 1
 
 `SessionShell.ground` is the session coordinator. The stock physics handler first

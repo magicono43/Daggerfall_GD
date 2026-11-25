@@ -1,0 +1,43 @@
+{
+  "schema": "steep-ramp-source-review-verification-v1",
+  "date": "2026-11-24",
+  "status": "source-only proposed list; runtime disabled/unqualified",
+  "source_coverage": {
+    "rdb_blocks": 187,
+    "border_blocks": 15,
+    "model_occurrences": 22961,
+    "steep_occurrences": 3053,
+    "steep_planes": 16475,
+    "unique_models": 1043,
+    "selected_source_occurrences": 25,
+    "selected_border_occurrences": 15,
+    "selected_blocks": 16
+  },
+  "outputs": [
+    {
+      "path": "design_docs/development/evidence/IMP-012-steep-ramp-source-list-2026-11-24.json",
+      "sha256": "86d249ad64a2323d096ffeca570e65bfaafb21e72df4be4eaca890afe2c420e4",
+      "bytes": 1275298,
+      "fresh_run_identical": true
+    },
+    {
+      "path": "design_docs/development/evidence/IMP-012-steep-ramp-source-list-2026-11-24.png",
+      "sha256": "be82a92161658baaff2582496e02bc30b1cd26eab8f5ff0158dcb5105103a4cb",
+      "bytes": 31597,
+      "fresh_run_identical": true
+    }
+  ],
+  "checks": [
+    "fresh independent process JSON byte equality",
+    "fresh independent process PNG byte equality",
+    "187 RDB / 15 border blocks",
+    "25 distinct source record-face keys / 16 blocks",
+    "15 border records",
+    "three exact model-face pairs",
+    "all selected placements yaw-only; source observer also rejects action-bearing selected records",
+    "visual inspection of source elevation PNG"
+  ],
+  "tool_sha256": "a6bb9c02c9ccaf8bf41f1cb9eeeaf2b5cb33469fa6e1107a0f04609f2b57df6d",
+  "diagram_pillow_version": "13.0.0",
+  "runtime_tests_run": false
+}

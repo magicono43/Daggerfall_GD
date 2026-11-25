@@ -233,7 +233,7 @@ func held(action: String) -> bool:
 ## Continuous Hold gait resumes under the same context rules as directions;
 ## discrete Toggle edges remain quarantined after cancellation.
 func continuous_held(action: String) -> bool:
-	if action not in ["run","sneak","backward"] or not core.gates.gameplay_input(): return false
+	if action not in ["run","sneak","backward","crouch"] or not core.gates.gameplay_input(): return false
 	for value: Dictionary in _physical.values():
 		if value.action == action and (value.device == -1 or (value.device == selected_controller and not disconnect_pending())): return true
 	return false

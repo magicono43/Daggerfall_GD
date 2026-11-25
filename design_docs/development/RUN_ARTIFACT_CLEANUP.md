@@ -1,5 +1,40 @@
 # Verification run artifact cleanup
 
+## 2026-11-25 IMP-012 ordinary stair follow-up
+
+After terminal verification, ordinary engine inactivity and exact containment/
+reparse checks, ten owned development/final roots were compacted. Removed 16,729
+reproducible files / 3,065,487,507 logical bytes. Preserved 138 hash-verified child
+reports/logs/captures, 32 disposable player logs, typed inputs and executed-source
+archives. No selected full project/export/cache remains. Installed template links
+were unlinked without following their targets. The modified development copy is
+labelled separately; no focused probe is counted as acceptance.
+
+Pre-cleanup logical retention was 7,237,018,321 bytes; post-cleanup retention was
+4,180,061,408 bytes before small final documentation/audit writes. The remaining
+retention above 2 GiB includes earlier accepted evidence and protected other-task
+human-review projects, which were preserved. No unique input, external source,
+installed tool or security setting was removed. Exact journal and hashes are in
+the [execution audit](evidence/IMP-012-ordinary-stairs-2026-11-25.audit.json).
+
+## 2026-11-25 IMP-012 steep corridor follow-up
+
+Four cleanup batches compacted 25 unique owned development/verification roots,
+removing 39,057 reproducible files / 6,259,215,829 logical bytes. Hash-verified
+reports, logs, reviewed captures, typed inputs and executed-source archives remain.
+No selected full project, export, dependency copy or cache remains. Ordinary
+engine inactivity, exact workspace containment and reparse checks qualified the
+targets; installed template links were unlinked without following their targets.
+
+Pre-final-batch retention was 8,304,061,168 logical bytes (7.73 GiB), reviewed as
+understood reproducible outputs plus protected prior evidence. Post-cleanup
+retention was 3,936,613,573 bytes before small documentation/audit writes. The
+remaining retention above the 2 GiB review trigger includes earlier accepted
+evidence and protected other-task human-review projects, which were left intact.
+No unique input, active review, classic/reference data, installed tool or security
+setting was removed. Exact journals and post-cleanup hashes are recorded in the
+[execution audit](evidence/IMP-012-steep-connectors-2026-11-25.audit.json).
+
 ## 2026-11-24 IMP-012 increment 1 and review-launch follow-up
 
 Five cleanup batches compacted 65 explicitly owned, inactive run roots after
@@ -765,3 +800,14 @@ Each records checked absolute targets, protected evidence, pre-deletion inventor
 actual deletion outcomes and SHA-256 recovery verification. Root reports describe
 executed runtime/build paths that have now been removed; rebuild rather than using
 those archived paths as implementation inputs.
+
+
+### IMP-012 stair contacts, 2026-11-25
+
+Six inactive owned verification/development roots were cleaned after process,
+containment, reparse and retained-evidence hash checks. Removed 10,269
+files (1,904,709,918.0 bytes); remaining `.runs` logical size was
+4,414,152,511 bytes. Earlier human review roots were protected. Source archives,
+typed inputs, compact results and player logs remain. Exact journals and hashes
+are recorded in `main_project/tests/.runs/imp012-stair-contact-cleanup-summary.json`
+and the [execution audit](evidence/IMP-012-stair-contacts-2026-11-25.audit.json).

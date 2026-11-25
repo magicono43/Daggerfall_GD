@@ -1,0 +1,180 @@
+extends RefCounted
+## Additional bounded geometry on the existing controlled course. All posture,
+## speed and travel requests pass through SessionShell's production coordinator.
+func run(t: RefCounted) -> void:
+	var body: Node3D = t.shell_ref.session_shell.placement
+	var motor: RefCounted = t.motor
+	var shell: RefCounted = t.shell_ref.session_shell
+	var initial: Vector3 = body.snapshot().position
+	var initial_ray: Dictionary = shell.view.ray_context(t.scope)
+	t.check("posture actual view origin available",true,initial_ray.get("ok",false))
+	t.key(KEY_CTRL,true)
+	t.key(KEY_CTRL,false)
+	var hold: int = t.actor_core.gates.acquire("posture-pause",t.scope,["simulation"])
+	t.check("posture pause defers actual shape",true,t.step(0.02).get("suspended",false) and body.snapshot().physical.posture == "standing")
+	t.actor_core.gates.release(hold,"posture-pause")
+	var result: Dictionary = t.step(0.02)
+	t.check("posture actual crouch commits",["crouched",false],[body.snapshot().physical.posture,body.snapshot().pending_stand])
+	t.near("posture crouch preserves base",initial.y-0.9,result.base.y)
+	t.check("posture origin change expires old aim",false,shell.view.ray_context_current(initial_ray))
+	t.near("posture immediate crouched Walk",100.0/39.5,result.gait.target_metres_per_second)
+	t.check("posture open room crouch camera interpolates",true,shell.view_camera.position.y > result.base.y+0.75 and shell.view_camera.position.y < result.base.y+1.6)
+	var active_origin: Vector3 = shell.view_camera.position
+	hold = t.actor_core.gates.acquire("posture-pause",t.scope,["simulation"])
+	t.step(0.1,3)
+	t.check("posture pause freezes active interpolation",active_origin,shell.view_camera.position)
+	t.actor_core.gates.release(hold,"posture-pause")
+	await t.capture_course("posture-crouch-committed")
+	t.check("posture repeated physics no retoggle","crouched",t.step(0.02,3).posture.actual)
+	t.key(KEY_SHIFT,true)
+	t.near("posture crouched Run",140.0/39.5,t.step(0.02).gait.target_metres_per_second)
+	t.key(KEY_SHIFT,false)
+	t.key(KEY_ALT,true)
+	t.near("posture crouched Sneak",49.0/39.5,t.step(0.02).gait.target_metres_per_second)
+	t.key(KEY_ALT,false)
+	var modifier := preload("res://tests/controlled_ground_provider.gd").new("posture-speed","CHAR",[])
+	t.check("posture scoped gait factors admitted",true,t.contribution(modifier,"posture-speed",1,{"walk":2.0,"run":1.5,"sneak":0.5}).ok)
+	t.near("posture crouched Walk modifier once",200.0/39.5,t.step(0.02).gait.target_metres_per_second)
+	t.key(KEY_SHIFT,true)
+	t.near("posture crouched Run own modifier once",210.0/39.5,t.step(0.02).gait.target_metres_per_second)
+	t.key(KEY_SHIFT,false)
+	t.key(KEY_ALT,true)
+	t.near("posture crouched Sneak excludes Walk modifier",24.5/39.5,t.step(0.02).gait.target_metres_per_second)
+	t.key(KEY_ALT,false)
+	t.check("posture scoped gait factors removed",true,t.contribution(modifier,"posture-speed",2,{}).ok)
+	# Centre x=0 remains clear; the intended capsule intersects this overhang.
+	var roof: StaticBody3D = t.course.box(Vector3(initial.x+0.24,1.45,initial.z),Vector3(0.10,0.2,0.6),Color.ORANGE)
+	await t.shell_ref.get_tree().physics_frame
+	await t.shell_ref.get_tree().physics_frame
+	shell.focus_changed(true)
+	t.key(KEY_CTRL,true)
+	t.key(KEY_CTRL,false)
+	result = t.step(0.02)
+	t.check("posture off centre full shape blocks stand",["crouched","standing",true],[result.posture.actual,result.posture.desired,result.posture.pending_stand])
+	t.near("posture blocked stand retains speed",100.0/39.5,result.gait.target_metres_per_second)
+	await t.capture_course("posture-pending-stand")
+	t.check("posture blocked actual shape unchanged",true,absf(body.snapshot().shape.height-0.9) < 0.00001)
+	t.key(KEY_CTRL,true)
+	t.key(KEY_CTRL,false)
+	t.check("posture renewed crouch cancels pending",false,t.step(0.02).posture.pending_stand)
+	t.key(KEY_CTRL,true)
+	t.key(KEY_CTRL,false)
+	t.step(0.02)
+	var paused_position: Vector3 = shell.view_camera.position
+	hold = t.actor_core.gates.acquire("posture-pause",t.scope,["simulation"])
+	t.step(0.1,3)
+	t.check("posture pause freezes camera",paused_position,shell.view_camera.position)
+	t.actor_core.gates.release(hold,"posture-pause")
+	roof.queue_free()
+	await t.shell_ref.get_tree().physics_frame
+	await t.shell_ref.get_tree().physics_frame
+	shell.focus_changed(true)
+	result = t.step(0.02)
+	t.check("posture pending automatically stands","standing",result.posture.actual)
+	t.near("posture automatic stand preserves base",initial.y-0.9,result.base.y)
+	t.near("posture immediate standing speed",175.0/39.5,result.gait.target_metres_per_second)
+	t.check("posture camera follows after commitment",true,shell.view_camera.position.y < result.base.y+1.6 and shell.view_camera.position.y > result.base.y+0.75)
+	await t.capture_course("posture-standing-transition")
+	t.step(0.02,12)
+	t.near("posture camera reaches standing eye",initial.y+0.7,shell.view_camera.position.y)
+	var overlap: StaticBody3D = t.course.box(initial,Vector3(0.2,0.2,0.2),Color.RED)
+	await t.shell_ref.get_tree().physics_frame
+	await t.shell_ref.get_tree().physics_frame
+	shell.focus_changed(true)
+	t.check("posture invalid initial overlap rejects shrink",false,body.prepare_ground_posture(motor,t.scope,"crouched",motor.profile.surface).ok)
+	t.near("posture rejected preparation leaves pose",0,initial.distance_to(body.snapshot().position))
+	overlap.queue_free()
+	await t.shell_ref.get_tree().physics_frame
+	await t.shell_ref.get_tree().physics_frame
+	shell.focus_changed(true)
+	# Exercise the real stock OptionButton and Apply/Retry Save handlers.
+	shell.open_controls()
+	t.shell_ref.render()
+	var choice: OptionButton = t.shell_ref.find_child("crouch_mode",true,false)
+	choice.select(0)
+	choice.item_selected.emit(0)
+	var controls: RefCounted = t.shell_ref.controller.controls
+	var persisted := FileAccess.get_file_as_string(t.shell_ref.controller.settings.path)
+	t.shell_ref.controller.settings.adapter.faults.settings_stage = true
+	t.press_control("Apply Controls")
+	t.check("posture stock Hold applies despite failed save","hold",motor.gait.crouch_mode)
+	t.check("posture failed save preserves disk",persisted,FileAccess.get_file_as_string(t.shell_ref.controller.settings.path))
+	t.check("posture malformed preference rejects",false,controls.set_response({"crouch_mode":true}).ok)
+	t.shell_ref.controller.settings.adapter.faults.clear()
+	t.press_control("Retry Save Controls")
+	t.check("posture retry saves applied preference","hold",t.shell_ref.controller.settings.value(t.shell_ref.controller.settings.persisted,preload("res://scripts/input/binding_configuration.gd").SETTING).response.crouch_mode)
+	t.press_control("Cancel / Close Controls")
+	t.key(KEY_CTRL,true)
+	t.check("posture Hold press crouches","crouched",t.step(0.02).posture.actual)
+	t.key(KEY_CTRL,false)
+	t.check("posture Hold release stands","standing",t.step(0.02).posture.actual)
+	controls.begin()
+	controls.set_response({"crouch_mode":"toggle"})
+	controls.apply()
+	# GUI refusal does not create Toggle or Hold intent.
+	var refused := InputEventKey.new()
+	refused.physical_keycode = KEY_CTRL
+	refused.location = KEY_LOCATION_LEFT
+	refused.pressed = true
+	shell.action_input.observe(refused)
+	shell.action_input.finish_consumed(refused)
+	shell.deliver_input()
+	t.check("posture GUI refusal creates no crouch","standing",t.step(0.02).posture.actual)
+	refused.pressed = false
+	shell.action_input.observe(refused)
+	# Multiple physical contributors still produce one logical start.
+	shell.action_input.connection_changed(71,true)
+	shell.action_input.select_controller(71)
+	controls.begin()
+	controls.propose("crouch","controller",0,{"kind":"button","code":JOY_BUTTON_A})
+	if not controls.pending().is_empty(): controls.resolve_replace(true)
+	controls.apply()
+	t.key(KEY_CTRL,true)
+	t.joy_button(JOY_BUTTON_A,true)
+	t.check("posture mixed contributors toggle once","crouched",t.step(0.02).posture.actual)
+	t.key(KEY_CTRL,false)
+	t.check("posture mixed contributor remains held",true,shell.action_input.held("crouch"))
+	t.joy_button(JOY_BUTTON_A,false)
+	t.step(0.02,3)
+	t.check("posture mixed release does not retoggle","crouched",body.snapshot().physical.posture)
+	shell.pause()
+	t.check("posture menu preserves actual and selection",true,t.step(0.1).get("suspended",false) and motor.gait.crouch_selected and body.snapshot().physical.posture == "crouched")
+	shell.options()
+	t.key(KEY_CTRL,true)
+	t.key(KEY_CTRL,false)
+	t.check("posture menu does not replay crouch","standing",t.step(0.02).posture.actual)
+	controls.begin()
+	controls.propose("crouch","controller",0,{})
+	controls.apply()
+	t.check("posture ungated load reset rejected",false,motor.reset_after_load(t.scope).ok)
+	var policy := preload("res://scripts/data/ground_policy.gd")
+	var bad: Dictionary = motor.profile.duplicate(true)
+	bad.surface.crouch_height = true
+	t.check("posture raw boolean height rejected",false,policy.reason(bad).is_empty())
+	bad = motor.profile.duplicate(true)
+	bad.surface.posture_seconds = INF
+	t.check("posture raw infinite duration rejected",false,policy.reason(bad).is_empty())
+	bad = motor.profile.duplicate(true)
+	bad.surface.walk_degrees = NAN
+	t.check("posture raw nonfinite slope rejected",false,policy.reason(bad).is_empty())
+	bad = motor.profile.duplicate(true)
+	bad.surface.support_degrees = 20.0
+	t.check("posture incompatible support policy rejected",false,policy.reason(bad).is_empty())
+	var prepared: Dictionary = body.prepare_ground_posture(motor,t.scope,"standing",motor.profile.surface)
+	t.key(KEY_W,true)
+	t.step(0.02)
+	t.key(KEY_W,false)
+	var request: Dictionary = body._ground_last.request.duplicate(true)
+	request.sequence += 1
+	request.posture = prepared
+	var before_rejection: Dictionary = body.snapshot()
+	t.check("posture stale physical proposal rejected",false,body.advance_ground(motor,request).ok)
+	t.check("posture stale proposal leaves coherent pose",before_rejection,body.snapshot())
+	request.posture = body.prepare_ground_posture(motor,t.scope,"standing",motor.profile.surface)
+	request.posture.height = 0.7
+	t.check("posture changed intended shape rejected",false,body.advance_ground(motor,request).ok)
+	t.key(KEY_S,true)
+	t.step(0.02)
+	t.key(KEY_S,false)
+	t.step(0.02,12)
+	t.motor.retry_activity()

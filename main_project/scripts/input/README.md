@@ -1,3 +1,11 @@
+# IMP-012 increment-2 consumer
+
+Stock Controls now applies independent Hold/Toggle Crouch through the same
+OptionButton/Apply/Retry Save handlers. Left Ctrl and Toggle remain default.
+The input owner's continuous-action allowlist includes Crouch; admitted physical
+history preserves Hold reconciliation without manufacturing discrete presses.
+See [the movement contract](../move/POSTURE_SURFACES.md).
+
 # Action input — IMP-011 increments 1, 2 and 3
 
 IMP-012 increment 1 supplies the real [ground/gait consumer](../move/GROUND.md).

@@ -136,6 +136,9 @@ func begin(request: Dictionary) -> Dictionary:
 	viewport.add_child(root)
 	var ticket := {"serial":_serial,"request":request.duplicate(true)}
 	_stage = {"ticket":ticket,"input":input,"placements":placements,"next":0,"viewport":viewport,"root":root,"cache":{},"blocks":{},"bindings":{},"occurrences":[],"doors":{},"suppressed":{},"triangles":0,"started":started,"resource_decodes":0,"assembly":selection.assembly,"finishing":false}
+	var ground: Dictionary = registry.query("move.ground","policy","player")
+	_stage.connector_index = preload("res://scripts/data/steep_connector_policy.gd").index(ground.record.value.connectors) if ground.get("ok",false) else {}
+	_stage.connector_version = Hash.digest(_stage.connector_index)
 	_stage.support = preload("res://scripts/loc/dungeon_support.gd").new()
 	_stage.block_versions = {}
 	_stage.resource_versions = {}
@@ -295,6 +298,8 @@ func step(ticket: Dictionary) -> Dictionary:
 			geometry.node.transform = _record_pose(record,block,p,_stage.cache[resource_key])
 			binding.transform = placed.transform * geometry.node.transform
 			geometry.collision.set_meta("scoped_record",key)
+			var connector := preload("res://scripts/data/steep_connector_policy.gd").match_source(_stage.connector_index,block,record,geometry.prototype)
+			preload("res://scripts/data/steep_connector_policy.gd").attach(geometry.collision,geometry.prototype,connector,binding.transform)
 			var separate_body: bool = record.get("door_metadata",{}).get("candidate",false) or record.has("action") or record.has("unused_action") or protected_targets.has(record.id)
 			if separate_body or fixed_body == null:
 				if _stage.body_nodes.size() >= _stage.body_limit:
@@ -515,7 +520,8 @@ func finish(ticket: Dictionary) -> Dictionary:
 	var geometry_input: Dictionary = _stage.input.data.duplicate(true)
 	geometry_input.erase("context")
 	geometry_input.erase("arrivals")
-	candidate.geometry_version = Hash.digest({"layout":geometry_input,"blocks":_stage.block_versions,"resources":_stage.resource_versions,"frame":Frame.FRAME})
+	candidate.ground_surface_version = _stage.connector_version
+	candidate.geometry_version = Hash.digest({"layout":geometry_input,"blocks":_stage.block_versions,"resources":_stage.resource_versions,"ground_surfaces":_stage.connector_version,"frame":Frame.FRAME})
 	candidate.context_ready = _stage.environment != null
 	candidate.palette = _stage.palette.duplicate(true)
 	candidate.material_assets = _stage.materials.receipts()
@@ -672,6 +678,21 @@ func geometry_ray(ticket: Dictionary, from: Vector3, to: Vector3) -> Dictionary:
 	var root: Node3D = _prepared_root if _prepared.get("ticket") == ticket else _live
 	if not root.is_ancestor_of(hit.collider) or not view.bindings.has(key): return _result("foreign_geometry","Query hit geometry outside this assembly.")
 	return {"ok":true,"found":true,"position":hit.position,"normal":hit.normal,"record":view.bindings[key].identity.duplicate(true),"ticket":ticket.duplicate(true)}
+
+## Narrow synchronous physical-surface projection. No catalog copies or actor writes.
+func ground_surface(ticket: Dictionary, hit: Dictionary) -> bool:
+	var current := _view(ticket)
+	if current.is_empty() or not is_instance_valid(hit.get("collider")) or not hit.get("collider") is StaticBody3D: return false
+	if typeof(hit.get("shape")) != TYPE_INT or typeof(hit.get("face_index",-1)) != TYPE_INT or not hit.get("position") is Vector3 or not hit.get("normal") is Vector3: return false
+	var body: StaticBody3D = hit.collider
+	if hit.get("rid") != body.get_rid(): return false
+	var root: Node3D = _prepared_root if _prepared.get("ticket") == ticket else _live
+	if root == null or not root.is_ancestor_of(body): return false
+	var shape_index: int = hit.get("shape",-1)
+	if shape_index < 0 or shape_index >= PhysicsServer3D.body_get_shape_count(body.get_rid()): return false
+	var shape_owner: Object = body.shape_owner_get_owner(body.shape_find_owner(shape_index))
+	if not shape_owner is CollisionShape3D or not current.bindings.has(str(shape_owner.get_meta("scoped_record",""))): return false
+	return preload("res://scripts/data/steep_connector_policy.gd").permits(shape_owner,int(hit.get("face_index",-1)),hit.get("normal",Vector3.ZERO),hit.get("position",Vector3.INF))
 
 func spatial_context(ticket: Dictionary, frame: String, position: Vector3) -> Dictionary:
 	var current := readiness(ticket)

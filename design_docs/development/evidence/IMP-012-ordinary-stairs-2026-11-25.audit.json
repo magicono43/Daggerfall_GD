@@ -1,0 +1,549 @@
+{
+  "schema": "imp012-ordinary-stairs-v1",
+  "date": "2026-11-25",
+  "status": "implemented and machine-qualified; new human stair review pending",
+  "authorization": "User requested following DFU after comparing ordinary staircase heights; no overall increment or milestone acceptance inferred.",
+  "policy": {
+    "step_up_metres": 0.5,
+    "step_up_reference": "Pinned DFU PlayerAdvanced/PlayerStandalone m_StepOffset=0.5",
+    "step_down_metres": 0.5,
+    "step_down_provenance": "Project ground-following choice for the same ordinary stairs; DFU uses controller/gravity rather than this parameter",
+    "ordinary_walk_degrees": 45,
+    "support_degrees": 80,
+    "reviewed_connector_records": 25,
+    "connector_designs": 3
+  },
+  "scope": {
+    "adapter_count": 12,
+    "ground_profile_fields": 16,
+    "gait_rule_fields": 15,
+    "source_stair_block": "block-0917/record-00028",
+    "stair_model": 67025,
+    "stair_risers": 16,
+    "source_riser_metres": 0.3,
+    "source_tread_height_span_metres": 6.1,
+    "maintained_upper_tread_threshold_metres": 6.0,
+    "stair_variants": [
+      "standing walk",
+      "standing run",
+      "standing sneak",
+      "crouched walk",
+      "crouched run",
+      "crouched sneak"
+    ],
+    "source_stair_assertions": 65,
+    "headless_assertions": 586,
+    "rendered_assertions": 587,
+    "reload_assertions": 10,
+    "human_checks_pending": 3,
+    "air_fall_implemented": false,
+    "parent_imp012_complete": false,
+    "m2_complete": false,
+    "native_save_complete": false
+  },
+  "selected_runs": [
+    {
+      "label": "headless",
+      "report": "main_project\\tests\\.runs\\verification-headless-c164cd3bfe4b4efb91edd756e20b5de7\\report.json",
+      "report_sha256": "72530521b6f6351e1eac7312eebb0bf996ecf2c4da7c989a022bc89a2558e6f2",
+      "source_archive": "main_project\\tests\\.runs\\verification-headless-c164cd3bfe4b4efb91edd756e20b5de7\\connector-executed-source.zip",
+      "source_archive_sha256": "fe65f02c8cee418ae1ef5d23ddb88af35cf8ecc57109ca833bda1b3c086e6f72",
+      "critical_sources": {
+        "scripts/move/placement_authority.gd": "d92a6921ecccf8e9e53eeb5f8a5df4794868504b1ad845071a0ddbe5d9fa5820",
+        "scripts/move/ground_coordinator.gd": "0248deefb2964bd216d0ad49342e6343889195ef4fca76ac197968e86546bddb",
+        "scripts/move/ground_gait.gd": "90e64d867f56a759a026baf80d788312a4f455cbeda697425d84a6232839ef98",
+        "scripts/rule/ground_formulas.gd": "71b24ddc3aeaeb34ca2570f3593cdf5dbb494783817f4e5113925ce81b37746a",
+        "scripts/data/ground_policy.gd": "9e3636e2eeb540e7b84ec97ee6699d70ee242b8bd37a2448dfae9dd9063011c9",
+        "scripts/data/steep_connector_policy.gd": "1abe7a3a94980aa3d982593f4dcd2d8f2abb52b0a903a225b9e79173b7108506",
+        "scripts/loc/dungeon_assembly.gd": "18637dc2436eedb8871d705e440a8c3e14f4e242166fa26f55d7d186127f0718",
+        "scripts/loc/dungeon_geometry.gd": "59ff874202f41a65f56526727a321a549c22975b1b1f494e05d5c5caa90c3e8e",
+        "content/move/ground.json": "be93ad7037d41e11078801307c90ce294b313f260b4a2dc5782ace52aaf7e861",
+        "tests/source_stair_cases.gd": "7f0d779b050ebabcd187222a01ea8bcac4d2a0c81a9fc7afe197415ba72ed95b",
+        "tests/ground_cases.gd": "813f3481885086845536287b3fb631f5816421f6f91aa0406a06794542017995",
+        "tests/ground_surface_cases.gd": "5b8b009956e519ce13c88d8c4a972ad59b2de6eae337d4bde89d16d8f0c23672",
+        "tests/ground_inventory.json": "62ef2150283826e6d16888066bc36f5c093495cf86a286ad72eb723f377d1a68"
+      },
+      "children": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-c164cd3bfe4b4efb91edd756e20b5de7\\evidence\\project\\scenario-1\\reload-result.json",
+          "sha256": "8712ad197dd5e92708c1842a1d69e57c0d5fe87f7dbeb64f0e93bbd2d856bbfe",
+          "assertions": 10,
+          "performance": {}
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-c164cd3bfe4b4efb91edd756e20b5de7\\evidence\\project\\scenario-1\\result.json",
+          "sha256": "e29098ba2af08e5b4f27094f37ce73cd2146492c5aea09986d22eb4bfe85203f",
+          "assertions": 586,
+          "performance": {
+            "capabilities_1000_usec": 15143,
+            "physics_5000_usec": 5551307,
+            "retained_intervals": 143
+          }
+        }
+      ],
+      "typed_inputs": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-c164cd3bfe4b4efb91edd756e20b5de7\\typed-inputs\\project\\scenario-1\\expected-ground-settings.bin",
+          "sha256": "609119ea846d79b058824aaa66b8615366e78686a7a83f678eca3ba002b9298b",
+          "bytes": 8436
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-c164cd3bfe4b4efb91edd756e20b5de7\\typed-inputs\\project\\scenario-1\\user\\Mods\\Ground\\connector-layout.json",
+          "sha256": "e34860af766b688abc5ece423ffcbb04184a6be06809f957643a84998ae21054",
+          "bytes": 4583
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-c164cd3bfe4b4efb91edd756e20b5de7\\typed-inputs\\project\\scenario-1\\user\\Mods\\Ground\\ground-policy.json",
+          "sha256": "23b9d122751f830162e914fd5c983b2d426f0e51a72edff63197474fdc9288d2",
+          "bytes": 129
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-c164cd3bfe4b4efb91edd756e20b5de7\\typed-inputs\\project\\scenario-1\\user\\Mods\\Ground\\mod.json",
+          "sha256": "dd127ebdd35004b66cff2179201c2e2e7370a90ec534718d251c853b22de97e3",
+          "bytes": 213
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-c164cd3bfe4b4efb91edd756e20b5de7\\typed-inputs\\project\\scenario-1\\user\\Overrides\\ground-policy.json",
+          "sha256": "31f1e2cc4b5e0d3383d06a525a8e431905697f979cb96aace2fcc59794de845d",
+          "bytes": 8770
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-c164cd3bfe4b4efb91edd756e20b5de7\\typed-inputs\\project\\scenario-1\\user\\settings\\settings.ini",
+          "sha256": "b1a98b8fe2f973e7efe3d25adf67c1aa5cabb30ee74c42ce1e4f4abdfc0e6135",
+          "bytes": 5168
+        }
+      ]
+    },
+    {
+      "label": "rendered",
+      "report": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\report.json",
+      "report_sha256": "b853c9efe0e8f47438e622a7222f21ca8d052de1973109c2b69bc7c0c041ea97",
+      "source_archive": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\connector-executed-source.zip",
+      "source_archive_sha256": "7e0ee8180fe65617e501fa1cd0d2164d17d5726fff8ceeda1e24c13f7be04b29",
+      "critical_sources": {
+        "scripts/move/placement_authority.gd": "d92a6921ecccf8e9e53eeb5f8a5df4794868504b1ad845071a0ddbe5d9fa5820",
+        "scripts/move/ground_coordinator.gd": "0248deefb2964bd216d0ad49342e6343889195ef4fca76ac197968e86546bddb",
+        "scripts/move/ground_gait.gd": "90e64d867f56a759a026baf80d788312a4f455cbeda697425d84a6232839ef98",
+        "scripts/rule/ground_formulas.gd": "71b24ddc3aeaeb34ca2570f3593cdf5dbb494783817f4e5113925ce81b37746a",
+        "scripts/data/ground_policy.gd": "9e3636e2eeb540e7b84ec97ee6699d70ee242b8bd37a2448dfae9dd9063011c9",
+        "scripts/data/steep_connector_policy.gd": "1abe7a3a94980aa3d982593f4dcd2d8f2abb52b0a903a225b9e79173b7108506",
+        "scripts/loc/dungeon_assembly.gd": "18637dc2436eedb8871d705e440a8c3e14f4e242166fa26f55d7d186127f0718",
+        "scripts/loc/dungeon_geometry.gd": "59ff874202f41a65f56526727a321a549c22975b1b1f494e05d5c5caa90c3e8e",
+        "content/move/ground.json": "be93ad7037d41e11078801307c90ce294b313f260b4a2dc5782ace52aaf7e861",
+        "tests/source_stair_cases.gd": "7f0d779b050ebabcd187222a01ea8bcac4d2a0c81a9fc7afe197415ba72ed95b",
+        "tests/ground_cases.gd": "813f3481885086845536287b3fb631f5816421f6f91aa0406a06794542017995",
+        "tests/ground_surface_cases.gd": "5b8b009956e519ce13c88d8c4a972ad59b2de6eae337d4bde89d16d8f0c23672",
+        "tests/ground_inventory.json": "62ef2150283826e6d16888066bc36f5c093495cf86a286ad72eb723f377d1a68"
+      },
+      "children": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\evidence\\project\\scenario-1\\reload-result.json",
+          "sha256": "b2789018a1b816abb47c84be9d587bd1c78f971917384ef124e75c780599064f",
+          "assertions": 10,
+          "performance": {}
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\evidence\\project\\scenario-1\\result.json",
+          "sha256": "a566657cc0357dcaba6e7ec56c63d2626149f499ac7c1379a4bd6f0ebfa22622",
+          "assertions": 587,
+          "performance": {
+            "capabilities_1000_usec": 14989,
+            "physics_5000_usec": 5643434,
+            "retained_intervals": 143
+          }
+        }
+      ],
+      "typed_inputs": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\typed-inputs\\project\\scenario-1\\expected-ground-settings.bin",
+          "sha256": "ffcd8f28faa301e8ae1cacbc35f5ab410e0ae3084409ba64fe0fb56d265365c4",
+          "bytes": 8436
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\typed-inputs\\project\\scenario-1\\human-review-source-block-0917-record-00028\\user\\Mods\\Ground\\connector-layout.json",
+          "sha256": "e34860af766b688abc5ece423ffcbb04184a6be06809f957643a84998ae21054",
+          "bytes": 4583
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\typed-inputs\\project\\scenario-1\\human-review-source-block-0917-record-00028\\user\\Mods\\Ground\\ground-policy.json",
+          "sha256": "23b9d122751f830162e914fd5c983b2d426f0e51a72edff63197474fdc9288d2",
+          "bytes": 129
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\typed-inputs\\project\\scenario-1\\human-review-source-block-0917-record-00028\\user\\Mods\\Ground\\mod.json",
+          "sha256": "dd127ebdd35004b66cff2179201c2e2e7370a90ec534718d251c853b22de97e3",
+          "bytes": 213
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\typed-inputs\\project\\scenario-1\\human-review-source-block-0917-record-00028\\user\\Overrides\\ground-policy.json",
+          "sha256": "31f1e2cc4b5e0d3383d06a525a8e431905697f979cb96aace2fcc59794de845d",
+          "bytes": 8770
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\typed-inputs\\project\\scenario-1\\human-review-source-block-0917-record-00028\\user\\settings\\settings.ini",
+          "sha256": "f18fa15ff75642b79673c3338ca906f98b1982140a7a15dffe15dfe2cdb42f38",
+          "bytes": 5195
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\typed-inputs\\project\\scenario-1\\user\\Mods\\Ground\\connector-layout.json",
+          "sha256": "e34860af766b688abc5ece423ffcbb04184a6be06809f957643a84998ae21054",
+          "bytes": 4583
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\typed-inputs\\project\\scenario-1\\user\\Mods\\Ground\\ground-policy.json",
+          "sha256": "23b9d122751f830162e914fd5c983b2d426f0e51a72edff63197474fdc9288d2",
+          "bytes": 129
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\typed-inputs\\project\\scenario-1\\user\\Mods\\Ground\\mod.json",
+          "sha256": "dd127ebdd35004b66cff2179201c2e2e7370a90ec534718d251c853b22de97e3",
+          "bytes": 213
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\typed-inputs\\project\\scenario-1\\user\\Overrides\\ground-policy.json",
+          "sha256": "31f1e2cc4b5e0d3383d06a525a8e431905697f979cb96aace2fcc59794de845d",
+          "bytes": 8770
+        },
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\typed-inputs\\project\\scenario-1\\user\\settings\\settings.ini",
+          "sha256": "b1a98b8fe2f973e7efe3d25adf67c1aa5cabb30ee74c42ce1e4f4abdfc0e6135",
+          "bytes": 5168
+        }
+      ]
+    },
+    {
+      "label": "debug",
+      "report": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\result.json",
+      "report_sha256": "7adf9b3bcf6845e3027c7372aedf8eb0347ff55bf6df6684c6f60c2181aaff01",
+      "source_archive": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\connector-executed-source.zip",
+      "source_archive_sha256": "a62c606dc4a3e1e1e03a9c46d4420ad019d7022104e86ddd7c151a52fffe1ac7",
+      "critical_sources": {
+        "scripts/move/placement_authority.gd": "d92a6921ecccf8e9e53eeb5f8a5df4794868504b1ad845071a0ddbe5d9fa5820",
+        "scripts/move/ground_coordinator.gd": "0248deefb2964bd216d0ad49342e6343889195ef4fca76ac197968e86546bddb",
+        "scripts/move/ground_gait.gd": "90e64d867f56a759a026baf80d788312a4f455cbeda697425d84a6232839ef98",
+        "scripts/rule/ground_formulas.gd": "71b24ddc3aeaeb34ca2570f3593cdf5dbb494783817f4e5113925ce81b37746a",
+        "scripts/data/ground_policy.gd": "9e3636e2eeb540e7b84ec97ee6699d70ee242b8bd37a2448dfae9dd9063011c9",
+        "scripts/data/steep_connector_policy.gd": "1abe7a3a94980aa3d982593f4dcd2d8f2abb52b0a903a225b9e79173b7108506",
+        "scripts/loc/dungeon_assembly.gd": "18637dc2436eedb8871d705e440a8c3e14f4e242166fa26f55d7d186127f0718",
+        "scripts/loc/dungeon_geometry.gd": "59ff874202f41a65f56526727a321a549c22975b1b1f494e05d5c5caa90c3e8e",
+        "content/move/ground.json": "be93ad7037d41e11078801307c90ce294b313f260b4a2dc5782ace52aaf7e861",
+        "tests/source_stair_cases.gd": "7f0d779b050ebabcd187222a01ea8bcac4d2a0c81a9fc7afe197415ba72ed95b",
+        "tests/ground_cases.gd": "813f3481885086845536287b3fb631f5816421f6f91aa0406a06794542017995",
+        "tests/ground_surface_cases.gd": "5b8b009956e519ce13c88d8c4a972ad59b2de6eae337d4bde89d16d8f0c23672",
+        "tests/ground_inventory.json": "62ef2150283826e6d16888066bc36f5c093495cf86a286ad72eb723f377d1a68"
+      },
+      "children": [
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\evidence\\build\\headless\\reload-result.json",
+          "sha256": "95715d7e561c531443745738467e847d05d5ec4cbb61fd9dd6fd58c98988e465",
+          "assertions": 10,
+          "performance": {}
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\evidence\\build\\headless\\result.json",
+          "sha256": "1028863b53ab07eeed6a3d61829653319b9e452811e3955b4e42eff8ebcfad8e",
+          "assertions": 586,
+          "performance": {
+            "capabilities_1000_usec": 14924,
+            "physics_5000_usec": 5562765,
+            "retained_intervals": 143
+          }
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\evidence\\build\\rendered\\reload-result.json",
+          "sha256": "1cd13bae808b5942e4260ca7c7085b50e662dd4e0a2b4616a71c564452d4f7d6",
+          "assertions": 10,
+          "performance": {}
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\evidence\\build\\rendered\\result.json",
+          "sha256": "c5278a62322b4ecac8c93d53e50c53843127651a140854911de587ca525240f3",
+          "assertions": 587,
+          "performance": {
+            "capabilities_1000_usec": 14926,
+            "physics_5000_usec": 5588130,
+            "retained_intervals": 143
+          }
+        }
+      ],
+      "typed_inputs": [
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\headless\\expected-ground-settings.bin",
+          "sha256": "02a8b2b44692ebc5083c7ee749d3ddc1342f4b55d886dce15d42ee1c3604e250",
+          "bytes": 8416
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\headless\\user\\Mods\\Ground\\connector-layout.json",
+          "sha256": "e34860af766b688abc5ece423ffcbb04184a6be06809f957643a84998ae21054",
+          "bytes": 4583
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\headless\\user\\Mods\\Ground\\ground-policy.json",
+          "sha256": "23b9d122751f830162e914fd5c983b2d426f0e51a72edff63197474fdc9288d2",
+          "bytes": 129
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\headless\\user\\Mods\\Ground\\mod.json",
+          "sha256": "dd127ebdd35004b66cff2179201c2e2e7370a90ec534718d251c853b22de97e3",
+          "bytes": 213
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\headless\\user\\Overrides\\ground-policy.json",
+          "sha256": "31f1e2cc4b5e0d3383d06a525a8e431905697f979cb96aace2fcc59794de845d",
+          "bytes": 8770
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\headless\\user\\settings\\settings.ini",
+          "sha256": "b1a98b8fe2f973e7efe3d25adf67c1aa5cabb30ee74c42ce1e4f4abdfc0e6135",
+          "bytes": 5168
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\rendered\\expected-ground-settings.bin",
+          "sha256": "9a59060ac519c089b9813e753fdeb9433735c2a18152884ba1b3fe62960e237f",
+          "bytes": 8416
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\rendered\\user\\Mods\\Ground\\connector-layout.json",
+          "sha256": "e34860af766b688abc5ece423ffcbb04184a6be06809f957643a84998ae21054",
+          "bytes": 4583
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\rendered\\user\\Mods\\Ground\\ground-policy.json",
+          "sha256": "23b9d122751f830162e914fd5c983b2d426f0e51a72edff63197474fdc9288d2",
+          "bytes": 129
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\rendered\\user\\Mods\\Ground\\mod.json",
+          "sha256": "dd127ebdd35004b66cff2179201c2e2e7370a90ec534718d251c853b22de97e3",
+          "bytes": 213
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\rendered\\user\\Overrides\\ground-policy.json",
+          "sha256": "31f1e2cc4b5e0d3383d06a525a8e431905697f979cb96aace2fcc59794de845d",
+          "bytes": 8770
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-26edd27a60334db580742290d1690333\\typed-inputs\\build\\rendered\\user\\settings\\settings.ini",
+          "sha256": "b1a98b8fe2f973e7efe3d25adf67c1aa5cabb30ee74c42ce1e4f4abdfc0e6135",
+          "bytes": 5168
+        }
+      ]
+    },
+    {
+      "label": "release",
+      "report": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\result.json",
+      "report_sha256": "ff98c43b41b46d7cef60172911172d5bf47752cacf36e7c711bac0a20f7dcc53",
+      "source_archive": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\connector-executed-source.zip",
+      "source_archive_sha256": "ef7864987ae474b0b5d16488dbb192f6e1b9516a862ae599db2ab3641f8f0360",
+      "critical_sources": {
+        "scripts/move/placement_authority.gd": "d92a6921ecccf8e9e53eeb5f8a5df4794868504b1ad845071a0ddbe5d9fa5820",
+        "scripts/move/ground_coordinator.gd": "0248deefb2964bd216d0ad49342e6343889195ef4fca76ac197968e86546bddb",
+        "scripts/move/ground_gait.gd": "90e64d867f56a759a026baf80d788312a4f455cbeda697425d84a6232839ef98",
+        "scripts/rule/ground_formulas.gd": "71b24ddc3aeaeb34ca2570f3593cdf5dbb494783817f4e5113925ce81b37746a",
+        "scripts/data/ground_policy.gd": "9e3636e2eeb540e7b84ec97ee6699d70ee242b8bd37a2448dfae9dd9063011c9",
+        "scripts/data/steep_connector_policy.gd": "1abe7a3a94980aa3d982593f4dcd2d8f2abb52b0a903a225b9e79173b7108506",
+        "scripts/loc/dungeon_assembly.gd": "18637dc2436eedb8871d705e440a8c3e14f4e242166fa26f55d7d186127f0718",
+        "scripts/loc/dungeon_geometry.gd": "59ff874202f41a65f56526727a321a549c22975b1b1f494e05d5c5caa90c3e8e",
+        "content/move/ground.json": "be93ad7037d41e11078801307c90ce294b313f260b4a2dc5782ace52aaf7e861",
+        "tests/source_stair_cases.gd": "7f0d779b050ebabcd187222a01ea8bcac4d2a0c81a9fc7afe197415ba72ed95b",
+        "tests/ground_cases.gd": "813f3481885086845536287b3fb631f5816421f6f91aa0406a06794542017995",
+        "tests/ground_surface_cases.gd": "5b8b009956e519ce13c88d8c4a972ad59b2de6eae337d4bde89d16d8f0c23672",
+        "tests/ground_inventory.json": "62ef2150283826e6d16888066bc36f5c093495cf86a286ad72eb723f377d1a68"
+      },
+      "children": [
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\evidence\\build\\headless\\reload-result.json",
+          "sha256": "f8f014c9cc2c6949c9d7cdfd29c35b5e9090280227e26db8354769e6f5347f79",
+          "assertions": 10,
+          "performance": {}
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\evidence\\build\\headless\\result.json",
+          "sha256": "5ba1d4f07714b50dc64a328bc81e53d8b68a7828ba27f833471544d3d0b517f0",
+          "assertions": 586,
+          "performance": {
+            "capabilities_1000_usec": 13034,
+            "physics_5000_usec": 4923717,
+            "retained_intervals": 143
+          }
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\evidence\\build\\rendered\\reload-result.json",
+          "sha256": "4480c4f9003f84b787b69702b143d3d4513b24aecee644d0c99beb44d9c5b2db",
+          "assertions": 10,
+          "performance": {}
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\evidence\\build\\rendered\\result.json",
+          "sha256": "f8fd86b6bda8ec7b4f32688ad3473fced7a3468c2c6812defc60f5a1994eac7f",
+          "assertions": 587,
+          "performance": {
+            "capabilities_1000_usec": 13384,
+            "physics_5000_usec": 5058633,
+            "retained_intervals": 143
+          }
+        }
+      ],
+      "typed_inputs": [
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\headless\\expected-ground-settings.bin",
+          "sha256": "64ff5535438a7ba0227c859cdb2174037b4ffed5df8d636d4d206724aff7a4b3",
+          "bytes": 8416
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\headless\\user\\Mods\\Ground\\connector-layout.json",
+          "sha256": "e34860af766b688abc5ece423ffcbb04184a6be06809f957643a84998ae21054",
+          "bytes": 4583
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\headless\\user\\Mods\\Ground\\ground-policy.json",
+          "sha256": "23b9d122751f830162e914fd5c983b2d426f0e51a72edff63197474fdc9288d2",
+          "bytes": 129
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\headless\\user\\Mods\\Ground\\mod.json",
+          "sha256": "dd127ebdd35004b66cff2179201c2e2e7370a90ec534718d251c853b22de97e3",
+          "bytes": 213
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\headless\\user\\Overrides\\ground-policy.json",
+          "sha256": "31f1e2cc4b5e0d3383d06a525a8e431905697f979cb96aace2fcc59794de845d",
+          "bytes": 8770
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\headless\\user\\settings\\settings.ini",
+          "sha256": "b1a98b8fe2f973e7efe3d25adf67c1aa5cabb30ee74c42ce1e4f4abdfc0e6135",
+          "bytes": 5168
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\rendered\\expected-ground-settings.bin",
+          "sha256": "bc93d323c3f5736b83175fced9c88e2e3d3477c22e618c7b6cbaeb0c4aac3f99",
+          "bytes": 8416
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\rendered\\user\\Mods\\Ground\\connector-layout.json",
+          "sha256": "e34860af766b688abc5ece423ffcbb04184a6be06809f957643a84998ae21054",
+          "bytes": 4583
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\rendered\\user\\Mods\\Ground\\ground-policy.json",
+          "sha256": "23b9d122751f830162e914fd5c983b2d426f0e51a72edff63197474fdc9288d2",
+          "bytes": 129
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\rendered\\user\\Mods\\Ground\\mod.json",
+          "sha256": "dd127ebdd35004b66cff2179201c2e2e7370a90ec534718d251c853b22de97e3",
+          "bytes": 213
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\rendered\\user\\Overrides\\ground-policy.json",
+          "sha256": "31f1e2cc4b5e0d3383d06a525a8e431905697f979cb96aace2fcc59794de845d",
+          "bytes": 8770
+        },
+        {
+          "path": "main_project\\tests\\.runs\\export-28bacc1d4a8641d5ac69230d9325deba\\typed-inputs\\build\\rendered\\user\\settings\\settings.ini",
+          "sha256": "b1a98b8fe2f973e7efe3d25adf67c1aa5cabb30ee74c42ce1e4f4abdfc0e6135",
+          "bytes": 5168
+        }
+      ]
+    }
+  ],
+  "launcher_smoke": {
+    "path": "main_project\\tests\\.runs\\verification-rendered-717a957a43c5424d8d6c5bcb88aac020\\evidence\\project\\scenario-1\\human-review-source-block-0917-record-00028\\result.json",
+    "sha256": "e6b07604cb318301df9e9a6edc8ae88aa1a096213c1ce103799a577c76419d3a",
+    "assertions": 15,
+    "frames": 60,
+    "human_pass": false
+  },
+  "selected_assertions": 3594,
+  "cleanup": {
+    "journal": "main_project\\tests\\.runs\\dungeon-cleanup-e8be07008fcf48a8bfb32ff69721d229.json",
+    "journal_sha256": "ce45fb00701a8114e5684b99eb413de2d8afb6342169d75937a2de3eeda9dfa7",
+    "unique_owned_roots": 10,
+    "removed_files": 16729,
+    "removed_bytes": 3065487507,
+    "retained_child_evidence": 138,
+    "retained_player_logs": 32,
+    "pre_cleanup_logical_bytes": 7237018321,
+    "post_cleanup_logical_bytes": 4180061408,
+    "post_cleanup_files": 85267,
+    "reparse_points_skipped": [],
+    "task_payloads_remaining": 0,
+    "engine_count_at_cleanup": 0,
+    "hash_verified": true,
+    "threshold_review": "Pre-cleanup retention below 8 GiB; remaining retention above 2 GiB includes earlier accepted evidence and protected other-task human review projects. Those roots and unique inputs were preserved."
+  },
+  "changed_file_hashes": {
+    "design_docs/design/GAMEPLAY_DECISIONS.md": "6edd626daa2d60c3569885af773cf697a111c3e05b8eee6d749eac6b1f6685a4",
+    "design_docs/development/IMPLEMENTATION_READINESS.md": "04c5b776fb2f40e607ad7a598eed72c2a113b358d7ab0a6781605e4fff011e6e",
+    "design_docs/development/RUN_ARTIFACT_CLEANUP.md": "c374fd0e96c1082c04cc8107f6f40b020951b677d3186cfb3aa5d08927e0249f",
+    "design_docs/development/TASK_BACKLOG.md": "0de17037d934dc086beada3c3a7b6adb0686ec01c08266b1866bc67e06e9f9f1",
+    "design_docs/development/evidence/IMP-012-INCREMENT-2-REVIEW-2026-11-24.md": "0e63eab515abeff0d306eeffcd9a2a90def970b94c63855e91e36aad98ecf0ba",
+    "design_docs/development/evidence/IMP-012-ORDINARY-STAIRS-REVIEW-2026-11-25.md": "486e0c6638c0cfce6bd1609b8fd0536600052a4d66a69e80a552bb176ecb006c",
+    "design_docs/development/evidence/IMP-012-STEEP-CONNECTORS-REVIEW-2026-11-25.md": "b74c5c0a1f7ee1c7fdfb9cefe7836694bced6749a4e9af9947a69e50f458b367",
+    "design_docs/development/evidence/IMP-012-STEEP-RAMP-LIST-2026-11-24.md": "b72aa3a1d9ce4a81260edefd52661527146cb12ca1129bdc1482c43b25e6f52f",
+    "design_docs/development/evidence/IMP-012-increment-2-2026-11-24.audit.json": "9f1b86d3e0167ec46bd0c20ef3c0d47ea1dd17425d68be9025497fcc77c8bcc0",
+    "design_docs/development/evidence/IMP-012-increment-2-2026-11-24.md": "8c671f6f3d8c4b73967dcdf5addc2c97a529a5f704411c0223ce825547a8c440",
+    "design_docs/development/evidence/IMP-012-increment-2-connectors-2026-11-24.json": "5abf7c967f04f697fb49d40bbd6fcd577ba3c487859af6e1b1ee2e3e869ae5ee",
+    "design_docs/development/evidence/IMP-012-ordinary-stairs-2026-11-25.md": "35520fc19fe4a0b147ef165324ca856b54d37865bb1c4ce7b95648693ada4283",
+    "design_docs/development/evidence/IMP-012-steep-connectors-2026-11-25.audit.json": "aad3aa276dc9b29a50a625e32d2e298d2eaca6b497989999c8bab06332bc3479",
+    "design_docs/development/evidence/IMP-012-steep-connectors-2026-11-25.md": "a1d0842925d6425b40c96d1bf6232efc53ef5d89980ba9ad0561c0b11693e4e0",
+    "design_docs/development/evidence/IMP-012-steep-ramp-source-followup-2026-11-25.json": "960731f2885d4abfabefb32fbe74830e91366174f980aa80c380106f1c194c01",
+    "design_docs/development/evidence/IMP-012-steep-ramp-source-list-2026-11-24.audit.json": "9e1851758f8792d8f2fef4729467ae627fe5c5f1689ab8cd2d23a83fd151b77a",
+    "design_docs/development/evidence/IMP-012-steep-ramp-source-list-2026-11-24.json": "86d249ad64a2323d096ffeca570e65bfaafb21e72df4be4eaca890afe2c420e4",
+    "design_docs/development/evidence/IMP-012-steep-ramp-source-list-2026-11-24.png": "be82a92161658baaff2582496e02bc30b1cd26eab8f5ff0158dcb5105103a4cb",
+    "design_docs/development/tasks/IMP-012.md": "7e590f0307f9479952efdd33593662a88266d3ce054e7471d5ac30fb5b39f2ee",
+    "main_project/content/move/ground.json": "be93ad7037d41e11078801307c90ce294b313f260b4a2dc5782ace52aaf7e861",
+    "main_project/scripts/data/ground_policy.gd": "9e3636e2eeb540e7b84ec97ee6699d70ee242b8bd37a2448dfae9dd9063011c9",
+    "main_project/scripts/data/steep_connector_policy.gd": "1abe7a3a94980aa3d982593f4dcd2d8f2abb52b0a903a225b9e79173b7108506",
+    "main_project/scripts/data/steep_connector_policy.gd.uid": "9b123e6be9e428eff864110a15990caf164261d657619df640c632fdba2b5819",
+    "main_project/scripts/input/README.md": "db5e776eb559fd197b898214c99f06f51d4f7f554ca5175eda53397078a1d325",
+    "main_project/scripts/input/VIEW_CURSOR.md": "09a7f902cec629cb9a490f4695c5f05b9da099907c55f533863a5ce8026021e1",
+    "main_project/scripts/input/action_input.gd": "41ab061be1aff912c9b6ea4b96388a6bb3e6c10827f80ef61af6820bb12ac9d9",
+    "main_project/scripts/input/binding_configuration.gd": "5f21f565a49dddd5a7dd293bcc4b442362003a2245f752481010a23cfd62b2bb",
+    "main_project/scripts/input/view_cursor.gd": "c1e72ff2ceebf3b1490baeefad3492d60f90b7125e1e8edac0d7945246117413",
+    "main_project/scripts/loc/dungeon_assembly.gd": "18637dc2436eedb8871d705e440a8c3e14f4e242166fa26f55d7d186127f0718",
+    "main_project/scripts/loc/dungeon_geometry.gd": "59ff874202f41a65f56526727a321a549c22975b1b1f494e05d5c5caa90c3e8e",
+    "main_project/scripts/move/GROUND.md": "cd4901e25016fad08da7996db3bb275ec6440007fef42e789f3f36fd122da97c",
+    "main_project/scripts/move/PLACEMENT.md": "f7eb356690f6a1f2c64d0122871754868ef52edaa9f69e90ff9fbf311a94e49f",
+    "main_project/scripts/move/POSTURE_SURFACES.md": "431102e17e00cd84f861d808bb06262014a6b44553c28cd4a8b9f52c690dea22",
+    "main_project/scripts/move/ground_coordinator.gd": "0248deefb2964bd216d0ad49342e6343889195ef4fca76ac197968e86546bddb",
+    "main_project/scripts/move/ground_gait.gd": "90e64d867f56a759a026baf80d788312a4f455cbeda697425d84a6232839ef98",
+    "main_project/scripts/move/placement_authority.gd": "d92a6921ecccf8e9e53eeb5f8a5df4794868504b1ad845071a0ddbe5d9fa5820",
+    "main_project/scripts/rule/ground_formulas.gd": "71b24ddc3aeaeb34ca2570f3593cdf5dbb494783817f4e5113925ce81b37746a",
+    "main_project/scripts/session/session_shell.gd": "a76d311d2e6afad07e53942a52c44666f029d4c6f91aa4df74cd3d19daca33ba",
+    "main_project/tests/connector_cases.gd": "b4dcc940d79df4dbb8470eece411f91eeacf6b3d013d6d1f76626f2b3d679100",
+    "main_project/tests/connector_cases.gd.uid": "88b829ea517bad5c02fae69f48198bdb950986d36a46a0ff838b706f76722c01",
+    "main_project/tests/connector_course.gd": "cc9c6b081c444d4e12674fc6ea4088eb9283abc599bbf1d6431607404694552a",
+    "main_project/tests/connector_course.gd.uid": "33ef589c7cc2ee21c3d11e3d561f3f7ce14d26eb561d7c431f53bfc906e44fc1",
+    "main_project/tests/connector_placement_cases.gd": "31864f08764c925361b3c585307f6cd4d49f9625dca6419ddba1c19b273b6ea7",
+    "main_project/tests/connector_placement_cases.gd.uid": "2774ced1d12b450a999402b78aa6048010ab081faf63d414034159202a45a633",
+    "main_project/tests/connector_source_observation.json": "f7f9adb45515646b118bc482d76aeadc21886263a668e23de915f4018a3fd66f",
+    "main_project/tests/ground_cases.gd": "813f3481885086845536287b3fb631f5816421f6f91aa0406a06794542017995",
+    "main_project/tests/ground_course.gd": "a03e94c5268ed281484e83ae09ef9b8b5b531ba1b3c3c7714393d00d2bd70c00",
+    "main_project/tests/ground_inventory.json": "62ef2150283826e6d16888066bc36f5c093495cf86a286ad72eb723f377d1a68",
+    "main_project/tests/ground_posture_cases.gd": "85e1eddb059c08a4e3dcdfbe80fe4ce5c1b449af7615e261b06e1da300dd0e50",
+    "main_project/tests/ground_posture_cases.gd.uid": "7a2555b393bb5db4dc2e1cb1cd2bc75a942db2edbb32206e11968a10d6788d30",
+    "main_project/tests/ground_reload.gd": "d38aaeb5093fd5a987fa6b77db961e4ff8262d7f52aebe209abd49deb28580b5",
+    "main_project/tests/ground_review.gd": "69ce1f828610fdf2ee3ca4125cadc5a96c6d4cd637d06da1138b94c5068376e5",
+    "main_project/tests/ground_surface_cases.gd": "5b8b009956e519ce13c88d8c4a972ad59b2de6eae337d4bde89d16d8f0c23672",
+    "main_project/tests/ground_surface_cases.gd.uid": "3b70efe594a14edcf6fdd8ef460a0b4f72b529a714d07a01203690a9ff652abe",
+    "main_project/tests/source_stair_cases.gd": "7f0d779b050ebabcd187222a01ea8bcac4d2a0c81a9fc7afe197415ba72ed95b",
+    "main_project/tests/source_stair_cases.gd.uid": "d7d24ae53ba67bf9424ac84011e9ff8db44edbfd586203b31636e4361e2c5108",
+    "main_project/tools/ground_fixture.ps1": "b63635b217f9442e07fd33b1055ebc8229af9c0528d6bcd3cea973e15aa7e9d9",
+    "main_project/tools/observe_ground_connectors.py": "8026d0f68e46425f6691cac903a46e8fc9a65306f8bc21adb3a308eb2c03e824",
+    "main_project/tools/observe_steep_ramp_list.py": "823c6bada108306a9f0366b5d06b0be1235b03826f0e871b69ac76250c5a2ccb",
+    "main_project/tools/review_ground.ps1": "0aed0dc58621a5e1e758868162d197f610c7a4a27a7b5dd94ae11bf239619559",
+    "main_project/tools/verify.ps1": "e95acc16d6a25595b54dec51281f4b4d14fd9d0027762258b05bca7d19cb32c0",
+    "main_project/tools/verify_ground_matrix.ps1": "17eb64523e3588a6a496937e9916386bd78c8e0e6b69c94950ed7ed30d1df01f",
+    "main_project/tools/verify_startup_export.ps1": "acd661bc0c2eb65cbdc16c78509604c98b78b2a477f39e7c2bf9b6765b2f949b"
+  },
+  "development_notes": [
+    "Initial authored fixtures and source-entry IDs were corrected; failed/partial/development runs are excluded. One intermediate run passed its assertions but its inventory changed during verification; that run is explicitly not selected.",
+    "Full source-stair descent exposed a rounded lower-cap contact beyond 80 degrees. Terrain angles remain checked by actual floor rays; the cap contact additionally requires point geometry and an upward tread witness.",
+    "First debug rendered startup ended without a result. A repeat using the same exported code passed 587 checks but had non-isolated shader-cache diagnostics, so it is not selected. Initial cause is not conclusively localized. Ground exports now match the maintained 1800-frame allowance and record child process exits/result presence; fresh debug/release checks passed independently.",
+    "The failed development project was reused for focused probes; its last debug source and compact outputs are retained without claiming exact snapshots of every earlier probe or counting them as acceptance.",
+    "The earlier ramp/human and machine audits retain their historical checkpoint values. This audit supersedes current stair tuning/contact qualification only; full assembled routes and named real-provider/SAVE gates remain open.",
+    "No source data/reference material, native adapter/library/toolchain, git history or external application state was deliberately changed. All changes remain uncommitted."
+  ]
+}

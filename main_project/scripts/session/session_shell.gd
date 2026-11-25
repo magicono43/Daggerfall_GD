@@ -200,7 +200,7 @@ func synchronize_startup() -> void:
 		ground = preload("res://scripts/move/ground_coordinator.gd").new(core,action_input,view,placement)
 		host.controller.controls.attach(ground)
 		ground.committed.connect(func(result: Dictionary):
-			view_camera.position = result.position
+			view_camera.position = result.get("view_position",result.position)
 			if not _ground_message.is_empty() and ground.reason.is_empty() and message == _ground_message:
 				message = ""
 				_ground_message = ""
@@ -212,7 +212,7 @@ func synchronize_startup() -> void:
 			schedule_render())
 		placement.pose_committed.connect(func(state: Dictionary):
 			view.place_facing(state.session,{"version":1,"yaw":rad_to_deg(atan2(state.forward.x,-state.forward.z)),"pitch":0.0})
-			view_camera.position = state.position
+			view_camera.position = ground.placement_view_position(state)
 			view_camera.reset_physics_interpolation())
 	if host.controller.providers.get("media") != null and music_playback == null:
 		music_playback = preload("res://scripts/av/music_playback.gd").new()

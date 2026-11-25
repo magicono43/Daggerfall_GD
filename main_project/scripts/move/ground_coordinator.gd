@@ -19,6 +19,7 @@ var _restriction_identity := ""
 var _trait_snapshot: Dictionary = {}
 var _restriction_snapshot: Dictionary = {}
 var profile: Dictionary = {}
+var _gait_profile: Dictionary = {}
 var _content := -1
 var _sequence := 0
 var _pending: Dictionary = {}
@@ -32,6 +33,9 @@ var _hold := 0
 var _busy := false
 var last: Dictionary = {}
 var _formula_operation: Dictionary = {}
+var _view_height := NAN
+var _view_base_y := NAN
+var _physical_base_y := NAN
 var reason := "Ground interval/traits/restriction providers unavailable."
 
 func _init(lifecycle: SessionLifecycle, actions: RefCounted, facing: RefCounted, body: Node3D) -> void:
@@ -47,13 +51,36 @@ func _init(lifecycle: SessionLifecycle, actions: RefCounted, facing: RefCounted,
 func _placed(state: Dictionary) -> void:
 	# Placement reset is independent of ordinary input suspension.
 	_sequence = 0
+	_view_height = NAN
+	_view_base_y = NAN
+	_physical_base_y = NAN
 	if gait._scope != state.session: gait.reset(state.session)
+	gait.crouch_selected = state.get("desired_posture",state.physical.posture) == "crouched"
+## Placement resets the legitimate eye origin, not an old transition history.
+func placement_view_position(state: Dictionary) -> Vector3:
+	if profile.is_empty() or state.session != scope: return state.position
+	var tuning: Dictionary = profile.surface
+	var eye: float = tuning.crouched_eye if state.physical.posture == "crouched" else tuning.standing_eye
+	if tuning.camera_radius >= state.shape.radius or eye+tuning.camera_radius >= state.shape.height: return state.position
+	_view_height = eye
+	_view_base_y = state.position.y-state.shape.height*0.5
+	_physical_base_y = _view_base_y
+	return Vector3(state.position.x,_view_base_y+eye,state.position.z)
+
 func can_configure(candidate: Dictionary) -> bool: return gait.can_configure(candidate)
 func configure(candidate: Dictionary) -> bool: return gait.configure(candidate)
-func edge(value: Dictionary) -> bool: return gait.edge(value,input)
+func edge(value: Dictionary) -> bool:
+	if _busy: return value.get("action") in ["run","sneak","autorun","crouch"]
+	return gait.edge(value,input)
 func reset_after_load(session: String) -> Dictionary:
 	if _busy or not _pending.is_empty() or not _after_pending.is_empty() or session != scope or core.snapshot().session != session or core.snapshot().phase != "initializing": return {"ok":false,"reason":"Gated current load initialization with settled activity required."}
+	input.invalidate("ground load boundary")
+	var desired: String = placement.snapshot().get("desired_posture","standing")
 	gait.reset(session)
+	gait.crouch_selected = desired == "crouched"
+	_view_height = NAN
+	_view_base_y = NAN
+	_physical_base_y = NAN
 	return {"ok":true,"native_save_ready":false}
 func service_binding(session: String) -> Dictionary:
 	return {"role":"ground_motion","owner":"MOVE","lifetime":"session","required":true,"ready":session == scope,"provider":self,"formula_hooks":["move.ground-speed"],"actor_activity":{"id":"ground-motion","roles":["motion"]}}
@@ -74,6 +101,9 @@ func bind(session: String, player: String, clock: RefCounted, traits: RefCounted
 	var definition: Dictionary = core.actors.definitions.query("move.ground","policy","player")
 	if not definition.ok: return definition
 	profile = definition.record.value.duplicate(true)
+	_gait_profile = profile.duplicate()
+	_gait_profile.erase("connectors")
+	_gait_profile = _gait_profile.duplicate(true)
 	_content = core.actors.definitions.content_ticket()
 	scope = session
 	actor = player
@@ -204,7 +234,10 @@ func _advance(delta: float) -> Dictionary:
 	if not _trait_snapshot.is_empty() and (traits.revision < _trait_snapshot.revision or (traits.revision == _trait_snapshot.revision and traits != _trait_snapshot)): return {"ok":false,"reason":"Stale or changed same-revision trait facts."}
 	_trait_snapshot = traits.duplicate(true)
 	_restriction_snapshot = restrictions.duplicate(true)
-	var selected := gait.resolve(input,capability,profile)
+	var desired := gait.desired_posture(input)
+	var posture: Dictionary = placement.prepare_ground_posture(self,scope,desired,profile.surface)
+	if not posture.ok: return posture
+	var selected := gait.resolve(input,capability,_gait_profile,"",posture.actual)
 	if not selected.ok: return selected
 	if not capability.voluntary_allowed or not restrictions.voluntary: selected.direction = Vector2.ZERO
 	if selected.gait == "run" and restrictions.run != "allow":
@@ -212,7 +245,7 @@ func _advance(delta: float) -> Dictionary:
 		if restrictions.run == "stop": selected.direction = Vector2.ZERO
 		else:
 			# Re-resolve through gait owner to preserve independent Walk modifiers.
-			var fallback := gait.resolve(input,capability,profile,"walk")
+			var fallback := gait.resolve(input,capability,_gait_profile,"walk",posture.actual)
 			if not fallback.ok: return fallback
 			selected.gait = fallback.gait
 			selected.target_metres_per_second = fallback.target_metres_per_second
@@ -235,11 +268,12 @@ func _advance(delta: float) -> Dictionary:
 		var supplier: RefCounted = self if role == "motion" else time_owner if role == "interval" else traits_owner
 		if not core.activity_owner(scope,supplier,activity.providers[role].id,role): return {"ok":false,"reason":"Required CORE activity service binding absent: "+role}
 	if core.snapshot().session != scope or not core.gates.simulation() or core.gates.intended_rate != context.rate or core.actors.ground_capabilities(scope,actor) != capability: return {"ok":false,"reason":"Ground supplier changed capability/scope/gates/rate during preparation."}
+	if view.origin_clearance_radius() > profile.surface.camera_radius: return {"ok":false,"reason":"Camera near plane exceeds the validated posture-clearance envelope."}
 	var direction: Vector2 = selected.direction
 	var velocity: Vector3 = Vector3(direction.x,0,direction.y).rotated(Vector3.UP,deg_to_rad(-float(facing.yaw)))*selected.target_metres_per_second
 	var custody: Dictionary = core.actors.reserve_motion_activity(self,capability)
 	if not custody.ok: return custody
-	var motion: Dictionary = placement.advance_ground(self,{"session":scope,"sequence":_sequence+1,"delta":delta,"velocity":velocity,"forward":Vector3.FORWARD.rotated(Vector3.UP,deg_to_rad(-float(facing.yaw))),"placement_serial":body.serial})
+	var motion: Dictionary = placement.advance_ground(self,{"session":scope,"sequence":_sequence+1,"delta":delta,"velocity":velocity,"forward":Vector3.FORWARD.rotated(Vector3.UP,deg_to_rad(-float(facing.yaw))),"placement_serial":body.serial,"posture":posture})
 	if not motion.ok:
 		if _pending.is_empty(): core.actors.release_motion_activity(self,scope,actor)
 		return motion
@@ -267,6 +301,7 @@ func _advance(delta: float) -> Dictionary:
 	else:
 		_pending = activity.duplicate(true)
 		_proof = activity.duplicate(true)
+	_present_origin(motion,delta)
 	motion.gait = selected.duplicate(true)
 	motion.activity_operation = activity.operation
 	motion.activity = {"ok":true,"phase":"performed-awaiting-boundary","operation":activity.operation}
@@ -282,8 +317,32 @@ func _advance(delta: float) -> Dictionary:
 	var preview: Dictionary = core.actors.preview_ground_activity(self,_pending)
 	if not preview.ok: _stop("Performed ground prediction requires recovery: "+str(preview.get("reason","unavailable")))
 	else: _must_settle = preview.settle
-	if motion.get("handoff_pending",false): _stop("Ground sliding exit requires later air/surface handoff.")
+	if motion.get("handoff_pending",false): _stop("Ground support exit requires increment-3 air handoff; performed activity retained.")
 	return motion
+
+## Physical commitment precedes presentation. Smoothing uses eligible simulated
+## delta only. A blocked visual path snaps; it cannot move the body or facing.
+func _present_origin(motion: Dictionary, delta: float) -> void:
+	var tuning: Dictionary = profile.surface
+	var target_height: float = tuning.crouched_eye if motion.posture.actual == "crouched" else tuning.standing_eye
+	var base_y: float = motion.base.y
+	if is_nan(_view_height): _view_height = target_height
+	if is_nan(_view_base_y): _view_base_y = base_y
+	if is_nan(_physical_base_y): _physical_base_y = base_y
+	_view_base_y += base_y-_physical_base_y-motion.get("stair_correction",0.0)
+	_physical_base_y = base_y
+	_view_base_y = clampf(_view_base_y,base_y-tuning.step_up,base_y+tuning.step_down)
+	_view_height = move_toward(_view_height,target_height,absf(tuning.standing_eye-tuning.crouched_eye)*delta/tuning.posture_seconds)
+	_view_base_y = base_y+(_view_base_y-base_y)*exp(-delta/tuning.stair_seconds)
+	var safe := Vector3(motion.position.x,base_y+target_height,motion.position.z)
+	var visual := Vector3(motion.position.x,_view_base_y+_view_height,motion.position.z)
+	# A full enclosing-sphere route, rather than collider height, bounds the
+	# temporary visual eye. Open-room crouching can therefore remain smooth.
+	if not placement.ground_view_route(self,safe,visual,tuning.camera_radius):
+		visual = safe
+		_view_height = target_height
+		_view_base_y = base_y
+	motion.view_position = visual
 
 func retire(session: String) -> void:
 	if session != scope: return

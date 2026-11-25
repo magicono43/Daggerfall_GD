@@ -1,0 +1,1647 @@
+{
+  "schema": "ground-connector-investigation-v1",
+  "sources": {
+    "MAPS.BSA": "8b5550bfcac03b6f605842568fdbfb7cc6bbed7ace5999c33c900ad286fc24be",
+    "BLOCKS.BSA": "6f5a4c8d9401c1b00ef83eaac9b0c6c32f53cef6eaa4c7d7027deb739bde4795",
+    "ARCH3D.BSA": "a51a9e149168814c4a14dc80bb93d38f153be18dc9754be44bc9c7b25dd46a85"
+  },
+  "layout": "place-00032",
+  "name": "Ruins of Cyeghtan Manor",
+  "placements": [
+    {
+      "id": "placement-00001",
+      "block": "block-0918",
+      "name": "B0000010.RDB",
+      "sha256": "2e71589307a0d9d98ecde03becc8a480ef357325ed3b158f17a0b67187a3a211"
+    },
+    {
+      "id": "placement-00002",
+      "block": "block-0909",
+      "name": "B0000001.RDB",
+      "sha256": "77cd9c187699fb60a9f70bcaca44a9e484153273760aaa1e30d7b4574bc5a697"
+    },
+    {
+      "id": "placement-00003",
+      "block": "block-1006",
+      "name": "N0000083.RDB",
+      "sha256": "22186fee8adbca14c27caa67ffd7a0811086d8df8cc9b0de0463a605452b68e7"
+    },
+    {
+      "id": "placement-00004",
+      "block": "block-0918",
+      "name": "B0000010.RDB",
+      "sha256": "2e71589307a0d9d98ecde03becc8a480ef357325ed3b158f17a0b67187a3a211"
+    },
+    {
+      "id": "placement-00005",
+      "block": "block-0919",
+      "name": "B0000011.RDB",
+      "sha256": "5dddca5f9e0332de776539479a6fb29882ee6487d37775de23edae375dac80cf"
+    },
+    {
+      "id": "placement-00006",
+      "block": "block-1000",
+      "name": "N0000077.RDB",
+      "sha256": "2e21f86c59423cc93d3597f5d8e7d125a6b9e36aaa198e9a66df9bef4f1a41ef"
+    },
+    {
+      "id": "placement-00007",
+      "block": "block-0918",
+      "name": "B0000010.RDB",
+      "sha256": "2e71589307a0d9d98ecde03becc8a480ef357325ed3b158f17a0b67187a3a211"
+    },
+    {
+      "id": "placement-00008",
+      "block": "block-0908",
+      "name": "B0000000.RDB",
+      "sha256": "77cd9c187699fb60a9f70bcaca44a9e484153273760aaa1e30d7b4574bc5a697"
+    }
+  ],
+  "declared_connections": [
+    {
+      "id": "placement-00001-placement-00003-lower",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            1984,
+            -1281,
+            640
+          ],
+          [
+            2048,
+            -1281,
+            640
+          ]
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ],
+        "placement": "placement-00001"
+      },
+      "b": {
+        "path": [
+          [
+            64,
+            -1281,
+            640
+          ],
+          [
+            0,
+            -1281,
+            640
+          ]
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement": "placement-00003"
+      }
+    },
+    {
+      "id": "placement-00001-placement-00003-upper",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            1984,
+            -513,
+            1408
+          ],
+          [
+            2048,
+            -513,
+            1408
+          ]
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ],
+        "placement": "placement-00001"
+      },
+      "b": {
+        "path": [
+          [
+            64,
+            -513,
+            1408
+          ],
+          [
+            0,
+            -513,
+            1408
+          ]
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement": "placement-00003"
+      }
+    },
+    {
+      "id": "placement-00002-placement-00003-lower",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            640,
+            -1281,
+            1984
+          ],
+          [
+            640,
+            -1281,
+            2048
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement": "placement-00002"
+      },
+      "b": {
+        "path": [
+          [
+            640,
+            -1281,
+            64
+          ],
+          [
+            640,
+            -1281,
+            0
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "placement": "placement-00003"
+      }
+    },
+    {
+      "id": "placement-00002-placement-00003-upper",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            1408,
+            -513,
+            1984
+          ],
+          [
+            1408,
+            -513,
+            2048
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement": "placement-00002"
+      },
+      "b": {
+        "path": [
+          [
+            1408,
+            -513,
+            64
+          ],
+          [
+            1408,
+            -513,
+            0
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "placement": "placement-00003"
+      }
+    },
+    {
+      "id": "placement-00003-placement-00004-lower",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            640,
+            -1281,
+            1984
+          ],
+          [
+            640,
+            -1281,
+            2048
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement": "placement-00003"
+      },
+      "b": {
+        "path": [
+          [
+            640,
+            -1281,
+            64
+          ],
+          [
+            640,
+            -1281,
+            0
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "placement": "placement-00004"
+      }
+    },
+    {
+      "id": "placement-00003-placement-00004-upper",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            1408,
+            -513,
+            1984
+          ],
+          [
+            1408,
+            -513,
+            2048
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement": "placement-00003"
+      },
+      "b": {
+        "path": [
+          [
+            1408,
+            -513,
+            64
+          ],
+          [
+            1408,
+            -513,
+            0
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "placement": "placement-00004"
+      }
+    },
+    {
+      "id": "placement-00003-placement-00006-lower",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            1984,
+            -1281,
+            640
+          ],
+          [
+            2048,
+            -1281,
+            640
+          ]
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ],
+        "placement": "placement-00003"
+      },
+      "b": {
+        "path": [
+          [
+            64,
+            -1281,
+            640
+          ],
+          [
+            0,
+            -1281,
+            640
+          ]
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement": "placement-00006"
+      }
+    },
+    {
+      "id": "placement-00003-placement-00006-upper",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            1984,
+            -513,
+            1408
+          ],
+          [
+            2048,
+            -513,
+            1408
+          ]
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ],
+        "placement": "placement-00003"
+      },
+      "b": {
+        "path": [
+          [
+            64,
+            -513,
+            1408
+          ],
+          [
+            0,
+            -513,
+            1408
+          ]
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement": "placement-00006"
+      }
+    },
+    {
+      "id": "placement-00005-placement-00006-lower",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            640,
+            -1281,
+            1984
+          ],
+          [
+            640,
+            -1281,
+            2048
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement": "placement-00005"
+      },
+      "b": {
+        "path": [
+          [
+            640,
+            -1281,
+            64
+          ],
+          [
+            640,
+            -1281,
+            0
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "placement": "placement-00006"
+      }
+    },
+    {
+      "id": "placement-00005-placement-00006-upper",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            1408,
+            -513,
+            1984
+          ],
+          [
+            1408,
+            -513,
+            2048
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement": "placement-00005"
+      },
+      "b": {
+        "path": [
+          [
+            1408,
+            -513,
+            64
+          ],
+          [
+            1408,
+            -513,
+            0
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "placement": "placement-00006"
+      }
+    },
+    {
+      "id": "placement-00006-placement-00007-lower",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            640,
+            -1281,
+            1984
+          ],
+          [
+            640,
+            -1281,
+            2048
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement": "placement-00006"
+      },
+      "b": {
+        "path": [
+          [
+            640,
+            -1281,
+            64
+          ],
+          [
+            640,
+            -1281,
+            0
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "placement": "placement-00007"
+      }
+    },
+    {
+      "id": "placement-00006-placement-00007-upper",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            1408,
+            -513,
+            1984
+          ],
+          [
+            1408,
+            -513,
+            2048
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement": "placement-00006"
+      },
+      "b": {
+        "path": [
+          [
+            1408,
+            -513,
+            64
+          ],
+          [
+            1408,
+            -513,
+            0
+          ]
+        ],
+        "normal": [
+          0,
+          0,
+          -1
+        ],
+        "placement": "placement-00007"
+      }
+    },
+    {
+      "id": "placement-00006-placement-00008-lower",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            1984,
+            -1281,
+            640
+          ],
+          [
+            2048,
+            -1281,
+            640
+          ]
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ],
+        "placement": "placement-00006"
+      },
+      "b": {
+        "path": [
+          [
+            64,
+            -1281,
+            640
+          ],
+          [
+            0,
+            -1281,
+            640
+          ]
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement": "placement-00008"
+      }
+    },
+    {
+      "id": "placement-00006-placement-00008-upper",
+      "kind": "passage",
+      "a": {
+        "path": [
+          [
+            1984,
+            -513,
+            1408
+          ],
+          [
+            2048,
+            -513,
+            1408
+          ]
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ],
+        "placement": "placement-00006"
+      },
+      "b": {
+        "path": [
+          [
+            64,
+            -513,
+            1408
+          ],
+          [
+            0,
+            -513,
+            1408
+          ]
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement": "placement-00008"
+      }
+    }
+  ],
+  "steep_model_occurrences": [
+    {
+      "layout": "place-00032",
+      "placement": "placement-00001",
+      "block": "block-0918",
+      "block_name": "B0000010.RDB",
+      "record": "record-00006",
+      "source_address": 9859,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "bounds_metres": [
+        [
+          -49.6,
+          19.200000000000003,
+          -25.6
+        ],
+        [
+          -46.400000000000006,
+          35.2,
+          -19.200000000000003
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 6,
+          "degrees": 69.443955
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00001",
+      "block": "block-0918",
+      "block_name": "B0000010.RDB",
+      "record": "record-00026",
+      "source_address": 10648,
+      "model": 67029,
+      "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+      "bounds_metres": [
+        [
+          -32.0,
+          12.8,
+          -49.6
+        ],
+        [
+          -19.200000000000003,
+          35.2,
+          -46.400000000000006
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 6,
+          "degrees": 63.535116
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00003",
+      "block": "block-1006",
+      "block_name": "N0000083.RDB",
+      "record": "record-00007",
+      "source_address": 27797,
+      "model": 41321,
+      "model_sha256": "93207232756f91f2d041a4aeaaa287752e4e32149feafae725c6ada05974e715",
+      "bounds_metres": [
+        [
+          21.724902343750003,
+          19.2083984375,
+          -23.107421875
+        ],
+        [
+          24.424902343750002,
+          20.45791015625,
+          -21.19990234375
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 9,
+          "degrees": 65.03721
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00003",
+      "block": "block-1006",
+      "block_name": "N0000083.RDB",
+      "record": "record-00079",
+      "source_address": 29990,
+      "model": 41736,
+      "model_sha256": "e48a547d0f97b799eeeab58103109c25392da2aabee5c9e47831dea96a4f25c1",
+      "bounds_metres": [
+        [
+          32.66046210093942,
+          32.0,
+          -17.244004640818204
+        ],
+        [
+          35.59078118274444,
+          32.65,
+          -14.532324658756293
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 15,
+          "degrees": 63.582716
+        },
+        {
+          "plane": 16,
+          "degrees": 66.490738
+        },
+        {
+          "plane": 23,
+          "degrees": 45.478725
+        },
+        {
+          "plane": 25,
+          "degrees": 79.169133
+        },
+        {
+          "plane": 28,
+          "degrees": 70.634148
+        },
+        {
+          "plane": 30,
+          "degrees": 54.73561
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00003",
+      "block": "block-1006",
+      "block_name": "N0000083.RDB",
+      "record": "record-00098",
+      "source_address": 26737,
+      "model": 41123,
+      "model_sha256": "322f64520599ce05b1c2a31c56a7eeab552f0002b871232a6738bebc8700b744",
+      "bounds_metres": [
+        [
+          49.888671875,
+          12.9,
+          -25.8625
+        ],
+        [
+          50.738671875,
+          14.875,
+          -24.7875
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 9,
+          "degrees": 56.309932
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00003",
+      "block": "block-1006",
+      "block_name": "N0000083.RDB",
+      "record": "record-00111",
+      "source_address": 23774,
+      "model": 41101,
+      "model_sha256": "a15f7e8536139ef3e8171b0d28d14f0280c284cfabd58389412bdc6b899b3a69",
+      "bounds_metres": [
+        [
+          36.8311938200502,
+          0.0111328125,
+          -14.24103870322437
+        ],
+        [
+          37.75043263559271,
+          1.3861328125,
+          -13.304122218152195
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 0,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 1,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 3,
+          "degrees": 79.655143
+        },
+        {
+          "plane": 4,
+          "degrees": 77.830336
+        },
+        {
+          "plane": 5,
+          "degrees": 78.953697
+        },
+        {
+          "plane": 6,
+          "degrees": 79.644447
+        },
+        {
+          "plane": 7,
+          "degrees": 80.316602
+        },
+        {
+          "plane": 11,
+          "degrees": 56.309932
+        },
+        {
+          "plane": 12,
+          "degrees": 71.565051
+        },
+        {
+          "plane": 13,
+          "degrees": 56.309932
+        },
+        {
+          "plane": 14,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 15,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 17,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 18,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 20,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 21,
+          "degrees": 78.733972
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00003",
+      "block": "block-1006",
+      "block_name": "N0000083.RDB",
+      "record": "record-00112",
+      "source_address": 23703,
+      "model": 41101,
+      "model_sha256": "a15f7e8536139ef3e8171b0d28d14f0280c284cfabd58389412bdc6b899b3a69",
+      "bounds_metres": [
+        [
+          38.93049882631334,
+          0.029277988522675137,
+          -15.213966357548717
+        ],
+        [
+          39.874474071008564,
+          1.411169262657706,
+          -14.370447631136713
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 0,
+          "degrees": 77.75986
+        },
+        {
+          "plane": 1,
+          "degrees": 78.332033
+        },
+        {
+          "plane": 3,
+          "degrees": 79.253065
+        },
+        {
+          "plane": 4,
+          "degrees": 76.775749
+        },
+        {
+          "plane": 5,
+          "degrees": 77.979579
+        },
+        {
+          "plane": 6,
+          "degrees": 80.5494
+        },
+        {
+          "plane": 7,
+          "degrees": 81.29124
+        },
+        {
+          "plane": 11,
+          "degrees": 55.91189
+        },
+        {
+          "plane": 12,
+          "degrees": 72.539919
+        },
+        {
+          "plane": 13,
+          "degrees": 55.336495
+        },
+        {
+          "plane": 14,
+          "degrees": 78.332033
+        },
+        {
+          "plane": 15,
+          "degrees": 79.708651
+        },
+        {
+          "plane": 17,
+          "degrees": 79.708651
+        },
+        {
+          "plane": 18,
+          "degrees": 79.139213
+        },
+        {
+          "plane": 20,
+          "degrees": 79.139213
+        },
+        {
+          "plane": 21,
+          "degrees": 77.75986
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00003",
+      "block": "block-1006",
+      "block_name": "N0000083.RDB",
+      "record": "record-00182",
+      "source_address": 24684,
+      "model": 41303,
+      "model_sha256": "4e6e71b6553d8ebfa5f9e7dcb655d1626826e46bcbc367d55527f709bf3d64d4",
+      "bounds_metres": [
+        [
+          11.160953972755378,
+          0.03857421875,
+          -42.00396033400134
+        ],
+        [
+          15.511895922231638,
+          1.4407226562500002,
+          -39.8230952274042
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 13,
+          "degrees": 49.908096
+        },
+        {
+          "plane": 14,
+          "degrees": 66.742584
+        },
+        {
+          "plane": 17,
+          "degrees": 49.908096
+        },
+        {
+          "plane": 18,
+          "degrees": 66.742584
+        },
+        {
+          "plane": 23,
+          "degrees": 50.079608
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00004",
+      "block": "block-0918",
+      "block_name": "B0000010.RDB",
+      "record": "record-00006",
+      "source_address": 9859,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "bounds_metres": [
+        [
+          1.5999999999999996,
+          19.200000000000003,
+          -76.80000000000001
+        ],
+        [
+          4.800000000000001,
+          35.2,
+          -70.4
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 6,
+          "degrees": 69.443955
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00004",
+      "block": "block-0918",
+      "block_name": "B0000010.RDB",
+      "record": "record-00026",
+      "source_address": 10648,
+      "model": 67029,
+      "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+      "bounds_metres": [
+        [
+          19.200000000000003,
+          12.8,
+          -100.80000000000001
+        ],
+        [
+          32.0,
+          35.2,
+          -97.60000000000001
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 6,
+          "degrees": 63.535116
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00005",
+      "block": "block-0919",
+      "block_name": "B0000011.RDB",
+      "record": "record-00046",
+      "source_address": 11412,
+      "model": 61030,
+      "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+      "bounds_metres": [
+        [
+          70.4,
+          12.8,
+          1.599999999999999
+        ],
+        [
+          83.2,
+          35.2,
+          4.800000000000002
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 1,
+          "degrees": 59.727446
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00006",
+      "block": "block-1000",
+      "block_name": "N0000077.RDB",
+      "record": "record-00010",
+      "source_address": 24523,
+      "model": 41301,
+      "model_sha256": "c1e151509bbb9e7f9bd827544f93173ba94c716410aa4d32fd018861993bafbf",
+      "bounds_metres": [
+        [
+          71.64658203125,
+          19.276171875000003,
+          -24.419921875
+        ],
+        [
+          74.49648437500001,
+          22.376171875,
+          -22.822363281250002
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 6,
+          "degrees": 78.516801
+        },
+        {
+          "plane": 16,
+          "degrees": 69.8645
+        },
+        {
+          "plane": 18,
+          "degrees": 51.960418
+        },
+        {
+          "plane": 20,
+          "degrees": 75.081809
+        },
+        {
+          "plane": 25,
+          "degrees": 73.182301
+        },
+        {
+          "plane": 27,
+          "degrees": 64.103241
+        },
+        {
+          "plane": 30,
+          "degrees": 73.899653
+        },
+        {
+          "plane": 34,
+          "degrees": 57.123924
+        },
+        {
+          "plane": 35,
+          "degrees": 56.286301
+        },
+        {
+          "plane": 36,
+          "degrees": 51.698166
+        },
+        {
+          "plane": 45,
+          "degrees": 66.73882
+        },
+        {
+          "plane": 46,
+          "degrees": 83.726907
+        },
+        {
+          "plane": 47,
+          "degrees": 50.157548
+        },
+        {
+          "plane": 48,
+          "degrees": 63.252194
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00006",
+      "block": "block-1000",
+      "block_name": "N0000077.RDB",
+      "record": "record-00030",
+      "source_address": 21690,
+      "model": 41106,
+      "model_sha256": "71698dfe6a54dfdf17d092e6ba5acbeb14546d65cc2efe26be85aea6f7e1b506",
+      "bounds_metres": [
+        [
+          72.95009765625001,
+          32.05009765625,
+          -23.5
+        ],
+        [
+          73.45,
+          32.6,
+          -21.700000000000003
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 6,
+          "degrees": 84.400661
+        },
+        {
+          "plane": 9,
+          "degrees": 84.400661
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00006",
+      "block": "block-1000",
+      "block_name": "N0000077.RDB",
+      "record": "record-00086",
+      "source_address": 20572,
+      "model": 41002,
+      "model_sha256": "c2d4d3fedff65aa0e8f7a8a4b9870c717392fa8c45046035590a348a51745bc5",
+      "bounds_metres": [
+        [
+          92.44140625,
+          38.455273437500004,
+          -19.08623046875
+        ],
+        [
+          94.85283203125,
+          40.58154296875,
+          -17.75537109375
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 16,
+          "degrees": 66.037511
+        },
+        {
+          "plane": 18,
+          "degrees": 48.329244
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00006",
+      "block": "block-1000",
+      "block_name": "N0000077.RDB",
+      "record": "record-00090",
+      "source_address": 19929,
+      "model": 41101,
+      "model_sha256": "a15f7e8536139ef3e8171b0d28d14f0280c284cfabd58389412bdc6b899b3a69",
+      "bounds_metres": [
+        [
+          79.30896129677564,
+          38.436132812500006,
+          -11.475432635592714
+        ],
+        [
+          80.24587778184781,
+          39.811132812500006,
+          -10.556193820050202
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 0,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 1,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 3,
+          "degrees": 79.655143
+        },
+        {
+          "plane": 4,
+          "degrees": 77.830336
+        },
+        {
+          "plane": 5,
+          "degrees": 78.953697
+        },
+        {
+          "plane": 6,
+          "degrees": 79.644447
+        },
+        {
+          "plane": 7,
+          "degrees": 80.316602
+        },
+        {
+          "plane": 11,
+          "degrees": 56.309932
+        },
+        {
+          "plane": 12,
+          "degrees": 71.565051
+        },
+        {
+          "plane": 13,
+          "degrees": 56.309932
+        },
+        {
+          "plane": 14,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 15,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 17,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 18,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 20,
+          "degrees": 78.733972
+        },
+        {
+          "plane": 21,
+          "degrees": 78.733972
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00006",
+      "block": "block-1000",
+      "block_name": "N0000077.RDB",
+      "record": "record-00091",
+      "source_address": 19858,
+      "model": 41103,
+      "model_sha256": "3019ac1366e44b5f98b39c31869d81f486dda51af901c015a48b178f19876925",
+      "bounds_metres": [
+        [
+          78.77511445071868,
+          38.494140625,
+          -15.900706178748406
+        ],
+        [
+          79.69435326626119,
+          39.644140625000006,
+          -14.981467363205892
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 1,
+          "degrees": 56.309932
+        },
+        {
+          "plane": 2,
+          "degrees": 56.309932
+        },
+        {
+          "plane": 3,
+          "degrees": 71.565051
+        },
+        {
+          "plane": 4,
+          "degrees": 75.963757
+        },
+        {
+          "plane": 8,
+          "degrees": 79.435265
+        },
+        {
+          "plane": 9,
+          "degrees": 79.435265
+        },
+        {
+          "plane": 11,
+          "degrees": 75.963757
+        },
+        {
+          "plane": 12,
+          "degrees": 75.963757
+        },
+        {
+          "plane": 14,
+          "degrees": 79.435265
+        },
+        {
+          "plane": 15,
+          "degrees": 75.963757
+        },
+        {
+          "plane": 18,
+          "degrees": 75.963757
+        },
+        {
+          "plane": 19,
+          "degrees": 79.435265
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00006",
+      "block": "block-1000",
+      "block_name": "N0000077.RDB",
+      "record": "record-00122",
+      "source_address": 24594,
+      "model": 41303,
+      "model_sha256": "4e6e71b6553d8ebfa5f9e7dcb655d1626826e46bcbc367d55527f709bf3d64d4",
+      "bounds_metres": [
+        [
+          69.07380253616151,
+          19.313574218750002,
+          -31.09605199858251
+        ],
+        [
+          71.70043815247958,
+          20.71572265625,
+          -26.74590206988051
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 13,
+          "degrees": 49.908096
+        },
+        {
+          "plane": 14,
+          "degrees": 66.742584
+        },
+        {
+          "plane": 17,
+          "degrees": 49.908096
+        },
+        {
+          "plane": 18,
+          "degrees": 66.742584
+        },
+        {
+          "plane": 23,
+          "degrees": 50.079608
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00006",
+      "block": "block-1000",
+      "block_name": "N0000077.RDB",
+      "record": "record-00128",
+      "source_address": 22916,
+      "model": 41316,
+      "model_sha256": "742fdafb748e1148bdfd01fedc894acbcf01c31a5205bf681debb352fbc63d16",
+      "bounds_metres": [
+        [
+          65.85707457611699,
+          0.06571335288964857,
+          -27.58466796875
+        ],
+        [
+          67.25155908851266,
+          2.3317768509273877,
+          -25.99404296875
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 8,
+          "degrees": 67.5
+        },
+        {
+          "plane": 9,
+          "degrees": 67.5
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00006",
+      "block": "block-1000",
+      "block_name": "N0000077.RDB",
+      "record": "record-00133",
+      "source_address": 21619,
+      "model": 41106,
+      "model_sha256": "71698dfe6a54dfdf17d092e6ba5acbeb14546d65cc2efe26be85aea6f7e1b506",
+      "bounds_metres": [
+        [
+          72.95009765625001,
+          32.05009765625,
+          -27.5
+        ],
+        [
+          73.45,
+          32.6,
+          -25.700000000000003
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 6,
+          "degrees": 84.400661
+        },
+        {
+          "plane": 9,
+          "degrees": 84.400661
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00006",
+      "block": "block-1000",
+      "block_name": "N0000077.RDB",
+      "record": "record-00214",
+      "source_address": 20643,
+      "model": 41002,
+      "model_sha256": "c2d4d3fedff65aa0e8f7a8a4b9870c717392fa8c45046035590a348a51745bc5",
+      "bounds_metres": [
+        [
+          92.86640625000001,
+          38.455273437500004,
+          -26.93623046875
+        ],
+        [
+          95.27783203125,
+          40.58154296875,
+          -25.60537109375
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 16,
+          "degrees": 66.037511
+        },
+        {
+          "plane": 18,
+          "degrees": 48.329244
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00007",
+      "block": "block-0918",
+      "block_name": "B0000010.RDB",
+      "record": "record-00006",
+      "source_address": 9859,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "bounds_metres": [
+        [
+          52.800000000000004,
+          19.200000000000003,
+          -76.80000000000001
+        ],
+        [
+          56.0,
+          35.2,
+          -70.4
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 6,
+          "degrees": 69.443955
+        }
+      ]
+    },
+    {
+      "layout": "place-00032",
+      "placement": "placement-00007",
+      "block": "block-0918",
+      "block_name": "B0000010.RDB",
+      "record": "record-00026",
+      "source_address": 10648,
+      "model": 67029,
+      "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+      "bounds_metres": [
+        [
+          70.4,
+          12.8,
+          -100.80000000000001
+        ],
+        [
+          83.2,
+          35.2,
+          -97.60000000000001
+        ]
+      ],
+      "inclined_planes": [
+        {
+          "plane": 6,
+          "degrees": 63.535116
+        }
+      ]
+    }
+  ],
+  "qualification": "unresolved: geometric inclination and socket paths do not identify required traversal surfaces; no positive/negative semantic labels or scoped exception detector established",
+  "policy": "ordinary slope limit retained; no dungeon exemption installed",
+  "annotation_sha256": "386895efaecb1af6c9a3e89974bafaec441d16cfeb1556a09693c130b5a1f056"
+}

@@ -1,4 +1,42 @@
+**IMP-012 increment 2 accepted / increment 3 handoff, 2026-11-25:** The user explicitly accepted posture and surfaces after approving the stair-contact corrections. See [acceptance](evidence/IMP-012-INCREMENT-2-ACCEPTANCE-2026-11-25.md). Earlier human-review/increment-2 acceptance-pending text is historical and superseded. Increment 3 is authorized when its [prompt](handoffs/IMP-012-INCREMENT-3-PROMPT.txt) is issued to the destination chat; no increment-3 runtime work starts here. Increment 4, parent IMP-012, M2 and documented real-provider/native SAVE gates remain open.
+
+**IMP-012 stair-contact follow-up, 2026-11-25:** The user confirms straight ramp/
+stair travel but reports diagonal sticking and wall-adjacent false handoffs.
+Measured-normal tread sampling, enclosing-wall constraints and wall-bounded floor
+observations address these contacts without changing the 0.50 m allowance or
+collider dimensions. See [execution evidence](evidence/IMP-012-stair-contacts-2026-11-25.md)
+and the [updated re-review](evidence/IMP-012-ORDINARY-STAIRS-REVIEW-2026-11-25.md).
+Headless, rendered and Windows debug/release checks passed (4,236 selected assertions); new human contact review remains pending.
+Earlier straight-only machine/human checkpoints below retain their historical scope.
+
+**IMP-012 ordinary stairs, 2026-11-25:** At the user's request, automatic stepping
+now permits 0.50 m upward/downward following, with DFU prefab provenance for the
+upward value and explicit project provenance for downward following. Stair contact
+corrections and source-stair return regressions passed maintained headless/rendered,
+Windows debug/release and launch checks (3,594 assertions). The new three-check
+[human stair review](evidence/IMP-012-ORDINARY-STAIRS-REVIEW-2026-11-25.md) remains
+pending. See [execution evidence](evidence/IMP-012-ordinary-stairs-2026-11-25.md).
+Earlier 0.25/0.18 m tuning and the blocked-stair report below are historical;
+overall increment, parent IMP-012/M2, air/fall and native SAVE gates remain open.
+
+**IMP-012 steep corridor follow-up, 2026-11-25:** The user confirmed the three
+ramp designs and authorized placement checking. Guarded exceptions for their 25
+source records are implemented and machine-qualified; see [execution evidence](evidence/IMP-012-steep-connectors-2026-11-25.md)
+and [playable review](evidence/IMP-012-STEEP-CONNECTORS-REVIEW-2026-11-25.md).
+The user passed checks 1-5 on all three designs and confirms the source-block ramp
+works. Ordinary stairs and the return support-loss hold remain open boundaries.
+Overall increment acceptance, assembled routes, real-provider/native SAVE and
+later increments retain their distinct gates.
+Earlier list-pending statements below are historical stages.
+
 # Implementation readiness
+
+**IMP-012 increment 2 execution, 2026-11-24:** See [execution evidence](evidence/IMP-012-increment-2-2026-11-24.md). Authorized posture/surface work is
+implemented and machine-qualified in the documented controlled scope; [human review](evidence/IMP-012-INCREMENT-2-REVIEW-2026-11-24.md)
+records all eight checks PASS, reported by the user on 2026-11-24. MOVE-007-D10 selects a reviewed list for special steep dungeon ramps;
+the [concrete source list](evidence/IMP-012-STEEP-RAMP-LIST-2026-11-24.md) now proposes three corridor floors in 25 pinned source records; runtime qualification remains open. No exception, parent IMP-012/M2,
+later-increment or native SAVE completion is inferred. Accepted prerequisites and
+increment 1 remain accepted. Older handoff-only descriptions below are historical.
 
 **IMP-012 increment 1 accepted, 2026-11-24:** The user explicitly accepted the
 increment after all eight human checks passed. The

@@ -1,0 +1,1468 @@
+{
+  "schema": "reviewed-steep-ramp-source-list-v1",
+  "sources": {
+    "BLOCKS.BSA": "6f5a4c8d9401c1b00ef83eaac9b0c6c32f53cef6eaa4c7d7027deb739bde4795",
+    "ARCH3D.BSA": "a51a9e149168814c4a14dc80bb93d38f153be18dc9754be44bc9c7b25dd46a85",
+    "layouts/profile.json": "1856fd83d96f96505091b540e9c3d78ffb9e5be8b9fa96a670860770f1f86b23"
+  },
+  "candidates": [
+    {
+      "model": 61030,
+      "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+      "floor_plane": 1,
+      "geometric_angle_degrees": 59.743563,
+      "stored_normal_angle_degrees": 59.727446,
+      "width_metres": 3.2,
+      "rise_metres": 19.200000000000003,
+      "horizontal_run_metres": 11.200000000000001,
+      "floor_length_metres": 22.22791038311969,
+      "source_occurrences": 5,
+      "border_occurrences": 3,
+      "geometry": [
+        {
+          "plane": 0,
+          "points_source_metres": [
+            [
+              -1.6,
+              11.200000000000001,
+              -4.800000000000001
+            ],
+            [
+              -1.6,
+              -8.0,
+              6.4
+            ],
+            [
+              -1.6,
+              -10.4,
+              6.4
+            ],
+            [
+              -1.6,
+              -10.4,
+              4.800000000000001
+            ]
+          ],
+          "normal_source": [
+            256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 1,
+          "points_source_metres": [
+            [
+              1.6,
+              11.200000000000001,
+              -4.800000000000001
+            ],
+            [
+              1.6,
+              -8.0,
+              6.4
+            ],
+            [
+              -1.6,
+              -8.0,
+              6.4
+            ],
+            [
+              -1.6,
+              11.200000000000001,
+              -4.800000000000001
+            ]
+          ],
+          "normal_source": [
+            0,
+            -129,
+            -221
+          ]
+        },
+        {
+          "plane": 2,
+          "points_source_metres": [
+            [
+              1.6,
+              -10.4,
+              4.800000000000001
+            ],
+            [
+              1.6,
+              -10.4,
+              6.4
+            ],
+            [
+              1.6,
+              -8.0,
+              6.4
+            ],
+            [
+              1.6,
+              11.200000000000001,
+              -4.800000000000001
+            ]
+          ],
+          "normal_source": [
+            -256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 3,
+          "points_source_metres": [
+            [
+              -0.8,
+              -11.200000000000001,
+              4.800000000000001
+            ],
+            [
+              -1.6,
+              -10.4,
+              4.800000000000001
+            ],
+            [
+              -1.6,
+              -10.4,
+              6.4
+            ],
+            [
+              -0.8,
+              -11.200000000000001,
+              6.4
+            ]
+          ],
+          "normal_source": [
+            181,
+            181,
+            0
+          ]
+        },
+        {
+          "plane": 4,
+          "points_source_metres": [
+            [
+              -0.8,
+              -11.200000000000001,
+              4.800000000000001
+            ],
+            [
+              -0.8,
+              -11.200000000000001,
+              6.4
+            ],
+            [
+              0.8,
+              -11.200000000000001,
+              6.4
+            ],
+            [
+              0.8,
+              -11.200000000000001,
+              4.800000000000001
+            ]
+          ],
+          "normal_source": [
+            0,
+            256,
+            0
+          ]
+        },
+        {
+          "plane": 5,
+          "points_source_metres": [
+            [
+              1.6,
+              -10.4,
+              6.4
+            ],
+            [
+              1.6,
+              -10.4,
+              4.800000000000001
+            ],
+            [
+              0.8,
+              -11.200000000000001,
+              4.800000000000001
+            ],
+            [
+              0.8,
+              -11.200000000000001,
+              6.4
+            ]
+          ],
+          "normal_source": [
+            -181,
+            181,
+            0
+          ]
+        },
+        {
+          "plane": 6,
+          "points_source_metres": [
+            [
+              -1.6,
+              11.200000000000001,
+              -6.4
+            ],
+            [
+              -1.6,
+              11.200000000000001,
+              -4.800000000000001
+            ],
+            [
+              -1.6,
+              -10.4,
+              4.800000000000001
+            ],
+            [
+              -1.6,
+              8.8,
+              -6.4
+            ]
+          ],
+          "normal_source": [
+            256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 7,
+          "points_source_metres": [
+            [
+              1.6,
+              11.200000000000001,
+              -6.4
+            ],
+            [
+              1.6,
+              11.200000000000001,
+              -4.800000000000001
+            ],
+            [
+              -1.6,
+              11.200000000000001,
+              -4.800000000000001
+            ],
+            [
+              -1.6,
+              11.200000000000001,
+              -6.4
+            ]
+          ],
+          "normal_source": [
+            0,
+            -256,
+            0
+          ]
+        },
+        {
+          "plane": 8,
+          "points_source_metres": [
+            [
+              1.6,
+              8.8,
+              -6.4
+            ],
+            [
+              1.6,
+              -10.4,
+              4.800000000000001
+            ],
+            [
+              1.6,
+              11.200000000000001,
+              -4.800000000000001
+            ],
+            [
+              1.6,
+              11.200000000000001,
+              -6.4
+            ]
+          ],
+          "normal_source": [
+            -256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 9,
+          "points_source_metres": [
+            [
+              -0.8,
+              8.0,
+              -6.4
+            ],
+            [
+              -1.6,
+              8.8,
+              -6.4
+            ],
+            [
+              -1.6,
+              -10.4,
+              4.800000000000001
+            ],
+            [
+              -0.8,
+              -11.200000000000001,
+              4.800000000000001
+            ]
+          ],
+          "normal_source": [
+            115,
+            115,
+            197
+          ]
+        },
+        {
+          "plane": 10,
+          "points_source_metres": [
+            [
+              -0.8,
+              8.0,
+              -6.4
+            ],
+            [
+              -0.8,
+              -11.200000000000001,
+              4.800000000000001
+            ],
+            [
+              0.8,
+              -11.200000000000001,
+              4.800000000000001
+            ],
+            [
+              0.8,
+              8.0,
+              -6.4
+            ]
+          ],
+          "normal_source": [
+            0,
+            129,
+            221
+          ]
+        },
+        {
+          "plane": 11,
+          "points_source_metres": [
+            [
+              1.6,
+              -10.4,
+              4.800000000000001
+            ],
+            [
+              1.6,
+              8.8,
+              -6.4
+            ],
+            [
+              0.8,
+              8.0,
+              -6.4
+            ],
+            [
+              0.8,
+              -11.200000000000001,
+              4.800000000000001
+            ]
+          ],
+          "normal_source": [
+            -115,
+            115,
+            197
+          ]
+        }
+      ]
+    },
+    {
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "floor_plane": 6,
+      "geometric_angle_degrees": 69.443955,
+      "stored_normal_angle_degrees": 69.443955,
+      "width_metres": 3.2,
+      "rise_metres": 12.8,
+      "horizontal_run_metres": 4.800000000000001,
+      "floor_length_metres": 13.670405992508051,
+      "source_occurrences": 15,
+      "border_occurrences": 11,
+      "geometry": [
+        {
+          "plane": 0,
+          "points_source_metres": [
+            [
+              1.6,
+              6.4,
+              -1.6
+            ],
+            [
+              1.6,
+              6.4,
+              -3.2
+            ],
+            [
+              1.6,
+              3.2,
+              -3.2
+            ],
+            [
+              1.6,
+              -6.4,
+              3.2
+            ]
+          ],
+          "normal_source": [
+            -256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 1,
+          "points_source_metres": [
+            [
+              1.6,
+              -9.600000000000001,
+              3.2
+            ],
+            [
+              1.6,
+              -6.4,
+              3.2
+            ],
+            [
+              1.6,
+              3.2,
+              -3.2
+            ],
+            [
+              1.6,
+              -9.600000000000001,
+              1.6
+            ]
+          ],
+          "normal_source": [
+            -256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 2,
+          "points_source_metres": [
+            [
+              -1.6,
+              6.4,
+              -1.6
+            ],
+            [
+              -1.6,
+              -6.4,
+              3.2
+            ],
+            [
+              -1.6,
+              -9.600000000000001,
+              3.2
+            ],
+            [
+              -1.6,
+              6.4,
+              -3.2
+            ]
+          ],
+          "normal_source": [
+            256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 3,
+          "points_source_metres": [
+            [
+              -1.6,
+              3.2,
+              -3.2
+            ],
+            [
+              -1.6,
+              6.4,
+              -3.2
+            ],
+            [
+              -1.6,
+              -9.600000000000001,
+              3.2
+            ],
+            [
+              -1.6,
+              -9.600000000000001,
+              1.6
+            ]
+          ],
+          "normal_source": [
+            256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 4,
+          "points_source_metres": [
+            [
+              1.6,
+              -9.600000000000001,
+              3.2
+            ],
+            [
+              1.6,
+              -9.600000000000001,
+              1.6
+            ],
+            [
+              -1.6,
+              -9.600000000000001,
+              1.6
+            ],
+            [
+              -1.6,
+              -9.600000000000001,
+              3.2
+            ]
+          ],
+          "normal_source": [
+            0,
+            256,
+            0
+          ]
+        },
+        {
+          "plane": 5,
+          "points_source_metres": [
+            [
+              1.6,
+              -9.600000000000001,
+              1.6
+            ],
+            [
+              1.6,
+              3.2,
+              -3.2
+            ],
+            [
+              -1.6,
+              3.2,
+              -3.2
+            ],
+            [
+              -1.6,
+              -9.600000000000001,
+              1.6
+            ]
+          ],
+          "normal_source": [
+            0,
+            90,
+            240
+          ]
+        },
+        {
+          "plane": 6,
+          "points_source_metres": [
+            [
+              -1.6,
+              -6.4,
+              3.2
+            ],
+            [
+              -1.6,
+              6.4,
+              -1.6
+            ],
+            [
+              1.6,
+              6.4,
+              -1.6
+            ],
+            [
+              1.6,
+              -6.4,
+              3.2
+            ]
+          ],
+          "normal_source": [
+            0,
+            -90,
+            -240
+          ]
+        },
+        {
+          "plane": 7,
+          "points_source_metres": [
+            [
+              -1.6,
+              6.4,
+              -1.6
+            ],
+            [
+              -1.6,
+              6.4,
+              -3.2
+            ],
+            [
+              1.6,
+              6.4,
+              -3.2
+            ],
+            [
+              1.6,
+              6.4,
+              -1.6
+            ]
+          ],
+          "normal_source": [
+            0,
+            -256,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "model": 67029,
+      "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+      "floor_plane": 6,
+      "geometric_angle_degrees": 63.434949,
+      "stored_normal_angle_degrees": 63.535116,
+      "width_metres": 3.2,
+      "rise_metres": 19.200000000000003,
+      "horizontal_run_metres": 9.600000000000001,
+      "floor_length_metres": 21.466252583997985,
+      "source_occurrences": 5,
+      "border_occurrences": 1,
+      "geometry": [
+        {
+          "plane": 0,
+          "points_source_metres": [
+            [
+              1.6,
+              9.600000000000001,
+              -3.2
+            ],
+            [
+              1.6,
+              9.600000000000001,
+              -6.4
+            ],
+            [
+              1.6,
+              6.4,
+              -6.4
+            ],
+            [
+              1.6,
+              -9.600000000000001,
+              6.4
+            ]
+          ],
+          "normal_source": [
+            -256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 1,
+          "points_source_metres": [
+            [
+              1.6,
+              -12.8,
+              6.4
+            ],
+            [
+              1.6,
+              -9.600000000000001,
+              6.4
+            ],
+            [
+              1.6,
+              6.4,
+              -6.4
+            ],
+            [
+              1.6,
+              -12.8,
+              3.2
+            ]
+          ],
+          "normal_source": [
+            -256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 2,
+          "points_source_metres": [
+            [
+              -1.6,
+              9.600000000000001,
+              -3.2
+            ],
+            [
+              -1.6,
+              -9.600000000000001,
+              6.4
+            ],
+            [
+              -1.6,
+              -12.8,
+              6.4
+            ],
+            [
+              -1.6,
+              9.600000000000001,
+              -6.4
+            ]
+          ],
+          "normal_source": [
+            256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 3,
+          "points_source_metres": [
+            [
+              -1.6,
+              6.4,
+              -6.4
+            ],
+            [
+              -1.6,
+              9.600000000000001,
+              -6.4
+            ],
+            [
+              -1.6,
+              -12.8,
+              6.4
+            ],
+            [
+              -1.6,
+              -12.8,
+              3.2
+            ]
+          ],
+          "normal_source": [
+            256,
+            0,
+            0
+          ]
+        },
+        {
+          "plane": 4,
+          "points_source_metres": [
+            [
+              1.6,
+              -12.8,
+              6.4
+            ],
+            [
+              1.6,
+              -12.8,
+              3.2
+            ],
+            [
+              -1.6,
+              -12.8,
+              3.2
+            ],
+            [
+              -1.6,
+              -12.8,
+              6.4
+            ]
+          ],
+          "normal_source": [
+            0,
+            256,
+            0
+          ]
+        },
+        {
+          "plane": 5,
+          "points_source_metres": [
+            [
+              1.6,
+              -12.8,
+              3.2
+            ],
+            [
+              1.6,
+              6.4,
+              -6.4
+            ],
+            [
+              -1.6,
+              6.4,
+              -6.4
+            ],
+            [
+              -1.6,
+              -12.8,
+              3.2
+            ]
+          ],
+          "normal_source": [
+            0,
+            114,
+            229
+          ]
+        },
+        {
+          "plane": 6,
+          "points_source_metres": [
+            [
+              -1.6,
+              -9.600000000000001,
+              6.4
+            ],
+            [
+              -1.6,
+              9.600000000000001,
+              -3.2
+            ],
+            [
+              1.6,
+              9.600000000000001,
+              -3.2
+            ],
+            [
+              1.6,
+              -9.600000000000001,
+              6.4
+            ]
+          ],
+          "normal_source": [
+            0,
+            -114,
+            -229
+          ]
+        },
+        {
+          "plane": 7,
+          "points_source_metres": [
+            [
+              -1.6,
+              9.600000000000001,
+              -3.2
+            ],
+            [
+              -1.6,
+              9.600000000000001,
+              -6.4
+            ],
+            [
+              1.6,
+              9.600000000000001,
+              -6.4
+            ],
+            [
+              1.6,
+              9.600000000000001,
+              -3.2
+            ]
+          ],
+          "normal_source": [
+            0,
+            -256,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "source_occurrences": [
+    {
+      "block": "block-0913",
+      "block_name": "B0000005.RDB",
+      "block_sha256": "ad52a9a888ca83bce910d593fa775796389fb4fffd3e3b48ac3741b6b3cf71fe",
+      "record": "record-00052",
+      "source_address": 11750,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        1152,
+        -768,
+        1920
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0914",
+      "block_name": "B0000006.RDB",
+      "block_sha256": "083a6ebc5e0f1781cb1b950fc0531e6ae7deea2fc1fd2e883b3fc553a4caf2f2",
+      "record": "record-00002",
+      "source_address": 9644,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        128,
+        -1024,
+        896
+      ],
+      "rotation_source": [
+        0,
+        -1024,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0914",
+      "block_name": "B0000006.RDB",
+      "block_sha256": "083a6ebc5e0f1781cb1b950fc0531e6ae7deea2fc1fd2e883b3fc553a4caf2f2",
+      "record": "record-00055",
+      "source_address": 11846,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        1152,
+        -768,
+        1920
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0915",
+      "block_name": "B0000007.RDB",
+      "block_sha256": "94239dbf8a8e23062bf880ad2bd822edb1c8f1cb73c6abffe9a942831b3674c7",
+      "record": "record-00007",
+      "source_address": 9859,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        128,
+        -1024,
+        896
+      ],
+      "rotation_source": [
+        0,
+        -1024,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0915",
+      "block_name": "B0000007.RDB",
+      "block_sha256": "94239dbf8a8e23062bf880ad2bd822edb1c8f1cb73c6abffe9a942831b3674c7",
+      "record": "record-00035",
+      "source_address": 11032,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        1152,
+        -768,
+        1920
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0916",
+      "block_name": "B0000008.RDB",
+      "block_sha256": "b3a78084b960d79076bcc48d42cb8e4947212db8129097ccaaff036b776c00ae",
+      "record": "record-00001",
+      "source_address": 9644,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        128,
+        -1024,
+        896
+      ],
+      "rotation_source": [
+        0,
+        -1024,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0916",
+      "block_name": "B0000008.RDB",
+      "block_sha256": "b3a78084b960d79076bcc48d42cb8e4947212db8129097ccaaff036b776c00ae",
+      "record": "record-00023",
+      "source_address": 10506,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        896,
+        -1280,
+        1664
+      ],
+      "rotation_source": [
+        0,
+        -3072,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0916",
+      "block_name": "B0000008.RDB",
+      "block_sha256": "b3a78084b960d79076bcc48d42cb8e4947212db8129097ccaaff036b776c00ae",
+      "record": "record-00036",
+      "source_address": 11080,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        1152,
+        -768,
+        1920
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0917",
+      "block_name": "B0000009.RDB",
+      "block_sha256": "c3acc53a584480a42d7b7c2d5feacc9d42d4a07f37e85c2499d3a6eeaf1c1c53",
+      "record": "record-00007",
+      "source_address": 9859,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        128,
+        -1024,
+        896
+      ],
+      "rotation_source": [
+        0,
+        -1024,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0917",
+      "block_name": "B0000009.RDB",
+      "block_sha256": "c3acc53a584480a42d7b7c2d5feacc9d42d4a07f37e85c2499d3a6eeaf1c1c53",
+      "record": "record-00028",
+      "source_address": 10696,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        1152,
+        -768,
+        1920
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0918",
+      "block_name": "B0000010.RDB",
+      "block_sha256": "2e71589307a0d9d98ecde03becc8a480ef357325ed3b158f17a0b67187a3a211",
+      "record": "record-00006",
+      "source_address": 9859,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        128,
+        -1024,
+        896
+      ],
+      "rotation_source": [
+        0,
+        -1024,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0918",
+      "block_name": "B0000010.RDB",
+      "block_sha256": "2e71589307a0d9d98ecde03becc8a480ef357325ed3b158f17a0b67187a3a211",
+      "record": "record-00026",
+      "source_address": 10648,
+      "model": 67029,
+      "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+      "position_source": [
+        1024,
+        -896,
+        1920
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C5O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0919",
+      "block_name": "B0000011.RDB",
+      "block_sha256": "5dddca5f9e0332de776539479a6fb29882ee6487d37775de23edae375dac80cf",
+      "record": "record-00046",
+      "source_address": 11412,
+      "model": 61030,
+      "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+      "position_source": [
+        1024,
+        -960,
+        1920
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C5O",
+      "floor_plane": 1
+    },
+    {
+      "block": "block-0920",
+      "block_name": "B0000012.RDB",
+      "block_sha256": "467608670d4188fd9833839daf2f7b02a4e8e52e130c9f2c1d4f48946e891cb4",
+      "record": "record-00002",
+      "source_address": 9644,
+      "model": 61030,
+      "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+      "position_source": [
+        512,
+        -960,
+        640
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C5O",
+      "floor_plane": 1
+    },
+    {
+      "block": "block-0921",
+      "block_name": "B0000013.RDB",
+      "block_sha256": "453afd13675163d587e184b91df60829023b5767abb097b82171efc07c3dc902",
+      "record": "record-00002",
+      "source_address": 9644,
+      "model": 61030,
+      "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+      "position_source": [
+        512,
+        -960,
+        640
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C5O",
+      "floor_plane": 1
+    },
+    {
+      "block": "block-0941",
+      "block_name": "N0000018.RDB",
+      "block_sha256": "8b7a2e9736dc6a9a27bc57e5bfc1884784418b630a88bac5ac7e022b35ed9543",
+      "record": "record-00015",
+      "source_address": 9955,
+      "model": 61030,
+      "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+      "position_source": [
+        512,
+        -960,
+        640
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C5O",
+      "floor_plane": 1
+    },
+    {
+      "block": "block-0980",
+      "block_name": "N0000057.RDB",
+      "block_sha256": "aa307f555b69152b37319148cef1b747ba57752fca5113c48bbaaa7da2669288",
+      "record": "record-00065",
+      "source_address": 11306,
+      "model": 67029,
+      "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+      "position_source": [
+        1536,
+        -896,
+        640
+      ],
+      "rotation_source": [
+        0,
+        -512,
+        0
+      ],
+      "description": "C5O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0981",
+      "block_name": "N0000058.RDB",
+      "block_sha256": "928bfd55a3aa37e577ee738bd9deac1e046841be400b0f90882ec4be28a488cc",
+      "record": "record-00079",
+      "source_address": 11797,
+      "model": 67029,
+      "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+      "position_source": [
+        1536,
+        -896,
+        640
+      ],
+      "rotation_source": [
+        0,
+        -512,
+        0
+      ],
+      "description": "C5O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-0982",
+      "block_name": "N0000059.RDB",
+      "block_sha256": "b4cdd15a68b0c38cab7e6317076c7741890f4065979b16d04497343e62dbd2da",
+      "record": "record-00070",
+      "source_address": 11797,
+      "model": 67029,
+      "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+      "position_source": [
+        1536,
+        -896,
+        640
+      ],
+      "rotation_source": [
+        0,
+        -512,
+        0
+      ],
+      "description": "C5O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-1030",
+      "block_name": "W0000014.RDB",
+      "block_sha256": "3cafda050d2357e2548b79c5854de438e9b7fd1968b25ba10c112c1d0e042e6d",
+      "record": "record-00080",
+      "source_address": 11306,
+      "model": 67029,
+      "model_sha256": "3522ed5a6c396842ea0038eb55ae3f7cd78da6da42c75d011411a8ed4236500c",
+      "position_source": [
+        1536,
+        -896,
+        640
+      ],
+      "rotation_source": [
+        0,
+        -512,
+        0
+      ],
+      "description": "C5O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-1041",
+      "block_name": "W0000025.RDB",
+      "block_sha256": "f031d370f50f49f626234a8515bb41a521ed626a8b8ef7cb10d3863e936125e6",
+      "record": "record-00032",
+      "source_address": 9955,
+      "model": 61030,
+      "model_sha256": "45e4c9af3f07236429898065308f7384b08a9bc3fed7f26afe44b9bcf4f3bd35",
+      "position_source": [
+        512,
+        -960,
+        640
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C5O",
+      "floor_plane": 1
+    },
+    {
+      "block": "block-1059",
+      "block_name": "S0000004.RDB",
+      "block_sha256": "ee0c010ca125b4e3fe5cd85c87166b693cdae2d9c03cac23d5837acf0efae304",
+      "record": "record-00016",
+      "source_address": 33110,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        640,
+        -3072,
+        128
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-1059",
+      "block_name": "S0000004.RDB",
+      "block_sha256": "ee0c010ca125b4e3fe5cd85c87166b693cdae2d9c03cac23d5837acf0efae304",
+      "record": "record-00017",
+      "source_address": 33062,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        384,
+        -3584,
+        128
+      ],
+      "rotation_source": [
+        0,
+        -1536,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-1059",
+      "block_name": "S0000004.RDB",
+      "block_sha256": "ee0c010ca125b4e3fe5cd85c87166b693cdae2d9c03cac23d5837acf0efae304",
+      "record": "record-00089",
+      "source_address": 32966,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        1152,
+        -3072,
+        128
+      ],
+      "rotation_source": [
+        0,
+        -512,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    },
+    {
+      "block": "block-1059",
+      "block_name": "S0000004.RDB",
+      "block_sha256": "ee0c010ca125b4e3fe5cd85c87166b693cdae2d9c03cac23d5837acf0efae304",
+      "record": "record-00090",
+      "source_address": 32918,
+      "model": 67027,
+      "model_sha256": "37231a5086cc0a99e390167635f8db195e225405526da11659a6009b0ec35169",
+      "position_source": [
+        1408,
+        -3584,
+        128
+      ],
+      "rotation_source": [
+        0,
+        -512,
+        0
+      ],
+      "description": "C1O",
+      "floor_plane": 6
+    }
+  ],
+  "related_ordinary_stair_model": {
+    "model": 67025,
+    "model_sha256": "b8858a6c45af202318f6bbd26bfe9c14453fbbf9969e6e0749643177043c8f43",
+    "vertical_riser_count": 16,
+    "vertical_riser_heights_metres": [
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3,
+      0.3
+    ],
+    "policy": "Not included in the three-floor exception list; ordinary step and collision rules remain authoritative."
+  },
+  "known_endpoint_obstructions": [
+    {
+      "source": "block-0917/record-00028",
+      "end": 1,
+      "obstructions": [
+        "block-0917/record-00019"
+      ],
+      "models": [
+        67025
+      ],
+      "model_hashes": [
+        "b8858a6c45af202318f6bbd26bfe9c14453fbbf9969e6e0749643177043c8f43"
+      ],
+      "crouched_clear": false
+    }
+  ],
+  "known_entrance_steps": [
+    "block-0915/record-00007/0",
+    "block-0916/record-00001/0",
+    "block-0917/record-00007/0",
+    "block-0918/record-00006/0"
+  ]
+}

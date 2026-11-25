@@ -27,60 +27,493 @@ func ground_context(scope: String) -> Dictionary:
 	if typeof(ready.get("ok")) != TYPE_BOOL or not ready.ok: return {"ok":false,"reason":"Current collision geometry unavailable."}
 	return {"ok":true,"position":_actor.position,"velocity":_actor.velocity,"serial":_serial,"ticket":_state.ticket.duplicate(true),"physical":_state.physical.duplicate(true)}
 
-## Flat-ground support observation only, never placement/clearance validation.
-## The standing capsule itself is swept by move_and_collide below.
-func _flat_ground(space: PhysicsDirectSpaceState3D, position: Vector3, p: Dictionary) -> bool:
-	var ray := PhysicsRayQueryParameters3D.create(position,position+Vector3.DOWN*(p.height*0.5+p.support_depth))
+## Detached posture preparation, revalidated after all external preflight callbacks.
+## The existing placement capsule supplies standing dimensions. No pose is changed.
+func prepare_ground_posture(owner: RefCounted, scope: String, desired: String, tuning: Dictionary) -> Dictionary:
+	if _ground_owner == null or _ground_owner.get_ref() != owner or _committing or desired not in ["standing","crouched"]: return {"ok":false,"reason":"Unbound/reentrant posture request."}
+	var context := ground_context(scope)
+	if not context.ok: return context
+	if not preload("res://scripts/data/ground_policy.gd").surface_reason(tuning).is_empty(): return {"ok":false,"reason":"Invalid surface tuning."}
+	var standing: Dictionary = _receipts[_state.handoff_id].policy.duplicate()
+	standing.margin = tuning.motion_margin
+	if tuning.camera_radius >= standing.radius or tuning.crouch_height < standing.radius*2 or tuning.crouch_height >= standing.height or tuning.standing_eye+tuning.camera_radius >= standing.height or tuning.crouched_eye+tuning.camera_radius >= tuning.crouch_height: return {"ok":false,"reason":"Posture tuning incompatible with placement dimensions."}
+	var space := _actor.get_world_3d().direct_space_state
+	if not _volume(space,_shape.shape,_actor.position,standing): return {"ok":false,"reason":"Initial capsule overlap requires placement recovery."}
+	var base: Vector3 = _actor.position-Vector3.UP*_shape.shape.height*0.5
+	var target := standing.duplicate()
+	target.height = tuning.crouch_height if desired == "crouched" else standing.height
+	var actual := desired
+	var center: Vector3 = base+Vector3.UP*target.height*0.5
+	if not _volume(space,_capsule(target),center,standing):
+		if desired != "standing" or _state.physical.posture != "crouched": return {"ok":false,"reason":"Intended posture volume obstructed."}
+		actual = "crouched"
+		target.height = _shape.shape.height
+		center = _actor.position
+	return {"ok":true,"session":scope,"serial":_serial,"from":_actor.position,"from_height":_shape.shape.height,"position":center,"height":target.height,"actual":actual,"desired":desired,"pending_stand":desired == "standing" and actual == "crouched","tuning":tuning.duplicate(true)}
+
+## A full capsule sweep establishes contact; a centre support ray additionally
+## prevents the capsule rim from bridging a gap. Walkability is separate from support.
+func _connector(hit: Dictionary) -> bool:
+	return assembly != null and assembly.has_method("ground_surface") and assembly.ground_surface(_state.ticket,hit)
+
+func _connector_contact(space: PhysicsDirectSpaceState3D, point: Vector3, normal: Vector3) -> bool:
+	var ray := PhysicsRayQueryParameters3D.create(point+normal*0.03,point-normal*0.03)
 	ray.exclude = [_actor.get_rid()]
 	var hit := space.intersect_ray(ray)
-	return not hit.is_empty() and hit.normal.dot(Vector3.UP) >= 0.999999 and absf(float(hit.position.y)-(_actor.position.y-p.height*0.5-p.margin*2)) < 0.0001
+	return not hit.is_empty() and _connector(hit)
 
-## Only the session coordinator may advance this existing body. This is not
-## placement validation/commit and never resets camera aim or motion history.
+func _wall_bounded_floor(space: PhysicsDirectSpaceState3D, position: Vector3, offset: Vector3, depth: float, p: Dictionary, tuning: Dictionary) -> Dictionary:
+	# Some source treads end just short of their enclosing wall. A footprint
+	# ray in that seam is not an open ledge: require the actual blocking wall
+	# near the capsule boundary, then observe a real floor inside it. Full-body
+	# clearance and the centre/remaining footprint checks are unchanged.
+	var wall_reach: float = _shape.shape.radius+maxf(_shape.shape.radius*0.25,tuning.contact_gap+p.margin*2.0)
+	var wall_ray := PhysicsRayQueryParameters3D.create(position,position+offset*wall_reach)
+	wall_ray.exclude = [_actor.get_rid()]
+	var wall := space.intersect_ray(wall_ray)
+	if wall.is_empty() or absf(wall.normal.y) > 0.01 or wall.normal.dot(offset) > -0.9: return {}
+	var inside: Vector3 = wall.position+wall.normal*_shape.shape.radius*0.5
+	inside.y = position.y
+	var floor_ray := PhysicsRayQueryParameters3D.create(inside,inside+Vector3.DOWN*depth)
+	floor_ray.exclude = [_actor.get_rid()]
+	var floor_hit := space.intersect_ray(floor_ray)
+	return floor_hit if not floor_hit.is_empty() and floor_hit.normal.y >= cos(deg_to_rad(tuning.support_degrees)) else {}
+
+func _ground_support(space: PhysicsDirectSpaceState3D, position: Vector3, p: Dictionary, tuning: Dictionary, depth: float, support_hint_ny := 1.0) -> Dictionary:
+	var query := _query(_shape.shape,position,p.margin)
+	query.motion = Vector3.DOWN*depth
+	var fractions := space.cast_motion(query)
+	if fractions.size() != 2 or fractions[0] >= 1.0: return {"ok":false,"reason":"capsule_support_cast_missing"}
+	query.transform.origin += query.motion*fractions[1]
+	query.motion = Vector3.ZERO
+	var contact := space.get_rest_info(query)
+	if contact.is_empty():
+		# The cast's unsafe endpoint can still fall just outside Jolt's contact
+		# reporting tolerance at a finite triangle lip. This is an observation
+		# only; no actor displacement or clearance relaxation is performed.
+		query.transform.origin += Vector3.DOWN*p.margin*2.0
+		contact = space.get_rest_info(query)
+	# A concave stair edge may report its vertical triangle's normal even
+	# though the actual contact is on the capsule's lower hemisphere. Certify
+	# that geometry from the measured contact point; a cylinder-side contact
+	# has no upward component and cannot supply ground support this way.
+	var cap_contact_support := false
+	if not contact.is_empty() and contact.normal.y < cos(deg_to_rad(tuning.support_degrees)):
+		var cap_centre: Vector3 = query.transform.origin-Vector3.UP*(_shape.shape.height*0.5-_shape.shape.radius)
+		var cap_delta: Vector3 = cap_centre-contact.point
+		# The terrain angle is checked by the centre/footprint floor rays. A
+		# rounded cap can touch a valid stair edge almost horizontally; its
+		# contact-vector angle is not the terrain's slope. Require a genuine
+		# lower-hemisphere point outside the margin-sized equatorial band.
+		cap_contact_support = cap_delta.y > p.margin*2.0 and absf(cap_delta.length()-_shape.shape.radius) <= p.margin*3.0
+		if cap_contact_support:
+			# Confirm an upward tread at that finite edge. A near-tangent wall
+			# point alone cannot become support just because its contact is noisy.
+			var inward: Vector3 = Vector3(-cap_delta.x,0,-cap_delta.z).normalized()*p.margin*2.0
+			var witness := PhysicsRayQueryParameters3D.create(contact.point+inward+Vector3.UP*tuning.contact_gap,contact.point+inward+Vector3.DOWN*tuning.contact_gap)
+			witness.exclude = [_actor.get_rid()]
+			var floor_witness := space.intersect_ray(witness)
+			cap_contact_support = not floor_witness.is_empty() and floor_witness.normal.y >= cos(deg_to_rad(tuning.support_degrees))
+	var physical_contact: bool = not contact.is_empty() and contact.normal.y < 0.99999 and contact.normal.y >= cos(deg_to_rad(tuning.support_degrees))
+	var contact_connector: bool = physical_contact and _connector_contact(space,contact.point,contact.normal)
+	var ray_depth: float = _shape.shape.height+depth
+	if support_hint_ny >= cos(deg_to_rad(tuning.support_degrees)) and support_hint_ny < 1.0:
+		ray_depth = maxf(ray_depth,_shape.shape.height*0.5-_shape.shape.radius+(_shape.shape.radius+p.margin)/support_hint_ny+_shape.shape.radius*sqrt(1.0/(support_hint_ny*support_hint_ny)-1.0)+depth)
+	if physical_contact:
+		# A vertical capsule on a steep plane can have its centre and rear
+		# footprint much farther above the floor than its own height. Extend
+		# observations only for actual upward contact; the full-shape cast and
+		# separate contact-depth limit still establish real nearby support.
+		var ny: float = contact.normal.y
+		ray_depth = maxf(ray_depth,_shape.shape.height*0.5-_shape.shape.radius+(_shape.shape.radius+p.margin)/ny+_shape.shape.radius*sqrt(1.0/(ny*ny)-1.0)+depth)
+	var ray := PhysicsRayQueryParameters3D.create(position,position+Vector3.DOWN*ray_depth)
+	ray.exclude = [_actor.get_rid()]
+	var centre := space.intersect_ray(ray)
+	if centre.is_empty() or centre.normal.y < cos(deg_to_rad(tuning.support_degrees)): return {"ok":false,"reason":"centre_support_missing"}
+	var centre_connector: bool = centre.normal.y < cos(deg_to_rad(tuning.walk_degrees)) and _connector(centre)
+	# Beyond an incline's upper lip, a higher ordinary tread under the centre
+	# supplies footing even while the capsule's rear cap still touches the ramp.
+	# Do not extrapolate that finite incline upward through the staircase.
+	if contact_connector and centre.normal.y >= cos(deg_to_rad(tuning.walk_degrees)) and centre.position.y >= contact.point.y-p.margin:
+		contact_connector = false
+	if centre.normal.y < 0.99999:
+		var ny: float = centre.normal.y
+		ray_depth = maxf(ray_depth,_shape.shape.height*0.5-_shape.shape.radius+(_shape.shape.radius+p.margin)/ny+_shape.shape.radius*sqrt(1.0/(ny*ny)-1.0)+depth)
+	# Require a capsule-radius footprint, not a tiny rim contact at a ledge.
+	# Each ray is only a support observation; full-shape sweeps/clearance remain
+	# mandatory. Height following is still limited separately below.
+	var observed_support_ny: float = centre.normal.y
+	if physical_contact: observed_support_ny = minf(observed_support_ny,contact.normal.y)
+	for offset in [Vector3.RIGHT,Vector3.LEFT,Vector3.FORWARD,Vector3.BACK]:
+		var edge_position: Vector3 = position+offset*_shape.shape.radius
+		var edge_ray := PhysicsRayQueryParameters3D.create(edge_position,edge_position+Vector3.DOWN*ray_depth)
+		edge_ray.exclude = [_actor.get_rid()]
+		var edge := space.intersect_ray(edge_ray)
+		if edge.is_empty():
+			# Discovery does not depend on a cached hint (for example just after
+			# placement). A longer retry accepts only an upward floor and retains
+			# the floor-span bound below.
+			var ny: float = cos(deg_to_rad(tuning.support_degrees))
+			var discovery_depth: float = _shape.shape.height*0.5-_shape.shape.radius+(_shape.shape.radius+p.margin)/ny+_shape.shape.radius*sqrt(1.0/(ny*ny)-1.0)+depth
+			edge_ray.to = edge_position+Vector3.DOWN*discovery_depth
+			var discovered := space.intersect_ray(edge_ray)
+			if not discovered.is_empty() and discovered.normal.y >= ny: edge = discovered
+		if edge.is_empty() or edge.normal.y < cos(deg_to_rad(tuning.support_degrees)):
+			var bounded_floor := _wall_bounded_floor(space,position,offset,ray_depth,p,tuning)
+			if not bounded_floor.is_empty(): edge = bounded_floor
+		if edge.is_empty() or edge.normal.y < cos(deg_to_rad(tuning.support_degrees)): return {"ok":false,"reason":"footprint_support_missing"}
+		if edge.normal.y < 0.99999:
+			observed_support_ny = minf(observed_support_ny,edge.normal.y)
+			var edge_ny: float = edge.normal.y
+			ray_depth = maxf(ray_depth,_shape.shape.height*0.5-_shape.shape.radius+(_shape.shape.radius+p.margin)/edge_ny+_shape.shape.radius*sqrt(1.0/(edge_ny*edge_ny)-1.0)+depth)
+		var span_ny: float = minf(observed_support_ny,support_hint_ny)
+		var floor_span: float = maxf(tuning.step_up,tuning.step_down)+tuning.contact_gap
+		if span_ny < 0.99999: floor_span += _shape.shape.radius*sqrt(1.0/(span_ny*span_ny)-1.0)
+		if centre.position.y-edge.position.y > floor_span: return {"ok":false,"reason":"footprint_floor_too_distant"}
+	# A wall can win get_rest_info at a floor/wall seam. The centre's measured
+	# upward plane distinguishes support from that wall; capsule sweep is still
+	# mandatory, and distance includes the spherical cap on an inclined plane.
+	var height: float = _shape.shape.height
+	var radius: float = _shape.shape.radius
+	var support_normal: Vector3 = centre.normal
+	var ground_y: float = centre.position.y
+	var connector := centre_connector
+	# At a flat/ramp seam the spherical cap touches the incline before the
+	# centre ray reaches it. Only a real, source-qualified floor contact can
+	# supply that plane; footprint rays and the capsule sweep still must pass.
+	if contact_connector:
+		support_normal = contact.normal
+		ground_y = contact.point.y-(support_normal.x*(position.x-contact.point.x)+support_normal.z*(position.z-contact.point.z))/support_normal.y
+		connector = true
+	elif connector and not contact.is_empty() and contact.normal.y >= cos(deg_to_rad(tuning.walk_degrees)):
+		# At the upper lip an ordinary landing can become the actual support
+		# before the centre sample leaves the corridor's last triangle.
+		support_normal = contact.normal
+	var required_y: float = ground_y+height*0.5-radius+(radius+p.margin)/support_normal.y
+	var distance: float = position.y-required_y
+	if connector and not contact.is_empty() and contact.normal.y >= cos(deg_to_rad(tuning.support_degrees)):
+		# Jolt's rest point is approximate, particularly on the rounded-cap lip.
+		# The full-shape downward cast is the measured clearance, not an infinite
+		# plane extrapolated from that approximate point.
+		distance = depth*fractions[0]
+		required_y = position.y-distance
+	if not contact.is_empty() and (contact.normal.y >= cos(deg_to_rad(tuning.support_degrees)) or cap_contact_support):
+		# Rounded capsule contact may rest on the edge of a validated step.
+		# Still require nearby ground under the centre, never an open gap.
+		if distance <= depth or position.y-height*0.5-centre.position.y <= tuning.step_up+tuning.contact_gap:
+			# Adjacent treads can have parallel normals at different heights.
+			# Their normal agreement cannot replace the actual capsule clearance.
+			distance = minf(distance,depth*fractions[0])
+	if distance < -p.margin or distance > depth: return {"ok":false,"reason":"support_distance_outside_bound","distance":distance,"depth":depth,"normal":support_normal,"contact":contact,"centre":centre,"connector":connector}
+	return {"ok":true,"normal":support_normal,"distance":maxf(0,distance),"collider":centre.collider_id,"plane_y":required_y,"ground_y":centre.position.y,"connector":connector,"support_ny":observed_support_ny}
+
+func _clear_route(space: PhysicsDirectSpaceState3D, start: Vector3, end: Vector3, p: Dictionary) -> bool:
+	return _volume(space,_shape.shape,start,p) and _volume(space,_shape.shape,end,p) and _route(space,_shape.shape,start,end,p)
+
+## Candidate step route: full shape up, across, down; no endpoint-only teleport.
+func _wall_direction(space: PhysicsDirectSpaceState3D, start: Vector3, requested: Vector3, distance: float, p: Dictionary, tuning: Dictionary, contact_normal: Vector3) -> Dictionary:
+	# Probe above any legal riser, so a stair face is not mistaken for an
+	# enclosing wall. Resolve these constraints against original intent, not
+	# a succession of rounded contact normals that can reverse that intent.
+	var origin: Vector3 = start+Vector3.UP*(maxf(_shape.shape.height-_shape.shape.radius,tuning.step_up+tuning.contact_gap*2)-_shape.shape.height*0.5)
+	var directions: Array[Vector3] = [Vector3.RIGHT,Vector3.LEFT,Vector3.FORWARD,Vector3.BACK]
+	var contact_direction := -Vector3(contact_normal.x,0,contact_normal.z).normalized()
+	if contact_direction.length_squared() > 0.5: directions.append(contact_direction)
+	var direction := requested
+	var found := false
+	for axis: Vector3 in directions:
+		var ray := PhysicsRayQueryParameters3D.create(origin,origin+axis*(_shape.shape.radius+distance+p.margin*3.0))
+		ray.exclude = [_actor.get_rid()]
+		var hit := space.intersect_ray(ray)
+		if hit.is_empty() or absf(hit.normal.y) > 0.01 or direction.dot(hit.normal) >= -0.000001: continue
+		direction = direction.slide(hit.normal)
+		found = true
+	if direction.dot(requested) < 0.000001: direction = Vector3.ZERO
+	return {"direction":direction.normalized()} if found else {}
+
+func _step_route(space: PhysicsDirectSpaceState3D, start: Vector3, horizontal: Vector3, p: Dictionary, tuning: Dictionary, obstacle_normal := Vector3.ZERO) -> Dictionary:
+	# Measure the obstacle top independently of intermediate capsule-cap contacts.
+	# At an angle, the leading cap reaches the riser before a ray projected
+	# along the input direction reaches its tread. Sample across the measured
+	# obstacle normal, while the actual swept route retains the requested angle.
+	var approach := Vector3(obstacle_normal.x,0,obstacle_normal.z)
+	var toe: Vector3 = -approach.normalized() if approach.length_squared() > 1e-12 and horizontal.dot(approach) < 0 else horizontal.normalized()
+	var ahead: Vector3 = start+horizontal+toe*p.radius
+	var top_ray := PhysicsRayQueryParameters3D.create(ahead+Vector3.UP*tuning.step_up,ahead+Vector3.DOWN*(_shape.shape.height*0.5+tuning.step_down))
+	top_ray.exclude = [_actor.get_rid()]
+	var top := space.intersect_ray(top_ray)
+	var base_ray := PhysicsRayQueryParameters3D.create(start,start+Vector3.DOWN*(_shape.shape.height+tuning.step_up))
+	base_ray.exclude = [_actor.get_rid()]
+	var base := space.intersect_ray(base_ray)
+	if top.is_empty() or base.is_empty() or top.normal.y < cos(deg_to_rad(tuning.walk_degrees)) or top.position.y-base.position.y > tuning.step_up+0.00001: return {"ok":false,"reason":"obstacle_top_outside_step_policy"}
+	# Lift only as far as the measured tread requires. A larger configured
+	# allowance must not invent extra headroom requirements on smaller stairs.
+	var lift: float = clampf(top.position.y-(start.y-_shape.shape.height*0.5)+tuning.contact_gap,0,tuning.step_up)
+	var raised: Vector3 = start+Vector3.UP*lift
+	var across: Vector3 = raised+horizontal
+	if not _clear_route(space,start,raised,p) or not _clear_route(space,raised,across,p): return {"ok":false,"reason":"step_up_across_clearance"}
+	var drop_query := _query(_shape.shape,across,p.margin)
+	drop_query.motion = Vector3.DOWN*(lift+tuning.step_down+tuning.contact_gap*2)
+	var fractions := space.cast_motion(drop_query)
+	if fractions.size() != 2 or fractions[0] >= 1: return {"ok":false,"reason":"step_destination_missing"}
+	var destination: Vector3 = across+drop_query.motion*fractions[0]+Vector3.UP*maxf(0,tuning.contact_gap-p.margin)
+	# Qualify support at the intended landing, not the temporarily raised probe.
+	var support := _ground_support(space,destination,p,tuning,tuning.contact_gap*3)
+	if not support.ok: return {"ok":false,"reason":"step_destination_support"}
+	destination.y = maxf(destination.y,support.plane_y+maxf(0,tuning.contact_gap-p.margin))
+	var rise: float = destination.y-start.y
+	if rise > tuning.step_up+0.00001 or rise < -tuning.step_down-0.00001: return {"ok":false,"reason":"step_height_bound"}
+	if not _clear_route(space,across,destination,p): return {"ok":false,"reason":"step_down_clearance"}
+	return {"ok":true,"position":destination,"normal":support.normal,"rise":rise,"ground_y":support.ground_y}
+
+## Only the coordinator advances this body. Travel is subdivided spatially,
+## preventing endpoint probes from catching a distant floor across a gap.
 func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
 	if _ground_owner == null or _ground_owner.get_ref() != owner or _committing: return {"ok":false,"reason":"Unbound or reentrant ground authority."}
-	if not raw is Dictionary or raw.size() != 6 or typeof(raw.get("sequence")) != TYPE_INT or raw.sequence < 1 or raw.sequence > 1000000000 or raw.get("session") != _actor_scope or not raw.get("velocity") is Vector3 or not raw.velocity.is_finite() or absf(raw.velocity.y) > 0.000001 or raw.velocity.length() > 1000.000001 or not raw.get("forward") is Vector3 or not raw.forward.is_finite() or absf(raw.forward.y) > 0.000001 or absf(raw.forward.length()-1.0) > 0.000001 or not raw.get("delta") is float or not is_finite(raw.delta) or raw.delta <= 0 or raw.delta > 0.1 or typeof(raw.get("placement_serial")) != TYPE_INT or raw.placement_serial != _serial: return {"ok":false,"reason":"Malformed/stale ground step."}
+	if not raw is Dictionary or raw.size() != 7 or typeof(raw.get("sequence")) != TYPE_INT or raw.sequence < 1 or raw.sequence > 1000000000 or raw.get("session") != _actor_scope or not raw.get("velocity") is Vector3 or not raw.velocity.is_finite() or absf(raw.velocity.y) > 0.000001 or raw.velocity.length() > 1000.000001 or not raw.get("forward") is Vector3 or not raw.forward.is_finite() or absf(raw.forward.y) > 0.000001 or absf(raw.forward.length()-1.0) > 0.000001 or not raw.get("delta") is float or not is_finite(raw.delta) or raw.delta <= 0 or raw.delta > 0.1 or typeof(raw.get("placement_serial")) != TYPE_INT or raw.placement_serial != _serial or not raw.get("posture") is Dictionary or typeof(raw.posture.get("desired")) != TYPE_STRING or not raw.posture.get("tuning") is Dictionary: return {"ok":false,"reason":"Malformed/stale ground step."}
 	if raw.sequence == _ground_sequence: return _ground_last.result.duplicate(true) if _ground_last.get("request") == raw else {"ok":false,"reason":"Changed ground step identity."}
 	if raw.sequence != _ground_sequence+1 or not core.gates.simulation(): return {"ok":false,"reason":"Out-of-order or suspended ground step."}
 	var context := ground_context(raw.session)
 	if not context.ok: return context
-	if context.physical.get("posture") != "standing" or context.physical.get("mode") != "standing" or context.velocity.y != 0.0: return {"ok":false,"reason":"Posture/air/support owner pending; physical history preserved."}
-	var p: Dictionary = _receipts[_state.handoff_id].policy
+	if context.physical.get("mode") != "standing" or context.physical.get("transport") != "foot" or not context.physical.get("fall_history",{}).is_empty(): return {"ok":false,"reason":"Air/special mode owner pending; physical history preserved."}
+	var checked := prepare_ground_posture(owner,raw.session,raw.posture.get("desired",""),raw.posture.get("tuning",{}))
+	if not checked.get("ok",false) or checked != raw.posture: return {"ok":false,"reason":"Posture/geometry changed during ground preparation."}
+	var tuning: Dictionary = checked.tuning
+	var p: Dictionary = _receipts[_state.handoff_id].policy.duplicate()
+	p.margin = tuning.motion_margin
 	var space := _actor.get_world_3d().direct_space_state
-	if not _flat_ground(space,_actor.position,p): return {"ok":false,"reason":"Flat support owner boundary; air/surface owner pending."}
+	var support := _ground_support(space,_actor.position,p,tuning,tuning.contact_gap*3,float(_ground_last.get("result",{}).get("support_hint_ny",1.0)))
+	if not support.ok: return {"ok":false,"reason":"Ground support lost; increment-3 handoff pending, history preserved.","support_observation":str(support)}
 	_committing = true
-	var before := _actor.position
-	var remaining: Vector3 = raw.velocity*raw.delta
+	_actor.safe_margin = p.margin*2.0
+	var old_height: float = _shape.shape.height
+	if absf(old_height-checked.height) > 0.000001:
+		var dimensions := p.duplicate()
+		dimensions.height = checked.height
+		_shape.shape = _capsule(dimensions)
+		_actor.position = checked.position
+	_state.physical.posture = checked.actual
+	_state.desired_posture = checked.desired
+	_state.pending_stand = checked.pending_stand
+	_state.shape.height = checked.height
+	var motion_start := _actor.position
+	var budget: float = raw.velocity.length()*raw.delta
+	var horizontal: Vector3 = raw.velocity.normalized()
+	var requested_horizontal := horizontal
+	var surface_distance := 0.0
 	var collisions := 0
 	var handoff_pending := false
-	for iteration in 4:
-		if remaining.length_squared() < 1e-20: break
-		# Sliding changes the path after the first hit. Qualify every ordered
-		# fragment before moving; never let the final slide silently enter air.
+	var steps := 0
+	var stair_correction := 0.0
+	var contact_reason := ""
+	var blocked_redirects := 0
+	# At the supported max speed/delta/stride this bounded loop is <= 20,000.
+	while budget > 0.00000001:
+		var distance: float = minf(budget,minf(tuning.probe_stride,p.radius*0.25))
+		var normal: Vector3 = support.normal
+		var tangent := horizontal.slide(normal)
+		if normal.y < cos(deg_to_rad(tuning.walk_degrees)) and tangent.y > 0.000001 and not support.get("connector",false):
+			# Remove uphill component, preserving contour/downhill voluntary motion.
+			var uphill := Vector3.UP.slide(normal).normalized()
+			tangent -= uphill*maxf(0,tangent.dot(uphill))
+		if tangent.length_squared() < 1e-12: break
+		tangent = tangent.normalized()*distance
+		var start := _actor.position
 		var sweep := KinematicCollision3D.new()
-		var candidate: Vector3 = _actor.position+remaining
-		if _actor.test_move(_actor.global_transform,remaining,sweep): candidate = _actor.position+sweep.get_travel()
-		if not _flat_ground(space,candidate,p):
-			if iteration == 0:
-				_committing = false
-				return {"ok":false,"reason":"Ground exit requires later air/surface handoff."}
+		var candidate := start+tangent
+		var blocked := _actor.test_move(_actor.global_transform,tangent,sweep,p.margin*2.0)
+		var contact_normal := sweep.get_normal() if sweep.get_collision_count() > 0 else Vector3.ZERO
+		var contact_point := sweep.get_position() if sweep.get_collision_count() > 0 else Vector3.ZERO
+		var contact_travel := sweep.get_travel()
+		# Very short gait fragments can miss test_move's contact tolerance while
+		# the authoritative query-margin sweep already meets a floor or wall.
+		if not blocked and not _clear_route(space,start,candidate,p):
+			blocked = true
+			var query := _query(_shape.shape,start,p.margin)
+			query.motion = tangent
+			var fractions := space.cast_motion(query)
+			if fractions.size() == 2 and fractions[0] < 1.0:
+				contact_travel = tangent*fractions[0]
+				query.transform.origin += tangent*fractions[1]
+				query.motion = Vector3.ZERO
+				var contact := space.get_rest_info(query)
+				if not contact.is_empty():
+					contact_normal = contact.normal
+					contact_point = contact.point
+		# Redirect a bounded fragment onto an approved incline at its actual
+		# capsule contact. This consumes the same surface-distance budget; it is
+		# not a stair lift, slope-angle increase or collision bypass.
+		if blocked and contact_normal.y >= cos(deg_to_rad(tuning.support_degrees)) and contact_normal.y < 0.99999 and _connector_contact(space,contact_point,contact_normal):
+			var approach: float = maxf(0.000001,-tangent.normalized().dot(contact_normal))
+			var backoff: float = minf(contact_travel.length(),p.margin*2.0/approach)
+			var prefix := start+contact_travel-tangent.normalized()*backoff
+			var remaining: float = maxf(0,distance-prefix.distance_to(start))
+			var redirected := prefix+horizontal.slide(contact_normal).normalized()*remaining
+			if _clear_route(space,start,prefix,p) and _clear_route(space,prefix,redirected,p) and _clear_route(space,start,redirected,p):
+				tangent = redirected-start
+				candidate = redirected
+				blocked = false
+		if blocked:
+			# test_move reports contact travel, not a guaranteed query-margin gap.
+			# Back off along the intended route, never push out along a new axis.
+			var approach: float = maxf(0.000001,-tangent.normalized().dot(contact_normal))
+			var backoff: float = minf(contact_travel.length(),p.margin*2.0/approach)
+			candidate = start+contact_travel-tangent.normalized()*backoff
+		var target_support := _ground_support(space,candidate,p,tuning,tuning.step_down+tuning.contact_gap*2,float(support.get("support_ny",1.0)))
+		var stepped := false
+		if blocked:
+			var route := _step_route(space,start,Vector3(tangent.x,0,tangent.z),p,tuning,contact_normal)
+			contact_reason = route.get("reason","")
+			if route.ok and route.rise > 0.000001 and route.normal.y >= cos(deg_to_rad(tuning.walk_degrees)):
+				candidate = route.position
+				target_support = {"ok":true,"normal":route.normal,"ground_y":route.ground_y}
+				stepped = true
+		if blocked and not stepped and blocked_redirects < 4:
+			var wall_motion := _wall_direction(space,start,requested_horizontal,distance,p,tuning,contact_normal)
+			if not wall_motion.is_empty():
+				var constrained: Vector3 = wall_motion.direction
+				# Preserve a reachable approach prefix when every component is
+				# blocked; probing a wall ahead must not stop the body short of it.
+				if constrained.length_squared() > 1e-12 and constrained.dot(horizontal) < 0.9999:
+					horizontal = constrained
+					blocked_redirects += 1
+					collisions += 1
+					continue
+		if blocked and not stepped and candidate.distance_to(start) <= p.margin*3.0:
+			var wall := Vector3(contact_normal.x,0,contact_normal.z)
+			var along_wall: Vector3 = requested_horizontal.slide(wall.normalized()).normalized() if wall.length_squared() > 1e-12 else Vector3.ZERO
+			if along_wall.dot(requested_horizontal) < 0.000001: along_wall = Vector3.ZERO
+			# A zero-length blocked prefix cannot leave valid ground. Resolve
+			# its wall constraint before probing an unreachable destination.
+			if along_wall.length_squared() < 1e-12:
+				collisions += 1
+				break
+			if blocked_redirects < 4 and along_wall.dot(horizontal) < 0.9999:
+				horizontal = along_wall
+				blocked_redirects += 1
+				collisions += 1
+				continue
+		if target_support.ok and support.ground_y-target_support.ground_y > tuning.step_down+0.00001:
 			handoff_pending = true
-			break # Prior fragments are performed, retained and must be accounted.
-		var hit := _actor.move_and_collide(remaining)
-		if hit == null: break
-		collisions += 1
-		remaining = hit.get_remainder().slide(hit.get_normal())
-	var travel := _actor.position-before
+			break
+		if not target_support.ok:
+			contact_reason = "target_"+str(target_support.get("reason","support_missing"))
+			handoff_pending = true
+			break
+		var before_following := candidate
+		if not stepped:
+			# Down following is a bounded correction after the swept voluntary path.
+			var drop: float = maxf(0,target_support.distance-maxf(0,tuning.contact_gap-p.margin))
+			if drop > tuning.step_down+0.00001:
+				handoff_pending = true
+				break
+			var followed := candidate+Vector3.DOWN*drop
+			var follow_route_clear := false
+			if target_support.normal.y > 0.99999 and target_support.has("plane_y"):
+				var level := followed
+				level.y = target_support.plane_y+maxf(0,tuning.contact_gap-p.margin)
+				# A clear flat landing has an exact height. Keep cast quantization
+				# from accumulating hover; a rounded stair lip can still obstruct
+				# this route, in which case retain its measured capsule clearance.
+				follow_route_clear = _clear_route(space,candidate,level,p)
+				if follow_route_clear: followed = level
+				else: followed.y = maxf(followed.y,level.y)
+			if not follow_route_clear and not _clear_route(space,candidate,followed,p):
+				# Mixed tread/riser contacts can make the centre plane propose a
+				# descent through the preceding lip. Find a clear prefix of this
+				# bounded downward route, then require real nearby support again.
+				var clear_fraction := 0.0
+				var blocked_fraction := 1.0
+				for probe in 12:
+					var middle: float = (clear_fraction+blocked_fraction)*0.5
+					if _clear_route(space,candidate,candidate.lerp(followed,middle),p): clear_fraction = middle
+					else: blocked_fraction = middle
+				var limited: Vector3 = candidate.lerp(followed,clear_fraction)
+				var limited_support := _ground_support(space,limited,p,tuning,tuning.contact_gap*3,float(target_support.get("support_ny",1.0)))
+				if not limited_support.ok or not _clear_route(space,candidate,limited,p):
+					contact_reason = "follow_clearance"
+					break
+				followed = limited
+				target_support = limited_support
+			candidate = followed
+		var connector_motion: bool = not stepped and (support.get("connector",false) or target_support.get("connector",false))
+		if connector_motion and candidate.distance_to(start) > distance:
+			# Lip following is voluntary corridor travel, not a free stair/drop
+			# correction. Bound the actual physical segment by the same gait budget.
+			var bounded := start+(candidate-start).limit_length(distance)
+			if not _clear_route(space,start,bounded,p): break
+			var bounded_support := _ground_support(space,bounded,p,tuning,tuning.contact_gap*3,minf(float(support.get("support_ny",1.0)),float(target_support.get("support_ny",1.0))))
+			if not bounded_support.ok:
+				handoff_pending = true
+				contact_reason = "bounded_connector_support"
+				break
+			candidate = bounded
+			target_support = bounded_support
+		# A new steep contact cannot turn a wall into uphill ground.
+		if target_support.normal.y < cos(deg_to_rad(tuning.walk_degrees)) and candidate.y > start.y+0.00001 and not target_support.get("connector",false):
+			contact_reason = "ordinary_uphill_restricted"
+			break
+		if stepped:
+			_actor.position = candidate # All three full-shape route fragments qualified.
+			steps += 1
+		else:
+			# Commit the qualified across/follow route, not a different diagonal
+			# motion through its corner. A second solver's recovery could otherwise
+			# leave the capsule overlapping a tall stair lip after a valid sweep.
+			# Unblocked across motion and following/bounded motion were already
+			# checked above. Only a shortened collision prefix needs this check.
+			if blocked and not _clear_route(space,start,before_following,p):
+				contact_reason = "collision_prefix_clearance"
+				break
+			_actor.position = candidate
+		if blocked and not stepped:
+			collisions += 1
+			var wall := Vector3(contact_normal.x,0,contact_normal.z)
+			if wall.length_squared() > 1e-12 and requested_horizontal.dot(wall) < -0.000001:
+				horizontal = requested_horizontal.slide(wall.normalized()).normalized()
+		var performed: float = _actor.position.distance_to(start)
+		if performed < 0.00000001:
+			if blocked and horizontal.length_squared() > 1e-12 and absf(horizontal.dot(tangent.normalized())) < 0.9999:
+				budget -= distance
+				continue
+			break
+		# Count only the swept prefix of voluntary surface motion. A blocked
+		# incline cannot retain the requested, unperformed vertical component.
+		var intended_horizontal := Vector2(tangent.x,tangent.z)
+		var actual_horizontal := Vector2(_actor.position.x-start.x,_actor.position.z-start.z)
+		var fraction: float = clampf(actual_horizontal.dot(intended_horizontal)/maxf(1e-20,intended_horizontal.length_squared()),0,1)
+		var performed_surface := tangent*fraction
+		if connector_motion: performed_surface = _actor.position-start
+		stair_correction += _actor.position.y-start.y-performed_surface.y
+		# Float32 committed positions can exceed an exact fragment by a few
+		# micrometres. Activity cannot receive more than the consumed gait budget;
+		# independent fixtures also bound the actual physical displacement.
+		surface_distance += minf(performed_surface.length(),distance)
+		budget -= distance
+		support = target_support
+		if horizontal.length_squared() < 1e-12: break
+	var travel := _actor.position-motion_start
 	_actor.velocity = travel/raw.delta
 	_actor.basis = Basis.looking_at(raw.forward,Vector3.UP)
 	_state.position = _actor.position
+	_state.physical.velocity = _actor.velocity
 	_state.forward = raw.forward
 	_ground_sequence = raw.sequence
-	var result := {"ok":true,"session":raw.session,"sequence":raw.sequence,"position":_actor.position,"requested_displacement":raw.velocity*raw.delta,"voluntary_displacement":travel,"passive_displacement":Vector3.ZERO,"actual_metres_per_second":travel.length()/raw.delta,"collisions":collisions,"placement_serial":_serial,"handoff_pending":handoff_pending,"unsupported_remainder":remaining if handoff_pending else Vector3.ZERO}
+	var result := {"ok":true,"session":raw.session,"sequence":raw.sequence,"position":_actor.position,"base":_actor.position-Vector3.UP*checked.height*0.5,"posture":checked.duplicate(true),"requested_displacement":raw.velocity*raw.delta,"voluntary_displacement":travel,"passive_displacement":Vector3.ZERO,"actual_metres_per_second":surface_distance/raw.delta,"surface_distance":surface_distance,"stair_correction":stair_correction,"contact_reason":contact_reason,"collisions":collisions,"steps":steps,"placement_serial":_serial,"handoff_pending":handoff_pending,"unsupported_remainder":horizontal*budget if handoff_pending else Vector3.ZERO}
+	result.support_hint_ny = float(support.get("support_ny",1.0))
 	_ground_last = {"request":raw.duplicate(true),"result":result.duplicate(true)}
-	# Coordinator publishes combined gait/activity before notifying observers.
 	_committing = false
 	return result
+
+## Geometry-safe view-origin proposal. A near-plane enclosing sphere is swept
+## from the validated actual eye; unsafe interpolation snaps to that eye.
+func ground_view_route(owner: RefCounted, start: Vector3, target: Vector3, radius: float) -> bool:
+	if _ground_owner == null or _ground_owner.get_ref() != owner or not is_instance_valid(_actor): return false
+	var sphere := SphereShape3D.new()
+	sphere.radius = radius
+	var space := _actor.get_world_3d().direct_space_state
+	var p := {"margin":0.001}
+	return _volume(space,sphere,start,p) and _volume(space,sphere,target,p) and _route(space,sphere,start,target,p)
 
 func snapshot() -> Dictionary:
 	return _state.duplicate(true)
@@ -238,6 +671,7 @@ func _commit(value: Dictionary, checked: Dictionary, access: Callable) -> Dictio
 	# final callback/scope/physics checks, never inside the publication section.
 	if not is_instance_valid(_actor):
 		_actor = CharacterBody3D.new()
+		_actor.collision_mask = 0xffffffff
 		_actor_scope = value.activation_session
 		_actor.name = "PlacementActor"
 		_actor.collision_mask = 0xffffffff

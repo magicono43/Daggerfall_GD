@@ -4,6 +4,8 @@ const Configuration = preload("res://scripts/input/binding_configuration.gd")
 const Policy = preload("res://scripts/data/ground_policy.gd")
 var run_mode := "hold"
 var sneak_mode := "hold"
+var crouch_mode := "toggle"
+var crouch_selected := false
 var run_selected := false
 var sneak_selected := false
 var autorun := false
@@ -20,6 +22,7 @@ func configure(candidate: Dictionary) -> bool:
 	if not can_configure(candidate): return false
 	run_mode = candidate.response.run_mode
 	sneak_mode = candidate.response.sneak_mode
+	crouch_mode = candidate.response.crouch_mode
 	return true
 func reset(scope: String) -> void:
 	_scope = scope
@@ -27,16 +30,19 @@ func reset(scope: String) -> void:
 	run_selected = false
 	sneak_selected = false
 	autorun = false
+	crouch_selected = false
 	_sources.clear()
 	_source_owners.clear()
 func interrupt(_reason: String) -> void:
 	autorun = false
 func edge(value: Dictionary, input: RefCounted) -> bool:
-	if value.get("action") not in ["run","sneak","autorun"]: return false
+	if value.get("action") not in ["run","sneak","autorun","crouch"]: return false
 	if not input.context_current(value) or value.get("session") != _scope or typeof(value.get("sequence")) != TYPE_INT or value.sequence <= _sequence: return true
 	_sequence = value.sequence
 	if value.get("kind") != "started": return true
 	match value.action:
+		"crouch":
+			if crouch_mode == "toggle": crouch_selected = not crouch_selected
 		"autorun": autorun = not autorun
 		"run":
 			if run_mode == "toggle": run_selected = not run_selected
@@ -64,8 +70,11 @@ func source(owner: RefCounted, raw: Variant) -> Dictionary:
 	_source_owners[raw.source] = weakref(owner)
 	return {"ok":true}
 
-func resolve(input: RefCounted, capability: Dictionary, profile: Dictionary, forced_gait := "") -> Dictionary:
-	if not Policy.reason(profile).is_empty(): return {"ok":false,"reason":"Ground profile unavailable."}
+func desired_posture(input: RefCounted) -> String:
+	return "crouched" if (input.continuous_held("crouch") if crouch_mode == "hold" else crouch_selected) else "standing"
+
+func resolve(input: RefCounted, capability: Dictionary, profile: Dictionary, forced_gait := "", posture := "standing") -> Dictionary:
+	if not Policy.gait_reason(profile).is_empty(): return {"ok":false,"reason":"Ground profile unavailable."}
 	for field in ["speed","running"]:
 		if typeof(capability.get(field)) != TYPE_INT or capability[field] < 0 or capability[field] > 1000000000: return {"ok":false,"reason":"Unsupported live ground capability: "+field}
 	var direction: Vector2 = input.movement()
@@ -81,8 +90,9 @@ func resolve(input: RefCounted, capability: Dictionary, profile: Dictionary, for
 	var gait := "run" if running else ("sneak" if sneaking else "walk")
 	if not forced_gait.is_empty(): gait = forced_gait
 	if not formula.is_valid(): return {"ok":false,"reason":"Required gait RULE provider unavailable."}
-	var resolved: Variant = formula.call({"gait":gait,"profile":profile.duplicate(true),"speed":capability.speed,"running":capability.running})
+	var resolved: Variant = formula.call({"gait":gait,"posture":posture,"profile":profile.duplicate(true),"speed":capability.speed,"running":capability.running})
 	if not resolved is Dictionary or not resolved.get("ok",false): return {"ok":false,"reason":"Selected gait RULE provider failed; no fallback."}
+	if not (resolved.get("value") is float or resolved.get("value") is int): return {"ok":false,"reason":"Numeric gait RULE result required."}
 	var speed: float = resolved.value
 	if not is_finite(speed) or speed <= 0: return {"ok":false,"reason":"Selected gait formula is nonpositive or nonfinite."}
 	var ids := _sources.keys()

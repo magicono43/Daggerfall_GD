@@ -20,6 +20,7 @@ static func prepare(result: Dictionary) -> Dictionary:
 	var provenance := {}
 	var kind := "classic"
 	var surface_keys: Array[String] = []
+	var triangle_planes := PackedInt32Array()
 	if result.has("value"):
 		var data: Dictionary = result.value.projection()
 		provenance = data.provenance.duplicate(true)
@@ -41,6 +42,7 @@ static func prepare(result: Dictionary) -> Dictionary:
 			var uv := PackedVector2Array()
 			# Frame has positive determinant. Source CCW becomes Godot clockwise.
 			for at in range(0,plane.triangles.size(),3):
+				triangle_planes.append(int(plane.source_plane))
 				for offset in [0,2,1]:
 					vertices.append(Frame.model_point(data.points_source[plane.point_indices[plane.triangles[at+offset]]]))
 					normals.append(Frame.normal(plane.normal_source))
@@ -88,7 +90,7 @@ static func prepare(result: Dictionary) -> Dictionary:
 	var bounds := AABB(triangles[0],Vector3.ZERO)
 	for vertex: Vector3 in triangles: bounds = bounds.expand(vertex)
 	var normal_probe: Vector3 = mesh.surface_get_arrays(0)[Mesh.ARRAY_NORMAL][0] if kind == "classic" else (triangles[2]-triangles[0]).cross(triangles[1]-triangles[0]).normalized()
-	return {"ok":true,"kind":kind,"mesh":mesh,"shape":shape,"bounds":bounds,"points":triangles,"normal_probe":normal_probe,"provenance":provenance,"surface_keys":surface_keys}
+	return {"ok":true,"kind":kind,"mesh":mesh,"shape":shape,"bounds":bounds,"points":triangles,"triangle_planes":triangle_planes,"normal_probe":normal_probe,"provenance":provenance,"surface_keys":surface_keys}
 
 static func model(result: Dictionary, prototype: Dictionary = {}, textures: Dictionary = {}) -> Dictionary:
 	var reusable := prototype if not prototype.is_empty() else prepare(result)
