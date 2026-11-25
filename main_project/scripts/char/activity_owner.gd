@@ -99,6 +99,19 @@ func clock_valid(c: Variant, s: Dictionary, event: bool) -> bool:
 	if c.ownership == "paused": return game == 0 and sim == 0
 	return c.ownership != "ordinary" or game*c.denominator == sim*c.numerator
 
+func ground_preview(r: Dictionary) -> Dictionary:
+	var a: RefCounted = _owner.get_ref()
+	var record: Dictionary = a._actors[r.actor].record
+	var state: Dictionary = record.get("activity",{})
+	if state.is_empty(): state = empty(record)
+	var m: Dictionary = r.context.motion
+	if m.climbing or m.swimming or m.riding or r.clock.ownership != "ordinary" or not clock_valid(r.clock,state,false): return fail("Only ordered ordinary ground intervals support preview.")
+	var selected: String = Math.segment(_policy.activity,m,0,0,0,0,false).selected
+	var resolved := rate(int(_policy.activity.rates[selected]),m)
+	if not resolved.ok: return resolved
+	var requested: int = F.floor_ratio(int(resolved.value)*(r.clock.end_game-r.clock.start_game)+int(state.fatigue_remainder),MINUTE)
+	return {"ok":true,"requested":requested,"settle":requested >= record.current.fatigue}
+
 func intake(owners: Dictionary, r: Dictionary) -> Dictionary:
 	var a: RefCounted = _owner.get_ref()
 	var ready := prepare()

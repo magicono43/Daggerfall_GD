@@ -41,7 +41,7 @@ static func response_bounds() -> Dictionary:
 	return {"mouse_x":Vector2(0.001,10.0),"mouse_y":Vector2(0.001,10.0),"controller_x":Vector2(1.0,1440.0),"controller_y":Vector2(1.0,1440.0),"keyboard_look":Vector2(1.0,1440.0),"cursor_speed":Vector2(1.0,5000.0),"mouse_smoothing_seconds":Vector2(0.001,1.0),"controller_smoothing_seconds":Vector2(0.001,1.0),"keyboard_smoothing_seconds":Vector2(0.001,1.0)}
 
 static func editable_response() -> Array:
-	return response_bounds().keys() + ["mouse_invert","controller_invert","mouse_smoothing","controller_smoothing","keyboard_smoothing"]
+	return response_bounds().keys() + ["mouse_invert","controller_invert","mouse_smoothing","controller_smoothing","keyboard_smoothing","run_mode","sneak_mode"]
 
 func declare_settings(owner: StartupSettingsOwner) -> void:
 	settings = owner

@@ -12,6 +12,75 @@ var _state := {}
 var _receipts := {}
 var _serial := 0
 var _committing := false
+var _ground_owner: WeakRef
+var _ground_sequence := 0
+var _ground_last: Dictionary = {}
+
+func bind_ground(owner: RefCounted) -> bool:
+	if _ground_owner != null and _ground_owner.get_ref() != null and _ground_owner.get_ref() != owner: return false
+	_ground_owner = weakref(owner)
+	return true
+
+func ground_context(scope: String) -> Dictionary:
+	if not is_instance_valid(_actor) or not is_instance_valid(_shape) or scope != _actor_scope or _state.get("session") != scope: return {"ok":false,"reason":"Committed MOVE body unavailable."}
+	var ready: Dictionary = assembly.readiness(_state.ticket)
+	if typeof(ready.get("ok")) != TYPE_BOOL or not ready.ok: return {"ok":false,"reason":"Current collision geometry unavailable."}
+	return {"ok":true,"position":_actor.position,"velocity":_actor.velocity,"serial":_serial,"ticket":_state.ticket.duplicate(true),"physical":_state.physical.duplicate(true)}
+
+## Flat-ground support observation only, never placement/clearance validation.
+## The standing capsule itself is swept by move_and_collide below.
+func _flat_ground(space: PhysicsDirectSpaceState3D, position: Vector3, p: Dictionary) -> bool:
+	var ray := PhysicsRayQueryParameters3D.create(position,position+Vector3.DOWN*(p.height*0.5+p.support_depth))
+	ray.exclude = [_actor.get_rid()]
+	var hit := space.intersect_ray(ray)
+	return not hit.is_empty() and hit.normal.dot(Vector3.UP) >= 0.999999 and absf(float(hit.position.y)-(_actor.position.y-p.height*0.5-p.margin*2)) < 0.0001
+
+## Only the session coordinator may advance this existing body. This is not
+## placement validation/commit and never resets camera aim or motion history.
+func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
+	if _ground_owner == null or _ground_owner.get_ref() != owner or _committing: return {"ok":false,"reason":"Unbound or reentrant ground authority."}
+	if not raw is Dictionary or raw.size() != 6 or typeof(raw.get("sequence")) != TYPE_INT or raw.sequence < 1 or raw.sequence > 1000000000 or raw.get("session") != _actor_scope or not raw.get("velocity") is Vector3 or not raw.velocity.is_finite() or absf(raw.velocity.y) > 0.000001 or raw.velocity.length() > 1000.000001 or not raw.get("forward") is Vector3 or not raw.forward.is_finite() or absf(raw.forward.y) > 0.000001 or absf(raw.forward.length()-1.0) > 0.000001 or not raw.get("delta") is float or not is_finite(raw.delta) or raw.delta <= 0 or raw.delta > 0.1 or typeof(raw.get("placement_serial")) != TYPE_INT or raw.placement_serial != _serial: return {"ok":false,"reason":"Malformed/stale ground step."}
+	if raw.sequence == _ground_sequence: return _ground_last.result.duplicate(true) if _ground_last.get("request") == raw else {"ok":false,"reason":"Changed ground step identity."}
+	if raw.sequence != _ground_sequence+1 or not core.gates.simulation(): return {"ok":false,"reason":"Out-of-order or suspended ground step."}
+	var context := ground_context(raw.session)
+	if not context.ok: return context
+	if context.physical.get("posture") != "standing" or context.physical.get("mode") != "standing" or context.velocity.y != 0.0: return {"ok":false,"reason":"Posture/air/support owner pending; physical history preserved."}
+	var p: Dictionary = _receipts[_state.handoff_id].policy
+	var space := _actor.get_world_3d().direct_space_state
+	if not _flat_ground(space,_actor.position,p): return {"ok":false,"reason":"Flat support owner boundary; air/surface owner pending."}
+	_committing = true
+	var before := _actor.position
+	var remaining: Vector3 = raw.velocity*raw.delta
+	var collisions := 0
+	var handoff_pending := false
+	for iteration in 4:
+		if remaining.length_squared() < 1e-20: break
+		# Sliding changes the path after the first hit. Qualify every ordered
+		# fragment before moving; never let the final slide silently enter air.
+		var sweep := KinematicCollision3D.new()
+		var candidate: Vector3 = _actor.position+remaining
+		if _actor.test_move(_actor.global_transform,remaining,sweep): candidate = _actor.position+sweep.get_travel()
+		if not _flat_ground(space,candidate,p):
+			if iteration == 0:
+				_committing = false
+				return {"ok":false,"reason":"Ground exit requires later air/surface handoff."}
+			handoff_pending = true
+			break # Prior fragments are performed, retained and must be accounted.
+		var hit := _actor.move_and_collide(remaining)
+		if hit == null: break
+		collisions += 1
+		remaining = hit.get_remainder().slide(hit.get_normal())
+	var travel := _actor.position-before
+	_actor.velocity = travel/raw.delta
+	_actor.basis = Basis.looking_at(raw.forward,Vector3.UP)
+	_state.position = _actor.position
+	_state.forward = raw.forward
+	_ground_sequence = raw.sequence
+	var result := {"ok":true,"session":raw.session,"sequence":raw.sequence,"position":_actor.position,"requested_displacement":raw.velocity*raw.delta,"voluntary_displacement":travel,"passive_displacement":Vector3.ZERO,"actual_metres_per_second":travel.length()/raw.delta,"collisions":collisions,"placement_serial":_serial,"handoff_pending":handoff_pending,"unsupported_remainder":remaining if handoff_pending else Vector3.ZERO}
+	_ground_last = {"request":raw.duplicate(true),"result":result.duplicate(true)}
+	# Coordinator publishes combined gait/activity before notifying observers.
+	_committing = false
+	return result
 
 func snapshot() -> Dictionary:
 	return _state.duplicate(true)
@@ -187,6 +256,8 @@ func _commit(value: Dictionary, checked: Dictionary, access: Callable) -> Dictio
 	_actor.velocity = Vector3.ZERO
 	_actor.basis = Basis.looking_at(fresh.forward,Vector3.UP)
 	_serial += 1
+	_ground_sequence = 0
+	_ground_last.clear()
 	_state = {"serial":_serial,"session":value.activation_session,"ticket":value.ticket.duplicate(true),"handoff_id":key,"position":fresh.position,"forward":fresh.forward,"shape":{"radius":fresh.policy.radius,"height":fresh.policy.height},"physical":fresh.physical.duplicate(true),"desired_context":value.desired_context.duplicate(true),"entrance":value.entrance.duplicate(true),"exit":value.exit.duplicate(true),"return":value["return"].duplicate(true),"marker":value.marker.duplicate(true),"camera_reset_serial":_serial,"placement_committed":true,"destination_ready":false}
 	_state.route = value.route
 	fresh.placement_committed = true
@@ -203,3 +274,5 @@ func retire_scope(scope: String) -> void:
 	_actor_scope = ""
 	_state.clear()
 	_receipts.clear()
+	_ground_sequence = 0
+	_ground_last.clear()

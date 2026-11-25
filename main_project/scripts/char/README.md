@@ -1,5 +1,9 @@
 # CHAR actor owner — IMP-016 increments 1–4
 
+IMP-012 increment 1 adds the narrow live ground capability/cursor projection and
+performed-activity custody/preview interfaces described in [ACTIVITY.md](ACTIVITY.md).
+MOVE remains physical authority; this adds no collider, calendar or actor store.
+
 Increment 4 adds the shared [lethal/prevention/death contract](DEATH.md), v4
 retention and the actual [vitals/disclosed-effects view](VITALS_VIEW.md). Earlier
 sections describing unavailable lethal ownership record historical increment scope.

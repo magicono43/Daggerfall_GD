@@ -34,6 +34,8 @@ var _ui_triggers: Dictionary = {}
 var _keyboard_layout := -1
 var dungeon_assembly: Node
 var placement: Node3D
+var ground: RefCounted
+var _ground_message := ""
 var vitals_view: Control
 var death_view: ColorRect
 var _death_movie_ticket: Dictionary = {}
@@ -195,6 +197,19 @@ func synchronize_startup() -> void:
 		core.placement = placement
 		host.add_child(placement)
 		core.retiring.connect(placement.retire_scope)
+		ground = preload("res://scripts/move/ground_coordinator.gd").new(core,action_input,view,placement)
+		host.controller.controls.attach(ground)
+		ground.committed.connect(func(result: Dictionary):
+			view_camera.position = result.position
+			if not _ground_message.is_empty() and ground.reason.is_empty() and message == _ground_message:
+				message = ""
+				_ground_message = ""
+				schedule_render())
+		ground.failed.connect(func(result: Dictionary):
+			_ground_message = result.reason
+			message = result.reason
+			host.controller.logger.message("WARNING",result.reason)
+			schedule_render())
 		placement.pose_committed.connect(func(state: Dictionary):
 			view.place_facing(state.session,{"version":1,"yaw":rad_to_deg(atan2(state.forward.x,-state.forward.z)),"pitch":0.0})
 			view_camera.position = state.position
@@ -246,6 +261,9 @@ func return_to_setup() -> void:
 			setup_pending = false
 
 func dispose() -> void:
+	if ground != null:
+		host.controller.controls.detach(ground)
+		ground.dispose()
 	death_view.free()
 	vitals_view.free()
 	if is_instance_valid(placement): placement.free()
@@ -334,6 +352,7 @@ func deliver_input() -> Array[Dictionary]:
 		if edge.action == "status" and edge.kind == "started":
 			vitals_view.open_details()
 			return {"kind":"applied"}
+		if ground != null and ground.edge(edge): return {"kind":"ground_request"}
 		edge.make_read_only()
 		gameplay_edge.emit(edge)
 		return {"kind":"intent_delivered"})

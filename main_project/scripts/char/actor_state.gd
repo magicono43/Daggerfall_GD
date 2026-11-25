@@ -23,6 +23,42 @@ const Activity = preload("res://scripts/char/activity_owner.gd")
 var activity: RefCounted
 var lethal: RefCounted
 signal lethal_committed(outcome: Dictionary)
+var _motion_custody: Dictionary = {}
+
+## Short actor-write custody spanning physical commitment and activity intake.
+## MOVE may retain it under a failed delivery; no actor revision may invalidate
+## already-performed work. This is runtime coordination, never native SAVE state.
+func reserve_motion_activity(owner: RefCounted, capability: Dictionary) -> Dictionary:
+	var core: SessionLifecycle = _core.get_ref()
+	if core == null or _vital_busy or not _operation.is_empty() or not core.activity_owner(capability.get("session",""),owner,"ground-motion","motion") or ground_capabilities(capability.get("session",""),capability.get("actor","")) != capability: return fail("Current bound ground capability required.","stale")
+	if _motion_custody.has(capability.actor):
+		var previous: Dictionary = _motion_custody[capability.actor]
+		return {"ok":true,"unchanged":true} if previous.owner.get_ref() == owner and previous.revision == capability.revision and previous.session == capability.session else fail("Actor has unsettled physical work.","busy")
+	_motion_custody[capability.actor] = {"owner":weakref(owner),"revision":capability.revision,"session":capability.session}
+	return {"ok":true}
+
+func release_motion_activity(owner: RefCounted, scope: String, actor: String) -> bool:
+	var custody: Dictionary = _motion_custody.get(actor,{})
+	if custody.is_empty() or custody.session != scope or custody.owner.get_ref() != owner: return false
+	_motion_custody.erase(actor)
+	return true
+
+func advance_motion_activity(owner: RefCounted, scope: String, actor: String) -> Dictionary:
+	var custody: Dictionary = _motion_custody.get(actor,{})
+	if custody.is_empty() or custody.session != scope or custody.owner.get_ref() != owner or not _actors.has(actor): return fail("Retired performed-work custody.","stale")
+	custody.revision = _actors[actor].record.revision
+	return {"ok":true,"revision":custody.revision}
+
+## Pure bounded prediction allows batching without delaying exhaustion beyond
+## the physical step that first performs its debt. No receipt, RNG or pool write.
+func preview_ground_activity(owner: RefCounted, raw: Variant) -> Dictionary:
+	if not activity_request_valid(raw) or raw.kind != "segment": return fail("Complete ground segment required.")
+	var custody: Dictionary = _motion_custody.get(raw.actor,{})
+	if custody.is_empty() or custody.owner.get_ref() != owner or custody.session != raw.session or custody.revision != raw.revision: return fail("Current performed-work custody required.","stale")
+	var begun := _begin(raw.session,{},raw.actor)
+	if not begun.ok: return begun
+	var prepared: Dictionary = activity.prepare()
+	return _end(activity.ground_preview(raw) if prepared.ok else prepared)
 signal activity_committed(outcome: Dictionary)
 
 func _init(core: SessionLifecycle) -> void:
@@ -294,6 +330,7 @@ func _publish(record: Dictionary, derived: Dictionary, sources: Array) -> Dictio
 	return _end({"ok":true,"actor":record.actor,"revision":record.revision,"baseline_valid":true,"entry_ready":false})
 
 func reconcile(scope: String, ticket: Dictionary, actor: String, revision: int, content: int) -> Dictionary:
+	if _motion_custody.has(actor): return fail("Settle performed MOVE activity before changing actor sources.","busy")
 	if _vital_busy: return fail("Vital publication in progress.","busy")
 	if _actors.has(actor) and not _actors[actor].record.get("lethal",{}).get("active",{}).is_empty(): return fail("Source reconciliation waits for lethal settlement.","busy")
 	var begun := _begin(scope,ticket,actor)
@@ -384,6 +421,14 @@ func projection(scope: String, actor: String) -> Dictionary:
 	view.pending_conditions = {"zero_health":view.record.current.health == 0,"zero_fatigue":view.record.current.fatigue == 0,"zero_magicka":view.record.current.magicka == 0,"obligations":not view.record.obligations.is_empty() or not view.record.progression.pending.is_empty() or Activity.unresolved(view.record) > 0}
 	return view
 
+## Narrow coherent physics capability snapshot; never copies actor retention.
+func ground_capabilities(scope: String, actor: String) -> Dictionary:
+	var view := vital_projection(scope,actor)
+	if not view.ok: return view
+	var entry: Dictionary = _actors[actor]
+	var activity: Dictionary = entry.record.get("activity",{})
+	return {"ok":true,"session":scope,"actor":actor,"content":view.content,"revision":view.revision,"speed":entry.derived.attributes.speed.live,"running":entry.derived.skills.running.live,"voluntary_allowed":not view.zero_health and not view.zero_fatigue and view.pending_outcomes == 0 and entry.record.get("lethal",{}).get("active",{}).is_empty(),"activity_game":activity.get("game",entry.record.progression.activity_baseline.instant*1000),"activity_sim":activity.get("simulation",0),"activity_owner":activity.get("interval_owner",""),"activity_count":activity.get("count",0)}
+
 func vital_projection(scope: String, actor: String) -> Dictionary:
 	var core: SessionLifecycle = _core.get_ref()
 	if core == null or core.snapshot().session != scope or not _actors.has(actor) or _actors[actor].record.session != scope: return fail("Unknown or retired actor.","stale")
@@ -413,8 +458,10 @@ func retire_scope(scope: String) -> void:
 			_actors.erase(actor)
 			_bindings.erase(actor)
 			_fresh_receipts.erase(actor)
+			_motion_custody.erase(actor)
 
 func dispose() -> void:
+	_motion_custody.clear()
 	for actor in _vital_holds.keys(): _release_vital_hold(actor)
 	_actors.clear()
 	_bindings.clear()
@@ -504,6 +551,7 @@ func _intake(owner: Object, request: Dictionary) -> Dictionary:
 	var retained: Dictionary = record.get("vitals",{}).get("receipts",{}).get(request.caller,{}).get(request.operation,{})
 	if not retained.is_empty():
 		return retained.result.duplicate(true) if retained.request == request else fail("Operation identity reused with changed intent.","identity_conflict")
+	if _motion_custody.has(request.actor): return fail("Settle performed MOVE activity before a new vital operation.","busy")
 	if not record.get("lethal",{}).get("active",{}).is_empty(): return fail("Lethal resolution pending.","busy")
 	if record.revision != request.revision: return fail("Obsolete actor revision.","stale")
 	var monitor := preload("res://scripts/rule/formula_error_monitor.gd").new()
@@ -560,6 +608,7 @@ func _intake(owner: Object, request: Dictionary) -> Dictionary:
 func acknowledge_vital(owner: Object, raw: Variant) -> Dictionary:
 	if not Vital.request_valid(raw): return fail("Original complete request required.")
 	var request: Dictionary = raw.duplicate(true)
+	if _motion_custody.has(request.actor): return fail("Settle performed MOVE activity before acknowledgment.","busy")
 	if _vital_busy or not _operation.is_empty(): return fail("CHAR publication in progress.","busy")
 	if _actors.has(request.actor) and _actors[request.actor].record.get("lethal",{}).get("events",{}).get(request.caller,{}).has(request.operation):
 		if not _core.get_ref().lethal_consumer(request.session,owner,request.caller): return fail("Retired lethal consumer.","stale")
@@ -585,9 +634,14 @@ func acknowledge_vital(owner: Object, raw: Variant) -> Dictionary:
 		record.revision += 1
 	return {"ok":true,"phase":"acknowledged","operation":request.operation,"result":receipt.result.duplicate(true)}
 
+func activity_request_valid(raw: Variant) -> bool:
+	return Activity.request_valid(raw) and _plain(raw)
+
 func activity_intake(owners: Dictionary, raw: Variant) -> Dictionary:
-	if not Activity.request_valid(raw) or not _plain(raw): return fail("Complete typed actor-activity-v1 request required.")
+	if not activity_request_valid(raw): return fail("Complete typed actor-activity-v1 request required.")
 	var r: Dictionary = raw.duplicate(true)
+	var custody: Dictionary = _motion_custody.get(r.actor,{})
+	if not custody.is_empty() and (owners.get("motion") != custody.owner.get_ref() or r.revision != custody.revision or r.session != custody.session): return fail("Actor retained by its performed MOVE interval.","busy")
 	var begun := _begin(r.session,{},r.actor)
 	if not begun.ok: return begun
 	var was_dead: bool = not _actors.get(r.actor,{}).get("record",{}).get("lethal",{}).get("dead",{}).is_empty()

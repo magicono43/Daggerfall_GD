@@ -1,5 +1,12 @@
 # Action input — IMP-011 increments 1, 2 and 3
 
+IMP-012 increment 1 supplies the real [ground/gait consumer](../move/GROUND.md).
+Stock Controls applies independent Hold/Toggle Run/Sneak. Crouch remains retained
+Toggle with its actual posture consumer pending increment 2. Earlier statements
+below that all gait consumers/edits are unavailable are historical.
+`continuous_held` narrowly exposes eligible retained Run/Sneak/Backward physical
+history without synthesizing discrete presses. Other action delivery is unchanged.
+
 ## View and cursor — increment 3
 
 The stock session now composes `view_cursor.gd` and its actual Camera3D. See

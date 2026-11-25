@@ -1,5 +1,23 @@
 # Implementation readiness
 
+**IMP-012 increment 1 accepted, 2026-11-24:** The user explicitly accepted the
+increment after all eight human checks passed. The
+[increment-2 handoff](handoffs/IMP-012-INCREMENT-2-PROMPT.txt) covers posture and
+surfaces only. See [acceptance](evidence/IMP-012-INCREMENT-1-ACCEPTANCE-2026-11-24.md).
+No increment-2 implementation starts here. Named real integrations, receipt
+retirement, exhaustion recovery, later increments, parent IMP-012 and M2 remain
+open; earlier acceptance-pending statements are superseded.
+
+**IMP-012 increment 1 execution, 2026-11-24:** The issued prompt authorizes the
+implemented ground motor/gaits and narrow activity interfaces; qualification and
+human review are tracked in [execution evidence](evidence/IMP-012-increment-1-2026-11-24.md)
+and [review](evidence/IMP-012-INCREMENT-1-REVIEW-2026-11-24.md). Real swept MOVE now
+feeds real CHAR under explicitly controlled entry/LOC-readiness/TIME/traits and
+restriction suppliers. That does not close full story entry, real TIME/condition/
+ITEM/MAGIC/NPC combinations or native SAVE. Accepted prerequisites remain accepted.
+Increment-1 user acceptance, later increments, parent IMP-012 and M2 remain open.
+Older no-runtime/handoff statements below are historical. Changes are uncommitted.
+
 **IMP-016 complete and accepted / IMP-012 increment-1 handoff, 2026-11-24:**
 The user explicitly accepted increment 4 and parent IMP-016. All four increments
 and the parent delivery/dependency edge are closed in their documented scopes.

@@ -25,6 +25,7 @@ func scratch(callbacks: Dictionary) -> RefCounted:
 	var registry := Registry.new()
 	preload("res://scripts/rule/actor_formulas.gd").new().declare(registry)
 	preload("res://scripts/rule/activity_formulas.gd").new().declare(registry)
+	registry.declare_ground_hook(preload("res://scripts/rule/ground_formulas.gd").new().calculate)
 	registry.declare_integer_hook(Fixture.HOOK,callbacks.builtin.builtin)
 	return registry
 

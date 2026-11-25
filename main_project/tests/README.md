@@ -1,5 +1,17 @@
 # Shared verification — IMP-003 / DEV-014
 
+IMP-012 increment 1 has independent `-Suite ground-movement -Fixture
+ground-movement-v1 -ClassicSource C:/Games/Daggerfall/arena2` headless/rendered
+commands, an exact `ground_inventory.json` inventory and fresh-process stock
+preference verification. Windows exports use `verify_startup_export.ps1
+-GroundMovement` for debug/release in both modes. `verify_ground_matrix.ps1`
+serializes the focused matrix. `review_ground.ps1` rebuilds and opens the actual
+controlled rendered review with real input/view/body/CHAR/Controls. See
+[GROUND.md](../scripts/move/GROUND.md) and the
+[manual review](../../design_docs/development/evidence/IMP-012-INCREMENT-1-REVIEW-2026-11-24.md).
+Controlled entry/LOC readiness/TIME/traits/restrictions are named explicitly;
+automated checks do not create human/device PASS or native SAVE readiness.
+
 IMP-061 increment 1 uses independent `-Suite dungeon-assembly -Fixture
 dungeon-assembly-v1` headless/rendered selections with `-ClassicSource
 C:/Games/Daggerfall/arena2`. `dungeon_inventory.json` freezes 1,609/1,615 unique

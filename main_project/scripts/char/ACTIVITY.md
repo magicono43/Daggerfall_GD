@@ -1,5 +1,24 @@
 # Activity and exhaustion — IMP-016 increment 3
 
+IMP-012 increment 1 supplies real committed flat-ground MOVE activity. See
+[the ground contract](../move/GROUND.md). The bounded course retains controlled
+TIME/traits/restrictions/LOC-readiness/entry suppliers. Full TIME, threat,
+ITEM/MAGIC and native SAVE integrations remain open. Older undelivered-locomotion
+statements below describe IMP-016 delivery-time scope.
+
+`ground_capabilities` returns coherent live Speed/Running, eligibility and activity
+cursors/count without copying actor ledgers. The CORE-bound MOVE owner reserves
+short actor-write custody before physical commitment. New source reconciliation,
+vital mutation and acknowledgment wait while performed work is unsettled; exact
+accepted vital retries remain retained lookups. Matching activity intake settles
+custody under the original performed proof, including later independent holds.
+Custody retires with the actor. The pure bounded `preview_ground_activity` uses
+the same selected rate/remainder and forces settlement on the depletion step,
+without writing receipts/practice/pools or consuming RNG. Compatible steps batch
+before first intake; submitted requests and receipts remain immutable. A queued
+next segment retains its original physical revisions separately from its first
+expected CHAR admission revision after the preceding segment settles.
+
 Increment 4 routes exhaustion through the same [CHAR lethal resolver](DEATH.md)
 as ordinary health damage. V4 adds a checked `lethal.v4` continuation without
 rewriting the accepted unavailable request/result. Prevention leaving fatigue

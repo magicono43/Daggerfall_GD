@@ -1,5 +1,9 @@
 # MOVE placement — IMP-013 increment 3
 
+IMP-012 increment 1 extends this same body through the checked
+[`advance_ground` motor interface](GROUND.md). Placement validation/commit and
+camera reset remain separate from locomotion. No competing collider is created.
+
 `session_shell.placement` is the composed `placement_authority.gd` node. It owns
 one `CharacterBody3D`, its active capsule, local pose and supported placement
 state. LOC retains layouts, stable bindings and staged geometry; CORE retains

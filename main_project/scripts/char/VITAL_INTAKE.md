@@ -1,5 +1,11 @@
 # Vital intake — IMP-016 increment 2
 
+IMP-012's performed-ground custody makes new vital writes and acknowledgments
+return checked busy while the actor has unsettled physical activity. Settle the
+retained producer interval and retry with the current actor revision. Existing
+accepted vital receipt lookup remains immutable and does not move the actor.
+See [the activity extension](ACTIVITY.md) and [MOVE contract](../move/GROUND.md).
+
 Increment 4 replaces the previously unavailable lethal boundary with the shared
 [versioned lethal event contract](DEATH.md). Nonlethal applied-vital-v1 receipts
 remain unchanged. Lethal outcomes report saturating debit and prevention restore

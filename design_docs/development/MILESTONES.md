@@ -1,5 +1,23 @@
 # Milestones and validation checkpoints
 
+**M2 / IMP-012 increment 1 accepted, 2026-11-24:** The user accepted the ground
+motor/gait increment after all eight human checks passed. See
+[acceptance](evidence/IMP-012-INCREMENT-1-ACCEPTANCE-2026-11-24.md) and
+[increment-2 handoff](handoffs/IMP-012-INCREMENT-2-PROMPT.txt). This closes the
+increment's acceptance only, not parent IMP-012/M2 or named real-provider,
+long-session retention, exhaustion recovery and SAVE gates. Increment 2 starts
+only in its destination chat; earlier pending-acceptance text is historical.
+
+**M2 / IMP-012 increment 1 execution, 2026-11-24:** Ground motor/gaits now use the
+existing collision body and actual CHAR activity owner. [Execution evidence](evidence/IMP-012-increment-1-2026-11-24.md)
+and [human review](evidence/IMP-012-INCREMENT-1-REVIEW-2026-11-24.md) distinguish
+controlled suppliers from real integrations. This closes no milestone: explicit
+increment-1 acceptance, later physical movement increments, full entry, real
+TIME/traits/restriction/effect/threat joint checks and native SAVE remain open.
+IMP-011's physical controller/changed-host IME deferrals remain at later M2.
+Accepted IMP-011/013/016 task edges are not reopened. Earlier handoff-only text
+below is historical; changes remain uncommitted.
+
 **IMP-016 complete and accepted / IMP-012 increment-1 handoff, 2026-11-24:**
 The user explicitly accepted increment 4 and parent IMP-016. All four increments
 and the parent delivery/dependency edge are closed in their documented scopes.

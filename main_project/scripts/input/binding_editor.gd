@@ -176,7 +176,15 @@ func render(host: Control) -> void:
 		check.toggled.connect(func(value: bool): owner.set_analog({field:value}))
 	host.label("View and cursor · live on Apply. Smoothing time is seconds.",16)
 	for field: String in Configuration.editable_response():
-		if draft.response[field] is bool:
+		if draft.response[field] is String:
+			var choice := OptionButton.new()
+			choice.name = field
+			choice.add_item(field.capitalize().replace("_"," ")+": Hold")
+			choice.add_item(field.capitalize().replace("_"," ")+": Toggle")
+			choice.selected = 0 if draft.response[field] == "hold" else 1
+			host.panel.add_child(choice)
+			choice.item_selected.connect(func(index: int): owner.set_response({field:"hold" if index == 0 else "toggle"}))
+		elif draft.response[field] is bool:
 			var check := CheckBox.new()
 			check.name = field
 			check.text = field.capitalize().replace("_"," ")

@@ -1,0 +1,1826 @@
+{
+  "schema": "IMP-012-increment-1-audit-v1",
+  "date": "2026-11-24",
+  "scope": "ground motor and gait only",
+  "engine": "Godot 4.7.2 Windows",
+  "accepted": false,
+  "starting_head": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221",
+  "committed": false,
+  "matrices": [
+    {
+      "path": "C:/Godot/Projects/Daggerfall_GD/main_project/tests/.runs/imp012-matrix-0bbf0b749cc74b25a8ea81752b323604.json",
+      "sha256": "FD2572C3FA110F593C04956836A4ADDF58E3F18168266637AC5533160E16F79B"
+    },
+    {
+      "path": "main_project/tests/.runs/imp012-matrix-2c5a5d47974f47b794ce704f9d782af4.json",
+      "sha256": "771C92EA2FE76122EABF4A36796F94FAE10AA4FBD57135160FF23D2931C19FBF"
+    }
+  ],
+  "commands": [
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": {
+        "Suite": "action-input",
+        "Fixture": "action-input-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-79bf08933abf4f539a9ea68230aa2d2c\\report.json",
+      "report_sha256": "9F92C6A0E3260BA5F33B5ECB3007D1EF36B93F637D80F0557B20206DA8C45C82",
+      "status": "passed",
+      "primary_assertions": 119,
+      "fresh_process_assertions": 0,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "327580ED1681372B4BD0BB9AD2C5511FC98492528AE6ED01A511B0764DC46A37",
+        "scripts/char/actor_state.gd": "97D52B55E66F42F99F22962A98A128EDBA0EC4A92E1678CC2F5EE97D709070A3",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "634021BF7629A6F57D69E8103243E771D28093283428F3379A359A8839AEAE06",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "ADE5A2E2CD0A85E214219F35C958ADF39BB5EDF80A71DA4323410E3FD3A1325A",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": false,
+        "scripts/char/actor_state.gd": false,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": false,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": false,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "action-input-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": {
+        "Suite": "binding-config",
+        "Fixture": "binding-config-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e48af716685b4d138f1e1e3db800f993\\report.json",
+      "report_sha256": "6438C3384D337E3DB3F548AFE1777DC818C403A022550BD58CFD2C9A83080F1F",
+      "status": "passed",
+      "primary_assertions": 72,
+      "fresh_process_assertions": 8,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "327580ED1681372B4BD0BB9AD2C5511FC98492528AE6ED01A511B0764DC46A37",
+        "scripts/char/actor_state.gd": "97D52B55E66F42F99F22962A98A128EDBA0EC4A92E1678CC2F5EE97D709070A3",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "634021BF7629A6F57D69E8103243E771D28093283428F3379A359A8839AEAE06",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "ADE5A2E2CD0A85E214219F35C958ADF39BB5EDF80A71DA4323410E3FD3A1325A",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": false,
+        "scripts/char/actor_state.gd": false,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": false,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": false,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "binding-config-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_rendered.ps1",
+      "arguments": {
+        "Suite": "view-cursor",
+        "Fixture": "view-cursor-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-f83dbf90108342f1a45159b2b79711b1\\report.json",
+      "report_sha256": "86733568D8E929EA4CA94ED769E03AAA60732BC67F868D187095E2368FB33B1E",
+      "status": "passed",
+      "primary_assertions": 89,
+      "fresh_process_assertions": 8,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "327580ED1681372B4BD0BB9AD2C5511FC98492528AE6ED01A511B0764DC46A37",
+        "scripts/char/actor_state.gd": "97D52B55E66F42F99F22962A98A128EDBA0EC4A92E1678CC2F5EE97D709070A3",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "634021BF7629A6F57D69E8103243E771D28093283428F3379A359A8839AEAE06",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "ADE5A2E2CD0A85E214219F35C958ADF39BB5EDF80A71DA4323410E3FD3A1325A",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": false,
+        "scripts/char/actor_state.gd": false,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": false,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": false,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "view-cursor-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": {
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "actor-state",
+        "Fixture": "actor-state-v1",
+        "TimeoutSeconds": 240
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-0abaa490c8fe4cc3a03f5f930277fe18\\report.json",
+      "report_sha256": "9B1B074E08B99F215135839EFA72E0EA7428CE21E211A09CD9F14719B0E38AAC",
+      "status": "passed",
+      "primary_assertions": 740,
+      "fresh_process_assertions": 527,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "327580ED1681372B4BD0BB9AD2C5511FC98492528AE6ED01A511B0764DC46A37",
+        "scripts/char/actor_state.gd": "97D52B55E66F42F99F22962A98A128EDBA0EC4A92E1678CC2F5EE97D709070A3",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "634021BF7629A6F57D69E8103243E771D28093283428F3379A359A8839AEAE06",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "ADE5A2E2CD0A85E214219F35C958ADF39BB5EDF80A71DA4323410E3FD3A1325A",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": false,
+        "scripts/char/actor_state.gd": false,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": false,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": false,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "actor-state-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_rendered.ps1",
+      "arguments": {
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "actor-state",
+        "Fixture": "actor-state-v1",
+        "TimeoutSeconds": 240
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-371dfee67af743dd98852982b9d1ff79\\report.json",
+      "report_sha256": "4F98C15584B478182FF148B080A9168ABBF689E59D4C96DD46473B433589E97F",
+      "status": "passed",
+      "primary_assertions": 759,
+      "fresh_process_assertions": 533,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "327580ED1681372B4BD0BB9AD2C5511FC98492528AE6ED01A511B0764DC46A37",
+        "scripts/char/actor_state.gd": "97D52B55E66F42F99F22962A98A128EDBA0EC4A92E1678CC2F5EE97D709070A3",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "634021BF7629A6F57D69E8103243E771D28093283428F3379A359A8839AEAE06",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "ADE5A2E2CD0A85E214219F35C958ADF39BB5EDF80A71DA4323410E3FD3A1325A",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": false,
+        "scripts/char/actor_state.gd": false,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": false,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": false,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "actor-state-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": {
+        "Suite": "session",
+        "Fixture": "m1-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-fba4f30a26e743018edb4d6639db3e20\\report.json",
+      "report_sha256": "522C41276CDC6A417FA971340C6D8E06DCE87BEA0B16A92C2F215105C3D108F0",
+      "status": "passed",
+      "primary_assertions": 263,
+      "fresh_process_assertions": 0,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "327580ED1681372B4BD0BB9AD2C5511FC98492528AE6ED01A511B0764DC46A37",
+        "scripts/char/actor_state.gd": "97D52B55E66F42F99F22962A98A128EDBA0EC4A92E1678CC2F5EE97D709070A3",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "634021BF7629A6F57D69E8103243E771D28093283428F3379A359A8839AEAE06",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "ADE5A2E2CD0A85E214219F35C958ADF39BB5EDF80A71DA4323410E3FD3A1325A",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": false,
+        "scripts/char/actor_state.gd": false,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": false,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": false,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "m1-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": {
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "formula",
+        "Fixture": "formula-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-d5db6e143fd84786a63482dfe05de76e\\report.json",
+      "report_sha256": "47A04B3677C8EA4B60E732C73E45DCDCAF1D94D28C999009796460A1B7586B80",
+      "status": "passed",
+      "primary_assertions": 82,
+      "fresh_process_assertions": 0,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "327580ED1681372B4BD0BB9AD2C5511FC98492528AE6ED01A511B0764DC46A37",
+        "scripts/char/actor_state.gd": "97D52B55E66F42F99F22962A98A128EDBA0EC4A92E1678CC2F5EE97D709070A3",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "634021BF7629A6F57D69E8103243E771D28093283428F3379A359A8839AEAE06",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "ADE5A2E2CD0A85E214219F35C958ADF39BB5EDF80A71DA4323410E3FD3A1325A",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": false,
+        "scripts/char/actor_state.gd": false,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": false,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": false,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "formula-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": {
+        "Suite": "randomness",
+        "Fixture": "randomness-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-4739651516264248aada0fa201020531\\report.json",
+      "report_sha256": "54AC60AA9C264F8F83171420126B8CF70038AE6B032A77CEF1260296A4CEE837",
+      "status": "passed",
+      "primary_assertions": 108,
+      "fresh_process_assertions": 0,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "327580ED1681372B4BD0BB9AD2C5511FC98492528AE6ED01A511B0764DC46A37",
+        "scripts/char/actor_state.gd": "97D52B55E66F42F99F22962A98A128EDBA0EC4A92E1678CC2F5EE97D709070A3",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "634021BF7629A6F57D69E8103243E771D28093283428F3379A359A8839AEAE06",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "ADE5A2E2CD0A85E214219F35C958ADF39BB5EDF80A71DA4323410E3FD3A1325A",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": false,
+        "scripts/char/actor_state.gd": false,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": false,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": false,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "randomness-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": {
+        "Suite": "randomness-session",
+        "Fixture": "randomness-session-v1"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-7192aa25a23941b185451377dbc595e1\\report.json",
+      "report_sha256": "975AAECB8E4316E5B15162E0E857C78A195436EDDB8B05535EBB35D443595F90",
+      "status": "passed",
+      "primary_assertions": 115,
+      "fresh_process_assertions": 15,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "327580ED1681372B4BD0BB9AD2C5511FC98492528AE6ED01A511B0764DC46A37",
+        "scripts/char/actor_state.gd": "97D52B55E66F42F99F22962A98A128EDBA0EC4A92E1678CC2F5EE97D709070A3",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "634021BF7629A6F57D69E8103243E771D28093283428F3379A359A8839AEAE06",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "ADE5A2E2CD0A85E214219F35C958ADF39BB5EDF80A71DA4323410E3FD3A1325A",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": false,
+        "scripts/char/actor_state.gd": false,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": false,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": false,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "randomness-session-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": {
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "m1-composition",
+        "Fixture": "m1-composition-v1",
+        "TimeoutSeconds": 240
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-a5398d95f78a4a8e8cc00b8ceaed0de7\\report.json",
+      "report_sha256": "3D0890A9B570B64F6A1FABD43FD6AAEBFF43DEDECACCF0AF271B767D66B87C6A",
+      "status": "passed",
+      "primary_assertions": 33,
+      "fresh_process_assertions": 12,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "327580ED1681372B4BD0BB9AD2C5511FC98492528AE6ED01A511B0764DC46A37",
+        "scripts/char/actor_state.gd": "97D52B55E66F42F99F22962A98A128EDBA0EC4A92E1678CC2F5EE97D709070A3",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "634021BF7629A6F57D69E8103243E771D28093283428F3379A359A8839AEAE06",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "ADE5A2E2CD0A85E214219F35C958ADF39BB5EDF80A71DA4323410E3FD3A1325A",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": false,
+        "scripts/char/actor_state.gd": false,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": false,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": false,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "m1-composition-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": {
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "location-assembly",
+        "Fixture": "location-assembly-v1",
+        "TimeoutSeconds": 240
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e53f6eb32a2848938ad80cf79f8001d4\\report.json",
+      "report_sha256": "85F6854E8978DF7D0F7CFC838495E58DBB43364BA2746D1058931576F9B104AB",
+      "status": "passed",
+      "primary_assertions": 1417,
+      "fresh_process_assertions": 1136,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "327580ED1681372B4BD0BB9AD2C5511FC98492528AE6ED01A511B0764DC46A37",
+        "scripts/char/actor_state.gd": "97D52B55E66F42F99F22962A98A128EDBA0EC4A92E1678CC2F5EE97D709070A3",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "634021BF7629A6F57D69E8103243E771D28093283428F3379A359A8839AEAE06",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "ADE5A2E2CD0A85E214219F35C958ADF39BB5EDF80A71DA4323410E3FD3A1325A",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": false,
+        "scripts/char/actor_state.gd": false,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": false,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": false,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "location-assembly-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": {
+        "TimeoutSeconds": 240,
+        "Fixture": "ground-movement-v1",
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "ground-movement"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-dbc33f51884f4ac78697e9cd1e49410c\\report.json",
+      "report_sha256": "D1A561A2A363F7FADB76D97607896B1C57E2B4E1E8426922142E9475DFDE4AFF",
+      "status": "passed",
+      "primary_assertions": 122,
+      "fresh_process_assertions": 8,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "57E8C32823F1CAB8B26DE5727C9D906A487DF75D43A599382DCB6E0A89A3AE4F",
+        "scripts/char/actor_state.gd": "884EA7D9833C5FFC5DD6A697533B166583E046D7D0EBE3DA59EAAFEB1B9EED64",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "60CF32B4B54B6336328026691695ACD64F415921C74C29A7789DEA45E47777E1",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "50621BCEB74F4364A0E140A9B8939EEF389760F49250AF2DE0708168FE0C3EB0",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "ground-movement-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_rendered.ps1",
+      "arguments": {
+        "TimeoutSeconds": 240,
+        "Fixture": "ground-movement-v1",
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Suite": "ground-movement"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-eb48934cc79a4275b29f3299dc577336\\report.json",
+      "report_sha256": "3F998FE39D9307AA92C9DD9B08A6E6EEDB3B8FC72A3C4388EF6EBD4A5E05FBF6",
+      "status": "passed",
+      "primary_assertions": 123,
+      "fresh_process_assertions": 8,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "57E8C32823F1CAB8B26DE5727C9D906A487DF75D43A599382DCB6E0A89A3AE4F",
+        "scripts/char/actor_state.gd": "884EA7D9833C5FFC5DD6A697533B166583E046D7D0EBE3DA59EAAFEB1B9EED64",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "60CF32B4B54B6336328026691695ACD64F415921C74C29A7789DEA45E47777E1",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "50621BCEB74F4364A0E140A9B8939EEF389760F49250AF2DE0708168FE0C3EB0",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "ground-movement-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "build_identity": {
+        "project_godot": "7658989DF5AD0B68C38E492E80062028DCADD627033A768268B2FA0F22ADB865",
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "bank": "9575028C7A1F589F5770FCCC8CFF2734566AF40CD26ED836944E9A5152688CFE",
+        "native_media": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+        "source_revision": "afe2d1742e08f655f0eab8e8adbbefdf23b2d221"
+      }
+    },
+    {
+      "tool": "verify_startup_export.ps1",
+      "arguments": {
+        "GroundMovement": true,
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Configuration": "debug"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-b580b4c141434963ad60c18190734446\\result.json",
+      "report_sha256": "7C6F446176B20FAA469219F37B78842E3C9D3DA7F4E436579CFE99721B02475A",
+      "status": "passed",
+      "primary_assertions": 245,
+      "fresh_process_assertions": 0,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "57E8C32823F1CAB8B26DE5727C9D906A487DF75D43A599382DCB6E0A89A3AE4F",
+        "scripts/char/actor_state.gd": "884EA7D9833C5FFC5DD6A697533B166583E046D7D0EBE3DA59EAAFEB1B9EED64",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "60CF32B4B54B6336328026691695ACD64F415921C74C29A7789DEA45E47777E1",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "50621BCEB74F4364A0E140A9B8939EEF389760F49250AF2DE0708168FE0C3EB0",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "ground-movement-v1",
+      "build_identity": {
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "configuration": "debug",
+        "pck": "5AD48A3D8E43954001D69ABA4179D231314010FF2191DA860A5AA96752F1BFD8",
+        "executable": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107"
+      }
+    },
+    {
+      "tool": "verify_startup_export.ps1",
+      "arguments": {
+        "GroundMovement": true,
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Configuration": "release"
+      },
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-6191b86ae29343d4bf14295d82f51545\\result.json",
+      "report_sha256": "41C21B48B807F740B98BECB30E3841BFF3D09F386DC78C139C08E32C45399C9C",
+      "status": "passed",
+      "primary_assertions": 245,
+      "fresh_process_assertions": 0,
+      "source_hashes": {
+        "scripts/rule/ground_formulas.gd": "3C2797CDEDC49AC08AFF82A010B6CFBA4E8A6D0E6BEC16F0D6D1031710A42CAC",
+        "scripts/startup/startup_shell.gd": "2CD194DDEEEE8FD9DE597B4C68D9148B8E31B93AC7028F23AD726330CB9AF9EE",
+        "scripts/input/binding_configuration.gd": "9B59A62122EF2849EB40298B7CAE1A204817C1B6FA7592AC0446D8E0C0AD5AA7",
+        "scripts/input/action_input.gd": "611AB0FCEBB546E8AAAE19F6B3A75039D3EF44B87CE76CA1A73CC108A32B880C",
+        "scripts/move/placement_authority.gd": "57E8C32823F1CAB8B26DE5727C9D906A487DF75D43A599382DCB6E0A89A3AE4F",
+        "scripts/char/actor_state.gd": "884EA7D9833C5FFC5DD6A697533B166583E046D7D0EBE3DA59EAAFEB1B9EED64",
+        "scripts/rule/formula_registry.gd": "968B26447160C91C8DA7AD0FE995FEBABD762C27947EB23899FAEA49557EC965",
+        "content/move/ground.json": "58BC7545BC012FC6B76D47618A6ADE74F7B8450B9533CD41EEBB29542A055FE1",
+        "scripts/char/activity_owner.gd": "0BCC59D13FF752C53AF48002254C3245DA0BE7407E13ABBC7EFCD9B518726663",
+        "scripts/input/binding_editor.gd": "CAFDD2355A71FE2834D03C0B7BF42E9CD94B5213EC82A1E3B5CF0DC6CFDF03F8",
+        "scripts/move/ground_coordinator.gd": "60CF32B4B54B6336328026691695ACD64F415921C74C29A7789DEA45E47777E1",
+        "scripts/startup/provider_boundary.gd": "89DD8FF84AC875DE8629A031BD862A1C321DCDC1EE094E560ED03C7952765FDA",
+        "scripts/move/ground_gait.gd": "50621BCEB74F4364A0E140A9B8939EEF389760F49250AF2DE0708168FE0C3EB0",
+        "scripts/data/ground_policy.gd": "E7CE657FB688ECE3309CEA183F728336355027A5BCF98F1F20BA19324E65B715",
+        "scripts/session/session_shell.gd": "055F789D68BBB76D097FA7FBB3D9D3E1A2EAE6C75C9E240707F2CE3D6B07D954"
+      },
+      "copied_source_matches_manifest": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "current_source_matches": {
+        "scripts/rule/ground_formulas.gd": true,
+        "scripts/startup/startup_shell.gd": true,
+        "scripts/input/binding_configuration.gd": true,
+        "scripts/input/action_input.gd": true,
+        "scripts/move/placement_authority.gd": true,
+        "scripts/char/actor_state.gd": true,
+        "scripts/rule/formula_registry.gd": true,
+        "content/move/ground.json": true,
+        "scripts/char/activity_owner.gd": true,
+        "scripts/input/binding_editor.gd": true,
+        "scripts/move/ground_coordinator.gd": true,
+        "scripts/startup/provider_boundary.gd": true,
+        "scripts/move/ground_gait.gd": true,
+        "scripts/data/ground_policy.gd": true,
+        "scripts/session/session_shell.gd": true
+      },
+      "fixture": "ground-movement-v1",
+      "build_identity": {
+        "native_storage": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+        "configuration": "release",
+        "pck": "A19E0BCF49B513CB1FB1CC576DE427CC3E2737DF7351B1E2398CAEC01B57BE00",
+        "executable": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562"
+      }
+    }
+  ],
+  "total_assertions": 6787,
+  "fresh_process_assertions": 2255,
+  "measurements": [
+    {
+      "mode": "headless",
+      "vectors": [
+        {
+          "actual": 4.43037939071655,
+          "case": "ground one second Walk metres",
+          "expected": 4.43037974683544,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual_xyz": [
+            0.0,
+            0.910000026226044,
+            -4.43037939071655
+          ],
+          "case": "ground measured world pose",
+          "expected_xyz": [
+            0.0,
+            0.910000026226044,
+            -4.43037974683544
+          ],
+          "frame": "dungeon-geometry-metres-v1",
+          "profile": "ground-motor-v1",
+          "step_simulated_seconds": 0.02,
+          "steps": 50,
+          "tolerance_metres": 0.0001,
+          "unit": "metre"
+        },
+        {
+          "actual": 2.83122062683105E-07,
+          "case": "ground backward returns metres",
+          "expected": 0.0,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 4.43037939071655,
+          "case": "ground sideways crosses visual marks metres",
+          "expected": 4.43037974683544,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 2.18987341772152,
+          "case": "ground Hold Sneak metres per second",
+          "expected": 2.18987341772152,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 8.86075949367088,
+          "case": "ground Walk factor applied once",
+          "expected": 8.86075949367089,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 2.18987341772152,
+          "case": "ground Sneak excludes Walk factors",
+          "expected": 2.18987341772152,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 1.09493670886076,
+          "case": "ground Sneak own factor once",
+          "expected": 1.09493670886076,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 4.43037974683544,
+          "case": "ground Walk source removed",
+          "expected": 4.43037974683544,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 100.0,
+          "case": "ground resolved speed cap metres per second",
+          "expected": 100.0,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 2.0,
+          "case": "ground physical capped speed metres",
+          "expected": 2.0,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 4.4303765296936,
+          "case": "ground diagonal capped metres",
+          "expected": 4.43037974683544,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 7.08860969543457,
+          "case": "ground one second Run metres",
+          "expected": 7.08860759493671,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.0708856582641602,
+          "case": "ground CORE intended rate 0.5",
+          "expected": 0.0708860759493671,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.283544540405273,
+          "case": "ground CORE intended rate 2.0",
+          "expected": 0.283544303797468,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 1.43051147460938E-05,
+          "case": "ground injected analog Run magnitude 0.0001",
+          "expected": 1.41772151898734E-05,
+          "tolerance": 1E-05,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.0708856582641602,
+          "case": "ground injected analog Run magnitude 0.5",
+          "expected": 0.0708860759493671,
+          "tolerance": 1E-05,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.141772270202637,
+          "case": "ground injected analog Run magnitude 1.0",
+          "expected": 0.141772151898734,
+          "tolerance": 1E-05,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 4.43037974683544,
+          "case": "ground mod fallback uses Walk baseline",
+          "expected": 4.43037974683544,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 7.9746835443038,
+          "case": "ground next eligible step uses live stats",
+          "expected": 7.9746835443038,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.159493684768677,
+          "case": "ground actual facing moves east metres",
+          "expected": 0.159493670886076,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.0,
+          "case": "ground actual facing has no north travel",
+          "expected": 0.0,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual_xyz": [
+            38.6476020812988,
+            0.910000026226044,
+            -19.6007118225098
+          ],
+          "case": "ground wall-slide support boundary",
+          "expected_height": 0.91,
+          "maximum_supported_x": 39.7,
+          "requested_speed_metres_per_second": 100.0,
+          "step_simulated_seconds": 0.1,
+          "unit": "metre"
+        }
+      ],
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-dbc33f51884f4ac78697e9cd1e49410c\\report.json"
+    },
+    {
+      "mode": "rendered",
+      "vectors": [
+        {
+          "actual": 4.43037939071655,
+          "case": "ground one second Walk metres",
+          "expected": 4.43037974683544,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual_xyz": [
+            0.0,
+            0.910000026226044,
+            -4.43037939071655
+          ],
+          "case": "ground measured world pose",
+          "expected_xyz": [
+            0.0,
+            0.910000026226044,
+            -4.43037974683544
+          ],
+          "frame": "dungeon-geometry-metres-v1",
+          "profile": "ground-motor-v1",
+          "step_simulated_seconds": 0.02,
+          "steps": 50,
+          "tolerance_metres": 0.0001,
+          "unit": "metre"
+        },
+        {
+          "actual": 2.83122062683105E-07,
+          "case": "ground backward returns metres",
+          "expected": 0.0,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 4.43037939071655,
+          "case": "ground sideways crosses visual marks metres",
+          "expected": 4.43037974683544,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 2.18987341772152,
+          "case": "ground Hold Sneak metres per second",
+          "expected": 2.18987341772152,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 8.86075949367088,
+          "case": "ground Walk factor applied once",
+          "expected": 8.86075949367089,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 2.18987341772152,
+          "case": "ground Sneak excludes Walk factors",
+          "expected": 2.18987341772152,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 1.09493670886076,
+          "case": "ground Sneak own factor once",
+          "expected": 1.09493670886076,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 4.43037974683544,
+          "case": "ground Walk source removed",
+          "expected": 4.43037974683544,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 100.0,
+          "case": "ground resolved speed cap metres per second",
+          "expected": 100.0,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 2.0,
+          "case": "ground physical capped speed metres",
+          "expected": 2.0,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 4.4303765296936,
+          "case": "ground diagonal capped metres",
+          "expected": 4.43037974683544,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 7.08860969543457,
+          "case": "ground one second Run metres",
+          "expected": 7.08860759493671,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.0708856582641602,
+          "case": "ground CORE intended rate 0.5",
+          "expected": 0.0708860759493671,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.283544540405273,
+          "case": "ground CORE intended rate 2.0",
+          "expected": 0.283544303797468,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 1.43051147460938E-05,
+          "case": "ground injected analog Run magnitude 0.0001",
+          "expected": 1.41772151898734E-05,
+          "tolerance": 1E-05,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.0708856582641602,
+          "case": "ground injected analog Run magnitude 0.5",
+          "expected": 0.0708860759493671,
+          "tolerance": 1E-05,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.141772270202637,
+          "case": "ground injected analog Run magnitude 1.0",
+          "expected": 0.141772151898734,
+          "tolerance": 1E-05,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 4.43037974683544,
+          "case": "ground mod fallback uses Walk baseline",
+          "expected": 4.43037974683544,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 7.9746835443038,
+          "case": "ground next eligible step uses live stats",
+          "expected": 7.9746835443038,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.159493684768677,
+          "case": "ground actual facing moves east metres",
+          "expected": 0.159493670886076,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual": 0.0,
+          "case": "ground actual facing has no north travel",
+          "expected": 0.0,
+          "tolerance": 0.0001,
+          "unit": "metre or metre/second as case names specify"
+        },
+        {
+          "actual_xyz": [
+            38.6476020812988,
+            0.910000026226044,
+            -19.6007118225098
+          ],
+          "case": "ground wall-slide support boundary",
+          "expected_height": 0.91,
+          "maximum_supported_x": 39.7,
+          "requested_speed_metres_per_second": 100.0,
+          "step_simulated_seconds": 0.1,
+          "unit": "metre"
+        }
+      ],
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-eb48934cc79a4275b29f3299dc577336\\report.json"
+    }
+  ],
+  "performance": [
+    {
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-a5398d95f78a4a8e8cc00b8ceaed0de7\\report.json",
+      "kind": "complete 12-adapter composition",
+      "values": {
+        "commit_phases": {
+          "intake_usec": 9250589,
+          "prepare_serial": 3,
+          "prepare_usec": 12123797,
+          "projection_usec": 660898,
+          "validators": {
+            "actor.baseline": {
+              "copy_usec": 170,
+              "validate_usec": 15
+            },
+            "actor.inputs": {
+              "copy_usec": 15883,
+              "validate_usec": 1305
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 37861,
+              "validate_usec": 27312
+            },
+            "geography.inputs": {
+              "copy_usec": 338308,
+              "validate_usec": 200320
+            },
+            "item-spell.inputs": {
+              "copy_usec": 188259,
+              "validate_usec": 3366
+            },
+            "layout.inputs": {
+              "copy_usec": 642796,
+              "validate_usec": 120653
+            },
+            "media.assets": {
+              "copy_usec": 328354,
+              "validate_usec": 11
+            },
+            "mod.preferences": {
+              "copy_usec": 210,
+              "validate_usec": 6
+            },
+            "move.ground": {
+              "copy_usec": 92,
+              "validate_usec": 4
+            },
+            "text.catalogs": {
+              "copy_usec": 220,
+              "validate_usec": 22
+            },
+            "text.fonts": {
+              "copy_usec": 93,
+              "validate_usec": 20
+            },
+            "world.variants": {
+              "copy_usec": 595179,
+              "validate_usec": 48012
+            }
+          }
+        },
+        "commit_usec": 13983737,
+        "faction_query_usec": 1096,
+        "initial_startup_usec": 169863,
+        "memory_peak_bytes": 2347220058,
+        "memory_static_bytes": 1791895786,
+        "selection_phases": {
+          "intake_usec": 11219161,
+          "prepare_serial": 1,
+          "prepare_usec": 14144458,
+          "projection_usec": 690954,
+          "validators": {
+            "actor.baseline": {
+              "copy_usec": 169,
+              "validate_usec": 17
+            },
+            "actor.inputs": {
+              "copy_usec": 15051,
+              "validate_usec": 1290
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 35508,
+              "validate_usec": 27545
+            },
+            "geography.inputs": {
+              "copy_usec": 370046,
+              "validate_usec": 196947
+            },
+            "item-spell.inputs": {
+              "copy_usec": 190294,
+              "validate_usec": 3206
+            },
+            "layout.inputs": {
+              "copy_usec": 629957,
+              "validate_usec": 123039
+            },
+            "media.assets": {
+              "copy_usec": 328051,
+              "validate_usec": 12
+            },
+            "mod.preferences": {
+              "copy_usec": 208,
+              "validate_usec": 6
+            },
+            "move.ground": {
+              "copy_usec": 92,
+              "validate_usec": 4
+            },
+            "text.catalogs": {
+              "copy_usec": 173,
+              "validate_usec": 23
+            },
+            "text.fonts": {
+              "copy_usec": 90,
+              "validate_usec": 22
+            },
+            "world.variants": {
+              "copy_usec": 627698,
+              "validate_usec": 48050
+            }
+          }
+        },
+        "selection_usec": 17274154
+      }
+    },
+    {
+      "mode": "headless",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-dbc33f51884f4ac78697e9cd1e49410c\\report.json",
+      "values": {
+        "capabilities_1000_usec": 15072,
+        "physics_5000_usec": 3927334,
+        "retained_intervals": 110
+      }
+    },
+    {
+      "mode": "rendered",
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-eb48934cc79a4275b29f3299dc577336\\report.json",
+      "values": {
+        "capabilities_1000_usec": 15797,
+        "physics_5000_usec": 4011830,
+        "retained_intervals": 110
+      }
+    }
+  ],
+  "changed_files": [
+    "design_docs/development/evidence/IMP-012-increment-1-2026-11-24.audit.json",
+    "design_docs/development/evidence/IMP-012-increment-1-2026-11-24.md",
+    "design_docs/development/evidence/IMP-012-INCREMENT-1-REVIEW-2026-11-24.md",
+    "design_docs/development/IMPLEMENTATION_READINESS.md",
+    "design_docs/development/MILESTONES.md",
+    "design_docs/development/TASK_BACKLOG.md",
+    "design_docs/development/tasks/IMP-012.md",
+    "main_project/content/move/ground.json",
+    "main_project/scripts/char/activity_owner.gd",
+    "main_project/scripts/char/ACTIVITY.md",
+    "main_project/scripts/char/actor_state.gd",
+    "main_project/scripts/char/README.md",
+    "main_project/scripts/char/VITAL_INTAKE.md",
+    "main_project/scripts/data/ground_policy.gd",
+    "main_project/scripts/data/ground_policy.gd.uid",
+    "main_project/scripts/input/action_input.gd",
+    "main_project/scripts/input/binding_configuration.gd",
+    "main_project/scripts/input/binding_editor.gd",
+    "main_project/scripts/input/README.md",
+    "main_project/scripts/move/ground_coordinator.gd",
+    "main_project/scripts/move/ground_coordinator.gd.uid",
+    "main_project/scripts/move/ground_gait.gd",
+    "main_project/scripts/move/ground_gait.gd.uid",
+    "main_project/scripts/move/GROUND.md",
+    "main_project/scripts/move/placement_authority.gd",
+    "main_project/scripts/move/PLACEMENT.md",
+    "main_project/scripts/rule/FORMULA_DISPATCH.md",
+    "main_project/scripts/rule/formula_registry.gd",
+    "main_project/scripts/rule/ground_formulas.gd",
+    "main_project/scripts/rule/ground_formulas.gd.uid",
+    "main_project/scripts/session/session_shell.gd",
+    "main_project/scripts/startup/provider_boundary.gd",
+    "main_project/scripts/startup/startup_shell.gd",
+    "main_project/tests/actor_state_cases.gd",
+    "main_project/tests/controlled_ground_provider.gd",
+    "main_project/tests/controlled_ground_provider.gd.uid",
+    "main_project/tests/formula_cases.gd",
+    "main_project/tests/ground_cases.gd",
+    "main_project/tests/ground_cases.gd.uid",
+    "main_project/tests/ground_course.gd",
+    "main_project/tests/ground_course.gd.uid",
+    "main_project/tests/ground_inventory.json",
+    "main_project/tests/ground_reload.gd",
+    "main_project/tests/ground_reload.gd.uid",
+    "main_project/tests/ground_review.gd",
+    "main_project/tests/ground_review.gd.uid",
+    "main_project/tests/m1_composition_cases.gd",
+    "main_project/tests/README.md",
+    "main_project/tools/compact_ground_runs.ps1",
+    "main_project/tools/ground_fixture.ps1",
+    "main_project/tools/review_ground.ps1",
+    "main_project/tools/verify_ground_matrix.ps1",
+    "main_project/tools/verify_startup_export.ps1",
+    "main_project/tools/verify.ps1"
+  ],
+  "controlled": [
+    "entry",
+    "flat course LOC ticket/readiness",
+    "TIME eligible microsecond intervals at nominal 12/1",
+    "trait/restriction providers",
+    "speed/stat source fixtures"
+  ],
+  "real": [
+    "SessionShell CORE",
+    "action_input and stock Controls handlers",
+    "view and Camera3D",
+    "existing MOVE capsule and Jolt collision",
+    "CHAR pools/practice/exhaustion",
+    "DATA/MOD/loose publication",
+    "RULE registry and RNG"
+  ],
+  "pending": [
+    "human review and explicit increment acceptance",
+    "later-M2 physical controller/changed-host IME",
+    "full stock story entry",
+    "real TIME/traits/restrictions/ITEM/MAGIC/NPC combinations",
+    "native SAVE/persistent IDs/checkpoint policy",
+    "increments 2–4, parent IMP-012 and M2"
+  ],
+  "command_count": 15,
+  "source_copy_cache": {
+    "sha256": "600EDA4F22B83A8CAB3DE85EABB5241D431EE363939E2CB7FCEC3DDC1545F4D9",
+    "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp012-before-final-schema-audit.json",
+    "purpose": "Executed source hashes captured and checked before routine payload compaction."
+  },
+  "source_scope_note": "The final ground-only matrix supersedes earlier ground/export runs after provider-identity and per-slide support fixes. Unchanged input/view/CHAR/CORE/RULE/RNG/composition/placement paths use the full matrix, with each exact executed source hash retained.",
+  "cleanup_manifests": [
+    "main_project/tests/.runs/imp012-cleanup-1368b119316148719678fc549d91c3c8.json",
+    "main_project/tests/.runs/dungeon-cleanup-9b94e61f8a6343d0a035a7bd2aaf09a2.json",
+    "main_project/tests/.runs/dungeon-cleanup-4f3f325b5e85418387f0ea7581e5c7c4.json",
+    "main_project/tests/.runs/dungeon-cleanup-b84b46d642cf43f39b24a712b9caf2b8.json",
+    "main_project/tests/.runs/dungeon-cleanup-cb50d6889a6746ea893566246f3a95e9.json"
+  ],
+  "human_review": {
+    "launcher": "main_project/tools/review_ground.ps1",
+    "checklist": "design_docs/development/evidence/IMP-012-INCREMENT-1-REVIEW-2026-11-24.md",
+    "physical_controller_and_ime": "user-deferred to later M2",
+    "status": "pending"
+  },
+  "review_focus_followup": {
+    "scope": "Automated fixture restores controlled focus after rendered capture; production/human focus behavior unchanged. Three forced focus-loss checks added. Earlier exports qualify their recorded fixture/source versions; no export behavior changed by this fixture-only correction.",
+    "reports": [
+      {
+        "fixture_source_hashes": {
+          "tests/ground_cases.gd": "82FD2D32C05B1A807A4E3CCEE8C50EE4F8DBECE51EE35FD0A1F79448663C929C",
+          "tests/ground_inventory.json": "C22426E828214B5466668062F4EB3DCD80CDCDF746821D3D9879258A8EBD68B2"
+        },
+        "assertions": 125,
+        "status": "passed",
+        "sha256": "2BBB8E8C6B0A4EB4973137A4056E2A54715D458B79575D65866CDF45C97EEB02",
+        "reproduction": {
+          "command": "./main_project/tools/verify_headless.ps1",
+          "arguments": {
+            "InputSequence": "",
+            "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+            "Seed": null,
+            "Clock": null,
+            "TimeoutSeconds": 240,
+            "Fixture": "ground-movement-v1",
+            "Scenario": [],
+            "Suite": "ground-movement",
+            "ClassicSource": "C:/Games/Daggerfall/arena2"
+          }
+        },
+        "report": "main_project/tests/.runs/verification-headless-96c797f14f3b43e2a15d51c154d71c74/report.json",
+        "mode": "headless",
+        "fresh_process_assertions": 8
+      },
+      {
+        "fixture_source_hashes": {
+          "tests/ground_cases.gd": "82FD2D32C05B1A807A4E3CCEE8C50EE4F8DBECE51EE35FD0A1F79448663C929C",
+          "tests/ground_inventory.json": "C22426E828214B5466668062F4EB3DCD80CDCDF746821D3D9879258A8EBD68B2"
+        },
+        "assertions": 126,
+        "status": "passed",
+        "sha256": "6FCE8E5A0C5459C5EA8AC0DB2063502AA0E0F8BA894208F9D8C4ABC648E041E6",
+        "reproduction": {
+          "command": "./main_project/tools/verify_rendered.ps1",
+          "arguments": {
+            "Fixture": "ground-movement-v1",
+            "Scenario": [],
+            "TimeoutSeconds": 240,
+            "Suite": "ground-movement",
+            "Clock": null,
+            "Seed": null,
+            "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+            "InputSequence": "",
+            "ClassicSource": "C:/Games/Daggerfall/arena2"
+          }
+        },
+        "report": "main_project/tests/.runs/verification-rendered-b4e68217584d437cb10d98c1fe3d82a7/report.json",
+        "mode": "rendered",
+        "fresh_process_assertions": 8
+      }
+    ],
+    "date": "2026-11-24",
+    "debug_runs": [
+      "main_project/tests/.runs/verification-rendered-8726a54c83244dc3baaf70a10596dee5/report.json",
+      "main_project/tests/.runs/verification-rendered-575413866d37455c9cb12fb2127b63b5/report.json"
+    ],
+    "original_failure": "main_project/tests/.runs/verification-rendered-a0d1ee98050f4b8ebe4843f112c8f001/report.json",
+    "launcher_validation": {
+      "path": "main_project/tools/review_ground.ps1",
+      "check": "PowerShell parser passed; rendered preparation command passed independently. Interactive human launch remains for user review.",
+      "sha256": "50CB59FAC32A06DF909DD8F244E4CC4794B6F2E9D62A37354544BB73D3078560"
+    }
+  },
+  "review_launch_followup": {
+    "fix": "Human sandbox is a fresh child of the scenario within the permitted project boundary. Wait on actual paired engine executable, retain stdout/stderr and distinguish nonzero exit from normal closure.",
+    "original_failure": "Human sandbox was outside copied project tests/.runs boundary; startup rejected the fixture before interactive initialization. Launcher incorrectly reported normal closure.",
+    "preparation_report": {
+      "sha256": "E658321AACE740647F1A8775FBFE19838A6A8D67B50AFC016D3ABBE4D3E7F31C",
+      "path": "main_project/tests/.runs/verification-rendered-358dfedbe08e4bba97a3a754d8674da4/report.json",
+      "fresh_process_assertions": 8,
+      "assertions": 126
+    },
+    "command": "& ./main_project/tools/review_ground.ps1 -ClassicSource C:/Games/Daggerfall/arena2 -SmokeTest",
+    "observation": "Inspected rendered course screenshot: clear floor, wall, distance markers and diagnostic readout; actual speed 4.430 m/s.",
+    "launch_result": {
+      "path": "main_project/tests/.runs/verification-rendered-358dfedbe08e4bba97a3a754d8674da4/project/tests/.runs/scenario-1/human-review/result.json",
+      "frames": 60,
+      "sha256": "6E5A3B89BE0E98F44D1C97FCA14FC1A018F5BD040F4DF3C7E011C62AE69FF605",
+      "engine_stderr_bytes": 0,
+      "capture": "project/tests/.runs/scenario-1/human-review/review-smoke.png",
+      "assertions": 13,
+      "human_pass": false
+    },
+    "source_hashes": {
+      "tools/review_ground.ps1": "E7DC73FC0603E6FEB4465CF3854D775450C307FDCB8FBD4789335E85B332679C",
+      "tests/ground_cases.gd": "82FD2D32C05B1A807A4E3CCEE8C50EE4F8DBECE51EE35FD0A1F79448663C929C",
+      "tests/ground_review.gd": "8CE3C3E69DB601FFD6196E6E0E2D795926F5665D157D9EC0EAAA44D6F73245CE"
+    },
+    "original_root": "main_project/tests/.runs/verification-rendered-904719cb92a942dab9987ebef5d118bd",
+    "date": "2026-11-24"
+  }
+}

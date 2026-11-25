@@ -1,5 +1,21 @@
 # Implementation backlog
 
+**IMP-012 increment 1 accepted / increment-2 handoff, 2026-11-24:** All eight
+human checks passed and the user explicitly accepted the ground motor/gait
+increment. See [acceptance](evidence/IMP-012-INCREMENT-1-ACCEPTANCE-2026-11-24.md)
+and [handoff](handoffs/IMP-012-INCREMENT-2-PROMPT.txt). Increment 2 is prepared for
+another chat, not started here. Later increments, parent IMP-012/M2 and named
+real-provider/retention/recovery/SAVE obligations remain open. Earlier pending
+acceptance statements below are historical; changes remain uncommitted.
+
+**IMP-012 increment 1 execution, 2026-11-24:** The issued ground motor/gait prompt
+is implemented and machine-verified through existing SessionShell/MOVE/CHAR owners.
+See [execution evidence](evidence/IMP-012-increment-1-2026-11-24.md) and
+[human review](evidence/IMP-012-INCREMENT-1-REVIEW-2026-11-24.md). Accepted
+IMP-011/013/016 prerequisites remain closed. Increment-1 acceptance, increments
+2–4, parent IMP-012, M2 and named real-provider/native SAVE integrations remain
+open. Earlier handoff-only statements below are historical. Changes are uncommitted.
+
 **IMP-016 complete and accepted / IMP-012 increment-1 handoff, 2026-11-24:**
 The user explicitly accepted increment 4 and parent IMP-016. All four increments
 and the parent delivery/dependency edge are closed in their documented scopes.

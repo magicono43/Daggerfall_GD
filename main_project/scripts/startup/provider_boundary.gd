@@ -21,7 +21,9 @@ func _init() -> void:
 	# Application hooks and numeric DATA policy exist before any candidate/lock.
 	_baseline_setup = preload("res://scripts/rule/actor_formulas.gd").new().declare(formulas)
 	if _baseline_setup.ok: _baseline_setup = preload("res://scripts/rule/activity_formulas.gd").new().declare(formulas)
+	if _baseline_setup.ok: _baseline_setup = formulas.declare_ground_hook(preload("res://scripts/rule/ground_formulas.gd").new().calculate)
 	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/actor_baseline.gd").new(),"",[])
+	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/ground_policy.gd").new(),"",[])
 
 func enable_variant_inputs() -> Dictionary:
 	if layouts == null: return {"ok":false,"reason":"Register layout provider before variants."}

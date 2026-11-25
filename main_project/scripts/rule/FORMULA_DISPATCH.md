@@ -1,5 +1,15 @@
 # Formula dispatch — IMP-006 increment 3
 
+IMP-012 increment 1 adds the focused `ground-speed-v1` Dictionary→float contract
+for `move.ground-speed`. It uses this same registry, MOD selection/locking,
+CORE-scoped consumer admission and callback/no-fallback checks. The exact input
+is `{gait,profile,speed,running}`; `ground_formulas.gd` validates the supported
+standing domain and supplies the approved MOVE-005 formula. Output must be a
+finite positive float ≤1e22; source combination, engine-unit mapping and the
+configured physical speed cap remain MOVE's checked consumer work. Existing
+integer/actor/activity contracts retain their earlier envelopes and output bounds.
+See [GROUND.md](../move/GROUND.md) for DATA provenance and ordered activity delivery.
+
 IMP-016 increment 3 additionally declares the focused `activity-formula-v1`
 Dictionary->integer hooks `char.activity-rate`, `char.recovery-health` and
 `char.recovery-pool` before preparation. `activity_formulas.gd` defines complete

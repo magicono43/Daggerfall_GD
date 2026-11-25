@@ -1,0 +1,12 @@
+{
+  "domain": "move.ground", "path": "policy", "operation": "add",
+  "entries": [{"id": "player", "value": {
+    "schema": "ground-motor-v1",
+    "divisor": 39.5, "walk_add": 150.0, "drag": 0.5,
+    "drag_threshold": 30.0, "run_base": 1.35, "running_divisor": 200.0,
+    "sneak_divisor": 2.0, "sneak_subtract": 1.0,
+    "metres_per_speed_unit": 1.0, "maximum": 100.0,
+    "moving_metres_per_second": 0.0001,
+    "provenance": {"formula": "MOVE-005 approved standing baseline; DFU PlayerSpeedChanger.cs", "license": "MIT; scripts/rule/DFU_LICENSE.txt", "mapping": "one gait unit per second = one engine metre per second; classic geometry already converted at 0.025 m/source unit", "scope": "standing flat ground; posture and air owners pending"}
+  }}]
+}

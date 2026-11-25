@@ -1,5 +1,17 @@
 # Verification run artifact cleanup
 
+## 2026-11-24 IMP-012 increment 1 and review-launch follow-up
+
+Five cleanup batches compacted 65 explicitly owned, inactive run roots after
+terminal verification and exact-path/reparse checks. Removed 99,374 reproducible
+files / 16,304,040,535 logical bytes while preserving reports, logs, captures,
+typed inputs and executed source snapshots. No selected full project/export or
+active human-review build remains. The human launcher rebuilds a fresh course.
+Earlier accepted evidence and unique debugging inputs were preserved. A transient
+8.90 GiB logical retention measurement was reviewed during verification; copied
+projects and exports were reproducible payloads. Exact journals are linked in the
+[IMP-012 audit](evidence/IMP-012-increment-1-2026-11-24.audit.json).
+
 ## 2026-11-24 IMP-016 increment 4
 
 At completed verification checkpoints and after the final matrix, ordinary engine inactivity, exact containment, terminal reports and reparse checks qualified **45 owned roots** across three batches. Removed **67,867 reproducible files /11,206,824,311 logical bytes**, preserving **463 hash-verified child reports/logs/captures**, root build identities, exact typed inputs and reviewed images. No selected full copied project, export, dependency copy or cache remains. Installed template junctions were unlinked without following or modifying their targets.
