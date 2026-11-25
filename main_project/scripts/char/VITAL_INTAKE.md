@@ -1,5 +1,11 @@
 # Vital intake — IMP-016 increment 2
 
+IMP-012 increment 3 adds the explicit CORE-bound MOVE consumer for fall health
+damage under [AIR.md](../move/AIR.md). MOVE may submit only `damage` on `health`;
+its actual coordinator attests the retained landing request. CHAR still owns all
+pool changes, prevention and death. This supersedes the older MOVE-no-grant
+statement below for that narrow consumer; it grants no fatigue/healing authority.
+
 IMP-012's performed-ground custody makes new vital writes and acknowledgments
 return checked busy while the actor has unsettled physical activity. Settle the
 retained producer interval and retry with the current actor revision. Existing
@@ -26,10 +32,10 @@ The shared CHAR-023 lethal boundary still rejects unchanged until increment 4.
 boundary. It never derives formulas, resolves modifier sources, moves an actor,
 draws randomness or performs COMBAT/MAGIC gameplay. The current CORE mode owner
 declares trusted session services with a stable `vital_intake` consumer handle.
-CORE admits only COMBAT, MAGIC, ITEM and CHAR owners implementing
+CORE admits COMBAT, MAGIC, ITEM, CHAR and the narrow MOVE owner implementing
 `vital_operation_current(detached_request) -> bool`. Runtime weak Object bindings
 attest the actual composed consumer; Object IDs and constructor labels are not
-persistent identities. UI, DATA, MOVE and observer callbacks have no intake grant.
+persistent identities. UI, DATA and observer callbacks have no intake grant.
 The stock provider still cannot enter a real game. Controlled consumers qualify
 this interface without delivering those future owners.
 
@@ -61,7 +67,7 @@ does not hide arithmetic overflow. No numeric-policy or executable hook is added
 
 | Consumer | Eligible operations |
 | --- | --- |
-| COMBAT | health damage |
+| COMBAT, MOVE | health damage |
 | MAGIC | spend, damage, drain, heal, recover on supported pools |
 | ITEM | heal, recover, fill on supported pools |
 | CHAR | spend, drain, recover, fill on supported pools |

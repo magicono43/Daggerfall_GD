@@ -1,5 +1,12 @@
 # Formula dispatch — IMP-006 increment 3
 
+IMP-012 increment 3 adds `air-formula-v1` Dictionary→float hooks
+`move.jump-impulse` and `move.landing-damage` through this same registry and scoped
+consumer binding. [AIR.md](../move/AIR.md) specifies exact inputs, finite/whole
+output domains, validated publication, scale conversion, physical caps and failure
+ordering. Only landing damage permits zero; integer/ground contracts retain their
+prior bounds. Selected provider failure has no fallback.
+
 IMP-012 increment 1 adds the focused `ground-speed-v1` Dictionary→float contract
 for `move.ground-speed`. It uses this same registry, MOD selection/locking,
 CORE-scoped consumer admission and callback/no-fallback checks. The exact input

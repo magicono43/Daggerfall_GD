@@ -24,7 +24,7 @@ static func request_valid(r: Variant) -> bool:
 
 static func eligible(domain: String, action: String, pool: String) -> bool:
 	match domain:
-		"COMBAT": return action == "damage" and pool == "health"
+		"COMBAT", "MOVE": return action == "damage" and pool == "health"
 		"MAGIC": return action in ["spend","damage","drain","heal","recover"]
 		"ITEM": return action in ["heal","recover","fill"]
 		"CHAR": return action in ["spend","drain","recover","fill"]

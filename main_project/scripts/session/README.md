@@ -1,5 +1,10 @@
 # Session shell interfaces
 
+IMP-012 increment 3 extends the existing ground consumer to resolved Jump,
+air/landing RULE hooks and an explicit MOVE health-damage consumer. It uses the
+same body, CORE gates, CHAR and camera projection. See [AIR.md](../move/AIR.md).
+No second controller, native SAVE or platform-carriage entry is introduced.
+
 IMP-016 increment 4 adds scoped prevention-directory and disclosed-effect
 bindings, CHAR's checked actor/event death confirmation, the real
 [vitals/effects view](../char/VITALS_VIEW.md) and an independent

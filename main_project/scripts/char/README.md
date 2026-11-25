@@ -1,5 +1,9 @@
 # CHAR actor owner — IMP-016 increments 1–4
 
+IMP-012 increment 3 uses this real owner for jump fatigue/practice, landing health
+and lethal handoff. See [AIR.md](../move/AIR.md) and the updated intake/activity
+contracts. Platform/MAGIC/WORLD providers and native SAVE retain separate gates.
+
 IMP-012 increment 1 adds the narrow live ground capability/cursor projection and
 performed-activity custody/preview interfaces described in [ACTIVITY.md](ACTIVITY.md).
 MOVE remains physical authority; this adds no collider, calendar or actor store.

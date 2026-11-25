@@ -1,3 +1,11 @@
+# Increment-3 extension
+
+Air, zero-time takeoff billing, gravity, landings and retained health outcomes now
+extend this same coordinator/body. See [AIR.md](AIR.md) for current interfaces,
+scale, tuning, recovery, controlled-provider and in-memory snapshot limits.
+Historical ground-only/unimplemented-air statements below describe earlier
+increments. Platform carriage/crushing, broad AV feedback and native SAVE remain open.
+
 # Increment-2 extension
 
 Posture and surfaces now extend this same coordinator/body; see

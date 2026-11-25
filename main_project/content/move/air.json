@@ -1,0 +1,19 @@
+{
+  "domain": "move.air", "path": "policy", "operation": "add",
+  "entries": [{"id": "player", "value": {
+    "schema": "air-motion-v1",
+    "metres_per_reference_unit": 1.0,
+    "jump_base": 4.5, "jumping_divisor": 200.0,
+    "athleticism": 0.1, "improved_athleticism": 0.1, "enhanced": 0.6,
+    "crouch_factor": 0.8, "gravity": 20.0,
+    "maximum_impulse": 20.0, "maximum_downward_speed": 40.0,
+    "steering_acceleration": 12.0, "steering_speed": 8.0,
+    "boost_speed": 0.0, "inherit_platform": true, "slow_fall_blocks_jump": true,
+    "safe_distance": 5.0, "damage_per_unit": 5.0, "hard_distance": 2.5,
+    "provenance": {
+      "formula": "MOVE-009-A01 and MOVE-010-A01 approved baselines; DFU AcrobatMotor and PlayerHealth formulas, MIT (scripts/rule/DFU_LICENSE.txt)",
+      "scale": "Project-selected one reference movement unit = one metre; dungeon-geometry-metres-v1. Not original executable trajectory verification.",
+      "tuning": "Project-authored 20 m/s impulse cap, 40 m/s descent cap, 12 m/s^2 steering toward 8 m/s; zero optional forward boost. Physical sweeps, not engine defaults."
+    }
+  }}]
+}

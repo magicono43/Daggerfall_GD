@@ -14,6 +14,23 @@ var argonian := false
 var source_request: Dictionary = {}
 var trait_snapshots: Dictionary = {}
 var capture_revisions: Dictionary = {}
+var enhanced_jumping := false
+var slow_fall := false
+var slow_fall_speed := 2.0
+var transition_request: Dictionary = {}
+var fail_event_capture := false
+var event_callback: Callable
+func air_transition_current(r: Dictionary) -> bool:
+	return valid and r == transition_request
+func air_traits(_context: Dictionary) -> Dictionary:
+	return {"ok":true,"revision":revision,"enhanced":enhanced_jumping,"slow_fall":slow_fall,"slow_fall_speed":slow_fall_speed}
+func capture_ground_event(r: Dictionary) -> bool:
+	if fail_event_capture: return false
+	if event_callback.is_valid(): event_callback.call()
+	if r.kind != "jump" or r.clock.start_game != game or r.clock.end_game != game or r.clock.start_sim != simulated or r.clock.end_sim != simulated: return false
+	if committed.has(r.operation): return committed[r.operation] == r
+	committed[r.operation] = r.duplicate(true)
+	return true
 func ground_source_current(request: Dictionary) -> bool: return valid and request == source_request
 
 func ground_interval(_context: Dictionary, delta: float) -> Dictionary:

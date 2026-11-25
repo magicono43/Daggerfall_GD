@@ -59,6 +59,21 @@ func preview_ground_activity(owner: RefCounted, raw: Variant) -> Dictionary:
 	if not begun.ok: return begun
 	var prepared: Dictionary = activity.prepare()
 	return _end(activity.ground_preview(raw) if prepared.ok else prepared)
+
+## Quote uses CHAR's selected jump rate; MOVE must still report the performed
+## event through activity_intake. This neither pays nor awards practice.
+func quote_jump(owner: RefCounted, capability: Dictionary, traits: Dictionary) -> Dictionary:
+	var core: SessionLifecycle = _core.get_ref()
+	if core == null or not core.activity_owner(capability.get("session",""),owner,"ground-motion","motion") or ground_capabilities(capability.get("session",""),capability.get("actor","")) != capability: return fail("Current MOVE jump capability required.")
+	for field in ["athleticism","improved_athleticism"]:
+		if typeof(traits.get(field)) != TYPE_BOOL: return fail("Checked jump traits required.")
+	var begun := _begin(capability.session,{},capability.actor)
+	if not begun.ok: return begun
+	var prepared: Dictionary = activity.prepare()
+	if not prepared.ok: return _end(prepared)
+	var quote: Dictionary = activity.rate(int(activity._policy.activity.jump_cost),traits)
+	if not quote.ok: return _end(quote)
+	return _end({"ok":true,"cost":quote.value,"eligible":capability.voluntary_allowed})
 signal activity_committed(outcome: Dictionary)
 
 func _init(core: SessionLifecycle) -> void:
@@ -427,7 +442,7 @@ func ground_capabilities(scope: String, actor: String) -> Dictionary:
 	if not view.ok: return view
 	var entry: Dictionary = _actors[actor]
 	var activity: Dictionary = entry.record.get("activity",{})
-	return {"ok":true,"session":scope,"actor":actor,"content":view.content,"revision":view.revision,"speed":entry.derived.attributes.speed.live,"running":entry.derived.skills.running.live,"voluntary_allowed":not view.zero_health and not view.zero_fatigue and view.pending_outcomes == 0 and entry.record.get("lethal",{}).get("active",{}).is_empty(),"activity_game":activity.get("game",entry.record.progression.activity_baseline.instant*1000),"activity_sim":activity.get("simulation",0),"activity_owner":activity.get("interval_owner",""),"activity_count":activity.get("count",0)}
+	return {"ok":true,"session":scope,"actor":actor,"content":view.content,"revision":view.revision,"speed":entry.derived.attributes.speed.live,"running":entry.derived.skills.running.live,"jumping":entry.derived.skills.jumping.live,"voluntary_allowed":not view.zero_health and not view.zero_fatigue and view.pending_outcomes == 0 and entry.record.get("lethal",{}).get("active",{}).is_empty(),"activity_game":activity.get("game",entry.record.progression.activity_baseline.instant*1000),"activity_sim":activity.get("simulation",0),"activity_owner":activity.get("interval_owner",""),"activity_count":activity.get("count",0)}
 
 func vital_projection(scope: String, actor: String) -> Dictionary:
 	var core: SessionLifecycle = _core.get_ref()

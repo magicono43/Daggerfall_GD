@@ -416,7 +416,7 @@ func _validate_vital_bindings(services: Array) -> Dictionary:
 		if not service.has("vital_intake"): continue
 		var id: Variant = service.vital_intake
 		var owner: Object = service.get("provider")
-		if not id is String or not preload("res://scripts/mod/package_library.gd").valid_id(id) or identities.has(id) or service.owner not in ["COMBAT","MAGIC","ITEM","CHAR"] or service.lifetime != "session" or not is_instance_valid(owner) or not owner.has_method("vital_operation_current") or bindings.has(owner.get_instance_id()):
+		if not id is String or not preload("res://scripts/mod/package_library.gd").valid_id(id) or identities.has(id) or service.owner not in ["COMBAT","MAGIC","ITEM","CHAR","MOVE"] or service.lifetime != "session" or not is_instance_valid(owner) or not owner.has_method("vital_operation_current") or bindings.has(owner.get_instance_id()):
 			return {"ok":false,"reason":"Vital intake requires one explicit eligible session owner binding and stable consumer handle."}
 		identities[id] = true
 		bindings[owner.get_instance_id()] = {"owner":weakref(owner),"id":id,"domain":service.owner}

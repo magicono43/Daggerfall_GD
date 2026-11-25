@@ -15,6 +15,247 @@ var _committing := false
 var _ground_owner: WeakRef
 var _ground_sequence := 0
 var _ground_last: Dictionary = {}
+var air := preload("res://scripts/move/air_history.gd").new()
+var _takeoff_sequence := 0
+var _takeoff_receipt: Dictionary = {}
+
+## Zero-time physical event. CHAR settles this retained actual takeoff before
+## any eligible flight duration is advanced. This is not a second body/controller.
+func commit_takeoff(owner: RefCounted, raw: Dictionary) -> Dictionary:
+	if _ground_owner == null or _ground_owner.get_ref() != owner or _committing or raw.size() != 5 or raw.get("session") != _actor_scope or raw.get("placement_serial") != _serial or not raw.get("posture") is Dictionary or not raw.get("takeoff") is Dictionary or not raw.get("velocity") is Vector3 or not raw.velocity.is_finite() or raw.velocity.length() > 2000.0: return {"ok":false,"reason":"Current checked takeoff required."}
+	var event: Variant = raw.takeoff.get("event_sequence")
+	if typeof(event) != TYPE_INT or event < 1 or event > 1000000000: return {"ok":false,"reason":"Bounded takeoff identity required."}
+	if raw.takeoff.size() != 6 or raw.takeoff.get("id") != "jump-"+str(event) or raw.takeoff.get("kind") != "jump" or not raw.takeoff.get("gait") is Dictionary or not preload("res://scripts/rule/air_formulas.gd").valid_input("move.jump-impulse",raw.takeoff.get("snapshot")) or not raw.takeoff.get("impulse") is float or not is_finite(raw.takeoff.impulse) or raw.takeoff.impulse <= 0.0 or raw.takeoff.impulse > 100.0: return {"ok":false,"reason":"Complete bounded takeoff snapshot required."}
+	if event == _takeoff_sequence: return _takeoff_receipt.result.duplicate(true) if _takeoff_receipt.get("request") == raw else {"ok":false,"reason":"Changed takeoff identity."}
+	if event < _takeoff_sequence or air.airborne or not air.pending.is_empty() or not core.gates.simulation() or air.segment >= 1000000000 or air.outcomes.size() >= 4096: return {"ok":false,"reason":"Takeoff unavailable or already committed."}
+	var checked := prepare_ground_posture(owner,raw.session,raw.posture.get("desired",""),raw.posture.get("tuning",{}))
+	if not checked.get("ok",false) or checked != raw.posture: return {"ok":false,"reason":"Takeoff posture changed."}
+	var context := air_context(owner,raw.session,checked.tuning)
+	if not context.ok or not context.supported or context.physical.mode != "standing" or context.physical.transport != "foot": return {"ok":false,"reason":"Actual ordinary foot support required at takeoff."}
+	_committing = true
+	var p: Dictionary = _receipts[_state.handoff_id].policy.duplicate()
+	if _shape.shape.height != checked.height:
+		p.height = checked.height
+		_shape.shape = _capsule(p)
+		_actor.position = checked.position
+	_state.physical.posture = checked.actual
+	_state.desired_posture = checked.desired
+	_state.pending_stand = checked.pending_stand
+	_state.shape.height = checked.height
+	air.begin(_actor.position.y-checked.height*0.5,raw.velocity,raw.takeoff)
+	_actor.velocity = raw.velocity
+	_publish_air()
+	_takeoff_sequence = event
+	var result := {"ok":true,"takeoff_committed":true,"session":raw.session,"position":_actor.position,"base":_actor.position-Vector3.UP*checked.height*0.5,"posture":checked.duplicate(true),"airborne":true,"velocity":air.velocity,"stair_correction":0.0,"actual_metres_per_second":0.0}
+	_takeoff_receipt = {"request":raw.duplicate(true),"result":result.duplicate(true)}
+	_committing = false
+	return result
+
+## Same MOVE body and sequence as surface travel. Queries do not commit takeoff.
+func air_context(owner: RefCounted, scope: String, tuning: Dictionary) -> Dictionary:
+	if _ground_owner == null or _ground_owner.get_ref() != owner or _committing: return {"ok":false,"reason":"Unbound air context."}
+	var context := ground_context(scope)
+	if not context.ok: return context
+	var p: Dictionary = _receipts[_state.handoff_id].policy.duplicate()
+	p.margin = tuning.motion_margin
+	var support := _ground_support(_actor.get_world_3d().direct_space_state,_actor.position,p,tuning,tuning.contact_gap*3,float(_ground_last.get("result",{}).get("support_hint_ny",1.0))) if not air.airborne else {"ok":false}
+	context.supported = support.ok
+	context.base = _actor.position-Vector3.UP*_shape.shape.height*0.5
+	context.airborne = air.airborne
+	return context
+
+func _publish_air() -> void:
+	_state.position = _actor.position
+	_state.physical.velocity = _actor.velocity
+	_state.physical.mode = "airborne" if air.airborne else "standing"
+	_state.physical.fall_history = {"segment":air.segment,"peak":air.peak,"origin_y":air.origin_y,"protected":air.protections.keys()} if air.airborne else {}
+
+func _air_slide(vector: Vector3, normal: Vector3, planes: Array[Vector3]) -> Vector3:
+	var result := vector.slide(normal)
+	for plane: Vector3 in planes:
+		if result.dot(plane) >= -0.00000001: continue
+		# A second witnessed plane must not project motion back into the first.
+		# Their shared crease preserves free motion (vertical at a wall pinch).
+		var crease := normal.cross(plane)
+		if crease.length_squared() < 1e-12: return Vector3.ZERO
+		result = crease*(vector.dot(crease)/crease.length_squared())
+		for previous: Vector3 in planes:
+			if result.dot(previous) < -0.00000001: return Vector3.ZERO
+	return result
+
+func _air_sweep(displacement: Vector3, p: Dictionary) -> Dictionary:
+	var space := _actor.get_world_3d().direct_space_state
+	var start := _actor.position
+	var hit := KinematicCollision3D.new()
+	var blocked := _actor.test_move(_actor.global_transform,displacement,hit,p.margin*2.0)
+	var travel := hit.get_travel() if blocked else displacement
+	var normal := hit.get_normal() if blocked and hit.get_collision_count() > 0 else Vector3.ZERO
+	var q := _query(_shape.shape,start,p.margin)
+	q.motion = displacement
+	var fractions := space.cast_motion(q)
+	if fractions.size() == 2 and fractions[0] < 1.0:
+		blocked = true
+		if displacement.length()*fractions[0] < travel.length(): travel = displacement*fractions[0]
+		q.transform.origin += displacement*fractions[1]
+		q.motion = Vector3.ZERO
+		var contact := space.get_rest_info(q)
+		if not contact.is_empty(): normal = contact.normal
+	if not blocked and not _volume(space,_shape.shape,start+displacement,p):
+		blocked = true
+		q = _query(_shape.shape,start+displacement,p.margin)
+		var endpoint_contact := space.get_rest_info(q)
+		if not endpoint_contact.is_empty(): normal = endpoint_contact.normal
+	if blocked and normal.length_squared() < 0.5:
+		# A short cast can miss contact tolerance. Obtain a real normal from a
+		# longer read-only witness, never extend the committed displacement.
+		var witness := KinematicCollision3D.new()
+		if _actor.test_move(_actor.global_transform,displacement.normalized()*(displacement.length()+p.margin*8.0),witness,p.margin*2.0) and witness.get_collision_count() > 0: normal = witness.get_normal()
+		if not normal.is_finite() or normal.length_squared() < 0.5: return {"hit":true,"normal":Vector3.ZERO,"remainder":Vector3.ZERO,"recovery":true}
+	if not blocked:
+		_actor.position += displacement
+		return {"hit":false}
+	var backoff := minf(travel.length(),p.margin*2.0/maxf(0.000001,-displacement.normalized().dot(normal)))
+	travel -= displacement.normalized()*backoff
+	var target := start+travel
+	if not _clear_route(space,start,target,p):
+		var low := 0.0
+		var high := 1.0
+		for index in 16:
+			var mid := (low+high)*0.5
+			if _clear_route(space,start,start+travel*mid,p): low = mid
+			else: high = mid
+		target = start+travel*low
+	_actor.position = target
+	return {"hit":true,"normal":normal,"remainder":displacement-(_actor.position-start)}
+
+## A start is an already checked once-only takeoff, never an input callback.
+func advance_air(owner: RefCounted, raw: Dictionary) -> Dictionary:
+	if _ground_owner == null or _ground_owner.get_ref() != owner or _committing: return {"ok":false,"reason":"Unbound/reentrant air authority."}
+	if raw.size() != 11 or typeof(raw.get("slow_fall")) != TYPE_BOOL or raw.get("session") != _actor_scope or typeof(raw.get("sequence")) != TYPE_INT or raw.get("placement_serial") != _serial or not raw.get("posture") is Dictionary or not raw.get("start") is Dictionary or not raw.get("policy") is Dictionary or not raw.get("steering") is Vector3 or not raw.steering.is_finite() or raw.steering.length() > 1000.00001 or typeof(raw.get("enhanced")) != TYPE_BOOL or not raw.get("forward") is Vector3 or not raw.forward.is_finite() or absf(raw.forward.length()-1.0) > 0.000001 or absf(raw.forward.y) > 0.000001 or not raw.get("delta") is float or not is_finite(raw.delta) or raw.delta <= 0.0 or raw.delta > 0.1: return {"ok":false,"reason":"Malformed air step."}
+	if raw.sequence == _ground_sequence: return _ground_last.result.duplicate(true) if raw == _ground_last.request else {"ok":false,"reason":"Changed air step identity."}
+	if raw.sequence != _ground_sequence+1 or not core.gates.simulation() or not preload("res://scripts/data/air_policy.gd").reason(raw.policy).is_empty(): return {"ok":false,"reason":"Stale/suspended/invalid air step."}
+	var checked := prepare_ground_posture(owner,raw.session,raw.posture.get("desired",""),raw.posture.get("tuning",{}))
+	if not checked.get("ok",false) or checked != raw.posture or not air.pending.is_empty(): return {"ok":false,"reason":"Air posture changed or landing awaits settlement."}
+	if not raw.start.is_empty():
+		if air.airborne or raw.start.size() != 2 or not raw.start.get("velocity") is Vector3 or not raw.start.velocity.is_finite() or raw.start.velocity.length() > 2000.0 or not raw.start.get("takeoff") is Dictionary: return {"ok":false,"reason":"Invalid/repeated takeoff."}
+		var departure := air_context(owner,raw.session,checked.tuning)
+		if not departure.ok or departure.supported or departure.physical.transport != "foot" or raw.start.takeoff.get("kind") != "walk-off": return {"ok":false,"reason":"Actual unsupported foot departure required."}
+	elif not air.airborne: return {"ok":false,"reason":"No active air segment."}
+	if air.outcomes.size() >= 4096 or air.segment >= 1000000000: return {"ok":false,"reason":"Air outcome retention exhausted."}
+	_committing = true
+	var p: Dictionary = _receipts[_state.handoff_id].policy.duplicate()
+	p.margin = checked.tuning.motion_margin
+	if _shape.shape.height != checked.height:
+		var dimensions := p.duplicate()
+		dimensions.height = checked.height
+		_shape.shape = _capsule(dimensions)
+		_actor.position = checked.position
+	_state.physical.posture = checked.actual
+	_state.desired_posture = checked.desired
+	_state.pending_stand = checked.pending_stand
+	_state.shape.height = checked.height
+	var start: Vector3 = _actor.position
+	if not raw.start.is_empty(): air.begin(start.y-checked.height*0.5,raw.start.velocity,raw.start.takeoff)
+	air.protection("@effect/slow-fall",raw.slow_fall,start.y-checked.height*0.5)
+	var steering_limit: float = raw.policy.steering_speed*raw.policy.metres_per_reference_unit
+	var steering_acceleration: float = raw.policy.steering_acceleration*raw.policy.metres_per_reference_unit
+	var gravity: float = raw.policy.gravity*raw.policy.metres_per_reference_unit
+	var terminal: float = raw.policy.maximum_downward_speed*raw.policy.metres_per_reference_unit
+	air.velocity.y = maxf(air.velocity.y,-terminal)
+	# Integrate at <= 1/240 s, splitting exactly at apex and terminal speed. Full
+	# capsule sweeps constrain every fragment; no endpoint-only teleport is used.
+	var remaining: float = raw.delta
+	var ceilings := 0
+	var collisions := 0
+	var landed := false
+	var contact_recovery := false
+	while remaining > 0.00000001:
+		var dt := minf(remaining,1.0/240.0)
+		var horizontal := Vector3(air.velocity.x,0,air.velocity.z)
+		var steered := horizontal
+		var steering_target: Vector3 = raw.steering.limit_length(steering_limit)
+		var can_steer: bool = raw.enhanced and horizontal.length() <= steering_limit+0.000001
+		if can_steer and horizontal.distance_to(steering_target) > 0.000000001: dt = minf(dt,horizontal.distance_to(steering_target)/steering_acceleration)
+		if air.velocity.y > 0.0: dt = minf(dt,air.velocity.y/gravity)
+		elif air.velocity.y > -terminal: dt = minf(dt,(air.velocity.y+terminal)/gravity)
+		if dt < 0.000000001: dt = minf(remaining,1.0/240.0)
+		# Above the voluntary limit retain inherited momentum without pumping or
+		# deleting it. Within the limit integrate bounded steering over swept time.
+		if can_steer: steered = horizontal.move_toward(steering_target,steering_acceleration*dt).limit_length(steering_limit)
+		var next_y: float = maxf(-terminal,air.velocity.y-gravity*dt)
+		var displacement := Vector3((horizontal.x+steered.x)*0.5,(air.velocity.y+next_y)*0.5,(horizontal.z+steered.z)*0.5)*dt
+		air.velocity.x = steered.x
+		air.velocity.z = steered.z
+		air.velocity.y = next_y
+		var residual := displacement
+		var contact_planes: Array[Vector3] = []
+		for slide in 4:
+			if residual.length_squared() < 1e-18: break
+			var hit := _air_sweep(residual,p)
+			if not hit.hit: break
+			if hit.get("recovery",false):
+				contact_recovery = true
+				remaining = 0.0
+				break
+			collisions += 1
+			var normal: Vector3 = hit.normal
+			if normal.y < -0.01 and air.velocity.y > 0.0:
+				air.velocity.y = 0.0
+				ceilings += 1
+			if normal.y >= cos(deg_to_rad(checked.tuning.support_degrees)) and displacement.y <= 0.0:
+				var support := _ground_support(_actor.get_world_3d().direct_space_state,_actor.position,p,checked.tuning,checked.tuning.contact_gap*3)
+				if support.ok:
+					landed = true
+					break
+			residual = _air_slide(hit.remainder,normal,contact_planes)
+			# Collisions can constrain retained momentum, but input cannot replace it.
+			var previous_y: float = air.velocity.y
+			air.velocity = _air_slide(air.velocity,normal,contact_planes)
+			air.velocity.y = minf(previous_y,air.velocity.y)
+			if normal.y < -0.01: air.velocity.y = minf(0.0,air.velocity.y)
+			contact_planes.append(normal)
+		air.observe(_actor.position.y-checked.height*0.5)
+		remaining -= dt
+		if landed: break
+	var landing := air.land(_actor.position.y-checked.height*0.5,raw.policy.metres_per_reference_unit) if landed else {}
+	_actor.velocity = air.velocity
+	_actor.basis = Basis.looking_at(raw.forward,Vector3.UP)
+	_state.forward = raw.forward
+	_publish_air()
+	_ground_sequence = raw.sequence
+	var travel := _actor.position-start
+	var result := {"ok":true,"session":raw.session,"sequence":raw.sequence,"position":_actor.position,"base":_actor.position-Vector3.UP*checked.height*0.5,"posture":checked.duplicate(true),"requested_displacement":displacement_for_report(raw.delta),"voluntary_displacement":Vector3.ZERO,"passive_displacement":travel,"actual_metres_per_second":0.0,"surface_distance":0.0,"stair_correction":0.0,"collisions":collisions,"ceilings":ceilings,"steps":0,"placement_serial":_serial,"handoff_pending":false,"airborne":air.airborne,"velocity":air.velocity,"landing":landing}
+	result.contact_recovery = contact_recovery
+	_ground_last = {"request":raw.duplicate(true),"result":result.duplicate(true)}
+	_committing = false
+	return result
+
+func displacement_for_report(delta: float) -> Vector3:
+	return air.velocity*delta
+
+func finish_walkoff(owner: RefCounted, sequence: int, takeoff: Dictionary, inherited: Vector3) -> Dictionary:
+	if _ground_owner == null or _ground_owner.get_ref() != owner or _committing or sequence != _ground_sequence or not air.airborne or air.takeoff.get("kind") != "walk-off" or air.takeoff.has("inherited") or not inherited.is_finite() or inherited.length() > 1000.0: return {"ok":false,"reason":"Current once-only walk-off inheritance required."}
+	air.takeoff = takeoff.duplicate(true)
+	air.takeoff.inherited = inherited
+	air.velocity += inherited
+	_actor.velocity = air.velocity
+	_publish_air()
+	return {"ok":true}
+
+## A coordinate rebase is not swept travel. The external owner must already have
+## rebased geometry; the destination capsule must be clear. Absolute peak stays.
+func rebase_air(owner: RefCounted, scope: String, delta: Vector3) -> Dictionary:
+	if _ground_owner == null or _ground_owner.get_ref() != owner or _committing or core.gates.simulation() or scope != _actor_scope or not delta.is_finite() or delta.length() > 8192.0: return {"ok":false,"reason":"Gated current finite origin shift required."}
+	var context := ground_context(scope)
+	if not context.ok: return context
+	var p: Dictionary = _receipts[_state.handoff_id].policy.duplicate()
+	if not _volume(_actor.get_world_3d().direct_space_state,_shape.shape,_actor.position+delta,p): return {"ok":false,"reason":"Rebased collision capsule unavailable."}
+	_actor.position += delta
+	air.origin_y -= delta.y
+	_serial += 1
+	_state.serial = _serial
+	_publish_air()
+	return {"ok":true,"serial":_serial}
 
 func bind_ground(owner: RefCounted) -> bool:
 	if _ground_owner != null and _ground_owner.get_ref() != null and _ground_owner.get_ref() != owner: return false
@@ -275,7 +516,7 @@ func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
 	if raw.sequence != _ground_sequence+1 or not core.gates.simulation(): return {"ok":false,"reason":"Out-of-order or suspended ground step."}
 	var context := ground_context(raw.session)
 	if not context.ok: return context
-	if context.physical.get("mode") != "standing" or context.physical.get("transport") != "foot" or not context.physical.get("fall_history",{}).is_empty(): return {"ok":false,"reason":"Air/special mode owner pending; physical history preserved."}
+	if context.physical.get("mode") != "standing" or context.physical.get("transport") != "foot" or not context.physical.get("fall_history",{}).is_empty(): return {"ok":false,"reason":"Ground request cannot replace active air/special-mode history."}
 	var checked := prepare_ground_posture(owner,raw.session,raw.posture.get("desired",""),raw.posture.get("tuning",{}))
 	if not checked.get("ok",false) or checked != raw.posture: return {"ok":false,"reason":"Posture/geometry changed during ground preparation."}
 	var tuning: Dictionary = checked.tuning
@@ -283,7 +524,7 @@ func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
 	p.margin = tuning.motion_margin
 	var space := _actor.get_world_3d().direct_space_state
 	var support := _ground_support(space,_actor.position,p,tuning,tuning.contact_gap*3,float(_ground_last.get("result",{}).get("support_hint_ny",1.0)))
-	if not support.ok: return {"ok":false,"reason":"Ground support lost; increment-3 handoff pending, history preserved.","support_observation":str(support)}
+	if not support.ok: return {"ok":false,"reason":"Ground support lost; coordinator must select checked flight.","support_observation":str(support)}
 	_committing = true
 	_actor.safe_margin = p.margin*2.0
 	var old_height: float = _shape.shape.height
@@ -297,6 +538,7 @@ func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
 	_state.pending_stand = checked.pending_stand
 	_state.shape.height = checked.height
 	var motion_start := _actor.position
+	var takeoff_velocity := _actor.velocity
 	var budget: float = raw.velocity.length()*raw.delta
 	var horizontal: Vector3 = raw.velocity.normalized()
 	var requested_horizontal := horizontal
@@ -398,6 +640,14 @@ func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
 			break
 		if not target_support.ok:
 			contact_reason = "target_"+str(target_support.get("reason","support_missing"))
+			# A swept unsupported prefix is real departure, not a blocked ground
+			# frame whose zero average velocity can strand the player on the rim.
+			# Keep the last performed fragment's velocity at the support boundary.
+			if _clear_route(space,start,candidate,p) and candidate.distance_to(start) > 0.00000001:
+				_actor.position = candidate
+				takeoff_velocity = (candidate-start)*(raw.velocity.length()/distance)
+				surface_distance += minf(candidate.distance_to(start),distance)
+				budget -= distance
 			handoff_pending = true
 			break
 		var before_following := candidate
@@ -484,6 +734,7 @@ func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
 		var fraction: float = clampf(actual_horizontal.dot(intended_horizontal)/maxf(1e-20,intended_horizontal.length_squared()),0,1)
 		var performed_surface := tangent*fraction
 		if connector_motion: performed_surface = _actor.position-start
+		takeoff_velocity = performed_surface*(raw.velocity.length()/distance)
 		stair_correction += _actor.position.y-start.y-performed_surface.y
 		# Float32 committed positions can exceed an exact fragment by a few
 		# micrometres. Activity cannot receive more than the consumed gait budget;
@@ -498,6 +749,10 @@ func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
 	_state.position = _actor.position
 	_state.physical.velocity = _actor.velocity
 	_state.forward = raw.forward
+	if handoff_pending:
+		air.begin(_actor.position.y-checked.height*0.5,Vector3(takeoff_velocity.x,0,takeoff_velocity.z),{"kind":"walk-off"})
+		_actor.velocity = air.velocity
+		_publish_air()
 	_ground_sequence = raw.sequence
 	var result := {"ok":true,"session":raw.session,"sequence":raw.sequence,"position":_actor.position,"base":_actor.position-Vector3.UP*checked.height*0.5,"posture":checked.duplicate(true),"requested_displacement":raw.velocity*raw.delta,"voluntary_displacement":travel,"passive_displacement":Vector3.ZERO,"actual_metres_per_second":surface_distance/raw.delta,"surface_distance":surface_distance,"stair_correction":stair_correction,"contact_reason":contact_reason,"collisions":collisions,"steps":steps,"placement_serial":_serial,"handoff_pending":handoff_pending,"unsupported_remainder":horizontal*budget if handoff_pending else Vector3.ZERO}
 	result.support_hint_ny = float(support.get("support_ny",1.0))
@@ -657,6 +912,7 @@ func commit(value: Dictionary, checked: Dictionary, access: Callable) -> Diction
 	return result
 
 func _commit(value: Dictionary, checked: Dictionary, access: Callable) -> Dictionary:
+	if (air.airborne or not air.pending.is_empty()) and _actor_scope == value.get("activation_session"): return _result(value,"unresolved_air_requires_explicit_owner_transfer")
 	if not _current(value) or str(value.get("activation_session","")).is_empty(): return _result(value,"activation_pending_or_stale")
 	if not core.layout_operation_owns(value.ticket.request.core_ticket): return _result(value,"original_operation_required")
 	var key: String = value.handoff_id
@@ -692,6 +948,9 @@ func _commit(value: Dictionary, checked: Dictionary, access: Callable) -> Dictio
 	_serial += 1
 	_ground_sequence = 0
 	_ground_last.clear()
+	air = preload("res://scripts/move/air_history.gd").new()
+	_takeoff_sequence = 0
+	_takeoff_receipt.clear()
 	_state = {"serial":_serial,"session":value.activation_session,"ticket":value.ticket.duplicate(true),"handoff_id":key,"position":fresh.position,"forward":fresh.forward,"shape":{"radius":fresh.policy.radius,"height":fresh.policy.height},"physical":fresh.physical.duplicate(true),"desired_context":value.desired_context.duplicate(true),"entrance":value.entrance.duplicate(true),"exit":value.exit.duplicate(true),"return":value["return"].duplicate(true),"marker":value.marker.duplicate(true),"camera_reset_serial":_serial,"placement_committed":true,"destination_ready":false}
 	_state.route = value.route
 	fresh.placement_committed = true

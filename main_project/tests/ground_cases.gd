@@ -10,6 +10,7 @@ var measurements: Array = []
 var performance: Dictionary = {}
 var committed_capsules_clear := true
 var source_calls := 0
+var extra_services: Array = []
 var fatigue_source := preload("res://tests/controlled_vital_consumer.gd").new()
 class MissingTraitIdentity extends RefCounted:
 	func ground_traits(_context: Dictionary) -> Dictionary:
@@ -261,6 +262,8 @@ func bootstrap(shell: Control, fixture: Dictionary) -> bool:
 	if not fixture.get("reuse_ground_content",false): controller.mods.edit("ground.tuning","toggle")
 	var bundled: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://content/move/ground.json"))
 	write(controller.mods.root.path_join("Overrides/ground-policy.json"),JSON.stringify({"domain":"move.ground","path":"policy","operation":"patch","entries":[{"id":"player","value":{"maximum":100.0,"connectors":bundled.entries[0].value.connectors}}]}))
+	if fixture.get("inputs",{}).get("input_sequence") == "air-cap-2":
+		write(controller.mods.root.path_join("Overrides/air-policy.json"),JSON.stringify({"domain":"move.air","path":"policy","operation":"patch","entries":[{"id":"player","value":{"maximum_downward_speed":2.0}}]}))
 	controller.select_folder(fixture.classic_source)
 	var publication: Dictionary = controller.continue_to_menu("run")
 	check("ground published composition",true,publication.ok)
@@ -293,6 +296,8 @@ func bootstrap(shell: Control, fixture: Dictionary) -> bool:
 	clock_provider.gates = actor_core.gates
 	check("ground suppliers explicitly bound",true,motor.bind(scope,"ground-player",clock_provider,trait_provider,restriction_provider).ok)
 	var services := [actors.service_binding(scope),motor.service_binding(scope),clock_provider.binding(),trait_provider.binding(),fatigue_source.binding("ground-test-fatigue","CHAR")]
+	services.append_array(extra_services)
+	if fixture.get("air_player",false): services[0].player_actor = "ground-player"
 	actor_core.complete_baseline(original,{"ok":true,"services":services})
 	if fixture.has("connector_model"):
 		course = preload("res://tests/connector_course.gd").new()
@@ -333,6 +338,18 @@ func bootstrap(shell: Control, fixture: Dictionary) -> bool:
 	return actor_core.snapshot().ready
 
 func run(shell: Control, fixture: Dictionary) -> Dictionary:
+	if fixture.get("air_contact_only",false): return await load("res://tests/air_contact_cases.gd").new().run(shell,fixture)
+	if fixture.get("air_only",false):
+		var focused: Dictionary = await load("res://tests/air_cases.gd").new().run(shell,fixture)
+		var exhaustion: Dictionary = await load("res://tests/air_exhaustion_cases.gd").new().run(shell,fixture)
+		focused.checks.append_array(exhaustion.checks)
+		focused.count = focused.checks.size()
+		focused.ok = focused.ok and exhaustion.ok
+		var retirement: Dictionary = await load("res://tests/air_retirement_cases.gd").new().run(shell,fixture)
+		focused.checks.append_array(retirement.checks)
+		focused.count = focused.checks.size()
+		focused.ok = focused.ok and retirement.ok
+		return focused
 	var review_script: GDScript = load("res://tests/ground_review.gd")
 	check("ground human review entry compiles",true,review_script != null and review_script.can_instantiate())
 	if await bootstrap(shell,fixture):
@@ -532,8 +549,8 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		near("ground actual facing moves east metres",(210.0/39.5)*1.5*.02,body.snapshot().position.x-facing_start.x)
 		near("ground actual facing has no north travel",0.0,body.snapshot().position.z-facing_start.z)
 		check("ground camera follows committed body",motor.last.view_position,shell.session_shell.view_camera.position)
-		# A wall slide can reach a different endpoint than its first sweep. The
-		# bounded ground-only course must not slide into unowned air at its corner.
+		# A wall slide can reach a different endpoint than its first sweep. Genuine
+		# support loss now enters the air owner rather than an unimplemented hold.
 		motor.retry_activity()
 		var edge_source := Supplier.new("controlled-edge-speed","CHAR",[])
 		contribution(edge_source,"edge-speed",1,{"run":1000000.0})
@@ -548,8 +565,8 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		key(KEY_D,false)
 		var guarded: Vector3 = body.snapshot().position
 		measurements.append({"case":"ground wall-slide support boundary","unit":"metre","actual_xyz":[guarded.x,guarded.y,guarded.z],"maximum_supported_x":39.7,"expected_height":0.91,"requested_speed_metres_per_second":100.0,"step_simulated_seconds":0.1})
-		check("ground sliding exit reports pending handoff",true,corner.get("handoff_pending",false))
-		check("ground slide guard keeps supported course pose",true,guarded.x <= 39.7 and absf(guarded.y-0.91) < 0.0001)
+		check("ground sliding exit enters air",true,corner.get("handoff_pending",false) and body.air.airborne)
+		check("ground slide departure witnesses real edge",true,guarded.x >= 39.65 and guarded.x <= 39.752 and absf(guarded.y-0.91) < 0.0001)
 		contribution(edge_source,"edge-speed",2,{})
 		check("ground sliding performed debt settles",true,motor.retry_activity().ok)
 		check("ground sliding settlement never replays travel",guarded,body.snapshot().position)
@@ -580,6 +597,20 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		if actor_core.snapshot().phase == "confirmation": actor_core.confirm(actor_core.ticket(),true)
 		source_a.callback = Callable()
 		course.queue_free()
+	var air_case: RefCounted = load("res://tests/air_cases.gd").new()
+	var air_fixture := fixture.duplicate(true)
+	air_fixture.reuse_ground_content = true
+	var air_result: Dictionary = await air_case.run(shell,air_fixture)
+	checks.append_array(air_result.checks)
+	measurements.append_array(air_result.get("measurements",[]))
+	var air_exhaustion: RefCounted = load("res://tests/air_exhaustion_cases.gd").new()
+	var exhaustion_result: Dictionary = await air_exhaustion.run(shell,fixture)
+	checks.append_array(exhaustion_result.checks)
+	var air_retirement: RefCounted = load("res://tests/air_retirement_cases.gd").new()
+	var retirement_result: Dictionary = await air_retirement.run(shell,fixture)
+	checks.append_array(retirement_result.checks)
+	var air_contact_result: Dictionary = await load("res://tests/air_contact_cases.gd").new().run(shell,air_fixture)
+	checks.append_array(air_contact_result.checks)
 	for model in [61030,67027,67029]:
 		var connector_case: RefCounted = load("res://tests/connector_cases.gd").new()
 		var connector_fixture := fixture.duplicate(true)

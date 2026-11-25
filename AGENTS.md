@@ -1,5 +1,20 @@
 # Coding agent instructions
 
+## Timing for significant tasks
+
+- For substantial implementation, debugging, investigation, verification or
+  multi-step deliverable work, state the current start time in **EST (UTC−05:00)**
+  at the beginning. After a brief scope inspection, give a rough elapsed-time
+  estimate, preferably a range. Use judgment: work expected to take roughly
+  15 minutes or more generally qualifies, as does substantive coding or debugging.
+- Use a reliable current clock; do not invent timestamps. Update the estimate
+  if findings materially change it. At completion, report the actual end time
+  in EST. If stopping with work unfinished, label it a stop time and state what
+  remains rather than implying completion.
+- Omit timing boilerplate for simple questions, acknowledgments, routine status
+  replies and trivial edits. Report timing once per substantial work session,
+  not again for every short follow-up within the same task.
+
 ## Objective and target
 
 Build the approved Daggerfall-style RPG in **Godot 4.7.2**, progressing through playable vertical slices in [the roadmap](design_docs/development/ROADMAP.md). Verify Windows first and preserve the approved platform adapter boundaries.

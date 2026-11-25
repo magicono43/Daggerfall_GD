@@ -32,7 +32,7 @@ func signature(callback: Variant, contract: String = CONTRACT) -> bool:
 		return false
 	for method: Dictionary in object.get_method_list():
 		if method.name == callback.get_method():
-			return method.args.size() == 1 and method.args[0].type == (TYPE_INT if contract == CONTRACT else TYPE_DICTIONARY) and method["return"].type == (TYPE_FLOAT if contract == "ground-speed-v1" else TYPE_INT) and method.default_args.is_empty() and (int(method.flags) & METHOD_FLAG_VARARG) == 0
+			return method.args.size() == 1 and method.args[0].type == (TYPE_INT if contract == CONTRACT else TYPE_DICTIONARY) and method["return"].type == (TYPE_FLOAT if contract in ["ground-speed-v1","air-formula-v1"] else TYPE_INT) and method.default_args.is_empty() and (int(method.flags) & METHOD_FLAG_VARARG) == 0
 	return false
 
 func declare_integer_hook(id: String, builtin: Callable) -> Dictionary:
@@ -65,6 +65,16 @@ func declare_ground_hook(builtin: Callable) -> Dictionary:
 	_hooks[ground.HOOK] = builtin
 	_contracts[ground.HOOK] = ground.CONTRACT
 	_builtin_owners[ground.HOOK] = builtin.get_object()
+	_revision += 1
+	return {"ok":true}
+
+func declare_air_hook(id: String, builtin: Callable) -> Dictionary:
+	var air = preload("res://scripts/rule/air_formulas.gd")
+	if not _editable() or not _contributions.is_empty() or not _candidate.is_empty(): return failure("registration_closed","Declare before preparation.")
+	if id not in air.HOOKS or _hooks.has(id) or not signature(builtin,air.CONTRACT): return failure("invalid_declaration","Expected pure air (Dictionary) -> float hook.")
+	_hooks[id] = builtin
+	_contracts[id] = air.CONTRACT
+	_builtin_owners[id] = builtin.get_object()
 	_revision += 1
 	return {"ok":true}
 
@@ -219,6 +229,8 @@ func invoke(hook: String, value: Variant, core: SessionLifecycle, owner: Object,
 	var valid: bool = preload("res://scripts/rule/activity_formulas.gd").valid_input(hook,value) if _contracts[hook] == "activity-formula-v1" else (preload("res://scripts/rule/actor_formulas.gd").valid_input(value) if actor_contract else typeof(value) == TYPE_INT and value >= -1000 and value <= 1000)
 	var ground_contract: bool = _contracts[hook] == "ground-speed-v1"
 	if ground_contract: valid = preload("res://scripts/rule/ground_formulas.gd").valid_input(value)
+	var air_contract: bool = _contracts[hook] == "air-formula-v1"
+	if air_contract: valid = preload("res://scripts/rule/air_formulas.gd").valid_input(hook,value)
 	if not valid:
 		return failure("invalid_input","Input violates the published " + _contracts[hook] + " domain.","",hook)
 	var selected: Dictionary = _active.winners[hook]
@@ -235,7 +247,7 @@ func invoke(hook: String, value: Variant, core: SessionLifecycle, owner: Object,
 	var problem := ""
 	if not monitor.errors.is_empty():
 		problem = "callback_error"
-	elif (ground_contract and (typeof(output) != TYPE_FLOAT or not is_finite(output) or output <= 0.0 or output > 1e22)) or (not ground_contract and (typeof(output) != TYPE_INT or output < (-1000000000000000 if actor_contract else -1000000) or output > (1000000000000000 if actor_contract else 1000000))):
+	elif ((ground_contract or air_contract) and (typeof(output) != TYPE_FLOAT or not is_finite(output) or (output < 0.0 if hook == "move.landing-damage" else output <= 0.0) or output > (1000000000.0 if hook == "move.landing-damage" else 1e22) or (hook == "move.landing-damage" and output != floor(output)))) or (not ground_contract and not air_contract and (typeof(output) != TYPE_INT or output < (-1000000000000000 if actor_contract else -1000000) or output > (1000000000000000 if actor_contract else 1000000))):
 		problem = "invalid_result"
 	elif _disposed or not _context(core,owner,hook,scope,captured):
 		problem = "stale_context"

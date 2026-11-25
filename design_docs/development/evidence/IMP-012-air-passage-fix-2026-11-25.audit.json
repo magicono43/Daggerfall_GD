@@ -1,0 +1,427 @@
+{
+  "schema": "imp012-air-passage-followup-v1",
+  "date": "2026-11-25",
+  "status": "machine-qualified-human-retest-pending",
+  "source_revision": "b349c833c2ccf8e5524e9f08e24d289496575368",
+  "uncommitted": true,
+  "human": {
+    "checks_1_to_3": "PASS",
+    "narrow_passage_retest": "PENDING",
+    "checks_4_to_7": "PENDING",
+    "quit_retest": "PENDING"
+  },
+  "commands": [
+    {
+      "parameters": {
+        "Fixture": "ground-movement-v1",
+        "InputSequence": "air-cap-2",
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "TimeoutSeconds": 600,
+        "Suite": "ground-movement"
+      },
+      "details": [
+        {
+          "scenario": "ground-movement",
+          "reload_assertions": 10,
+          "performance": {
+            "capabilities_1000_usec": 15857,
+            "physics_5000_usec": 6161153,
+            "retained_intervals": 146
+          },
+          "assertions": 928
+        }
+      ],
+      "label": "ground-cap-2-headless",
+      "assertions": 938,
+      "sha256": "5D96BE274CF88A4AC24BC19D762FA916E4B5A83E8F0CC915A04C5F04143150B7",
+      "tool": "verify_headless.ps1",
+      "executed_sources_match": true,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-d511a495d4134551bf24a29e1565eafd\\report.json",
+      "source_hashes": {
+        "tests/air_contact_cases.gd": "C0277F9FE34B6BB445D8960BB1D1FDDC385F014FA8060B55C1F8A50D021D3EE7",
+        "tests/air_boundary_cases.gd": "717379D6AA157D5018579903BD758663FCACB2B6BF117AA97D4C6F4D89649154",
+        "content/move/air.json": "0F2382EA018DFD41BF3C69958D97A53F339FAAFD7C6F99943F55DE5F8589BDF7",
+        "scripts/rule/formula_registry.gd": "3A611F4A619444F86B99C9067E07B1F5B4E8499C8C7B24B1738F12B88A2DC568",
+        "scripts/char/vital_records.gd": "5606CA975D1C5FA71C37926FC64D72318F06F1BA5B9A1EED466237C0AAF10817",
+        "scripts/move/ground_coordinator.gd": "84C73B5C913799E29BE969595C4F8791F47A98624FD0E6969FE14C3BB9824927",
+        "content/move/ground.json": "BE93AD7037D41E11078801307C90CE294B313F260B4A2DC5782ACE52AAF7E861",
+        "tests/controlled_ground_provider.gd": "6F196454347466CB25934B0A2C81EFD347B0C2A80F804721F83A598B312E06D4",
+        "tests/ground_cases.gd": "6709DC903A02079A07EF2F0C85F25E4CA3F9B85E756A4ED63DF81E229B66F323",
+        "scripts/rule/air_formulas.gd": "F6DFD9C5856D679A7F0BEEE7133C05D243FF7B5E27D48AE5EE746C21BAAC9BAC",
+        "tests/air_retirement_cases.gd": "168EC1A43461BA6050B39911DD45CB3F99C0B05344F50C58923A7FAEFD35F453",
+        "scripts/startup/provider_boundary.gd": "7FA51C22FBC7BB5FDBB24BD0BD806D716EAF03D67F81A44E204EEDA6B3C272AD",
+        "tests/air_cases.gd": "DC2168458C3FFD5B60DEAE17BE6EE1BDE5CA0810995A6C51AADA661FF6DF03F1",
+        "tests/m1_composition_cases.gd": "828F5CADD6B2B0F1519D8B7D85F4799EE3474BA1752D208CEE3592BC1407309B",
+        "scripts/data/air_policy.gd": "7CD62554EDB456AE09CCE734349889451852FDFEB4C2613E92390607C1D9F1C5",
+        "scripts/move/air_history.gd": "036198473C9D1F4E1BB2563EA074BD0D89142F3B978431FA587CDA9C9B440993",
+        "scripts/session/session_lifecycle.gd": "80EF0943B45B87CB0B445C470C389F00B2E6FCF7BE54892A53AF99C35564134F",
+        "scripts/move/placement_authority.gd": "F41E10869F3F085121BEF6343AB55BE99D6A576119AFDD1D6253C0623AEACCFB",
+        "scripts/session/session_shell.gd": "A76D311D2E6AFAD07E53942A52C44666F029D4C6F91AA4DF74CD3D19DACA33BA",
+        "tests/ground_course.gd": "5BCB8B5E2ACCD094D1C6662A41F81DAABCEAE1E7DC25EB77440A7036C2343EAC",
+        "tests/air_exhaustion_cases.gd": "0407C233232F9CB4F9673C8CD76E4489000D06F0C33EF765E86C076E9289C61C",
+        "tests/actor_state_cases.gd": "23954025CDBF277D817FB195F54196D0B960B428C5D7726CB76053399C390044",
+        "tests/ground_review.gd": "DE169AA8AA4BAFC1595D5360E7101F19DE29796B8A9AB8FE6D8EB1C288DB3FC3",
+        "tests/ground_inventory.json": "515EAB0884D818D49F2F927776701A85E6398C300306FC34FBA1967BB14F2793",
+        "scripts/char/actor_state.gd": "A9E6A6A403BE8AB8834835BB3380835A71B06DA382D59695AF2EEEE4471612E2"
+      }
+    },
+    {
+      "parameters": {
+        "Fixture": "ground-movement-v1",
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "TimeoutSeconds": 600,
+        "Suite": "ground-movement"
+      },
+      "details": [
+        {
+          "scenario": "ground-movement",
+          "reload_assertions": 10,
+          "performance": {
+            "capabilities_1000_usec": 15954,
+            "physics_5000_usec": 6440685,
+            "retained_intervals": 146
+          },
+          "assertions": 928
+        }
+      ],
+      "label": "ground-headless",
+      "assertions": 938,
+      "sha256": "901A3F1E75D2EF776EF478124A3E9F11A6D65615A65A0FF793135DE003FECD9A",
+      "tool": "verify_headless.ps1",
+      "executed_sources_match": true,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-1513338ac8234ad4a94f245caaef499d\\report.json",
+      "source_hashes": {
+        "tests/air_contact_cases.gd": "C0277F9FE34B6BB445D8960BB1D1FDDC385F014FA8060B55C1F8A50D021D3EE7",
+        "tests/air_boundary_cases.gd": "717379D6AA157D5018579903BD758663FCACB2B6BF117AA97D4C6F4D89649154",
+        "content/move/air.json": "0F2382EA018DFD41BF3C69958D97A53F339FAAFD7C6F99943F55DE5F8589BDF7",
+        "scripts/rule/formula_registry.gd": "3A611F4A619444F86B99C9067E07B1F5B4E8499C8C7B24B1738F12B88A2DC568",
+        "scripts/char/vital_records.gd": "5606CA975D1C5FA71C37926FC64D72318F06F1BA5B9A1EED466237C0AAF10817",
+        "scripts/move/ground_coordinator.gd": "84C73B5C913799E29BE969595C4F8791F47A98624FD0E6969FE14C3BB9824927",
+        "content/move/ground.json": "BE93AD7037D41E11078801307C90CE294B313F260B4A2DC5782ACE52AAF7E861",
+        "tests/controlled_ground_provider.gd": "6F196454347466CB25934B0A2C81EFD347B0C2A80F804721F83A598B312E06D4",
+        "tests/ground_cases.gd": "6709DC903A02079A07EF2F0C85F25E4CA3F9B85E756A4ED63DF81E229B66F323",
+        "scripts/rule/air_formulas.gd": "F6DFD9C5856D679A7F0BEEE7133C05D243FF7B5E27D48AE5EE746C21BAAC9BAC",
+        "tests/air_retirement_cases.gd": "168EC1A43461BA6050B39911DD45CB3F99C0B05344F50C58923A7FAEFD35F453",
+        "scripts/startup/provider_boundary.gd": "7FA51C22FBC7BB5FDBB24BD0BD806D716EAF03D67F81A44E204EEDA6B3C272AD",
+        "tests/air_cases.gd": "DC2168458C3FFD5B60DEAE17BE6EE1BDE5CA0810995A6C51AADA661FF6DF03F1",
+        "tests/m1_composition_cases.gd": "828F5CADD6B2B0F1519D8B7D85F4799EE3474BA1752D208CEE3592BC1407309B",
+        "scripts/data/air_policy.gd": "7CD62554EDB456AE09CCE734349889451852FDFEB4C2613E92390607C1D9F1C5",
+        "scripts/move/air_history.gd": "036198473C9D1F4E1BB2563EA074BD0D89142F3B978431FA587CDA9C9B440993",
+        "scripts/session/session_lifecycle.gd": "80EF0943B45B87CB0B445C470C389F00B2E6FCF7BE54892A53AF99C35564134F",
+        "scripts/move/placement_authority.gd": "F41E10869F3F085121BEF6343AB55BE99D6A576119AFDD1D6253C0623AEACCFB",
+        "scripts/session/session_shell.gd": "A76D311D2E6AFAD07E53942A52C44666F029D4C6F91AA4DF74CD3D19DACA33BA",
+        "tests/ground_course.gd": "5BCB8B5E2ACCD094D1C6662A41F81DAABCEAE1E7DC25EB77440A7036C2343EAC",
+        "tests/air_exhaustion_cases.gd": "0407C233232F9CB4F9673C8CD76E4489000D06F0C33EF765E86C076E9289C61C",
+        "tests/actor_state_cases.gd": "23954025CDBF277D817FB195F54196D0B960B428C5D7726CB76053399C390044",
+        "tests/ground_review.gd": "DE169AA8AA4BAFC1595D5360E7101F19DE29796B8A9AB8FE6D8EB1C288DB3FC3",
+        "tests/ground_inventory.json": "515EAB0884D818D49F2F927776701A85E6398C300306FC34FBA1967BB14F2793",
+        "scripts/char/actor_state.gd": "A9E6A6A403BE8AB8834835BB3380835A71B06DA382D59695AF2EEEE4471612E2"
+      }
+    },
+    {
+      "parameters": {
+        "Fixture": "ground-movement-v1",
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "TimeoutSeconds": 600,
+        "Suite": "ground-movement"
+      },
+      "details": [
+        {
+          "scenario": "ground-movement",
+          "reload_assertions": 10,
+          "performance": {
+            "capabilities_1000_usec": 15775,
+            "physics_5000_usec": 6442035,
+            "retained_intervals": 146
+          },
+          "assertions": 929
+        }
+      ],
+      "label": "ground-rendered",
+      "assertions": 939,
+      "sha256": "D65B4F738219410E2B5EA9A30A508255EE307984B1F05ADE028C488DD7993DFC",
+      "tool": "verify_rendered.ps1",
+      "executed_sources_match": true,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-e090603cff2742d094eac776dcff54ea\\report.json",
+      "source_hashes": {
+        "tests/air_contact_cases.gd": "C0277F9FE34B6BB445D8960BB1D1FDDC385F014FA8060B55C1F8A50D021D3EE7",
+        "tests/air_boundary_cases.gd": "717379D6AA157D5018579903BD758663FCACB2B6BF117AA97D4C6F4D89649154",
+        "content/move/air.json": "0F2382EA018DFD41BF3C69958D97A53F339FAAFD7C6F99943F55DE5F8589BDF7",
+        "scripts/rule/formula_registry.gd": "3A611F4A619444F86B99C9067E07B1F5B4E8499C8C7B24B1738F12B88A2DC568",
+        "scripts/char/vital_records.gd": "5606CA975D1C5FA71C37926FC64D72318F06F1BA5B9A1EED466237C0AAF10817",
+        "scripts/move/ground_coordinator.gd": "84C73B5C913799E29BE969595C4F8791F47A98624FD0E6969FE14C3BB9824927",
+        "content/move/ground.json": "BE93AD7037D41E11078801307C90CE294B313F260B4A2DC5782ACE52AAF7E861",
+        "tests/controlled_ground_provider.gd": "6F196454347466CB25934B0A2C81EFD347B0C2A80F804721F83A598B312E06D4",
+        "tests/ground_cases.gd": "6709DC903A02079A07EF2F0C85F25E4CA3F9B85E756A4ED63DF81E229B66F323",
+        "scripts/rule/air_formulas.gd": "F6DFD9C5856D679A7F0BEEE7133C05D243FF7B5E27D48AE5EE746C21BAAC9BAC",
+        "tests/air_retirement_cases.gd": "168EC1A43461BA6050B39911DD45CB3F99C0B05344F50C58923A7FAEFD35F453",
+        "scripts/startup/provider_boundary.gd": "7FA51C22FBC7BB5FDBB24BD0BD806D716EAF03D67F81A44E204EEDA6B3C272AD",
+        "tests/air_cases.gd": "DC2168458C3FFD5B60DEAE17BE6EE1BDE5CA0810995A6C51AADA661FF6DF03F1",
+        "tests/m1_composition_cases.gd": "828F5CADD6B2B0F1519D8B7D85F4799EE3474BA1752D208CEE3592BC1407309B",
+        "scripts/data/air_policy.gd": "7CD62554EDB456AE09CCE734349889451852FDFEB4C2613E92390607C1D9F1C5",
+        "scripts/move/air_history.gd": "036198473C9D1F4E1BB2563EA074BD0D89142F3B978431FA587CDA9C9B440993",
+        "scripts/session/session_lifecycle.gd": "80EF0943B45B87CB0B445C470C389F00B2E6FCF7BE54892A53AF99C35564134F",
+        "scripts/move/placement_authority.gd": "F41E10869F3F085121BEF6343AB55BE99D6A576119AFDD1D6253C0623AEACCFB",
+        "scripts/session/session_shell.gd": "A76D311D2E6AFAD07E53942A52C44666F029D4C6F91AA4DF74CD3D19DACA33BA",
+        "tests/ground_course.gd": "5BCB8B5E2ACCD094D1C6662A41F81DAABCEAE1E7DC25EB77440A7036C2343EAC",
+        "tests/air_exhaustion_cases.gd": "0407C233232F9CB4F9673C8CD76E4489000D06F0C33EF765E86C076E9289C61C",
+        "tests/actor_state_cases.gd": "23954025CDBF277D817FB195F54196D0B960B428C5D7726CB76053399C390044",
+        "tests/ground_review.gd": "DE169AA8AA4BAFC1595D5360E7101F19DE29796B8A9AB8FE6D8EB1C288DB3FC3",
+        "tests/ground_inventory.json": "515EAB0884D818D49F2F927776701A85E6398C300306FC34FBA1967BB14F2793",
+        "scripts/char/actor_state.gd": "A9E6A6A403BE8AB8834835BB3380835A71B06DA382D59695AF2EEEE4471612E2"
+      }
+    },
+    {
+      "parameters": {
+        "GroundMovement": true,
+        "Configuration": "debug",
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Templates": "C:/Users/Kirk/AppData/Roaming/Godot/export_templates/4.7.2.stable"
+      },
+      "details": [
+        {
+          "mode": null,
+          "reload_assertions": 10,
+          "assertions": 928
+        },
+        {
+          "mode": null,
+          "reload_assertions": 10,
+          "assertions": 929
+        }
+      ],
+      "label": "ground-export-debug",
+      "assertions": 1877,
+      "sha256": "02842B0A3917A29D48976A76F8E3FF2F528FE86F59D7A7CA97BBB793802F40DE",
+      "tool": "verify_startup_export.ps1",
+      "executed_sources_match": true,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-c07e281c8839420b8e1351e86c504445\\result.json",
+      "source_hashes": {
+        "tests/air_contact_cases.gd": "C0277F9FE34B6BB445D8960BB1D1FDDC385F014FA8060B55C1F8A50D021D3EE7",
+        "tests/air_boundary_cases.gd": "717379D6AA157D5018579903BD758663FCACB2B6BF117AA97D4C6F4D89649154",
+        "content/move/air.json": "0F2382EA018DFD41BF3C69958D97A53F339FAAFD7C6F99943F55DE5F8589BDF7",
+        "scripts/rule/formula_registry.gd": "3A611F4A619444F86B99C9067E07B1F5B4E8499C8C7B24B1738F12B88A2DC568",
+        "scripts/char/vital_records.gd": "5606CA975D1C5FA71C37926FC64D72318F06F1BA5B9A1EED466237C0AAF10817",
+        "scripts/move/ground_coordinator.gd": "84C73B5C913799E29BE969595C4F8791F47A98624FD0E6969FE14C3BB9824927",
+        "content/move/ground.json": "BE93AD7037D41E11078801307C90CE294B313F260B4A2DC5782ACE52AAF7E861",
+        "tests/controlled_ground_provider.gd": "6F196454347466CB25934B0A2C81EFD347B0C2A80F804721F83A598B312E06D4",
+        "tests/ground_cases.gd": "6709DC903A02079A07EF2F0C85F25E4CA3F9B85E756A4ED63DF81E229B66F323",
+        "scripts/rule/air_formulas.gd": "F6DFD9C5856D679A7F0BEEE7133C05D243FF7B5E27D48AE5EE746C21BAAC9BAC",
+        "tests/air_retirement_cases.gd": "168EC1A43461BA6050B39911DD45CB3F99C0B05344F50C58923A7FAEFD35F453",
+        "scripts/startup/provider_boundary.gd": "7FA51C22FBC7BB5FDBB24BD0BD806D716EAF03D67F81A44E204EEDA6B3C272AD",
+        "tests/air_cases.gd": "DC2168458C3FFD5B60DEAE17BE6EE1BDE5CA0810995A6C51AADA661FF6DF03F1",
+        "tests/m1_composition_cases.gd": "828F5CADD6B2B0F1519D8B7D85F4799EE3474BA1752D208CEE3592BC1407309B",
+        "scripts/data/air_policy.gd": "7CD62554EDB456AE09CCE734349889451852FDFEB4C2613E92390607C1D9F1C5",
+        "scripts/move/air_history.gd": "036198473C9D1F4E1BB2563EA074BD0D89142F3B978431FA587CDA9C9B440993",
+        "scripts/session/session_lifecycle.gd": "80EF0943B45B87CB0B445C470C389F00B2E6FCF7BE54892A53AF99C35564134F",
+        "scripts/move/placement_authority.gd": "F41E10869F3F085121BEF6343AB55BE99D6A576119AFDD1D6253C0623AEACCFB",
+        "scripts/session/session_shell.gd": "A76D311D2E6AFAD07E53942A52C44666F029D4C6F91AA4DF74CD3D19DACA33BA",
+        "tests/ground_course.gd": "5BCB8B5E2ACCD094D1C6662A41F81DAABCEAE1E7DC25EB77440A7036C2343EAC",
+        "tests/air_exhaustion_cases.gd": "0407C233232F9CB4F9673C8CD76E4489000D06F0C33EF765E86C076E9289C61C",
+        "tests/actor_state_cases.gd": "23954025CDBF277D817FB195F54196D0B960B428C5D7726CB76053399C390044",
+        "tests/ground_review.gd": "DE169AA8AA4BAFC1595D5360E7101F19DE29796B8A9AB8FE6D8EB1C288DB3FC3",
+        "tests/ground_inventory.json": "515EAB0884D818D49F2F927776701A85E6398C300306FC34FBA1967BB14F2793",
+        "scripts/char/actor_state.gd": "A9E6A6A403BE8AB8834835BB3380835A71B06DA382D59695AF2EEEE4471612E2"
+      }
+    },
+    {
+      "parameters": {
+        "GroundMovement": true,
+        "Configuration": "release",
+        "ClassicSource": "C:/Games/Daggerfall/arena2",
+        "Templates": "C:/Users/Kirk/AppData/Roaming/Godot/export_templates/4.7.2.stable"
+      },
+      "details": [
+        {
+          "mode": null,
+          "reload_assertions": 10,
+          "assertions": 928
+        },
+        {
+          "mode": null,
+          "reload_assertions": 10,
+          "assertions": 929
+        }
+      ],
+      "label": "ground-export-release",
+      "assertions": 1877,
+      "sha256": "C2515AE8B1CD222BD0D17061A02958E912C733E7EDECB5D6B18C5DA85BBC1B9D",
+      "tool": "verify_startup_export.ps1",
+      "executed_sources_match": true,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-29c6ce5dc33943ceb16c35ef8649aff0\\result.json",
+      "source_hashes": {
+        "tests/air_contact_cases.gd": "C0277F9FE34B6BB445D8960BB1D1FDDC385F014FA8060B55C1F8A50D021D3EE7",
+        "tests/air_boundary_cases.gd": "717379D6AA157D5018579903BD758663FCACB2B6BF117AA97D4C6F4D89649154",
+        "content/move/air.json": "0F2382EA018DFD41BF3C69958D97A53F339FAAFD7C6F99943F55DE5F8589BDF7",
+        "scripts/rule/formula_registry.gd": "3A611F4A619444F86B99C9067E07B1F5B4E8499C8C7B24B1738F12B88A2DC568",
+        "scripts/char/vital_records.gd": "5606CA975D1C5FA71C37926FC64D72318F06F1BA5B9A1EED466237C0AAF10817",
+        "scripts/move/ground_coordinator.gd": "84C73B5C913799E29BE969595C4F8791F47A98624FD0E6969FE14C3BB9824927",
+        "content/move/ground.json": "BE93AD7037D41E11078801307C90CE294B313F260B4A2DC5782ACE52AAF7E861",
+        "tests/controlled_ground_provider.gd": "6F196454347466CB25934B0A2C81EFD347B0C2A80F804721F83A598B312E06D4",
+        "tests/ground_cases.gd": "6709DC903A02079A07EF2F0C85F25E4CA3F9B85E756A4ED63DF81E229B66F323",
+        "scripts/rule/air_formulas.gd": "F6DFD9C5856D679A7F0BEEE7133C05D243FF7B5E27D48AE5EE746C21BAAC9BAC",
+        "tests/air_retirement_cases.gd": "168EC1A43461BA6050B39911DD45CB3F99C0B05344F50C58923A7FAEFD35F453",
+        "scripts/startup/provider_boundary.gd": "7FA51C22FBC7BB5FDBB24BD0BD806D716EAF03D67F81A44E204EEDA6B3C272AD",
+        "tests/air_cases.gd": "DC2168458C3FFD5B60DEAE17BE6EE1BDE5CA0810995A6C51AADA661FF6DF03F1",
+        "tests/m1_composition_cases.gd": "828F5CADD6B2B0F1519D8B7D85F4799EE3474BA1752D208CEE3592BC1407309B",
+        "scripts/data/air_policy.gd": "7CD62554EDB456AE09CCE734349889451852FDFEB4C2613E92390607C1D9F1C5",
+        "scripts/move/air_history.gd": "036198473C9D1F4E1BB2563EA074BD0D89142F3B978431FA587CDA9C9B440993",
+        "scripts/session/session_lifecycle.gd": "80EF0943B45B87CB0B445C470C389F00B2E6FCF7BE54892A53AF99C35564134F",
+        "scripts/move/placement_authority.gd": "F41E10869F3F085121BEF6343AB55BE99D6A576119AFDD1D6253C0623AEACCFB",
+        "scripts/session/session_shell.gd": "A76D311D2E6AFAD07E53942A52C44666F029D4C6F91AA4DF74CD3D19DACA33BA",
+        "tests/ground_course.gd": "5BCB8B5E2ACCD094D1C6662A41F81DAABCEAE1E7DC25EB77440A7036C2343EAC",
+        "tests/air_exhaustion_cases.gd": "0407C233232F9CB4F9673C8CD76E4489000D06F0C33EF765E86C076E9289C61C",
+        "tests/actor_state_cases.gd": "23954025CDBF277D817FB195F54196D0B960B428C5D7726CB76053399C390044",
+        "tests/ground_review.gd": "DE169AA8AA4BAFC1595D5360E7101F19DE29796B8A9AB8FE6D8EB1C288DB3FC3",
+        "tests/ground_inventory.json": "515EAB0884D818D49F2F927776701A85E6398C300306FC34FBA1967BB14F2793",
+        "scripts/char/actor_state.gd": "A9E6A6A403BE8AB8834835BB3380835A71B06DA382D59695AF2EEEE4471612E2"
+      }
+    },
+    {
+      "parameters": {
+        "SmokeTest": true,
+        "ClassicSource": "C:/Games/Daggerfall/arena2"
+      },
+      "smoke": {
+        "human_pass": false,
+        "sha256": "E5DAE42C9AC220BFBFA25ABB10E55BE2744C4566E539B494E9CD0F6D5814A086",
+        "assertions": 18,
+        "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-af1fbfda7a284a32aa0a91df2815bd52\\evidence\\project\\scenario-1\\human-review\\result.json",
+        "original_result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-af1fbfda7a284a32aa0a91df2815bd52\\project\\tests\\.runs\\scenario-1\\human-review\\result.json"
+      },
+      "details": [
+        {
+          "scenario": "ground-movement",
+          "reload_assertions": 10,
+          "performance": {
+            "capabilities_1000_usec": 15806,
+            "physics_5000_usec": 6355972,
+            "retained_intervals": 146
+          },
+          "assertions": 929
+        }
+      ],
+      "label": "ground-review-smoke",
+      "assertions": 957,
+      "sha256": "45E20753B796B53989B2A458C24971C5FBE3F1706C0E68D781C39367C62492A5",
+      "tool": "review_ground.ps1",
+      "executed_sources_match": true,
+      "report": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-af1fbfda7a284a32aa0a91df2815bd52\\report.json",
+      "source_hashes": {
+        "tests/air_contact_cases.gd": "C0277F9FE34B6BB445D8960BB1D1FDDC385F014FA8060B55C1F8A50D021D3EE7",
+        "tests/air_boundary_cases.gd": "717379D6AA157D5018579903BD758663FCACB2B6BF117AA97D4C6F4D89649154",
+        "content/move/air.json": "0F2382EA018DFD41BF3C69958D97A53F339FAAFD7C6F99943F55DE5F8589BDF7",
+        "scripts/rule/formula_registry.gd": "3A611F4A619444F86B99C9067E07B1F5B4E8499C8C7B24B1738F12B88A2DC568",
+        "scripts/char/vital_records.gd": "5606CA975D1C5FA71C37926FC64D72318F06F1BA5B9A1EED466237C0AAF10817",
+        "scripts/move/ground_coordinator.gd": "84C73B5C913799E29BE969595C4F8791F47A98624FD0E6969FE14C3BB9824927",
+        "content/move/ground.json": "BE93AD7037D41E11078801307C90CE294B313F260B4A2DC5782ACE52AAF7E861",
+        "tests/controlled_ground_provider.gd": "6F196454347466CB25934B0A2C81EFD347B0C2A80F804721F83A598B312E06D4",
+        "tests/ground_cases.gd": "6709DC903A02079A07EF2F0C85F25E4CA3F9B85E756A4ED63DF81E229B66F323",
+        "scripts/rule/air_formulas.gd": "F6DFD9C5856D679A7F0BEEE7133C05D243FF7B5E27D48AE5EE746C21BAAC9BAC",
+        "tests/air_retirement_cases.gd": "168EC1A43461BA6050B39911DD45CB3F99C0B05344F50C58923A7FAEFD35F453",
+        "scripts/startup/provider_boundary.gd": "7FA51C22FBC7BB5FDBB24BD0BD806D716EAF03D67F81A44E204EEDA6B3C272AD",
+        "tests/air_cases.gd": "DC2168458C3FFD5B60DEAE17BE6EE1BDE5CA0810995A6C51AADA661FF6DF03F1",
+        "tests/m1_composition_cases.gd": "828F5CADD6B2B0F1519D8B7D85F4799EE3474BA1752D208CEE3592BC1407309B",
+        "scripts/data/air_policy.gd": "7CD62554EDB456AE09CCE734349889451852FDFEB4C2613E92390607C1D9F1C5",
+        "scripts/move/air_history.gd": "036198473C9D1F4E1BB2563EA074BD0D89142F3B978431FA587CDA9C9B440993",
+        "scripts/session/session_lifecycle.gd": "80EF0943B45B87CB0B445C470C389F00B2E6FCF7BE54892A53AF99C35564134F",
+        "scripts/move/placement_authority.gd": "F41E10869F3F085121BEF6343AB55BE99D6A576119AFDD1D6253C0623AEACCFB",
+        "scripts/session/session_shell.gd": "A76D311D2E6AFAD07E53942A52C44666F029D4C6F91AA4DF74CD3D19DACA33BA",
+        "tests/ground_course.gd": "5BCB8B5E2ACCD094D1C6662A41F81DAABCEAE1E7DC25EB77440A7036C2343EAC",
+        "tests/air_exhaustion_cases.gd": "0407C233232F9CB4F9673C8CD76E4489000D06F0C33EF765E86C076E9289C61C",
+        "tests/actor_state_cases.gd": "23954025CDBF277D817FB195F54196D0B960B428C5D7726CB76053399C390044",
+        "tests/ground_review.gd": "DE169AA8AA4BAFC1595D5360E7101F19DE29796B8A9AB8FE6D8EB1C288DB3FC3",
+        "tests/ground_inventory.json": "515EAB0884D818D49F2F927776701A85E6398C300306FC34FBA1967BB14F2793",
+        "scripts/char/actor_state.gd": "A9E6A6A403BE8AB8834835BB3380835A71B06DA382D59695AF2EEEE4471612E2"
+      }
+    }
+  ],
+  "assertions": 7526,
+  "cleanup": [
+    {
+      "removed_bytes": 2762395327,
+      "journal": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\dungeon-cleanup-65e6df94f71e4a3f81e8d98033ef51e5.json",
+      "sha256": "241CF140BD062637A5AA4B05F741EDB422745C8455771489DAEEC51D6C1DBFAD",
+      "preserved_records": 161
+    },
+    {
+      "removed_bytes": 208674076.0,
+      "journal": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp012-contact-development-cleanup.json",
+      "sha256": "112CD7D774A3ABA98D1255F9CC2696418B4BD2CE781BC428C50A1B916BA41D74",
+      "preserved_records": 41
+    }
+  ],
+  "protected_human_root": "verification-rendered-00e9af5caf3349acb8366778c82f1cc7",
+  "initial_compile_attempt": "verification-headless-19e3ac1190be4dcb8d5bfda2e2ffab34",
+  "development": "imp012-contact-dev",
+  "open_gates": [
+    "human checks 4–7 / passage and Quit retest",
+    "real provider composition",
+    "native SAVE",
+    "exhaustion recovery and CHAR receipt retirement",
+    "increment 4",
+    "parent IMP-012 / M2"
+  ],
+  "generated_utc": "2026-11-25T20:27:40.6889902Z",
+  "source_archives": [
+    {
+      "files": 311,
+      "sha256": "B34D12C033923E8D15A0B7E4F8F293184846C658F1E533F30BB63D2AD79EEF1B",
+      "manifest": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-d511a495d4134551bf24a29e1565eafd\\air-executed-source.json"
+    },
+    {
+      "files": 311,
+      "sha256": "124F22DDE16798B864501B5D84F1686A9C2DBA689184A9618A08379784FC0001",
+      "manifest": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-1513338ac8234ad4a94f245caaef499d\\air-executed-source.json"
+    },
+    {
+      "files": 311,
+      "sha256": "124F22DDE16798B864501B5D84F1686A9C2DBA689184A9618A08379784FC0001",
+      "manifest": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-e090603cff2742d094eac776dcff54ea\\air-executed-source.json"
+    },
+    {
+      "files": 311,
+      "sha256": "124F22DDE16798B864501B5D84F1686A9C2DBA689184A9618A08379784FC0001",
+      "manifest": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-c07e281c8839420b8e1351e86c504445\\air-executed-source.json"
+    },
+    {
+      "files": 311,
+      "sha256": "124F22DDE16798B864501B5D84F1686A9C2DBA689184A9618A08379784FC0001",
+      "manifest": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-29c6ce5dc33943ceb16c35ef8649aff0\\air-executed-source.json"
+    },
+    {
+      "files": 311,
+      "sha256": "124F22DDE16798B864501B5D84F1686A9C2DBA689184A9618A08379784FC0001",
+      "manifest": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-af1fbfda7a284a32aa0a91df2815bd52\\air-executed-source.json"
+    }
+  ],
+  "quit_probe": {
+    "result": "main_project/tests/.runs/imp012-contact-dev/evidence/actual-quit/actual-quit.json",
+    "process_exit": 0,
+    "human_retest": "pending",
+    "phase": "ready",
+    "media_shutdown_started": true,
+    "resource_leak_warnings": true,
+    "sha256": "620662D2248038FE5F40395C6BFD5CC45E7DBDD1E617FA03C60B9C252C54CBB2",
+    "original_physics_sha256": "2DE9ADAFCBCF07BEBD0F80DAA87066DF41B24EF9C3D416C3A1098F34CE6506C6",
+    "matches_original_qualified_physics": true
+  },
+  "capture_review": {
+    "path": "main_project/tests/.runs/verification-rendered-af1fbfda7a284a32aa0a91df2815bd52/evidence/project/scenario-1/human-review/review-quit.png",
+    "inspected": true,
+    "outcome": "Quit consent and buttons readable; diagnostics hidden",
+    "sha256": "FA14483B65D37D0EE6C83F6E86ABBC810ADBCFD30378AE8B3F88D75491EF2FC8"
+  },
+  "retention": {
+    "files": 91237,
+    "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs",
+    "reparse_points_skipped": [],
+    "measured_utc": "2026-11-25T20:30:21.7013367Z",
+    "bytes": 4950387773
+  },
+  "cleanup_total_removed_bytes": 2971069403,
+  "retention_review": "4.61 GiB; below 8 GiB, above 2 GiB reviewed as prior protected evidence plus the original human build retained until retest or 2026-11-26. No automatic verification payload remains.",
+  "ended_utc": "2026-11-25T20:30:43.9311027+00:00",
+  "ended_est": "2026-11-25 15:30:43 EST",
+  "whitespace_check": "git diff --check passed"
+}

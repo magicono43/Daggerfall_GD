@@ -1,5 +1,12 @@
 # Activity and exhaustion — IMP-016 increment 3
 
+IMP-012 increment 3 adds live Jumping to the fixed-size capability projection,
+the pure checked `quote_jump` rate preflight, and real once-only jump intake.
+Actual zero-time takeoff commits before billing; flight time follows the settled
+jump receipt. Saturating depletion retains impulse and advances no post-exhaustion
+duration. [AIR.md](../move/AIR.md) describes custody/proof/retry ordering. This
+does not solve the known course recovery or long-session receipt-retirement gates.
+
 IMP-012 increment 1 supplies real committed flat-ground MOVE activity. See
 [the ground contract](../move/GROUND.md). The bounded course retains controlled
 TIME/traits/restrictions/LOC-readiness/entry suppliers. Full TIME, threat,

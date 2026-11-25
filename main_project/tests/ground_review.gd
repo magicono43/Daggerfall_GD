@@ -1,6 +1,17 @@
 extends "res://tests/ground_cases.gd"
 ## Human review only. Same SessionShell motor/body/CHAR and stock controls.
+func review_presentation(shell: Control, readout: Label) -> void:
+	var menu_visible: bool = not shell.session_shell.windows.top().is_empty() or not actor_core.gates.gameplay_input()
+	shell.panel.get_parent().get_parent().visible = menu_visible
+	readout.visible = not menu_visible
+
 func run(shell: Control, fixture: Dictionary) -> Dictionary:
+	var review_prevention := preload("res://tests/controlled_prevention.gd").new()
+	review_prevention.ready = true
+	review_prevention.sources = []
+	extra_services = [review_prevention.binding()]
+	fixture = fixture.duplicate(true)
+	fixture.air_player = true
 	if not await bootstrap(shell,fixture): return {"ok":false,"reason":"Controlled review entry failed.","checks":checks,"count":checks.size()}
 	source_a.callback = Callable()
 	var controls: RefCounted = shell.controller.controls
@@ -22,6 +33,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	var smoke: bool = fixture.get("review_smoke",false) == true
 	var smoke_frames := 0
 	var saw_crouch := false
+	var saw_air := false
 	var smoke_start: Vector3 = shell.session_shell.placement.snapshot().position
 	if smoke:
 		shell.session_shell.focus_changed(true)
@@ -31,7 +43,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	while shell.is_inside_tree():
 		# Review-only presentation: expose the actual course during eligible play;
 		# the unmodified stock Pause/Controls panel returns for every menu/hold.
-		shell.panel.get_parent().get_parent().visible = not shell.session_shell.windows.top().is_empty() or not actor_core.gates.gameplay_input()
+		review_presentation(shell,readout)
 		var cap: Dictionary = actors.ground_capabilities(scope,"ground-player")
 		var result: Dictionary = motor.last
 		var practice: Dictionary = actors.activity_projection(scope,"ground-player").get("practice",{})
@@ -44,18 +56,25 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		if fixture.get("connector_full_block",false):
 			readout.text += "\nSOURCE BLOCK %s · original surrounding model geometry · doors/mechanisms inactive" % str(fixture.get("connector_source_placement",""))
 		readout.text += "\nPosture %s · desired %s · pending stand %s\nCHAR recovery exists; this course lacks real TIME/threat handoffs. Exhaustion remains held." % [result.get("posture",{}).get("actual","standing"),result.get("posture",{}).get("desired","standing"),str(result.get("posture",{}).get("pending_stand",false))]
+		var physical: Node3D = shell.session_shell.placement
+		var landing: Dictionary = physical.air.outcomes.get("landing-"+str(physical.air.segment),{})
+		readout.text += "\nSPACE Jump · mode %s · vertical %.2f m/s · health %s · Jumping practice %s\nLast landing: %.3f reference m · damage %s · hard feedback %s" % ["air" if physical.air.airborne else "ground",physical.air.velocity.y,str(actors.vital_projection(scope,"ground-player").get("current",{}).get("health","unavailable")),str(practice.get("jumping",0)),landing.get("distance",0.0),str(landing.get("damage",0)),str(landing.get("hard",false))]
 		await shell.get_tree().process_frame
 		if smoke:
 			shell.session_shell.focus_changed(true)
 			smoke_frames += 1
 			saw_crouch = saw_crouch or shell.session_shell.placement.snapshot().physical.posture == "crouched"
+			saw_air = saw_air or physical.air.airborne
 			if smoke_frames == 30:
 				key(KEY_CTRL,true)
 				key(KEY_CTRL,false)
+				if not fixture.has("connector_model"): key(KEY_SPACE,true)
+			if smoke_frames == 31: key(KEY_SPACE,false)
 			if smoke_frames >= 60:
 				key(KEY_W,false)
 				check("ground review actual crouch observed",true,saw_crouch)
 				check("ground review actual stand observed","standing",shell.session_shell.placement.snapshot().physical.posture)
+				if not fixture.has("connector_model"): check("ground review actual air observed",true,saw_air)
 				check("ground review real physics advances",true,shell.session_shell.placement.snapshot().position.distance_to(smoke_start) > 0.01 and motor.last.has("gait"))
 				check("ground review stock input reaches motor",true,motor.last.get("gait",{}).get("direction",Vector2.ZERO).length() > 0.0)
 				if DisplayServer.get_name() != "headless":
@@ -63,6 +82,17 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 					var image := shell.get_viewport().get_texture().get_image()
 					image.save_png(sandbox.path_join("review-smoke.png"))
 					check("ground review rendered course observed",true,not image.is_empty() and not shell.panel.get_parent().get_parent().visible)
+				shell.session_shell.pause()
+				review_presentation(shell,readout)
+				check("ground review menu hides diagnostics",true,shell.panel.get_parent().get_parent().visible and not readout.visible)
+				shell.session_shell.request_quit()
+				shell.render()
+				review_presentation(shell,readout)
+				check("ground review quit consent unobscured",true,shell.session_shell.quit_phase == "confirmation" and shell.panel.get_parent().get_parent().visible and not readout.visible)
+				if DisplayServer.get_name() != "headless":
+					await RenderingServer.frame_post_draw
+					shell.get_viewport().get_texture().get_image().save_png(sandbox.path_join("review-quit.png"))
+				shell.session_shell.cancel_quit()
 				var ok := true
 				for item in checks: ok = ok and item.expected == item.actual
 				return {"ok":ok,"review_smoke":true,"checks":checks,"count":checks.size(),"frames":smoke_frames,"human_pass":false}

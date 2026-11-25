@@ -78,6 +78,17 @@ func build_surfaces() -> void:
 		var z := -11.0 if width > 0.6 else -16.0
 		for side in [-1,1]: box(Vector3(side*(width*0.5+0.1),1.2,z),Vector3(0.2,2.4,2),Color.DARK_GREEN)
 		label_at("Passage %.2f m" % width,Vector3(0,2.8,z+1))
+	# Increment 3 review: a measured six-metre platform reached by ordinary legal
+	# half-metre stairs. Ground floor receives the real north-side walk-off.
+	for index in 12:
+		var rise := (index+1)*0.5
+		box(Vector3(20,rise*0.5,10-index),Vector3(4,rise,1),Color.SKY_BLUE)
+	box(Vector3(20,3,-3),Vector3(4,6,3),Color.STEEL_BLUE)
+	label_at("AIR / DROP: 12 x 0.50 m steps\n6 m platform; walk off north side",Vector3(20,2,12))
+	label_at("6 m drop: about 5 HP\nActual peak / landing distance in readout",Vector3(20,7,-3))
+	box(Vector3(-18,2.2,-5),Vector3(4,0.2,4),Color.ORANGE)
+	label_at("JUMP ceiling: underside 2.10 m",Vector3(-18,2.7,-2.5))
+	label_at("SPACE: fresh Jump\nHold: no repeat / Ctrl: crouched takeoff",Vector3(0,2,-3))
 func build() -> void:
 	box(Vector3(0,-0.1,0),Vector3(80,0.2,80),Color(0.2,0.3,0.25))
 	box(Vector3(0,2,-20),Vector3(80,4,0.2),Color(0.5,0.2,0.1))

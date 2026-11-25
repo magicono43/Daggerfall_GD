@@ -142,7 +142,10 @@ try {
             $item.reason = 'Fixture unavailable for selected scenario'
             continue
         }
-        if ($null -ne $Seed -or $null -ne $Clock -or $InputSequence -ne '') {
+        # One named, fixed IMP-012 policy fixture is supported. This does not
+        # admit arbitrary replay input, seeds or clocks to fixed owner suites.
+        $fixedAirCapSelection = $id -ceq 'ground-movement' -and $Fixture -ceq 'ground-movement-v1' -and $InputSequence -ceq 'air-cap-2'
+        if ($null -ne $Seed -or $null -ne $Clock -or ($InputSequence -ne '' -and !$fixedAirCapSelection)) {
             $item.reason = 'Selected fixture uses fixed owner inputs; explicit seed/clock/input overrides are unsupported for this selection'
             continue
         }

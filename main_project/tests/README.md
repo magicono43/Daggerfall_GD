@@ -1,5 +1,20 @@
 # Shared verification — IMP-003 / DEV-014
 
+IMP-012 increment 3 extends the maintained ground selection with real Jump,
+gravity, peak-based landings, CHAR health/death and callback-retirement coverage.
+Current fixed inventories are 928 headless / 929 rendered, plus 10 fresh-process
+checks each. Add `-InputSequence air-cap-2` to the same ground selection for the
+independently published 2 m/s downward-cap fixture. This one named selection is
+allowed explicitly; arbitrary input strings, seed overrides and clock overrides
+remain rejected. Windows debug/release `-GroundMovement` exports run the baseline
+inventory in both modes. See [AIR.md](../scripts/move/AIR.md) and the
+[human review](../../design_docs/development/evidence/IMP-012-INCREMENT-3-REVIEW-2026-11-25.md).
+In-memory MOVE checkpoints do not establish native SAVE readiness.
+The human-found 0.58 m passage jump is covered by `air_contact_cases.gd`:
+real course input, repeated 30/60/120 Hz pinch contacts, clear capsule positions,
+landing/walking away and stock recovery Quit through teardown. Rendered review
+smoke also verifies that diagnostics hide for menus and Quit consent.
+
 IMP-012 increment 1 has independent `-Suite ground-movement -Fixture
 ground-movement-v1 -ClassicSource C:/Games/Daggerfall/arena2` headless/rendered
 commands, an exact `ground_inventory.json` inventory and fresh-process stock

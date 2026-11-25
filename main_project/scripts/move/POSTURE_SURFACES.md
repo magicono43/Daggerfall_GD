@@ -2,6 +2,11 @@
 
 # IMP-012 increment 2 — posture and surfaces
 
+Increment 3 extends these accepted contacts and posture rules through [AIR.md](AIR.md).
+Actual air resize retains feet, velocity, takeoff gait and fall history. Genuine
+drop handoffs now enter swept flight. Earlier air-owner-pending descriptions below
+are historical; source grants, capsule margins and step/angle limits remain intact.
+
 This extends the existing GROUND/PLACEMENT authority. Earlier increment-1
 standing/flat-only boundary descriptions are historical. There is still one
 SessionShell, CORE, resolved input/view owner, MOVE capsule and CHAR activity

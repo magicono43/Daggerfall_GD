@@ -1,3 +1,11 @@
+# Increment-3 locomotion extension
+
+The same capsule now owns checked takeoff and swept flight; see [AIR.md](AIR.md).
+Same-session doorway requests cannot clear unresolved flight/landing consequences.
+Gated coherent-origin shifts retain absolute foot-height debt. Settled in-memory
+owner checkpoints are supported; arbitrary/native reconstruction remains unavailable.
+Earlier no-air wording below records the doorway-only implementation checkpoint.
+
 # Increment-2 locomotion extension
 
 Ground locomotion resizes this existing capsule through detached preparation and
