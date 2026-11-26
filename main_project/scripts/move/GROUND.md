@@ -207,3 +207,11 @@ expiry is completion of that review. Physical-controller/changed-host IME checks
 remain user-deferred to later M2. Full story entry, real TIME/traits/restriction/
 ITEM/MAGIC/NPC combinations, native SAVE, later increments, parent IMP-012 and M2
 remain named integrations/acceptance gates.
+# IMP-014 calendar integration boundary
+
+The stock handler now accounts the [native calendar](../time/README.md) once
+through CORE before MOVE. The accepted controlled MOVE/CHAR microsecond proof
+provider remains unchanged and never advances native calendar time. Maintained
+ground checks also select published `calendar-rate-3`, preserving measured Walk
+speed and physical pose while qualifying independent native calendar accounting.
+This does not close the real TIME/CHAR scheduler/activity joint gate.

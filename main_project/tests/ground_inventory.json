@@ -1194,7 +1194,11 @@
     "compression retirement original crush request retained at retirement",
     "compression retirement retirement cannot publish current crush outcome",
     "compression retirement retired crush cannot attest health",
-    "compression retirement late retry cannot repeat retired death"
+    "compression retirement late retry cannot repeat retired death",
+    "calendar movement rate independently published",
+    "calendar MOVE proof does not double account",
+    "calendar CORE one second result",
+    "calendar advance preserves physical pose"
   ],
   "rendered": [
     "ground published composition",
@@ -2390,7 +2394,11 @@
     "compression retirement original crush request retained at retirement",
     "compression retirement retirement cannot publish current crush outcome",
     "compression retirement retired crush cannot attest health",
-    "compression retirement late retry cannot repeat retired death"
+    "compression retirement late retry cannot repeat retired death",
+    "calendar movement rate independently published",
+    "calendar MOVE proof does not double account",
+    "calendar CORE one second result",
+    "calendar advance preserves physical pose"
   ],
   "reload": [
     "ground reload isolated settings path",

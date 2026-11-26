@@ -1181,3 +1181,25 @@ stable IDs, original action parameters/model tags, retained known links and pend
 DFU interpretation and missing required-link rejection (808 unique checks). The normal marker suites additionally
 exercise DATA decoding for all nine formerly rejected blocks and real LOC geometry
 preparation for N0000007; this does not qualify action execution or story traversal.
+# IMP-014 increment 1
+
+Independent DEV-014 selections are `-Suite calendar-clock -Fixture
+calendar-clock-v1 -ClassicSource C:/Games/Daggerfall/arena2` in
+`verify_headless.ps1` and `verify_rendered.ps1`. `calendar_inventory.json` freezes
+complete unique headless/rendered identities; missing/duplicate checks fail.
+`verify_startup_export.ps1 -CalendarClock` selects the same owner checks in
+Windows debug/release PCKs. Inputs use explicit zero-filled 32-byte session seed
+material and integer elapsed nanoseconds, not wall-clock catch-up.
+
+The complete stock adapter composition qualifies the primary calendar path;
+additional isolated real DATA/MOD applications qualify corrections, precedence,
+locking and compatible/incompatible restore. Only entry and activity authorization
+are controlled. No real due-work owner may be enabled without scheduler support.
+The ground regression also accepts the fixed `-InputSequence calendar-rate-3`
+selection and retains all previous movement checks plus native-calendar separation
+assertions. Its MOVE/CHAR proof provider remains controlled and independent.
+
+`review_calendar.ps1` rebuilds the rendered selection, then opens the controlled
+review overlay. `-SmokeTest` checks those handlers and captures an image without
+claiming human success. See the [numbered review](../../design_docs/development/evidence/IMP-014-INCREMENT-1-REVIEW-2026-11-25.md)
+and [TIME contract](../scripts/time/README.md) for precision and open joint gates.

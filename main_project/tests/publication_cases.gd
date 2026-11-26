@@ -294,11 +294,16 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	var identity: Dictionary = definitions.query("fixture.records", "items/main.json", "sword").record.identity
 	var lifecycle = shell.session_shell.core
 	lifecycle.startup_route_changed("main_menu")
-	lifecycle.provider = preload("res://tests/controlled_session_provider.gd").new()
+	lifecycle.provider = preload("res://tests/controlled_calendar_entry.gd").new()
+	lifecycle.provider.core = lifecycle
 	for index in 3:
 		var mode := "load" if index == 2 else "new"
 		var entered: Dictionary = lifecycle.request({"id": "publication-character-%d" % index, "mode": mode, "origin": "", "selection": {"fixture": index}})
 		check("controlled CORE %s entry %d" % [mode, index], "Succeeded", entered.get("outcome", entered.get("kind")))
+		# The composed TIME owner now requires its exact settled payload on load.
+		var capture_hold: int = lifecycle.gates.acquire("publication-clock-capture",lifecycle.snapshot().session,["simulation"])
+		lifecycle.provider.restored = lifecycle.calendar.capture_snapshot().state
+		lifecycle.gates.release(capture_hold,"publication-clock-capture")
 		lifecycle.request({"id": "publication-return-%d" % index, "mode": "return", "origin": lifecycle.snapshot().session})
 		if lifecycle.snapshot().phase == "confirmation":
 			lifecycle.confirm(lifecycle.ticket(), true)

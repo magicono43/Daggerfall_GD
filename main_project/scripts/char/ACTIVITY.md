@@ -256,3 +256,11 @@ Notifications observe coherent committed state. Optional diagnostic/UI failures
 cannot replay gameplay. `activity_projection` returns narrowly detached cursors,
 remainders, practice and an indexed receipt/episode. `activity_diagnostics.gd` is
 a read-only composed development surface, not UI-006 or an activity/time source.
+# IMP-014 native calendar boundary
+
+[TIME](../time/README.md) now owns native calendar milliseconds and ordinary
+fractions. Existing `eligible-activity` game/simulation-microsecond proofs remain
+their accepted controlled contract; they are neither native timestamps nor a
+second calendar writer. No partially qualified provider replaces them. Real
+TIME/CHAR segment settlement, scheduling, exhaustion and native SAVE joint checks
+remain open under their named owners.

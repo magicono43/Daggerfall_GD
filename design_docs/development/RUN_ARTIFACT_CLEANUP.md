@@ -1,5 +1,21 @@
 # Verification run artifact cleanup
 
+## 2026-11-25 IMP-014 increment 1
+
+After terminal verification and ordinary engine inactivity, three exact owned
+batches compacted 30 roots, removing **49,092 reproducible files / 7,646,333,998
+bytes**. Preserved 226 hash-verified child reports/logs/captures, runtime-source
+archives, a 60-file tool-source archive and typed inputs. Export executable/PCK
+identities were checked before deletion; template junctions were unlinked without
+following installed targets. No task-owned full project/export/cache remains.
+
+Pre-second-batch retention measured 8,493,738,712 bytes (7.91 GiB), reviewed as
+understood active/reproducible task payloads plus protected earlier evidence and
+other-task human storage. Final retention/deferred paths and all journals are in
+the [execution audit](evidence/IMP-014-increment-1-2026-11-25.audit.json). No unique
+input, authoritative/reference/classic data or installed tool was removed. The
+review launcher rebuilds compacted builds through maintained DEV-014 tools.
+
 ## 2026-11-25 IMP-012 increment 4
 
 Four batches compacted 21 exact owned inactive roots after terminal verification,

@@ -353,3 +353,10 @@ automatic startup has no intervening user callback or frame requiring a second
 identical preparation. Recovery, reservations, omissions and run locking retain
 their existing contracts. Diagnostic microsecond measurements are recorded in
 `definitions.timings`; they impose no new gameplay latency budget.
+# IMP-014 calendar policy
+
+The application registers `time.calendar:policy/world` (`calendar-clock-v1`)
+before preparation. Its complete validated opening, weekday/anchor, seasons and
+rate use this existing transaction and lock; fixed calendar units/epoch cannot
+be overridden. See [TIME](../time/README.md) for schema bounds, precision,
+compatibility, provenance and recovery. No publication/omission policy changes.

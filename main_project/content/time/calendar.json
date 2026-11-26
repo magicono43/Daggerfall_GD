@@ -1,0 +1,15 @@
+{
+  "domain":"time.calendar", "path":"policy", "operation":"add",
+  "entries":[{"id":"world","value":{
+    "schema":"calendar-clock-v1",
+    "opening":{"year":405,"month":1,"day":4,"hour":13,"minute":30,"second":0,"millisecond":0},
+    "weekday":{"rule":"monthly"},
+    "seasons":{"winter":331,"spring":61,"summer":151,"fall":241},
+    "rate":12.0,
+    "provenance":{
+      "authority":"TIME-001-D01..D05; TIME-002-D01..D03",
+      "reference":"Pinned DFU DaggerfallDateTime.cs / WorldTime.cs, MIT; calendar constants and classic opening 523530. Project-authored integer implementation; no copied source.",
+      "epoch":"Year zero, month one, day one; fixed twelve 30-day months. Era and localized labels are presentation only."
+    }
+  }}]
+}

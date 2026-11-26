@@ -100,7 +100,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	controller.providers.formulas.replace_stage("actor.formula","1.0.0",[{"hook":"char.damage","contract":"actor-rational-v1","callback":callbacks.damage},{"hook":"char.activity-rate","contract":"activity-formula-v1","callback":callbacks.activity_rate}])
 	controller.check_content()
 	check("full candidate validates",true,controller.prepared_content.ok)
-	check("ordinary adapters retained",["actor.baseline","actor.inputs","faction-quest.inputs","geography.inputs","item-spell.inputs","layout.inputs","media.assets","mod.preferences","move.air","move.ground","text.catalogs","text.fonts","world.variants"],adapter_names(registry))
+	check("ordinary adapters retained",["actor.baseline","actor.inputs","faction-quest.inputs","geography.inputs","item-spell.inputs","layout.inputs","media.assets","mod.preferences","move.air","move.feedback","move.ground","move.mechanism","text.catalogs","text.fonts","time.calendar","world.variants"],adapter_names(registry))
 	check("actual menu publication",true,controller.continue_to_menu("run").ok)
 	observations.final_publication_phases = registry.timings.duplicate(true)
 	check("typed gameplay provider selected","actor.formula",controller.providers.formulas.active().winners["char.damage"])

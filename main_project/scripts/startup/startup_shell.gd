@@ -55,7 +55,7 @@ func _ready() -> void:
 	if inputs.is_empty():
 		return
 	# Combined verification retains every ordinary registration; only roots differ.
-	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","ground-review","ground-movement","ground-movement_reload","actor-state","actor-state_reload"]
+	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","calendar-clock","calendar-review","ground-review","ground-movement","ground-movement_reload","actor-state","actor-state_reload"]
 	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 		var resource_sources: Array = []
 		if fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload"]:
@@ -434,6 +434,7 @@ func _physics_process(_delta: float) -> void:
 	if session_shell != null:
 		session_shell.refresh_control_labels()
 		session_shell.deliver_input()
+		if not session_shell.advance_calendar(_delta): return
 		if session_shell.ground != null: session_shell.ground.physics_step(_delta)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -478,7 +479,7 @@ func _process(_delta: float) -> void:
 func fixture_actor_material(_ticket: Dictionary, _mode: String) -> Dictionary:
 	# Pass through the existing CORE constructor seam; no second lifecycle/RNG.
 	var seeds = preload("res://scripts/rule/seed_derivation.gd")
-	if fixture.get("mode") in ["actor-state","actor-state_reload"]:
+	if fixture.get("mode") in ["calendar-clock","calendar-review","actor-state","actor-state_reload"]:
 		var material := PackedByteArray()
 		material.resize(32)
 		return seeds.validate_material(material)
@@ -552,6 +553,10 @@ func run_fixture() -> void:
 		script_path = "res://tests/ground_reload.gd"
 	elif fixture.get("mode") == "ground-review":
 		script_path = "res://tests/ground_review.gd"
+	elif fixture.get("mode") == "calendar-clock":
+		script_path = "res://tests/calendar_cases.gd"
+	elif fixture.get("mode") == "calendar-review":
+		script_path = "res://tests/calendar_review.gd"
 	elif fixture.get("mode") == "ground-movement":
 		script_path = "res://tests/ground_cases.gd"
 	elif fixture.get("mode") in ["actor-state","actor-state_reload"]:

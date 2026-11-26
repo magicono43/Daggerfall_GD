@@ -233,3 +233,12 @@ ordinary navigation remains available while gameplay is gated. Disposal detaches
 the input consumer and breaks editor/owner references. No character snapshot can
 replace the application controls. See [input](../input/README.md) and
 [settings](../startup/README.md) for the request/result and recovery contracts.
+# IMP-014 calendar integration
+
+CORE now composes the [TIME calendar owner](../time/README.md), validates its load
+payload during preflight and initializes its exact origin before dependent
+baseline providers. The stock physics handler accounts one eligible calendar
+interval through CORE, separately from MOVE/CHAR proofs and slow cadence. CORE
+intended rate and DATA calendar rate apply once each at their own boundaries.
+Disposal clears the provider/death-authority references as well as subscriptions.
+Controlled entry/activity checks do not qualify real rest, scheduling or native SAVE.

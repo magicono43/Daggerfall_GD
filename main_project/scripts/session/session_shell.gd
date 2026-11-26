@@ -44,6 +44,19 @@ var vitals_view: Control
 var death_view: ColorRect
 var _death_movie_ticket: Dictionary = {}
 
+func advance_calendar(delta: float) -> bool:
+	# Legacy controlled startup fixtures explicitly omit DATA/TIME. A real
+	# composed clock is required before any eligible physical work can follow.
+	if core.calendar.definitions == null or not core.gates.simulation(): return true
+	if core.calendar.committing(): return false
+	var checked: Dictionary = core.advance_calendar_frame(self,delta)
+	if not checked.ok:
+		message = checked.get("reason","Required calendar accounting failed.")
+		core.required_service_lost(core.snapshot().session,"calendar-clock")
+		schedule_render()
+		return false
+	return true
+
 ## Narrow AV lifetime boundary. Recreated consumers get effective preferences,
 ## prepared resources and a current sequence floor; old callbacks cannot replay.
 func replace_movement_audio() -> Dictionary:
@@ -175,6 +188,8 @@ func _init(shell: Control, material_provider: Callable = Callable()) -> void:
 		host.controller.logger.message("WARNING", report.reason)
 		schedule_render())
 	core.formulas = host.controller.providers.formulas
+	core.calendar.definitions = host.controller.providers.definitions
+	core.bind_calendar_source(self)
 	core.actors.definitions = host.controller.providers.definitions
 	core.gates.changed.connect(schedule_render)
 	core.state_changed.connect(func(_old: Dictionary, _new: Dictionary, _reason: String): schedule_render())

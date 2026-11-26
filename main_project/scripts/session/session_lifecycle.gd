@@ -45,11 +45,53 @@ var _activity_bindings: Dictionary = {}
 var _prevention_binding: Dictionary = {}
 var _effects_binding: WeakRef
 var player_actor := ""
+var calendar: RefCounted
+var _calendar_owner: WeakRef
+var _calendar_interval := 0
+var _calendar_eligibility := 0
+var _calendar_current: Dictionary = {}
+var _calendar_provider_serial := 0
 
 func _init(material_provider: Callable = Callable()) -> void:
+	calendar = preload("res://scripts/time/calendar_clock.gd").new(self)
+	retiring.connect(calendar.retire)
+	gates.changed.connect(func(): _calendar_eligibility += 1)
 	randomness = preload("res://scripts/rule/session_randomness.gd").new(gates, material_provider)
 	actors = preload("res://scripts/char/actor_state.gd").new(self)
 	retiring.connect(actors.retire_scope)
+
+## Accounted eligible simulation nanoseconds, after CORE rate. MOVE activity
+## proofs, slow cadence and wall-clock gaps never feed this single writer path.
+func bind_calendar_source(owner: RefCounted) -> bool:
+	if _calendar_owner != null and is_instance_valid(_calendar_owner.get_ref()) and _calendar_owner.get_ref() != owner: return false
+	if not calendar.bind_ordinary(owner): return false
+	if _calendar_owner == null or _calendar_owner.get_ref() != owner:
+		_calendar_provider_serial += 1
+		_calendar_current.clear()
+	_calendar_owner = weakref(owner)
+	return true
+
+func calendar_interval(owner: RefCounted, eligible_ns: Variant) -> Dictionary:
+	if _calendar_owner == null or _calendar_owner.get_ref() != owner or calendar.committing() or busy() or _publishing or _finishing or not gates.simulation() or not preload("res://scripts/time/calendar.gd").integer(eligible_ns,0,9223372036854775807): return {}
+	_calendar_interval += 1
+	_calendar_current = {"session":_state.session,"interval":_calendar_interval,"elapsed_ns":eligible_ns,"eligibility":_calendar_eligibility,"provider":_calendar_provider_serial}
+	return _calendar_current.duplicate(true)
+
+func calendar_interval_current(value: Dictionary) -> bool:
+	return value == _calendar_current and value.session == _state.session and value.eligibility == _calendar_eligibility and gates.simulation() and not busy() and not _publishing and not _finishing
+
+func calendar_source_current(generation: int) -> bool:
+	return generation == _calendar_provider_serial
+
+func advance_calendar_frame(owner: RefCounted, seconds: Variant) -> Dictionary:
+	# Quantize stock physics input once to nearest eligible nanosecond. Integer
+	# interval callers have exact split/combine equivalence at this precision.
+	if not (seconds is int or seconds is float) or not is_finite(float(seconds)) or seconds < 0.0 or not is_finite(gates.intended_rate) or gates.intended_rate <= 0.0: return {"ok":false,"reason":"Invalid CORE elapsed/rate."}
+	var ns: float = float(seconds)*gates.intended_rate*1000000000.0
+	if not is_finite(ns) or ns >= 9223372036854775807.0: return {"ok":false,"reason":"CORE elapsed overflow."}
+	if ns > 0.0 and ns < 0.5: return {"ok":false,"reason":"Elapsed input is below the supported nanosecond precision."}
+	var interval := calendar_interval(owner,int(round(ns)))
+	return calendar.ordinary(owner,interval) if not interval.is_empty() else {"ok":false,"reason":"No eligible calendar interval."}
 
 func actor_formula_valid(scope: String, owner: Object, hook: String, operation: Dictionary) -> bool:
 	# Only the composed CHAR owner may derive a baseline while entry is gated.
@@ -158,6 +200,11 @@ func complete_preflight(value: Dictionary, result: Dictionary) -> bool:
 	if not result.get("ok", false):
 		_finish("Failed", result.get("reason", "Preparation failed."))
 		return true
+	if _operation.intent.mode in ["new","load"] and calendar.definitions != null:
+		var clock_checked: Dictionary = calendar.preflight(_operation.intent.mode,result.get("calendar_state"))
+		if not clock_checked.ok:
+			_finish("Failed",clock_checked.reason)
+			return true
 	_operation.prepared = result.duplicate(true)
 	if _state.status == "alive":
 		_commit({"phase": "confirmation"}, "Discard unsaved progress? No automatic save.")
@@ -251,6 +298,11 @@ func complete_cleanup(value: Dictionary, result: Dictionary) -> bool:
 		_commit({"session": _operation.scope, "status": "initializing", "application": "session", "phase": "baseline"}, "clean replacement scope")
 		if not busy() or _state.phase != "baseline":
 			return true
+		if calendar.definitions != null:
+			var initialized: Dictionary = calendar.initialize(ticket(),_operation.intent.mode,_operation.prepared.get("calendar_state"))
+			if not initialized.ok:
+				complete_baseline(ticket(),initialized)
+				return true
 		var checked: Dictionary = provider.initialize_baseline(ticket())
 		if not checked.get("pending", false):
 			complete_baseline(ticket(), checked)
@@ -305,6 +357,12 @@ func complete_readiness(value: Dictionary, result: Dictionary) -> bool:
 		_cleanup_scope(_state.session, "failure")
 		return true
 	var formula_bindings := _validate_formula_bindings(result.services)
+	if calendar.definitions != null:
+		var calendar_bindings: Dictionary = calendar.bind_activities(result.services)
+		if not calendar_bindings.ok:
+			_commit({"ready":false,"phase":"replacement"},calendar_bindings.reason)
+			_cleanup_scope(_state.session,"failure")
+			return true
 	if not formula_bindings.ok:
 		_commit({"ready":false,"phase":"replacement"},formula_bindings.reason)
 		_cleanup_scope(_state.session,"failure")
@@ -592,6 +650,11 @@ func _finish(kind: String, reason: String, unsafe_cleanup := false) -> void:
 
 func dispose() -> void:
 	# Application/test owner invokes after scopes end; break owned subscriptions.
+	calendar.dispose()
+	_calendar_owner = null
+	_calendar_current.clear()
+	provider = null
+	_death_authority = null
 	actors.dispose()
 	randomness.dispose()
 	_formula_bindings.clear()

@@ -328,6 +328,10 @@ func shell_cases(shell: Control, fixture: Dictionary) -> void:
 	shell.controller.providers = startup_provider
 	shell.controller.check_content()
 	var ui: RefCounted = shell.session_shell
+	# This asset-independent legacy fixture replaces DATA with a deliberately
+	# non-DATA startup provider. It cannot qualify a resolved calendar. Keep that
+	# absent dependency explicit; calendar-clock tests the real composed boundary.
+	ui.core.calendar.definitions = null
 	var provider := Provider.new()
 	ui.core.provider = provider
 	ui.focus_changed(true)

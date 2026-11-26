@@ -264,6 +264,8 @@ func bootstrap(shell: Control, fixture: Dictionary) -> bool:
 	write(controller.mods.root.path_join("Overrides/ground-policy.json"),JSON.stringify({"domain":"move.ground","path":"policy","operation":"patch","entries":[{"id":"player","value":{"maximum":100.0,"connectors":bundled.entries[0].value.connectors}}]}))
 	if fixture.get("inputs",{}).get("input_sequence") == "air-cap-2":
 		write(controller.mods.root.path_join("Overrides/air-policy.json"),JSON.stringify({"domain":"move.air","path":"policy","operation":"patch","entries":[{"id":"player","value":{"maximum_downward_speed":2.0}}]}))
+	if fixture.get("inputs",{}).get("input_sequence") == "calendar-rate-3":
+		write(controller.mods.root.path_join("Overrides/calendar-policy.json"),JSON.stringify({"domain":"time.calendar","path":"policy","operation":"patch","entries":[{"id":"world","value":{"rate":3.0}}]}))
 	controller.select_folder(fixture.classic_source)
 	var publication: Dictionary = controller.continue_to_menu("run")
 	check("ground published composition",true,publication.ok)
@@ -376,11 +378,18 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		var feedback_nested: Array = [{}]
 		var feedback_observer := func(_event): feedback_nested[0] = motor.physics_step(0.02)
 		motor.feedback.cue.connect(feedback_observer)
+		var calendar_before: int = actor_core.calendar.query().timestamp
 		key(KEY_W,true)
 		var result := step(0.02,50)
 		check("ground collision path success",true,result.get("ok",false))
 		var walking: Vector3 = body.snapshot().position-starting
 		near("ground one second Walk metres",175.0/39.5,walking.length())
+		var calendar_rate := 3 if fixture.get("inputs",{}).get("input_sequence") == "calendar-rate-3" else 12
+		check("calendar movement rate independently published",calendar_rate*1000000,actor_core.calendar.query().rate_units)
+		check("calendar MOVE proof does not double account",calendar_before,actor_core.calendar.query().timestamp)
+		var calendar_pose: Vector3 = body.snapshot().position
+		check("calendar CORE one second result",calendar_rate*1000,actor_core.advance_calendar_frame(shell.session_shell,1.0).actual_ms)
+		check("calendar advance preserves physical pose",calendar_pose,body.snapshot().position)
 		var walked_pose: Vector3 = body.snapshot().position
 		motor.feedback.cue.disconnect(feedback_observer)
 		check("feedback consumer cannot reenter physical motion",true,feedback_nested[0].get("ok") == false and "reentrant" in feedback_nested[0].get("reason",""))

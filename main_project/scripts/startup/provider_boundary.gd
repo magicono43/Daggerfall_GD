@@ -26,6 +26,7 @@ func _init() -> void:
 	if _baseline_setup.ok: _baseline_setup = formulas.declare_air_hook("move.landing-damage",preload("res://scripts/rule/air_formulas.gd").new().damage)
 	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/actor_baseline.gd").new(),"",[])
 	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/ground_policy.gd").new(),"",[])
+	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/calendar_policy.gd").new(),"",[])
 	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/air_policy.gd").new(),"",[])
 	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/movement_feedback_policy.gd").new(),"",[])
 	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/mechanism_policy.gd").new(),"",[])

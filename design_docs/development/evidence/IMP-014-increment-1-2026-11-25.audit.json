@@ -1,0 +1,686 @@
+{
+  "changed_files": [
+    " M design_docs/development/DEPENDENCY_GRAPH.md",
+    " M design_docs/development/IMPLEMENTATION_READINESS.md",
+    " M design_docs/development/MILESTONES.md",
+    " M design_docs/development/RUN_ARTIFACT_CLEANUP.md",
+    " M design_docs/development/TASK_BACKLOG.md",
+    " M design_docs/development/tasks/IMP-014.md",
+    " M main_project/scripts/char/ACTIVITY.md",
+    " M main_project/scripts/data/DEFINITION_PUBLICATION.md",
+    " M main_project/scripts/move/GROUND.md",
+    " M main_project/scripts/session/README.md",
+    " M main_project/scripts/session/session_gates.gd",
+    " M main_project/scripts/session/session_lifecycle.gd",
+    " M main_project/scripts/session/session_shell.gd",
+    " M main_project/scripts/startup/provider_boundary.gd",
+    " M main_project/scripts/startup/startup_shell.gd",
+    " M main_project/tests/README.md",
+    " M main_project/tests/actor_state_cases.gd",
+    " M main_project/tests/ground_cases.gd",
+    " M main_project/tests/ground_inventory.json",
+    " M main_project/tests/m1_composition_cases.gd",
+    " M main_project/tests/publication_cases.gd",
+    " M main_project/tests/session_cases.gd",
+    " M main_project/tools/verify.ps1",
+    " M main_project/tools/verify_startup_export.ps1",
+    "?? design_docs/development/evidence/IMP-014-INCREMENT-1-REVIEW-2026-11-25.md",
+    "?? design_docs/development/evidence/IMP-014-increment-1-2026-11-25.audit.json",
+    "?? design_docs/development/evidence/IMP-014-increment-1-2026-11-25.md",
+    "?? main_project/content/time/calendar.json",
+    "?? main_project/scripts/data/calendar_policy.gd",
+    "?? main_project/scripts/data/calendar_policy.gd.uid",
+    "?? main_project/scripts/time/README.md",
+    "?? main_project/scripts/time/calendar.gd",
+    "?? main_project/scripts/time/calendar.gd.uid",
+    "?? main_project/scripts/time/calendar_clock.gd",
+    "?? main_project/scripts/time/calendar_clock.gd.uid",
+    "?? main_project/tests/calendar_cases.gd",
+    "?? main_project/tests/calendar_cases.gd.uid",
+    "?? main_project/tests/calendar_inventory.json",
+    "?? main_project/tests/calendar_review.gd",
+    "?? main_project/tests/calendar_review.gd.uid",
+    "?? main_project/tests/controlled_calendar_entry.gd",
+    "?? main_project/tests/controlled_calendar_entry.gd.uid",
+    "?? main_project/tools/calendar_fixture.ps1",
+    "?? main_project/tools/review_calendar.ps1"
+  ],
+  "left_uncommitted": true,
+  "schema": "imp014-increment1-audit-v1",
+  "initial_git_status": [],
+  "reports": [
+    {
+      "root": "verification-headless-c24a21b7106d4907a046bedf46d4ffa7",
+      "tool": "verify_headless.ps1",
+      "report_sha256": "297F7500E1F96022B11F1AC0E62F7E23E96A8B3966CCEBB376F796F02611F4C2",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-c24a21b7106d4907a046bedf46d4ffa7\\report.json",
+      "status": "passed",
+      "arguments": [
+        "-Suite",
+        "calendar-clock",
+        "-Fixture",
+        "calendar-clock-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "executable_sha256": null,
+      "name": "Calendar headless",
+      "mode": "headless",
+      "pck_sha256": null,
+      "children": [
+        {
+          "fixture": "calendar-clock-v1",
+          "reload_assertions": 0,
+          "mode": "headless",
+          "assertions": 263,
+          "display": "headless",
+          "exit": 0
+        }
+      ],
+      "assertions": 263,
+      "fixture": "calendar-clock-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_files": 9,
+      "source_archive_sha256": "7104446D5CCFE5AFD046A4C4FFB95B1EA9459E3FFCA030E101E1B2CE5C813178",
+      "source_manifest_sha256": "B7FD133F2DA8E7112861032B1CB38B33786553E247AEA12A2B3BCD78F7477E6D"
+    },
+    {
+      "root": "verification-rendered-e33a91dbc4bd44b08fae8866eb3edb52",
+      "tool": "review_calendar.ps1",
+      "report_sha256": "87B666E1F57B5BD8B40365D0029CE228F8113C6E6A1A9EA2E3EC0226C39B92E0",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-rendered-e33a91dbc4bd44b08fae8866eb3edb52\\report.json",
+      "status": "passed",
+      "arguments": [
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-SmokeTest"
+      ],
+      "executable_sha256": null,
+      "name": "Final rendered clock and review",
+      "mode": "rendered",
+      "pck_sha256": null,
+      "children": [
+        {
+          "fixture": "calendar-clock-v1",
+          "reload_assertions": 0,
+          "mode": "rendered",
+          "assertions": 266,
+          "display": "Windows",
+          "exit": 0
+        }
+      ],
+      "assertions": 266,
+      "fixture": "calendar-clock-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_files": 9,
+      "source_archive_sha256": "2EDF59A106B450CC90177E82147EE4740641138F3C991CFDC4856964D93B8CA7",
+      "source_manifest_sha256": "631B40AD714892A6FE683B52181F8F08FFB6AEC36664E5E1DBBD3CB34233F2EA"
+    },
+    {
+      "root": "export-0a61352962fd4906a38b953a2081cbb9",
+      "tool": "verify_startup_export.ps1",
+      "report_sha256": "21F13F0117D6808AAFAAFFD77FFD4979B1C09B020346D2B122663FADC16B26E8",
+      "configuration": "debug",
+      "report": "main_project\\tests\\.runs\\export-0a61352962fd4906a38b953a2081cbb9\\result.json",
+      "status": "passed",
+      "arguments": [
+        "-Configuration",
+        "debug",
+        "-CalendarClock",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "name": "Final Windows debug",
+      "mode": null,
+      "pck_sha256": "0F3FD44032CAF907D8F8F1335A9C2014EA1A473D16FDFAEC3F32A421467B62A1",
+      "children": [
+        {
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-0a61352962fd4906a38b953a2081cbb9/build/tests/.runs/headless/result.json",
+          "mode": "exported-headless",
+          "exit": 0,
+          "assertions": 263
+        },
+        {
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-0a61352962fd4906a38b953a2081cbb9/build/tests/.runs/rendered/result.json",
+          "mode": "exported-rendered",
+          "exit": 0,
+          "assertions": 266
+        }
+      ],
+      "assertions": 529,
+      "fixture": "calendar-clock-v1",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "verified_production_files": 9,
+      "source_archive_sha256": "AA6686EEB106AD25BD627DC1710A09ADCD3AA9139F253B090698A83FE786CEE0",
+      "source_manifest_sha256": "B3CA17DD866B8F1D081832AE63BC669649BFAD6DD040ECBA727ED906D404C22B"
+    },
+    {
+      "root": "export-e6f154a2de7e40e7abebc988afdb9573",
+      "tool": "verify_startup_export.ps1",
+      "report_sha256": "3B55855BFA8F8265409E24BAEFCD740F75AB911E1081FCFCCAEFFAF048F53727",
+      "configuration": "release",
+      "report": "main_project\\tests\\.runs\\export-e6f154a2de7e40e7abebc988afdb9573\\result.json",
+      "status": "passed",
+      "arguments": [
+        "-Configuration",
+        "release",
+        "-CalendarClock",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "name": "Final Windows release",
+      "mode": null,
+      "pck_sha256": "478EF6A1131C90B19C0A33E5D08844BC52E857E340BE89FC1D8CE9871DE13394",
+      "children": [
+        {
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-e6f154a2de7e40e7abebc988afdb9573/build/tests/.runs/headless/result.json",
+          "mode": "exported-headless",
+          "exit": 0,
+          "assertions": 263
+        },
+        {
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-e6f154a2de7e40e7abebc988afdb9573/build/tests/.runs/rendered/result.json",
+          "mode": "exported-rendered",
+          "exit": 0,
+          "assertions": 266
+        }
+      ],
+      "assertions": 529,
+      "fixture": "calendar-clock-v1",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "verified_production_files": 9,
+      "source_archive_sha256": "A1EF8385934B771C1858528646022F264C7A7EB3F4BCB4F53FEDD98302D9D343",
+      "source_manifest_sha256": "4AD2828F1217FD29A80EAE6A49819D863B6708BF2B61330594658C460AD531ED"
+    },
+    {
+      "root": "verification-headless-8f8e5aebb03b4d0bb317b0fbe339a462",
+      "tool": "verify_headless.ps1",
+      "report_sha256": "F6E8DDCCE82A6D635A14D1122D6B63DFF717FFAB3C337890F9A9B933D455D13C",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-8f8e5aebb03b4d0bb317b0fbe339a462\\report.json",
+      "status": "passed",
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "executable_sha256": null,
+      "name": "Session fixture",
+      "mode": "headless",
+      "pck_sha256": null,
+      "children": [
+        {
+          "fixture": "IMP-002-session-v1",
+          "reload_assertions": 0,
+          "mode": "headless",
+          "assertions": 263,
+          "display": "headless",
+          "exit": 0
+        }
+      ],
+      "assertions": 263,
+      "fixture": "m1-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_files": 9,
+      "source_archive_sha256": "6994B5271801D894D95E8804E19477D5B48B167886CB332C34D8B42DAC837911",
+      "source_manifest_sha256": "7C7EA4DDB2FD827256FF38F3EEF3C14399471BC65D14B0E3C4F4CB044791DB51"
+    },
+    {
+      "root": "verification-headless-cae2a2b819194e6e9d1ae0326c938ee7",
+      "tool": "verify_headless.ps1",
+      "report_sha256": "0235FDD6A002A4311FCFEC73AF1737B78B483AC757EE5B4536D530A121B82851",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-cae2a2b819194e6e9d1ae0326c938ee7\\report.json",
+      "status": "passed",
+      "arguments": [
+        "-Suite",
+        "publication",
+        "-Fixture",
+        "publication-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "executable_sha256": null,
+      "name": "Publication",
+      "mode": "headless",
+      "pck_sha256": null,
+      "children": [
+        {
+          "fixture": "publication-v1",
+          "reload_assertions": 8,
+          "mode": "headless",
+          "assertions": 111,
+          "display": "headless",
+          "exit": 0
+        }
+      ],
+      "assertions": 119,
+      "fixture": "publication-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_files": 9,
+      "source_archive_sha256": "F5967B962F01B36C69C91ABAD15B613254F58DA5A3606BAF20A192E79D083B7A",
+      "source_manifest_sha256": "A82C2CE79A080B10D8CFD26801ABF3C954DAF6FDB40EB161FD118E635251A6EE"
+    },
+    {
+      "root": "verification-headless-8f4c5bacc8ff4502868df8abc5a60dbf",
+      "tool": "verify_headless.ps1",
+      "report_sha256": "BF761BDB08B50F5D2BBB00AB9666BB27815BC52E18CDDED8119D1BAD1BE0F362",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-8f4c5bacc8ff4502868df8abc5a60dbf\\report.json",
+      "status": "passed",
+      "arguments": [
+        "-Suite",
+        "m1-composition",
+        "-Fixture",
+        "m1-composition-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "executable_sha256": null,
+      "name": "Complete composition headless",
+      "mode": "headless",
+      "pck_sha256": null,
+      "children": [
+        {
+          "fixture": "m1-composition-v1",
+          "reload_assertions": 12,
+          "mode": "headless",
+          "assertions": 33,
+          "display": "headless",
+          "exit": 0
+        }
+      ],
+      "assertions": 45,
+      "fixture": "m1-composition-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_files": 9,
+      "source_archive_sha256": "78DC52B4F9041AF9BD8DC80569E353F7AD04FF302E3D40E689C5F302D6449EC0",
+      "source_manifest_sha256": "9D468B635FCC894B2EC6C1DEE2DA64BD2BA31A381DE38D095E7913D11DDF8F7D"
+    },
+    {
+      "root": "verification-rendered-c3d27e63cb684f74b8a139026b84931f",
+      "tool": "verify_rendered.ps1",
+      "report_sha256": "A4A4F92790C77247FC61D4D0F7E9E0320D28EB826EDDB52FF6BF4838EAA19252",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-rendered-c3d27e63cb684f74b8a139026b84931f\\report.json",
+      "status": "passed",
+      "arguments": [
+        "-Suite",
+        "m1-composition",
+        "-Fixture",
+        "m1-composition-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "executable_sha256": null,
+      "name": "Complete composition rendered",
+      "mode": "rendered",
+      "pck_sha256": null,
+      "children": [
+        {
+          "fixture": "m1-composition-v1",
+          "reload_assertions": 13,
+          "mode": "rendered",
+          "assertions": 34,
+          "display": "Windows",
+          "exit": 0
+        }
+      ],
+      "assertions": 47,
+      "fixture": "m1-composition-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_files": 9,
+      "source_archive_sha256": "EA3C0B0DDADC5D4AB45CF7DFE066452B03DBA9AD8AB584BE560418BE737EA5E4",
+      "source_manifest_sha256": "F1496A3DDA40DF6878AB324AF0E6991F696367364AF7FE7E7D2026C5B71046A3"
+    },
+    {
+      "root": "verification-headless-1a5b05d57e5b4b46b85bb8c248f6ab97",
+      "tool": "verify_headless.ps1",
+      "report_sha256": "B26E83585492CABB5E3DFBB21900F5722905A25A4D27B2E968BE265763FF3E5B",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-1a5b05d57e5b4b46b85bb8c248f6ab97\\report.json",
+      "status": "passed",
+      "arguments": [
+        "-Suite",
+        "ground-movement",
+        "-Fixture",
+        "ground-movement-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-InputSequence",
+        "calendar-rate-3",
+        "-TimeoutSeconds",
+        "360"
+      ],
+      "executable_sha256": null,
+      "name": "Final ground headless 3x",
+      "mode": "headless",
+      "pck_sha256": null,
+      "children": [
+        {
+          "fixture": "IMP-012-ground-v1",
+          "reload_assertions": 14,
+          "mode": "headless",
+          "assertions": 1197,
+          "display": "headless",
+          "exit": 0
+        }
+      ],
+      "assertions": 1211,
+      "fixture": "ground-movement-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_files": 9,
+      "source_archive_sha256": "ECC9AC88B945C1802E708B19A1B0B29F0D230F129564134B6C834B2AE4CE0BB8",
+      "source_manifest_sha256": "1C4A30DCDA36E3862FEF4961D2175526B80571F21BCD8A1D7670F2FDC0799D22"
+    },
+    {
+      "root": "verification-rendered-e916993bff354b999195e9dc6ac15e8f",
+      "tool": "verify_rendered.ps1",
+      "report_sha256": "AFD7D75E0D946061E3E4012B52FF8898243646B17F1ED7DE4474BB99829DF924",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-rendered-e916993bff354b999195e9dc6ac15e8f\\report.json",
+      "status": "passed",
+      "arguments": [
+        "-Suite",
+        "ground-movement",
+        "-Fixture",
+        "ground-movement-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-InputSequence",
+        "calendar-rate-3",
+        "-TimeoutSeconds",
+        "360"
+      ],
+      "executable_sha256": null,
+      "name": "Final ground rendered 3x",
+      "mode": "rendered",
+      "pck_sha256": null,
+      "children": [
+        {
+          "fixture": "IMP-012-ground-v1",
+          "reload_assertions": 14,
+          "mode": "rendered",
+          "assertions": 1198,
+          "display": "Windows",
+          "exit": 0
+        }
+      ],
+      "assertions": 1212,
+      "fixture": "ground-movement-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_files": 9,
+      "source_archive_sha256": "6CE41A90AD29D20F80916ED3EE2552E787AE7893E5C445679D92B3E82D0850BD",
+      "source_manifest_sha256": "2EB2480E12EA5035599E70E6123D42CE5F2BCD960A7A20A527C5AFF761F8ED20"
+    },
+    {
+      "root": "verification-rendered-271a7c4e8caf402db9f196008ac88b19",
+      "tool": "verify_rendered.ps1",
+      "report_sha256": "9622A2E03B3168573F6AFA09FBF3FB08D2309BF0B28C011CFB93ADABF302FF63",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-rendered-271a7c4e8caf402db9f196008ac88b19\\report.json",
+      "status": "passed",
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "executable_sha256": null,
+      "name": "Session rendered",
+      "mode": "rendered",
+      "pck_sha256": null,
+      "children": [
+        {
+          "fixture": "IMP-002-session-v1",
+          "reload_assertions": 0,
+          "mode": "rendered",
+          "assertions": 265,
+          "display": "Windows",
+          "exit": 0
+        }
+      ],
+      "assertions": 265,
+      "fixture": "m1-v1",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_files": 9,
+      "source_archive_sha256": "E4FD183360011C39103E3D3116A5DD4B4226D347E137A41DE1915BC62FE5834E",
+      "source_manifest_sha256": "08F0804F4505B053CB0A4CA66C72433FA81009A321BE46973DB4C22FE96C8569"
+    }
+  ],
+  "cleanup": [
+    {
+      "removed_files": 10732,
+      "retained_evidence": 41,
+      "journal": "dungeon-cleanup-883b652120bd4b2f9664c042a4cd917a.json",
+      "removed_bytes": 1484822537,
+      "roots": 7,
+      "sha256": "FB00AB4BE94B785B47CD938B4783F908D7257A4FB8EA2733CA7B419A26E44466"
+    },
+    {
+      "removed_files": 20032,
+      "retained_evidence": 92,
+      "journal": "dungeon-cleanup-13675391cfd44bf089e1ddd3531ddaee.json",
+      "removed_bytes": 3188521672,
+      "roots": 12,
+      "sha256": "E7E3FA2B9D83387F613304824F61C08A13D03575A63CBE882D876C8144B482FF"
+    },
+    {
+      "removed_files": 18328,
+      "retained_evidence": 93,
+      "journal": "dungeon-cleanup-e797b2ec530e4eae8b2eb93d204e57cc.json",
+      "removed_bytes": 2972989789,
+      "roots": 11,
+      "sha256": "91B7A88D7A61788AA1103F652D1BA8739C806745BA86B006CCAB0561E41667FF"
+    }
+  ],
+  "numeric_precision": {
+    "fraction": "integer numerator 0..999999999999 over 1000000000000 game milliseconds",
+    "rate": "positive millionths, 0.000001..1000000",
+    "eligible": "integer eligible simulation nanoseconds after CORE rate",
+    "clock_fixture_seed": "0000000000000000000000000000000000000000000000000000000000000000",
+    "stock_float": "nearest eligible nanosecond; reject positive below half a nanosecond; float input keeps binary precision",
+    "native": "nonnegative signed-int64 whole game milliseconds"
+  },
+  "start_utc": "2026-11-26T00:36:29Z",
+  "review": {
+    "sha256": "0AF52006AB7143E7723D9990071F1DCE401C2DEC14F4CC01D6DFB160E955D7ED",
+    "root": "verification-rendered-e33a91dbc4bd44b08fae8866eb3edb52",
+    "assertions": 6,
+    "human_pass": false,
+    "checklist": "design_docs/development/evidence/IMP-014-INCREMENT-1-REVIEW-2026-11-25.md",
+    "result": "main_project\\tests\\.runs\\verification-rendered-e33a91dbc4bd44b08fae8866eb3edb52\\project\\tests\\.runs\\scenario-1\\human-review\\result.json",
+    "retained_result": "main_project/tests/.runs/verification-rendered-e33a91dbc4bd44b08fae8866eb3edb52/evidence/project/scenario-1/human-review/result.json",
+    "retained_capture": "main_project/tests/.runs/verification-rendered-e33a91dbc4bd44b08fae8866eb3edb52/evidence/project/scenario-1/human-review/calendar-review.png",
+    "visual_qa": "Final numeric readout, independent top panel and stock menu separation visually inspected; automated human_pass remains false."
+  },
+  "remaining_gates": [
+    "Human review and explicit increment acceptance",
+    "IMP-014 increments 2-3 and parent; M2",
+    "Real TIME/CHAR activity clock/custody/settlement integration",
+    "Real QUEST/MAGIC/rest/travel/prison and regional holiday owners",
+    "Full native SAVE bundle/generation/cross-session reconciliation",
+    "WORLD/entry and inherited real-provider/device gates",
+    "Long-session receipt retirement/compaction"
+  ],
+  "baseline_revision": "a28db2423391954429a2df6a65274e62208f6504",
+  "measurements": {
+    "Final rendered clock and review": {
+      "accounted_frame_memory_bytes": 2327664,
+      "complete_startup_usec": 32330054,
+      "retained_clock_receipts": 10000,
+      "ten_thousand_accounted_frames_usec": 303448,
+      "ten_thousand_queries_usec": 128113
+    },
+    "Calendar headless": {
+      "accounted_frame_memory_bytes": 2327664,
+      "complete_startup_usec": 32630983,
+      "retained_clock_receipts": 10000,
+      "ten_thousand_accounted_frames_usec": 292014,
+      "ten_thousand_queries_usec": 128179
+    }
+  },
+  "accepted_imp012_baseline": {
+    "accepted_production_files": 16,
+    "audit_baseline": "b1f689f8977716bbffa1765f67b7f75061952a2c",
+    "authorized_calendar_extension_paths": [
+      "main_project/scripts/session/session_shell.gd",
+      "main_project/scripts/startup/provider_boundary.gd"
+    ],
+    "baseline_git": "a28db24",
+    "retained_exactly": 14
+  },
+  "status": "machine-qualified-human-acceptance-pending",
+  "production_source_hashes": {
+    "content/time/calendar.json": "21D7280E034CE4D6C992AB5BCE30DDFFE8754CBABCFFC28F316C0DD60D982CDB",
+    "scripts/time/calendar_clock.gd": "816FA1B2BA64926AEF7EAE341DC7A6450393D4D083EFA69E38B474A09CC69D1F",
+    "scripts/session/session_lifecycle.gd": "7195ED406C563FAFB0DFA82B219CAAFE339BA0A91592EE8A11F87718FC390076",
+    "scripts/time/calendar.gd": "9A78C43A686A60115268717E9DAAFD827E03518715EA56F3ECBDC2384DBF39FD",
+    "scripts/data/calendar_policy.gd": "302996CAE47D1AF7FC357D908A589613C554399A7A56D0D6DE5FB09EAC3DCC49",
+    "scripts/session/session_gates.gd": "EF36909011D65C15AE284C2D03C2BD8E2DA0AEFE8A1B6AB486EE5CD8655B8870",
+    "scripts/session/session_shell.gd": "7BB5DB5660865D15D90439CA46EF622A393D21D905140AFAF82D34765F9FF1E9",
+    "scripts/startup/provider_boundary.gd": "47A2919C53F1B91274CE0F3E0533732ED2CFD794A7ED3608BE051FAD2C1EACD4",
+    "scripts/startup/startup_shell.gd": "C34CC4AAC5B72F9DE11939B4065C1A015A93E4604AE7E371777781BAC1279E73"
+  },
+  "human_pass": false,
+  "selected_assertions": 4755,
+  "start_est": "2026-11-25 19:36:29 EST",
+  "cleanup_totals": {
+    "removed_bytes": 7646333998,
+    "remaining_owned_full_payloads": [],
+    "retained_evidence": 226,
+    "pre_second_batch_retention_bytes": 8493738712,
+    "removed_files": 49092,
+    "roots": 30,
+    "typed_inputs_preserved": 4
+  },
+  "tool_source_archive": {
+    "files": 60,
+    "sha256": "71B19A0E72EACCE73C33DC33B1D2B5F59EF771F843C87786979FC11526AC61F6",
+    "file": "main_project/tests/.runs/imp014-final-tool-sources.zip"
+  },
+  "typed_input_manifests": [
+    "imp014-typed-inputs-batch2.json",
+    "imp014-typed-inputs-final.json"
+  ],
+  "verification_evolution": [
+    "Initial development parser and MOD-selection persistence failures excluded",
+    "Disposal cycle fixed and clean engine exit required",
+    "Per-frame deep receipt copies replaced with packed numeric receipts; fixture observer counts rather than retaining unused outcomes",
+    "Visual QA fixed unsupported format token/menu overlap, with maintained readout assertion",
+    "Hold owner namespace/current-session scope collision coverage added; calendar/export matrix repeated",
+    "Ignored required calendar failure now gates CORE before physical work; real stock-handler recovery coverage",
+    "Asset-independent session fixture keeps absent DATA/TIME explicit; complete-composition calendar tests qualify actual TIME",
+    "Exact adapter lists synchronized to all current domains; complete composition and final movement regressions pass"
+  ],
+  "retention": {
+    "manifest": "main_project/tests/.runs/imp014-retention-final.json",
+    "final_files": 93959,
+    "links_not_followed": [],
+    "final_bytes": 5488462343,
+    "review": "Remaining large files belong to protected IMP-011 human review and older other-task roots; no uncertain target deleted.",
+    "manifest_sha256": "42637D4DAB790751EA622926E56EDA66D42433F139FD0225CA4D75E6F6B18D9A",
+    "largest_deferred": [
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp011-view-review-2026-11-23-final\\project\\native\\media\\bin\\avcodec-62.dll",
+        "bytes": 93854720
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-13d636fdec0f426f8ba63113299820b0\\project\\native\\media\\bin\\avcodec-62.dll",
+        "bytes": 93854720
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-17dbac68203440ca92259c5ce685505e\\project\\native\\media\\bin\\avcodec-62.dll",
+        "bytes": 93854720
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-43a28ee25d824d2eaea8b5476d07674e\\project\\native\\media\\bin\\avcodec-62.dll",
+        "bytes": 93854720
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-65a7606dbe4c409bb0129689dda8d4d5\\project\\native\\media\\bin\\avcodec-62.dll",
+        "bytes": 93854720
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-c96d811ee25e4a0698354f29bd11ef86\\project\\native\\media\\bin\\avcodec-62.dll",
+        "bytes": 93854720
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cc8b5f15a7814be586b3eae8dc2c719d\\project\\native\\media\\bin\\avcodec-62.dll",
+        "bytes": 93854720
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-ce9c10bf5cc348d0ad4e8708dcd4877d\\project\\native\\media\\bin\\avcodec-62.dll",
+        "bytes": 93854720
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-d3cfeef68f9b4413b85327f7e2b5c08d\\project\\native\\media\\bin\\avcodec-62.dll",
+        "bytes": 93854720
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-dccb06ad4e15465691bdf70af6e5d363\\project\\native\\media\\bin\\avcodec-62.dll",
+        "bytes": 93854720
+      }
+    ],
+    "measurement_note": "Measured after cleanup, before final small metadata writes; other-task payloads protected."
+  },
+  "documentation_link_check": {
+    "manifest": "main_project/tests/.runs/imp014-doc-links.json",
+    "links": 999,
+    "new_missing": 0,
+    "note": "Historical missing handoff/other targets were already present; no unrelated repair attempted.",
+    "files": 14,
+    "preexisting_missing": 97
+  },
+  "reference_source_hashes": {
+    "main_project/scripts/rule/DFU_LICENSE.txt": "6E5E22FA760938AB398743150787896BD20FCF4936AAD0122704700BAD1E669A",
+    "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Utility/DaggerfallDateTime.cs": "3D63BD8CFE922E1B816461048BFCFD871A0D3E16E38872EC77481CB21BA8A9C0",
+    "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Internal/WorldTime.cs": "6154C12D034BECF2708728CCEADADBB07D6F05801E36F72B2B9540C5B450F24A"
+  },
+  "timing": {
+    "start_est": "2026-11-25 19:36:29 EST",
+    "elapsed_seconds": 5650,
+    "end_est": "2026-11-25 21:10:39 EST",
+    "revised_estimate": "45-90 minutes; later 20-35 minutes remaining after ownership/failure-path findings",
+    "initial_estimate": "2-4 hours",
+    "start_utc": "2026-11-26T00:36:29Z",
+    "end_utc": "2026-11-26T02:10:39Z"
+  }
+}
