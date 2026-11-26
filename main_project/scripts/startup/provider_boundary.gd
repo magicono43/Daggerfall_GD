@@ -15,6 +15,7 @@ var _preference_stores: Dictionary = {}
 var layouts: RefCounted
 var variants: RefCounted
 var geography: RefCounted
+var creation_art: RefCounted
 var _baseline_setup: Dictionary = {}
 
 func _init() -> void:
@@ -38,6 +39,12 @@ func enable_variant_inputs() -> Dictionary:
 	var registered := register_content_adapter(candidate,"",[])
 	if registered.ok: variants = candidate
 	return registered
+
+func enable_creation() -> Dictionary:
+	var registered := register_content_adapter(preload("res://scripts/data/creation_flow.gd").new(),"",[])
+	if not registered.ok: return registered
+	creation_art = preload("res://scripts/av/creation_art.gd").new()
+	return creation_art.declare(self)
 
 func enable_layout_inputs(required_resource_sources: Array = []) -> Dictionary:
 	var candidate := preload("res://scripts/data/layout_inputs.gd").new()
@@ -102,7 +109,9 @@ func enable_structured_text() -> bool:
 
 func register_bundled_text() -> Dictionary:
 	# Catalogs need no classic source; bundled intake also works from an exported PCK.
-	return register_content_adapter(preload("res://scripts/data/text_catalog.gd").new(), "", [])
+	var catalog := preload("res://scripts/data/text_catalog.gd").new()
+	if creation_art != null: catalog.extra_bundled.append("creation.csv")
+	return register_content_adapter(catalog, "", [])
 
 func uses_definition_pipeline() -> bool:
 	return true
@@ -167,6 +176,7 @@ func discard_classic_candidate() -> void:
 
 func dispose() -> void:
 	before_menu = Callable()
+	if creation_art != null: creation_art.dispose()
 	if media != null: media.dispose()
 	if media_preferences != null: media_preferences.dispose()
 	if presentation != null:

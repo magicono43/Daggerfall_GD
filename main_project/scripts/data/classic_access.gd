@@ -230,6 +230,38 @@ func death_video_source() -> Dictionary:
 	reader.close()
 	return source
 
+func creation_image(file: String) -> Dictionary:
+	# Optional interface originals, requested only through the active DATA source.
+	# This bounded owner table is not a wildcard path/format interface. Absence or
+	# malformed optional art does not invalidate required startup or gameplay data.
+	const NAMES = ["CHAR00I0.IMG","CHAR01I0.IMG","CHAR02I0.IMG","CHAR03I0.IMG","CHAR04I0.IMG","CHAR05I0.IMG","TMAP00I0.IMG","CUST00I0.IMG","CHGN00I0.IMG"]
+	if not ready() or file not in NAMES: return {"ok":false,"reason":"Published creation-art source binding unavailable."}
+	var reader := MediaReader.new("classic-img-v1")
+	var checked: Dictionary = reader.initialize(_active_source.path_join(file))
+	if not checked.ok: return checked
+	var decoded: Dictionary = reader.read_record({"record":0,"frame":0})
+	reader.close()
+	if not decoded.ok: return decoded
+	var data: Dictionary = decoded.value.projection()
+	var palette_name := "MAP.PAL" if file == "TMAP00I0.IMG" else "ART_PAL.COL"
+	if data.has("embedded_palette"):
+		data.ok = true
+		var embedded := preload("res://scripts/data/classic_image.gd").new().rgba(data,data.embedded_palette,-1)
+		if not embedded.ok: return embedded
+		return {"ok":true,"image":Image.create_from_data(embedded.width,embedded.height,false,Image.FORMAT_RGBA8,embedded.rgba),"provenance":{"image":data.provenance,"palette":"embedded six-bit RGB","alpha_index":-1,"sampling":"nearest","source_identity":data.identity}}
+	reader = MediaReader.new("classic-palette-v1")
+	checked = reader.initialize(_active_source.path_join(palette_name))
+	if not checked.ok: return checked
+	var colors: Dictionary = reader.read_record({"record":0,"frame":0})
+	reader.close()
+	if not colors.ok: return colors
+	var palette_data: Dictionary = colors.value.projection()
+	data.ok = true
+	palette_data.ok = true
+	var rgba := preload("res://scripts/data/classic_image.gd").new().rgba(data,palette_data,-1)
+	if not rgba.ok: return rgba
+	return {"ok":true,"image":Image.create_from_data(rgba.width,rgba.height,false,Image.FORMAT_RGBA8,rgba.rgba),"provenance":{"image":data.provenance,"palette":palette_data.provenance,"alpha_index":-1,"sampling":"nearest","source_identity":data.identity}}
+
 func dispose() -> void:
 	discard_prepared()
 	for reader: RefCounted in _active.values():

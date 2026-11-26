@@ -41,6 +41,7 @@ var _movement_audio_cue: Callable
 var _movement_audio_ready: Callable
 var _ground_message := ""
 var vitals_view: Control
+var creation_view: RefCounted
 var death_view: ColorRect
 var _death_movie_ticket: Dictionary = {}
 
@@ -319,6 +320,12 @@ func synchronize_startup() -> void:
 			_startup_route = host.controller.route
 		_synchronizing_startup = false
 
+func open_creation() -> Dictionary:
+	if creation_view == null: creation_view = preload("res://scripts/char/creation_view.gd").new(self)
+	var checked: Dictionary = creation_view.open()
+	if not checked.ok: message = checked.reason; schedule_render()
+	return checked
+
 func request(mode: String, selection: Dictionary = {}) -> Dictionary:
 	if mode in ["new", "load"] and host.controller.route != "main_menu":
 		return {"kind": "unavailable", "reason": "Complete required startup checks first."}
@@ -336,6 +343,7 @@ func return_to_setup() -> void:
 			setup_pending = false
 
 func dispose() -> void:
+	if creation_view != null: creation_view.dispose()
 	if ground != null:
 		host.controller.controls.detach(ground)
 		ground.dispose()
@@ -452,6 +460,13 @@ func deliver_input() -> Array[Dictionary]:
 
 func options() -> void:
 	var top := windows.top()
+	if top.get("window") == "creation" and creation_view != null:
+		# Leaving cancellable admitted creation must also cancel CORE's captured
+		# operation; discarding the runtime draft alone cannot abandon live work.
+		if core.busy() and core.snapshot().phase == "preflight": core.cancel(core.ticket())
+		elif core.busy() and core.snapshot().phase == "confirmation": core.confirm(core.ticket(),false)
+		creation_view.exit()
+		return
 	if top.get("window") == "controls":
 		close_controls()
 		return
@@ -530,8 +545,12 @@ func render() -> void:
 		host.button("Return to Main Menu", func(): core.recover_menu())
 		host.essential_button("return_setup", return_to_setup)
 	elif state.session.is_empty():
+		if windows.top().get("window") == "creation" and creation_view != null and creation_view.active():
+			creation_view.render()
+			host.essential_button("quit",request_quit)
+			return
 		host.label("Main menu ready.")
-		host.button("New Game", func(): request("new"))
+		host.button("New Game", open_creation)
 		host.label("Character entry and saved games are unavailable until their support is enabled.", 15)
 		host.button("Settings / Setup", func(): host.controller.open_setup(); host.render())
 		host.button("Controls",open_controls)
@@ -588,6 +607,7 @@ func render() -> void:
 	view._sync()
 
 func restore_focus() -> void:
+	if windows.top().get("window") == "creation": return # Creation owns nested controls and text focus by stable action identity.
 	if windows.top().is_empty() and core.gates.gameplay_input():
 		# Returning to gameplay must not leave Space/Enter or controller Confirm
 		# armed on the placeholder shell's Pause button. Menus retain UI focus.
@@ -668,6 +688,7 @@ func render_settings(top: Dictionary) -> void:
 			windows.open("discard_settings", core.snapshot().session, {"required_choice": true}))
 
 func request_quit() -> void:
+	if creation_view != null and creation_view.active(): creation_view.exit()
 	if not quit_phase.is_empty():
 		return
 	_quit_hold = core.gates.acquire("shutdown", "", ["simulation", "input", "admission"])

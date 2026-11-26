@@ -300,6 +300,11 @@ func find_button(shell: Control, text: String) -> Button:
 			return child
 	return null
 
+func current_prompt(shell: Control) -> Control:
+	for child in shell.panel.get_children():
+		if child.get_script() == preload("res://scripts/session/session_prompt.gd"): return child
+	return null
+
 func click(shell: Control, text: String) -> void:
 	await shell.get_tree().process_frame
 	await shell.get_tree().process_frame
@@ -338,8 +343,13 @@ func shell_cases(shell: Control, fixture: Dictionary) -> void:
 	shell.render()
 	var storage: RefCounted = shell.controller.storage.adapter
 	var log_owner: Logger = shell.registered_logger
-	await click(shell, "New Game")
-	check("normal title routes to CORE provider and readiness", ui.core.snapshot().ready and provider.initializations == 1)
+	# This legacy non-DATA fixture has no creation definitions. Qualify its
+	# existing controlled lifecycle directly; creation-draft separately exercises
+	# the real New Game button and validated UI/CHAR/CORE route.
+	check("reachable stock control New Game", find_button(shell,"New Game") != null)
+	ui.request("new")
+	await shell.get_tree().process_frame
+	check("controlled shell request routes to CORE provider and readiness", ui.core.snapshot().ready and provider.initializations == 1)
 	await click(shell, "Pause")
 	await click(shell, "Settings")
 	check("nested settings remain suspended", ui.windows.layers().size() == 2 and not ui.core.gates.simulation())
@@ -371,7 +381,11 @@ func shell_cases(shell: Control, fixture: Dictionary) -> void:
 	await click(shell, "Discard and Continue")
 	check("normal title return tears down windows", ui.core.snapshot().session.is_empty() and ui.windows.top().is_empty())
 	check("application lease/settings/logger retained across session change", shell.controller.storage.adapter == storage and shell.registered_logger == log_owner and shell.controller.logger.initialized and shell.controller.settings != null)
-	await click(shell, "New Game")
+	await shell.get_tree().process_frame
+	await shell.get_tree().process_frame
+	check("reachable stock control New Game", find_button(shell,"New Game") != null)
+	ui.request("new")
+	await shell.get_tree().process_frame
 	ui.request_quit()
 	check("quit prompts for live session and deduplicates", ui.quit_phase == "confirmation")
 	check("pending shutdown blocks conflicting admission", ui.request("new").kind == "busy")
@@ -386,10 +400,7 @@ func shell_cases(shell: Control, fixture: Dictionary) -> void:
 		return {"ok": result.response == "cancel" or result.text == "Accepted", "reason": "Enter Accepted"})
 	await shell.get_tree().process_frame
 	await shell.get_tree().process_frame
-	var prompt: Control
-	for child in shell.panel.get_children():
-		if child.get_script() == preload("res://scripts/session/session_prompt.gd"):
-			prompt = child
+	var prompt: Control = current_prompt(shell)
 	check("stock text prompt rendered", prompt != null)
 	if prompt != null:
 		prompt.field.grab_focus()
@@ -409,6 +420,10 @@ func shell_cases(shell: Control, fixture: Dictionary) -> void:
 			focus_peer.grab_focus()
 			await shell.get_tree().process_frame
 			await shell.get_tree().process_frame
+			# Focus holds can legitimately recreate controls while retaining the
+			# same modal owner/draft. Inspect the live view, not a retired pointer.
+			prompt = current_prompt(shell)
+			if prompt == null: push_error("Focused modal owner lost its stock prompt view."); return
 			var composition_before: bool = prompt._composition
 			var composition_frame_before: int = prompt._composition_end_frame
 			# Controlled pending composition must not end from another window's
@@ -422,6 +437,10 @@ func shell_cases(shell: Control, fixture: Dictionary) -> void:
 			await shell.get_tree().process_frame
 			main_window.gui_embed_subwindows = embedded_before
 			main_window.grab_focus()
+			await shell.get_tree().process_frame
+			await shell.get_tree().process_frame
+			prompt = current_prompt(shell)
+			if prompt == null: push_error("Returning focus lost its stock prompt view."); return
 			prompt.field.grab_focus()
 		ui.windows.update_data(prompt_id, {"draft": "Rejected"})
 		prompt.field.text = "Rejected"

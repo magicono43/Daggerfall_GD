@@ -1,5 +1,33 @@
 # Verification run artifact cleanup
 
+## 2026-11-26 IMP-015 increment 1
+
+Three completed, explicitly owned batches compacted **32 roots**, removing
+**53,527 files / 8,688,356,556 bytes**. Two dedicated engine shader-cache
+passes removed **990 files / 27,478,260 bytes** and reverified every required
+retention hash. Total: **54,517 files / 8,715,834,816 bytes** removed.
+
+Preserved compact reports/logs, typed mod/loose/settings inputs, reviewed captures,
+32 stream-hash-verified runtime source archives and a verified frozen tool archive.
+Export child reports have recorded `child-evidence` aliases; original report
+executable/PCK hashes remain. No task-owned full project/export/dependency copy
+or shader/import cache remains. Rebuild through `tools/review_creation.ps1`.
+
+An observed precompaction regular retention sample reached **9,725,482,868**; final retention is
+**6,955,136,411 bytes**, before final small metadata writes. Retention above
+8 GiB was reviewed. Remaining largest consumers are earlier verification roots
+outside this task's verified ownership; prior human/unknown roots were protected.
+Ordinary process checks found no active Godot/Startup/FFmpeg child. Paths and
+reparse ancestry were checked; installed template junctions were unlinked without
+following or changing their targets. No external classic/reference data,
+authoritative input, installed dependency or security setting was changed.
+
+The [execution evidence](evidence/IMP-015-increment-1-2026-11-26.md) and
+[delivery audit](evidence/IMP-015-increment-1-2026-11-26.audit.json) link the exact
+cleanup journals, source archives, retained aliases and measurements under
+`main_project/tests/.runs/imp015-increment1-audit/`. All engine checks passed before final compaction: 6,475 selected assertions / 14 child results. Human acceptance,
+parent IMP-015, later increments, real entry/grants/native SAVE and M2/M3 stay open.
+
 ## 2026-11-26 IMP-014 increment 3
 
 After all owned children returned and normal engine inactivity checks passed,

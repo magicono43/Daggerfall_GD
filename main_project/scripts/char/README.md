@@ -1,5 +1,10 @@
 # CHAR actor owner — IMP-016 increments 1–4
 
+IMP-015 increment 1 separately composes the runtime-only [creation draft and
+navigation contract](CREATION.md). The stock New Game action opens that draft;
+the stock session provider still rejects actual fresh entry. Controlled creation
+fixtures certify interfaces, not real mechanics, actor intake or starting grants.
+
 IMP-012 increment 3 uses this real owner for jump fatigue/practice, landing health
 and lethal handoff. See [AIR.md](../move/AIR.md) and the updated intake/activity
 contracts. Platform/MAGIC/WORLD providers and native SAVE retain separate gates.

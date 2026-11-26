@@ -1,0 +1,370 @@
+{
+  "schema": "creation-fixture-v1",
+  "allowed": {
+    "race": [
+      "breton",
+      "nord"
+    ],
+    "gender": [
+      "male",
+      "female"
+    ],
+    "class_method": [
+      "list",
+      "questionnaire",
+      "custom"
+    ],
+    "questionnaire": [
+      {
+        "schema": "assigned-questionnaire-v1",
+        "questions": [
+          "question-1",
+          "question-2",
+          "question-3",
+          "question-4",
+          "question-5",
+          "question-6",
+          "question-7",
+          "question-8",
+          "question-9",
+          "question-10"
+        ],
+        "answers": {
+          "question-1": "mage",
+          "question-2": "warrior",
+          "question-3": "mage",
+          "question-4": "warrior",
+          "question-5": "mage",
+          "question-6": "warrior",
+          "question-7": "mage",
+          "question-8": "warrior",
+          "question-9": "mage",
+          "question-10": "warrior"
+        },
+        "result": "class-16"
+      }
+    ],
+    "class": [
+      "class-16",
+      "class-00"
+    ],
+    "custom": [
+      {
+        "schema": "assigned-custom-career-v1",
+        "id": "controlled.custom-1",
+        "name": "Assigned Artisan",
+        "attributes": {
+          "strength": 50,
+          "intelligence": 50,
+          "willpower": 50,
+          "agility": 50,
+          "endurance": 50,
+          "personality": 50,
+          "speed": 50,
+          "luck": 50
+        },
+        "tiers": {
+          "primary": [
+            "long-blade",
+            "critical-strike",
+            "dodging"
+          ],
+          "major": [
+            "running",
+            "swimming",
+            "climbing"
+          ],
+          "minor": [
+            "archery",
+            "short-blade",
+            "axe",
+            "blunt-weapon",
+            "hand-to-hand",
+            "jumping"
+          ]
+        },
+        "advantages": [],
+        "disadvantages": [],
+        "hit_points_per_level": 8,
+        "advancement": {
+          "numerator": 1,
+          "denominator": 1
+        },
+        "biography_template": "controlled.biography-1"
+      }
+    ],
+    "biography_method": [
+      "manual",
+      "automatic"
+    ],
+    "face": [
+      "controlled.face-1",
+      "controlled.face-2"
+    ],
+    "reflexes": [
+      "average",
+      "high"
+    ]
+  },
+  "preset": {
+    "race": "breton",
+    "gender": "female",
+    "class_method": "list",
+    "questionnaire": {
+      "schema": "assigned-questionnaire-v1",
+      "questions": [
+        "question-1",
+        "question-2",
+        "question-3",
+        "question-4",
+        "question-5",
+        "question-6",
+        "question-7",
+        "question-8",
+        "question-9",
+        "question-10"
+      ],
+      "answers": {
+        "question-1": "mage",
+        "question-2": "warrior",
+        "question-3": "mage",
+        "question-4": "warrior",
+        "question-5": "mage",
+        "question-6": "warrior",
+        "question-7": "mage",
+        "question-8": "warrior",
+        "question-9": "mage",
+        "question-10": "warrior"
+      },
+      "result": "class-16"
+    },
+    "class": "class-16",
+    "biography_method": "manual",
+    "biography": {
+      "template": "controlled.biography-1",
+      "answers": {
+        "childhood": "library",
+        "training": "blade"
+      },
+      "outcomes": {
+        "childhood/library": {
+          "id": "retained-book",
+          "quantity": 1
+        }
+      },
+      "known_effects": [
+        {
+          "kind": "skill",
+          "target": "long-blade",
+          "value": 2,
+          "represented": "candidate-only"
+        }
+      ],
+      "obligations": [
+        "ITEM starting grants pending; no possession created"
+      ]
+    },
+    "name": "Assigned Adventurer",
+    "face": "controlled.face-1",
+    "attributes": {
+      "schema": "assigned-creation-allocation-v1",
+      "base": {
+        "strength": 50,
+        "intelligence": 50,
+        "willpower": 50,
+        "agility": 50,
+        "endurance": 50,
+        "personality": 50,
+        "speed": 50,
+        "luck": 50
+      },
+      "allocated": {
+        "strength": 6,
+        "endurance": 6
+      },
+      "remaining": 0
+    },
+    "skills": {
+      "schema": "assigned-creation-allocation-v1",
+      "base": {
+        "long-blade": 30,
+        "critical-strike": 30,
+        "dodging": 30,
+        "running": 20,
+        "swimming": 20,
+        "climbing": 20
+      },
+      "allocated": {
+        "long-blade": 6,
+        "running": 6,
+        "swimming": 6
+      },
+      "remaining": 0
+    },
+    "reflexes": "average"
+  },
+  "custom": {
+    "race": "breton",
+    "gender": "female",
+    "class_method": "custom",
+    "questionnaire": {
+      "schema": "assigned-questionnaire-v1",
+      "questions": [
+        "question-1",
+        "question-2",
+        "question-3",
+        "question-4",
+        "question-5",
+        "question-6",
+        "question-7",
+        "question-8",
+        "question-9",
+        "question-10"
+      ],
+      "answers": {
+        "question-1": "mage",
+        "question-2": "warrior",
+        "question-3": "mage",
+        "question-4": "warrior",
+        "question-5": "mage",
+        "question-6": "warrior",
+        "question-7": "mage",
+        "question-8": "warrior",
+        "question-9": "mage",
+        "question-10": "warrior"
+      },
+      "result": "class-16"
+    },
+    "class": "class-16",
+    "biography_method": "manual",
+    "biography": {
+      "template": "controlled.biography-1",
+      "answers": {
+        "childhood": "library",
+        "training": "blade"
+      },
+      "outcomes": {
+        "childhood/library": {
+          "id": "retained-book",
+          "quantity": 1
+        }
+      },
+      "known_effects": [
+        {
+          "kind": "skill",
+          "target": "long-blade",
+          "value": 2,
+          "represented": "candidate-only"
+        }
+      ],
+      "obligations": [
+        "ITEM starting grants pending; no possession created"
+      ]
+    },
+    "name": "Assigned Artisan",
+    "face": "controlled.face-1",
+    "attributes": {
+      "schema": "assigned-creation-allocation-v1",
+      "base": {
+        "strength": 50,
+        "intelligence": 50,
+        "willpower": 50,
+        "agility": 50,
+        "endurance": 50,
+        "personality": 50,
+        "speed": 50,
+        "luck": 50
+      },
+      "allocated": {
+        "strength": 6,
+        "endurance": 6
+      },
+      "remaining": 0
+    },
+    "skills": {
+      "schema": "assigned-creation-allocation-v1",
+      "base": {
+        "long-blade": 30,
+        "critical-strike": 30,
+        "dodging": 30,
+        "running": 20,
+        "swimming": 20,
+        "climbing": 20
+      },
+      "allocated": {
+        "long-blade": 6,
+        "running": 6,
+        "swimming": 6
+      },
+      "remaining": 0
+    },
+    "reflexes": "average",
+    "custom": {
+      "schema": "assigned-custom-career-v1",
+      "id": "controlled.custom-1",
+      "name": "Assigned Artisan",
+      "attributes": {
+        "strength": 50,
+        "intelligence": 50,
+        "willpower": 50,
+        "agility": 50,
+        "endurance": 50,
+        "personality": 50,
+        "speed": 50,
+        "luck": 50
+      },
+      "tiers": {
+        "primary": [
+          "long-blade",
+          "critical-strike",
+          "dodging"
+        ],
+        "major": [
+          "running",
+          "swimming",
+          "climbing"
+        ],
+        "minor": [
+          "archery",
+          "short-blade",
+          "axe",
+          "blunt-weapon",
+          "hand-to-hand",
+          "jumping"
+        ]
+      },
+      "advantages": [],
+      "disadvantages": [],
+      "hit_points_per_level": 8,
+      "advancement": {
+        "numerator": 1,
+        "denominator": 1
+      },
+      "biography_template": "controlled.biography-1"
+    }
+  },
+  "biography_alternative": {
+    "template": "controlled.biography-1",
+    "answers": {
+      "childhood": "temple",
+      "training": "blade"
+    },
+    "outcomes": {
+      "childhood/temple": {
+        "id": "retained-relic",
+        "quantity": 1
+      }
+    },
+    "known_effects": [
+      {
+        "kind": "skill",
+        "target": "long-blade",
+        "value": 1,
+        "represented": "candidate-only"
+      }
+    ],
+    "obligations": [
+      "ITEM starting grants pending; no possession created"
+    ]
+  }
+}

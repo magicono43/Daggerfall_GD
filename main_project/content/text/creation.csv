@@ -1,0 +1,21 @@
+schema,codec,collection,locale,key,operation,base,optional,essential,placeholders,suppress,value
+text-catalog-v1,text-token-v1,creation,en,action.next,add,en,false,false,,false,Next
+text-catalog-v1,text-token-v1,creation,en,action.begin,add,en,false,false,,false,Begin Game
+text-catalog-v1,text-token-v1,creation,en,action.back,add,en,false,false,,false,Back
+text-catalog-v1,text-token-v1,creation,en,action.restart,add,en,false,false,,false,Restart
+text-catalog-v1,text-token-v1,creation,en,action.exit,add,en,false,false,,false,Exit creation
+text-catalog-v1,text-token-v1,creation,en,action.apply-name,add,en,false,false,,false,Use name
+text-catalog-v1,text-token-v1,creation,en,step.race,add,en,false,false,,false,Race
+text-catalog-v1,text-token-v1,creation,en,step.gender,add,en,false,false,,false,Gender
+text-catalog-v1,text-token-v1,creation,en,step.class_method,add,en,false,false,,false,Class method
+text-catalog-v1,text-token-v1,creation,en,step.questionnaire,add,en,false,false,,false,Class questionnaire
+text-catalog-v1,text-token-v1,creation,en,step.class,add,en,false,false,,false,Preset class
+text-catalog-v1,text-token-v1,creation,en,step.custom,add,en,false,false,,false,Custom career
+text-catalog-v1,text-token-v1,creation,en,step.biography_method,add,en,false,false,,false,Biography method
+text-catalog-v1,text-token-v1,creation,en,step.biography,add,en,false,false,,false,Biography
+text-catalog-v1,text-token-v1,creation,en,step.name,add,en,false,false,,false,Name
+text-catalog-v1,text-token-v1,creation,en,step.face,add,en,false,false,,false,Face
+text-catalog-v1,text-token-v1,creation,en,step.attributes,add,en,false,false,,false,Attributes
+text-catalog-v1,text-token-v1,creation,en,step.skills,add,en,false,false,,false,Skills
+text-catalog-v1,text-token-v1,creation,en,step.reflexes,add,en,false,false,,false,Reflexes
+text-catalog-v1,text-token-v1,creation,en,step.summary,add,en,false,false,,false,Summary

@@ -8,12 +8,15 @@ const SCHEMA := "text-catalog-v1"
 const DOMAIN := "text.catalogs"
 const HEADER := ["schema","codec","collection","locale","key","operation","base","optional","essential","placeholders","suppress","value"]
 const RECOVERY := {"retry":"Retry", "quit":"Quit", "choose_folder":"Choose Folder", "continue":"Continue", "cancel":"Cancel", "return_setup":"Return to Setup", "standard_storage":"Use standard storage for this launch", "reset_settings":"Preserve original and reset to defaults", "save_continue":"Save and Continue", "run_continue":"Continue for This Run", "retry_save":"Retry saving preferences"}
+var extra_bundled: Array[String] = [] # Trusted enabled consumers only, before registration.
 
 func declaration() -> Dictionary:
 	return {"id":"text.catalogs.v1", "domain":DOMAIN,"reference_domains":[DOMAIN], "operations":["add","replace"], "formats":[Csv.VERSION], "json_envelopes":false, "required_resources":["recovery"], "capabilities":["text-catalog-v1"]}
 
 func bundled_contributions() -> Array:
-	return [{"file":"recovery.csv", "bytes":FileAccess.get_file_as_bytes("res://content/text/recovery.csv")}]
+	var result: Array = [{"file":"recovery.csv", "bytes":FileAccess.get_file_as_bytes("res://content/text/recovery.csv")}]
+	for file: String in extra_bundled: result.append({"file":file,"bytes":FileAccess.get_file_as_bytes("res://content/text/"+file)})
+	return result
 
 func validate_record(_id: String, _value: Dictionary) -> String:
 	return "Text catalogs require text-csv-v1, not a JSON envelope."

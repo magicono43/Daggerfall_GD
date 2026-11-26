@@ -1,0 +1,402 @@
+{
+  "schema": "imp015-increment1-delivery-audit-v1",
+  "utc": "2026-11-26T08:41:48.7506686Z",
+  "source_revision": "106f588b255b35c7a2f7d9edbaf95889c1df6ea3",
+  "human_pass": false,
+  "accepted": false,
+  "parent_complete": false,
+  "assertions": 6475,
+  "children": 14,
+  "reports": [
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-3a15df47eec34553b8209268f59746c8\\report.json",
+      "sha256": "21DC022EBD7F3CC0575011D093E460D60EF1F94A993CBF0EF6A619C83373E789",
+      "status": "passed",
+      "assertions": 705,
+      "children": [
+        {
+          "count": 705,
+          "mode": "headless",
+          "scenario": "creation-draft"
+        }
+      ],
+      "source_matches": 21,
+      "unexecuted_fixture_deltas": []
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-9c762463a748438dbb5533b9239275d7\\report.json",
+      "sha256": "2BAD4077697ECA0BB9CB0821812A001A5CF2703A5322598213A322E59807AA69",
+      "status": "passed",
+      "assertions": 737,
+      "children": [
+        {
+          "count": 737,
+          "mode": "rendered",
+          "scenario": "creation-draft"
+        }
+      ],
+      "source_matches": 21,
+      "unexecuted_fixture_deltas": []
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-108f4c09a71049979770eec3e64534b4\\result.json",
+      "sha256": "2AB9129A7557469C1254F38DAD0C9AD565B88FCB280592C4ABBC8DA6D9594A04",
+      "status": "passed",
+      "assertions": 1442,
+      "children": [
+        {
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-108f4c09a71049979770eec3e64534b4\\child-evidence\\headless\\result.json",
+          "count": 705,
+          "sha256": "1A40181F98725DC9167BC8A6A8506B1698CEB7EF12F65B5C4BC3886892E82485",
+          "scenario": "exported-headless"
+        },
+        {
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-108f4c09a71049979770eec3e64534b4\\child-evidence\\rendered\\result.json",
+          "count": 737,
+          "sha256": "72805AFD77277D7E3D88AA0DF4D3B84122A627C9C1D42A1538EBD50CB0151FD2",
+          "scenario": "exported-rendered"
+        }
+      ],
+      "source_matches": 21,
+      "unexecuted_fixture_deltas": [],
+      "exe_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "pck_sha256": "F688CA7CD509C2B315FFABD142545EEE277D895A48823830DB126141488E5E21"
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-86ca97f490364da0867991970d468c09\\result.json",
+      "sha256": "F745B6EC453CCDCBC3CBA674DA4074D71B2A32C01139C0C79FF839E8B0A7074A",
+      "status": "passed",
+      "assertions": 1442,
+      "children": [
+        {
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-86ca97f490364da0867991970d468c09\\child-evidence\\headless\\result.json",
+          "count": 705,
+          "sha256": "95315900CF731CBE3E75586A04C319E763516261726EEE90A1027CA82D50A8A3",
+          "scenario": "exported-headless"
+        },
+        {
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-86ca97f490364da0867991970d468c09\\child-evidence\\rendered\\result.json",
+          "count": 737,
+          "sha256": "3E3B100447AA76603974E350BFC827463172C0546F5AD5C81070B7AD2BC3609D",
+          "scenario": "exported-rendered"
+        }
+      ],
+      "source_matches": 21,
+      "unexecuted_fixture_deltas": [],
+      "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "pck_sha256": "BC7D1D93C0C1C31AAC2FE7764353E1CF4E5BEB27AE0250F814644473AB8067E4"
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-d0da8ce0d92b446795915140ff3f28c3\\report.json",
+      "sha256": "A0218035467C1DA6EA3B1702A52747E54CC1C16FABF2E7F0F78772C3D9D5613C",
+      "status": "passed",
+      "assertions": 737,
+      "children": [
+        {
+          "count": 737,
+          "mode": "rendered",
+          "scenario": "creation-draft"
+        }
+      ],
+      "source_matches": 21,
+      "unexecuted_fixture_deltas": []
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-2cc988735d7b41988dd08c1d4132efa3\\report.json",
+      "sha256": "5873BB2A5DFE960115B1C52757C0E42C79EC48BAE99A325409B4E1AA4CC922E1",
+      "status": "passed",
+      "assertions": 263,
+      "children": [
+        {
+          "count": 263,
+          "mode": "headless",
+          "scenario": "session"
+        }
+      ],
+      "source_matches": 21,
+      "unexecuted_fixture_deltas": []
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-5a81614ffdae477fab51feeb23a6cc7e\\report.json",
+      "sha256": "F1C30A7D69DF74B7A67FDAC4880B7AA4ADE2AB2CD43DDA48D79BBB838F4FC765",
+      "status": "passed",
+      "assertions": 265,
+      "children": [
+        {
+          "count": 265,
+          "mode": "rendered",
+          "scenario": "session"
+        }
+      ],
+      "source_matches": 21,
+      "unexecuted_fixture_deltas": []
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-f10a1277a02448db81c63d14276bc856\\report.json",
+      "sha256": "109EE0A9D8069F7988AA5D95A2641948B85E58E6A648AE6939D582E756F5B3BD",
+      "status": "passed",
+      "assertions": 429,
+      "children": [
+        {
+          "count": 419,
+          "mode": "headless",
+          "scenario": "locale-fonts"
+        },
+        {
+          "count": 10,
+          "mode": "reload-headless",
+          "scenario": "locale-fonts"
+        }
+      ],
+      "source_matches": 21,
+      "unexecuted_fixture_deltas": []
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-e7c614d51fbf439291b6903259019db9\\report.json",
+      "sha256": "F439775A35F43630DA57CD3D90A278A7BDE321EDBE2CE32FA6D8410B9A2C4074",
+      "status": "passed",
+      "assertions": 451,
+      "children": [
+        {
+          "count": 441,
+          "mode": "rendered",
+          "scenario": "locale-fonts"
+        },
+        {
+          "count": 10,
+          "mode": "reload-rendered",
+          "scenario": "locale-fonts"
+        }
+      ],
+      "source_matches": 21,
+      "unexecuted_fixture_deltas": []
+    },
+    {
+      "human_pass": false,
+      "assertions": 4,
+      "sha256": "044DB7F9A86C82911D64598547735CC057A0C66A4C84017A0D198092EC57DA1D",
+      "review_smoke": true,
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-d0da8ce0d92b446795915140ff3f28c3\\project\\tests\\.runs\\scenario-1\\human-review\\result.json"
+    }
+  ],
+  "runtime_files": [
+    {
+      "path": "main_project/content/char/creation.json",
+      "sha256": "104E852C616CDAB4D2FE1224F8B9DF0EC978EADE57C38E7CF69C44E80F6B8B63"
+    },
+    {
+      "path": "main_project/content/text/creation.csv",
+      "sha256": "3E0D15B9F16D48770A282122A5C54FA085D023C9CABBD8D7AE83B22E7E2712DB"
+    },
+    {
+      "path": "main_project/content/text/creation.csv.import",
+      "sha256": "C7D129DF259FEB5ADDB132A77DED322A6D94840A35E6112510CF7FF731F474BB"
+    },
+    {
+      "path": "main_project/export_presets.cfg",
+      "sha256": "D8CB202DB107F9AD630E3EDF2EDBE7AE69A2D48CA7CCE985DA631DAB3B4F8072"
+    },
+    {
+      "path": "main_project/scripts/av/creation_art.gd",
+      "sha256": "E0EFC5ED09721FB413B6796E11FAA4DBFBF19CC21A439E5D2A66EC88EBE61366"
+    },
+    {
+      "path": "main_project/scripts/char/creation_draft.gd",
+      "sha256": "B9DD38155D7EF72E8A4E81C8F7269908F620299814D88E74645883BB175E317C"
+    },
+    {
+      "path": "main_project/scripts/char/creation_inputs.gd",
+      "sha256": "7F14DBDCB3A83823492DEFF77BA4E6D5FF5D85355C24A45D3E46AE4EDFB74BC0"
+    },
+    {
+      "path": "main_project/scripts/char/creation_navigation.gd",
+      "sha256": "6C895BCA92124ECEDDF43A2CD613ED89888645C0F0C9740782A2D89581C1E810"
+    },
+    {
+      "path": "main_project/scripts/char/creation_view.gd",
+      "sha256": "9BC07803DA801E43DE3EF5EB7FED1E6BA16CBB3038F366987E7E9BCE0EAAD01A"
+    },
+    {
+      "path": "main_project/scripts/data/classic_access.gd",
+      "sha256": "E069969B9E2753261888C01A2B02F0AC7C1A5741C7D783D685B2D2FEAA487019"
+    },
+    {
+      "path": "main_project/scripts/data/creation_flow.gd",
+      "sha256": "A5D268EA1EE52F2078EC8A58AFD43D69B547DD209BD9F7CF71559A055568F3BA"
+    },
+    {
+      "path": "main_project/scripts/data/text_catalog.gd",
+      "sha256": "CC95AA7CFC8E86DF6125A9B2D5613AB229C6780032C493214A8B5C2F82CF7408"
+    },
+    {
+      "path": "main_project/scripts/session/session_lifecycle.gd",
+      "sha256": "812896D82E10970AA53BCA76966093B6FA073B24824116A85662AE64D470CDB3"
+    },
+    {
+      "path": "main_project/scripts/session/session_shell.gd",
+      "sha256": "E4CA1DD7089D0D42359DE81032BFED0C9AB72F1291729151427B22D878BB9285"
+    },
+    {
+      "path": "main_project/scripts/startup/provider_boundary.gd",
+      "sha256": "51F21C81D3213529BA865FDCE00E0F3B04C7BD851A80B7B8B3B6BF2D55C82234"
+    },
+    {
+      "path": "main_project/scripts/startup/startup_shell.gd",
+      "sha256": "5E21D217A3FC0DBC500C1C75EBE23F383DCF184840BE265EA42806C53616E354"
+    },
+    {
+      "path": "main_project/tests/controlled_creation_inputs.gd",
+      "sha256": "83AE8915BB17F1E700AD766C56F94DA311F2BE8BC0B9EF2C870FE1DB61CE3F08"
+    },
+    {
+      "path": "main_project/tests/creation_cases.gd",
+      "sha256": "1278F9FE2B7E15C7A851F54A3DA0408951E211E5F09022D1768A4954C5C9CA94"
+    },
+    {
+      "path": "main_project/tests/creation_fixture.json",
+      "sha256": "0E3A5DBBF442CFA1B1DBF4D3B60B1F8FEEB3FBB86C042E1DD3221F8B39F92FD5"
+    },
+    {
+      "path": "main_project/tests/creation_inventory.json",
+      "sha256": "98021E286F76C8BF78D4D624D083FBDF99F469F8C4D672D2116ADEE778FC76EE"
+    },
+    {
+      "path": "main_project/tests/creation_review.gd",
+      "sha256": "F776ADC3B021A1943B851391DF2E0DE4D26F818E09209F67E85F242242B1A409"
+    },
+    {
+      "path": "main_project/tests/creation_setup.gd",
+      "sha256": "E256318698E8DFDDDC00FA7AA7165E6A337F3831C1F19EE0CAE644360AC9DD4A"
+    },
+    {
+      "path": "main_project/tests/session_cases.gd",
+      "sha256": "F85D882D35D345CDDB861B6C5C0D5AAD24F34135C0F740291B0A21CD50BA0AB5"
+    },
+    {
+      "path": "main_project/tools/creation_fixture.ps1",
+      "sha256": "4755DA099440CF0F2A58297631F8F8D6452CABD8BB4E613DFC573044EFFA44B0"
+    },
+    {
+      "path": "main_project/tools/review_creation.ps1",
+      "sha256": "2E7C5119C5E9E9CDDEECE18B2F8284D505AD7AA2BC4DE968734060F8E32A483B"
+    },
+    {
+      "path": "main_project/tools/verify_startup_export.ps1",
+      "sha256": "EB7BA56D67D7B62221D1C7F3D5B1EFBC92D5C1832385600B6485228BAB778A70"
+    },
+    {
+      "path": "main_project/tools/verify.ps1",
+      "sha256": "DC673D0F4B9D5D594F4D5D7A0E0B1CBE1984E81D20D298EB652E770E1E1C0BC4"
+    }
+  ],
+  "changed_files": [
+    "design_docs/development/DEPENDENCY_GRAPH.md",
+    "design_docs/development/evidence/IMP-015-increment-1-2026-11-26.audit.json",
+    "design_docs/development/evidence/IMP-015-increment-1-2026-11-26.md",
+    "design_docs/development/evidence/IMP-015-INCREMENT-1-REVIEW-2026-11-26.md",
+    "design_docs/development/IMPLEMENTATION_READINESS.md",
+    "design_docs/development/MILESTONES.md",
+    "design_docs/development/RUN_ARTIFACT_CLEANUP.md",
+    "design_docs/development/TASK_BACKLOG.md",
+    "design_docs/development/tasks/IMP-015.md",
+    "main_project/content/char/creation.json",
+    "main_project/content/text/creation.csv",
+    "main_project/content/text/creation.csv.import",
+    "main_project/export_presets.cfg",
+    "main_project/scripts/av/creation_art.gd",
+    "main_project/scripts/char/creation_draft.gd",
+    "main_project/scripts/char/creation_inputs.gd",
+    "main_project/scripts/char/creation_navigation.gd",
+    "main_project/scripts/char/creation_view.gd",
+    "main_project/scripts/char/CREATION.md",
+    "main_project/scripts/char/README.md",
+    "main_project/scripts/data/classic_access.gd",
+    "main_project/scripts/data/creation_flow.gd",
+    "main_project/scripts/data/MEDIA_DECODERS.md",
+    "main_project/scripts/data/text_catalog.gd",
+    "main_project/scripts/session/README.md",
+    "main_project/scripts/session/session_lifecycle.gd",
+    "main_project/scripts/session/session_shell.gd",
+    "main_project/scripts/startup/provider_boundary.gd",
+    "main_project/scripts/startup/startup_shell.gd",
+    "main_project/tests/controlled_creation_inputs.gd",
+    "main_project/tests/creation_cases.gd",
+    "main_project/tests/creation_fixture.json",
+    "main_project/tests/creation_inventory.json",
+    "main_project/tests/creation_review.gd",
+    "main_project/tests/creation_setup.gd",
+    "main_project/tests/session_cases.gd",
+    "main_project/tools/creation_fixture.ps1",
+    "main_project/tools/review_creation.ps1",
+    "main_project/tools/verify_startup_export.ps1",
+    "main_project/tools/verify.ps1"
+  ],
+  "cleanup": [
+    {
+      "removed_bytes": 2972117400,
+      "sha256": "019B10980B1828D3111FCC57CAAD30E40BE0FA3C6B86E08446A892F809F39EB5",
+      "removed_files": 18399,
+      "roots": 11,
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp015-increment1-audit\\cleanup-2ba6b0b36a424ed5807278251ed54c0b.json"
+    },
+    {
+      "removed_bytes": 2547781990,
+      "sha256": "489706F07843F7B0C5B8EE7C22002FFA96F3350AD070062E6EFFE0AB6B9E50E0",
+      "removed_files": 15329,
+      "roots": 9,
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp015-increment1-audit\\cleanup-538653fbeebd48809e5c44bb1fce17d4.json"
+    },
+    {
+      "removed_bytes": 3168457166,
+      "sha256": "A249CCAD71BDEA48BACACB758C72698DCD8CA47AC9161B46192DE10CD59975FA",
+      "removed_files": 19799,
+      "roots": 12,
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp015-increment1-audit\\cleanup-a10667652ebd4bc7b1a55b8644e2d3b1.json"
+    },
+    {
+      "kind": "dedicated engine shader caches",
+      "removed_bytes": 10991304,
+      "sha256": "F7930C6B4DC5AF803C89C191123F3F1D8D4274FDE18E9DBE7B8F06FA1544CA4A",
+      "removed_files": 396,
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp015-increment1-audit\\shader-cache-cleanup-final.json"
+    },
+    {
+      "kind": "dedicated engine shader caches",
+      "removed_bytes": 16486956,
+      "sha256": "D298CD75ECF1EC21D1840CAA446DCA86DD641AE8F9E0D1480F89869816773D11",
+      "removed_files": 594,
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp015-increment1-audit\\shader-cache-cleanup.json"
+    }
+  ],
+  "remaining": [
+    "human acceptance",
+    "increments 2-4 real creation semantics/presentation",
+    "IMP-036 grants placement opening/readiness",
+    "creation cinematics",
+    "native SAVE",
+    "M2/M3 and named TIME/MOVE/CHAR joint gates"
+  ],
+  "supplemental_retirement_proof": {
+    "before": {
+      "admitted_retry_retained": true,
+      "draft_empty": true,
+      "retained_count": 2,
+      "session": "",
+      "sha256": "4ba65ab8ea4938028668d0764f0283d1a552bf4b7fca5764c7a7c40eaa86497b",
+      "source": "res://tests/.runs/imp015-increment1-audit/old_creation_draft.gd",
+      "unsubmitted_retained": true
+    },
+    "included_in_selected_assertion_total": false,
+    "after": {
+      "admitted_retry_retained": true,
+      "draft_empty": true,
+      "retained_count": 1,
+      "session": "",
+      "sha256": "b9dd38155d7ef72e8a4e81c8f7269908f620299814d88e74645883bb175e317c",
+      "source": "res://scripts/char/creation_draft.gd",
+      "unsubmitted_retained": false
+    },
+    "sha256": "AC7F25E2805CE38F064F77654C5AD2F7C14BF71959B3DCDDA6219914022CAC38",
+    "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/imp015-increment1-audit/retention-before-after.json"
+  }
+}

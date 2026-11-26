@@ -1,5 +1,11 @@
 # Classic media — IMP-008 increment 1
 
+IMP-015 increment 1 adds the bounded optional `classic.creation_image()` source
+interface described in [creation](../char/CREATION.md). These optional interface
+originals are not required startup-manifest entries. Existing IMG/palette decoders
+and logical media replacement selection are reused; no source bytes, decoder
+format, world-texture substitution or native dependency is added.
+
 The separately delivered [increment-2 media replacement contract](MEDIA_REPLACEMENTS.md)
 adds logical/package export selection and engine resources without broadening
 this accepted classic inventory, source-space units or HMI/VID timing policy.

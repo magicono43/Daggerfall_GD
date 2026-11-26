@@ -55,7 +55,7 @@ func _ready() -> void:
 	if inputs.is_empty():
 		return
 	# Combined verification retains every ordinary registration; only roots differ.
-	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","ground-review","ground-movement","ground-movement_reload","actor-state","actor-state_reload"]
+	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","creation-draft","creation-review","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","ground-review","ground-movement","ground-movement_reload","actor-state","actor-state_reload"]
 	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 		var resource_sources: Array = []
 		if fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload"]:
@@ -115,6 +115,11 @@ func _ready() -> void:
 			label("Media adapter registration failed: " + registered.reason)
 			return
 	if ordinary_composition or fixture.get("mode") in ["translation-preferences", "translation-preferences_reload"]:
+		if ordinary_composition:
+			var creation_registered: Dictionary = controller.providers.enable_creation()
+			if not creation_registered.ok:
+				label("Creation registration failed: "+creation_registered.reason)
+				return
 		var registered: Dictionary = controller.providers.enable_mod_preferences()
 		if not registered.ok:
 			label(registered.reason)
@@ -147,6 +152,7 @@ func _ready() -> void:
 		preload("res://tests/native_library_fixture.gd").configure(self)
 	if fixture.get("mode") in ["formula","formula-fault"]:
 		preload("res://tests/formula_fixture.gd").configure(self,fixture)
+	if fixture.get("mode") in ["creation-draft","creation-review"]: preload("res://tests/creation_setup.gd").configure(fixture)
 	controller.start(inputs)
 	registered_logger = controller.logger
 	OS.add_logger(registered_logger)
@@ -421,6 +427,9 @@ func _input(event: InputEvent) -> void:
 	# Observe releases even when a GUI control/IME consumes the event. Only
 	# unhandled eligible presses can become gameplay intent.
 	session_shell.action_input.observe(event)
+	if session_shell.creation_view != null and session_shell.creation_view.route_keyboard(event):
+		get_viewport().set_input_as_handled()
+		return
 	if session_shell.route_controls(event):
 		session_shell.action_input.finish_consumed(event)
 		get_viewport().set_input_as_handled()
@@ -484,7 +493,7 @@ func _process(_delta: float) -> void:
 func fixture_actor_material(_ticket: Dictionary, _mode: String) -> Dictionary:
 	# Pass through the existing CORE constructor seam; no second lifecycle/RNG.
 	var seeds = preload("res://scripts/rule/seed_derivation.gd")
-	if fixture.get("mode") in ["calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","actor-state","actor-state_reload"]:
+	if fixture.get("mode") in ["creation-draft","creation-review","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","actor-state","actor-state_reload"]:
 		var material := PackedByteArray()
 		material.resize(32)
 		return seeds.validate_material(material)
@@ -560,6 +569,10 @@ func run_fixture() -> void:
 		script_path = "res://tests/ground_review.gd"
 	elif fixture.get("mode") == "calendar-clock":
 		script_path = "res://tests/calendar_cases.gd"
+	elif fixture.get("mode") == "creation-draft":
+		script_path = "res://tests/creation_cases.gd"
+	elif fixture.get("mode") == "creation-review":
+		script_path = "res://tests/creation_review.gd"
 	elif fixture.get("mode") == "calendar-activity-review":
 		script_path = "res://tests/activity_review.gd"
 	elif fixture.get("mode") == "calendar-scheduler-review":

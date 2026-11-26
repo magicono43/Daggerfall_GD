@@ -19,6 +19,7 @@ param(
     [switch]$ActorState,
     [switch]$GroundMovement,
     [switch]$CalendarClock,
+    [switch]$CreationDraft,
     [switch]$ItemSpellInputs,
     [switch]$FactionQuestInputs,
     [switch]$GeographyInputs,
@@ -34,7 +35,7 @@ param(
     [switch]$FormulaExtraError
 )
 $ErrorActionPreference = 'Stop'
-if ($CalendarClock -and !$ClassicSource) { throw 'Calendar clock requires complete composition classic input.' }
+if (($CreationDraft -or $CalendarClock) -and !$ClassicSource) { throw 'Calendar clock requires complete composition classic input.' }
 if ($GroundMovement) { $ActorState = $true }
 if ($LocationAssembly) { $DungeonAssembly = $true; $Fixture = 'location-assembly-v1' }
 elseif ($DungeonMarkers) { $DungeonContext = $true; $DungeonAssembly = $true; $Fixture = 'dungeon-markers-v1' }
@@ -51,6 +52,7 @@ if ($VariantInputs) { $LayoutInputs = $true }
 . "$PSScriptRoot/actor_state_fixture.ps1"
 . "$PSScriptRoot/ground_fixture.ps1"
 . "$PSScriptRoot/calendar_fixture.ps1"
+. "$PSScriptRoot/creation_fixture.ps1"
 . "$PSScriptRoot/actor_fixture.ps1"
 . "$PSScriptRoot/item_spell_fixture.ps1"
 . "$PSScriptRoot/faction_quest_fixture.ps1"
@@ -76,7 +78,7 @@ $priorLocal = $env:LOCALAPPDATA
 $report = @{ ok = $false; status = 'incomplete'; configuration = $Configuration; classic_source = $ClassicSource
     fixture = $(if ($FormulaExtraError) {'formula-extra-error-v1'} elseif ($Formula -or $FormulaFault) {'formula-v1'} elseif ($RandomnessSession) {'randomness-session-v1'} elseif ($Randomness) {'randomness-v1'} elseif ($DefinitionPublication) {'publication-v1'} elseif ($DependencyPlanning) {'planning-v1'} elseif ($ModDiscovery) {'mods-v1'} elseif ($ClassicSource) {'classic-v1'} else {'IMP-001-Windows-export-v1'}); checks = @()
     reproduction = @{ command = './main_project/tools/verify_startup_export.ps1'; arguments = @{
-        DungeonMarkers = [bool]$DungeonMarkers; DungeonContext = [bool]$DungeonContext; DungeonAssembly = [bool]$DungeonAssembly; GroundMovement = [bool]$GroundMovement; CalendarClock = [bool]$CalendarClock; ActorState = [bool]$ActorState; M1Composition = [bool]$M1Composition; VariantInputs = [bool]$VariantInputs; LayoutInputs = [bool]$LayoutInputs; Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; RandomnessSession = [bool]$RandomnessSession; Formula = [bool]$Formula; FormulaFault = [bool]$FormulaFault; FormulaExtraError = [bool]$FormulaExtraError; Godot = $Godot; Templates = $Templates } } }
+        DungeonMarkers = [bool]$DungeonMarkers; DungeonContext = [bool]$DungeonContext; DungeonAssembly = [bool]$DungeonAssembly; GroundMovement = [bool]$GroundMovement; CreationDraft = [bool]$CreationDraft; CalendarClock = [bool]$CalendarClock; ActorState = [bool]$ActorState; M1Composition = [bool]$M1Composition; VariantInputs = [bool]$VariantInputs; LayoutInputs = [bool]$LayoutInputs; Configuration = $Configuration; ClassicSource = $ClassicSource; ModDiscovery = [bool]$ModDiscovery; DependencyPlanning = [bool]$DependencyPlanning; DefinitionPublication = [bool]$DefinitionPublication; Randomness = [bool]$Randomness; RandomnessSession = [bool]$RandomnessSession; Formula = [bool]$Formula; FormulaFault = [bool]$FormulaFault; FormulaExtraError = [bool]$FormulaExtraError; Godot = $Godot; Templates = $Templates } } }
 function Copy-ExportResources([string]$Source, [string]$Destination) {
     New-Item -ItemType Directory -Force $Destination | Out-Null
     foreach ($entry in Get-ChildItem -LiteralPath $Source) {
@@ -95,6 +97,7 @@ if ($GeographyInputs) { $report.fixture = 'geography-inputs-v1'; $report.reprodu
 if ($FactionQuestInputs) { $report.fixture = 'faction-quest-inputs-v1'; $report.reproduction.arguments.FactionQuestInputs = $true }
 if ($ItemSpellInputs) { $report.fixture = 'item-spell-inputs-v1'; $report.reproduction.arguments.ItemSpellInputs = $true }
 if ($CalendarClock) { $report.fixture = 'calendar-clock-v1' }
+if ($CreationDraft) { $report.fixture = 'creation-draft-v1' }
 if ($ActorState) { $report.fixture = if ($GroundMovement) { 'ground-movement-v1' } else { 'actor-state-v1' } }
 if ($ActorInputs) { $report.fixture = 'actor-inputs-v1'; $report.reproduction.arguments.ActorInputs = $true }
 if ($NativeMedia) { $report.fixture = 'native-v1'; $report.reproduction.arguments.NativeMedia = $true }
@@ -107,7 +110,7 @@ if ($StructuredText) { $report.fixture = 'structured-text-v1'; $report.reproduct
 if ($TextCatalog) { $report.fixture = 'text-v1'; $report.reproduction.arguments.TextCatalog = $true }
 if ($FormulaExtraError -and !$FormulaFault) { throw 'Additional formula errors require the explicit fault scenario' }
 if (($LayoutInputs -or $GeographyInputs -or $FactionQuestInputs -or $ItemSpellInputs -or $ActorState -or $ActorInputs -or $NativeMedia -or $MediaReplacements -or $TranslationPreferences -or $LocaleFonts -or $StructuredText -or $TextCatalog -or $ModDiscovery -or $DependencyPlanning -or $DefinitionPublication -or $Formula -or $FormulaFault) -and !$ClassicSource) { throw 'Mod checks require an explicit real -ClassicSource' }
-if (@($CalendarClock,$ActorState,$M1Composition,$LayoutInputs,$GeographyInputs,$FactionQuestInputs,$ItemSpellInputs,$ActorInputs,$NativeMedia,$MediaReplacements,$ClassicMedia,$TranslationPreferences,$LocaleFonts,$StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
+if (@($CreationDraft,$CalendarClock,$ActorState,$M1Composition,$LayoutInputs,$GeographyInputs,$FactionQuestInputs,$ItemSpellInputs,$ActorInputs,$NativeMedia,$MediaReplacements,$ClassicMedia,$TranslationPreferences,$LocaleFonts,$StructuredText,$TextCatalog,$ModDiscovery,$DependencyPlanning,$DefinitionPublication,$Randomness,$RandomnessSession,$Formula,$FormulaFault | Where-Object { $_ }).Count -gt 1) { throw 'Select one owner scenario per export invocation' }
 $env:APPDATA = "$run/engine-roaming"
 $env:LOCALAPPDATA = "$run/engine-local"
 New-Item -ItemType Directory -Force "$env:APPDATA/Godot/export_templates",$env:LOCALAPPDATA | Out-Null
@@ -123,7 +126,7 @@ if ($LASTEXITCODE -ne 0 -or !(Test-Path "$build/Startup.exe") -or !(Test-ScriptD
     Get-Content "$run/export.log" -Tail 30
     throw "Windows export failed: $run"
 }
-if ($CalendarClock) {
+if ($CreationDraft -or $CalendarClock) {
     $report.source_revision = (& git -C $project rev-parse HEAD)
     $report.working_tree = @(& git -C $project status --short)
     $report.source_hashes = @{}
@@ -189,12 +192,12 @@ foreach ($mode in @('headless','rendered')) {
         if ((Split-Path $selectedRoot -Leaf) -ine 'ARENA2') { $selectedRoot = Join-Path $selectedRoot 'ARENA2' }
         $lockedRoot = "$sandbox/locked/ARENA2"
         New-Item -ItemType Directory -Force $lockedRoot | Out-Null
-        foreach ($name in ($(if ($DungeonAssembly -or $LayoutInputs) { @('TEXTURE.199','TEXTURE.210') } else { @() }) + $(if ($CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState -or $LayoutInputs -or $GeographyInputs) { @('WOODS.WLD','CLIMATE.PAK','POLITIC.PAK') } else { @() }) + $(if ($CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState -or $LayoutInputs -or $GeographyInputs -or $ItemSpellInputs -or $FactionQuestInputs) { @('SPELLS.STD','MAGIC.DEF') } else { @() }) + $(if ($CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState -or $LayoutInputs -or $GeographyInputs -or $ActorInputs -or $ItemSpellInputs -or $FactionQuestInputs) { Get-ActorSourceNames } else { @() }) + @('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($ClassicMedia -or $NativeMedia) { @('MIDI.BSA','TEXTURE.321','TEXTURE.024','TEXTURE.002','INVE00I0.IMG','APAINT.CIF','BUTTONS.RCI','ART_PAL.COL','ANIM0011.VID') } else { @() }) + $(if ($CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState -or $TranslationPreferences -or $StructuredText -or $LocaleFonts) { @('TEXT.RSC') } else { @() }))) {
+        foreach ($name in ($(if ($CreationDraft) { @('CHAR00I0.IMG','CHAR01I0.IMG','CHAR02I0.IMG','CHAR03I0.IMG','CHAR04I0.IMG','CHAR05I0.IMG','TMAP00I0.IMG','CHGN00I0.IMG','CUST00I0.IMG','ART_PAL.COL','MAP.PAL') } else { @() }) + $(if ($DungeonAssembly -or $LayoutInputs) { @('TEXTURE.199','TEXTURE.210') } else { @() }) + $(if ($CreationDraft -or $CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState -or $LayoutInputs -or $GeographyInputs) { @('WOODS.WLD','CLIMATE.PAK','POLITIC.PAK') } else { @() }) + $(if ($CreationDraft -or $CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState -or $LayoutInputs -or $GeographyInputs -or $ItemSpellInputs -or $FactionQuestInputs) { @('SPELLS.STD','MAGIC.DEF') } else { @() }) + $(if ($CreationDraft -or $CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState -or $LayoutInputs -or $GeographyInputs -or $ActorInputs -or $ItemSpellInputs -or $FactionQuestInputs) { Get-ActorSourceNames } else { @() }) + @('ARCH3D.BSA','BLOCKS.BSA','MAPS.BSA','DAGGER.SND') + $(if ($ClassicMedia -or $NativeMedia) { @('MIDI.BSA','TEXTURE.321','TEXTURE.024','TEXTURE.002','INVE00I0.IMG','APAINT.CIF','BUTTONS.RCI','ART_PAL.COL','ANIM0011.VID') } else { @() }) + $(if ($CreationDraft -or $CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState -or $TranslationPreferences -or $StructuredText -or $LocaleFonts) { @('TEXT.RSC') } else { @() }))) {
             $before[$name] = (Get-FileHash -LiteralPath (Join-Path $selectedRoot $name) -Algorithm SHA256).Hash
             $guards += [IO.File]::Open((Join-Path $selectedRoot $name), [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
             [IO.File]::WriteAllBytes("$lockedRoot/$name", [byte[]]@(1,0,0,2,42,232,3,0,0,1,0,0,0))
         }
-        if ($CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState) {
+        if ($CreationDraft -or $CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState) {
             $contextSources = Get-Content -LiteralPath "$runtimeProject/content/layouts/dungeon_context.json" -Raw | ConvertFrom-Json
             if ($DungeonContext) {
                 $observation = Get-Content -LiteralPath "$runtimeProject/tests/dungeon_context_observation.json" -Raw | ConvertFrom-Json
@@ -202,7 +205,7 @@ foreach ($mode in @('headless','rendered')) {
                     foreach ($archive in $block.texture_archives) { $contextSources.resource_sources += @{file=('TEXTURE.{0:000}' -f $archive);format='classic-texture-v1'} }
                 }
             }
-            if ($CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState) { $contextSources.resource_sources += (Get-Content -LiteralPath "$project/tests/location_source_observation.json" -Raw | ConvertFrom-Json).resource_sources }
+            if ($CreationDraft -or $CalendarClock -or $DungeonAssembly -or $M1Composition -or $ActorState) { $contextSources.resource_sources += (Get-Content -LiteralPath "$project/tests/location_source_observation.json" -Raw | ConvertFrom-Json).resource_sources }
             foreach ($source in $contextSources.resource_sources) {
                 $name = $source.file
                 if ($before.ContainsKey($name)) { continue }
@@ -257,6 +260,7 @@ foreach ($mode in @('headless','rendered')) {
     }
     if ($ActorState) { $fixture.mode = if ($GroundMovement) { 'ground-movement' } else { 'actor-state' }; $fixture.fixture = if ($GroundMovement) { 'ground-movement-v1' } else { 'actor-state-v1' } }
     if ($CalendarClock) { $fixture.mode = 'calendar-clock'; $fixture.fixture = 'calendar-clock-v1' }
+    if ($CreationDraft) { $fixture.mode = 'creation-draft'; $fixture.fixture = 'creation-draft-v1' }
     if ($M1Composition) { $fixture.mode = 'm1-composition'; $fixture.fixture = 'm1-composition-v1' }
     if ($DungeonAssembly) { $fixture.mode = 'dungeon-assembly'; $fixture.fixture = $(if ($LocationAssembly) { 'location-assembly-v1' } elseif ($DungeonMarkers) { 'dungeon-markers-v1' } elseif ($DungeonContext) { 'dungeon-context-v1' } else { 'dungeon-assembly-v1' }); $report.fixture = $fixture.fixture }
     $fixture |
@@ -314,6 +318,7 @@ foreach ($mode in @('headless','rendered')) {
     if ($GeographyInputs -and !(Test-GeographyInventory $result $mode)) { throw 'Incomplete exported geographic assertion inventory' }
     if ($FactionQuestInputs -and !(Test-FactionQuestInventory $result $mode)) { throw 'Incomplete exported faction/quest assertion inventory' }
     if ($ItemSpellInputs -and !(Test-ItemSpellInventory $result $mode)) { throw 'Incomplete exported item/spell assertion inventory' }
+    if ($CreationDraft -and !(Test-CreationInventory $result $mode)) { throw 'Incomplete exported creation inventory' }
     if ($CalendarClock -and !(Test-CalendarInventory $result $mode)) { throw 'Incomplete exported calendar inventory' }
     if ($GroundMovement -and !(Test-GroundInventory $result $mode)) { throw 'Incomplete exported ground inventory' }
     if ($ActorState -and !$GroundMovement -and !(Test-ActorStateInventory $result $mode)) { throw 'Incomplete exported actor state inventory' }
@@ -335,7 +340,7 @@ foreach ($mode in @('headless','rendered')) {
         if ($after[$name] -ne $before[$name]) { throw 'Classic source changed' }
     }
     if ($M1Composition -and !(Test-CompositionInventory $result $mode)) { throw 'Incomplete exported M1 inventory' }
-    $expected = if ($CalendarClock) { $result.count } elseif ($ActorState) { $result.count } elseif ($DungeonAssembly) { Get-DungeonExpectedCount $mode } elseif ($M1Composition) { Get-CompositionExpectedCount $mode } elseif ($VariantInputs) { Get-VariantExpectedCount $mode } elseif ($LayoutInputs) { if ($mode -eq 'headless') {369} else {372} } elseif ($GeographyInputs) { if ($mode -eq 'headless') {200} else {202} } elseif ($FactionQuestInputs) { if ($mode -eq 'headless') {132} else {134} } elseif ($ItemSpellInputs) { if ($mode -eq 'headless') {160} else {162} } elseif ($ActorInputs) { if ($mode -eq 'headless') {236} else {238} } elseif ($NativeMedia) { Get-NativeExpectedCount $mode } elseif ($MediaReplacements) { if ($mode -eq 'headless') {168} else {173} } elseif ($ClassicMedia) { if ($mode -eq 'headless') {119} else {136} } elseif ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
+    $expected = if ($CreationDraft -or $CalendarClock) { $result.count } elseif ($ActorState) { $result.count } elseif ($DungeonAssembly) { Get-DungeonExpectedCount $mode } elseif ($M1Composition) { Get-CompositionExpectedCount $mode } elseif ($VariantInputs) { Get-VariantExpectedCount $mode } elseif ($LayoutInputs) { if ($mode -eq 'headless') {369} else {372} } elseif ($GeographyInputs) { if ($mode -eq 'headless') {200} else {202} } elseif ($FactionQuestInputs) { if ($mode -eq 'headless') {132} else {134} } elseif ($ItemSpellInputs) { if ($mode -eq 'headless') {160} else {162} } elseif ($ActorInputs) { if ($mode -eq 'headless') {236} else {238} } elseif ($NativeMedia) { Get-NativeExpectedCount $mode } elseif ($MediaReplacements) { if ($mode -eq 'headless') {168} else {173} } elseif ($ClassicMedia) { if ($mode -eq 'headless') {119} else {136} } elseif ($TranslationPreferences) { if ($mode -eq 'headless') {149} else {164} } elseif ($LocaleFonts) { if ($mode -eq 'headless') {419} else {441} } elseif ($StructuredText) { if ($mode -eq 'headless') {284} else {294} } elseif ($TextCatalog) { if ($mode -eq 'headless') {121} else {127} } elseif ($DefinitionPublication) { if ($mode -eq 'headless') {111} else {117} } elseif ($DependencyPlanning) { if ($mode -eq 'headless') {87} else {101} } elseif ($ModDiscovery) { if ($mode -eq 'headless') {119} else {136} } else { if ($mode -eq 'headless') {97} else {100} }
     $formulaExpected = if ($FormulaFault) { 18 } elseif ($mode -eq 'headless') { 82 } else { 84 }
     if (($Formula -or $FormulaFault) -and $result.count -ne $formulaExpected) { throw 'Incomplete formula export inventory' }
     $sessionExpected = if ($mode -eq 'headless') { 115 } else { 116 }

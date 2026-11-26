@@ -233,6 +233,15 @@ ordinary navigation remains available while gameplay is gated. Disposal detaches
 the input consumer and breaks editor/owner references. No character snapshot can
 replace the application controls. See [input](../input/README.md) and
 [settings](../startup/README.md) for the request/result and recovery contracts.
+# IMP-015 draft navigation
+
+CORE composes `creation_draft.gd` separately from live actor state. The stock
+New Game control opens the CHAR/UI draft route; final confirmation captures
+immutable completed intent into the existing `request(new)` operation. CORE's
+busy, preflight, living-session consent, cancellation and retained outcomes stay
+authoritative. Actual stock entry remains unavailable. See
+[creation](../char/CREATION.md) for provider, route, discard and retry contracts.
+
 # IMP-014 calendar integration
 
 CORE now composes the [TIME calendar owner](../time/README.md), validates its load

@@ -8,6 +8,7 @@ signal retiring(scope: String)
 var preferences: RefCounted
 var placement: Node # Composed MOVE authority; never a replacement lifecycle.
 var actors: RefCounted # CHAR owns no physical body/pose.
+var creation := preload("res://scripts/char/creation_draft.gd").new() # Runtime CHAR draft, separate from actors and UI instances.
 
 func require_placement(original: Dictionary, layout_ticket: Dictionary) -> bool:
 	if not layout_operation_owns(original): return false
@@ -656,6 +657,7 @@ func _finish(kind: String, reason: String, unsafe_cleanup := false) -> void:
 	terminal.emit(result.duplicate(true))
 
 func dispose() -> void:
+	creation.dispose()
 	# Application/test owner invokes after scopes end; break owned subscriptions.
 	calendar.dispose()
 	_calendar_owner = null

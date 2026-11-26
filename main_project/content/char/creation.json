@@ -1,0 +1,299 @@
+{
+  "domain": "char.creation",
+  "path": "flows",
+  "operation": "add",
+  "entries": [
+    {
+      "id": "stock",
+      "value": {
+        "schema": "creation-flow-v1",
+        "steps": {
+          "race": {
+            "hook": "race",
+            "title": "Race",
+            "art": "creation.race"
+          },
+          "gender": {
+            "hook": "gender",
+            "title": "Gender",
+            "art": ""
+          },
+          "class_method": {
+            "hook": "class_method",
+            "title": "Class method",
+            "art": ""
+          },
+          "questionnaire": {
+            "hook": "questionnaire",
+            "title": "Class questionnaire",
+            "art": "creation.questionnaire"
+          },
+          "class": {
+            "hook": "class",
+            "title": "Preset class",
+            "art": ""
+          },
+          "custom": {
+            "hook": "custom",
+            "title": "Custom career",
+            "art": "creation.custom"
+          },
+          "biography_method": {
+            "hook": "biography_method",
+            "title": "Biography method",
+            "art": ""
+          },
+          "biography": {
+            "hook": "biography",
+            "title": "Biography",
+            "art": ""
+          },
+          "name": {
+            "hook": "name",
+            "title": "Name",
+            "art": "creation.name"
+          },
+          "face": {
+            "hook": "face",
+            "title": "Face",
+            "art": "creation.face"
+          },
+          "attributes": {
+            "hook": "attributes",
+            "title": "Attributes",
+            "art": "creation.attributes"
+          },
+          "skills": {
+            "hook": "skills",
+            "title": "Skills",
+            "art": "creation.skills"
+          },
+          "reflexes": {
+            "hook": "reflexes",
+            "title": "Reflexes",
+            "art": "creation.reflexes"
+          },
+          "summary": {
+            "hook": "summary",
+            "title": "Summary",
+            "art": "creation.summary"
+          }
+        },
+        "routes": [
+          {
+            "id": "list-manual",
+            "class_method": "list",
+            "biography_method": "manual",
+            "steps": [
+              "race",
+              "gender",
+              "class_method",
+              "class",
+              "biography_method",
+              "biography",
+              "name",
+              "face",
+              "attributes",
+              "skills",
+              "reflexes",
+              "summary"
+            ]
+          },
+          {
+            "id": "list-automatic",
+            "class_method": "list",
+            "biography_method": "automatic",
+            "steps": [
+              "race",
+              "gender",
+              "class_method",
+              "class",
+              "biography_method",
+              "biography",
+              "name",
+              "face",
+              "attributes",
+              "skills",
+              "reflexes",
+              "summary"
+            ]
+          },
+          {
+            "id": "questionnaire-manual",
+            "class_method": "questionnaire",
+            "biography_method": "manual",
+            "steps": [
+              "race",
+              "gender",
+              "class_method",
+              "questionnaire",
+              "class",
+              "biography_method",
+              "biography",
+              "name",
+              "face",
+              "attributes",
+              "skills",
+              "reflexes",
+              "summary"
+            ]
+          },
+          {
+            "id": "questionnaire-automatic",
+            "class_method": "questionnaire",
+            "biography_method": "automatic",
+            "steps": [
+              "race",
+              "gender",
+              "class_method",
+              "questionnaire",
+              "class",
+              "biography_method",
+              "biography",
+              "name",
+              "face",
+              "attributes",
+              "skills",
+              "reflexes",
+              "summary"
+            ]
+          },
+          {
+            "id": "custom-manual",
+            "class_method": "custom",
+            "biography_method": "manual",
+            "steps": [
+              "race",
+              "gender",
+              "class_method",
+              "custom",
+              "biography_method",
+              "biography",
+              "name",
+              "face",
+              "attributes",
+              "skills",
+              "reflexes",
+              "summary"
+            ]
+          },
+          {
+            "id": "custom-automatic",
+            "class_method": "custom",
+            "biography_method": "automatic",
+            "steps": [
+              "race",
+              "gender",
+              "class_method",
+              "custom",
+              "biography_method",
+              "biography",
+              "name",
+              "face",
+              "attributes",
+              "skills",
+              "reflexes",
+              "summary"
+            ]
+          }
+        ],
+        "provenance": {
+          "authority": "CHAR-001/UI-011 finalized v1; IMP-015 increment 1",
+          "source": "DFU StartNewGameWizard flow reference; no gameplay mechanics imported"
+        },
+        "choices": {
+          "race": [
+            {
+              "id": "breton",
+              "label": "Breton"
+            },
+            {
+              "id": "redguard",
+              "label": "Redguard"
+            },
+            {
+              "id": "nord",
+              "label": "Nord"
+            },
+            {
+              "id": "dark-elf",
+              "label": "Dark Elf"
+            },
+            {
+              "id": "high-elf",
+              "label": "High Elf"
+            },
+            {
+              "id": "wood-elf",
+              "label": "Wood Elf"
+            },
+            {
+              "id": "khajiit",
+              "label": "Khajiit"
+            },
+            {
+              "id": "argonian",
+              "label": "Argonian"
+            }
+          ],
+          "gender": [
+            {
+              "id": "male",
+              "label": "Male"
+            },
+            {
+              "id": "female",
+              "label": "Female"
+            }
+          ],
+          "class_method": [
+            {
+              "id": "questionnaire",
+              "label": "Answer questions"
+            },
+            {
+              "id": "list",
+              "label": "Choose from a list"
+            },
+            {
+              "id": "custom",
+              "label": "Create a custom career"
+            }
+          ],
+          "biography_method": [
+            {
+              "id": "manual",
+              "label": "Answer biography questions"
+            },
+            {
+              "id": "automatic",
+              "label": "Generate biography automatically"
+            }
+          ],
+          "reflexes": [
+            {
+              "id": "very-low",
+              "label": "very low"
+            },
+            {
+              "id": "low",
+              "label": "low"
+            },
+            {
+              "id": "average",
+              "label": "average"
+            },
+            {
+              "id": "high",
+              "label": "high"
+            },
+            {
+              "id": "very-high",
+              "label": "very high"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
