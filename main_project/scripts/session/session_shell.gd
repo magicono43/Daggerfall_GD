@@ -461,6 +461,7 @@ func deliver_input() -> Array[Dictionary]:
 func options() -> void:
 	var top := windows.top()
 	if top.get("window") == "creation" and creation_view != null:
+		if creation_view.cancel_nested(): return
 		# Leaving cancellable admitted creation must also cancel CORE's captured
 		# operation; discarding the runtime draft alone cannot abandon live work.
 		if core.busy() and core.snapshot().phase == "preflight": core.cancel(core.ticket())

@@ -1,5 +1,14 @@
 # CHAR-003 — Preset class and questionnaire
 
+**Implementation clarification, 2026-11-26:** During authorized IMP-015 increment
+2 the user selected DFU's collision-advance question sampling: draw from all forty;
+on a duplicate, advance to the next unused question. Retain the ten questions and
+order. This resolves the sampling-policy dependency below. The operation-local
+reviewed PCG source/derivation and retained-result boundary are documented in
+[the implementation contract](../../../../main_project/scripts/char/CREATION_CAREER.md).
+No Unity RNG/original-executable sequence equivalence is claimed. Biography
+questions and later increment scope are unaffected.
+
 Approval status: **Approved — finalized v1.** User approved the complete Draft v1 on 2026-11-06: “I approve”.
 Updated: 2026-11-06.
 

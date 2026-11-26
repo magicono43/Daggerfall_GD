@@ -1,3 +1,13 @@
+function Get-CreationAppearanceNames {
+    foreach ($race in 0..7) {
+        'SCBG{0:00}I0.IMG' -f $race
+        foreach ($gender in 0..1) {
+            'FACE{0}{1}I0.CIF' -f $gender,$race
+            foreach ($clothed in 0..1) { 'BODY{0}{1}I{2}.IMG' -f $gender,$race,$clothed }
+        }
+    }
+}
+
 function Test-CreationInventory($Result, [string]$Mode) {
     $inventory = Get-Content -LiteralPath "$PSScriptRoot/../tests/creation_inventory.json" -Raw | ConvertFrom-Json
     $expected = @($inventory.$Mode)

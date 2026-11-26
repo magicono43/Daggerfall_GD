@@ -5558,3 +5558,15 @@ The interview reply also included “3. Yes”. The interview contained two ques
 | UI-021-D02 | 2026-11-16 | Confirmed | Use stock hold-to-speed-up for prison presentation. User replied “2. Hold to speed up control, but all moddable of course.” |
 
 - **UI-021-A01 — 2026-11-16 — Approved.** The user replied “I approve” to the request to finalize Draft v1. The [UI-021 specification](systems/UI/UI-021.md) is finalized v1, including the verdict acknowledgment, moddable hold-to-speed-up control and confirmed release feedback.
+
+## CHAR-003 implementation clarification — 2026-11-26
+
+During authorized IMP-015 increment 2, the user selected DFU's collision-advance
+sampling for the **class-selection** questionnaire: “in that case just use DFU's
+behavior I'd say.” Draw from all forty questions; on a duplicate, advance to the
+next unused question. Retain ten distinct questions/order for the draft and
+replace answer scores on revision. This resolves the sampling-policy dependency
+in CHAR-003. Biography/background questions remain increment 3 and are unaffected.
+The [implementation contract](../../main_project/scripts/char/CREATION_CAREER.md)
+records operation-local reviewed PCG generation and the independent vector;
+Unity/original-executable RNG sequence parity is not claimed.

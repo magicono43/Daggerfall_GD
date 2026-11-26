@@ -84,6 +84,10 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		incomplete.publication = controller.result.duplicate(true)
 		return incomplete
 	var record: Dictionary = read.record
+	var career_suite := preload("res://tests/creation_career_cases.gd").new()
+	var career_checks: Array = await career_suite.qualify(shell,fixture)
+	measurements.career_preparation_usec = career_suite.provider.measurements.preparation_usec
+	checks.append_array(career_checks)
 	await publication(shell,fixture,record)
 	check("published creation provenance",true,record.contributors.any(func(source): return source.provider == "@shipped/creation-flow-v1"))
 	check("locked creation publication","locked",definitions.prepare(controller.mods).kind)
@@ -470,18 +474,27 @@ func publication(_shell: Control, fixture: Dictionary, record: Dictionary) -> vo
 	var Controller = preload("res://scripts/startup/startup_controller.gd")
 	var app := Controller.new()
 	app.providers.enable_media_replacements()
+	app.providers.enable_actor_inputs()
 	app.providers.enable_creation()
 	app.start({"executable_dir":sandbox.path_join("publication/executable"),"per_user_dir":sandbox.path_join("publication/user")})
 	app.settings.effective["startup/show_setup"] = true
 	var package := manifest("creation.review")
-	package.capabilities = ["data.creation-flow-v1","data.media-v1"]
-	package.content = ["flow.json","media.json"]
+	package.capabilities = ["data.creation-flow-v1","data.creation-career-v1","data.actor-inputs-v1","data.actor-baseline-v1","data.media-v1"]
+	package.content = ["flow.json","media.json","career.json","preset.json","numbers.json"]
 	var root: String = app.mods.root.path_join("Mods/creation")
 	preload("res://tests/publication_fixture.gd").write(root.path_join("mod.json"),package)
 	var steps: Dictionary = record.value.steps.duplicate(true)
 	steps.race.title = "Pack race title"
 	var patch := {"domain":Flow.DOMAIN,"path":"flows","operation":"patch","entries":[{"id":"stock","value":{"steps":steps}}]}
 	preload("res://tests/publication_fixture.gd").write(root.path_join("flow.json"),patch)
+	preload("res://tests/publication_fixture.gd").write(root.path_join("career.json"),{"domain":"char.career","path":"policy","operation":"patch","entries":[{"id":"stock","value":{"attribute_total":401}}]})
+	var preset_data: Dictionary = _shell.controller.providers.definitions.query("actor.inputs","catalog","class-16").record.value.data.duplicate(true)
+	preset_data.hit_points_per_level = 17 # Pinned Warrior baseline is 20; prove an actual change.
+	preload("res://tests/publication_fixture.gd").write(root.path_join("preset.json"),{"domain":"actor.inputs","path":"catalog","operation":"patch","entries":[{"id":"class-16","value":{"data":preset_data}}]})
+	var multipliers: Dictionary = _shell.controller.providers.definitions.query("actor.baseline","policy","player").record.value.multipliers.duplicate(true)
+	multipliers["5"] = {"numerator":3,"denominator":4}
+	preload("res://tests/publication_fixture.gd").write(root.path_join("numbers.json"),{"domain":"actor.baseline","path":"policy","operation":"patch","entries":[{"id":"player","value":{"multipliers":multipliers}}]})
+	preload("res://tests/publication_fixture.gd").write(app.mods.root.path_join("Overrides/career.json"),{"domain":"char.career","path":"policy","operation":"patch","entries":[{"id":"stock","value":{"attribute_total":402}}]})
 	var image := Image.create(2,2,false,Image.FORMAT_RGBA8)
 	image.fill(Color.MAGENTA)
 	image.save_png(root.path_join("art.png"))
@@ -499,6 +512,16 @@ func publication(_shell: Control, fixture: Dictionary, record: Dictionary) -> vo
 	var published: Dictionary = app.providers.definitions.query(Flow.DOMAIN,"flows","stock")
 	check("loose creation field wins","Loose race title",published.record.value.steps.race.title)
 	check("creation contributors retained",true,published.record.contributors.size() >= 3)
+	var career_policy: Dictionary = app.providers.definitions.query("char.career","policy","stock")
+	check("career package loose policy precedence",402,int(career_policy.record.value.attribute_total))
+	check("career policy contributors retained",true,career_policy.record.contributors.size() >= 3)
+	var resolved_provider := preload("res://scripts/char/creation_inputs.gd").new()
+	resolved_provider.definitions = app.providers.definitions
+	resolved_provider.content = app.providers.definitions.content_ticket()
+	resolved_provider.prepare()
+	check("career preset package actual mechanics",17,resolved_provider.preset("class-16").hit_points_per_level)
+	check("career preset uses resolved mana policy",{"numerator":3,"denominator":4},resolved_provider.preset("class-16").spell_points)
+	check("career custom uses resolved mana policy",{"ok":true,"numerator":3,"denominator":4},resolved_provider.custom_spell_points({"traits":[]}))
 	var exported: Dictionary = app.providers.media.export_resource("creation.review","review-art","image")
 	check("package image export through resolver",true,exported.ok)
 	if not exported.ok: print("CREATION PACKAGE DIAGNOSTIC ",exported," contributors ",published.record.contributors)
@@ -514,8 +537,11 @@ func publication(_shell: Control, fixture: Dictionary, record: Dictionary) -> vo
 	var invalid: Dictionary = record.value.duplicate(true)
 	invalid.routes[0].steps.append("race")
 	preload("res://tests/publication_fixture.gd").write(app.mods.root.path_join("Overrides/invalid.json"),{"domain":Flow.DOMAIN,"path":"flows","operation":"replace","entries":[{"id":"stock","value":invalid}]})
+	preload("res://tests/publication_fixture.gd").write(app.mods.root.path_join("Overrides/invalid-career.json"),{"domain":"char.career","path":"policy","operation":"patch","entries":[{"id":"stock","value":{"hp":{"start":8,"min":9,"max":30}}}]})
 	app.select_folder(fixture.classic_source)
 	check("cyclic loose flow blocks candidate","package_recovery",app.route)
 	check("invalid flow publishes no partial data",false,app.providers.definitions.query(Flow.DOMAIN,"flows","stock").ok)
+	check("career invalid policy publishes no partial data",false,app.providers.definitions.query("char.career","policy","stock").ok)
+	check("career invalid HP candidate diagnosed",true,JSON.stringify(app.result.get("issues",[])).contains("HP bounds"))
 	app.providers.dispose()
 	app.storage.adapter.release()

@@ -1,5 +1,10 @@
 # Definition publication — IMP-005 increment 3
 
+IMP-015 increment 2 adds `char.career` policy/source publication and cross-owner
+preset/numeric checks through this same transaction. See the
+[creation career contract](../char/CREATION_CAREER.md). Original assets stay
+external; optional presentation failure and required choice validity are distinct.
+
 IMP-010 increment 3 registers [variant declarations and scoped proposals](VARIANT_INPUTS.md)
 in `world.variants` before preparation. Final candidate validation includes winning
 variant/default references across layout, geography and media contributions;

@@ -1,5 +1,11 @@
 # Actor and character input profile — IMP-009 increment 1
 
+**IMP-015 increment 2, 2026-11-26:** The structural profile is unchanged. The
+separate [creation career provider](../char/CREATION_CAREER.md) now qualifies
+the eighteen resolved playable presets through actual CHAR semantics, alongside
+race/gender, questionnaire and custom careers. It does not relabel source-only
+reader readiness or qualify biography, live effects, entry or SAVE.
+
 IMP-016 increment 4 separately publishes checked `actor.baseline:death#player`
 and `actor.baseline:vitals#player`; see [lethal](../char/DEATH.md) and
 [presentation](../char/VITALS_VIEW.md) schemas. The structural catalog and its

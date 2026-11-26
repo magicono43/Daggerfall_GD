@@ -15,6 +15,9 @@ var _capture_ids: Dictionary = {}
 var _admitted: Dictionary = {}
 var _requests: Dictionary = {}
 var _retry_serial := 0
+var _assigned_questions: Array = []
+var _question_generation: Dictionary = {}
+var questionnaire_material: Callable # Trusted deterministic fixture seam; OS entropy normally.
 
 func bind(content: int, bindings: Dictionary) -> Dictionary:
 	if not _draft.is_empty() or _busy or content < 0: return failure("binding", "Bind providers before opening a draft.")
@@ -37,6 +40,8 @@ func start() -> Dictionary:
 func discard() -> void:
 	# May run reentrantly from a provider. Its returned work is rejected afterward.
 	_draft.clear()
+	_assigned_questions.clear()
+	_question_generation.clear()
 	for key: String in _captures.keys():
 		if _admitted.get(_captures[key].draft.id) != _captures[key].id:
 			_capture_ids.erase(_captures[key].id)
@@ -105,7 +110,7 @@ func validate(section: String, expected: Dictionary, value: Variant) -> Dictiona
 	_busy = true
 	var candidate := projection()
 	candidate.selections[section] = value.duplicate(true) if value is Dictionary or value is Array else value
-	var checked: Variant = _bindings[section].validate.call({"schema":"creation-validation-v1","section":section,"draft":candidate,"retained":candidate.retained.duplicate(true)})
+	var checked: Variant = _bindings[section].validate.call({"schema":"creation-validation-v1","section":section,"draft":candidate,"retained":candidate.retained.duplicate(true),"assigned_questions":_assigned_questions.duplicate(),"question_generation":_question_generation.duplicate(true)})
 	_busy = false
 	if not current(expected): return failure("stale", "Creation changed during provider validation.")
 	if not checked is Dictionary or not plain(checked) or typeof(checked.get("ok")) != TYPE_BOOL: return failure("provider", "Creation provider returned an invalid result.")
@@ -116,6 +121,33 @@ func validate(section: String, expected: Dictionary, value: Variant) -> Dictiona
 	for dependent in checked.invalidate:
 		if dependent not in SECTIONS or dependent == section: return failure("provider", "Unsupported dependent invalidation.")
 	return checked.duplicate(true)
+
+func generate_questionnaire(expected: Dictionary) -> Dictionary:
+	if not current(expected) or _busy: return failure("stale","Creation generation context retired.")
+	if _draft.selections.get("class_method") != "questionnaire": return failure("route","Choose the questionnaire route first.")
+	if _assigned_questions.is_empty():
+		# Operation-local progression source; never acquire/reseed a gameplay session
+		# source during pre-session creation. Same reviewed PCG/derivation/mapping.
+		var seeds = preload("res://scripts/rule/seed_derivation.gd")
+		_busy = true
+		var supplied: Variant = seeds.material_from_os() if questionnaire_material.is_null() else questionnaire_material.call()
+		_busy = false
+		if not current(expected): return failure("stale","Creation retired during entropy acquisition.")
+		if not supplied is Dictionary or not supplied.get("ok",false) or not seeds.validate_material(supplied.get("material")).ok: return failure("random","Questionnaire initialization material unavailable. Choose direct selection.")
+		var derived: Dictionary = seeds.derive(supplied.material,"progression")
+		if not derived.ok: return failure("random","Questionnaire random source unavailable. Choose direct selection.")
+		var source: RefCounted = derived.source
+		var questions: Array = []
+		for index in 10:
+			var draw: Dictionary = source.bounded(40)
+			if not draw.ok: return failure("random","Questionnaire draw failed. Choose direct selection.")
+			var number: int = draw.value
+			while ("question-%02d" % number) in questions: number = (number+1)%40
+			questions.append("question-%02d" % number)
+		_assigned_questions = questions
+		_question_generation = {"algorithm":"pcg32-xsh-rr-v1","derivation":"rpg-rng-v1/progression/independent-creation-operation","sampling":"dfu-collision-advance-v1/user-approved-2026-11-26","logical_draws":source.logical_count,"raw_draws":source.raw_count,"material_sha256":preload("res://scripts/data/actor_input_formats.gd").sha256(supplied.material)}
+	var previous: Dictionary = _draft.retained.get("questionnaire",{})
+	return edit("questionnaire",expected,{"questions":_assigned_questions.duplicate(),"answers":previous.get("answers",{}).duplicate(true)})
 
 func edit(section: String, expected: Dictionary, value: Variant) -> Dictionary:
 	if not current(expected): return failure("stale", "This creation view has retired.")
@@ -146,7 +178,7 @@ func section_status(section: String) -> Dictionary:
 	if not checked.ok: return checked
 	if checked.value != _draft.selections[section] or checked.retained != _draft.retained.get(section,{}): return failure("provider", "Validation attempted to change retained creation facts.")
 	if not checked.errors.is_empty(): return failure("incomplete", str(checked.errors))
-	return {"ok":true,"semantic_ready":checked.semantic_ready}
+	return {"ok":true,"semantic_ready":checked.semantic_ready,"validation":{"provider":_bindings[section].id,"semantic_ready":checked.semantic_ready,"provenance":checked.provenance,"errors":checked.errors}}
 
 func capture(expected: Dictionary, required: Array, route_receipt: Dictionary) -> Dictionary:
 	if not current(expected): return failure("stale", "Creation draft changed before confirmation.")
@@ -166,16 +198,20 @@ func capture(expected: Dictionary, required: Array, route_receipt: Dictionary) -
 		if not section is String or section not in complete or seen.has(section): return failure("route","UI route duplicates or bypasses a required CHAR section.")
 		seen[section] = true
 	var errors := {}
+	var current_validations := {}
 	for section in required:
 		if section not in SECTIONS: return failure("invalid", "Unsupported required creation section.")
 		var checked := section_status(section)
+		if checked.ok: current_validations[section] = checked.validation.duplicate(true)
 		if not checked.ok or not checked.get("semantic_ready",false): errors[section] = checked.get("reason","Required real creation semantics are unavailable.")
 		if not current(expected): return failure("stale", "Creation changed during final validation.")
 	if not errors.is_empty(): return {"ok":false,"kind":"incomplete","reason":"Creation is incomplete.","sections":errors}
 	var key := "%s/%d" % [_draft.id,_draft.revision]
 	if not _captures.has(key):
 		_submission_serial += 1
-		_captures[key] = external_value({"schema":"creation-submission-v1","id":"creation-submit-%d" % _submission_serial,"draft":projection(),"required":required.duplicate(),"route":route_receipt.duplicate(true)})
+		var captured_draft := projection()
+		captured_draft.validated = current_validations
+		_captures[key] = external_value({"schema":"creation-submission-v1","id":"creation-submit-%d" % _submission_serial,"draft":captured_draft,"required":required.duplicate(),"route":route_receipt.duplicate(true)})
 		_capture_ids[_captures[key].id] = key
 	elif _captures[key].required != required or _captures[key].route != route_receipt:
 		return failure("identity", "Changed route under an existing submission identity.")

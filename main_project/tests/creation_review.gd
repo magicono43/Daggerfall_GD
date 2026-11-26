@@ -8,9 +8,16 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	shell.session_shell.open_creation()
 	var view: RefCounted = shell.session_shell.creation_view
 	view.exit()
-	var provider := preload("res://tests/controlled_creation_inputs.gd").new()
+	var provider: RefCounted = preload("res://tests/controlled_creation_inputs.gd").new()
+	if fixture.get("career_review",false):
+		provider = preload("res://tests/creation_career_review_inputs.gd").new()
+		provider.definitions = shell.controller.providers.definitions
+		provider.content = provider.definitions.content_ticket()
+		provider.options = provider.definitions.query("char.creation","flows","stock").record.value.choices
+		provider.prepare()
 	view.open(provider)
 	view.notice = "CONTROLLED REVIEW: choose the assigned choices on each page. Enter any valid fixture name. Both class routes and both biography methods use explicit assigned outcomes; Begin Game reaches the real stock unavailable-entry response. No playable character or grants are created."
+	if fixture.get("career_review",false): view.notice = "RACE AND CAREER REVIEW: race, gender, eighteen presets, questionnaire and Custom use real production data and mechanics. Biography, name, portrait, allocations and reflexes use explicitly assigned later-stage inputs only. No biography affinity, starting rolls, grants or playable entry is qualified."
 	shell.session_shell.render()
 	if not fixture.get("review_smoke",false):
 		# Keep the ordinary event loop and window-manager/Pause/Quit handlers alive.

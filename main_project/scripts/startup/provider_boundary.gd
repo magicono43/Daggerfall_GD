@@ -43,6 +43,10 @@ func enable_variant_inputs() -> Dictionary:
 func enable_creation() -> Dictionary:
 	var registered := register_content_adapter(preload("res://scripts/data/creation_flow.gd").new(),"",[])
 	if not registered.ok: return registered
+	var career := preload("res://scripts/data/creation_career.gd").new()
+	career.classic = classic
+	registered = register_content_adapter(career,"",[])
+	if not registered.ok: return registered
 	creation_art = preload("res://scripts/av/creation_art.gd").new()
 	return creation_art.declare(self)
 

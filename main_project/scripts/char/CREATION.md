@@ -1,4 +1,13 @@
-# Creation draft and navigation — IMP-015 increment 1
+**User acceptance, 2026-11-26:** "Good work, I accept what you have done in increment 2". Increment 2 is accepted. Individual numbered human-test outcomes were not reported and are not inferred. Later increments, parent IMP-015 and integration/milestone gates remain open. Earlier pending-acceptance wording below is historical.
+
+# Creation draft and navigation — IMP-015
+
+**Increment 2 implementation, 2026-11-26:** Production race/gender, presets,
+questionnaire and custom careers now extend this contract. See the
+[race/career contract](CREATION_CAREER.md) for publication, source qualification,
+deliberate retained generation, real stock controls and remaining gates.
+Increment-1-only unavailability statements below are historical where superseded.
+Human results/acceptance of increment 2 remain separate.
 
 `SessionLifecycle.creation` is the composed runtime CHAR draft authority. It is
 separate from `actors`, persistent saves, Control instances and UI navigation.
@@ -105,18 +114,17 @@ handoff. Old rendered controls are generation checked. Keyboard echo does not
 repeat navigation; ordinary controller mappings/fresh-press routing are reused.
 Focus is retained by action identity and deferred only for current live controls.
 
-The stock `creation_inputs.gd` performs bounded structural selection checks using
-published creation choices and the real reader-only class records. It reports
-`semantic_ready:false`. Missing rich section providers explain the unavailable
-mechanic and keep Back/Restart/Exit usable. Those records are not relabelled as
-real race/career/biography readiness. Full name/face/reflex, race/career mechanics,
-biography, starting rolls and allocations remain increments 2–4. The stock session
-provider continues to reject fresh entry. The separately labelled review binds
-assigned fixture providers to these same CHAR/UI/CORE paths.
+The stock `creation_inputs.gd` now qualifies real race/gender, preset/questionnaire
+and custom-career semantics against locked DATA. Structural reader profiles stay
+`semantic_ready:false`. Missing later providers explain their unavailable mechanics
+and retain Back/Restart/Exit. Full name/face/reflex, biography, starting rolls and
+allocations remain increments 3–4. The stock session provider rejects fresh entry.
+The increment-2 review combines real race/career with explicitly assigned later
+providers on these same CHAR/UI/CORE paths; normal New Game never borrows them.
 
 ## Optional original interface art
 
-`av/creation_art.gd` registers nine logical image targets in the existing media
+`av/creation_art.gd` registers ten logical image targets in the existing media
 resolver before content preparation. DATA's active classic source supplies the
 bounded read-only `creation_image` interface. It opens only the declared interface
 filenames; no wildcard paths, world-texture substitution or copied source assets.
@@ -129,6 +137,7 @@ it never silently selects an unrelated classic image.
 | creation.race | TMAP00I0.IMG | MAP.PAL, six-bit components |
 | creation.questionnaire | CHGN00I0.IMG | Embedded six-bit RGB |
 | creation.custom | CUST00I0.IMG | ART_PAL.COL |
+| creation.dagger | CUST08I0.IMG | ART_PAL.COL, transparent index zero |
 | creation.name | CHAR00I0.IMG | ART_PAL.COL |
 | creation.face | CHAR01I0.IMG | ART_PAL.COL |
 | creation.attributes | CHAR02I0.IMG | ART_PAL.COL |
@@ -142,8 +151,9 @@ Mapping evidence: pinned DFU `CreateChar*.cs` constants and `API/ImgFile.cs`
 320×200 coordinates. Controls remain real Godot controls. Native OK/name regions
 are used where practical; readable overlays cover incompatible baked English
 instructions. Rich later editors are deliberately unavailable rather than painted
-over with invented mechanics. No original portrait set or province hit map is
-certified here. Gender/class/biography method dialogs have accessible untextured
+over with invented mechanics. Increment 2 qualifies the province picker and
+first-frame appearance mappings; the full portrait selector remains later.
+Gender/class/biography method dialogs have accessible untextured
 panels. The user requested close classic layout where practical on 2026-11-26.
 
 Selection follows existing media package/loose precedence and run locking. The

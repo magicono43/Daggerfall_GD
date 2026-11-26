@@ -96,6 +96,17 @@ func next(expected: Dictionary) -> Dictionary:
 	_generation += 1
 	return {"ok":true}
 
+func career_route(expected: Dictionary, method: String) -> Dictionary:
+	if not Draft.same_value(expected,context()) or summary_locked() or step().get("hook") not in ["class","questionnaire","class_method"] or method not in ["list","custom"]: return Draft.failure("stale","Career route context retired.")
+	var checked: Dictionary = owner.edit("class_method",expected.token,method)
+	if not checked.ok: return checked
+	for invalidated in checked.get("invalidated",[]): _visited.erase(invalidated)
+	_refresh_path()
+	for index in _path.size():
+		if _flow.steps[_path[index]].hook == ("custom" if method == "custom" else "class"): _position = index; break
+	_generation += 1
+	return {"ok":true}
+
 func back(expected: Dictionary) -> Dictionary:
 	if not Draft.same_value(expected,context()): return Draft.failure("stale","Creation control context retired.")
 	if not _editor.is_empty(): _editor = ""

@@ -234,7 +234,7 @@ func creation_image(file: String) -> Dictionary:
 	# Optional interface originals, requested only through the active DATA source.
 	# This bounded owner table is not a wildcard path/format interface. Absence or
 	# malformed optional art does not invalidate required startup or gameplay data.
-	const NAMES = ["CHAR00I0.IMG","CHAR01I0.IMG","CHAR02I0.IMG","CHAR03I0.IMG","CHAR04I0.IMG","CHAR05I0.IMG","TMAP00I0.IMG","CUST00I0.IMG","CHGN00I0.IMG"]
+	const NAMES = ["CHAR00I0.IMG","CHAR01I0.IMG","CHAR02I0.IMG","CHAR03I0.IMG","CHAR04I0.IMG","CHAR05I0.IMG","TMAP00I0.IMG","CUST00I0.IMG","CUST08I0.IMG","CHGN00I0.IMG"]
 	if not ready() or file not in NAMES: return {"ok":false,"reason":"Published creation-art source binding unavailable."}
 	var reader := MediaReader.new("classic-img-v1")
 	var checked: Dictionary = reader.initialize(_active_source.path_join(file))
@@ -258,9 +258,43 @@ func creation_image(file: String) -> Dictionary:
 	var palette_data: Dictionary = colors.value.projection()
 	data.ok = true
 	palette_data.ok = true
-	var rgba := preload("res://scripts/data/classic_image.gd").new().rgba(data,palette_data,-1)
+	var rgba := preload("res://scripts/data/classic_image.gd").new().rgba(data,palette_data,0 if file == "CUST08I0.IMG" else -1)
 	if not rgba.ok: return rgba
-	return {"ok":true,"image":Image.create_from_data(rgba.width,rgba.height,false,Image.FORMAT_RGBA8,rgba.rgba),"provenance":{"image":data.provenance,"palette":palette_data.provenance,"alpha_index":-1,"sampling":"nearest","source_identity":data.identity}}
+	return {"ok":true,"image":Image.create_from_data(rgba.width,rgba.height,false,Image.FORMAT_RGBA8,rgba.rgba),"provenance":{"image":data.provenance,"palette":palette_data.provenance,"alpha_index":0 if file == "CUST08I0.IMG" else -1,"sampling":"nearest","source_identity":data.identity}}
+
+func creation_source(file: String) -> Dictionary:
+	# Bounded read-only source capability, not an arbitrary path reader. Original
+	# map/result bytes are interpreted by the creation DATA adapter before publish.
+	if not ready() or file not in ["CLASSES.DAT","TAMRIEL2.IMG"]: return {"ok":false,"reason":"Creation source unavailable."}
+	var stream := FileAccess.open(_active_source.path_join(file),FileAccess.READ)
+	if stream == null: return {"ok":false,"reason":"Required creation source missing: "+file}
+	var length := stream.get_length()
+	if length < 1 or length > 131072: stream.close(); return {"ok":false,"reason":"Unsupported creation source length: "+file}
+	var bytes := stream.get_buffer(length)
+	stream.close()
+	if bytes.size() != length: return {"ok":false,"reason":"Incomplete creation source read: "+file}
+	return {"ok":true,"bytes":bytes,"source":_active_source.path_join(file),"sha256":ActorFormats.sha256(bytes)}
+
+func creation_appearance(file: String) -> Dictionary:
+	# Fixed supported source namespace; no wildcard filesystem discovery. Checking
+	# first frame certifies the mapping only, not the later portrait-selection owner.
+	var allowed: Array[String] = []
+	for race in 8:
+		allowed.append("SCBG%02dI0.IMG" % race)
+		for gender in 2:
+			allowed.append("FACE%d%dI0.CIF" % [gender,race])
+			for clothed in 2: allowed.append("BODY%d%dI%d.IMG" % [gender,race,clothed])
+	if not ready() or file not in allowed: return {"ok":false,"reason":"Unsupported appearance source mapping."}
+	var path := _active_source.path_join(file)
+	var stream := FileAccess.open(path,FileAccess.READ)
+	if stream == null: return {"ok":false,"reason":"Required appearance source missing: "+file}
+	var length := stream.get_length()
+	if length < 1 or length > 2097152: stream.close(); return {"ok":false,"reason":"Unsupported appearance source extent: "+file}
+	var bytes := stream.get_buffer(length)
+	stream.close()
+	var decoded := preload("res://scripts/data/classic_image.gd").new().decode(bytes,file,0,0)
+	if not decoded.ok: return {"ok":false,"reason":"Invalid appearance source: "+file+": "+str(decoded.reason)}
+	return {"ok":true,"source":file,"sha256":ActorFormats.sha256(bytes),"first_frame":{"width":decoded.width,"height":decoded.height},"scope":"Mapping and first frame; full face selection remains CHAR-007."}
 
 func dispose() -> void:
 	discard_prepared()

@@ -13,12 +13,15 @@ var notice := ""
 var controlled := false
 var _working: Dictionary = {}
 var _buttons: Dictionary = {}
+var _editors: Dictionary = {}
+var glyph_diagnostics: Array = []
 var _focus := ""
 var _page: Control
 var _capture: Dictionary = {}
 var _render_generation := 0
 var _presentation: RefCounted
 var _keyboard_down: Dictionary = {}
+var career_view := preload("res://scripts/char/creation_career_view.gd").new()
 
 func _init(session_shell: RefCounted) -> void:
 	shell = session_shell
@@ -28,6 +31,22 @@ func _init(session_shell: RefCounted) -> void:
 
 func active() -> bool:
 	return navigation.active()
+
+func cancel_nested() -> bool:
+	if not active() or shell.core.busy() or not inputs.has_method("validate_career"): return false
+	if not career_view.candidate.is_empty():
+		career_view.candidate = ""
+		career_view.stop_narration()
+		career_view.refresh(self)
+		return true
+	if not navigation.summary_locked() and navigation.step().get("hook") == "class" and owner.projection().selections.get("class_method") == "questionnaire":
+		action("career-route",navigation.context(),"list")
+		return true
+	if navigation.step().get("hook") == "custom" and career_view.custom_tab != 0:
+		career_view.custom_tab = 0
+		career_view.refresh(self)
+		return true
+	return false
 
 func route_keyboard(event: InputEvent) -> bool:
 	if not event is InputEventKey or event.keycode not in [KEY_ENTER,KEY_KP_ENTER,KEY_SPACE]: return false
@@ -56,12 +75,15 @@ func open(provider: RefCounted = null) -> Dictionary:
 		inputs.definitions = definitions
 		inputs.content = definitions.content_ticket()
 		inputs.options = read.record.value.choices.duplicate(true)
+		inputs.prepare()
 	var checked: Dictionary = owner.bind(definitions.content_ticket(),inputs.bindings())
 	if not checked.ok: return checked
 	checked = navigation.bind(owner,read.record)
 	if not checked.ok: return checked
 	checked = navigation.start()
 	if not checked.ok: return checked
+	_working.clear()
+	glyph_diagnostics.clear()
 	var opened: Dictionary = shell.windows.open("creation",shell.core.snapshot().session,{"cursor":"visible"})
 	if opened.kind != "applied": navigation.discard(); return Draft.failure("window","Creation window could not open.")
 	layer = opened.id
@@ -74,8 +96,10 @@ func open(provider: RefCounted = null) -> Dictionary:
 	return {"ok":true}
 
 func exit() -> void:
+	career_view.clear()
 	navigation.discard()
 	_working.clear()
+	glyph_diagnostics.clear()
 	_capture.clear()
 	_render_generation += 1
 	if not layer.is_empty(): shell.windows.retire_layer(layer,_layer_scope)
@@ -84,7 +108,9 @@ func exit() -> void:
 
 func restart() -> void:
 	if not active(): return
+	career_view.clear()
 	_working.clear()
+	glyph_diagnostics.clear()
 	_capture.clear()
 	_submission_failed = false
 	notice = ""
@@ -97,7 +123,19 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 	var checked: Dictionary
 	match id:
 		"edit": checked = navigation.edit(expected,value)
-		"next": checked = navigation.next(expected)
+		"generate-questionnaire": checked = owner.generate_questionnaire(expected.token)
+		"career-route": checked = navigation.career_route(expected,str(value))
+		"next":
+			# The visible custom name is part of this completion request, even if
+			# the player uses Next instead of the explicit Use name/Enter action.
+			if inputs.has_method("validate_career") and navigation.step().get("hook") == "custom" and _working.has("custom.name"):
+				var candidate: Dictionary = owner.projection().selections.get("custom",{}).duplicate(true)
+				if not candidate.is_empty() and candidate.name != _working["custom.name"]:
+					candidate.name = _working["custom.name"]
+					checked = navigation.edit(expected,candidate)
+					if not checked.ok: notice = str(checked.get("reason","Name edit rejected.")); shell.schedule_render(); return checked
+					expected = navigation.context()
+			checked = navigation.next(expected)
 		"back": checked = navigation.back(expected)
 		"summary-edit": checked = navigation.summary_edit(expected,str(value))
 		"restart": restart(); return {"ok":true}
@@ -114,7 +152,7 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 		_: return Draft.failure("action","Unsupported creation action.")
 	notice = "" if checked.ok else str(checked.get("reason","Creation request rejected."))
 	if checked.has("sections"): notice += "\n"+str(checked.sections)
-	if checked.ok and id in ["edit","next","back","summary-edit"]:
+	if checked.ok and id in ["edit","next","back","summary-edit","career-route","generate-questionnaire"]:
 		# A page/selection handoff is a real input boundary, with the existing
 		# fresh-press quarantine. Keep the same requester-owned gate and scope.
 		shell.windows.replace(layer,"creation",func(_old: Dictionary): return {"ok":true,"data":{"cursor":"visible"}})
@@ -124,13 +162,16 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 func render() -> void:
 	_render_generation += 1
 	_buttons.clear()
+	_editors.clear()
+	glyph_diagnostics.clear()
 	var host: Control = shell.host
 	var expected: Dictionary = navigation.context()
 	var current: Dictionary = navigation.step()
 	var hook: String = current.hook
 	host.label(translated("step."+navigation.step_id(),current.title),26)
-	if controlled: host.label("CONTROLLED CREATION REVIEW · assigned inputs · no playable entry or grants",15)
-	else: host.label("Creation draft · required choice mechanics and playable entry are still being implemented.",15)
+	if controlled and inputs.has_method("validate_career"): host.label("CREATION CAREER REVIEW · real race/career · assigned later stages · no playable entry or grants",15)
+	elif controlled: host.label("CONTROLLED CREATION REVIEW · assigned inputs · no playable entry or grants",15)
+	else: host.label("Race and career use resolved definitions. Later creation stages and playable entry remain unavailable.",15)
 	var art: Dictionary = {"ok":false}
 	var resolver: RefCounted = host.controller.providers.creation_art
 	if resolver != null: art = resolver.resolve(current.art)
@@ -157,6 +198,8 @@ func render() -> void:
 	var selected: Dictionary = owner.projection().selections
 	if hook == "summary":
 		_summary(expected,selected)
+	elif inputs.has_method("validate_career") and hook in ["race","gender","class","questionnaire","custom"]:
+		career_view.render(self,expected,hook,selected)
 	elif hook == "name":
 		var field := LineEdit.new()
 		field.text = str(_working.get(hook,selected.get(hook,"")))
@@ -208,6 +251,7 @@ func render() -> void:
 	if hook != "summary": _button("next","Next",Rect2(526,344,100,46),func(): action("next",expected))
 	else: _button("begin","Begin Game",Rect2(500,344,130,46),func(): action("begin",expected))
 	if hook == "summary": _button("restart","Restart",Rect2(500,294,130,46),func(): action("restart",expected))
+	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook in ["race","class"]: _buttons.next.disabled = true
 	var row := HBoxContainer.new()
 	host.panel.add_child(row)
 	for entry in [["back","Back"],["restart","Restart"],["exit","Exit creation"]]:
@@ -224,9 +268,10 @@ func render() -> void:
 		row.add_child(retry)
 		_bind_button(retry,"retry",func(): action("retry",expected))
 	if not notice.is_empty(): host.label(notice)
+	if not glyph_diagnostics.is_empty(): host.label("Some characters are unavailable in the current font. Your Unicode text is retained unchanged; install a compatible font pack to display them.",15)
 	if navigation.summary_locked(): host.label("Restart to change this selection after final review.")
 	if not art.ok and not current.art.is_empty(): host.label("Optional interface artwork unavailable; using the readable fallback.",15)
-	var focus: Button = _buttons.get(_focus,_buttons.get("back"))
+	var focus: Control = _editors.get(_focus,_buttons.get(_focus,_buttons.get("back")))
 	if focus != null and _focus != "name-field": call_deferred("_focus_control",focus,_render_generation)
 
 func _focus_control(control: Control, generation: int) -> void:
@@ -251,18 +296,30 @@ func _summary(expected: Dictionary, selected: Dictionary) -> void:
 		elif section == "custom" and value is Dictionary:
 			text += "Custom career: "+str(value.get("name","Incomplete"))+"\n"
 			for tier in value.get("tiers",{}): text += str(tier).capitalize()+" skills: "+", ".join(value.tiers[tier])+"\n"
-			text += "Advantages: "+str(value.get("advantages",[]))+"\nDisadvantages: "+str(value.get("disadvantages",[]))+"\nHP per level: "+str(value.get("hit_points_per_level","Incomplete"))+"\n"
+			if value.has("traits") and inputs.has_method("validate_career"):
+				for id in value.traits: text += str(inputs.policy.traits[id].label)+"\n"
+				var evaluated: Dictionary = preload("res://scripts/char/custom_career.gd").evaluate(value,inputs.policy,owner.token().id+"/custom")
+				text += "Class base attributes: "+str(value.attributes)+"\nInitial reputation: "+str(value.reputation)+"\nDifficulty: "+str(evaluated.difficulty)+"\nAdvancement: %.4f\n" % (float(evaluated.advancement.numerator)/evaluated.advancement.denominator)
+			else: text += "Advantages: "+str(value.get("advantages",[]))+"\nDisadvantages: "+str(value.get("disadvantages",[]))+"\n"
+			text += "HP per level parameter: "+str(value.get("hit_points_per_level","Incomplete"))+"\n"
 		else:
 			var label := str(value)
 			for choice: Dictionary in inputs.choices(section):
 				if Draft.same_value(choice.get("value",choice.id),value): label = str(choice.label); break
 			text += section.capitalize()+": "+label+"\n"
+			if section == "race" and inputs.has_method("race_benefits"): text += "Birth identity; "+inputs.race_benefits(value)+"\n"
+			if section == "class" and inputs.has_method("preset"):
+				var career: Dictionary = inputs.preset(value)
+				if career.ok:
+					for tier in career.tiers: text += str(tier).capitalize()+": "+", ".join(career.tiers[tier])+"\n"
+					for id in career.traits: text += str(inputs.policy.traits[id].label)+"\n"
+					text += "HP per level parameter: %d\nAdvancement: %.4f\n" % [career.hit_points_per_level,float(career.advancement.numerator)/career.advancement.denominator]
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	facts.add_child(scroll)
 	var label := Label.new()
-	label.text = text
+	label.text = display_text(text,"summary")
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.add_theme_font_size_override("font_size",16)
@@ -290,10 +347,16 @@ func _box(rect: Rect2) -> PanelContainer:
 
 func _text(parent: Control, value: String) -> void:
 	var label := Label.new()
-	label.text = value
+	label.text = display_text(value)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.add_theme_font_size_override("font_size",16)
 	parent.add_child(label)
+
+func display_text(value: String, field := "text") -> String:
+	if _presentation == null: return value
+	var displayed: Dictionary = _presentation.literal(value,"body","","",{"window":"creation","step":navigation.step_id(),"field":field})
+	glyph_diagnostics.append_array(displayed.diagnostics)
+	return displayed.text
 
 func _button(id: String, text: String, rect: Rect2, callback: Callable) -> void:
 	var button := Button.new()
@@ -305,6 +368,7 @@ func _button(id: String, text: String, rect: Rect2, callback: Callable) -> void:
 	_bind_button(button,id,callback)
 
 func _bind_button(button: Button, id: String, callback: Callable) -> void:
+	button.text = display_text(button.text,id)
 	_buttons[id] = button
 	button.set_meta("creation_action",id)
 	button.set_meta("font_role","body")
@@ -325,6 +389,7 @@ func _bind_button(button: Button, id: String, callback: Callable) -> void:
 	button.focus_entered.connect(func(): _focus = id)
 
 func dispose() -> void:
+	career_view.clear()
 	navigation.discard()
 	if shell.core.retiring.is_connected(_retire): shell.core.retiring.disconnect(_retire)
 	if shell.core.terminal.is_connected(_terminal): shell.core.terminal.disconnect(_terminal)

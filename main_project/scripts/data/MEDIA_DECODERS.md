@@ -1,5 +1,12 @@
 # Classic media — IMP-008 increment 1
 
+IMP-015 increment 2 extends the bounded creation interface with optional
+CUST08I0.IMG (transparent index-zero dagger), read-only province/result input and
+56 first-frame appearance mapping receipts. Eight narration targets use existing
+DAGGER.SND decoding and media replacement/loose resolution with bounded caches.
+See the [race/career contract](../char/CREATION_CAREER.md); this does not qualify
+full portrait selection, runtime racial effects or playable entry.
+
 IMP-015 increment 1 adds the bounded optional `classic.creation_image()` source
 interface described in [creation](../char/CREATION.md). These optional interface
 originals are not required startup-manifest entries. Existing IMG/palette decoders

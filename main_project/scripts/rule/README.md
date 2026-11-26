@@ -66,6 +66,13 @@ formula dispatch remain gated increments 2/3; no later owner gate closes here.
 
 ## Session lifetime — IMP-006 increment 2
 
+IMP-015 increment 2 uses an independent CHAR creation-operation source **before**
+there is a gameplay session: see [creation generation](../char/CREATION_CAREER.md).
+It reuses the reviewed PCG/seed derivation and retains the assigned question set.
+It never acquires/activates a session stream or changes the four-purpose contract
+below. The user chose DFU collision-advance sampling on 2026-11-26; validation and
+navigation do not draw. Original/Unity RNG sequence equivalence is not claimed.
+
 CORE's `SessionLifecycle` owns `randomness` (`session_randomness.gd`, interface
 `session-rng-v1`). The earlier increment-1-only notes above retain their delivery
 scope; the normal CORE path now initializes sources. `Core.new()` uses the accepted

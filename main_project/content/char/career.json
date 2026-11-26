@@ -1,0 +1,1472 @@
+{
+  "domain": "char.career",
+  "path": "policy",
+  "operation": "add",
+  "entries": [
+    {
+      "id": "stock",
+      "value": {
+        "schema": "creation-career-v1",
+        "attributes": {
+          "strength": {
+            "start": 50,
+            "min": 10,
+            "max": 75
+          },
+          "intelligence": {
+            "start": 50,
+            "min": 10,
+            "max": 75
+          },
+          "willpower": {
+            "start": 50,
+            "min": 10,
+            "max": 75
+          },
+          "agility": {
+            "start": 50,
+            "min": 10,
+            "max": 75
+          },
+          "endurance": {
+            "start": 50,
+            "min": 10,
+            "max": 75
+          },
+          "personality": {
+            "start": 50,
+            "min": 10,
+            "max": 75
+          },
+          "speed": {
+            "start": 50,
+            "min": 10,
+            "max": 75
+          },
+          "luck": {
+            "start": 50,
+            "min": 10,
+            "max": 75
+          }
+        },
+        "attribute_total": 400,
+        "skills": {
+          "medical": {
+            "label": "Medical",
+            "classic": 0
+          },
+          "etiquette": {
+            "label": "Etiquette",
+            "classic": 1
+          },
+          "streetwise": {
+            "label": "Streetwise",
+            "classic": 2
+          },
+          "jumping": {
+            "label": "Jumping",
+            "classic": 3
+          },
+          "orcish": {
+            "label": "Orcish",
+            "classic": 4
+          },
+          "harpy": {
+            "label": "Harpy",
+            "classic": 5
+          },
+          "giantish": {
+            "label": "Giantish",
+            "classic": 6
+          },
+          "dragonish": {
+            "label": "Dragonish",
+            "classic": 7
+          },
+          "nymph": {
+            "label": "Nymph",
+            "classic": 8
+          },
+          "daedric": {
+            "label": "Daedric",
+            "classic": 9
+          },
+          "spriggan": {
+            "label": "Spriggan",
+            "classic": 10
+          },
+          "centaurian": {
+            "label": "Centaurian",
+            "classic": 11
+          },
+          "impish": {
+            "label": "Impish",
+            "classic": 12
+          },
+          "lockpicking": {
+            "label": "Lockpicking",
+            "classic": 13
+          },
+          "mercantile": {
+            "label": "Mercantile",
+            "classic": 14
+          },
+          "pickpocket": {
+            "label": "Pickpocket",
+            "classic": 15
+          },
+          "stealth": {
+            "label": "Stealth",
+            "classic": 16
+          },
+          "swimming": {
+            "label": "Swimming",
+            "classic": 17
+          },
+          "climbing": {
+            "label": "Climbing",
+            "classic": 18
+          },
+          "backstabbing": {
+            "label": "Backstabbing",
+            "classic": 19
+          },
+          "dodging": {
+            "label": "Dodging",
+            "classic": 20
+          },
+          "running": {
+            "label": "Running",
+            "classic": 21
+          },
+          "destruction": {
+            "label": "Destruction",
+            "classic": 22
+          },
+          "restoration": {
+            "label": "Restoration",
+            "classic": 23
+          },
+          "illusion": {
+            "label": "Illusion",
+            "classic": 24
+          },
+          "alteration": {
+            "label": "Alteration",
+            "classic": 25
+          },
+          "thaumaturgy": {
+            "label": "Thaumaturgy",
+            "classic": 26
+          },
+          "mysticism": {
+            "label": "Mysticism",
+            "classic": 27
+          },
+          "short-blade": {
+            "label": "Short Blade",
+            "classic": 28
+          },
+          "long-blade": {
+            "label": "Long Blade",
+            "classic": 29
+          },
+          "hand-to-hand": {
+            "label": "Hand To Hand",
+            "classic": 30
+          },
+          "axe": {
+            "label": "Axe",
+            "classic": 31
+          },
+          "blunt-weapon": {
+            "label": "Blunt Weapon",
+            "classic": 32
+          },
+          "archery": {
+            "label": "Archery",
+            "classic": 33
+          },
+          "critical-strike": {
+            "label": "Critical Strike",
+            "classic": 34
+          }
+        },
+        "hp": {
+          "start": 8,
+          "min": 4,
+          "max": 30
+        },
+        "difficulty": {
+          "min": -12,
+          "max": 40,
+          "low_milli": 300,
+          "high_milli": 3000
+        },
+        "limits": {
+          "advantage": 7,
+          "disadvantage": 7
+        },
+        "reputation": {
+          "merchants": {
+            "start": 0,
+            "min": -10,
+            "max": 10
+          },
+          "commoners": {
+            "start": 0,
+            "min": -10,
+            "max": 10
+          },
+          "scholars": {
+            "start": 0,
+            "min": -10,
+            "max": 10
+          },
+          "nobility": {
+            "start": 0,
+            "min": -10,
+            "max": 10
+          },
+          "underworld": {
+            "start": 0,
+            "min": -10,
+            "max": 10
+          }
+        },
+        "reputation_total": 0,
+        "traits": {
+          "acute_hearing": {
+            "label": "Acute Hearing",
+            "category": "acute_hearing",
+            "target": "none",
+            "cost": 1,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "adrenaline_rush": {
+            "label": "Adrenaline Rush",
+            "category": "adrenaline_rush",
+            "target": "none",
+            "cost": 4,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "athleticism": {
+            "label": "Athleticism",
+            "category": "athleticism",
+            "target": "none",
+            "cost": 4,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "bonus_to_hit/animals": {
+            "label": "Bonus To Hit: Animals",
+            "category": "bonus_to_hit",
+            "target": "animals",
+            "cost": 6,
+            "side": "advantage",
+            "conflict": "enemy",
+            "singleton": false
+          },
+          "bonus_to_hit/daedra": {
+            "label": "Bonus To Hit: Daedra",
+            "category": "bonus_to_hit",
+            "target": "daedra",
+            "cost": 3,
+            "side": "advantage",
+            "conflict": "enemy",
+            "singleton": false
+          },
+          "bonus_to_hit/humanoid": {
+            "label": "Bonus To Hit: Humanoid",
+            "category": "bonus_to_hit",
+            "target": "humanoid",
+            "cost": 6,
+            "side": "advantage",
+            "conflict": "enemy",
+            "singleton": false
+          },
+          "bonus_to_hit/undead": {
+            "label": "Bonus To Hit: Undead",
+            "category": "bonus_to_hit",
+            "target": "undead",
+            "cost": 6,
+            "side": "advantage",
+            "conflict": "enemy",
+            "singleton": false
+          },
+          "expertise/axe": {
+            "label": "Expertise: Axe",
+            "category": "expertise",
+            "target": "axe",
+            "cost": 2,
+            "side": "advantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "expertise/blunt": {
+            "label": "Expertise: Blunt",
+            "category": "expertise",
+            "target": "blunt",
+            "cost": 2,
+            "side": "advantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "expertise/hand_to_hand": {
+            "label": "Expertise: Hand To Hand",
+            "category": "expertise",
+            "target": "hand_to_hand",
+            "cost": 2,
+            "side": "advantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "expertise/long_blade": {
+            "label": "Expertise: Long Blade",
+            "category": "expertise",
+            "target": "long_blade",
+            "cost": 2,
+            "side": "advantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "expertise/missile": {
+            "label": "Expertise: Missile",
+            "category": "expertise",
+            "target": "missile",
+            "cost": 2,
+            "side": "advantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "expertise/short_blade": {
+            "label": "Expertise: Short Blade",
+            "category": "expertise",
+            "target": "short_blade",
+            "cost": 2,
+            "side": "advantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "immunity/disease": {
+            "label": "Immunity: Disease",
+            "category": "immunity",
+            "target": "disease",
+            "cost": 10,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "immunity/fire": {
+            "label": "Immunity: Fire",
+            "category": "immunity",
+            "target": "fire",
+            "cost": 10,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "immunity/frost": {
+            "label": "Immunity: Frost",
+            "category": "immunity",
+            "target": "frost",
+            "cost": 10,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "immunity/magic": {
+            "label": "Immunity: Magic",
+            "category": "immunity",
+            "target": "magic",
+            "cost": 10,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "immunity/paralysis": {
+            "label": "Immunity: Paralysis",
+            "category": "immunity",
+            "target": "paralysis",
+            "cost": 10,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "immunity/poison": {
+            "label": "Immunity: Poison",
+            "category": "immunity",
+            "target": "poison",
+            "cost": 10,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "immunity/shock": {
+            "label": "Immunity: Shock",
+            "category": "immunity",
+            "target": "shock",
+            "cost": 10,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "increased_magery/1": {
+            "label": "Increased Magery: 1",
+            "category": "increased_magery",
+            "target": "1",
+            "cost": 2,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": true
+          },
+          "increased_magery/1.5": {
+            "label": "Increased Magery: 1.5",
+            "category": "increased_magery",
+            "target": "1.5",
+            "cost": 4,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": true
+          },
+          "increased_magery/1.75": {
+            "label": "Increased Magery: 1.75",
+            "category": "increased_magery",
+            "target": "1.75",
+            "cost": 6,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": true
+          },
+          "increased_magery/2": {
+            "label": "Increased Magery: 2",
+            "category": "increased_magery",
+            "target": "2",
+            "cost": 8,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": true
+          },
+          "increased_magery/3": {
+            "label": "Increased Magery: 3",
+            "category": "increased_magery",
+            "target": "3",
+            "cost": 10,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": true
+          },
+          "rapid_healing/general": {
+            "label": "Rapid Healing: General",
+            "category": "rapid_healing",
+            "target": "general",
+            "cost": 4,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "rapid_healing/darkness": {
+            "label": "Rapid Healing: Darkness",
+            "category": "rapid_healing",
+            "target": "darkness",
+            "cost": 3,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "rapid_healing/light": {
+            "label": "Rapid Healing: Light",
+            "category": "rapid_healing",
+            "target": "light",
+            "cost": 2,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "regenerate_health/general": {
+            "label": "Regenerate Health: General",
+            "category": "regenerate_health",
+            "target": "general",
+            "cost": 14,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "regenerate_health/darkness": {
+            "label": "Regenerate Health: Darkness",
+            "category": "regenerate_health",
+            "target": "darkness",
+            "cost": 10,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "regenerate_health/light": {
+            "label": "Regenerate Health: Light",
+            "category": "regenerate_health",
+            "target": "light",
+            "cost": 6,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "regenerate_health/immersed": {
+            "label": "Regenerate Health: Immersed",
+            "category": "regenerate_health",
+            "target": "immersed",
+            "cost": 2,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "resistance/disease": {
+            "label": "Resistance: Disease",
+            "category": "resistance",
+            "target": "disease",
+            "cost": 5,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "resistance/fire": {
+            "label": "Resistance: Fire",
+            "category": "resistance",
+            "target": "fire",
+            "cost": 5,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "resistance/frost": {
+            "label": "Resistance: Frost",
+            "category": "resistance",
+            "target": "frost",
+            "cost": 5,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "resistance/magic": {
+            "label": "Resistance: Magic",
+            "category": "resistance",
+            "target": "magic",
+            "cost": 5,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "resistance/paralysis": {
+            "label": "Resistance: Paralysis",
+            "category": "resistance",
+            "target": "paralysis",
+            "cost": 5,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "resistance/poison": {
+            "label": "Resistance: Poison",
+            "category": "resistance",
+            "target": "poison",
+            "cost": 5,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "resistance/shock": {
+            "label": "Resistance: Shock",
+            "category": "resistance",
+            "target": "shock",
+            "cost": 5,
+            "side": "advantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "spell_absorption/general": {
+            "label": "Spell Absorption: General",
+            "category": "spell_absorption",
+            "target": "general",
+            "cost": 14,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "spell_absorption/darkness": {
+            "label": "Spell Absorption: Darkness",
+            "category": "spell_absorption",
+            "target": "darkness",
+            "cost": 12,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "spell_absorption/light": {
+            "label": "Spell Absorption: Light",
+            "category": "spell_absorption",
+            "target": "light",
+            "cost": 8,
+            "side": "advantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "critical_weakness/disease": {
+            "label": "Critical Weakness: Disease",
+            "category": "critical_weakness",
+            "target": "disease",
+            "cost": -14,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "critical_weakness/fire": {
+            "label": "Critical Weakness: Fire",
+            "category": "critical_weakness",
+            "target": "fire",
+            "cost": -14,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "critical_weakness/frost": {
+            "label": "Critical Weakness: Frost",
+            "category": "critical_weakness",
+            "target": "frost",
+            "cost": -14,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "critical_weakness/magic": {
+            "label": "Critical Weakness: Magic",
+            "category": "critical_weakness",
+            "target": "magic",
+            "cost": -14,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "critical_weakness/paralysis": {
+            "label": "Critical Weakness: Paralysis",
+            "category": "critical_weakness",
+            "target": "paralysis",
+            "cost": -14,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "critical_weakness/poison": {
+            "label": "Critical Weakness: Poison",
+            "category": "critical_weakness",
+            "target": "poison",
+            "cost": -14,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "critical_weakness/shock": {
+            "label": "Critical Weakness: Shock",
+            "category": "critical_weakness",
+            "target": "shock",
+            "cost": -14,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "damage/holy_places": {
+            "label": "Damage: Holy Places",
+            "category": "damage",
+            "target": "holy_places",
+            "cost": -6,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "damage/sunlight": {
+            "label": "Damage: Sunlight",
+            "category": "damage",
+            "target": "sunlight",
+            "cost": -10,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "darkness_powered_magery/lower_daylight": {
+            "label": "Darkness Powered Magery: Lower Daylight",
+            "category": "darkness_powered_magery",
+            "target": "lower_daylight",
+            "cost": -7,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": true
+          },
+          "darkness_powered_magery/unable_daylight": {
+            "label": "Darkness Powered Magery: Unable Daylight",
+            "category": "darkness_powered_magery",
+            "target": "unable_daylight",
+            "cost": -10,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": true
+          },
+          "forbidden_armor/chain": {
+            "label": "Forbidden Armor: Chain",
+            "category": "forbidden_armor",
+            "target": "chain",
+            "cost": -2,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_armor/leather": {
+            "label": "Forbidden Armor: Leather",
+            "category": "forbidden_armor",
+            "target": "leather",
+            "cost": -1,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_armor/plate": {
+            "label": "Forbidden Armor: Plate",
+            "category": "forbidden_armor",
+            "target": "plate",
+            "cost": -5,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_material/adamantium": {
+            "label": "Forbidden Material: Adamantium",
+            "category": "forbidden_material",
+            "target": "adamantium",
+            "cost": -5,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_material/daedric": {
+            "label": "Forbidden Material: Daedric",
+            "category": "forbidden_material",
+            "target": "daedric",
+            "cost": -2,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_material/dwarven": {
+            "label": "Forbidden Material: Dwarven",
+            "category": "forbidden_material",
+            "target": "dwarven",
+            "cost": -7,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_material/ebony": {
+            "label": "Forbidden Material: Ebony",
+            "category": "forbidden_material",
+            "target": "ebony",
+            "cost": -5,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_material/elven": {
+            "label": "Forbidden Material: Elven",
+            "category": "forbidden_material",
+            "target": "elven",
+            "cost": -9,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_material/iron": {
+            "label": "Forbidden Material: Iron",
+            "category": "forbidden_material",
+            "target": "iron",
+            "cost": -1,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_material/mithril": {
+            "label": "Forbidden Material: Mithril",
+            "category": "forbidden_material",
+            "target": "mithril",
+            "cost": -6,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_material/orcish": {
+            "label": "Forbidden Material: Orcish",
+            "category": "forbidden_material",
+            "target": "orcish",
+            "cost": -3,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_material/silver": {
+            "label": "Forbidden Material: Silver",
+            "category": "forbidden_material",
+            "target": "silver",
+            "cost": -6,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_material/steel": {
+            "label": "Forbidden Material: Steel",
+            "category": "forbidden_material",
+            "target": "steel",
+            "cost": -10,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_shield/buckler": {
+            "label": "Forbidden Shield: Buckler",
+            "category": "forbidden_shield",
+            "target": "buckler",
+            "cost": -1,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_shield/kite": {
+            "label": "Forbidden Shield: Kite",
+            "category": "forbidden_shield",
+            "target": "kite",
+            "cost": -1,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_shield/round": {
+            "label": "Forbidden Shield: Round",
+            "category": "forbidden_shield",
+            "target": "round",
+            "cost": -1,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_shield/tower": {
+            "label": "Forbidden Shield: Tower",
+            "category": "forbidden_shield",
+            "target": "tower",
+            "cost": -1,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "forbidden_weaponry/axe": {
+            "label": "Forbidden Weaponry: Axe",
+            "category": "forbidden_weaponry",
+            "target": "axe",
+            "cost": -2,
+            "side": "disadvantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "forbidden_weaponry/blunt": {
+            "label": "Forbidden Weaponry: Blunt",
+            "category": "forbidden_weaponry",
+            "target": "blunt",
+            "cost": -2,
+            "side": "disadvantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "forbidden_weaponry/hand_to_hand": {
+            "label": "Forbidden Weaponry: Hand To Hand",
+            "category": "forbidden_weaponry",
+            "target": "hand_to_hand",
+            "cost": -2,
+            "side": "disadvantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "forbidden_weaponry/long_blade": {
+            "label": "Forbidden Weaponry: Long Blade",
+            "category": "forbidden_weaponry",
+            "target": "long_blade",
+            "cost": -2,
+            "side": "disadvantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "forbidden_weaponry/missile": {
+            "label": "Forbidden Weaponry: Missile",
+            "category": "forbidden_weaponry",
+            "target": "missile",
+            "cost": -2,
+            "side": "disadvantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "forbidden_weaponry/short_blade": {
+            "label": "Forbidden Weaponry: Short Blade",
+            "category": "forbidden_weaponry",
+            "target": "short_blade",
+            "cost": -2,
+            "side": "disadvantage",
+            "conflict": "weapon",
+            "singleton": false
+          },
+          "no_spell_point_regeneration": {
+            "label": "No Spell Point Regeneration",
+            "category": "no_spell_point_regeneration",
+            "target": "none",
+            "cost": -14,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": false
+          },
+          "light_powered_magery/lower_darkness": {
+            "label": "Light Powered Magery: Lower Darkness",
+            "category": "light_powered_magery",
+            "target": "lower_darkness",
+            "cost": -10,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": true
+          },
+          "light_powered_magery/unable_darkness": {
+            "label": "Light Powered Magery: Unable Darkness",
+            "category": "light_powered_magery",
+            "target": "unable_darkness",
+            "cost": -14,
+            "side": "disadvantage",
+            "conflict": "",
+            "singleton": true
+          },
+          "low_tolerance/disease": {
+            "label": "Low Tolerance: Disease",
+            "category": "low_tolerance",
+            "target": "disease",
+            "cost": -5,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "low_tolerance/fire": {
+            "label": "Low Tolerance: Fire",
+            "category": "low_tolerance",
+            "target": "fire",
+            "cost": -5,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "low_tolerance/frost": {
+            "label": "Low Tolerance: Frost",
+            "category": "low_tolerance",
+            "target": "frost",
+            "cost": -5,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "low_tolerance/magic": {
+            "label": "Low Tolerance: Magic",
+            "category": "low_tolerance",
+            "target": "magic",
+            "cost": -5,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "low_tolerance/paralysis": {
+            "label": "Low Tolerance: Paralysis",
+            "category": "low_tolerance",
+            "target": "paralysis",
+            "cost": -5,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "low_tolerance/poison": {
+            "label": "Low Tolerance: Poison",
+            "category": "low_tolerance",
+            "target": "poison",
+            "cost": -5,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "low_tolerance/shock": {
+            "label": "Low Tolerance: Shock",
+            "category": "low_tolerance",
+            "target": "shock",
+            "cost": -5,
+            "side": "disadvantage",
+            "conflict": "tolerance",
+            "singleton": false
+          },
+          "phobia/animals": {
+            "label": "Phobia: Animals",
+            "category": "phobia",
+            "target": "animals",
+            "cost": -4,
+            "side": "disadvantage",
+            "conflict": "enemy",
+            "singleton": false
+          },
+          "phobia/daedra": {
+            "label": "Phobia: Daedra",
+            "category": "phobia",
+            "target": "daedra",
+            "cost": -4,
+            "side": "disadvantage",
+            "conflict": "enemy",
+            "singleton": false
+          },
+          "phobia/humanoid": {
+            "label": "Phobia: Humanoid",
+            "category": "phobia",
+            "target": "humanoid",
+            "cost": -4,
+            "side": "disadvantage",
+            "conflict": "enemy",
+            "singleton": false
+          },
+          "phobia/undead": {
+            "label": "Phobia: Undead",
+            "category": "phobia",
+            "target": "undead",
+            "cost": -4,
+            "side": "disadvantage",
+            "conflict": "enemy",
+            "singleton": false
+          }
+        },
+        "races": {
+          "breton": {
+            "label": "Breton",
+            "picker": 1,
+            "description": 2003,
+            "narration": 209,
+            "benefit": "Magic resistance flag. Resistance resolution and class stacking remain owner-defined.",
+            "appearance": {
+              "male": {
+                "body": "BODY00I0.IMG",
+                "clothed": "BODY00I1.IMG",
+                "heads": "FACE00I0.CIF",
+                "background": "SCBG00I0.IMG"
+              },
+              "female": {
+                "body": "BODY10I0.IMG",
+                "clothed": "BODY10I1.IMG",
+                "heads": "FACE10I0.CIF",
+                "background": "SCBG00I0.IMG"
+              }
+            },
+            "abilities": {
+              "kind": "resistance",
+              "effect": "magic"
+            }
+          },
+          "redguard": {
+            "label": "Redguard",
+            "picker": 2,
+            "description": 2002,
+            "narration": 210,
+            "benefit": "With a non-archery weapon: hit and damage modifiers each floor(level / 3). Excludes unarmed attacks.",
+            "appearance": {
+              "male": {
+                "body": "BODY01I0.IMG",
+                "clothed": "BODY01I1.IMG",
+                "heads": "FACE01I0.CIF",
+                "background": "SCBG01I0.IMG"
+              },
+              "female": {
+                "body": "BODY11I0.IMG",
+                "clothed": "BODY11I1.IMG",
+                "heads": "FACE11I0.CIF",
+                "background": "SCBG01I0.IMG"
+              }
+            },
+            "abilities": {
+              "kind": "weapon_modifiers",
+              "scope": "non_archery_weapon",
+              "divisor": 3
+            }
+          },
+          "nord": {
+            "label": "Nord",
+            "picker": 3,
+            "description": 2000,
+            "narration": 211,
+            "benefit": "Frost resistance flag. Resistance resolution and class stacking remain owner-defined.",
+            "appearance": {
+              "male": {
+                "body": "BODY02I0.IMG",
+                "clothed": "BODY02I1.IMG",
+                "heads": "FACE02I0.CIF",
+                "background": "SCBG02I0.IMG"
+              },
+              "female": {
+                "body": "BODY12I0.IMG",
+                "clothed": "BODY12I1.IMG",
+                "heads": "FACE12I0.CIF",
+                "background": "SCBG02I0.IMG"
+              }
+            },
+            "abilities": {
+              "kind": "resistance",
+              "effect": "frost"
+            }
+          },
+          "dark-elf": {
+            "label": "Dark Elf",
+            "picker": 4,
+            "description": 2007,
+            "narration": 212,
+            "benefit": "With a weapon: hit and damage modifiers each floor(level / 4). Excludes unarmed attacks.",
+            "appearance": {
+              "male": {
+                "body": "BODY03I0.IMG",
+                "clothed": "BODY03I1.IMG",
+                "heads": "FACE03I0.CIF",
+                "background": "SCBG03I0.IMG"
+              },
+              "female": {
+                "body": "BODY13I0.IMG",
+                "clothed": "BODY13I1.IMG",
+                "heads": "FACE13I0.CIF",
+                "background": "SCBG03I0.IMG"
+              }
+            },
+            "abilities": {
+              "kind": "weapon_modifiers",
+              "scope": "weapon",
+              "divisor": 4
+            }
+          },
+          "high-elf": {
+            "label": "High Elf",
+            "picker": 5,
+            "description": 2006,
+            "narration": 213,
+            "benefit": "Paralysis immunity flag. Interactions with class traits remain owner-defined.",
+            "appearance": {
+              "male": {
+                "body": "BODY04I0.IMG",
+                "clothed": "BODY04I1.IMG",
+                "heads": "FACE04I0.CIF",
+                "background": "SCBG04I0.IMG"
+              },
+              "female": {
+                "body": "BODY14I0.IMG",
+                "clothed": "BODY14I1.IMG",
+                "heads": "FACE14I0.CIF",
+                "background": "SCBG04I0.IMG"
+              }
+            },
+            "abilities": {
+              "kind": "immunity",
+              "effect": "paralysis"
+            }
+          },
+          "wood-elf": {
+            "label": "Wood Elf",
+            "picker": 6,
+            "description": 2005,
+            "narration": 214,
+            "benefit": "With an archery weapon: hit and damage modifiers each floor(level / 3).",
+            "appearance": {
+              "male": {
+                "body": "BODY05I0.IMG",
+                "clothed": "BODY05I1.IMG",
+                "heads": "FACE05I0.CIF",
+                "background": "SCBG05I0.IMG"
+              },
+              "female": {
+                "body": "BODY15I0.IMG",
+                "clothed": "BODY15I1.IMG",
+                "heads": "FACE15I0.CIF",
+                "background": "SCBG05I0.IMG"
+              }
+            },
+            "abilities": {
+              "kind": "weapon_modifiers",
+              "scope": "archery_weapon",
+              "divisor": 3
+            }
+          },
+          "khajiit": {
+            "label": "Khajiit",
+            "picker": 7,
+            "description": 2001,
+            "narration": 215,
+            "benefit": "+30 effective Climbing before enhanced-climbing doubling and the applicable clamp.",
+            "appearance": {
+              "male": {
+                "body": "BODY06I0.IMG",
+                "clothed": "BODY06I1.IMG",
+                "heads": "FACE06I0.CIF",
+                "background": "SCBG06I0.IMG"
+              },
+              "female": {
+                "body": "BODY16I0.IMG",
+                "clothed": "BODY16I1.IMG",
+                "heads": "FACE16I0.CIF",
+                "background": "SCBG06I0.IMG"
+              }
+            },
+            "abilities": {
+              "kind": "effective_climbing",
+              "bonus": 30,
+              "order": "before_enhancement_and_clamp"
+            }
+          },
+          "argonian": {
+            "label": "Argonian",
+            "picker": 8,
+            "description": 2004,
+            "narration": 216,
+            "benefit": "Reduced breath consumption: each breath decrement has a 50% chance of restoration. No failed-swimming-check fatigue penalty; ordinary swimming fatigue still applies. This is not water breathing.",
+            "appearance": {
+              "male": {
+                "body": "BODY07I0.IMG",
+                "clothed": "BODY07I1.IMG",
+                "heads": "FACE07I0.CIF",
+                "background": "SCBG07I0.IMG"
+              },
+              "female": {
+                "body": "BODY17I0.IMG",
+                "clothed": "BODY17I1.IMG",
+                "heads": "FACE17I0.CIF",
+                "background": "SCBG07I0.IMG"
+              }
+            },
+            "abilities": {
+              "kind": "swimming",
+              "breath_restore_numerator": 1,
+              "breath_restore_denominator": 2,
+              "failed_check_fatigue_exempt": true
+            }
+          }
+        },
+        "tradeoff_witness": {
+          "hit_points_per_level": 8,
+          "traits": []
+        },
+        "answer_categories": [
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            2,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            2,
+            0,
+            1
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            1,
+            2,
+            0
+          ],
+          [
+            2,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            2,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            2,
+            0,
+            1
+          ],
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            2,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            1,
+            2,
+            0
+          ],
+          [
+            2,
+            0,
+            1
+          ],
+          [
+            2,
+            0,
+            1
+          ],
+          [
+            1,
+            2,
+            0
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            1,
+            2,
+            0
+          ]
+        ],
+        "provenance": {
+          "policy": "CHAR-002/004/005 approved tables",
+          "metadata": "Pinned DFU 1.1.1 RaceTemplate.cs, DFCareer.cs, CreateCharClassQuestions.cs (MIT)",
+          "original": "Original text, map, CLASS and result bytes remain external Bethesda game data; loaded at runtime, never bundled."
+        }
+      }
+    }
+  ]
+}

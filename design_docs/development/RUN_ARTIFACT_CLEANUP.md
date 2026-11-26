@@ -914,3 +914,20 @@ files (1,904,709,918.0 bytes); remaining `.runs` logical size was
 typed inputs, compact results and player logs remain. Exact journals and hashes
 are recorded in `main_project/tests/.runs/imp012-stair-contact-cleanup-summary.json`
 and the [execution audit](evidence/IMP-012-stair-contacts-2026-11-25.audit.json).
+
+### IMP-015 increment 2, 2026-11-26
+
+After all owned jobs returned and ordinary process inspection found no engine or
+media decoder, four compaction journals removed 42 explicitly owned inactive roots:
+72,845 files / 11,796,864,093 bytes. Dedicated shader cleanup removed another
+1,122 files / 31,142,028 bytes. Checked absolute containment, reparse handling,
+source archive recovery, compact export-child aliases and required-evidence hashes
+were verified. Reports, typed inputs and reviewed captures remain; no full new
+review build is retained solely for pending human acceptance. The launcher rebuilds.
+
+The initial 9,020,875,875-byte sample triggered review. Final logical retention was
+7,837,115,711 bytes (7.30 GiB), excluding reparse targets. Earlier/unknown roots were
+protected; no elevated process query or security change was introduced. Exact
+journals are in `main_project/tests/.runs/imp015-increment2-audit/cleanup-*.json`,
+with `shader-cache-cleanup.json` and `retention-final.json`. See the
+[execution audit](evidence/IMP-015-increment-2-2026-11-26.audit.json).
