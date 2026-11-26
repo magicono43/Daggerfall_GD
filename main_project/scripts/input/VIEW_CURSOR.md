@@ -1,5 +1,14 @@
 # Posture-origin extension — IMP-012 increment 2
 
+Increment 4 adds retained support yaw and optional geometry-safe positional
+treatment to this actual view owner. Ray context exposes actual displayed origin,
+declared cosmetic offset and the compensated targeting origin, with the same
+displayed resolved direction. Both origins/offset participate in freshness checks.
+Stock Controls applies independent Off-capable gait/mounted/landing intensities;
+stair/posture baselines remain separate. See
+[PLATFORMS_FEEDBACK.md](../move/PLATFORMS_FEEDBACK.md). Earlier no-bob wording below
+records the earlier view-only checkpoint.
+
 MOVE changes the existing camera's eye origin after physical posture commitment
 and applies geometry-safe stair smoothing. Facing remains owned here. Aim samples
 also expire when their displayed origin or direction changes. The actual camera

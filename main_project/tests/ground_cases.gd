@@ -307,14 +307,18 @@ func bootstrap(shell: Control, fixture: Dictionary) -> bool:
 		course = preload("res://tests/ground_course.gd").new()
 	shell.add_child(course)
 	course.build()
+	if fixture.get("mechanism_course",false):
+		var platform: StaticBody3D = course.box(Vector3(0,0.25,0),Vector3(8,0.5,8),Color.CORNFLOWER_BLUE)
+		platform.name = "ControlledMechanism"
 	# Review geometry participates in the same gated physics preparation and
 	# placement validation, never a post-readiness batch of unsynchronised solids.
-	if fixture.get("mode") == "ground-review" and not fixture.has("connector_model"): course.build_surfaces()
+	if fixture.get("mode") == "ground-review" and not fixture.has("connector_model") and not fixture.get("review_platforms",false): course.build_surfaces()
 	var body: Node3D = shell.session_shell.placement
 	body.assembly = course
 	var door := {"position":Vector3(0,0,1),"normal":Vector3.FORWARD,"points":[Vector3(-2,0,1),Vector3(2,3,1)]}
 	course.candidate = {"route_intent_bound":true,"ticket":{"request":{"core_ticket":original.duplicate(true)}},"route":"ground-course","handoff_id":"ground-course-entry","activation_session":scope,"frame":"dungeon-geometry-metres-v1","position":Vector3.ZERO,"forward":Vector3.FORWARD,"pose_kind":"ground-course-sole","desired_context":{"doorway_side":"interior","space":"ground-course"},"entrance":door,"exit":door,"return":{},"marker":{},"placement_policy":body.baseline_policy()}
 	if fixture.has("connector_model"): course.candidate.position = course.spawn_sole
+	if fixture.get("mechanism_course",false): course.candidate.position = Vector3(1,0.5,0)
 	await shell.get_tree().physics_frame
 	await shell.get_tree().physics_frame
 	if fixture.get("connector_full_block",false):
@@ -353,6 +357,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	var review_script: GDScript = load("res://tests/ground_review.gd")
 	check("ground human review entry compiles",true,review_script != null and review_script.can_instantiate())
 	if await bootstrap(shell,fixture):
+		preload("res://tests/movement_feedback_cases.gd").new().run(self)
 		var body: Node3D = shell.session_shell.placement
 		check("ground missing supplier identity rejects at binding",false,motor.bind(scope,"ground-player",clock_provider,MissingTraitIdentity.new(),restriction_provider).ok)
 		check("ground provider binding rejection is atomic",true,motor.traits_owner == trait_provider and actor_core.gates.simulation())
@@ -368,12 +373,33 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		check("ground host focus loss preserves pose",starting,body.snapshot().position)
 		await capture_course("ground-start")
 		check("ground capture restores controlled focus",true,actor_core.gates.simulation())
+		var feedback_nested: Array = [{}]
+		var feedback_observer := func(_event): feedback_nested[0] = motor.physics_step(0.02)
+		motor.feedback.cue.connect(feedback_observer)
 		key(KEY_W,true)
 		var result := step(0.02,50)
 		check("ground collision path success",true,result.get("ok",false))
 		var walking: Vector3 = body.snapshot().position-starting
 		near("ground one second Walk metres",175.0/39.5,walking.length())
 		var walked_pose: Vector3 = body.snapshot().position
+		motor.feedback.cue.disconnect(feedback_observer)
+		check("feedback consumer cannot reenter physical motion",true,feedback_nested[0].get("ok") == false and "reentrant" in feedback_nested[0].get("reason",""))
+		var actual_view: RefCounted = shell.session_shell.view
+		check("feedback default gait modest",50.0,actual_view._response.gait_bob_percent)
+		check("feedback default landing Off",0.0,actual_view._response.landing_camera_percent)
+		check("feedback actual camera positional motion",true,actual_view.cosmetic_offset.length() > 0.00001 and shell.session_shell.view_camera.position != motor.last.view_position)
+		var actual_ray: Dictionary = actual_view.ray_context(scope)
+		check("feedback actual projected displayed origin",shell.session_shell.view_camera.project_ray_origin(shell.get_viewport().get_visible_rect().get_center()),actual_ray.get("displayed_origin"))
+		near("feedback cosmetic preserves target origin",0,actual_ray.origin.distance_to(motor.last.view_position),0.000001)
+		check("feedback cosmetic preserves actual facing",Vector3(deg_to_rad(-actual_view.facing.y),deg_to_rad(-actual_view.facing.x),0),shell.session_shell.view_camera.rotation)
+		var mounted_pose: Vector3 = body.snapshot().position
+		var mounted_offset: Vector3 = actual_view.movement_offset(scope,0.1,0.125,true,true,motor.feedback.policy)
+		check("feedback controlled mounted default modest",50.0,actual_view._response.mounted_bob_percent)
+		check("feedback controlled mounted offset full geometry route",true,body.ground_view_route(motor,motor.last.view_position,motor.last.view_position+mounted_offset,motor.profile.surface.camera_radius))
+		actual_view.place_origin(motor.last.view_position,mounted_offset)
+		check("feedback controlled mounted reaches actual camera",true,mounted_offset.length() > 0.00001 and shell.session_shell.view_camera.position == motor.last.view_position+mounted_offset and body.snapshot().position == mounted_pose)
+		actual_view.reset_feedback()
+		actual_view.place_origin(motor.last.view_position)
 		measurements.append({"case":"ground measured world pose","unit":"metre","frame":"dungeon-geometry-metres-v1","profile":"ground-motor-v1","steps":50,"step_simulated_seconds":0.02,"expected_xyz":[starting.x,starting.y,starting.z-175.0/39.5],"actual_xyz":[walked_pose.x,walked_pose.y,walked_pose.z],"tolerance_metres":0.0001})
 		await capture_course("ground-walk")
 		key(KEY_W,false)
@@ -399,6 +425,15 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		var controls: RefCounted = shell.controller.controls
 		shell.session_shell.open_controls()
 		shell.render()
+		var mounted_off: SpinBox = shell.find_child("mounted_bob_percent",true,false)
+		mounted_off.value = 0.0
+		press_control("Apply Controls")
+		check("feedback stock mounted Off actual application",0.0,actual_view._response.mounted_bob_percent)
+		press_control("Cancel / Close Controls")
+		var off_offset: Vector3 = actual_view.movement_offset(scope,0.1,0.125,true,true,motor.feedback.policy)
+		check("feedback mounted Off actual view owner",Vector3.ZERO,off_offset)
+		shell.session_shell.open_controls()
+		shell.render()
 		var run_choice: OptionButton = shell.find_child("run_mode",true,false)
 		var sneak_choice: OptionButton = shell.find_child("sneak_mode",true,false)
 		run_choice.select(1)
@@ -409,11 +444,17 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		var crouch_choice: OptionButton = shell.find_child("crouch_mode",true,false)
 		crouch_choice.select(0)
 		crouch_choice.item_selected.emit(0)
+		for field in ["gait_bob_percent","mounted_bob_percent","landing_camera_percent","movement_audio_percent"]:
+			var slider: SpinBox = shell.find_child(field,true,false)
+			slider.value = {"gait_bob_percent":0.0,"mounted_bob_percent":25.0,"landing_camera_percent":75.0,"movement_audio_percent":0.0}[field]
 		var persisted := FileAccess.get_file_as_string(shell.controller.settings.path)
 		shell.controller.settings.adapter.faults.settings_stage = true
 		press_control("Apply Controls")
 		check("ground stock toggle applies despite failed save",true,controls.effective() == controls.draft() and "UNSAVED" in controls.status)
 		check("ground applied gait independent of persistence",["toggle","toggle"],[motor.gait.run_mode,motor.gait.sneak_mode])
+		check("feedback stock controls apply actual camera",[0.0,25.0,75.0],[actual_view._response.gait_bob_percent,actual_view._response.mounted_bob_percent,actual_view._response.landing_camera_percent])
+		check("feedback mute applies actual player",0.0,shell.session_shell.movement_audio.volume_linear)
+		check("feedback malformed strength rejects",false,controls.set_response({"gait_bob_percent":-1.0}).ok)
 		check("ground failed save preserves disk",persisted,FileAccess.get_file_as_string(shell.controller.settings.path))
 		shell.controller.settings.adapter.faults.clear()
 		press_control("Retry Save Controls")
@@ -431,6 +472,8 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		key(KEY_W,false)
 		var activity: Dictionary = actors.activity_projection(scope,"ground-player")
 		check("ground real CHAR Running practice",4,activity.practice.running)
+		check("feedback Off leaves actual gait camera neutral",Vector3.ZERO,actual_view.cosmetic_offset)
+		check("feedback muted travel retains step projection",true,motor.feedback.steps > 0)
 		input_handoffs()
 		var preparation: int = actors.definitions.timings.prepare_serial
 		var saved: Vector3 = body.snapshot().position
@@ -444,8 +487,11 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		var wall_position: Vector3 = body.snapshot().position
 		check("ground real wall blocks capsule",true,wall_position.z >= -19.601 and wall_position.z < -19.59)
 		var practice_before: int = actors.activity_projection(scope,"ground-player").practice.running
+		var wall_steps: int = motor.feedback.steps
+		var wall_phase: float = motor.feedback.phase
 		step(0.02,50)
 		check("ground blocked Run no practice",practice_before,actors.activity_projection(scope,"ground-player").practice.running)
+		check("feedback blocked wall cannot create steps",true,motor.feedback.steps == wall_steps and motor.feedback.phase == wall_phase)
 		check("ground point updates skip DATA preparation",preparation,actors.definitions.timings.prepare_serial)
 		restriction_provider.run_policy = "walk"
 		restriction_provider.revision += 1
@@ -548,7 +594,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		key(KEY_W,false)
 		near("ground actual facing moves east metres",(210.0/39.5)*1.5*.02,body.snapshot().position.x-facing_start.x)
 		near("ground actual facing has no north travel",0.0,body.snapshot().position.z-facing_start.z)
-		check("ground camera follows committed body",motor.last.view_position,shell.session_shell.view_camera.position)
+		check("ground camera follows committed body",motor.last.view_position+motor.last.get("cosmetic_offset",Vector3.ZERO),shell.session_shell.view_camera.position)
 		# A wall slide can reach a different endpoint than its first sweep. Genuine
 		# support loss now enters the air owner rather than an unimplemented hold.
 		motor.retry_activity()
@@ -635,6 +681,39 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	var contact_result: Dictionary = await contact_case.run(shell,contact_fixture)
 	checks.append_array(contact_result.checks)
 	measurements.append_array(contact_result.get("measurements",[]))
+	var platform_case: RefCounted = load("res://tests/platform_cases.gd").new()
+	var platform_fixture := fixture.duplicate(true)
+	platform_fixture.reuse_ground_content = true
+	var platform_result: Dictionary = await platform_case.run(shell,platform_fixture)
+	checks.append_array(platform_result.checks)
+	measurements.append_array(platform_result.get("measurements",[]))
+	var compression_case: RefCounted = load("res://tests/compression_cases.gd").new()
+	var compression_fixture := fixture.duplicate(true)
+	compression_fixture.reuse_ground_content = true
+	var compression_result: Dictionary = await compression_case.run(shell,compression_fixture)
+	checks.append_array(compression_result.checks)
+	measurements.append_array(compression_result.get("measurements",[]))
+	var descending_case: RefCounted = load("res://tests/compression_cases.gd").new()
+	var descending_fixture := compression_fixture.duplicate(true)
+	descending_fixture.compression_kind = "descending"
+	var descending_result: Dictionary = await descending_case.run(shell,descending_fixture)
+	checks.append_array(descending_result.checks)
+	measurements.append_array(descending_result.get("measurements",[]))
+	var prevention_case: RefCounted = load("res://tests/compression_cases.gd").new()
+	var prevention_fixture := compression_fixture.duplicate(true)
+	prevention_fixture.prevent_crush = true
+	var prevention_result: Dictionary = await prevention_case.run(shell,prevention_fixture)
+	checks.append_array(prevention_result.checks)
+	measurements.append_array(prevention_result.get("measurements",[]))
+	var retirement_crush_fixture := compression_fixture.duplicate(true)
+	retirement_crush_fixture.retire_crush = true
+	var retirement_crush: Dictionary = await load("res://tests/compression_cases.gd").new().run(shell,retirement_crush_fixture)
+	checks.append_array(retirement_crush.checks)
+	var pushing_case: RefCounted = load("res://tests/pushing_cases.gd").new()
+	var pushing_fixture := compression_fixture.duplicate(true)
+	var pushing_result: Dictionary = await pushing_case.run(shell,pushing_fixture)
+	checks.append_array(pushing_result.checks)
+	measurements.append_array(pushing_result.get("measurements",[]))
 	var ok := true
 	for item in checks: ok = ok and item.expected == item.actual
 	return {"ok":ok,"checks":checks,"count":checks.size(),"fixture":"IMP-012-ground-v1","engine":Engine.get_version_info(),"display":DisplayServer.get_name(),"measurements":measurements,"performance":performance,"source":"Real SessionShell input/view/body/CHAR/DATA/CORE; controlled flat course LOC readiness, entry, TIME, traits, restrictions","inputs":fixture.get("inputs",{})}

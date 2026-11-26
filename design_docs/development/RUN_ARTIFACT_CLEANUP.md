@@ -1,5 +1,23 @@
 # Verification run artifact cleanup
 
+## 2026-11-25 IMP-012 increment 4
+
+Four batches compacted 21 exact owned inactive roots after terminal verification,
+ordinary engine inactivity and containment/reparse checks. Removed **33,302
+reproducible files / 5,111,131,650 logical bytes**, preserving 247 hash-verified
+child reports/logs/captures, 14 typed settings inputs, 21 source archives and root
+build identities. Export executable/PCK hashes were checked before deletion.
+Installed template junctions were unlinked without following their targets. No
+task-owned full project, export, dependency copy or cache remains.
+
+Final-batch logical retention measured **5,865,887,862 bytes before cleanup /
+4,811,179,916 bytes afterward**, before small final audit writes. Retention above
+2 GiB was reviewed; older other-task projects and the protected IMP-011 human
+review contain large native DLLs. Those uncertain/other-task payloads, unique
+inputs and prior accepted evidence were preserved. Exact largest-file/deferred
+paths, journals and retained hashes are recorded in the
+[execution audit](evidence/IMP-012-increment-4-2026-11-25.audit.json).
+
 ## 2026-11-25 IMP-012 ordinary stair follow-up
 
 After terminal verification, ordinary engine inactivity and exact containment/

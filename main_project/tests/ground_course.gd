@@ -3,6 +3,8 @@ extends Node3D
 ## No production import or ordinary gameplay entry bypass is installed.
 var candidate: Dictionary = {}
 var collision_ready := true
+func movement_feedback_context(ticket: Dictionary, _base: Vector3) -> Dictionary:
+	return {"ok":collision_ready and candidate.get("ticket") == ticket,"category":"stone","provenance":"controlled course surface, not WORLD climate/water context"}
 func marker_candidate(ticket: Dictionary, route: String, _index := 0) -> Dictionary:
 	return candidate.duplicate(true) if collision_ready and candidate.get("ticket") == ticket and candidate.get("route") == route else {}
 func readiness(_ticket: Dictionary) -> Dictionary: return {"ok":collision_ready}

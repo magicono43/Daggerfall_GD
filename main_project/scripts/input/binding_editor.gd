@@ -198,7 +198,7 @@ func render(host: Control) -> void:
 			spin.min_value = bounds.x
 			spin.max_value = bounds.y
 			spin.step = 0.001 if field.begins_with("mouse") or field.ends_with("seconds") else 1.0
-			spin.prefix = field.capitalize().replace("_"," ") + " "
+			spin.prefix = field.capitalize().replace("_"," ") + (" (0 = Off) " if field.ends_with("_percent") else " ")
 			spin.value = draft.response[field]
 			host.panel.add_child(spin)
 			spin.value_changed.connect(func(value: float): owner.set_response({field:value}))

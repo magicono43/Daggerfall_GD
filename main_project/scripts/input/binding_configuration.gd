@@ -35,10 +35,10 @@ static func defaults() -> Dictionary:
 
 static func response_defaults() -> Dictionary:
 	# Live view response; gait/posture remain retained until their owners exist.
-	return {"mouse_smoothing_seconds":0.08,"controller_smoothing_seconds":0.08,"keyboard_smoothing_seconds":0.08,"mouse_x":0.10,"mouse_y":0.10,"mouse_invert":false,"mouse_smoothing":false,"controller_x":180.0,"controller_y":120.0,"controller_invert":false,"controller_smoothing":false,"keyboard_look":90.0,"keyboard_smoothing":false,"pitch_limit":89.0,"cursor_speed":800.0,"trigger_press":0.55,"trigger_release":0.45,"run_mode":"hold","sneak_mode":"hold","crouch_mode":"toggle"}
+	return {"mouse_smoothing_seconds":0.08,"controller_smoothing_seconds":0.08,"keyboard_smoothing_seconds":0.08,"mouse_x":0.10,"mouse_y":0.10,"mouse_invert":false,"mouse_smoothing":false,"controller_x":180.0,"controller_y":120.0,"controller_invert":false,"controller_smoothing":false,"keyboard_look":90.0,"keyboard_smoothing":false,"pitch_limit":89.0,"cursor_speed":800.0,"trigger_press":0.55,"trigger_release":0.45,"run_mode":"hold","sneak_mode":"hold","crouch_mode":"toggle","gait_bob_percent":50.0,"mounted_bob_percent":50.0,"landing_camera_percent":0.0,"movement_audio_percent":100.0}
 
 static func response_bounds() -> Dictionary:
-	return {"mouse_x":Vector2(0.001,10.0),"mouse_y":Vector2(0.001,10.0),"controller_x":Vector2(1.0,1440.0),"controller_y":Vector2(1.0,1440.0),"keyboard_look":Vector2(1.0,1440.0),"cursor_speed":Vector2(1.0,5000.0),"mouse_smoothing_seconds":Vector2(0.001,1.0),"controller_smoothing_seconds":Vector2(0.001,1.0),"keyboard_smoothing_seconds":Vector2(0.001,1.0)}
+	return {"mouse_x":Vector2(0.001,10.0),"mouse_y":Vector2(0.001,10.0),"controller_x":Vector2(1.0,1440.0),"controller_y":Vector2(1.0,1440.0),"keyboard_look":Vector2(1.0,1440.0),"cursor_speed":Vector2(1.0,5000.0),"mouse_smoothing_seconds":Vector2(0.001,1.0),"controller_smoothing_seconds":Vector2(0.001,1.0),"keyboard_smoothing_seconds":Vector2(0.001,1.0),"gait_bob_percent":Vector2(0,100),"mounted_bob_percent":Vector2(0,100),"landing_camera_percent":Vector2(0,100),"movement_audio_percent":Vector2(0,100)}
 
 static func editable_response() -> Array:
 	return response_bounds().keys() + ["mouse_invert","controller_invert","mouse_smoothing","controller_smoothing","keyboard_smoothing","run_mode","sneak_mode","crouch_mode"]
@@ -176,7 +176,7 @@ static func validate(candidate: Variant) -> Dictionary:
 		var baseline: Variant = responses[field]
 		var value: Variant = candidate.response.get(field)
 		if typeof(value) != typeof(baseline): return {"ok":false,"reason":"Invalid response preference: " + field}
-		if value is float and (not is_finite(value) or value <= 0.0): return {"ok":false,"reason":"Invalid response rate: " + field}
+		if value is float and (not is_finite(value) or value < 0.0 or (value == 0.0 and not field.ends_with("_percent"))): return {"ok":false,"reason":"Invalid response rate: " + field}
 		if value is String and value not in ["hold","toggle"]: return {"ok":false,"reason":"Unsupported input mode: " + field}
 		if field in editable_response():
 			if response_bounds().has(field):

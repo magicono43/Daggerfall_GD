@@ -1,0 +1,1291 @@
+{
+  "verification_source_hashes": {
+    "main_project/tests/air_boundary_cases.gd": "AEFC421001E37CBFF1D3FC6F9FFF0F72E79BE66D3A5F4B38D73386657ED741B9",
+    "main_project/tests/compression_cases.gd": "6FA9D0CC7E5993A8DDB14353792ADDA230C4A0A7471E1235E22AA0076E05BBA9",
+    "main_project/tests/controlled_mechanism.gd": "6BC9B32E311E0F815E00782FA1834646CC66829CDA82CD568571501078F660C5",
+    "main_project/tests/ground_cases.gd": "63E0DCAFE2EE1FCC2AE01C452326BD875FCE03A84485C5C4B85CFDCA01F0B874",
+    "main_project/tests/ground_course.gd": "6735D2C2FE77B13836277E4AFDBA32BC8648989B50426FE5AC04F60EA94E4DE4",
+    "main_project/tests/ground_inventory.json": "CAF2F6AECD81E2EA3352EF187EF95909FECAF2F93CDD64208AA9BE438DE864FC",
+    "main_project/tests/ground_reload.gd": "A715E7DB55A63A015E84F3109E8926E4E402B0D4BE02BFFAC136EC7F0FC34CCD",
+    "main_project/tests/ground_review.gd": "C4FB1C867595CA760278053C5E5322BCC046EE21B84684B8E1EBD80EAEB81565",
+    "main_project/tests/movement_feedback_cases.gd": "F7ED36E3686684C9B8DD4171633FCEBA7AE940C01B3A086114031BA15C2D67E1",
+    "main_project/tests/platform_boundary_cases.gd": "B45252B5A7275D8129350E27ED9FA47EDF18B92DC3D7A59BA8B4EC1EEEFE3710",
+    "main_project/tests/platform_cases.gd": "DC8CE52540B5C6104D8348DB8A5A7ECDA94CFC4AB80EA718039D4D7C34289D9C",
+    "main_project/tests/pushing_cases.gd": "649FD7A62A1465A1F1D86CEC279755454F92C102360E59DE3A3CE90BA7768918",
+    "main_project/tools/review_ground.ps1": "068AAF16A820B3F14EDD95BCF761161EF81AEB66BA50A207165C2E380E1D68EB"
+  },
+  "initial_git_status": "clean",
+  "left_uncommitted": true,
+  "production_source_hashes": {
+    "main_project/content/move/feedback.json": "723FE558434BA97C019B12740411A1CDDA8ABA5BBC6C99CC27D83E3D5265AB0F",
+    "main_project/content/move/mechanisms.json": "D575473394B7961310820846E0CF2F0EF1C58D13482CFD25878BA86935FDF67E",
+    "main_project/scripts/av/movement_audio_preferences.gd": "52338D3C7F246750E5BED4B35F53A3C57545F07070D61E8AD7020676526DC60D",
+    "main_project/scripts/av/movement_audio.gd": "D87C9B9F8C53E99E627630E70559E530655B5881C8D9894B4FC9CE91C1A0D5E1",
+    "main_project/scripts/data/mechanism_policy.gd": "DF11A502A274A14B16945ADCDE25B2AF3024953044A398865BB4115394E00B6C",
+    "main_project/scripts/data/movement_feedback_policy.gd": "D1047F1C64E1097809C260A80E3BFDD82686DB27930761B1C7A37440DA30011A",
+    "main_project/scripts/input/binding_configuration.gd": "B5835CDB6B61D34B74503C3E9997211DDA175DB18209DEB6100CF38BEBFBF6DD",
+    "main_project/scripts/input/binding_editor.gd": "F3033A93C19B2CEEF6BD790CAE3630E22D8D357E367B463230DA71406FD5B5E5",
+    "main_project/scripts/input/view_cursor.gd": "A3E59358ACC685761D52573B36A6DC69D768907973BA66EEBD94889C4C905AD5",
+    "main_project/scripts/move/ground_coordinator.gd": "1A422579F0CD4C541E681CE9B581053EA7980CB66DADCBDBE79D377A551195AE",
+    "main_project/scripts/move/mechanism_collision.gd": "CCB9144ED314AEC7820E53AC8CDB515BA8D426BCBC134033FC005913756A0C38",
+    "main_project/scripts/move/mechanism_motion.gd": "FED15A27A45FC912D042BE308D9365F026D0EAE53C9667D8E19DF7245517B48B",
+    "main_project/scripts/move/movement_feedback.gd": "6BCA192952E15EB763CAA2F51B2CDA2B29EC3B97FA300D27CE7FC89A166E6AB9",
+    "main_project/scripts/move/placement_authority.gd": "DD139D359F78D88F4B820F51FCC2E3EE06C45B722944203541C7FED6B8F33B2A",
+    "main_project/scripts/session/session_shell.gd": "676AD09ED4DCD6346C84652279FA64CC1CB3FC347E2789FC7BBA9201E55BE268",
+    "main_project/scripts/startup/provider_boundary.gd": "0235A6ED20CE753B533B02F4AB2DA6DCD88B4ADA6DDBC76A6044B752A464AE4E"
+  },
+  "selected_assertions": 8501.0,
+  "baseline_revision": "b1f689f8977716bbffa1765f67b7f75061952a2c",
+  "prior_passing_checkpoints_excluded_from_total": [
+    {
+      "children": [
+        {
+          "display": "headless",
+          "mode": "headless",
+          "assertions": 1191,
+          "reload_assertions": 14
+        }
+      ],
+      "source_manifest_sha256": "31E6E2DD0FCA5DE1BF6711EA4C626B40B2EB031CEDA59C61C1E42B58D61451E0",
+      "suite": "ground-movement",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-headless-81e00b01b5c140c59d0769990b771a86",
+      "counted_in_final_matrix": false,
+      "fixture": "ground-movement-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "A3F5C0AF5C9085DCB65BF275932DA2B11F6565342373922CAA48A1589C4D9DC1",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-81e00b01b5c140c59d0769990b771a86\\report.json",
+      "command": {
+        "arguments": {
+          "Seed": null,
+          "Suite": "ground-movement",
+          "Fixture": "ground-movement-v1",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Clock": null,
+          "Scenario": [],
+          "TimeoutSeconds": 360,
+          "InputSequence": ""
+        },
+        "command": "./main_project/tools/verify_headless.ps1"
+      },
+      "pck_sha256": null,
+      "mode": "headless",
+      "selected_assertions": 1205,
+      "report_sha256": "9FB0A8F2E70C5385A4D6123C9DF04F49A76955DB7C2FF74EDCC34BD4957F3041"
+    },
+    {
+      "children": [
+        {
+          "display": "Windows",
+          "mode": "rendered",
+          "assertions": 1192,
+          "reload_assertions": 14
+        }
+      ],
+      "source_manifest_sha256": "499422F104761EB7EA2570D879E2FF9D04BDC772FB9599FED9B90FA280E557A7",
+      "suite": "ground-movement",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-rendered-aa1525acaaf145faa7d8b1c35830798e",
+      "counted_in_final_matrix": false,
+      "fixture": "ground-movement-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "B9BDB4FCAF832904223E75223DFE321BBC2E4A42CFBF50A80545823406E120C4",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-rendered-aa1525acaaf145faa7d8b1c35830798e\\report.json",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "TimeoutSeconds": 360,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Suite": "ground-movement",
+          "Fixture": "ground-movement-v1",
+          "InputSequence": "",
+          "Scenario": [],
+          "Clock": null,
+          "Seed": null
+        }
+      },
+      "pck_sha256": null,
+      "mode": "rendered",
+      "selected_assertions": 1206,
+      "report_sha256": "182AF9CD2A3CE3E5CDF5560F35C7D328BD70437E736C12307F3CE911A4127778"
+    }
+  ],
+  "review": {
+    "assertions": 18,
+    "root": "verification-rendered-aa1525acaaf145faa7d8b1c35830798e",
+    "captures": [
+      "review-smoke.png",
+      "review-quit.png"
+    ],
+    "human_pass": false,
+    "result_sha256": "E5DAE42C9AC220BFBFA25ABB10E55BE2744C4566E539B494E9CD0F6D5814A086",
+    "capture_qa": "Inspected real course, readable readout, stock Controls scroll layout and unobscured Quit consent. Device audibility/comfort and seven human checks remain pending.",
+    "capture_files": [
+      {
+        "path": "main_project/tests/.runs/verification-rendered-aa1525acaaf145faa7d8b1c35830798e/evidence/project/scenario-1/human-review/review-smoke.png",
+        "sha256": "21C892AEA5BE4A87ABA43AD70EBC4C0175CD067DCC146E372BB9C5A284201059"
+      },
+      {
+        "path": "main_project/tests/.runs/verification-rendered-aa1525acaaf145faa7d8b1c35830798e/evidence/project/scenario-1/human-review/review-quit.png",
+        "sha256": "FA14483B65D37D0EE6C83F6E86ABBC810ADBCFD30378AE8B3F88D75491EF2FC8"
+      }
+    ]
+  },
+  "status": "machine-qualified-human-acceptance-pending",
+  "remaining_gates": [
+    "Seven human checks, device audibility/comfort and explicit increment acceptance",
+    "Parent IMP-012 and M2",
+    "Real TIME/traits/restrictions/MAGIC and prevention benefit directories",
+    "Real classic mechanisms, multiple-provider LOC composition, unknown-action/axis execution qualification",
+    "Specialized movement/lethal modes and actual water/mounted context",
+    "WORLD origins/residency, full assembled traversal, native SAVE/cross-session reconstruction/live transit",
+    "NPC noise consumption/retirement, propagation/hearing/detection",
+    "Known exhaustion handoffs and CHAR receipt retirement/long sessions",
+    "Physical controller/IME qualifications; deferred stair/jump feel tuning"
+  ],
+  "verification_evolution": "Two actual landing-camera/aim assertions were added after the first passing checkpoint. Before exports, recreation was strengthened from default audio gain to 35%; both final export modes exercise that form. Counts and exact executed archives remain per run; all 16 modified production files match every qualifying run.",
+  "final_reports": [
+    {
+      "children": [
+        {
+          "display": "headless",
+          "mode": "headless",
+          "assertions": 1193,
+          "reload_assertions": 14
+        }
+      ],
+      "source_manifest_sha256": "C64E7B026871E490E294C7F2F814DE7DCAB191CF0C9A8EBFD22ED5250F20F7BA",
+      "suite": "ground-movement",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-headless-dc5a7a82c0404ef6ab31e34e5d7741b3",
+      "counted_in_final_matrix": true,
+      "fixture": "ground-movement-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "97E9B1F5BC884EFAEF586830CDD51304152146B7736AB7BCCCF0F92BBE6A4ECA",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-dc5a7a82c0404ef6ab31e34e5d7741b3\\report.json",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "InputSequence": "air-cap-2",
+          "TimeoutSeconds": 360,
+          "Fixture": "ground-movement-v1",
+          "Clock": null,
+          "Suite": "ground-movement",
+          "Seed": null,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Scenario": [],
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe"
+        }
+      },
+      "pck_sha256": null,
+      "mode": "headless",
+      "selected_assertions": 1207,
+      "report_sha256": "86E97DB45E882F079636470227E8806882E44609EA88C01E77EB1E09A7802B22"
+    },
+    {
+      "children": [
+        {
+          "display": "Windows",
+          "mode": "rendered",
+          "assertions": 1194,
+          "reload_assertions": 14
+        }
+      ],
+      "source_manifest_sha256": "0D10EA8C1C2E771FAD89B2DFB2E163B9BC0735913232CAA439F7E03EC788D1EB",
+      "suite": "ground-movement",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-rendered-707fa84087be4ff49de6a48204640f7d",
+      "counted_in_final_matrix": true,
+      "fixture": "ground-movement-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "17DC391A15287F2B40233C626891EDC57A161449950FAC306C5D068F28298C26",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-rendered-707fa84087be4ff49de6a48204640f7d\\report.json",
+      "command": {
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "ground-movement-v1",
+          "TimeoutSeconds": 360,
+          "InputSequence": "",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Seed": null,
+          "Clock": null,
+          "Suite": "ground-movement",
+          "Scenario": []
+        },
+        "command": "./main_project/tools/verify_rendered.ps1"
+      },
+      "pck_sha256": null,
+      "mode": "rendered",
+      "selected_assertions": 1208,
+      "report_sha256": "FD5EF7B3840509D34D4C885BD8E9DAC299E0ECF0C1B56CC0E35A801A3EACA155"
+    },
+    {
+      "children": [
+        {
+          "display": "headless",
+          "mode": "headless",
+          "assertions": 1193,
+          "reload_assertions": 14
+        },
+        {
+          "display": "Windows",
+          "mode": "rendered",
+          "assertions": 1194,
+          "reload_assertions": 14
+        }
+      ],
+      "source_manifest_sha256": "B3F9D1E7E668D3A5D63709B34E9DC9AB3B6DDE904E699D1E823324494CDBC315",
+      "suite": null,
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "verified_production_hashes": 16,
+      "root": "export-53a0d0bf77f3437aaab18178541a42c1",
+      "counted_in_final_matrix": true,
+      "fixture": "ground-movement-v1",
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "status": "passed",
+      "source_archive_sha256": "0872EA2E7A31CF1F1F78BD62FDC02612CD48EE9539C20109D6B6F99577F37CE9",
+      "configuration": "debug",
+      "report": "main_project\\tests\\.runs\\export-53a0d0bf77f3437aaab18178541a42c1\\result.json",
+      "command": {
+        "command": "./main_project/tools/verify_startup_export.ps1",
+        "arguments": {
+          "DefinitionPublication": false,
+          "DungeonMarkers": false,
+          "RandomnessSession": false,
+          "ActorState": true,
+          "DungeonContext": false,
+          "DependencyPlanning": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "DungeonAssembly": false,
+          "Randomness": false,
+          "VariantInputs": false,
+          "FormulaFault": false,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "FormulaExtraError": false,
+          "GroundMovement": true,
+          "ModDiscovery": false,
+          "M1Composition": false,
+          "Configuration": "debug",
+          "LayoutInputs": false,
+          "Formula": false,
+          "ClassicSource": "C:/Games/Daggerfall/arena2"
+        }
+      },
+      "pck_sha256": "045B8D5DEDBC457A9BF6BC2F8E3BCD3AE728FC753E3B87F435B15BE70C3F5EBF",
+      "mode": null,
+      "selected_assertions": 2415,
+      "report_sha256": "D98F374F532C5D571DA85AFA96CFDB919A92C12DF3CF21EBFAFA1CD0CB15E777"
+    },
+    {
+      "children": [
+        {
+          "display": "headless",
+          "mode": "headless",
+          "assertions": 1193,
+          "reload_assertions": 14
+        },
+        {
+          "display": "Windows",
+          "mode": "rendered",
+          "assertions": 1194,
+          "reload_assertions": 14
+        }
+      ],
+      "source_manifest_sha256": "F5A7C4A0C7347278422CB007E9BE374CBC3B459291B33FC9A44CC8023896FABA",
+      "suite": null,
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "verified_production_hashes": 16,
+      "root": "export-eef78101edeb49cea5a350b0f005db9c",
+      "counted_in_final_matrix": true,
+      "fixture": "ground-movement-v1",
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "status": "passed",
+      "source_archive_sha256": "C4968ED4A16A0B41CAB5A819DECD7D8B2CCA86F6CA81805CE6E3C3EA2E917B8C",
+      "configuration": "release",
+      "report": "main_project\\tests\\.runs\\export-eef78101edeb49cea5a350b0f005db9c\\result.json",
+      "command": {
+        "arguments": {
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "LayoutInputs": false,
+          "ModDiscovery": false,
+          "DungeonAssembly": false,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "DungeonMarkers": false,
+          "ActorState": true,
+          "GroundMovement": true,
+          "FormulaExtraError": false,
+          "DependencyPlanning": false,
+          "M1Composition": false,
+          "DefinitionPublication": false,
+          "Configuration": "release",
+          "FormulaFault": false,
+          "Randomness": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "RandomnessSession": false,
+          "DungeonContext": false,
+          "Formula": false,
+          "VariantInputs": false
+        },
+        "command": "./main_project/tools/verify_startup_export.ps1"
+      },
+      "pck_sha256": "B18C28E67B11777C68F0099F9F64B4DA3DCD3E1BB28E84307E062140FA9BF897",
+      "mode": null,
+      "selected_assertions": 2415,
+      "report_sha256": "CBAB4960D9E7147A0E34D3C9279AA46855FB4906F62C371FD4F98513F4215438"
+    },
+    {
+      "children": [
+        {
+          "display": "headless",
+          "mode": "headless",
+          "assertions": 72,
+          "reload_assertions": 8
+        }
+      ],
+      "source_manifest_sha256": "6D05B0DFDF2E4C6E74F7EFEF5B4856462E4E2BC2FB2DEE90FB071D5A7C852D5B",
+      "suite": "binding-config",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-headless-4dafe1cc917a44b78f934a27160353c2",
+      "counted_in_final_matrix": true,
+      "fixture": "binding-config-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "17DC391A15287F2B40233C626891EDC57A161449950FAC306C5D068F28298C26",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-4dafe1cc917a44b78f934a27160353c2\\report.json",
+      "command": {
+        "arguments": {
+          "Suite": "binding-config",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "InputSequence": "",
+          "Scenario": [],
+          "ClassicSource": "",
+          "TimeoutSeconds": 360,
+          "Fixture": "binding-config-v1",
+          "Seed": null,
+          "Clock": null
+        },
+        "command": "./main_project/tools/verify_headless.ps1"
+      },
+      "pck_sha256": null,
+      "mode": "headless",
+      "selected_assertions": 80,
+      "report_sha256": "818654E72B1558FEC3471AE901D7C7218DA4EC17B57ABF03E7EE516E972855A5"
+    },
+    {
+      "children": [
+        {
+          "display": "Windows",
+          "mode": "rendered",
+          "assertions": 73,
+          "reload_assertions": 8
+        }
+      ],
+      "source_manifest_sha256": "E693E67BA24C34B4EEA2F31314B3E9C79AEB25B95AF04EC1747EDDCB1DABA5C2",
+      "suite": "binding-config",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-rendered-23eb2a20d8a7461fbc88fa7a7fb95b53",
+      "counted_in_final_matrix": true,
+      "fixture": "binding-config-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "17DC391A15287F2B40233C626891EDC57A161449950FAC306C5D068F28298C26",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-rendered-23eb2a20d8a7461fbc88fa7a7fb95b53\\report.json",
+      "command": {
+        "arguments": {
+          "Suite": "binding-config",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "InputSequence": "",
+          "Scenario": [],
+          "ClassicSource": "",
+          "TimeoutSeconds": 360,
+          "Fixture": "binding-config-v1",
+          "Seed": null,
+          "Clock": null
+        },
+        "command": "./main_project/tools/verify_rendered.ps1"
+      },
+      "pck_sha256": null,
+      "mode": "rendered",
+      "selected_assertions": 81,
+      "report_sha256": "4487EAF5619EF41FA14AAD3075C64858AD9E2ACEA5E4258941C1DA710D033CE7"
+    },
+    {
+      "children": [
+        {
+          "display": "headless",
+          "mode": "headless",
+          "assertions": 85,
+          "reload_assertions": 8
+        }
+      ],
+      "source_manifest_sha256": "5E7A7D33BF5B835F2370A49E48DB0DDA6D1AF69478310F7B69DA743852B13986",
+      "suite": "view-cursor",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-headless-1f5b2ee784c74939843ca2a46aca2c38",
+      "counted_in_final_matrix": true,
+      "fixture": "view-cursor-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "209D3298A2AB2539CDB5DF76F80737706EF6A31D608D6D8516CC8CA49313FF34",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-1f5b2ee784c74939843ca2a46aca2c38\\report.json",
+      "command": {
+        "arguments": {
+          "Suite": "view-cursor",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "InputSequence": "",
+          "Scenario": [],
+          "ClassicSource": "",
+          "TimeoutSeconds": 360,
+          "Fixture": "view-cursor-v1",
+          "Seed": null,
+          "Clock": null
+        },
+        "command": "./main_project/tools/verify_headless.ps1"
+      },
+      "pck_sha256": null,
+      "mode": "headless",
+      "selected_assertions": 93,
+      "report_sha256": "B624FA95E5E4BEAB0D221BEC3B56135C682E2B7BC41300F354CE517D74A57FB2"
+    },
+    {
+      "children": [
+        {
+          "display": "Windows",
+          "mode": "rendered",
+          "assertions": 89,
+          "reload_assertions": 8
+        }
+      ],
+      "source_manifest_sha256": "6BB3FB545CC15B3A1A154AC32C509D70A43546A13202F6BE95A64346D30A4A09",
+      "suite": "view-cursor",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-rendered-f95f7314869643e38d57582ee7bda989",
+      "counted_in_final_matrix": true,
+      "fixture": "view-cursor-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "209D3298A2AB2539CDB5DF76F80737706EF6A31D608D6D8516CC8CA49313FF34",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-rendered-f95f7314869643e38d57582ee7bda989\\report.json",
+      "command": {
+        "arguments": {
+          "Suite": "view-cursor",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "InputSequence": "",
+          "Scenario": [],
+          "ClassicSource": "",
+          "TimeoutSeconds": 360,
+          "Fixture": "view-cursor-v1",
+          "Seed": null,
+          "Clock": null
+        },
+        "command": "./main_project/tools/verify_rendered.ps1"
+      },
+      "pck_sha256": null,
+      "mode": "rendered",
+      "selected_assertions": 97,
+      "report_sha256": "DE5ECB9F4983F90D7377EF324F37B11FB91375785DB7589E837574B4C4BAAE7F"
+    },
+    {
+      "children": [
+        {
+          "display": "headless",
+          "mode": "headless",
+          "assertions": 263,
+          "reload_assertions": 0
+        }
+      ],
+      "source_manifest_sha256": "0D0CA19AB19788C66CDF4A37A5E9C283C32ACE8EFB16937734732998AA65823C",
+      "suite": "session",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-headless-59028288abbb4124a51ac544a51f9678",
+      "counted_in_final_matrix": true,
+      "fixture": "m1-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "209D3298A2AB2539CDB5DF76F80737706EF6A31D608D6D8516CC8CA49313FF34",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-59028288abbb4124a51ac544a51f9678\\report.json",
+      "command": {
+        "arguments": {
+          "Suite": "session",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "InputSequence": "",
+          "Scenario": [],
+          "ClassicSource": "",
+          "TimeoutSeconds": 360,
+          "Fixture": "m1-v1",
+          "Seed": null,
+          "Clock": null
+        },
+        "command": "./main_project/tools/verify_headless.ps1"
+      },
+      "pck_sha256": null,
+      "mode": "headless",
+      "selected_assertions": 263,
+      "report_sha256": "9C6967587C2AB1441FC828E7BA76748344C0481A82BDE637A41C2ADB50716580"
+    },
+    {
+      "children": [
+        {
+          "display": "headless",
+          "mode": "headless",
+          "assertions": 111,
+          "reload_assertions": 8
+        }
+      ],
+      "source_manifest_sha256": "71602183C659434BAE37F51695BB073027FCE489F79FA0D76BE9EE03A4C97D1B",
+      "suite": "publication",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-headless-bcb831c08f5a4d6da280324b7795816e",
+      "counted_in_final_matrix": true,
+      "fixture": "publication-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "209D3298A2AB2539CDB5DF76F80737706EF6A31D608D6D8516CC8CA49313FF34",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-bcb831c08f5a4d6da280324b7795816e\\report.json",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Seed": null,
+          "Suite": "publication",
+          "InputSequence": "",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Clock": null,
+          "Scenario": [],
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "TimeoutSeconds": 360,
+          "Fixture": "publication-v1"
+        }
+      },
+      "pck_sha256": null,
+      "mode": "headless",
+      "selected_assertions": 119,
+      "report_sha256": "B20BF9E0D23A9E880692C1D5CB8830E84C13E1F627BD4CBF6CF0CE660A696870"
+    },
+    {
+      "children": [
+        {
+          "display": "headless",
+          "mode": "headless",
+          "assertions": 119,
+          "reload_assertions": 0
+        }
+      ],
+      "source_manifest_sha256": "19DE798C5F9787F9079113677CAFC92D112C2A4C2505F6218A028C16A8DB567C",
+      "suite": "media",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-headless-0cc1d1061ed34e2a9152f8d2580387cd",
+      "counted_in_final_matrix": true,
+      "fixture": "media-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "209D3298A2AB2539CDB5DF76F80737706EF6A31D608D6D8516CC8CA49313FF34",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-headless-0cc1d1061ed34e2a9152f8d2580387cd\\report.json",
+      "command": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Seed": null,
+          "Suite": "media",
+          "InputSequence": "",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Clock": null,
+          "Scenario": [],
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "TimeoutSeconds": 360,
+          "Fixture": "media-v1"
+        }
+      },
+      "pck_sha256": null,
+      "mode": "headless",
+      "selected_assertions": 119,
+      "report_sha256": "43C6C09108881921ECA2A459614843D168344DA1D667C8A4BE408FB60714CCC9"
+    },
+    {
+      "children": [
+        {
+          "display": "Windows",
+          "mode": "rendered",
+          "assertions": 375,
+          "reload_assertions": 11
+        }
+      ],
+      "source_manifest_sha256": "003A2734DC5D7A8348564D738ED0BD36E455077DB26492C8A93004DCC758D968",
+      "suite": "native",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "verified_production_hashes": 16,
+      "root": "verification-rendered-cea6f2b7359a4e548a185926c5720e6d",
+      "counted_in_final_matrix": true,
+      "fixture": "native-v1",
+      "executable_sha256": null,
+      "status": "passed",
+      "source_archive_sha256": "209D3298A2AB2539CDB5DF76F80737706EF6A31D608D6D8516CC8CA49313FF34",
+      "configuration": null,
+      "report": "main_project\\tests\\.runs\\verification-rendered-cea6f2b7359a4e548a185926c5720e6d\\report.json",
+      "command": {
+        "command": "./main_project/tools/verify_rendered.ps1",
+        "arguments": {
+          "Seed": null,
+          "Suite": "native",
+          "InputSequence": "",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Clock": null,
+          "Scenario": [],
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "TimeoutSeconds": 360,
+          "Fixture": "native-v1"
+        }
+      },
+      "pck_sha256": null,
+      "mode": "rendered",
+      "selected_assertions": 386,
+      "report_sha256": "D99A7C39ABD771FA199A727B3C236BF5ADB14E22C11AB06E1D8F653CC788F43C"
+    }
+  ],
+  "cleanup": [
+    {
+      "removed_files": 9089,
+      "journal": "dungeon-cleanup-036009ae6da64822b9bdb5dc09c55d69.json",
+      "unlinked_templates": [],
+      "removed_bytes": 1272463589,
+      "preserved_child_files": 51,
+      "roots": [
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b8481257e2a4430da8484244bf81b70a",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-a9eb96a40f284702873a266808c43a26",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-3878dab309a74543be7e1c493b4ae025",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-473e4bbed865481a80b2b8488b4f6259",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-2f452500c39e498aa05df9c40df27333",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b91358785c3f4ceca653c58edebc9dc3"
+      ],
+      "sha256": "65844A9C45EC2FE37C48D1408553DD73391E98F37A26714CEDACBB2075193953"
+    },
+    {
+      "removed_files": 6228,
+      "journal": "dungeon-cleanup-7144d695fbff475a811c40e94fb8494c.json",
+      "unlinked_templates": [],
+      "removed_bytes": 856142007,
+      "preserved_child_files": 70,
+      "roots": [
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-81e00b01b5c140c59d0769990b771a86",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-aa1525acaaf145faa7d8b1c35830798e",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-dc5a7a82c0404ef6ab31e34e5d7741b3",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-707fa84087be4ff49de6a48204640f7d"
+      ],
+      "sha256": "7EED1DC57EC8233117357A8C455A185D65FA032E22E4E0B99256C427BB6AC2F2"
+    },
+    {
+      "removed_files": 13601,
+      "journal": "dungeon-cleanup-388e258aa6f24dd5b195bf004a88d8aa.json",
+      "unlinked_templates": [],
+      "removed_bytes": 1924613364,
+      "preserved_child_files": 78,
+      "roots": [
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-4dafe1cc917a44b78f934a27160353c2",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-23eb2a20d8a7461fbc88fa7a7fb95b53",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-1f5b2ee784c74939843ca2a46aca2c38",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-f95f7314869643e38d57582ee7bda989",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-59028288abbb4124a51ac544a51f9678",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-644594dbe86748e49371d8e5ffbd2d05",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-bcb831c08f5a4d6da280324b7795816e",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-0cc1d1061ed34e2a9152f8d2580387cd",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cea6f2b7359a4e548a185926c5720e6d"
+      ],
+      "sha256": "F6309063F8DE78C478C25ADEDA7D418B720DF38276F94E20A09CB89E32758C53"
+    },
+    {
+      "removed_files": 4384,
+      "journal": "dungeon-cleanup-7fbeabedd5d04408ba46ca6c928e2801.json",
+      "unlinked_templates": [
+        {
+          "target": [
+            "C:\\Users\\Kirk\\AppData\\Roaming\\Godot\\export_templates\\4.7.2.stable"
+          ],
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-53a0d0bf77f3437aaab18178541a42c1\\engine-roaming\\Godot\\export_templates\\4.7.2.stable"
+        },
+        {
+          "target": [
+            "C:\\Users\\Kirk\\AppData\\Roaming\\Godot\\export_templates\\4.7.2.stable"
+          ],
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-eef78101edeb49cea5a350b0f005db9c\\engine-roaming\\Godot\\export_templates\\4.7.2.stable"
+        }
+      ],
+      "removed_bytes": 1057912690,
+      "preserved_child_files": 48,
+      "roots": [
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-53a0d0bf77f3437aaab18178541a42c1",
+        "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-eef78101edeb49cea5a350b0f005db9c"
+      ],
+      "sha256": "F7797A136F7C70BBC9A87A7B163F5A88A70EFA39C479128182D04B3F8B3F3920"
+    }
+  ],
+  "diagnostics": {
+    "roots": [
+      "verification-headless-b8481257e2a4430da8484244bf81b70a",
+      "verification-headless-a9eb96a40f284702873a266808c43a26",
+      "verification-headless-3878dab309a74543be7e1c493b4ae025",
+      "verification-headless-473e4bbed865481a80b2b8488b4f6259",
+      "verification-headless-2f452500c39e498aa05df9c40df27333",
+      "verification-headless-b91358785c3f4ceca653c58edebc9dc3",
+      "verification-headless-644594dbe86748e49371d8e5ffbd2d05"
+    ],
+    "counted": false,
+    "mutable_development_root": "verification-headless-b8481257e2a4430da8484244bf81b70a",
+    "note": "The final mutable development archive is not the original executed source of earlier probes. Initial parse/contact/fixture/inventory failures and the publication invocation missing ClassicSource are excluded."
+  },
+  "timing": {
+    "end_est": "2026-11-25 18:54:02 EST",
+    "initial_estimate": "6-10 hours",
+    "start_est": "2026-11-25 16:11:26 EST",
+    "start_utc": "2026-11-25T21:11:26Z",
+    "end_utc": "2026-11-25T23:54:02Z",
+    "elapsed_seconds": 9756
+  },
+  "schema": "imp012-increment4-audit-v1",
+  "changed_files": [
+    "design_docs/development/evidence/IMP-012-INCREMENT-4-REVIEW-2026-11-25.md",
+    "design_docs/development/evidence/IMP-012-increment-4-2026-11-25.audit.json",
+    "design_docs/development/evidence/IMP-012-increment-4-2026-11-25.md",
+    "main_project/content/move/feedback.json",
+    "main_project/content/move/mechanisms.json",
+    "main_project/scripts/av/movement_audio.gd",
+    "main_project/scripts/av/movement_audio_preferences.gd",
+    "main_project/scripts/data/mechanism_policy.gd",
+    "main_project/scripts/data/movement_feedback_policy.gd",
+    "main_project/scripts/move/PLATFORMS_FEEDBACK.md",
+    "main_project/scripts/move/mechanism_collision.gd",
+    "main_project/scripts/move/mechanism_motion.gd",
+    "main_project/scripts/move/movement_feedback.gd",
+    "main_project/tests/compression_cases.gd",
+    "main_project/tests/controlled_mechanism.gd",
+    "main_project/tests/movement_feedback_cases.gd",
+    "main_project/tests/platform_boundary_cases.gd",
+    "main_project/tests/platform_cases.gd",
+    "main_project/tests/pushing_cases.gd",
+    "design_docs/development/IMPLEMENTATION_READINESS.md",
+    "design_docs/development/RUN_ARTIFACT_CLEANUP.md",
+    "design_docs/development/TASK_BACKLOG.md",
+    "design_docs/development/tasks/IMP-012.md",
+    "design_docs/development/tasks/IMP-024.md",
+    "design_docs/development/tasks/IMP-035.md",
+    "main_project/scripts/av/NATIVE_PLAYBACK.md",
+    "main_project/scripts/char/DEATH.md",
+    "main_project/scripts/char/VITAL_INTAKE.md",
+    "main_project/scripts/input/README.md",
+    "main_project/scripts/input/VIEW_CURSOR.md",
+    "main_project/scripts/input/binding_configuration.gd",
+    "main_project/scripts/input/binding_editor.gd",
+    "main_project/scripts/input/view_cursor.gd",
+    "main_project/scripts/move/AIR.md",
+    "main_project/scripts/move/GROUND.md",
+    "main_project/scripts/move/PLACEMENT.md",
+    "main_project/scripts/move/ground_coordinator.gd",
+    "main_project/scripts/move/placement_authority.gd",
+    "main_project/scripts/session/session_shell.gd",
+    "main_project/scripts/startup/provider_boundary.gd",
+    "main_project/tests/air_boundary_cases.gd",
+    "main_project/tests/ground_cases.gd",
+    "main_project/tests/ground_course.gd",
+    "main_project/tests/ground_inventory.json",
+    "main_project/tests/ground_reload.gd",
+    "main_project/tests/ground_review.gd",
+    "main_project/tools/review_ground.ps1"
+  ],
+  "inventory": {
+    "headless": 1193,
+    "reload": 14,
+    "course": "platforms-feedback-v4",
+    "fixture": "IMP-012-ground-v1",
+    "schema": "ground-inventory-v1",
+    "sha256": "CAF2F6AECD81E2EA3352EF187EF95909FECAF2F93CDD64208AA9BE438DE864FC",
+    "rendered": 1194,
+    "accepted_inventory_preserved": true
+  },
+  "retention": {
+    "deferred": "Older other-task roots, including protected IMP-011 human storage, were not qualified for deletion in this session.",
+    "after": {
+      "skipped_links": [],
+      "largest": [
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-dccb06ad4e15465691bdf70af6e5d363\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-ce9c10bf5cc348d0ad4e8708dcd4877d\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cc8b5f15a7814be586b3eae8dc2c719d\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-13d636fdec0f426f8ba63113299820b0\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-65a7606dbe4c409bb0129689dda8d4d5\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-17dbac68203440ca92259c5ce685505e\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-43a28ee25d824d2eaea8b5476d07674e\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp011-view-review-2026-11-23-final\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 37737576,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-2e84f6de05364ff29d5ce9611e4b065b\\report.json"
+        },
+        {
+          "bytes": 37737269,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-6ef31e46a2f64fed9296fa303ff8567b\\report.json"
+        },
+        {
+          "bytes": 32319396,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-13d636fdec0f426f8ba63113299820b0\\project\\content\\media\\banks\\generaluser-gs-2.0.3.sf2"
+        },
+        {
+          "bytes": 32319396,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-17dbac68203440ca92259c5ce685505e\\project\\content\\media\\banks\\generaluser-gs-2.0.3.sf2"
+        },
+        {
+          "bytes": 32319396,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp011-view-review-2026-11-23-final\\project\\content\\media\\banks\\generaluser-gs-2.0.3.sf2"
+        },
+        {
+          "bytes": 32319396,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-43a28ee25d824d2eaea8b5476d07674e\\project\\content\\media\\banks\\generaluser-gs-2.0.3.sf2"
+        },
+        {
+          "bytes": 32319396,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-65a7606dbe4c409bb0129689dda8d4d5\\project\\content\\media\\banks\\generaluser-gs-2.0.3.sf2"
+        },
+        {
+          "bytes": 32319396,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cc8b5f15a7814be586b3eae8dc2c719d\\project\\content\\media\\banks\\generaluser-gs-2.0.3.sf2"
+        },
+        {
+          "bytes": 32319396,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-ce9c10bf5cc348d0ad4e8708dcd4877d\\project\\content\\media\\banks\\generaluser-gs-2.0.3.sf2"
+        },
+        {
+          "bytes": 32319396,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-dccb06ad4e15465691bdf70af6e5d363\\project\\content\\media\\banks\\generaluser-gs-2.0.3.sf2"
+        },
+        {
+          "bytes": 26845053,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-2e84f6de05364ff29d5ce9611e4b065b\\evidence\\scenario-1\\result.json"
+        },
+        {
+          "bytes": 26844842,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-6ef31e46a2f64fed9296fa303ff8567b\\evidence\\scenario-1\\result.json"
+        }
+      ],
+      "logical_bytes": 4811179916,
+      "files": 90165,
+      "label": "after-final-cleanup",
+      "utc": "2026-11-25T18:49:01.1126789-05:00"
+    },
+    "before": {
+      "skipped_links": [
+        {
+          "target": "C:\\Users\\Kirk\\AppData\\Roaming\\Godot\\export_templates\\4.7.2.stable",
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-eef78101edeb49cea5a350b0f005db9c\\engine-roaming\\Godot\\export_templates\\4.7.2.stable"
+        },
+        {
+          "target": "C:\\Users\\Kirk\\AppData\\Roaming\\Godot\\export_templates\\4.7.2.stable",
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-53a0d0bf77f3437aaab18178541a42c1\\engine-roaming\\Godot\\export_templates\\4.7.2.stable"
+        }
+      ],
+      "largest": [
+        {
+          "bytes": 109268480,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-eef78101edeb49cea5a350b0f005db9c\\build\\Startup.exe"
+        },
+        {
+          "bytes": 103176704,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-53a0d0bf77f3437aaab18178541a42c1\\build\\Startup.exe"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-43a28ee25d824d2eaea8b5476d07674e\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-dccb06ad4e15465691bdf70af6e5d363\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-53a0d0bf77f3437aaab18178541a42c1\\build\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-ce9c10bf5cc348d0ad4e8708dcd4877d\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cc8b5f15a7814be586b3eae8dc2c719d\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-53a0d0bf77f3437aaab18178541a42c1\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-13d636fdec0f426f8ba63113299820b0\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-65a7606dbe4c409bb0129689dda8d4d5\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp011-view-review-2026-11-23-final\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-eef78101edeb49cea5a350b0f005db9c\\build\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-17dbac68203440ca92259c5ce685505e\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 93854720,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-eef78101edeb49cea5a350b0f005db9c\\project\\native\\media\\bin\\avcodec-62.dll"
+        },
+        {
+          "bytes": 64503196,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-53a0d0bf77f3437aaab18178541a42c1\\build\\Startup.pck"
+        },
+        {
+          "bytes": 64503196,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-eef78101edeb49cea5a350b0f005db9c\\build\\Startup.pck"
+        },
+        {
+          "bytes": 37737576,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-2e84f6de05364ff29d5ce9611e4b065b\\report.json"
+        },
+        {
+          "bytes": 37737269,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-6ef31e46a2f64fed9296fa303ff8567b\\report.json"
+        },
+        {
+          "bytes": 32319396,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-eef78101edeb49cea5a350b0f005db9c\\project\\content\\media\\banks\\generaluser-gs-2.0.3.sf2"
+        },
+        {
+          "bytes": 32319396,
+          "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp011-view-review-2026-11-23-final\\project\\content\\media\\banks\\generaluser-gs-2.0.3.sf2"
+        }
+      ],
+      "logical_bytes": 5865887862,
+      "files": 94499,
+      "label": "before-final-cleanup",
+      "utc": "2026-11-25T18:47:52.931743-05:00"
+    }
+  },
+  "artifact_integrity": {
+    "payloads_absent": true,
+    "archives": 21,
+    "verified_typed_inputs": 14,
+    "verified_source_entries": 6850
+  },
+  "documentation_link_check": {
+    "note": "Historical handoff TXT targets are absent in the baseline and remain unchanged; the issued request attachment and current execution/review links are available.",
+    "new_missing_links": 0,
+    "preexisting_missing_historical_handoff_links": [
+      {
+        "target": "handoffs/IMP-012-INCREMENT-4-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-012-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-012-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-012-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-016-INCREMENT-4-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-016-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-016-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-016-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-013-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-013-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-013-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-061-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-061-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-061-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-011-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-011-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-010-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-010-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-010-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-009-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-009-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-009-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-008-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-008-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-008-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-007-INCREMENT-4-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-007-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-007-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md"
+      },
+      {
+        "target": "handoffs/IMP-012-INCREMENT-4-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-012-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-012-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-012-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-016-INCREMENT-4-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-016-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-016-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-016-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-013-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-013-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-013-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-061-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-061-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-061-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-011-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-011-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-010-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-010-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-010-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-009-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-009-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-009-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-008-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-008-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-008-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-007-INCREMENT-4-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-007-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "handoffs/IMP-007-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/TASK_BACKLOG.md"
+      },
+      {
+        "target": "../handoffs/IMP-012-INCREMENT-4-PROMPT.txt",
+        "file": "design_docs/development/tasks/IMP-012.md"
+      },
+      {
+        "target": "../handoffs/IMP-012-INCREMENT-3-PROMPT.txt",
+        "file": "design_docs/development/tasks/IMP-012.md"
+      },
+      {
+        "target": "../handoffs/IMP-012-INCREMENT-2-PROMPT.txt",
+        "file": "design_docs/development/tasks/IMP-012.md"
+      },
+      {
+        "target": "../handoffs/IMP-012-INCREMENT-1-PROMPT.txt",
+        "file": "design_docs/development/tasks/IMP-012.md"
+      }
+    ]
+  }
+}

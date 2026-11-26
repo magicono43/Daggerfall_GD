@@ -1,5 +1,9 @@
 # IMP-012 increment-2 consumer
 
+Increment 4 adds live Off-capable gait bob, mounted bob, landing camera and
+movement-audio percentages to the stock Controls handler, persistence and consumer
+reapplication path. See [the owner contract](../move/PLATFORMS_FEEDBACK.md).
+
 Stock Controls now applies independent Hold/Toggle Crouch through the same
 OptionButton/Apply/Retry Save handlers. Left Ctrl and Toggle remain default.
 The input owner's continuous-action allowlist includes Crouch; admitted physical

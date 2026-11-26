@@ -1,5 +1,12 @@
 # IMP-012 increment 3 — air and landings
 
+Increment 4 joins actual controlled mechanism carriage to the nine-field point
+velocity seam, with current support-relative history and once-only detachment.
+Flight precedes the mechanism's residual push within coordinated collision slices.
+See [PLATFORMS_FEEDBACK.md](PLATFORMS_FEEDBACK.md). Earlier carriage/feedback-pending
+statements describe the accepted increment-3 checkpoint, not the current extension.
+Real classic mechanisms, WORLD integration and native SAVE remain unqualified.
+
 This extends the existing SessionShell ground coordinator and placement capsule.
 There is one physical authority. `air_history.gd` holds plain MOVE state and never
 moves a body, runs an independent controller, or writes CHAR. Increment 2 remains

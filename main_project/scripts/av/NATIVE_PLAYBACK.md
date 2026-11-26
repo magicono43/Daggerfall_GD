@@ -1,5 +1,12 @@
 # Native playback — IMP-008 increment 3
 
+IMP-012 increment 4 adds the narrow `movement_audio.gd` listener-relative bridge:
+validated classic PCM is prepared at binding, four engine voices consume scoped
+committed cues, and pause/live gain/retirement remain independent of gameplay.
+Missing optional clips are diagnosed silence. This does not deliver broad local
+spatial/ambient audio or NPC hearing. See
+[PLATFORMS_FEEDBACK.md](../move/PLATFORMS_FEEDBACK.md).
+
 `music_playback.gd` and `video_playback.gd` are bounded realization consumers.
 They resolve committed DATA targets, retain original provider/source provenance
 and operate on checked bytes. They do not select playlists, world music, dialogue,

@@ -1,0 +1,15 @@
+{
+  "domain": "move.mechanism", "path": "policy", "operation": "add",
+  "entries": [
+    {"id":"carry-push", "value":{
+      "schema":"mechanism-motion-v1", "shape":"upright-box", "carry":true, "push":true, "crush":false,
+      "lethal_mode":"none", "compression_metres":0.001, "exceptions":[],
+      "provenance":{"policy":"MOVE-008 controlled non-crush mechanism. No classic model-name or all-elevator exception inferred."}
+    }},
+    {"id":"grounded-crush", "value":{
+      "schema":"mechanism-motion-v1", "shape":"upright-box", "carry":true, "push":true, "crush":true,
+      "lethal_mode":"grounded-crouch", "compression_metres":0.001, "exceptions":[],
+      "provenance":{"policy":"MOVE-008-D03-D07 forced crouch then lethal continuing grounded full-body compression; controlled upright-box qualification only. No real classic action execution or specialized lethal mode readiness."}
+    }}
+  ]
+}

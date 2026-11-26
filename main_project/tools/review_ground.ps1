@@ -1,5 +1,6 @@
-param([string]$ClassicSource = 'C:/Games/Daggerfall/arena2', [string]$Godot = 'C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe', [switch]$SmokeTest, [Alias("ConnectorModel")][ValidateSet(0,61030,67027,67029)][int[]]$ConnectorModels = @(0), [string[]]$ConnectorPlacements = @())
+param([string]$ClassicSource = 'C:/Games/Daggerfall/arena2', [string]$Godot = 'C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe', [switch]$SmokeTest, [switch]$Platforms, [Alias("ConnectorModel")][ValidateSet(0,61030,67027,67029)][int[]]$ConnectorModels = @(0), [string[]]$ConnectorPlacements = @())
 $ErrorActionPreference = 'Stop'
+if ($Platforms -and ($ConnectorPlacements.Count -gt 0 -or @($ConnectorModels | Where-Object { $_ -ne 0 }).Count -gt 0)) { throw 'Platforms review uses its controlled mechanism course; choose source connector reviews separately.' }
 if ($PSVersionTable.PSVersion.Major -lt 7) {
     throw 'Ground review requires PowerShell 7 (pwsh.exe). Windows PowerShell 5.1 (powershell.exe) can lose the engine exit code and falsely reject its version. Run the review with pwsh.exe -NoProfile -ExecutionPolicy Bypass -Command instead; see IMP-012-STEEP-CONNECTORS-REVIEW-2026-11-25.md for the complete command.'
 }
@@ -25,6 +26,7 @@ function Invoke-GroundHumanReview([int]$Model, [string]$Placement = "") {
 $case = $selected.scenarios[0].root
 $fixture = Get-Content -LiteralPath "$case/fixture.json" -Raw | ConvertFrom-Json
 $fixture.mode = 'ground-review'
+if ($Platforms) { $fixture | Add-Member -NotePropertyName review_platforms -NotePropertyValue $true }
 $reviewDirectory = if ($Model -gt 0) { 'human-review-' + $Model } else { 'human-review' }
 if ($Placement) { $reviewDirectory = "human-review-source-" + $Placement.Replace("/","-") }
 $fixture.sandbox = (Join-Path $case $reviewDirectory).Replace('\','/')

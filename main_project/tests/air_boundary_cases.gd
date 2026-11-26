@@ -294,6 +294,11 @@ func run(t: RefCounted, a: RefCounted, b: RefCounted, prevention: RefCounted) ->
 	t.finish_flight()
 	t.check("walk-off reaches real lower floor",true,not body.air.airborne and body.snapshot().position.y < -5.0)
 	t.check("measured six metre fall damages through CHAR",drop_health-5,t.actors.vital_projection(t.scope,"ground-player").current.health)
+	var landed_view: RefCounted = t.shell_ref.session_shell.view
+	var landed_camera: Camera3D = t.shell_ref.session_shell.view_camera
+	t.check("feedback configured hard landing reaches actual camera",true,landed_view._response.landing_camera_percent == 75.0 and landed_view.cosmetic_offset.y < 0 and landed_camera.position == t.motor.last.view_position+landed_view.cosmetic_offset)
+	var landing_ray: Dictionary = landed_view.ray_context(t.scope)
+	t.near("feedback hard landing preserves actual targeting origin",0.0,landing_ray.get("origin",Vector3.INF).distance_to(t.motor.last.view_position),0.000001)
 	t.motor.retry_activity()
 	# Real skill publication gives a capped high jump and an apex-based damaging
 	# landing. CHAR remains the sole health writer; no direct actor pose is assigned.

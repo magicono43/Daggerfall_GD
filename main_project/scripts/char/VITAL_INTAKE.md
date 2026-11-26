@@ -1,5 +1,10 @@
 # Vital intake — IMP-016 increment 2
 
+Current lethal semantics are in [DEATH.md](DEATH.md); the older lethal-unavailable
+paragraphs below record the increment-2 checkpoint. IMP-012 increment 4 extends
+the exact retained MOVE vital attestation from landings to grounded compression,
+using the same health damage/prevention/death APIs and activity-first custody.
+
 IMP-012 increment 3 adds the explicit CORE-bound MOVE consumer for fall health
 damage under [AIR.md](../move/AIR.md). MOVE may submit only `damage` on `health`;
 its actual coordinator attests the retained landing request. CHAR still owns all

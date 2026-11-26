@@ -60,6 +60,7 @@ func air_context(owner: RefCounted, scope: String, tuning: Dictionary) -> Dictio
 	p.margin = tuning.motion_margin
 	var support := _ground_support(_actor.get_world_3d().direct_space_state,_actor.position,p,tuning,tuning.contact_gap*3,float(_ground_last.get("result",{}).get("support_hint_ny",1.0))) if not air.airborne else {"ok":false}
 	context.supported = support.ok
+	context.support_collider = support.get("collider",0)
 	context.base = _actor.position-Vector3.UP*_shape.shape.height*0.5
 	context.airborne = air.airborne
 	return context
@@ -270,7 +271,7 @@ func ground_context(scope: String) -> Dictionary:
 
 ## Detached posture preparation, revalidated after all external preflight callbacks.
 ## The existing placement capsule supplies standing dimensions. No pose is changed.
-func prepare_ground_posture(owner: RefCounted, scope: String, desired: String, tuning: Dictionary) -> Dictionary:
+func prepare_ground_posture(owner: RefCounted, scope: String, desired: String, tuning: Dictionary, mechanism: Dictionary = {}) -> Dictionary:
 	if _ground_owner == null or _ground_owner.get_ref() != owner or _committing or desired not in ["standing","crouched"]: return {"ok":false,"reason":"Unbound/reentrant posture request."}
 	var context := ground_context(scope)
 	if not context.ok: return context
@@ -280,6 +281,7 @@ func prepare_ground_posture(owner: RefCounted, scope: String, desired: String, t
 	if tuning.camera_radius >= standing.radius or tuning.crouch_height < standing.radius*2 or tuning.crouch_height >= standing.height or tuning.standing_eye+tuning.camera_radius >= standing.height or tuning.crouched_eye+tuning.camera_radius >= tuning.crouch_height: return {"ok":false,"reason":"Posture tuning incompatible with placement dimensions."}
 	var space := _actor.get_world_3d().direct_space_state
 	if not _volume(space,_shape.shape,_actor.position,standing): return {"ok":false,"reason":"Initial capsule overlap requires placement recovery."}
+	if not mechanism.is_empty(): return preload("res://scripts/move/mechanism_collision.gd").prepare(self,mechanism,desired,tuning)
 	var base: Vector3 = _actor.position-Vector3.UP*_shape.shape.height*0.5
 	var target := standing.duplicate()
 	target.height = tuning.crouch_height if desired == "crouched" else standing.height
@@ -517,7 +519,7 @@ func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
 	var context := ground_context(raw.session)
 	if not context.ok: return context
 	if context.physical.get("mode") != "standing" or context.physical.get("transport") != "foot" or not context.physical.get("fall_history",{}).is_empty(): return {"ok":false,"reason":"Ground request cannot replace active air/special-mode history."}
-	var checked := prepare_ground_posture(owner,raw.session,raw.posture.get("desired",""),raw.posture.get("tuning",{}))
+	var checked := prepare_ground_posture(owner,raw.session,raw.posture.get("desired",""),raw.posture.get("tuning",{}),raw.posture.get("mechanism",{}).get("packet",{}))
 	if not checked.get("ok",false) or checked != raw.posture: return {"ok":false,"reason":"Posture/geometry changed during ground preparation."}
 	var tuning: Dictionary = checked.tuning
 	var p: Dictionary = _receipts[_state.handoff_id].policy.duplicate()
@@ -528,6 +530,18 @@ func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
 	_committing = true
 	_actor.safe_margin = p.margin*2.0
 	var old_height: float = _shape.shape.height
+	var passive := Vector3.ZERO
+	var mechanism_failure := ""
+	var mechanism_support_lost := false
+	if checked.has("mechanism") and not checked.mechanism.lethal:
+		var mechanism_commit: Dictionary = owner.mechanisms.commit(checked.mechanism.packet.sample)
+		if _actor_scope != raw.session or core.snapshot().session != raw.session or not is_instance_valid(_actor):
+			_committing = false
+			return {"ok":false,"retired":true,"reason":"Physical mechanism scope retired during commitment."}
+		if not mechanism_commit.ok:
+			_committing = false
+			return {"ok":false,"reason":mechanism_commit.reason,"mechanism_changed":mechanism_commit.get("changed",false)}
+		if mechanism_commit.get("receipt_pending",false): mechanism_failure = "Mechanism acknowledgment pending; performed carriage retained."
 	if absf(old_height-checked.height) > 0.000001:
 		var dimensions := p.duplicate()
 		dimensions.height = checked.height
@@ -537,14 +551,32 @@ func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
 	_state.desired_posture = checked.desired
 	_state.pending_stand = checked.pending_stand
 	_state.shape.height = checked.height
+	if checked.has("mechanism"):
+		var plan: Dictionary = checked.mechanism
+		# Crush admission retains a safe crouched pose and the unadvanced provider
+		# sample under a global consequence hold; it never embeds the survivor.
+		if not plan.lethal:
+			_actor.position = checked.position
+			passive = plan.passive
+			if plan.attached: owner.view.carry_yaw(raw.session,plan.yaw)
+		else:
+			_actor.position = checked.position
+		_state.position = _actor.position
+		var forced_reasons: Dictionary = _state.get("forced_posture",{}).duplicate(true)
+		if plan.forced: forced_reasons[plan.packet.sample.source] = "crouched"
+		else: forced_reasons.erase(plan.packet.sample.source)
+		_state.forced_posture = forced_reasons
+		# Actual support is observed only after mechanism geometry commitment.
+		support = _ground_support(space,_actor.position,p,tuning,tuning.contact_gap*3)
+		if not support.ok: mechanism_support_lost = true
 	var motion_start := _actor.position
 	var takeoff_velocity := _actor.velocity
-	var budget: float = raw.velocity.length()*raw.delta
+	var budget: float = raw.velocity.length()*raw.delta if mechanism_failure.is_empty() and not mechanism_support_lost and not checked.get("mechanism",{}).get("lethal",false) else 0.0
 	var horizontal: Vector3 = raw.velocity.normalized()
 	var requested_horizontal := horizontal
 	var surface_distance := 0.0
 	var collisions := 0
-	var handoff_pending := false
+	var handoff_pending := mechanism_support_lost
 	var steps := 0
 	var stair_correction := 0.0
 	var contact_reason := ""
@@ -756,9 +788,61 @@ func advance_ground(owner: RefCounted, raw: Variant) -> Dictionary:
 	_ground_sequence = raw.sequence
 	var result := {"ok":true,"session":raw.session,"sequence":raw.sequence,"position":_actor.position,"base":_actor.position-Vector3.UP*checked.height*0.5,"posture":checked.duplicate(true),"requested_displacement":raw.velocity*raw.delta,"voluntary_displacement":travel,"passive_displacement":Vector3.ZERO,"actual_metres_per_second":surface_distance/raw.delta,"surface_distance":surface_distance,"stair_correction":stair_correction,"contact_reason":contact_reason,"collisions":collisions,"steps":steps,"placement_serial":_serial,"handoff_pending":handoff_pending,"unsupported_remainder":horizontal*budget if handoff_pending else Vector3.ZERO}
 	result.support_hint_ny = float(support.get("support_ny",1.0))
+	result.passive_displacement = passive
+	result.mechanism = checked.get("mechanism",{}).duplicate(true)
+	result.mechanism_failure = mechanism_failure
+	if checked.has("mechanism") and not handoff_pending:
+		var actual_support := _ground_support(space,_actor.position,p,tuning,tuning.contact_gap*3,float(support.get("support_ny",1.0)))
+		result.mechanism_supported = actual_support.get("ok",false) and actual_support.get("collider") == checked.mechanism.packet.sample.geometry.get_instance_id()
 	_ground_last = {"request":raw.duplicate(true),"result":result.duplicate(true)}
 	_committing = false
 	return result
+
+## Ordered by the coordinator after swept flight, before performed-work capture.
+## This is the same capsule, never an independent mechanism collision callback.
+func commit_air_mechanism(owner: RefCounted, scope: String, packet: Dictionary, tuning: Dictionary) -> Dictionary:
+	if _committing or _ground_owner == null or _ground_owner.get_ref() != owner or scope != _actor_scope: return {"ok":false,"reason":"Current coordinated air mechanism authority required."}
+	var checked := prepare_ground_posture(owner,scope,_state.get("desired_posture",_state.physical.posture),tuning,packet)
+	if not checked.ok: return checked
+	var plan: Dictionary = checked.mechanism
+	_committing = true
+	var acknowledgment_pending := false
+	if not plan.lethal:
+		var committed: Dictionary = owner.mechanisms.commit(packet.sample)
+		if _actor_scope != scope or core.snapshot().session != scope or not is_instance_valid(_actor):
+			_committing = false
+			return {"ok":false,"retired":true,"reason":"Air mechanism scope retired during commitment."}
+		if not committed.ok:
+			_committing = false
+			return committed
+		acknowledgment_pending = committed.get("receipt_pending",false)
+	if _shape.shape.height != checked.height:
+		var dimensions: Dictionary = _receipts[_state.handoff_id].policy.duplicate()
+		dimensions.height = checked.height
+		_shape.shape = _capsule(dimensions)
+	_actor.position = checked.position
+	_state.shape.height = checked.height
+	_state.physical.posture = checked.actual
+	_state.desired_posture = checked.desired
+	_state.pending_stand = checked.pending_stand
+	var reasons: Dictionary = _state.get("forced_posture",{}).duplicate(true)
+	if plan.forced: reasons[packet.sample.source] = "crouched"
+	else: reasons.erase(packet.sample.source)
+	_state.forced_posture = reasons
+	if plan.attached:
+		owner.view.carry_yaw(scope,plan.yaw)
+		_actor.basis = Basis(Vector3.UP,plan.yaw)*_actor.basis
+		_state.forward = -_actor.basis.z
+	var base: Vector3 = _actor.position-Vector3.UP*checked.height*0.5
+	if air.airborne: air.observe(base.y)
+	_publish_air()
+	var support: Dictionary = {}
+	if not air.airborne:
+		var support_policy: Dictionary = _receipts[_state.handoff_id].policy.duplicate()
+		support_policy.margin = tuning.motion_margin
+		support = _ground_support(_actor.get_world_3d().direct_space_state,_actor.position,support_policy,tuning,tuning.contact_gap*3)
+	_committing = false
+	return {"ok":true,"position":_actor.position,"base":base,"posture":checked,"passive":plan.passive,"mechanism":plan,"mechanism_supported":support.get("ok",false) and support.get("collider") == packet.sample.geometry.get_instance_id(),"mechanism_failure":"Mechanism acknowledgment pending; performed air push retained." if acknowledgment_pending else ""}
 
 ## Geometry-safe view-origin proposal. A near-plane enclosing sphere is swept
 ## from the validated actual eye; unsafe interpolation snaps to that eye.

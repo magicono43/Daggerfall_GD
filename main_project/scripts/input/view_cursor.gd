@@ -21,6 +21,42 @@ var _serial := 0
 var _gestures := {}
 var _death_scope := ""
 var _death_position := Vector3.ZERO
+var cosmetic_offset := Vector3.ZERO
+var _landing_offset := 0.0
+
+## Add support yaw to the actual retained facing; pending look remains additive.
+func carry_yaw(session: String, radians: float) -> bool:
+	if session != input.core.snapshot().session or not input.core.gates.simulation() or not is_finite(radians) or absf(radians) > PI: return false
+	facing.x = wrapf(facing.x-rad_to_deg(radians),-180,180)
+	_present()
+	return true
+
+func feedback_landing(session: String) -> void:
+	if session == input.core.snapshot().session: _landing_offset = 1.0
+
+func reset_feedback() -> void:
+	cosmetic_offset = Vector3.ZERO
+	_landing_offset = 0.0
+
+func movement_offset(session: String, delta: float, phase: float, eligible: bool, mounted: bool, policy: Dictionary) -> Vector3:
+	if session != input.core.snapshot().session or not input.core.gates.simulation() or not is_finite(delta) or delta <= 0: return cosmetic_offset
+	var target := Vector3.ZERO
+	if not cursor_mode:
+		if eligible:
+			var strength: float = _response.mounted_bob_percent*policy.mounted_metres if mounted else _response.gait_bob_percent*policy.gait_metres
+			target = Vector3(sin(phase*TAU)*0.5,sin(phase*TAU*2.0),0)*strength/100.0
+		target.y -= _landing_offset*policy.landing_metres*_response.landing_camera_percent/100.0
+	_landing_offset = maxf(0,_landing_offset-delta/0.18)
+	cosmetic_offset = cosmetic_offset.lerp(target,1.0-exp(-delta/0.06))
+	return cosmetic_offset
+
+## The actual camera receives the safe offset. Targeting removes only that
+## declared positional treatment from its actual projected origin; facing and
+## projection remain the displayed camera's, never a hidden future look target.
+func place_origin(baseline: Vector3, offset := Vector3.ZERO) -> void:
+	if not _death_scope.is_empty(): return
+	cosmetic_offset = offset
+	if is_instance_valid(camera): camera.position = baseline+offset
 
 func death_lower(scope: String, progress: float) -> bool:
 	if scope != input.core.snapshot().session or input.core.snapshot().status != "dead" or not is_finite(progress) or progress < 0 or progress > 1: return false
@@ -65,6 +101,8 @@ func can_configure(candidate: Dictionary) -> bool:
 func configure(candidate: Dictionary) -> bool:
 	if not can_configure(candidate): return false
 	_response = candidate.response.duplicate(true)
+	if is_instance_valid(camera) and _death_scope.is_empty(): camera.position -= cosmetic_offset
+	reset_feedback()
 	clear_pending()
 	return true
 
@@ -82,6 +120,7 @@ func _invalidated(_reason: String) -> void:
 	_sync()
 
 func _retire(_old_scope: String) -> void:
+	reset_feedback()
 	clear_death_view(_old_scope)
 	cursor_mode = false
 	_scope = ""
@@ -247,8 +286,8 @@ func ray_context(scope: String) -> Dictionary:
 	_sync()
 	if scope != _scope or scope.is_empty() or not _eligible or not is_instance_valid(camera) or not camera.is_inside_tree(): return {"ok":false}
 	var point := cursor if cursor_mode else viewport.get_visible_rect().get_center()
-	return {"ok":true,"scope":scope,"ticket":input.context_ticket(),"cursor_mode":cursor_mode,"point":point,"origin":camera.project_ray_origin(point),"direction":camera.project_ray_normal(point),"yaw":facing.x,"pitch":facing.y}
+	return {"ok":true,"scope":scope,"ticket":input.context_ticket(),"cursor_mode":cursor_mode,"point":point,"origin":camera.project_ray_origin(point)-cosmetic_offset,"displayed_origin":camera.project_ray_origin(point),"cosmetic_offset":cosmetic_offset,"direction":camera.project_ray_normal(point),"yaw":facing.x,"pitch":facing.y}
 
 func ray_context_current(value: Dictionary) -> bool:
 	var point := cursor if cursor_mode else viewport.get_visible_rect().get_center()
-	return is_instance_valid(camera) and camera.is_inside_tree() and value.get("origin") == camera.project_ray_origin(point) and value.get("direction") == camera.project_ray_normal(point) and value.get("ok",false) and input.context_current(value.get("ticket",{})) and value.get("yaw") == facing.x and value.get("pitch") == facing.y and value.get("point") == point and value.get("cursor_mode") == cursor_mode
+	return is_instance_valid(camera) and camera.is_inside_tree() and value.get("origin") == camera.project_ray_origin(point)-cosmetic_offset and value.get("displayed_origin") == camera.project_ray_origin(point) and value.get("cosmetic_offset") == cosmetic_offset and value.get("direction") == camera.project_ray_normal(point) and value.get("ok",false) and input.context_current(value.get("ticket",{})) and value.get("yaw") == facing.x and value.get("pitch") == facing.y and value.get("point") == point and value.get("cursor_mode") == cursor_mode

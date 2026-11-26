@@ -1,5 +1,9 @@
 # Increment-3 locomotion extension
 
+Increment 4 adds ordered mechanism/air collision operations to this same physical
+authority, not a second controller. Full-shape crush/posture evidence and safe
+cosmetic routes are described in [PLATFORMS_FEEDBACK.md](PLATFORMS_FEEDBACK.md).
+
 The same capsule now owns checked takeoff and swept flight; see [AIR.md](AIR.md).
 Same-session doorway requests cannot clear unresolved flight/landing consequences.
 Gated coherent-origin shifts retain absolute foot-height debt. Settled in-memory

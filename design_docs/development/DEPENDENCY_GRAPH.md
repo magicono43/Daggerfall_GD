@@ -1,5 +1,7 @@
 # Implementation dependencies
 
+**IMP-012 accepted and complete / IMP-014 increment-1 handoff, 2026-11-25:** The user reported all seven increment-4 human checks PASS and explicitly accepted increment 4 and parent IMP-012 as complete. All four increments and IMP-012's assigned dependency contribution are closed; see [acceptance](evidence/IMP-012-ACCEPTANCE-2026-11-25.md). M2 and named real-provider/native SAVE/exhaustion/retirement/device joint checks remain open under their actual owners. Other downstream prerequisites remain required. The [IMP-014 calendar-and-clock prompt](handoffs/IMP-014-INCREMENT-1-PROMPT.md) is prepared for another chat; preparing it starts no implementation here. Issuing it there authorizes only increment 1 and narrow supporting interfaces. Its listed IMP-002/006 prerequisites are already accepted. Earlier pending/parent-open wording below is historical.
+
 **IMP-016 complete and accepted / IMP-012 increment-1 handoff, 2026-11-24:**
 The user explicitly accepted increment 4 and parent IMP-016. All four increments
 and the parent delivery/dependency edge are closed in their documented scopes.

@@ -1,5 +1,12 @@
 # CHAR lethal events — IMP-016 increment 4
 
+IMP-012 increment 4 uses this same resolver for retained grounded compression.
+MOVE settles physical activity, attests only its exact retained health request
+under the existing MOVE vital binding, and acknowledges prevention through CHAR.
+A prevented player retains collision recovery until the original mechanism
+provider qualifies a new safe proposal; no immunity or health write is added.
+See [the MOVE contract](../move/PLATFORMS_FEEDBACK.md).
+
 `core.actors` remains the only CHAR authority. `lethal_events.gd` is its helper,
 with retained facts in the actor record, not a second actor store. Ordinary
 lethal health intake and classified CHAR-022 exhaustion call this same resolver.

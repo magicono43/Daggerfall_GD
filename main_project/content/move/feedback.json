@@ -1,0 +1,15 @@
+{
+  "domain": "move.feedback", "path": "policy", "operation": "add",
+  "entries": [{"id": "player", "value": {
+    "schema": "movement-feedback-v1",
+    "strides": {"walk": 2.5, "run": 2.5, "sneak": 1.6},
+    "surfaces": {"stone": [309,330], "ground": [310,331], "snow": [311,332], "shallow-water": [334], "swimming": [346], "wood": [313,333]},
+    "hard_clip": 92, "damage_clip": 91, "splash_clip": 342,
+    "gait_metres": 0.015, "mounted_metres": 0.02, "landing_metres": 0.045,
+    "provenance": {
+      "sounds": "DFU 1.1.1 PlayerFootsteps.cs and SoundClips.cs, MIT; physical classic ordinals decoded from the user's validated external classic source, no sound bytes redistributed. Optional unavailable mappings are silent with diagnostics.",
+      "strides": "DFU Walk/Run 2.5 distance baseline interpreted in project metres; Sneak 1.6 and positional amplitudes are project engineering tuning. No original executable parity claim.",
+      "contexts": "Mappings do not establish WORLD climate, water or mounted gameplay readiness. Actual eligible scoped context is required."
+    }
+  }}]
+}

@@ -1,3 +1,11 @@
+# Increment-4 extension
+
+The same coordinator/capsule now has coordinated mechanism motion, separate
+passive attribution, retained crush delivery and committed feedback. See
+[PLATFORMS_FEEDBACK.md](PLATFORMS_FEEDBACK.md) for the current contract and
+qualification boundaries. Earlier increment-only exclusions below are historical.
+Parent IMP-012/M2 and the named real-provider/native SAVE gates remain open.
+
 # Increment-3 extension
 
 Air, zero-time takeoff billing, gravity, landings and retained health outcomes now

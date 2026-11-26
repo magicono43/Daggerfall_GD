@@ -35,13 +35,47 @@ var _keyboard_layout := -1
 var dungeon_assembly: Node
 var placement: Node3D
 var ground: RefCounted
+var movement_audio: AudioStreamPlayer
+var movement_audio_preferences: RefCounted
+var _movement_audio_cue: Callable
+var _movement_audio_ready: Callable
 var _ground_message := ""
 var vitals_view: Control
 var death_view: ColorRect
 var _death_movie_ticket: Dictionary = {}
 
+## Narrow AV lifetime boundary. Recreated consumers get effective preferences,
+## prepared resources and a current sequence floor; old callbacks cannot replay.
+func replace_movement_audio() -> Dictionary:
+	if ground == null or ground._busy: return {"ok":false,"reason":"Movement audio replacement requires a settled presentation boundary."}
+	if movement_audio_preferences == null:
+		movement_audio_preferences = preload("res://scripts/av/movement_audio_preferences.gd").new()
+		if not host.controller.controls.attach(movement_audio_preferences): return {"ok":false,"reason":"Movement audio preference consumer rejected the current configuration."}
+	if is_instance_valid(movement_audio):
+		if _movement_audio_cue.is_valid() and ground.feedback.cue.is_connected(_movement_audio_cue): ground.feedback.cue.disconnect(_movement_audio_cue)
+		if _movement_audio_ready.is_valid() and ground.feedback_ready.is_connected(_movement_audio_ready): ground.feedback_ready.disconnect(_movement_audio_ready)
+		if ground.presentation_reset.is_connected(movement_audio.reset_delivery): ground.presentation_reset.disconnect(movement_audio.reset_delivery)
+		if core.retiring.is_connected(movement_audio.retire): core.retiring.disconnect(movement_audio.retire)
+		movement_audio.retire(movement_audio.scope)
+		movement_audio.free()
+	movement_audio = preload("res://scripts/av/movement_audio.gd").new()
+	host.add_child(movement_audio)
+	movement_audio_preferences.attach(movement_audio)
+	_movement_audio_ready = func(session: String, policy: Dictionary):
+		var state: Dictionary = placement.snapshot()
+		movement_audio.prepare(session,policy,host.controller.providers.classic,state.get("serial",-1) if state.get("session") == session else -1,ground.feedback.cue_sequence)
+	_movement_audio_cue = func(event: Dictionary):
+		movement_audio.present(event)
+	ground.feedback_ready.connect(_movement_audio_ready)
+	ground.presentation_reset.connect(movement_audio.reset_delivery)
+	ground.feedback.cue.connect(_movement_audio_cue)
+	core.retiring.connect(movement_audio.retire)
+	if not ground.scope.is_empty() and not ground.feedback.policy.is_empty(): _movement_audio_ready.call(ground.scope,ground.feedback.policy)
+	return {"ok":true,"native_save_ready":false}
+
 func advance_actor_presentation(delta: float) -> void:
 	death_view.advance(delta)
+	if is_instance_valid(movement_audio): movement_audio.advance(delta*core.gates.intended_rate,core.gates.simulation() and core.gates.intended_rate > 0.0)
 	if not core.player_actor.is_empty() and vitals_view.scope != core.snapshot().session: vitals_view.bind(core.snapshot().session,core.player_actor)
 	vitals_view.refresh()
 
@@ -198,9 +232,10 @@ func synchronize_startup() -> void:
 		host.add_child(placement)
 		core.retiring.connect(placement.retire_scope)
 		ground = preload("res://scripts/move/ground_coordinator.gd").new(core,action_input,view,placement)
+		replace_movement_audio()
 		host.controller.controls.attach(ground)
 		ground.committed.connect(func(result: Dictionary):
-			view_camera.position = result.get("view_position",result.position)
+			view.place_origin(result.get("view_position",result.position),result.get("cosmetic_offset",Vector3.ZERO))
 			if not _ground_message.is_empty() and ground.reason.is_empty() and message == _ground_message:
 				message = ""
 				_ground_message = ""
@@ -212,7 +247,7 @@ func synchronize_startup() -> void:
 			schedule_render())
 		placement.pose_committed.connect(func(state: Dictionary):
 			view.place_facing(state.session,{"version":1,"yaw":rad_to_deg(atan2(state.forward.x,-state.forward.z)),"pitch":0.0})
-			view_camera.position = ground.placement_view_position(state)
+			view.place_origin(ground.placement_view_position(state))
 			view_camera.reset_physics_interpolation())
 	if host.controller.providers.get("media") != null and music_playback == null:
 		music_playback = preload("res://scripts/av/music_playback.gd").new()
@@ -264,6 +299,13 @@ func dispose() -> void:
 	if ground != null:
 		host.controller.controls.detach(ground)
 		ground.dispose()
+	if is_instance_valid(movement_audio): movement_audio.free()
+	if movement_audio_preferences != null:
+		host.controller.controls.detach(movement_audio_preferences)
+		movement_audio_preferences.dispose()
+		movement_audio_preferences = null
+	_movement_audio_cue = Callable()
+	_movement_audio_ready = Callable()
 	death_view.free()
 	vitals_view.free()
 	if is_instance_valid(placement): placement.free()

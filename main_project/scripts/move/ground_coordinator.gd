@@ -49,6 +49,21 @@ signal landed(outcome: Dictionary)
 var _air_sources: Dictionary = {}
 var _platform: Dictionary = {}
 var _air_effect_snapshot: Dictionary = {}
+var feedback := preload("res://scripts/move/movement_feedback.gd").new()
+signal feedback_ready(session: String, policy: Dictionary)
+signal presentation_reset(session: String, serial: int, cue_sequence: int)
+var mechanisms := preload("res://scripts/move/mechanism_motion.gd").new()
+var crush_pending: Dictionary = {}
+var crush_outcomes: Dictionary = {}
+var crush_recoveries: Dictionary = {}
+var _crush_request: Dictionary = {}
+var _crush_hold := 0
+var _crush_sequence := 0
+var _mechanism_hold := 0
+
+func bind_mechanism(provider: RefCounted, source: String, definition: String) -> Dictionary:
+	if _busy or not _pending.is_empty() or not crush_pending.is_empty() or not mechanisms.attachment.is_empty(): return {"ok":false,"reason":"Settled detached mechanism binding required."}
+	return mechanisms.bind(core,scope,provider,source,definition)
 
 ## Narrow MOVE mode/provider handoff. The real specialist must attest successful
 ## control/entry; input requests alone never protect. No specialist is implemented.
@@ -79,11 +94,11 @@ func protection_transition(provider: RefCounted, r: Dictionary) -> Dictionary:
 ## Point velocity is linear + angular(rad/s) cross radius(m), sampled by the
 ## support owner. This is inheritance only, never platform carriage/crushing.
 func platform_velocity(provider: RefCounted, r: Dictionary) -> Dictionary:
+	if mechanisms.provider != null: return {"ok":false,"reason":"The current coordinated mechanism binding supplies actual support samples."}
 	if _busy or r.size() != 9 or r.get("session") != scope or not preload("res://scripts/mod/package_library.gd").valid_id(r.get("source")) or not preload("res://scripts/mod/package_library.gd").valid_id(r.get("support")) or typeof(r.get("revision")) != TYPE_INT or r.revision < 1 or r.revision > 1000000000 or r.get("placement_serial") != placement.snapshot().get("serial") or not core.activity_owner(scope,provider,r.source,"motion") or not provider.has_method("air_transition_current"): return {"ok":false,"reason":"Current bound support-point provider required."}
-	for field in ["linear","angular","point","center"]:
-		if not r.get(field) is Vector3 or not r[field].is_finite() or r[field].length() > 10000.0: return {"ok":false,"reason":"Finite support-point motion required."}
-	var point_velocity: Vector3 = r.linear+r.angular.cross(r.point-r.center)
-	if point_velocity.length() > 1000.0: return {"ok":false,"reason":"Platform point speed exceeds collision envelope."}
+	var checked := _point_motion(r)
+	if not checked.ok: return checked
+	var point_velocity: Vector3 = checked.velocity
 	if not _platform.is_empty() and (_platform.owner.get_ref() != provider or r.revision < _platform.request.revision or (r.revision == _platform.request.revision and r != _platform.request)): return {"ok":false,"reason":"Stale/changed support sample."}
 	_busy = true
 	var valid: Variant = provider.air_transition_current(r.duplicate(true))
@@ -94,13 +109,28 @@ func platform_velocity(provider: RefCounted, r: Dictionary) -> Dictionary:
 	_platform = {"owner":weakref(provider),"request":r.duplicate(true),"velocity":point_velocity,"sequence":_sequence+1}
 	return {"ok":true,"velocity":point_velocity}
 
+func _point_motion(r: Dictionary) -> Dictionary:
+	for field in ["linear","angular","point","center"]:
+		if not r.get(field) is Vector3 or not r[field].is_finite() or r[field].length() > 10000.0: return {"ok":false,"reason":"Finite support-point motion required."}
+	var velocity: Vector3 = r.linear+r.angular.cross(r.point-r.center)
+	return {"ok":true,"velocity":velocity} if velocity.length() <= 1000.0 else {"ok":false,"reason":"Platform point speed exceeds collision envelope."}
+
 func _inherit_platform(detach := true) -> Vector3:
 	var inherited := Vector3.ZERO
 	if not _platform.is_empty() and _platform.sequence == _sequence+1 and air_policy.inherit_platform: inherited = _platform.velocity
 	if detach: _platform = {} # Only a committed takeoff detaches.
+	if not mechanisms.attachment.is_empty() and air_policy.inherit_platform:
+		var attached: Dictionary = mechanisms.attachment
+		var center: Vector3 = attached.center
+		if mechanisms.previous.get("revision") == attached.revision: center = mechanisms.previous.to.origin
+		var state: Dictionary = placement.snapshot()
+		var foot: Vector3 = state.position-Vector3.UP*state.shape.height*0.5
+		inherited = attached.linear+attached.angular.cross(foot-center)
+	if detach: mechanisms.detach()
 	return inherited
 
 func origin_shift(provider: RefCounted, r: Dictionary) -> Dictionary:
+	if mechanisms.provider != null: return {"ok":false,"reason":"Bound mechanism origin transfer requires the real WORLD/LOC reconstruction joint check."}
 	if _busy or r.size() != 5 or r.get("session") != scope or typeof(r.get("revision")) != TYPE_INT or r.revision < 1 or r.revision > 1000000000 or r.get("placement_serial") != placement.snapshot().get("serial") or not r.get("delta") is Vector3 or not r.delta.is_finite() or not core.activity_owner(scope,provider,str(r.get("source","")),"motion") or not provider.has_method("air_transition_current") or core.gates.simulation(): return {"ok":false,"reason":"Bound gated coherent-origin adapter required."}
 	_busy = true
 	var valid: Variant = provider.air_transition_current(r.duplicate(true))
@@ -111,6 +141,10 @@ func origin_shift(provider: RefCounted, r: Dictionary) -> Dictionary:
 		_view_base_y = NAN
 		_physical_base_y = NAN
 		_platform.clear()
+		mechanisms.detach()
+		feedback.reset(scope,placement.snapshot().serial,_sequence)
+		view.reset_feedback()
+		presentation_reset.emit(scope,placement.snapshot().serial,feedback.cue_sequence)
 	return result
 
 func _init(lifecycle: SessionLifecycle, actions: RefCounted, facing: RefCounted, body: Node3D) -> void:
@@ -130,6 +164,9 @@ func _placed(state: Dictionary) -> void:
 	_view_height = NAN
 	_view_base_y = NAN
 	_physical_base_y = NAN
+	feedback.reset(state.session,state.serial)
+	view.reset_feedback()
+	presentation_reset.emit(state.session,state.serial,feedback.cue_sequence)
 	if gait._scope != state.session: gait.reset(state.session)
 	gait.crouch_selected = state.get("desired_posture",state.physical.posture) == "crouched"
 ## Placement resets the legitimate eye origin, not an old transition history.
@@ -186,6 +223,9 @@ func bind(session: String, player: String, clock: RefCounted, traits: RefCounted
 	var air_definition: Dictionary = core.actors.definitions.query("move.air","policy","player")
 	if not air_definition.ok: return air_definition
 	air_policy = air_definition.record.value.duplicate(true)
+	var feedback_definition: Dictionary = core.actors.definitions.query("move.feedback","policy","player")
+	if not feedback_definition.ok: return feedback_definition
+	if not feedback.bind(session,feedback_definition.record.value,player): return {"ok":false,"reason":"Invalid movement feedback definition."}
 	profile = definition.record.value.duplicate(true)
 	_gait_profile = profile.duplicate()
 	_gait_profile.erase("connectors")
@@ -202,6 +242,10 @@ func bind(session: String, player: String, clock: RefCounted, traits: RefCounted
 	_restriction_snapshot = {}
 	gait.reset(scope)
 	reason = ""
+	_busy = true
+	feedback_ready.emit(session,feedback.policy.duplicate(true))
+	_busy = false
+	if not _scope_current(session): return _retired_result()
 	return {"ok":true}
 
 func _scope_current(expected: String) -> bool:
@@ -276,7 +320,7 @@ func _settle_jump() -> Dictionary:
 	if _hold != 0:
 		core.gates.release(_hold,"ground-continuation")
 		_hold = 0
-	reason = ""
+	reason = "Mechanism acknowledgment pending; performed carriage retained." if not mechanisms.pending_commit.is_empty() else ""
 	return result
 
 func _settle_one() -> Dictionary:
@@ -303,7 +347,7 @@ func _settle_one() -> Dictionary:
 	if _hold != 0:
 		core.gates.release(_hold,"ground-continuation")
 		_hold = 0
-	reason = ""
+	reason = "Mechanism acknowledgment pending; performed carriage retained." if not mechanisms.pending_commit.is_empty() else ""
 	return result
 
 func physics_step(delta: Variant) -> Dictionary:
@@ -312,6 +356,7 @@ func physics_step(delta: Variant) -> Dictionary:
 	var step_scope := scope
 	if not _jump_debt.is_empty(): return {"ok":false,"reason":"Settle committed jump before further travel."}
 	if not placement.air.pending.is_empty(): return {"ok":false,"reason":"Settle committed landing before further travel."}
+	if not crush_pending.is_empty(): return {"ok":false,"reason":"Settle retained compression before further travel."}
 	if _attempted or not _after_pending.is_empty(): return {"ok":false,"reason":"Settle committed activity before further travel."}
 	if not core.gates.simulation():
 		if not _pending.is_empty(): retry_activity()
@@ -325,10 +370,13 @@ func physics_step(delta: Variant) -> Dictionary:
 	delta *= rate
 	if not is_finite(delta) or delta > 0.1: return _stop("Scaled CORE physics interval requires a supported smaller step.")
 	_busy = true
-	var result := _advance(delta)
+	var result := _advance_coordinated(delta)
 	_busy = false
 	if not _scope_current(step_scope): return _retired_result()
-	if not result.get("ok",false): return _stop(str(result.get("reason","Ground provider failure.")))
+	if not result.get("ok",false):
+		if not mechanisms.pending_commit.is_empty() and _mechanism_hold == 0: _mechanism_hold = core.gates.acquire("move-mechanism",scope,["simulation","input","save"])
+		return _stop(str(result.get("reason","Ground provider failure.")))
+	if not result.get("continuation_error","").is_empty(): _stop(result.continuation_error)
 	if _hold != 0: result.activity = {"ok":false,"phase":"performed-debt","reason":reason}
 	elif not _pending.is_empty() and (_must_settle or _pending.clock.end_sim-_pending.clock.start_sim >= 1000000):
 		var settlement := retry_activity()
@@ -344,13 +392,107 @@ func physics_step(delta: Variant) -> Dictionary:
 	if result.get("landing",{}).size() > 0:
 		var settlement := retry_activity()
 		if settlement.get("ok",false): result.landing_settlement = retry_landing()
+	if not crush_pending.is_empty():
+		var settlement := retry_activity()
+		if settlement.get("ok",false): result.crush_settlement = retry_crush()
 	if not _scope_current(step_scope): return _retired_result()
 	# Both physical and gait/activity outcomes are committed before observers.
+	if result.has("gait"):
+		_busy = true
+		var supported: bool = not placement.air.airborne and result.get("landing",{}).is_empty()
+		var surface := "unclassified"
+		if placement.assembly.has_method("movement_feedback_context"):
+			var resolved: Variant = placement.assembly.movement_feedback_context(placement.snapshot().ticket,result.base)
+			if resolved is Dictionary and resolved.get("ok") == true and preload("res://scripts/mod/package_library.gd").valid_id(resolved.get("category")): surface = resolved.category
+		if not _scope_current(step_scope):
+			_busy = false
+			return _retired_result()
+		# surface_distance already contains only actually supported voluntary
+		# fragments, including a ledge prefix when this update ends in flight.
+		feedback.movement(result,surface,result.get("surface_distance",0.0) > 0.0)
+		if not _scope_current(step_scope):
+			_busy = false
+			return _retired_result()
+		var offset: Vector3 = view.movement_offset(scope,delta,feedback.phase,supported and result.get("surface_distance",0.0) > 0,false,feedback.policy)
+		var baseline: Vector3 = result.get("view_position",result.position)
+		if not placement.ground_view_route(self,baseline,baseline+offset,profile.surface.camera_radius): offset = Vector3.ZERO
+		result.cosmetic_offset = offset
+		_busy = false
+	if not result.get("continuation_error","").is_empty():
+		result.ok = false
+		result.reason = result.continuation_error
+		result.performed_prefix = true
 	last = result.duplicate(true)
 	_busy = true
 	committed.emit(last.duplicate(true))
 	_busy = false
 	return result
+
+## Moving geometry and the player share bounded swept slices. Providers prepare
+## candidates read-only; only admitted slices commit their next revision. The
+## final projection retains every performed distance, even if a later slice fails.
+func _advance_coordinated(delta: float) -> Dictionary:
+	if mechanisms.provider == null: return _advance(delta)
+	var origin := scope
+	var remaining := delta
+	var aggregate: Dictionary = {}
+	var distance := 0.0
+	var voluntary := Vector3.ZERO
+	var passive := Vector3.ZERO
+	var correction := 0.0
+	var mechanism_metres := 0.0
+	var voluntary_end_sequence := 0
+	var elapsed := 0.0
+	var count := 0
+	while remaining > 0.00000001:
+		var packet: Dictionary = mechanisms.prepare(_sequence+1,placement.snapshot().serial,remaining)
+		if not packet.ok:
+			mechanisms.detach()
+			if aggregate.is_empty(): return packet
+			aggregate.continuation_error = packet.reason
+			break
+		if not _scope_current(origin): return _retired_result()
+		var bound: float = packet.linear.length()*remaining+packet.sample.dimensions.length()*0.5*absf(packet.yaw)
+		# Bound a rounded-contact graze between samples below one quarter of the
+		# existing collision margin, as well as bounding actual box-corner travel.
+		var stride: float = minf(profile.surface.probe_stride,sqrt(8.0*placement.snapshot().shape.radius*profile.surface.motion_margin)*0.5)
+		var slices := maxi(1,maxi(int(ceil(bound/stride)),int(ceil(absf(packet.yaw)/deg_to_rad(1.0)))))
+		if slices+count > 2048:
+			if aggregate.is_empty(): return {"ok":false,"reason":"Mechanism interval exceeds the bounded coordinated slice envelope."}
+			aggregate.continuation_error = "Mechanism interval exceeds the bounded coordinated slice envelope."
+			break
+		var duration := remaining/slices
+		var part := _advance(duration)
+		if not _scope_current(origin): return _retired_result()
+		if not part.get("ok",false):
+			if aggregate.is_empty(): return part
+			aggregate.continuation_error = str(part.get("reason","Mechanism slice failed."))
+			break
+		count += 1
+		elapsed += duration
+		remaining = maxf(0,remaining-duration)
+		distance += float(part.get("surface_distance",0.0))
+		if part.get("surface_distance",0.0) > 0.0: voluntary_end_sequence = part.sequence
+		voluntary += part.get("voluntary_displacement",Vector3.ZERO)
+		passive += part.get("passive_displacement",Vector3.ZERO)
+		correction += float(part.get("stair_correction",0.0))
+		mechanism_metres += part.get("mechanism",{}).get("passive",Vector3.ZERO).length()
+		aggregate = part
+		if not core.gates.simulation() or not crush_pending.is_empty() or not placement.air.pending.is_empty(): break
+		if _must_settle and not _pending.is_empty():
+			var settled := _settle_one()
+			aggregate.activity = settled
+			if not settled.ok or not core.gates.simulation(): break
+	aggregate.surface_distance = distance
+	aggregate.actual_metres_per_second = distance/elapsed if elapsed > 0 else 0.0
+	aggregate.voluntary_displacement = voluntary
+	aggregate.passive_displacement = passive
+	aggregate.stair_correction = correction
+	aggregate.eligible_seconds = elapsed
+	aggregate.mechanism_slices = count
+	aggregate.mechanism_metres = mechanism_metres
+	aggregate.separate_step_contact = not aggregate.get("landing",{}).is_empty() and voluntary_end_sequence > 0 and voluntary_end_sequence < aggregate.sequence
+	return aggregate
 
 func _advance(delta: float) -> Dictionary:
 	if core.snapshot().session != scope or core.actors.definitions.content_ticket() != _content: return {"ok":false,"reason":"Ground scope/content retired."}
@@ -384,7 +526,13 @@ func _advance(delta: float) -> Dictionary:
 	_trait_snapshot = traits.duplicate(true)
 	_restriction_snapshot = restrictions.duplicate(true)
 	var desired := gait.desired_posture(input)
-	var posture: Dictionary = placement.prepare_ground_posture(self,scope,desired,profile.surface)
+	var mechanism_packet: Dictionary = mechanisms.prepare(_sequence+1,placement.snapshot().serial,delta)
+	if not mechanism_packet.ok:
+		mechanisms.detach()
+		return mechanism_packet
+	var sample: Dictionary = mechanism_packet.sample
+	var mechanism_grounded: bool = not sample.is_empty() and not placement.air.airborne and not jump_pressed
+	var posture: Dictionary = placement.prepare_ground_posture(self,scope,desired,profile.surface,mechanism_packet if mechanism_grounded else {})
 	if not posture.ok: return posture
 	var selected := gait.resolve(input,capability,_gait_profile,"",posture.actual)
 	if not selected.ok: return selected
@@ -400,6 +548,7 @@ func _advance(delta: float) -> Dictionary:
 			selected.target_metres_per_second = fallback.target_metres_per_second
 	var facing: Dictionary = view.capture_facing(scope)
 	if not facing.get("ok",false): return {"ok":false,"reason":"Actual view facing unavailable."}
+	if posture.has("mechanism"): facing.yaw -= rad_to_deg(posture.mechanism.yaw)
 	var body: Dictionary = placement.ground_context(scope)
 	if not body.ok: return body
 	var air_context: Dictionary = placement.air_context(self,scope,profile.surface)
@@ -413,6 +562,21 @@ func _advance(delta: float) -> Dictionary:
 		_air_effect_snapshot = effects.duplicate(true)
 	elif jump_pressed or air_context.airborne or not air_context.supported: return {"ok":false,"reason":"Required air effect provider unavailable."}
 	var starting_air: bool = not air_context.airborne and not air_context.supported
+	if not sample.is_empty() and not air_context.airborne:
+		if air_context.supported and air_context.support_collider == sample.geometry.get_instance_id():
+			var support_request := {"session":scope,"source":sample.source,"support":sample.support,"revision":sample.revision,"placement_serial":body.serial,"linear":mechanism_packet.linear,"angular":mechanism_packet.angular,"point":air_context.base,"center":sample.from.origin}
+			var point := _point_motion(support_request)
+			if not point.ok: return point
+			var radial: Vector3 = air_context.base-sample.from.origin
+			radial.y = 0.0
+			if mechanism_packet.linear.length()+mechanism_packet.angular.length()*(radial.length()+selected.direction.length()*selected.target_metres_per_second*delta) > 1000.0: return {"ok":false,"reason":"Prospective support-point velocity exceeds the inherited-motion envelope."}
+			# Same nine-field platform_velocity contract, attested here by the
+			# current mechanism sample plus the actual collision support witness.
+			_platform = {"owner":mechanisms.provider,"request":support_request,"velocity":point.velocity,"sequence":_sequence+1}
+			mechanisms.attachment = {"support":sample.support,"revision":sample.revision,"local_point":sample.from.affine_inverse()*air_context.base,"velocity":point.velocity,"linear":mechanism_packet.linear,"angular":mechanism_packet.angular,"center":sample.from.origin}
+		else:
+			mechanisms.detach()
+			_platform.clear()
 	if not air_context.airborne and not _platform.is_empty() and (_platform.sequence != _sequence+1 or not core.activity_owner(scope,_platform.owner.get_ref(),_platform.request.source,"motion")): return {"ok":false,"reason":"Current moving-support point sample unavailable."}
 	var jumping: bool = jump_pressed and not air_context.airborne and air_context.supported and capability.voluntary_allowed and restrictions.voluntary and not (effects.slow_fall and air_policy.slow_fall_blocks_jump)
 	var takeoff := {}
@@ -428,6 +592,21 @@ func _advance(delta: float) -> Dictionary:
 			initial_velocity.y = minf(impulse.value,air_policy.maximum_impulse)*air_policy.metres_per_reference_unit
 			takeoff = {"id":"jump-"+str(_jump_sequence),"event_sequence":_jump_sequence,"kind":"jump","snapshot":values,"gait":selected.duplicate(true),"impulse":initial_velocity.y}
 			initial_velocity += Vector3.FORWARD.rotated(Vector3.UP,deg_to_rad(-float(facing.yaw)))*air_policy.boost_speed*air_policy.metres_per_reference_unit
+	if not jumping and not starting_air and not air_context.airborne and not sample.is_empty() and not posture.has("mechanism"):
+		# A consumed but rejected Jump remains an ordinary carried ground step.
+		posture = placement.prepare_ground_posture(self,scope,desired,profile.surface,mechanism_packet)
+		if not posture.ok: return posture
+		selected = gait.resolve(input,capability,_gait_profile,"",posture.actual)
+		if not selected.ok: return selected
+		if not capability.voluntary_allowed or not restrictions.voluntary: selected.direction = Vector2.ZERO
+		if selected.gait == "run" and restrictions.run != "allow":
+			if restrictions.run == "stop": selected.direction = Vector2.ZERO
+			else:
+				var fallback := gait.resolve(input,capability,_gait_profile,"walk",posture.actual)
+				if not fallback.ok: return fallback
+				selected.gait = fallback.gait
+				selected.target_metres_per_second = fallback.target_metres_per_second
+		facing.yaw -= rad_to_deg(posture.mechanism.yaw)
 	if starting_air: takeoff = {"id":"walk-off-"+str(_sequence+1),"kind":"walk-off","gait":selected.duplicate(true)}
 	if jumping or starting_air: initial_velocity += _inherit_platform(false)
 	var interval: Variant = time_owner.ground_interval(context.duplicate(true),delta)
@@ -457,6 +636,7 @@ func _advance(delta: float) -> Dictionary:
 			return launch
 		_platform.clear()
 		var event := activity.duplicate(true)
+		mechanisms.detach()
 		event.kind = "jump"
 		event.operation = takeoff.id
 		event.context.event = takeoff.id
@@ -485,6 +665,9 @@ func _advance(delta: float) -> Dictionary:
 	var motion: Dictionary
 	var flying: bool = air_context.airborne or jumping or starting_air
 	if flying:
+		if starting_air:
+			_platform.clear()
+			mechanisms.detach()
 		var flight_policy := air_policy.duplicate(true)
 		if effects.slow_fall: flight_policy.maximum_downward_speed = minf(flight_policy.maximum_downward_speed,effects.slow_fall_speed/flight_policy.metres_per_reference_unit)
 		motion = placement.advance_air(self,{"session":scope,"sequence":_sequence+1,"delta":delta,"forward":forward,"placement_serial":body.serial,"posture":posture,"start":{"velocity":initial_velocity,"takeoff":takeoff} if starting_air else {},"policy":flight_policy,"steering":velocity,"enhanced":effects.enhanced and capability.voluntary_allowed and restrictions.voluntary,"slow_fall":effects.slow_fall})
@@ -498,17 +681,36 @@ func _advance(delta: float) -> Dictionary:
 	if not motion.ok:
 		if _pending.is_empty(): core.actors.release_motion_activity(self,scope,actor)
 		return motion
+	if flying and not sample.is_empty():
+		# Flight first uses its inherited velocity. The mechanism then advances
+		# and resolves any remaining actual overlap as a separate passive push;
+		# a rising support is not applied once as carry and again as inheritance.
+		var contact: Dictionary = placement.commit_air_mechanism(self,scope,mechanism_packet,profile.surface)
+		if not _scope_current(context.session): return _retired_result()
+		if contact.ok:
+			motion.position = contact.position
+			motion.base = contact.base
+			motion.posture = contact.posture
+			motion.passive_displacement += contact.passive
+			motion.mechanism = contact.mechanism
+			motion.mechanism_supported = contact.get("mechanism_supported",false)
+			motion.mechanism_failure = contact.get("mechanism_failure","")
+		else: motion.mechanism_failure = contact.get("reason","Air mechanism collision requires retained recovery.")
+	if not sample.is_empty() and not placement.air.airborne and not motion.get("mechanism",{}).get("lethal",false):
+		if motion.get("mechanism_supported",false) and not placement.air.airborne:
+			mechanisms.attachment = {"support":sample.support,"revision":sample.revision,"local_point":sample.to.affine_inverse()*motion.base,"velocity":mechanism_packet.linear+mechanism_packet.angular.cross(motion.base-sample.to.origin),"linear":mechanism_packet.linear,"angular":mechanism_packet.angular,"center":sample.to.origin}
+		else: mechanisms.detach()
 	if not motion.get("landing",{}).is_empty():
 		placement.air.pending.session = scope
 		placement.air.pending.actor = actor
 		placement.air.pending.content = _content
+		placement.air.pending.placement_serial = motion.placement_serial
 		motion.landing = placement.air.pending.duplicate(true)
-	if jumping or starting_air: _platform.clear()
 	_sequence += 1
 	var moving: bool = motion.actual_metres_per_second > profile.moving_metres_per_second
 	activity.context.motion.running = selected.gait == "run" and moving
 	activity.context.motion.voluntary_motion = moving and not flying
-	activity.context.motion.passive_motion = flying and motion.passive_displacement.length_squared() > 0.000000001
+	activity.context.motion.passive_motion = motion.passive_displacement.length_squared() > 0.000000001
 	# A segment can grow only before its first delivery, while context and all
 	# captured source revisions agree. Collision classification boundaries split it.
 	var compatible: bool = not _pending.is_empty() and _pending.context.motion == activity.context.motion and _pending.context.argonian == activity.context.argonian and _pending.providers.traits == activity.providers.traits and _pending.providers.interval == activity.providers.interval and _pending.revision == activity.revision and _pending.clock.numerator == activity.clock.numerator and _pending.clock.denominator == activity.clock.denominator and _captured_revisions[_pending.operation].speed_sources == selected.source_revisions
@@ -540,6 +742,14 @@ func _advance(delta: float) -> Dictionary:
 	var captured: Variant = time_owner.capture_ground(activity.duplicate(true))
 	if not _scope_current(activity.session): return _retired_result()
 	if typeof(captured) != TYPE_BOOL or not captured: _stop("TIME failed to retain performed interval proof.")
+	if motion.get("mechanism",{}).get("lethal",false):
+		if crush_outcomes.size() >= 4096: return _stop("Crush outcome retention exhausted.")
+		_crush_sequence += 1
+		crush_pending = {"id":"crush-"+str(_crush_sequence),"session":scope,"actor":actor,"content":_content,"source":sample.source,"support":sample.support,"revision":sample.revision,"evidence":motion.mechanism.duplicate(true),"phase":"health"}
+		_crush_hold = core.gates.acquire("move-crush",scope,["simulation","input","save"])
+	if not motion.get("mechanism_failure","").is_empty():
+		if not mechanisms.pending_commit.is_empty() and _mechanism_hold == 0: _mechanism_hold = core.gates.acquire("move-mechanism",scope,["simulation","input","save"])
+		_stop(motion.mechanism_failure)
 	# TIME first retains the already performed eligible interval. Its proof then
 	# permits CHAR settlement under the new landing continuation hold.
 	if not motion.get("landing",{}).is_empty() and _landing_hold == 0: _landing_hold = core.gates.acquire("move-landing",scope,["simulation","input","save"])
@@ -548,16 +758,126 @@ func _advance(delta: float) -> Dictionary:
 		if not settled.ok: return motion
 	var preview: Dictionary = core.actors.preview_ground_activity(self,_pending)
 	if not preview.ok: _stop("Performed ground prediction requires recovery: "+str(preview.get("reason","unavailable")))
-	else: _must_settle = preview.settle or jumping or not motion.get("landing",{}).is_empty() or motion.get("contact_recovery",false)
+	else: _must_settle = preview.settle or jumping or not motion.get("landing",{}).is_empty() or motion.get("contact_recovery",false) or not crush_pending.is_empty()
 	return motion
 
 func vital_operation_current(request: Dictionary) -> bool:
-	return request == _landing_request and request.session == scope and core.snapshot().session == scope and not placement.air.pending.is_empty()
+	return request.get("session") == scope and core.snapshot().session == scope and ((request == _landing_request and not placement.air.pending.is_empty()) or (request == _crush_request and not crush_pending.is_empty()))
+
+func retry_crush() -> Dictionary:
+	if _busy or not _pending.is_empty() or not _jump_debt.is_empty(): return {"ok":false,"reason":"Settle performed activity before crush health."}
+	if crush_pending.is_empty(): return {"ok":true,"unchanged":true}
+	var origin := scope
+	_busy = true
+	if _crush_request.is_empty():
+		var cap: Dictionary = core.actors.vital_projection(scope,actor)
+		if not cap.ok:
+			_busy = false
+			return _stop("Crush CHAR unavailable; evidence retained.")
+		_crush_request = {"schema":"vital-intake-v1","session":scope,"actor":actor,"caller":"move-landings","operation":crush_pending.id,"content":cap.content,"revision":cap.revision,"action":"damage","pool":"health","unit":"points","amount":cap.current.health,"attribution":{"source":crush_pending.source,"cause":"grounded-compression","component":crush_pending.id}}
+	var health: Dictionary = core.actors.vital_intake(self,_crush_request)
+	if not _scope_current(origin):
+		_busy = false
+		return _retired_result()
+	crush_pending.health = health.duplicate(true)
+	var dead: bool = health.get("schema") == "lethal-outcome-v1" and health.get("phase") == "dead"
+	if not health.get("ok",false) and not dead:
+		_busy = false
+		return _stop("Crush health pending: "+str(health.get("reason","owner failure")))
+	if not dead:
+		var acknowledgment: Dictionary = core.actors.acknowledge_vital(self,_crush_request)
+		if not _scope_current(origin):
+			_busy = false
+			return _retired_result()
+		if not acknowledgment.get("ok",false):
+			_busy = false
+			return _stop("Crush acknowledgment pending.")
+	crush_pending.phase = "committed"
+	crush_outcomes[crush_pending.id] = crush_pending.duplicate(true)
+	var outcome := crush_pending.duplicate(true)
+	crush_pending.clear()
+	_crush_request.clear()
+	# A prevented survivor still needs collision-owner recovery before the
+	# retained unadvanced mechanism sample can proceed. No immunity or replay.
+	if dead:
+		core.gates.release(_crush_hold,"move-crush")
+		_crush_hold = 0
+	if _hold != 0 and reason.begins_with("Crush"):
+		core.gates.release(_hold,"ground-continuation")
+		_hold = 0
+	reason = "" if dead else "Crush prevented; safe mechanism recovery required."
+	_busy = false
+	return {"ok":true,"outcome":outcome,"recovery_required":not dead}
+
+## Prevention grants survival, not collision immunity. Only the current mechanism
+## owner can qualify a new safe proposal while gated; no time or pose is replayed.
+func recover_crush(provider: RefCounted, outcome: String, delta: float) -> Dictionary:
+	if _busy or not crush_pending.is_empty() or not _pending.is_empty() or not crush_outcomes.has(outcome) or crush_outcomes[outcome].get("health",{}).get("phase") != "prevented" or mechanisms.provider == null or mechanisms.provider.get_ref() != provider or not core.activity_owner(scope,provider,mechanisms.source,"motion") or not is_finite(delta) or delta <= 0 or delta > 0.1: return {"ok":false,"reason":"Settled current prevented crush and original mechanism owner required."}
+	if crush_recoveries.has(outcome): return {"ok":true,"unchanged":true,"native_save_ready":false}
+	if _crush_hold == 0 or core.gates.simulation(): return {"ok":false,"reason":"Retained crush recovery gate required."}
+	var origin := scope
+	_busy = true
+	var packet: Dictionary = mechanisms.prepare(_sequence+1,placement.snapshot().serial,delta)
+	if not _scope_current(origin):
+		_busy = false
+		return _retired_result()
+	if not packet.ok:
+		_busy = false
+		return packet
+	var posture: Dictionary = placement.prepare_ground_posture(self,scope,placement.snapshot().get("desired_posture","standing"),profile.surface,packet)
+	if not _scope_current(origin):
+		_busy = false
+		return _retired_result()
+	if not posture.ok or posture.get("mechanism",{}).get("lethal",true):
+		_busy = false
+		return {"ok":false,"reason":"New provider proposal still lacks full collision-valid body clearance."}
+	crush_recoveries[outcome] = {"source":packet.sample.source,"support":packet.sample.support,"revision":packet.sample.revision,"from":packet.sample.from,"to":packet.sample.to}
+	core.gates.release(_crush_hold,"move-crush")
+	_crush_hold = 0
+	reason = ""
+	_busy = false
+	return {"ok":true,"native_save_ready":false}
+
+func retry_mechanism() -> Dictionary:
+	if _busy or not _pending.is_empty() or not crush_pending.is_empty(): return {"ok":false,"reason":"Settle activity/consequences before mechanism acknowledgment."}
+	var had_pending: bool = not mechanisms.pending_commit.is_empty()
+	var own_message := reason.begins_with("Mechanism acknowledgment")
+	_busy = true
+	var result := mechanisms.retry_commit()
+	_busy = false
+	if had_pending and result.ok and _mechanism_hold != 0:
+		core.gates.release(_mechanism_hold,"move-mechanism")
+		_mechanism_hold = 0
+	if had_pending and result.ok and _hold != 0 and own_message:
+		core.gates.release(_hold,"ground-continuation")
+		_hold = 0
+	if had_pending and result.ok and own_message: reason = ""
+	return result
+
+func capture_ground_state() -> Dictionary:
+	if mechanisms.provider == null or core.gates.simulation() or not crush_pending.is_empty() or not mechanisms.pending_commit.is_empty(): return {"ok":false,"reason":"Settled gated mechanism/consequence checkpoint required; plain motion uses its air checkpoint."}
+	var mechanism := mechanisms.checkpoint()
+	if not mechanism.get("ok",false): return mechanism
+	var state := _capture_air_checkpoint()
+	if not state.ok: return state
+	if not mechanisms.checkpoint_current(mechanism): return {"ok":false,"reason":"Mechanism state changed during checkpoint preparation."}
+	return {"ok":true,"air":state,"mechanism":mechanism,"crush_outcomes":crush_outcomes.duplicate(true),"crush_recoveries":crush_recoveries.duplicate(true),"crush_sequence":_crush_sequence,"desired":placement.snapshot().get("desired_posture"),"forced":placement.snapshot().get("forced_posture",{}),"native_save_ready":false}
+
+func restore_ground_state(state: Dictionary) -> Dictionary:
+	if _busy or state.size() != 9 or state.get("native_save_ready") != false or not state.get("air") is Dictionary or not state.get("mechanism") is Dictionary or not mechanisms.checkpoint_current(state.mechanism) or state.get("crush_outcomes") != crush_outcomes or state.get("crush_recoveries") != crush_recoveries or state.get("crush_sequence") != _crush_sequence or state.get("desired") != placement.snapshot().get("desired_posture") or state.get("forced") != placement.snapshot().get("forced_posture",{}): return {"ok":false,"reason":"Current mechanism/geometry must precede exact owner reconstruction."}
+	var restored := _restore_air_checkpoint(state.get("air",{}))
+	if restored.ok:
+		gait.crouch_selected = state.desired == "crouched"
+	return restored
 
 ## Supported settled in-memory owner boundary, deliberately not a native SAVE
 ## reconstruction API. CHAR revision and physical checkpoint prevent rewinding a
 ## newer consequence. Input and camera interpolation are never durable authority.
 func capture_air_state() -> Dictionary:
+	if mechanisms.provider != null: return {"ok":false,"reason":"Bound mechanisms require the complete ground owner checkpoint."}
+	return _capture_air_checkpoint()
+
+func _capture_air_checkpoint() -> Dictionary:
 	if _busy or not _pending.is_empty() or not _jump_debt.is_empty() or not placement.air.pending.is_empty(): return {"ok":false,"reason":"Settle required movement consequences before snapshot."}
 	var body: Dictionary = placement.ground_context(scope)
 	var cap: Dictionary = core.actors.vital_projection(scope,actor)
@@ -565,6 +885,10 @@ func capture_air_state() -> Dictionary:
 	return {"ok":true,"schema":"move-air-checkpoint-v1","session":scope,"actor":actor,"content":_content,"actor_revision":cap.revision,"sequence":_sequence,"serial":body.serial,"position":body.position,"posture":body.physical.posture,"air":placement.air.snapshot(),"jump_result":_jump_result.duplicate(true),"native_save_ready":false}
 
 func restore_air_state(s: Dictionary) -> Dictionary:
+	if mechanisms.provider != null: return {"ok":false,"reason":"Bound mechanisms require the complete ground owner checkpoint."}
+	return _restore_air_checkpoint(s)
+
+func _restore_air_checkpoint(s: Dictionary) -> Dictionary:
 	if _busy or core.gates.simulation() or not _pending.is_empty() or not _jump_debt.is_empty() or not placement.air.pending.is_empty() or s.size() != 13 or s.get("schema") != "move-air-checkpoint-v1" or s.get("session") != scope or s.get("actor") != actor or s.get("content") != _content or s.get("sequence") != _sequence or s.get("native_save_ready") != false or not preload("res://scripts/move/air_history.gd").valid(s.get("air")): return {"ok":false,"reason":"Gated settled current owner checkpoint required."}
 	var body: Dictionary = placement.ground_context(scope)
 	var cap: Dictionary = core.actors.vital_projection(scope,actor)
@@ -576,6 +900,9 @@ func restore_air_state(s: Dictionary) -> Dictionary:
 	_view_height = NAN
 	_view_base_y = NAN
 	_physical_base_y = NAN
+	feedback.reset(scope,body.serial,_sequence)
+	view.reset_feedback()
+	presentation_reset.emit(scope,body.serial,feedback.cue_sequence)
 	return {"ok":true,"native_save_ready":false}
 
 ## Pull required health outcome; optional feedback observes only settled results.
@@ -633,6 +960,14 @@ func retry_landing() -> Dictionary:
 		_hold = 0
 	reason = ""
 	landed.emit(outcome.duplicate(true))
+	if not _scope_current(operation_scope):
+		_busy = false
+		return _retired_result()
+	feedback.landing(outcome,_sequence)
+	if not _scope_current(operation_scope):
+		_busy = false
+		return _retired_result()
+	if outcome.hard: view.feedback_landing(scope)
 	_busy = false
 	return {"ok":true,"outcome":outcome.duplicate(true)}
 
@@ -662,6 +997,21 @@ func _present_origin(motion: Dictionary, delta: float) -> void:
 
 func retire(session: String) -> void:
 	if session != scope: return
+	feedback.reset("",-1)
+	mechanisms.detach()
+	mechanisms.provider = null
+	if not mechanisms.pending_commit.is_empty(): retired_work[scope+"/mechanism"] = {"sample":mechanisms.pending_commit.duplicate(true),"source":mechanisms.source}
+	mechanisms.previous.clear()
+	mechanisms.pending_commit.clear()
+	mechanisms.scope = ""
+	if not crush_pending.is_empty(): retired_work[scope+"/crush"] = {"outcome":crush_pending.duplicate(true),"request":_crush_request.duplicate(true)}
+	crush_pending.clear()
+	crush_outcomes.clear()
+	crush_recoveries.clear()
+	_crush_sequence = 0
+	_crush_request.clear()
+	_crush_hold = 0
+	_mechanism_hold = 0
 	# Debt remains diagnosable on the retired coordinator; cannot enter a new scope.
 	if not _pending.is_empty() or not _jump_debt.is_empty() or not placement.air.pending.is_empty(): retired_work[scope] = {"request":_pending.duplicate(true),"queued":_after_pending.duplicate(true),"captured_revisions":_captured_revisions.duplicate(),"reason":reason,"physical":last.duplicate(true),"air":placement.air.snapshot(),"jump":_jump_debt.duplicate(true),"landing_request":_landing_request.duplicate(true)}
 	_pending.clear()
@@ -694,6 +1044,9 @@ func dispose() -> void:
 	input.invalidated.disconnect(_interrupt_jump)
 	core.retiring.disconnect(retire)
 	placement.pose_committed.disconnect(_placed)
-	for event: Signal in [committed,failed]:
+	for event: Signal in [committed,failed,landed,feedback_ready,presentation_reset,feedback.cue,feedback.noise_distance]:
 		for connection: Dictionary in event.get_connections(): event.disconnect(connection.callable)
+	mechanisms.core = null
+	mechanisms.previous.clear()
+	mechanisms.pending_commit.clear()
 	retired_work.clear()
