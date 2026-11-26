@@ -1,6 +1,13 @@
+**Increment-3 user acceptance, 2026-11-26:** The user explicitly accepts increment 3 and separately reports "Also, 1-9 are PASS". Its biography/starting-roll delivery and review fixes are accepted. Increment 4, parent IMP-015, real entry and named integration/milestone gates remain open. Earlier pending language below is historical.
+
 **User acceptance, 2026-11-26:** "Good work, I accept what you have done in increment 2". Increment 2 is accepted. Individual numbered human-test outcomes were not reported and are not inferred. Later increments, parent IMP-015 and integration/milestone gates remain open. Earlier pending-acceptance wording below is historical.
 
 # Creation draft and navigation — IMP-015
+
+**Increment 3 under qualification, 2026-11-26:** The production provider now
+adds biography and starting rolls; see [its owner/data contract](CREATION_STARTING.md).
+Earlier later-provider/unavailability descriptions below are historical where
+superseded. Increment 4, actual entry and all milestone gates remain open.
 
 **Increment 2 implementation, 2026-11-26:** Production race/gender, presets,
 questionnaire and custom careers now extend this contract. See the

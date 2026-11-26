@@ -69,6 +69,11 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	policy_data.attributes.strength.max = 200
 	policy_data.skills["added-skill"] = {"min":0,"max":200}
 	write(controller.mods.root.path_join("Overrides/actor-policy.json"),JSON.stringify({"domain":Baseline.DOMAIN,"path":"policy","operation":"patch","entries":[{"id":"player","value":policy_data}]}))
+	# Full composition includes creation: a new permanent skill also needs an
+	# explicit creation limit. Keep this fixture's mod coherent across owners.
+	var starting_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://content/char/starting.json")).entries[0].value
+	starting_data.skills.limits["added-skill"] = {"min":0,"max":100}
+	write(controller.mods.root.path_join("Overrides/starting-policy.json"),JSON.stringify({"domain":"char.starting","path":"policy","operation":"patch","entries":[{"id":"stock","value":starting_data}]}))
 	activity_data.practice_cap = 20000
 	write(controller.mods.root.path_join("Overrides/activity-policy.json"),JSON.stringify({"domain":Baseline.DOMAIN,"path":"activity","operation":"patch","entries":[{"id":"player","value":activity_data}]}))
 	death_data.numerator = 1
@@ -100,7 +105,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	controller.providers.formulas.replace_stage("actor.formula","1.0.0",[{"hook":"char.damage","contract":"actor-rational-v1","callback":callbacks.damage},{"hook":"char.activity-rate","contract":"activity-formula-v1","callback":callbacks.activity_rate}])
 	controller.check_content()
 	check("full candidate validates",true,controller.prepared_content.ok)
-	check("ordinary adapters retained",["actor.baseline","actor.inputs","faction-quest.inputs","geography.inputs","item-spell.inputs","layout.inputs","media.assets","mod.preferences","move.air","move.feedback","move.ground","move.mechanism","text.catalogs","text.fonts","time.calendar","world.variants"],adapter_names(registry))
+	check("ordinary adapters retained",["actor.baseline","actor.inputs","char.biography","char.career","char.creation","char.starting","faction-quest.inputs","geography.inputs","item-spell.inputs","layout.inputs","media.assets","mod.preferences","move.air","move.feedback","move.ground","move.mechanism","rule.holidays","text.catalogs","text.fonts","time.calendar","world.variants"],adapter_names(registry))
 	check("actual menu publication",true,controller.continue_to_menu("run").ok)
 	observations.final_publication_phases = registry.timings.duplicate(true)
 	check("typed gameplay provider selected","actor.formula",controller.providers.formulas.active().winners["char.damage"])

@@ -1,5 +1,12 @@
 # Actor and character input profile — IMP-009 increment 1
 
+**IMP-015 increment 3, 2026-11-26:** CHAR's
+[biography/starting contract](../char/CREATION_STARTING.md) adopts the user's
+explicit DFU no-effect treatment of AE/AF. Structural declarations/operands and
+source receipts stay unchanged. The creation owner retains them as non-executing
+metadata; it does not qualify an ally/enemy mechanic or waive other required
+unsupported effects. The global structural readiness gates below remain intact.
+
 **IMP-015 increment 2, 2026-11-26:** The structural profile is unchanged. The
 separate [creation career provider](../char/CREATION_CAREER.md) now qualifies
 the eighteen resolved playable presets through actual CHAR semantics, alongside

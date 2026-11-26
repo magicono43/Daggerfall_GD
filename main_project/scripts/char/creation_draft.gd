@@ -18,6 +18,25 @@ var _retry_serial := 0
 var _assigned_questions: Array = []
 var _question_generation: Dictionary = {}
 var questionnaire_material: Callable # Trusted deterministic fixture seam; OS entropy normally.
+var _preview_operation: Dictionary = {}
+
+func formula_operation_current(operation: Dictionary) -> bool:
+	return not _preview_operation.is_empty() and same_value(operation,_preview_operation) and current(operation.get("token",{}))
+
+func attribute_preview(core: SessionLifecycle, expected: Dictionary, values: Dictionary, multiplier: Dictionary) -> Dictionary:
+	if not current(expected) or not _preview_operation.is_empty() or core.formulas == null: return failure("preview","Current published formula context required.")
+	var formula = preload("res://scripts/rule/actor_formulas.gd")
+	if values.size() != 8 or multiplier.size() != 2 or not formula.integer(multiplier.get("numerator"),0,1000000) or not formula.integer(multiplier.get("denominator"),1,1000000): return failure("preview","Complete attribute and class magery context required.")
+	for id in preload("res://scripts/data/actor_baseline.gd").ATTRIBUTES:
+		if not formula.integer(values.get(id),0,1000000): return failure("preview","Exact supported attributes required.")
+	_preview_operation = {"token":expected.duplicate(true),"kind":"creation-derived-preview-v1"}
+	var result := {}
+	for pair in [["damage","strength"],["capacity","strength"],["magicka","intelligence"],["resistance","willpower"],["agility","agility"],["growth","endurance"],["healing","endurance"]]:
+		var checked: Dictionary = core.formulas.invoke("char."+pair[0],{"value":values[pair[1]],"numerator":multiplier.numerator,"denominator":multiplier.denominator},core,self,"",_preview_operation)
+		if not checked.ok: _preview_operation.clear(); return checked
+		result[pair[0]] = checked.value
+	_preview_operation.clear()
+	return {"ok":true,"values":result,"scope":"Attribute-derived preview with class magery; excludes later racial, biography and runtime effects."}
 
 func bind(content: int, bindings: Dictionary) -> Dictionary:
 	if not _draft.is_empty() or _busy or content < 0: return failure("binding", "Bind providers before opening a draft.")

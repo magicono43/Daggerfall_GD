@@ -8,6 +8,11 @@ function Get-CreationAppearanceNames {
     }
 }
 
+function Get-CreationBookNames {
+    $policy = Get-Content -LiteralPath "$PSScriptRoot/../content/char/biography.json" -Raw | ConvertFrom-Json
+    foreach ($id in $policy.entries[0].value.books) { 'BOOKS/BOK{0:00000}.TXT' -f [int]$id }
+}
+
 function Test-CreationInventory($Result, [string]$Mode) {
     $inventory = Get-Content -LiteralPath "$PSScriptRoot/../tests/creation_inventory.json" -Raw | ConvertFrom-Json
     $expected = @($inventory.$Mode)

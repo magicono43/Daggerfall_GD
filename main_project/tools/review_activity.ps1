@@ -60,5 +60,7 @@ if ($SmokeTest) {
     if (!$result.ok -or !$result.review_smoke -or $result.human_pass -or $result.count -ne 8) { throw 'Activity review smoke failed.' }
     if (!(Test-ScriptDiagnostics @("$($fixture.sandbox)/engine.stdout.log","$($fixture.sandbox)/engine.stderr.log") '' $result)) { throw 'Activity review reported an unexpected engine diagnostic.' }
 }
+. "$PSScriptRoot/run_artifacts.ps1"
+Complete-ReviewArtifacts -Root $selected.root -OwnedChild $process
 Write-Output "Activity review closed. Evidence: $($fixture.sandbox)"
 

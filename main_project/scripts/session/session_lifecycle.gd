@@ -109,6 +109,10 @@ func actor_formula_valid(scope: String, owner: Object, hook: String, operation: 
 	if _state.phase in ["baseline","initializing"]: return original == ticket() and busy()
 	return false # Ready-session consumers use the ordinary declared hook bindings.
 
+func creation_formula_valid(owner: Object, hook: String, operation: Dictionary) -> bool:
+	# Pre-session, read-only CHAR projection. No actor/session binding is created.
+	return owner == creation and hook in preload("res://scripts/rule/actor_formulas.gd").HOOKS and _startup_ready and _state.application == "menu" and _state.session.is_empty() and not busy() and not _blocked and not _publishing and not _finishing and creation.current(operation.get("token",{}))
+
 func snapshot() -> Dictionary:
 	var view := _state.duplicate(true)
 	view.make_read_only()

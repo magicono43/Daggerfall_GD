@@ -744,12 +744,48 @@ acceptance normally requires its reports/captures, not all duplicated binaries.
 Preserve unique inputs and material unresolved failure evidence; preserve a whole
 failure workspace only when the failure cannot be reproduced from compact inputs.
 
-Review total `.runs` retention above **2 GiB** and identify the largest consumers.
+Review total `.runs` retention above **8 GiB** and identify the largest consumers,
+matching the current AGENTS.md instructions. Record logical length and actual
+allocated storage separately, accounting for compressed files and hardlinks.
 This is a maintenance trigger, not permission to discard required evidence or a
 runtime limit. Prefer sub-GiB evidence retention. If required captures exceed the
 trigger, document why and remove redundant captures/build copies. Check size
 after large export/native suites and before task handoff; do not let multiple
 implementation tasks silently accumulate tens of GiB.
+
+### Shared review cleanup and compatible evidence storage
+
+The creation, calendar, scheduler, activity and ground review launchers call
+`main_project/tools/run_artifacts.ps1` after their owned successful engine exits.
+Ground review waits until **all** requested model/placement reviews return.
+`Complete-ReviewArtifacts` admits only that launcher's closed review root, using
+the returned process as inactivity evidence even when another review is active.
+Unexpected engine exits, unclosed/active markers, explicit retention exceptions
+and unsafe paths are deferred, with a visible reason.
+
+The shared compactor verifies a nonempty `review-source.zip` before deletion.
+Unknown source extensions, custom images and older/different native bytes are
+archived; copied native/bank/tool files are omitted only when their exact hashes
+match existing authoritative files. Child fixtures, results, logs and captures
+stay at their original `project/tests/.runs/` paths. `REVIEW-COMPACTION.json`
+records the archive, source entries, retained hashes and removed payloads.
+Known import/shader/editor caches are removed; unfamiliar isolated files remain.
+
+Use `main_project/tools/maintain_run_artifacts.ps1` for qualified global backlog
+maintenance. `-ReviewRoots` lists exact closed verification roots; explicit
+`-ProtectedRoots` remain untouched. Without `-Apply` the command writes a plan
+only. `-CompressEvidence` applies per-file NTFS compression to large inactive
+JSON, preserving paths, logical bytes, SHA-256 and ordinary readers.
+`-ShareArchives` consolidates byte-identical ZIPs with same-volume hardlinks,
+preserving every path and hash, recording identity/rollback receipts and marking
+shared archives read-only. Treat source ZIPs as immutable; create a new archive
+instead of updating one in place. Unsupported/locked/uncertain targets are
+deferred; never change volume settings or privileges to force maintenance.
+
+Ownership is a qualification question, not a permanent exemption for older
+closed builds. Repository-wide reviews should resolve those backlogs while
+preserving active/explicit exceptions. Historical 2-GiB triggers in execution
+entries below describe their original policy; the current trigger is 8 GiB.
 
 `main_project/tests/.runs/` is ignored disposable verification storage. The
 authoritative implementation, fixtures, native dependency pins and runners live
@@ -931,3 +967,72 @@ protected; no elevated process query or security change was introduced. Exact
 journals are in `main_project/tests/.runs/imp015-increment2-audit/cleanup-*.json`,
 with `shader-cache-cleanup.json` and `retention-final.json`. See the
 [execution audit](evidence/IMP-015-increment-2-2026-11-26.audit.json).
+
+### IMP-015 increment 3, 2026-11-26
+
+After every owned verifier/review returned and ordinary activity inspection found
+no engine/export/decoder, three journals compacted 36 explicitly named inactive
+roots: 60,546 files / 9,088,019,420 bytes removed. Dedicated shader cleanup removed
+another 594 files / 16,486,956 bytes. Reports, typed fixtures, final nonempty
+executed-source ZIPs and reviewed captures remain; export-child evidence aliases
+and installed-template junction targets were checked. No full review build is
+retained solely for pending acceptance; the launcher rebuilds it.
+
+The first helper mistakenly matched the ancestor `.runs` while selecting source
+files: its 12 excluded development source ZIPs are empty. Reports and captures
+survive, but those historical source versions cannot be recovered from the ZIPs.
+This limitation is recorded in the execution evidence. The corrected helper
+filters relative paths, refuses empty source archives and verified 679 source
+entries on its next compaction. All final selected reports have separately
+verified nonempty source archives. No qualification relies on the excluded runs.
+
+The 11,947,604,499-byte intermediate sample triggered retention review. Earlier
+and unknown roots remain protected. Exact journals, shader cleanup and final
+sample live in `main_project/tests/.runs/imp015-increment3-audit/`; see
+[execution evidence](evidence/IMP-015-increment-3-2026-11-26.md) and its linked
+machine audit for the final logical retention and preserved source receipts.
+
+Final logical retention: 8,591,373,138 bytes (8.00134 GiB), excluding reparse
+targets. The threshold review found the largest remaining roots belong to earlier
+tasks; they remain protected. All 36 owned full builds are gone. Retention above
+8 GiB is explicitly reviewed rather than resolved by deleting unknown outputs.
+
+### IMP-015 increment-3 review fixes, 2026-11-26
+
+After the serial creation/review, Windows debug/release and session jobs returned,
+six named inactive roots were compacted: 11,648 files / 1,928,874,469 bytes removed.
+Dedicated shader cleanup removed another 198 files / 5,495,652 bytes. Nonempty
+source archives, reports, typed fixtures, three inspected captures and export
+child aliases remain hash-verified. Installed template targets remain protected.
+The follow-up's journals and final sample are in
+`main_project/tests/.runs/imp015-increment3-review-fixes/`. Prior task and human
+review roots are outside this cleanup list and remain protected. See
+[follow-up evidence](evidence/IMP-015-increment-3-review-fixes-2026-11-26.md).
+
+### Global closed-review and evidence maintenance, 2026-11-26
+
+The user authorized corrective work after the whole-project disk audit. Thirteen
+qualified closed reviews were compacted, preserving source archives and original
+child evidence paths while removing 2,805,221,168 copied/cache bytes. Per-file NTFS
+compression of 665 inactive JSON files saved 1,452,417,024 allocated bytes; 64
+byte-identical ZIP paths were consolidated with checked file identities, immutable
+hardlinks and rollback receipts, saving 147,529,992 allocated bytes. Both batches
+had zero deferrals. Current review, failed investigation and explicit view-review
+exceptions remain protected with documented reasons/expiry.
+
+Net measured project allocation fell from 11,227,178,088 to 6,899,724,472 bytes:
+**4.03 GiB reclaimed** after accounting for retained archives and added evidence.
+Final `.runs` logical length is 6,466,099,322 bytes; deduplicated allocated storage
+is 4,971,203,336 bytes (4.63 GiB). Counts exclude filesystem metadata and writes
+after the live sample. Shared launchers now compact automatically on successful
+owned exit; a fresh creation-review smoke verified that end-to-end behavior.
+See [maintenance evidence](evidence/PROJECT-STORAGE-MAINTENANCE-2026-11-26.md)
+and `main_project/tests/.runs/storage-maintenance-2026-11-26/` for exact plans,
+hash/archive checks, native boundaries, protected builds and before/after samples.
+
+After the user reported creation review checks 1–9 PASS and accepted increment 3,
+the temporary latest-review retention ended. That additional review runtime was
+compacted (216,440,687 copied/cache bytes removed before source-archive overhead),
+preserving and verifying source/child evidence. The archived retention record and
+`acceptance-retirement.json` are in the same maintenance evidence directory. The
+earlier space samples remain point-in-time measurements, not updated estimates.

@@ -47,6 +47,12 @@ func enable_creation() -> Dictionary:
 	career.classic = classic
 	registered = register_content_adapter(career,"",[])
 	if not registered.ok: return registered
+	registered = register_content_adapter(preload("res://scripts/data/creation_starting.gd").new(),"",[])
+	if not registered.ok: return registered
+	var biography := preload("res://scripts/data/creation_biography.gd").new()
+	biography.classic = classic
+	registered = register_content_adapter(biography,"",[])
+	if not registered.ok: return registered
 	creation_art = preload("res://scripts/av/creation_art.gd").new()
 	return creation_art.declare(self)
 

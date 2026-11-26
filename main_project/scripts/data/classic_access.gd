@@ -234,7 +234,7 @@ func creation_image(file: String) -> Dictionary:
 	# Optional interface originals, requested only through the active DATA source.
 	# This bounded owner table is not a wildcard path/format interface. Absence or
 	# malformed optional art does not invalidate required startup or gameplay data.
-	const NAMES = ["CHAR00I0.IMG","CHAR01I0.IMG","CHAR02I0.IMG","CHAR03I0.IMG","CHAR04I0.IMG","CHAR05I0.IMG","TMAP00I0.IMG","CUST00I0.IMG","CUST08I0.IMG","CHGN00I0.IMG"]
+	const NAMES = ["CHAR00I0.IMG","CHAR01I0.IMG","CHAR02I0.IMG","CHAR03I0.IMG","CHAR04I0.IMG","CHAR05I0.IMG","TMAP00I0.IMG","CUST00I0.IMG","CUST08I0.IMG","CHGN00I0.IMG","BIOG00I0.IMG"]
 	if not ready() or file not in NAMES: return {"ok":false,"reason":"Published creation-art source binding unavailable."}
 	var reader := MediaReader.new("classic-img-v1")
 	var checked: Dictionary = reader.initialize(_active_source.path_join(file))
@@ -274,6 +274,24 @@ func creation_source(file: String) -> Dictionary:
 	stream.close()
 	if bytes.size() != length: return {"ok":false,"reason":"Incomplete creation source read: "+file}
 	return {"ok":true,"bytes":bytes,"source":_active_source.path_join(file),"sha256":ActorFormats.sha256(bytes)}
+
+func creation_book(id: int) -> Dictionary:
+	# Narrow read-only qualification for retained biography book intent. Rendering,
+	# book UI, possession construction and SAVE stay with their later owners.
+	if not ready() or id < 0 or id > 255: return {"ok":false,"reason":"Unsupported classic biography book ID."}
+	var relative := "BOOKS/BOK%05d.TXT" % id
+	var file := FileAccess.open(_active_source.path_join(relative),FileAccess.READ)
+	if file == null: return {"ok":false,"reason":"Required biography book source missing: "+relative}
+	var length := file.get_length()
+	if length < 236 or length > 2097152: file.close(); return {"ok":false,"reason":"Malformed biography book length: "+relative}
+	var bytes := file.get_buffer(length); file.close()
+	if bytes.size() != length: return {"ok":false,"reason":"Incomplete biography book read: "+relative}
+	var count := bytes.decode_u16(234)
+	if count < 1 or 236+count*4 > length: return {"ok":false,"reason":"Malformed biography book page directory: "+relative}
+	for page in count:
+		var offset := bytes.decode_u32(236+page*4)
+		if offset < 236+count*4 or offset >= length: return {"ok":false,"reason":"Invalid biography book page offset: "+relative}
+	return {"ok":true,"id":id,"source":relative,"sha256":ActorFormats.sha256(bytes),"price_seed":bytes.decode_u32(0),"page_count":count,"qualification":"Read-only header/page-address metadata; no runtime book reader or possession grant."}
 
 func creation_appearance(file: String) -> Dictionary:
 	# Fixed supported source namespace; no wildcard filesystem discovery. Checking

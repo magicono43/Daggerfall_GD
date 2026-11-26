@@ -88,6 +88,17 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	var career_checks: Array = await career_suite.qualify(shell,fixture)
 	measurements.career_preparation_usec = career_suite.provider.measurements.preparation_usec
 	checks.append_array(career_checks)
+	checks.append_array(preload("res://tests/starting_roll_cases.gd").new().qualify(shell))
+	var biography_suite := preload("res://tests/biography_cases.gd").new()
+	checks.append_array(biography_suite.qualify(shell))
+	measurements.biography_preparation_usec = biography_suite.provider.measurements.get("biography_preparation_usec",-1)
+	measurements.biography_templates = biography_suite.provider.templates.size()
+	measurements.biography_texts = biography_suite.provider.biography_texts.size()
+	measurements.biography_books = biography_suite.provider.biography_books.size()
+	var biography_queries_started := Time.get_ticks_usec()
+	for index in 1000: definitions.query("char.biography","texts","text-4116")
+	measurements.biography_thousand_point_queries_usec = Time.get_ticks_usec()-biography_queries_started
+	checks.append_array(await preload("res://tests/creation_biography_ui_cases.gd").new().qualify(shell,fixture))
 	await publication(shell,fixture,record)
 	check("published creation provenance",true,record.contributors.any(func(source): return source.provider == "@shipped/creation-flow-v1"))
 	check("locked creation publication","locked",definitions.prepare(controller.mods).kind)
@@ -479,8 +490,8 @@ func publication(_shell: Control, fixture: Dictionary, record: Dictionary) -> vo
 	app.start({"executable_dir":sandbox.path_join("publication/executable"),"per_user_dir":sandbox.path_join("publication/user")})
 	app.settings.effective["startup/show_setup"] = true
 	var package := manifest("creation.review")
-	package.capabilities = ["data.creation-flow-v1","data.creation-career-v1","data.actor-inputs-v1","data.actor-baseline-v1","data.media-v1"]
-	package.content = ["flow.json","media.json","career.json","preset.json","numbers.json"]
+	package.capabilities = ["data.creation-flow-v1","data.creation-career-v1","data.creation-starting-v1","data.creation-biography-v1","data.actor-inputs-v1","data.actor-baseline-v1","data.media-v1"]
+	package.content = ["flow.json","media.json","career.json","preset.json","numbers.json","starting.json","history.json"]
 	var root: String = app.mods.root.path_join("Mods/creation")
 	preload("res://tests/publication_fixture.gd").write(root.path_join("mod.json"),package)
 	var steps: Dictionary = record.value.steps.duplicate(true)
@@ -488,6 +499,15 @@ func publication(_shell: Control, fixture: Dictionary, record: Dictionary) -> vo
 	var patch := {"domain":Flow.DOMAIN,"path":"flows","operation":"patch","entries":[{"id":"stock","value":{"steps":steps}}]}
 	preload("res://tests/publication_fixture.gd").write(root.path_join("flow.json"),patch)
 	preload("res://tests/publication_fixture.gd").write(root.path_join("career.json"),{"domain":"char.career","path":"policy","operation":"patch","entries":[{"id":"stock","value":{"attribute_total":401}}]})
+	var starting_rules: Dictionary = _shell.controller.providers.definitions.query("char.starting","policy","stock").record.value.attributes.duplicate(true)
+	starting_rules.pool = {"min":9,"max":9}
+	preload("res://tests/publication_fixture.gd").write(root.path_join("starting.json"),{"domain":"char.starting","path":"policy","operation":"patch","entries":[{"id":"stock","value":{"attributes":starting_rules}}]})
+	var history := {"schema":"creation-biography-text-v1","available":true,"text":"Package history for %ra.","source":{"author":"creation.review"}}
+	preload("res://tests/publication_fixture.gd").write(root.path_join("history.json"),{"domain":"char.biography","path":"texts","operation":"patch","entries":[{"id":"text-4116","value":history}]})
+	starting_rules.pool = {"min":11,"max":11}
+	preload("res://tests/publication_fixture.gd").write(app.mods.root.path_join("Overrides/starting.json"),{"domain":"char.starting","path":"policy","operation":"patch","entries":[{"id":"stock","value":{"attributes":starting_rules}}]})
+	history.text = "Loose history for %ra."
+	preload("res://tests/publication_fixture.gd").write(app.mods.root.path_join("Overrides/history.json"),{"domain":"char.biography","path":"texts","operation":"patch","entries":[{"id":"text-4116","value":history}]})
 	var preset_data: Dictionary = _shell.controller.providers.definitions.query("actor.inputs","catalog","class-16").record.value.data.duplicate(true)
 	preset_data.hit_points_per_level = 17 # Pinned Warrior baseline is 20; prove an actual change.
 	preload("res://tests/publication_fixture.gd").write(root.path_join("preset.json"),{"domain":"actor.inputs","path":"catalog","operation":"patch","entries":[{"id":"class-16","value":{"data":preset_data}}]})
@@ -509,12 +529,19 @@ func publication(_shell: Control, fixture: Dictionary, record: Dictionary) -> vo
 	app.select_folder(fixture.classic_source)
 	app.continue_to_menu("run")
 	check("real package loose creation publication","main_menu",app.route)
+	if app.route != "main_menu":
+		print("CREATION PUBLICATION ISSUES ",app.result.get("issues",[]))
+		app.providers.dispose(); app.storage.adapter.release(); return
 	var published: Dictionary = app.providers.definitions.query(Flow.DOMAIN,"flows","stock")
 	check("loose creation field wins","Loose race title",published.record.value.steps.race.title)
 	check("creation contributors retained",true,published.record.contributors.size() >= 3)
 	var career_policy: Dictionary = app.providers.definitions.query("char.career","policy","stock")
 	check("career package loose policy precedence",402,int(career_policy.record.value.attribute_total))
 	check("career policy contributors retained",true,career_policy.record.contributors.size() >= 3)
+	var starting_policy: Dictionary = app.providers.definitions.query("char.starting","policy","stock")
+	check("starting real package loose precedence",11,int(starting_policy.record.value.attributes.pool.min))
+	check("starting real package loose provenance",true,starting_policy.record.contributors.size() >= 3)
+	check("biography real package loose text precedence","Loose history for %ra.",app.providers.definitions.query("char.biography","texts","text-4116").record.value.text)
 	var resolved_provider := preload("res://scripts/char/creation_inputs.gd").new()
 	resolved_provider.definitions = app.providers.definitions
 	resolved_provider.content = app.providers.definitions.content_ticket()

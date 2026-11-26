@@ -22,6 +22,7 @@ foreach ($candidate in $candidates) {
     if ($report.suite -eq 'ground-movement' -and $report.status -eq 'passed') { $selected = $report; break }
 }
 if ($null -eq $selected) { throw 'Could not locate the newly qualified ground review build.' }
+$script:lastGroundReviewChild = $null
 function Invoke-GroundHumanReview([int]$Model, [string]$Placement = "") {
 $case = $selected.scenarios[0].root
 $fixture = Get-Content -LiteralPath "$case/fixture.json" -Raw | ConvertFrom-Json
@@ -70,6 +71,7 @@ if ($SmokeTest) {
     if (!$result.ok -or $result.review_smoke -ne $true) { throw "Ground review smoke failed: $resultPath" }
 }
 Move-Item -LiteralPath "$($selected.root)/ACTIVE-HUMAN-REVIEW.json" -Destination "$($selected.root)/HUMAN-REVIEW-CLOSED-$reviewDirectory.json"
+$script:lastGroundReviewChild = $process
 if ($SmokeTest) { Write-Output "Ground review launch smoke passed; human review remains pending. Result: $resultPath" }
 else { Write-Output "Human review closed; no automatic PASS. Review root: $($selected.root)" }
 
@@ -85,3 +87,7 @@ if ($ConnectorPlacements.Count -gt 0) {
         Invoke-GroundHumanReview ([int]$matching[0].model) $placement
     }
 }
+# All model/source-placement windows share this project. Compact only after the
+# final synchronous review returns, never inside the per-placement function.
+. "$PSScriptRoot/run_artifacts.ps1"
+Complete-ReviewArtifacts -Root $selected.root -OwnedChild $script:lastGroundReviewChild

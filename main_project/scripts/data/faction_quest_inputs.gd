@@ -22,6 +22,17 @@ func read_only_index(ticket: int) -> Dictionary:
 	if ticket != _index_ticket or not _index.get("ok",false): return Formats.fail("before_readiness","Exact committed faction index required.")
 	return _index.duplicate(true)
 
+func point_query(ticket: int, context: Dictionary) -> Dictionary:
+	# Narrow mapping projection: consumers need not copy the complete faction/
+	# quest graph to bind one retained biography obligation.
+	if ticket != _index_ticket or not _index.get("ok",false): return Formats.fail("before_readiness","Exact committed faction index required.")
+	if context.size() != 1 or not context.get("mapping") is String: return Formats.fail("invalid_mapping","One explicit mapping required.")
+	var matches: Array = _index.mappings.get(context.mapping,[])
+	if matches.is_empty(): return Formats.fail("missing","Required mapping absent.",DOMAIN,0,"",context.mapping)
+	if matches.size() != 1: return Formats.fail("ambiguous","Required mapping is ambiguous.",DOMAIN,0,"",context.mapping)
+	var parts: PackedStringArray = str(matches[0]).split("#")
+	return {"ok":true,"reference":{"path":parts[0],"id":parts[1]}}
+
 var _receipts: Dictionary = {}
 var _mappings: Dictionary = {}
 var _kinds: Dictionary = {}

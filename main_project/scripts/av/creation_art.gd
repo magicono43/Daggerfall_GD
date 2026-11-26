@@ -1,7 +1,7 @@
 extends RefCounted
 ## Application-lifetime optional UI resources. One decode/texture per target,
 ## including cached missing results. DATA/MOD own selection and content locking.
-const FILES = {"creation.race":"TMAP00I0.IMG","creation.questionnaire":"CHGN00I0.IMG","creation.custom":"CUST00I0.IMG","creation.dagger":"CUST08I0.IMG","creation.name":"CHAR00I0.IMG","creation.face":"CHAR01I0.IMG","creation.attributes":"CHAR02I0.IMG","creation.skills":"CHAR03I0.IMG","creation.summary":"CHAR04I0.IMG","creation.reflexes":"CHAR05I0.IMG"}
+const FILES = {"creation.biography":"BIOG00I0.IMG","creation.race":"TMAP00I0.IMG","creation.questionnaire":"CHGN00I0.IMG","creation.custom":"CUST00I0.IMG","creation.dagger":"CUST08I0.IMG","creation.name":"CHAR00I0.IMG","creation.face":"CHAR01I0.IMG","creation.attributes":"CHAR02I0.IMG","creation.skills":"CHAR03I0.IMG","creation.summary":"CHAR04I0.IMG","creation.reflexes":"CHAR05I0.IMG"}
 var classic: RefCounted
 var media: RefCounted
 var definitions: RefCounted

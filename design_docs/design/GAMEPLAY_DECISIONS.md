@@ -1,5 +1,12 @@
 # Gameplay and feature decisions
 
+**CHAR-006-AEAF-D01 — 2026-11-26 (IMP-015 increment 3):** After explanation
+that DFU logs AE/AF as unimplemented and applies no effect, the user instructed,
+“Go by what DFU says in this case, please.” Adopt that no-effect baseline while
+retaining original AE/AF declarations and provenance as non-executing metadata.
+This does not establish original-game semantics or authorize ignoring other
+unsupported required commands. See CHAR-006's dated clarification.
+
 Individual decisions can be confirmed before a complete feature specification is approved.
 
 ## Standing project data policy

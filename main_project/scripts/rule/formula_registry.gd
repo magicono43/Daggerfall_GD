@@ -217,7 +217,7 @@ func active() -> Dictionary:
 	return result
 
 func _context(core: SessionLifecycle, owner: Object, hook: String, scope: String, operation: Dictionary) -> bool:
-	return is_instance_valid(core) and core.formulas == self and (core.formula_owner_valid(scope,owner,hook) or core.actor_formula_valid(scope,owner,hook,operation)) and core._plain_data(operation) and owner.formula_operation_current(operation.duplicate(true)) == true
+	return is_instance_valid(core) and core.formulas == self and (core.formula_owner_valid(scope,owner,hook) or core.actor_formula_valid(scope,owner,hook,operation) or core.creation_formula_valid(owner,hook,operation)) and core._plain_data(operation) and owner.formula_operation_current(operation.duplicate(true)) == true
 
 func invoke(hook: String, value: Variant, core: SessionLifecycle, owner: Object, scope: String, operation: Dictionary) -> Dictionary:
 	if _disposed or _active.is_empty() or not _active.winners.has(hook):

@@ -46,4 +46,6 @@ if ($SmokeTest) {
     if (!(Test-ScriptDiagnostics @("$($fixture.sandbox)/engine.stdout.log","$($fixture.sandbox)/engine.stderr.log") '' $result)) { throw 'Calendar review reported an unexpected engine diagnostic.' }
 }
 Move-Item -LiteralPath "$($selected.root)/ACTIVE-HUMAN-REVIEW.json" -Destination "$($selected.root)/CLOSED-HUMAN-REVIEW.json"
+. "$PSScriptRoot/run_artifacts.ps1"
+Complete-ReviewArtifacts -Root $selected.root -OwnedChild $process
 Write-Output "Calendar review closed. Evidence: $($fixture.sandbox)"

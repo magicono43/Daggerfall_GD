@@ -2,6 +2,10 @@
 
 # Race and career — IMP-015 increment 2
 
+Increment 3 adds the [biography and starting-roll provider](CREATION_STARTING.md)
+under qualification. Earlier statements below deferring these providers describe
+the accepted increment-2 scope; they do not override the newer contract.
+
 Production New Game binds `creation_inputs.gd` to DATA's locked
 `char.career:policy#stock` and `char.career:sources#stock`. These CHAR providers
 qualify birth race/gender, class method, eighteen presets, class questionnaire and

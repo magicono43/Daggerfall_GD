@@ -46,7 +46,7 @@
           "biography": {
             "hook": "biography",
             "title": "Biography",
-            "art": ""
+            "art": "creation.biography"
           },
           "name": {
             "hook": "name",

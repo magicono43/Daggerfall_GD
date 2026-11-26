@@ -1,0 +1,249 @@
+{
+  "entries": [
+    {
+      "value": {
+        "schema": "creation-starting-v1",
+        "attributes": {
+          "pool": {
+            "max": 14,
+            "min": 6
+          },
+          "values": {
+            "strength": {
+              "bonus": {
+                "max": 10,
+                "min": 0
+              },
+              "cap": 100
+            },
+            "intelligence": {
+              "bonus": {
+                "max": 10,
+                "min": 0
+              },
+              "cap": 100
+            },
+            "willpower": {
+              "bonus": {
+                "max": 10,
+                "min": 0
+              },
+              "cap": 100
+            },
+            "agility": {
+              "bonus": {
+                "max": 10,
+                "min": 0
+              },
+              "cap": 100
+            },
+            "endurance": {
+              "bonus": {
+                "max": 10,
+                "min": 0
+              },
+              "cap": 100
+            },
+            "personality": {
+              "bonus": {
+                "max": 10,
+                "min": 0
+              },
+              "cap": 100
+            },
+            "speed": {
+              "bonus": {
+                "max": 10,
+                "min": 0
+              },
+              "cap": 100
+            },
+            "luck": {
+              "bonus": {
+                "max": 10,
+                "min": 0
+              },
+              "cap": 100
+            }
+          }
+        },
+        "skills": {
+          "pools": {
+            "major": 6,
+            "primary": 6,
+            "minor": 6
+          },
+          "ranges": {
+            "major": {
+              "max": 21,
+              "min": 18
+            },
+            "primary": {
+              "max": 31,
+              "min": 28
+            },
+            "other": {
+              "max": 6,
+              "min": 3
+            },
+            "minor": {
+              "max": 16,
+              "min": 13
+            }
+          },
+          "limits": {
+            "medical": {
+              "max": 100,
+              "min": 0
+            },
+            "etiquette": {
+              "max": 100,
+              "min": 0
+            },
+            "streetwise": {
+              "max": 100,
+              "min": 0
+            },
+            "jumping": {
+              "max": 100,
+              "min": 0
+            },
+            "orcish": {
+              "max": 100,
+              "min": 0
+            },
+            "harpy": {
+              "max": 100,
+              "min": 0
+            },
+            "giantish": {
+              "max": 100,
+              "min": 0
+            },
+            "dragonish": {
+              "max": 100,
+              "min": 0
+            },
+            "nymph": {
+              "max": 100,
+              "min": 0
+            },
+            "daedric": {
+              "max": 100,
+              "min": 0
+            },
+            "spriggan": {
+              "max": 100,
+              "min": 0
+            },
+            "centaurian": {
+              "max": 100,
+              "min": 0
+            },
+            "impish": {
+              "max": 100,
+              "min": 0
+            },
+            "lockpicking": {
+              "max": 100,
+              "min": 0
+            },
+            "mercantile": {
+              "max": 100,
+              "min": 0
+            },
+            "pickpocket": {
+              "max": 100,
+              "min": 0
+            },
+            "stealth": {
+              "max": 100,
+              "min": 0
+            },
+            "swimming": {
+              "max": 100,
+              "min": 0
+            },
+            "climbing": {
+              "max": 100,
+              "min": 0
+            },
+            "backstabbing": {
+              "max": 100,
+              "min": 0
+            },
+            "dodging": {
+              "max": 100,
+              "min": 0
+            },
+            "running": {
+              "max": 100,
+              "min": 0
+            },
+            "destruction": {
+              "max": 100,
+              "min": 0
+            },
+            "restoration": {
+              "max": 100,
+              "min": 0
+            },
+            "illusion": {
+              "max": 100,
+              "min": 0
+            },
+            "alteration": {
+              "max": 100,
+              "min": 0
+            },
+            "thaumaturgy": {
+              "max": 100,
+              "min": 0
+            },
+            "mysticism": {
+              "max": 100,
+              "min": 0
+            },
+            "short-blade": {
+              "max": 100,
+              "min": 0
+            },
+            "long-blade": {
+              "max": 100,
+              "min": 0
+            },
+            "hand-to-hand": {
+              "max": 100,
+              "min": 0
+            },
+            "axe": {
+              "max": 100,
+              "min": 0
+            },
+            "blunt-weapon": {
+              "max": 100,
+              "min": 0
+            },
+            "archery": {
+              "max": 100,
+              "min": 0
+            },
+            "critical-strike": {
+              "max": 100,
+              "min": 0
+            }
+          }
+        },
+        "provenance": {
+          "source": "Pinned DFU StatsRollout.cs / SkillsRollout.cs; approved explicit final skill limits",
+          "authority": "CHAR-008-A01 / CHAR-009-A01",
+          "license": "Authored configuration; DFU evidence MIT, see DFU_LICENSE.txt"
+        }
+      },
+      "id": "stock"
+    }
+  ],
+  "path": "policy",
+  "operation": "add",
+  "domain": "char.starting"
+}

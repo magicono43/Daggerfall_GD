@@ -1,5 +1,16 @@
 # CHAR-006 — Biography selection and outcomes
 
+**AE/AF baseline clarification, 2026-11-26:** During IMP-015 increment 3,
+the user instructed, “Go by what DFU says in this case, please.” This adopts
+the pinned DFU dispatcher's no-effect treatment of AE/AF. Retain the original
+codes, selectors, ordered operands, answer identities and source provenance as
+explicit non-executing metadata. Their presence does not reject an otherwise
+supported biography. This is an intentional baseline choice, not verified
+original-executable semantics or implementation of an ally/enemy mechanic.
+Other unsupported required commands still fail. Original sources remain
+read-only. Earlier AE/AF owner-review requirements below are satisfied only
+for this treatment.
+
 Approval status: **Approved — finalized v1.** User approved the complete Draft v1 on 2026-11-06: “I approve”.
 Updated: 2026-11-06.
 

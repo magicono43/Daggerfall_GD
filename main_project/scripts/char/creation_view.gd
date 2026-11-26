@@ -22,6 +22,8 @@ var _render_generation := 0
 var _presentation: RefCounted
 var _keyboard_down: Dictionary = {}
 var career_view := preload("res://scripts/char/creation_career_view.gd").new()
+var starting_view := preload("res://scripts/char/creation_starting_view.gd").new()
+var biography_view := preload("res://scripts/char/creation_biography_view.gd").new()
 
 func _init(session_shell: RefCounted) -> void:
 	shell = session_shell
@@ -34,6 +36,9 @@ func active() -> bool:
 
 func cancel_nested() -> bool:
 	if not active() or shell.core.busy() or not inputs.has_method("validate_career"): return false
+	if not navigation.summary_locked() and navigation.step().get("hook") == "biography":
+		action("back",navigation.context())
+		return true
 	if not career_view.candidate.is_empty():
 		career_view.candidate = ""
 		career_view.stop_narration()
@@ -49,12 +54,18 @@ func cancel_nested() -> bool:
 	return false
 
 func route_keyboard(event: InputEvent) -> bool:
-	if not event is InputEventKey or event.keycode not in [KEY_ENTER,KEY_KP_ENTER,KEY_SPACE]: return false
+	if not event is InputEventKey or event.keycode not in [KEY_ENTER,KEY_KP_ENTER,KEY_SPACE,KEY_ESCAPE]: return false
 	var identity: int = event.keycode
 	if not event.pressed:
 		_keyboard_down.erase(identity)
 		return false
 	if _keyboard_down.has(identity): return true
+	if event.keycode == KEY_ESCAPE:
+		if not active() or shell.windows.top().get("window") != "creation": return false
+		if event.echo: return true
+		_keyboard_down[identity] = true
+		shell.options()
+		return true
 	if not active() or not shell.host.get_viewport().gui_get_focus_owner() is Button: return false
 	if event.echo: return true
 	_keyboard_down[identity] = true
@@ -69,13 +80,16 @@ func open(provider: RefCounted = null) -> Dictionary:
 	var read: Dictionary = definitions.query("char.creation","flows","stock")
 	if not read.ok: return read
 	controlled = provider != null
+	var preparation_error := ""
 	inputs = provider
 	if inputs == null:
-		inputs = preload("res://scripts/char/creation_inputs.gd").new()
+		inputs = preload("res://scripts/char/creation_biography_inputs.gd").new()
 		inputs.definitions = definitions
 		inputs.content = definitions.content_ticket()
 		inputs.options = read.record.value.choices.duplicate(true)
-		inputs.prepare()
+		var prepared: Dictionary = inputs.prepare()
+		if not prepared.ok: preparation_error = prepared.get("reason","Required creation content is unavailable.")
+	if inputs.has_method("bind_preview"): inputs.bind_preview(owner,shell.core)
 	var checked: Dictionary = owner.bind(definitions.content_ticket(),inputs.bindings())
 	if not checked.ok: return checked
 	checked = navigation.bind(owner,read.record)
@@ -90,7 +104,7 @@ func open(provider: RefCounted = null) -> Dictionary:
 	_layer_scope = shell.core.snapshot().session
 	_submission_failed = false
 	_capture.clear()
-	notice = ""
+	notice = preparation_error
 	_focus = ""
 	shell.schedule_render()
 	return {"ok":true}
@@ -122,6 +136,12 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 	if not active() or shell.windows.top().get("id") != layer or not Draft.same_value(expected,navigation.context()) or shell.core.busy(): return Draft.failure("stale","Creation input context retired.")
 	var checked: Dictionary
 	match id:
+		"biography-operation":
+			if navigation.step().get("hook") != "biography" or navigation.summary_locked(): return Draft.failure("permission","Restart to change biography after final review.")
+			checked = inputs.biography_operation(owner,expected.token,str(value.operation),value.get("payload",{})) if inputs.has_method("biography_operation") else Draft.failure("unavailable","Biography operations unavailable.")
+		"starting-operation":
+			if navigation.step().get("hook") != ("skills" if value == "generate-skills" else "attributes"): return Draft.failure("permission","Use the corresponding starting allocation editor.")
+			checked = inputs.operate(owner,expected.token,str(value)) if inputs.has_method("operate") else Draft.failure("unavailable","Starting operations unavailable.")
 		"edit": checked = navigation.edit(expected,value)
 		"generate-questionnaire": checked = owner.generate_questionnaire(expected.token)
 		"career-route": checked = navigation.career_route(expected,str(value))
@@ -152,7 +172,7 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 		_: return Draft.failure("action","Unsupported creation action.")
 	notice = "" if checked.ok else str(checked.get("reason","Creation request rejected."))
 	if checked.has("sections"): notice += "\n"+str(checked.sections)
-	if checked.ok and id in ["edit","next","back","summary-edit","career-route","generate-questionnaire"]:
+	if checked.ok and id in ["edit","next","back","summary-edit","career-route","generate-questionnaire","starting-operation","biography-operation"]:
 		# A page/selection handoff is a real input boundary, with the existing
 		# fresh-press quarantine. Keep the same requester-owned gate and scope.
 		shell.windows.replace(layer,"creation",func(_old: Dictionary): return {"ok":true,"data":{"cursor":"visible"}})
@@ -169,9 +189,10 @@ func render() -> void:
 	var current: Dictionary = navigation.step()
 	var hook: String = current.hook
 	host.label(translated("step."+navigation.step_id(),current.title),26)
-	if controlled and inputs.has_method("validate_career"): host.label("CREATION CAREER REVIEW · real race/career · assigned later stages · no playable entry or grants",15)
+	if controlled and inputs.has_method("biography_operation"): host.label("BIOGRAPHY AND ROLLS REVIEW · real increments 1–3 · assigned name/portrait/reflexes · no playable entry or grants",15)
+	elif controlled and inputs.has_method("validate_career"): host.label("CREATION CAREER REVIEW · real race/career · assigned later stages · no playable entry or grants",15)
 	elif controlled: host.label("CONTROLLED CREATION REVIEW · assigned inputs · no playable entry or grants",15)
-	else: host.label("Race and career use resolved definitions. Later creation stages and playable entry remain unavailable.",15)
+	else: host.label("Creation uses resolved definitions. Name, portrait and reflex completion and playable entry remain unavailable.",15)
 	var art: Dictionary = {"ok":false}
 	var resolver: RefCounted = host.controller.providers.creation_art
 	if resolver != null: art = resolver.resolve(current.art)
@@ -200,6 +221,10 @@ func render() -> void:
 		_summary(expected,selected)
 	elif inputs.has_method("validate_career") and hook in ["race","gender","class","questionnaire","custom"]:
 		career_view.render(self,expected,hook,selected)
+	elif inputs.has_method("operate") and hook in ["attributes","skills"]:
+		starting_view.render(self,expected,hook,selected)
+	elif inputs.has_method("biography_operation") and hook == "biography":
+		biography_view.render(self,expected,selected)
 	elif hook == "name":
 		var field := LineEdit.new()
 		field.text = str(_working.get(hook,selected.get(hook,"")))
@@ -267,6 +292,8 @@ func render() -> void:
 		retry.custom_minimum_size = Vector2(180,40)
 		row.add_child(retry)
 		_bind_button(retry,"retry",func(): action("retry",expected))
+	# Keep cancellation reachable without scrolling past the 640x400 page.
+	host.panel.move_child(row,_page.get_index())
 	if not notice.is_empty(): host.label(notice)
 	if not glyph_diagnostics.is_empty(): host.label("Some characters are unavailable in the current font. Your Unicode text is retained unchanged; install a compatible font pack to display them.",15)
 	if navigation.summary_locked(): host.label("Restart to change this selection after final review.")
@@ -287,10 +314,25 @@ func _summary(expected: Dictionary, selected: Dictionary) -> void:
 		var value: Variant = selected[section]
 		if section in ["attributes","skills"] and value is Dictionary:
 			text += section.capitalize()+"\n"
+			if value.has("roll"):
+				var receipt: Dictionary = owner.validate(section,owner.token(),value)
+				if receipt.ok:
+					var evaluated: Dictionary = receipt.provenance.evaluation
+					for id in value.roll.base: text += "  %s: %d rolled + %d allocated%s = %d\n" % [id,value.roll.base[id],value.roll.allocated[id],(" %+d biography" % inputs.adjustments(owner.projection()).get(id,0)) if section == "skills" else "",evaluated.final[id]]
+					text += "Remaining: "+str(evaluated.remaining)+"\n"
+				else: text += "Invalid: "+receipt.reason+"\n"
+				continue
 			for key in value.get("base",{}): text += "  "+str(key).capitalize()+": "+str(value.base[key])+" + "+str(value.get("allocated",{}).get(key,0))+" assigned\n"
 			text += "Unspent points: "+str(value.get("remaining","unavailable"))+"\n"
 		elif section == "biography" and value is Dictionary:
 			text += "Biography\n"
+			if inputs.has_method("biography_operation"):
+				var checked: Dictionary = owner.validate("biography",owner.token(),value)
+				if checked.ok: text += checked.provenance.resolved_history+"\n"
+				for question in inputs.templates[value.template].questions:
+					for answer in question.answers:
+						if answer.id == value.answers.get(question.id): text += question.text+"\n"+answer.text+"\n"+biography_view.disclosure(self,answer)+"\n"
+				continue
 			for question in value.get("answers",{}): text += "  "+str(question).capitalize()+": "+str(value.answers[question])+"\n"
 			for effect: Dictionary in value.get("known_effects",[]): text += "Known effect: "+str(effect.get("target",""))+" "+str(effect.get("value",""))+" (candidate; applied at entry)\n"
 		elif section == "custom" and value is Dictionary:
