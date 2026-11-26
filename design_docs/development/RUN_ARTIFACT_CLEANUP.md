@@ -1,5 +1,29 @@
 # Verification run artifact cleanup
 
+## 2026-11-26 IMP-014 increment 3
+
+After all owned children returned and normal engine inactivity checks passed,
+28 exact owned development/final roots were compacted. Removed **52,118 filesystem
+entries / 7,220,640,940 logical bytes**, with **396 retained evidence files**
+hash-verified and zero deletion failures. No task-owned full project/export,
+dependency copy or cache remains. Installed template junction targets, external
+classic/reference data and earlier human/acceptance/uncertain roots were protected.
+
+Retained 28 verified executed-source archives, delivery/tool snapshots, typed
+inputs, reports/logs and reviewed captures. The initial preflight restart occurred
+before any deletion; the final script revalidated ancestry for the deletion phase.
+Exact plan, actual-removal journal, script, archive hashes and retained aliases are
+under `main_project/tests/.runs/imp014-increment3-audit/` and the
+[delivery audit](evidence/IMP-014-increment-3-2026-11-26.audit.json).
+
+Retention above 8 GiB was reviewed at **13,770,293,043 bytes** before cleanup;
+post-cleanup sampled retention is **6,563,197,549 bytes**, before final small
+metadata writes. Remaining older roots and their largest consumers are recorded
+and protected; no new full-build retention exception was created. Rebuild the
+controlled review through `tools/review_activity.ps1`; no administrator, elevated
+process query or security-setting change was needed. See the
+[execution evidence](evidence/IMP-014-increment-3-2026-11-26.md).
+
 ## 2026-11-25 IMP-014 increment 2
 
 Four exact owned inactive batches compacted **54 roots**, removing **89,316

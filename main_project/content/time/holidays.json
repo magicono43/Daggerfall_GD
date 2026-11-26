@@ -1,0 +1,1491 @@
+{
+  "domain": "rule.holidays",
+  "path": "annual",
+  "operation": "add",
+  "entries": [
+    {
+      "id": "new-life",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "New Life",
+        "recurrence": "annual-fixed-360",
+        "day": 1,
+        "priority": 53,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 1,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 1,
+            "region_byte": 255,
+            "day": 1
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "scour-day",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Scour Day",
+        "recurrence": "annual-fixed-360",
+        "day": 2,
+        "priority": 52,
+        "regions": [
+          "packs/classic#region-24"
+        ],
+        "classic_id": 2,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 2,
+            "region_byte": 25,
+            "day": 2
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "ovanka",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Ovanka",
+        "recurrence": "annual-fixed-360",
+        "day": 12,
+        "priority": 51,
+        "regions": [
+          "packs/classic#region-00"
+        ],
+        "classic_id": 3,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 3,
+            "region_byte": 1,
+            "day": 12
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "south-winds-prayer",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "South Winds Prayer",
+        "recurrence": "annual-fixed-360",
+        "day": 15,
+        "priority": 50,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 4,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 4,
+            "region_byte": 255,
+            "day": 15
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "day-of-lights",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Day of Lights",
+        "recurrence": "annual-fixed-360",
+        "day": 16,
+        "priority": 49,
+        "regions": [
+          "packs/classic#region-28"
+        ],
+        "classic_id": 5,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 5,
+            "region_byte": 29,
+            "day": 16
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "waking-day",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Waking Day",
+        "recurrence": "annual-fixed-360",
+        "day": 18,
+        "priority": 48,
+        "regions": [
+          "packs/classic#region-04"
+        ],
+        "classic_id": 6,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 6,
+            "region_byte": 5,
+            "day": 18
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "mad-pelagius",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Mad Pelagius",
+        "recurrence": "annual-fixed-360",
+        "day": 32,
+        "priority": 47,
+        "regions": [
+          "packs/classic#region-24"
+        ],
+        "classic_id": 7,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 7,
+            "region_byte": 25,
+            "day": 32
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "othroktide",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Othroktide",
+        "recurrence": "annual-fixed-360",
+        "day": 35,
+        "priority": 46,
+        "regions": [
+          "packs/classic#region-05"
+        ],
+        "classic_id": 8,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 8,
+            "region_byte": 6,
+            "day": 35
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "day-of-release",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Day of Release",
+        "recurrence": "annual-fixed-360",
+        "day": 38,
+        "priority": 45,
+        "regions": [
+          "packs/classic#region-59"
+        ],
+        "classic_id": 9,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 9,
+            "region_byte": 60,
+            "day": 38
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "hearts-day",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Hearts Day",
+        "recurrence": "annual-fixed-360",
+        "day": 46,
+        "priority": 44,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 10,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 10,
+            "region_byte": 255,
+            "day": 46
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "perserverance-day",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Perserverance Day",
+        "recurrence": "annual-fixed-360",
+        "day": 57,
+        "priority": 43,
+        "regions": [
+          "packs/classic#region-40"
+        ],
+        "classic_id": 11,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 11,
+            "region_byte": 41,
+            "day": 57
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "aduros-nau",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Aduros Nau",
+        "recurrence": "annual-fixed-360",
+        "day": 58,
+        "priority": 42,
+        "regions": [
+          "packs/classic#region-25"
+        ],
+        "classic_id": 12,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 12,
+            "region_byte": 26,
+            "day": 58
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "first-harvest",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "First Harvest",
+        "recurrence": "annual-fixed-360",
+        "day": 67,
+        "priority": 41,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 13,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 13,
+            "region_byte": 255,
+            "day": 67
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "day-of-waiting",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Day of Waiting",
+        "recurrence": "annual-fixed-360",
+        "day": 69,
+        "priority": 40,
+        "regions": [
+          "packs/classic#region-01"
+        ],
+        "classic_id": 14,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 14,
+            "region_byte": 2,
+            "day": 69
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "flower-day",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Flower Day",
+        "recurrence": "annual-fixed-360",
+        "day": 85,
+        "priority": 39,
+        "regions": [
+          "packs/classic#region-24"
+        ],
+        "classic_id": 15,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 15,
+            "region_byte": 25,
+            "day": 85
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "festival-of-blades",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Festival of Blades",
+        "recurrence": "annual-fixed-360",
+        "day": 86,
+        "priority": 38,
+        "regions": [
+          "packs/classic#region-00"
+        ],
+        "classic_id": 16,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 16,
+            "region_byte": 1,
+            "day": 86
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "gardtide",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Gardtide",
+        "recurrence": "annual-fixed-360",
+        "day": 91,
+        "priority": 37,
+        "regions": [
+          "packs/classic#region-13"
+        ],
+        "classic_id": 17,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 17,
+            "region_byte": 14,
+            "day": 91
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "day-of-the-dead",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Day of the Dead",
+        "recurrence": "annual-fixed-360",
+        "day": 103,
+        "priority": 36,
+        "regions": [
+          "packs/classic#region-17"
+        ],
+        "classic_id": 18,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 18,
+            "region_byte": 18,
+            "day": 103
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "day-of-shame",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Day of Shame",
+        "recurrence": "annual-fixed-360",
+        "day": 110,
+        "priority": 35,
+        "regions": [
+          "packs/classic#region-19"
+        ],
+        "classic_id": 19,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 19,
+            "region_byte": 20,
+            "day": 110
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "jesters-day",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Jesters Day",
+        "recurrence": "annual-fixed-360",
+        "day": 118,
+        "priority": 34,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 20,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 20,
+            "region_byte": 255,
+            "day": 118
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "second-harvest",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Second Harvest",
+        "recurrence": "annual-fixed-360",
+        "day": 127,
+        "priority": 33,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 21,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 21,
+            "region_byte": 255,
+            "day": 127
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "marukhs-day",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Marukhs Day",
+        "recurrence": "annual-fixed-360",
+        "day": 129,
+        "priority": 32,
+        "regions": [
+          "packs/classic#region-27"
+        ],
+        "classic_id": 22,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 22,
+            "region_byte": 28,
+            "day": 129
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "fire-festival",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Fire Festival",
+        "recurrence": "annual-fixed-360",
+        "day": 140,
+        "priority": 31,
+        "regions": [
+          "packs/classic#region-32"
+        ],
+        "classic_id": 23,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 23,
+            "region_byte": 33,
+            "day": 140
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "fishing-day",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Fishing Day",
+        "recurrence": "annual-fixed-360",
+        "day": 150,
+        "priority": 30,
+        "regions": [
+          "packs/classic#region-30"
+        ],
+        "classic_id": 24,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 24,
+            "region_byte": 31,
+            "day": 150
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "drigh-rzimb",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Drigh RZimb",
+        "recurrence": "annual-fixed-360",
+        "day": 151,
+        "priority": 29,
+        "regions": [
+          "packs/classic#region-43"
+        ],
+        "classic_id": 25,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 25,
+            "region_byte": 44,
+            "day": 151
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "mid-year",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Mid Year",
+        "recurrence": "annual-fixed-360",
+        "day": 166,
+        "priority": 28,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 26,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 26,
+            "region_byte": 255,
+            "day": 166
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "dancing-day",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Dancing Day",
+        "recurrence": "annual-fixed-360",
+        "day": 173,
+        "priority": 27,
+        "regions": [
+          "packs/classic#region-17"
+        ],
+        "classic_id": 27,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 27,
+            "region_byte": 18,
+            "day": 173
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "tibedetha",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Tibedetha",
+        "recurrence": "annual-fixed-360",
+        "day": 174,
+        "priority": 26,
+        "regions": [
+          "packs/classic#region-34"
+        ],
+        "classic_id": 28,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 28,
+            "region_byte": 35,
+            "day": 174
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "merchants-festival",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Merchants Festival",
+        "recurrence": "annual-fixed-360",
+        "day": 190,
+        "priority": 25,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 29,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 29,
+            "region_byte": 255,
+            "day": 190
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "divad-etept",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Divad Etept",
+        "recurrence": "annual-fixed-360",
+        "day": 192,
+        "priority": 24,
+        "regions": [
+          "packs/classic#region-55"
+        ],
+        "classic_id": 30,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 30,
+            "region_byte": 56,
+            "day": 192
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "suns-rest",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Suns Rest",
+        "recurrence": "annual-fixed-360",
+        "day": 200,
+        "priority": 23,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 31,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 31,
+            "region_byte": 255,
+            "day": 200
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "fiery-night",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Fiery Night",
+        "recurrence": "annual-fixed-360",
+        "day": 209,
+        "priority": 22,
+        "regions": [
+          "packs/classic#region-00"
+        ],
+        "classic_id": 32,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 32,
+            "region_byte": 1,
+            "day": 209
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "maiden-katrica",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Maiden Katrica",
+        "recurrence": "annual-fixed-360",
+        "day": 212,
+        "priority": 21,
+        "regions": [
+          "packs/classic#region-47"
+        ],
+        "classic_id": 33,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 33,
+            "region_byte": 48,
+            "day": 212
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "koomu-alazeri",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Koomu Alazeri",
+        "recurrence": "annual-fixed-360",
+        "day": 221,
+        "priority": 20,
+        "regions": [
+          "packs/classic#region-40"
+        ],
+        "classic_id": 34,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 34,
+            "region_byte": 41,
+            "day": 221
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "feast-of-the-tiger",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Feast of the Tiger",
+        "recurrence": "annual-fixed-360",
+        "day": 224,
+        "priority": 19,
+        "regions": [
+          "packs/classic#region-10"
+        ],
+        "classic_id": 35,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 35,
+            "region_byte": 11,
+            "day": 224
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "appreciation-day",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Appreciation Day",
+        "recurrence": "annual-fixed-360",
+        "day": 231,
+        "priority": 18,
+        "regions": [
+          "packs/classic#region-21"
+        ],
+        "classic_id": 36,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 36,
+            "region_byte": 22,
+            "day": 231
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "harvest-end",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Harvest End",
+        "recurrence": "annual-fixed-360",
+        "day": 237,
+        "priority": 17,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 37,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 37,
+            "region_byte": 255,
+            "day": 237
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "tales-and-tallow",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Tales and Tallow",
+        "recurrence": "annual-fixed-360",
+        "day": 243,
+        "priority": 16,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 38,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 38,
+            "region_byte": 255,
+            "day": 243
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "khurat",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Khurat",
+        "recurrence": "annual-fixed-360",
+        "day": 246,
+        "priority": 15,
+        "regions": [
+          "packs/classic#region-16"
+        ],
+        "classic_id": 39,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 39,
+            "region_byte": 17,
+            "day": 246
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "riglametha",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Riglametha",
+        "recurrence": "annual-fixed-360",
+        "day": 252,
+        "priority": 14,
+        "regions": [
+          "packs/classic#region-22"
+        ],
+        "classic_id": 40,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 40,
+            "region_byte": 23,
+            "day": 252
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "childrens-day",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Childrens Day",
+        "recurrence": "annual-fixed-360",
+        "day": 259,
+        "priority": 13,
+        "regions": [
+          "packs/classic#region-19"
+        ],
+        "classic_id": 41,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 41,
+            "region_byte": 20,
+            "day": 259
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "dirij-tereur",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Dirij Tereur",
+        "recurrence": "annual-fixed-360",
+        "day": 275,
+        "priority": 12,
+        "regions": [
+          "packs/classic#region-00"
+        ],
+        "classic_id": 42,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 42,
+            "region_byte": 1,
+            "day": 275
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "witches-festival",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Witches Festival",
+        "recurrence": "annual-fixed-360",
+        "day": 283,
+        "priority": 11,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 43,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 43,
+            "region_byte": 255,
+            "day": 283
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "broken-diamonds",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Broken Diamonds",
+        "recurrence": "annual-fixed-360",
+        "day": 293,
+        "priority": 10,
+        "regions": [
+          "packs/classic#region-18"
+        ],
+        "classic_id": 44,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 44,
+            "region_byte": 19,
+            "day": 293
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "emperors-birthday",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Emperors Birthday",
+        "recurrence": "annual-fixed-360",
+        "day": 300,
+        "priority": 9,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 45,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 45,
+            "region_byte": 255,
+            "day": 300
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "serpents-dance",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Serpents Dance",
+        "recurrence": "annual-fixed-360",
+        "day": 303,
+        "priority": 8,
+        "regions": [
+          "packs/classic#region-50"
+        ],
+        "classic_id": 46,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 46,
+            "region_byte": 51,
+            "day": 303
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "moon-festival",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Moon Festival",
+        "recurrence": "annual-fixed-360",
+        "day": 308,
+        "priority": 7,
+        "regions": [
+          "packs/classic#region-59"
+        ],
+        "classic_id": 47,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 47,
+            "region_byte": 60,
+            "day": 308
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "hel-anseilak",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Hel Anseilak",
+        "recurrence": "annual-fixed-360",
+        "day": 318,
+        "priority": 6,
+        "regions": [
+          "packs/classic#region-45"
+        ],
+        "classic_id": 48,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 48,
+            "region_byte": 46,
+            "day": 318
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "warriors-festival",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Warriors Festival",
+        "recurrence": "annual-fixed-360",
+        "day": 320,
+        "priority": 5,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 49,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 49,
+            "region_byte": 255,
+            "day": 320
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "north-winds-festival",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "North Winds Festival",
+        "recurrence": "annual-fixed-360",
+        "day": 345,
+        "priority": 4,
+        "regions": [
+          "*"
+        ],
+        "classic_id": 50,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 50,
+            "region_byte": 255,
+            "day": 345
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "baranth-do",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Baranth Do",
+        "recurrence": "annual-fixed-360",
+        "day": 348,
+        "priority": 3,
+        "regions": [
+          "packs/classic#region-00"
+        ],
+        "classic_id": 51,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 51,
+            "region_byte": 1,
+            "day": 348
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "chila",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Chila",
+        "recurrence": "annual-fixed-360",
+        "day": 354,
+        "priority": 2,
+        "regions": [
+          "packs/classic#region-44"
+        ],
+        "classic_id": 52,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 52,
+            "region_byte": 45,
+            "day": 354
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    },
+    {
+      "id": "saturalia",
+      "value": {
+        "schema": "regional-holidays-v1",
+        "label": "Saturalia",
+        "recurrence": "annual-fixed-360",
+        "day": 355,
+        "priority": 1,
+        "regions": [
+          "packs/classic#region-23"
+        ],
+        "classic_id": 53,
+        "provenance": {
+          "source": "DFU 1.1.1 pinned local snapshot",
+          "sha256": {
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+            "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+          },
+          "license": "MIT; scripts/rule/DFU_LICENSE.txt",
+          "adapter": {
+            "holiday": 53,
+            "region_byte": 24,
+            "day": 355
+          },
+          "differences": "All matches; priority desc then stable ID; no day-355 cutoff. Old Life unused source enum excluded."
+        }
+      }
+    }
+  ]
+}

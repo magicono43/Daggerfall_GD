@@ -111,6 +111,13 @@ and cleared by `begin_candidate` / `finish_candidate`, and expose
 outcomes. These are preparation-only callbacks, not runtime mutation requests. The registry's
 `domain_index(domain)` calls that optional projection only with its **published**
 ticket and returns a detached copy; before publication it returns `before_readiness`.
+
+IMP-014 increment 3 additionally exposes `point_query(domain, context)` for
+adapters with a prepared narrow point-query index. The registry supplies only its
+actual committed ticket; before publication or without the optional provider it
+fails explicitly. Holiday DATA uses this to avoid copying full geography/holiday
+catalogs during regional date lookup. Candidate lifetime, validation, detached
+results, provenance and locking remain the same; see [holiday contract](../rule/HOLIDAYS.md).
 Geography uses this for validated membership/name/classic-mapping lookup keys,
 then reads records through the authoritative registry's ordinary `query` API.
 Failed candidates clear the projection; new tickets replace it. There is no

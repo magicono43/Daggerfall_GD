@@ -2,6 +2,7 @@ extends RefCounted
 ## Retained chronological cursor. Providers own indexed next-due queries and
 ## mutation receipts. This coordinator never materializes an interval's stream.
 const Calendar = preload("res://scripts/time/calendar.gd")
+const Policies = preload("res://scripts/time/activity_policies.gd")
 const ErrorMonitor = preload("res://scripts/rule/formula_error_monitor.gd")
 const DEFAULT_BUDGET := 64
 var budget: Variant = DEFAULT_BUDGET
@@ -24,7 +25,12 @@ func bind(services: Array) -> Dictionary:
 		if not service.get("calendar_due_work",false): continue
 		var d: Variant = service.get("calendar_schedule")
 		var provider: Variant = service.get("provider")
-		if not d is Dictionary or d.size() != 4 or not d.get("id") is String or not preload("res://scripts/mod/package_library.gd").valid_id(d.id) or candidates.has(d.id) or not Calendar.integer(d.get("version"),1,Calendar.MAX) or not d.get("after") is Array or not d.get("interacts") is Array or service.get("lifetime") != "session" or service.get("ready") != true or not is_instance_valid(provider): return {"ok":false,"reason":"Complete current scheduler declaration required."}
+		if not d is Dictionary or d.size() != (5 if d.has("activity_policy") else 4) or not d.get("id") is String or not preload("res://scripts/mod/package_library.gd").valid_id(d.id) or candidates.has(d.id) or not Calendar.integer(d.get("version"),1,Calendar.MAX) or not d.get("after") is Array or not d.get("interacts") is Array or service.get("lifetime") != "session" or service.get("ready") != true or not is_instance_valid(provider): return {"ok":false,"reason":"Complete current scheduler declaration required."}
+		if d.has("activity_policy"):
+			var error := Policies.reason(d.activity_policy)
+			if not error.is_empty(): return {"ok":false,"reason":error}
+			for method: String in ["calendar_range_current","calendar_apply_range","calendar_range_outcome"]:
+				if not provider.has_method(method): return {"ok":false,"reason":"Range policy lacks bound owner interface: "+method}
 		for method: String in ["calendar_schedule_current","calendar_next_due","calendar_due_current","calendar_apply_due","calendar_due_outcome"]:
 			if not provider.has_method(method): return {"ok":false,"reason":"Missing required scheduler interface: "+method}
 		candidates[d.id] = {"provider":weakref(provider),"declaration":d.duplicate(true)}
@@ -50,6 +56,12 @@ func bind(services: Array) -> Dictionary:
 	for id: String in sorted:
 		for other: String in candidates[id].declaration.interacts:
 			if not _precedes(id,other,candidates) and not _precedes(other,id,candidates): return {"ok":false,"reason":"Interacting work requires declared precedence."}
+	for id: String in sorted:
+		var policy: Dictionary = candidates[id].declaration.get("activity_policy",{})
+		if policy.is_empty() or policy.mode == "bulk": continue
+		for other: String in sorted:
+			var other_policy: Dictionary = candidates[other].declaration.get("activity_policy",{})
+			if (other_policy.is_empty() or other_policy.mode == "bulk") and _precedes(id,other,candidates): return {"ok":false,"reason":"Destination selection cannot precede unresolved chronology."}
 	bindings = candidates
 	order = ranked
 	precedence = {}
@@ -108,13 +120,19 @@ func _call(id: String, method: String, packet: Dictionary) -> Dictionary:
 		result = provider.call(method,detached)
 	OS.remove_logger(monitor)
 	if not active() or clock._scope != scope: return {"ok":false,"reason":"Scheduler scope retired during callback."}
+	if clock.definitions == null or clock.definitions.get_instance_id() != clock._definitions_id or clock.definitions.content_ticket() != clock._content_ticket: return {"ok":false,"reason":"Scheduler content publication changed during callback."}
 	if not monitor.errors.is_empty() or typeof(current) != TYPE_BOOL or not current or not result is Dictionary: return {"ok":false,"reason":"Required schedule callback failed or became stale."}
 	return {"ok":true,"value":result.duplicate(true)}
 
 func _packet() -> Dictionary:
-	return {"session":operation.scope,"operation":operation.serial,"start":operation.start,"endpoint":operation.target,"committed":_clock.get_ref()._timestamp,"reason":operation.reason,"interrupted":operation.interrupted}
+	return {"session":operation.scope,"operation":operation.serial,"start":operation.start,"endpoint":operation.target,"committed":_clock.get_ref()._timestamp,"reason":operation.reason,"interrupted":operation.interrupted,"context":operation.request.get("context","")}
 
 func _matches(packet: Dictionary, result: Dictionary) -> bool:
+	if packet.has("coverage"):
+		var echo := result.duplicate(true)
+		echo.erase("kind")
+		if result.get("kind") == "not-applied": echo.erase("retry_authorized")
+		return Policies.exact(echo,packet) and result.get("kind") in ["completed","not-applied"]
 	return result.get("session") == packet.session and typeof(result.get("operation")) == TYPE_INT and result.operation == packet.operation and result.get("owner") == packet.owner and result.get("occurrence") == packet.occurrence and typeof(result.get("timestamp")) == TYPE_INT and result.timestamp == packet.timestamp and typeof(result.get("revision")) == TYPE_INT and result.revision == packet.revision
 
 func _result(kind: String, reason := "") -> Dictionary:
@@ -173,11 +191,12 @@ func _process_pass() -> Dictionary:
 		# pause. Moving to another instant requires all independent gates clear.
 		if not operation.uncertain.is_empty():
 			var uncertain: Dictionary = operation.uncertain
-			var reconciled := _call(uncertain.owner,"calendar_due_outcome",uncertain)
+			var reconciled := _call(uncertain.owner,"calendar_range_outcome" if uncertain.has("coverage") else "calendar_due_outcome",uncertain)
 			if not active(): return {"ok":false,"kind":"rejected","reason":"Retired operation."}
 			if not reconciled.ok: return _fail(reconciled.get("reason","Recovery unavailable."))
 			var value: Dictionary = reconciled.value
 			if value.get("kind") == "not-applied" and _matches(uncertain,value) and value.get("retry_authorized") == true and typeof(value.get("retry_authorized")) == TYPE_BOOL:
+				if uncertain.has("coverage"): operation.range_retry = uncertain.duplicate(true)
 				operation.uncertain = {}
 				operation.failed = false
 			elif value.get("kind") in ["completed","interrupted"] and _matches(uncertain,value):
@@ -185,8 +204,24 @@ func _process_pass() -> Dictionary:
 			else: return _fail("Owner reconciliation has not established a committed outcome or safe retry.")
 			continue
 		if operation.failed: return _fail("Planning failure requires scope replacement; no mutation replay is authorized.")
+		if not operation.get("range_retry",{}).is_empty():
+			var retry_packet: Dictionary = operation.range_retry
+			var approved := _call(retry_packet.owner,"calendar_range_current",retry_packet)
+			if not active(): return {"ok":false,"kind":"rejected","reason":"Retired range retry."}
+			if not approved.ok or not Policies.exact(approved.value,{"kind":"current","policy":retry_packet.policy}): return _fail("Original range retry approval expired.")
+			operation.uncertain = retry_packet.duplicate(true)
+			operation.erase("range_retry")
+			var retried := _call(retry_packet.owner,"calendar_apply_range",retry_packet)
+			if not active(): return {"ok":false,"kind":"rejected","reason":"Retired range retry."}
+			if not retried.ok or retried.value.get("kind") != "completed" or not _matches(retry_packet,retried.value): return _fail("Range retry outcome ambiguous.")
+			_ack(retry_packet,retried.value)
+			continue
 		if operation.scan < order.size():
 			var id: String = order[operation.scan]
+			var policy := _policy(id)
+			if not policy.is_empty() and policy.mode != "bulk":
+				operation.scan += 1
+				continue
 			var packet := _packet()
 			packet.cursor = operation.cursors.get(id,{})
 			var planned := _call(id,"calendar_next_due",packet)
@@ -210,7 +245,11 @@ func _process_pass() -> Dictionary:
 			if operation.candidates.has(id) and (chosen.is_empty() or operation.candidates[id].timestamp < due):
 				chosen = id
 				due = operation.candidates[id].timestamp
-		if operation.interrupted and (chosen.is_empty() or due > clock._timestamp): return _result("interrupted")
+		if operation.interrupted and (chosen.is_empty() or due > clock._timestamp):
+			var deferred := _destination()
+			if not deferred.is_empty(): return deferred
+			if _destination_pending(): continue
+			return _result("interrupted")
 		if chosen.is_empty():
 			if due > clock._timestamp:
 				var authorized: bool = clock._scheduler_authorize_segment(operation)
@@ -219,12 +258,27 @@ func _process_pass() -> Dictionary:
 				if not clock._scheduler_can_advance(operation.request): return _result("pending-budget","Independent suspension prevents the next chronological segment.")
 				clock._scheduler_segment(operation,due)
 				if not active(): return {"ok":false,"kind":"rejected","reason":"Retired operation."}
+			var deferred := _destination()
+			if not deferred.is_empty(): return deferred
+			if _destination_pending(): continue
 			clock._fraction = operation.fraction
 			return _result("completed")
 		if operation.instant != due:
 			operation.instant = due
 			operation.instant_done = []
 		var next: Dictionary = operation.candidates[chosen]
+		var policy := _policy(chosen)
+		if not policy.is_empty() and policy.mode == "bulk":
+			var bound: int = operation.target
+			if operation.interrupted: bound = mini(bound,clock._timestamp)
+			for other: String in order:
+				if other != chosen and operation.candidates.has(other): bound = mini(bound,operation.candidates[other].timestamp-1)
+			var coverage := Policies.coverage(policy,operation.cursors.get(chosen,{}).get("timestamp",operation.start),bound)
+			if coverage.get("ok",false) and coverage.count > 1 and policy.first+coverage.first_index*policy.period == due:
+				coverage.range_end = policy.first+coverage.last_index*policy.period
+				var ranged := _range(chosen,policy,coverage)
+				if not ranged.is_empty(): return ranged
+				if operation.cursors.get(chosen,{}).get("timestamp",-1) == coverage.range_end: continue
 		var dispatch := _packet()
 		dispatch.merge({"owner":chosen,"occurrence":next.occurrence,"timestamp":due,"revision":next.revision})
 		var fresh := _call(chosen,"calendar_due_current",dispatch)
@@ -250,6 +304,16 @@ func _process_pass() -> Dictionary:
 	return _result("pending-budget")
 
 func _ack(packet: Dictionary, value: Dictionary) -> void:
+	if packet.has("coverage"):
+		operation.cursors[packet.owner] = {"timestamp":packet.coverage.range_end,"occurrence":str(packet.coverage.last_index)}
+		operation.instant = packet.coverage.range_end
+		operation.instant_done = [packet.owner]
+		if packet.policy.mode != "bulk": operation.done["destination:"+packet.owner] = true
+		operation.uncertain = {}
+		operation.failed = false
+		operation.scan = 0
+		operation.candidates = {}
+		return
 	operation.done[packet.owner+":"+packet.occurrence] = true
 	operation.cursors[packet.owner] = {"timestamp":packet.timestamp,"occurrence":packet.occurrence}
 	operation.instant_done.append(packet.owner)
@@ -258,6 +322,46 @@ func _ack(packet: Dictionary, value: Dictionary) -> void:
 	operation.failed = false
 	operation.scan = 0
 	operation.candidates = {}
+
+func _policy(id: String) -> Dictionary:
+	var policy: Dictionary = bindings[id].declaration.get("activity_policy",{})
+	return policy if not policy.is_empty() and Policies.applies(policy,operation.request) else {}
+
+func _destination_pending() -> bool:
+	for id: String in order:
+		var policy := _policy(id)
+		if not policy.is_empty() and policy.mode != "bulk" and not operation.done.has("destination:"+id): return true
+	return false
+
+func _destination() -> Dictionary:
+	for id: String in order:
+		var policy := _policy(id)
+		if policy.is_empty() or policy.mode == "bulk" or operation.done.has("destination:"+id): continue
+		return _range(id,policy,Policies.coverage(policy,operation.start,_clock.get_ref()._timestamp),true)
+	return {}
+
+func _range(id: String, policy: Dictionary, coverage: Dictionary, destination := false) -> Dictionary:
+	var clock: RefCounted = _clock.get_ref()
+	var packet := _packet()
+	packet.merge({"owner":id,"policy":policy.duplicate(true),"coverage":coverage,"requester":operation.request.get("owner","ordinary"),"segment":operation.segment+1,"declaration":bindings[id].declaration.version,"content":clock._content_ticket})
+	var fresh := _call(id,"calendar_range_current",packet)
+	if not active(): return {"ok":false,"kind":"rejected","reason":"Retired range operation."}
+	if fresh.ok and fresh.value == {"kind":"chronological"} and not destination: return {}
+	if not fresh.ok or not Policies.exact(fresh.value,{"kind":"current","policy":policy}): return _fail("Exact bound owner range approval required.")
+	if coverage.range_end > clock._timestamp:
+		var authorized: bool = clock._scheduler_authorize_segment(operation)
+		if not active(): return {"ok":false,"kind":"rejected","reason":"Retired range operation."}
+		if not authorized: return _fail("Range requester expired.")
+		if not clock._scheduler_can_advance(operation.request): return _result("pending-budget","Independent suspension prevents range commitment.")
+		clock._scheduler_segment(operation,coverage.range_end)
+		if not active(): return {"ok":false,"kind":"rejected","reason":"Retired range operation."}
+	packet.committed = clock._timestamp
+	operation.uncertain = packet.duplicate(true)
+	var applied := _call(id,"calendar_apply_range",packet)
+	if not active(): return {"ok":false,"kind":"rejected","reason":"Retired range operation."}
+	if not applied.ok or applied.value.get("kind") != "completed" or not _matches(packet,applied.value): return _fail("Range outcome ambiguous; checked reconciliation required.")
+	_ack(packet,applied.value)
+	return {}
 
 func retire() -> void:
 	operation = {}

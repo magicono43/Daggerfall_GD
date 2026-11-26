@@ -433,6 +433,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("queries leave RNG unchanged",inspected,core.randomness.snapshot())
 	check("calendar never draws gameplay RNG",true,rng_before.sources == inspected.sources)
 	measurements.scheduler = await preload("res://tests/scheduler_cases.gd").new().run(self,shell)
+	measurements.activity = await preload("res://tests/activity_policy_cases.gd").new().run(self,shell)
 	if DisplayServer.get_name() != "headless":
 		var start: int = core.calendar.query().timestamp
 		shell.set_physics_process(true)
@@ -449,7 +450,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		var image := shell.get_viewport().get_texture().get_image()
 		check("rendered calendar review available",false,image.is_empty())
 		image.save_png(sandbox.path_join("calendar-clock.png"))
-	return {"ok":checks.all(func(item): return item.expected == item.actual),"checks":checks,"count":checks.size(),"fixture":fixture.fixture,"scheduler_fixture":"calendar-scheduler-v1","engine":Engine.get_version_info(),"display":DisplayServer.get_name(),"measurements":measurements,"inputs":{"seed":"fixture-material","elapsed":"integer nanoseconds","rate_scale":1000000}}
+	return {"ok":checks.all(func(item): return item.expected == item.actual),"checks":checks,"count":checks.size(),"fixture":fixture.fixture,"scheduler_fixture":"calendar-scheduler-v1","activity_fixture":"calendar-activity-v1","engine":Engine.get_version_info(),"display":DisplayServer.get_name(),"measurements":measurements,"inputs":{"seed":"fixture-material","elapsed":"integer nanoseconds","rate_scale":1000000}}
 
 func before_observer(core: RefCounted, source: RefCounted, observed: Array) -> void:
 	var start: int = core.calendar.query().timestamp

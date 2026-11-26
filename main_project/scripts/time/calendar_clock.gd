@@ -126,6 +126,9 @@ func query() -> Dictionary:
 	result.make_read_only()
 	return result
 
+func regional_holidays(region: Variant, timestamp: Variant) -> Dictionary:
+	return preload("res://scripts/rule/regional_holidays.gd").query(definitions,region,timestamp)
+
 func capture_snapshot() -> Dictionary:
 	var core: RefCounted = _core.get_ref()
 	if _busy or _required_work or scheduler.active() or not scheduler.bindings.is_empty() or not _current() or core == null or _scope.is_empty() or core.snapshot().session != _scope or not core.gates.safe or core.gates.simulation() or core.gates.blocked("save") or core.busy(): return _failure("Settled supported owner save boundary required.")
@@ -167,15 +170,17 @@ func ordinary(owner: RefCounted, request: Dictionary) -> Dictionary:
 func activity(owner: RefCounted, request: Dictionary) -> Dictionary:
 	if not _current(): return _failure("Stale activity session.")
 	if _busy: return _failure("Clock is owned by another commitment.","busy")
-	if request.size() not in [5,7] or request.get("session") != _scope or not request.get("owner") is String or not request.get("operation") is String or request.operation.is_empty() or request.operation.length() > 160 or not request.get("reason") is String or request.reason.is_empty() or request.reason.length() > 160 or not Calendar.integer(request.get("duration_ms"),1,Calendar.MAX): return _failure("Complete explicit activity request required.")
-	if request.size() == 7 and (not Calendar.integer(request.get("start"),0,Calendar.MAX) or not Calendar.integer(request.get("endpoint"),0,Calendar.MAX) or request.endpoint <= request.start or request.endpoint-request.start != request.duration_ms): return _failure("Checked forward native endpoints required.")
+	var expected_fields := 5+(1 if request.has("context") else 0)+(2 if request.has("start") or request.has("endpoint") else 0)
+	if request.size() != expected_fields or (request.has("context") and (not request.context is String or not preload("res://scripts/mod/package_library.gd").valid_id(request.context))) or request.get("session") != _scope or not request.get("owner") is String or not request.get("operation") is String or request.operation.is_empty() or request.operation.length() > 160 or not request.get("reason") is String or request.reason.is_empty() or request.reason.length() > 160 or not Calendar.integer(request.get("duration_ms"),1,Calendar.MAX): return _failure("Complete explicit activity request required.")
+	if request.has("start") or request.has("endpoint"):
+		if not Calendar.integer(request.get("start"),0,Calendar.MAX) or not Calendar.integer(request.get("endpoint"),0,Calendar.MAX) or request.endpoint <= request.start or request.endpoint-request.start != request.duration_ms: return _failure("Checked forward native endpoints required.")
 	var binding: WeakRef = _activities.get(request.owner)
 	if binding == null or binding.get_ref() != owner: return _failure("Undeclared activity owner.")
 	var key: String = "activity:"+request.owner+":"+request.operation
 	if _scheduled_receipts.has(key): return _scheduled_retry(key,request)
 	if scheduler.active(): return scheduler.progress(key,request)
 	if _receipts.has(key): return _retry(key,request)
-	if request.size() == 7 and request.start != _timestamp: return _failure("Native request start is not the current committed endpoint.")
+	if request.has("start") and request.start != _timestamp: return _failure("Native request start is not the current committed endpoint.")
 	var core: RefCounted = _core.get_ref()
 	if core.gates.blocked_except("simulation",activity_hold_owner(request.owner),_scope): return _failure("Independent suspension blocks activity.")
 	if _required_work and scheduler.bindings.is_empty(): return _failure("Required due-work scheduler unavailable.","deferred")

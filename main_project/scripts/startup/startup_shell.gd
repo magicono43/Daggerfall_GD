@@ -55,7 +55,7 @@ func _ready() -> void:
 	if inputs.is_empty():
 		return
 	# Combined verification retains every ordinary registration; only roots differ.
-	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","calendar-clock","calendar-review","calendar-scheduler-review","ground-review","ground-movement","ground-movement_reload","actor-state","actor-state_reload"]
+	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","ground-review","ground-movement","ground-movement_reload","actor-state","actor-state_reload"]
 	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 		var resource_sources: Array = []
 		if fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload"]:
@@ -484,7 +484,7 @@ func _process(_delta: float) -> void:
 func fixture_actor_material(_ticket: Dictionary, _mode: String) -> Dictionary:
 	# Pass through the existing CORE constructor seam; no second lifecycle/RNG.
 	var seeds = preload("res://scripts/rule/seed_derivation.gd")
-	if fixture.get("mode") in ["calendar-clock","calendar-review","calendar-scheduler-review","actor-state","actor-state_reload"]:
+	if fixture.get("mode") in ["calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","actor-state","actor-state_reload"]:
 		var material := PackedByteArray()
 		material.resize(32)
 		return seeds.validate_material(material)
@@ -560,6 +560,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/ground_review.gd"
 	elif fixture.get("mode") == "calendar-clock":
 		script_path = "res://tests/calendar_cases.gd"
+	elif fixture.get("mode") == "calendar-activity-review":
+		script_path = "res://tests/activity_review.gd"
 	elif fixture.get("mode") == "calendar-scheduler-review":
 		script_path = "res://tests/scheduler_review.gd"
 	elif fixture.get("mode") == "calendar-review":

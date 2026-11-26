@@ -1,5 +1,9 @@
 # Chronological due work — IMP-014 increment 2
 
+The [increment-3 range policy extension](ACTIVITY_POLICIES.md) qualifies explicit
+controlled activity policies alongside this accepted chronological fallback.
+Statements below excluding bulk/holidays describe increment 2's delivered scope.
+
 `calendar_clock.gd` remains the sole timestamp/fraction writer. Its `due_work.gd`
 helper retains one in-memory operation through bounded passes. CORE owns all
 gates. Owners retain domain mutations, indexed timing and assigned outcomes.

@@ -1,0 +1,1349 @@
+{
+  "schema": "imp014-increment3-delivery-audit-v1",
+  "status": "machine-qualified-human-acceptance-pending",
+  "baseline_commit": "99f9cbd",
+  "start_est": "2026-11-25 23:46:30 EST",
+  "end_est": "2026-11-26 01:02:55 EST",
+  "elapsed": "1h 16m 25s",
+  "production_and_fixture_hashes": {
+    "content/time/calendar.json": "21D7280E034CE4D6C992AB5BCE30DDFFE8754CBABCFFC28F316C0DD60D982CDB",
+    "content/time/holidays.json": "175D5705DEBAE6DEE3347A8B08EFD66C98B5102BE6CE1E46124B67783CBC0B44",
+    "scripts/data/definition_registry.gd": "E4070058A06492FBD187B21D44BE52F7E65D379B6087C74353D32A2206D77C9F",
+    "scripts/data/holiday_definitions.gd": "C88A6E2BD362ACFB2C954DF7F868476CCAD458679A08DB773AB98010D68EEEF8",
+    "scripts/rule/regional_holidays.gd": "B94F3A80007E7739564979ED55B4E217D576F1A5B3B7123B89C6B2657956985D",
+    "scripts/session/session_gates.gd": "945A1D64A2043BA10ACADDF86A42BFD216F98DB7C6C61420401C0C6FD126F27B",
+    "scripts/session/session_lifecycle.gd": "89590CFB11CE8FE0E7238A003D46319EF554B3056D529373B0703D90F01EE0D1",
+    "scripts/session/session_shell.gd": "E868383A30A97A7FEB6F5F710189EF4E621215EBE1FF4101194E86B5B258CBD5",
+    "scripts/startup/provider_boundary.gd": "96EF06C046D5433D44DFA1BA4172345E6977ED6E210651FB9D7A2290B8748745",
+    "scripts/startup/startup_shell.gd": "953D322DA8AFA0121C55DAA3DF29B59BB2EB49269678FBF8F5E1A50116F0ED84",
+    "scripts/time/activity_policies.gd": "A50493046E353D1A759698FB1EA8AFA066A06672C3F288669C99CD2D7551345B",
+    "scripts/time/calendar.gd": "9A78C43A686A60115268717E9DAAFD827E03518715EA56F3ECBDC2384DBF39FD",
+    "scripts/time/calendar_clock.gd": "7BDD2015B612B1526EF2B2FF082EABF5CFCC2753EBCE15D94E7DA51AE79308E0",
+    "scripts/time/calendar_crossings.gd": "FB6B6445AD8A9E6CF781E774984E4A442FC01B5CCE74E0FB51F27B00C9446F1B",
+    "scripts/time/due_work.gd": "DA079B170324BAF8B427BE23D0F7D0CEE65EA4AEBDFB2D3060F3B19BE5DF1367",
+    "tests/activity_math_cases.gd": "D768F9C91FDCFA83AC3C1C63056E50240E5775952809B17F7E5963F083D8CF5C",
+    "tests/activity_owner_cases.gd": "3986867DFF249FFB071B226BBB5B9BC0D42B3C229303ACB99478FDD5CD3FBBFD",
+    "tests/activity_policy_cases.gd": "22D0E8FBBB24DF5EB1E7085AD2BCBA64069CBC255B547A341AA87D6DF318C274",
+    "tests/activity_policy_inventory.json": "412AAB1D2040C1B8E19993D48547D15F1101C50632BB42E3690C46E1D598D409",
+    "tests/activity_review.gd": "2F9680A3F80E5396F431E2ED71EDE528D4BD7FE9F70AB6744FDB908047EBCAB8",
+    "tests/calendar_cases.gd": "E1735BF5710ED76407A20B0E221CE973EE0B7EC4F841955EB7F3299E81EFA992",
+    "tests/calendar_inventory.json": "EAC413DD617D925AE04058102625B319107C9F5D2C68E1F68D8B30A2D02375A9",
+    "tests/calendar_review.gd": "E4B09CE54F83C333CC231BAA40BF8DF569B8145D0B3E26CDB1BD624BDE4349B8",
+    "tests/scheduler_cases.gd": "61A7918B45D1603656222BF306AF721A121B38C45AC7C4361DF23BA1C4D786C9",
+    "tests/scheduler_inventory.json": "8298FBAA6C0ADBD3AC68578AFD853C6BE07528C8AA9DAF7C83347A48D8F39372",
+    "tests/scheduler_review.gd": "F0B635328F4E9377AE8F5F05947DA1C97D645ED06654AF2115B3C17B26E92CC8"
+  },
+  "accepted_inventory_preservation": {
+    "tests/calendar_inventory.json": true,
+    "tests/scheduler_inventory.json": true
+  },
+  "selected_assertions": 5078,
+  "selected": [
+    {
+      "selection": "calendar-clock-headless",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-74ea364ac1a14b688f16d10bbc1f50a5",
+      "assertions": 509,
+      "children": [
+        {
+          "path": "project/tests/.runs/scenario-1/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-74ea364ac1a14b688f16d10bbc1f50a5\\retained-evidence\\project\\tests\\.runs\\scenario-1\\result.json",
+          "sha256": "D337F40B9BC7120FC02B5A6E7DA18932CDF3541DFD634D3966409D66DBAD8EDF",
+          "count": 509,
+          "review_smoke": false
+        }
+      ]
+    },
+    {
+      "selection": "calendar-clock-rendered",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-a995e64b8f784de097386dac74a63b4e",
+      "assertions": 524,
+      "children": [
+        {
+          "path": "project/tests/.runs/scenario-1/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-a995e64b8f784de097386dac74a63b4e\\retained-evidence\\project\\tests\\.runs\\scenario-1\\result.json",
+          "sha256": "B82A1DFCD2ED5CDE04A9FA27B86250637A392B1E0096712C14F66297BEFB99C9",
+          "count": 516,
+          "review_smoke": false
+        },
+        {
+          "path": "project/tests/.runs/scenario-1/human-review/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-a995e64b8f784de097386dac74a63b4e\\retained-evidence\\project\\tests\\.runs\\scenario-1\\human-review\\result.json",
+          "sha256": "34F7EA3FDAE677D99CC7DAF17A22F42315BB8F4FFD90B35C27E6C8AC2113DE9B",
+          "count": 8,
+          "review_smoke": true
+        }
+      ]
+    },
+    {
+      "selection": "export-debug",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-a17b594a2e024d22a9fd3e189734e058",
+      "assertions": 1025,
+      "children": [
+        {
+          "path": "build/tests/.runs/headless/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-a17b594a2e024d22a9fd3e189734e058\\retained-evidence\\build\\tests\\.runs\\headless\\result.json",
+          "sha256": "2C9AADE1215C82A5CE35795EFAA5D1DF7DC8D16E7940A328D05592DA2ED4BC08",
+          "count": 509,
+          "review_smoke": false
+        },
+        {
+          "path": "build/tests/.runs/rendered/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-a17b594a2e024d22a9fd3e189734e058\\retained-evidence\\build\\tests\\.runs\\rendered\\result.json",
+          "sha256": "7C8ED8F770C476EF0F0E029E18E688D5B79D6946BCB005C4CB789AC9547C1AA5",
+          "count": 516,
+          "review_smoke": false
+        }
+      ]
+    },
+    {
+      "selection": "export-release",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-818050e13f2f4c98ad4ab3d4045ff854",
+      "assertions": 1025,
+      "children": [
+        {
+          "path": "build/tests/.runs/headless/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-818050e13f2f4c98ad4ab3d4045ff854\\retained-evidence\\build\\tests\\.runs\\headless\\result.json",
+          "sha256": "274DCB7C32A594B5E86BAE3E3979E2535DB2F9CC053D863DB7FF2CBBDAFD8677",
+          "count": 509,
+          "review_smoke": false
+        },
+        {
+          "path": "build/tests/.runs/rendered/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-818050e13f2f4c98ad4ab3d4045ff854\\retained-evidence\\build\\tests\\.runs\\rendered\\result.json",
+          "sha256": "3E529DC8447D965D6EF248FAD18F6CD22B160ABFA967253D44AEC8006732779E",
+          "count": 516,
+          "review_smoke": false
+        }
+      ]
+    },
+    {
+      "selection": "geography-inputs-headless",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-9585be12066d4669b80a97f8af143300",
+      "assertions": 200,
+      "children": [
+        {
+          "path": "project/tests/.runs/scenario-1/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-9585be12066d4669b80a97f8af143300\\retained-evidence\\project\\tests\\.runs\\scenario-1\\result.json",
+          "sha256": "3745D2D3432A4C92E92591CD5E356BECF7091EA986B08F460863B99AA6224B1B",
+          "count": 200,
+          "review_smoke": false
+        }
+      ]
+    },
+    {
+      "selection": "geography-inputs-rendered",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-b313e05144bb4c43b96b03ef75672c34",
+      "assertions": 202,
+      "children": [
+        {
+          "path": "project/tests/.runs/scenario-1/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-b313e05144bb4c43b96b03ef75672c34\\retained-evidence\\project\\tests\\.runs\\scenario-1\\result.json",
+          "sha256": "43D00F822A5F14BF23F539004F80372E519BB8FC4B232E31D83F65BFE223A418",
+          "count": 202,
+          "review_smoke": false
+        }
+      ]
+    },
+    {
+      "selection": "ground-movement-headless",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-5a0daba55e4648639762059b89d6ce4f",
+      "assertions": 1211,
+      "children": [
+        {
+          "path": "project/tests/.runs/scenario-1/reload-result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-5a0daba55e4648639762059b89d6ce4f\\retained-evidence\\project\\tests\\.runs\\scenario-1\\reload-result.json",
+          "sha256": "2DA19A94CD09F06002D05AD6D982339C12C10E2DD572980193D068451ABC37F4",
+          "count": 14,
+          "review_smoke": false
+        },
+        {
+          "path": "project/tests/.runs/scenario-1/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-5a0daba55e4648639762059b89d6ce4f\\retained-evidence\\project\\tests\\.runs\\scenario-1\\result.json",
+          "sha256": "847F9052647B1816635B9644F03A57CE06A9E2536927E05F7045626B88DE758B",
+          "count": 1197,
+          "review_smoke": false
+        }
+      ]
+    },
+    {
+      "selection": "publication-headless",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e0c152bc5d9648f5a6b6f5844c0848e1",
+      "assertions": 119,
+      "children": [
+        {
+          "path": "project/tests/.runs/scenario-1/reload-result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e0c152bc5d9648f5a6b6f5844c0848e1\\retained-evidence\\project\\tests\\.runs\\scenario-1\\reload-result.json",
+          "sha256": "C37C2231F3A707CFB4C1A35185D5055210E069096BAE1E8666FB7F2EA14E0AF7",
+          "count": 8,
+          "review_smoke": false
+        },
+        {
+          "path": "project/tests/.runs/scenario-1/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e0c152bc5d9648f5a6b6f5844c0848e1\\retained-evidence\\project\\tests\\.runs\\scenario-1\\result.json",
+          "sha256": "5C2E1E35716223EDF274CDC7739820DF618CB30CFE7F23E2E7DAE8A80C9F65C2",
+          "count": 111,
+          "review_smoke": false
+        }
+      ]
+    },
+    {
+      "selection": "session-headless",
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b19a6d57dec046bfbf29e2cfaf612ca8",
+      "assertions": 263,
+      "children": [
+        {
+          "path": "project/tests/.runs/scenario-1/result.json",
+          "retained_path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b19a6d57dec046bfbf29e2cfaf612ca8\\retained-evidence\\project\\tests\\.runs\\scenario-1\\result.json",
+          "sha256": "1B8D7C3C92B63BFF06A3231A9F907A9587F445A568AF385575D523FC71FDADAF",
+          "count": 263,
+          "review_smoke": false
+        }
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-62e660589b89404c83bfe7ed9bb302a2",
+      "name": "export-62e660589b89404c83bfe7ed9bb302a2",
+      "creation_utc": "2026-11-26T05:13:17.012351+00:00",
+      "status": "passed",
+      "suite": "calendar-clock-v1",
+      "configuration": "debug",
+      "report_sha256": "DC6D5BC402A52114B9A32B5CCC55499DEE1BE5565D13E209A7F46E87C00BA7D0",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\export-62e660589b89404c83bfe7ed9bb302a2-source.zip",
+        "sha256": "0609043C9C1D628F4F2608B3EA59EA7F64EC6C20D5D46C7BAD82310FE01042F1"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-818050e13f2f4c98ad4ab3d4045ff854",
+      "name": "export-818050e13f2f4c98ad4ab3d4045ff854",
+      "creation_utc": "2026-11-26T05:34:48.244287+00:00",
+      "status": "passed",
+      "suite": "calendar-clock-v1",
+      "configuration": "release",
+      "report_sha256": "39D4C2344101B50925AE73C02703042E2A45CDECDC229F6BDC1DBFCF218BE128",
+      "delivery_mismatches": [],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\export-818050e13f2f4c98ad4ab3d4045ff854-source.zip",
+        "sha256": "2DE7AA882399585A26C43744CE99D075DCD170FF094FB059599C726C5B20AE27"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-a17b594a2e024d22a9fd3e189734e058",
+      "name": "export-a17b594a2e024d22a9fd3e189734e058",
+      "creation_utc": "2026-11-26T05:31:56.631423+00:00",
+      "status": "passed",
+      "suite": "calendar-clock-v1",
+      "configuration": "debug",
+      "report_sha256": "E882EA079B15423949CF58C15D0AB525C4DB2BB6C0E693F42D23D0EC176662FC",
+      "delivery_mismatches": [],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\export-a17b594a2e024d22a9fd3e189734e058-source.zip",
+        "sha256": "2DE7AA882399585A26C43744CE99D075DCD170FF094FB059599C726C5B20AE27"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-d67c8338f01c4885826ea7525fd81c31",
+      "name": "export-d67c8338f01c4885826ea7525fd81c31",
+      "creation_utc": "2026-11-26T05:15:49.810522+00:00",
+      "status": "passed",
+      "suite": "calendar-clock-v1",
+      "configuration": "release",
+      "report_sha256": "14D46F8FED9DB7278C6EEA642ACEBB426CA557610E91431E4AB234FB569C0541",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\export-d67c8338f01c4885826ea7525fd81c31-source.zip",
+        "sha256": "0609043C9C1D628F4F2608B3EA59EA7F64EC6C20D5D46C7BAD82310FE01042F1"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-0d5149f0d3aa4405b7865f4ed23064ef",
+      "name": "verification-headless-0d5149f0d3aa4405b7865f4ed23064ef",
+      "creation_utc": "2026-11-26T05:04:33.111016+00:00",
+      "status": "incomplete",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "703E9C057B3E647060F929C24D0447007FF27D25AF88B3F647D9901FB7E4A334",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": false,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-0d5149f0d3aa4405b7865f4ed23064ef-source.zip",
+        "sha256": "96DA3F73C2B82393EB76A2029D32E3AC20B691FD17110D9B4607A767525A65E0"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-11cc84aceadd453685846c34f2ce0d62",
+      "name": "verification-headless-11cc84aceadd453685846c34f2ce0d62",
+      "creation_utc": "2026-11-26T04:51:00.030479+00:00",
+      "status": "passed",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "7344DFBCF3B3B5366011FEF0BFE62D2F8A308C3E2B7AA5E5E796F40775774702",
+      "delivery_mismatches": [
+        "scripts/startup/startup_shell.gd",
+        "scripts/time/activity_policies.gd",
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/calendar_cases.gd",
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": false,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-11cc84aceadd453685846c34f2ce0d62-source.zip",
+        "sha256": "4E3607DFA7C3F2448B9B5FDF7806BEBAA78F7CB0B3D466ED878A85EB88537E74"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-1d702361ee90454e85e712ce264caae9",
+      "name": "verification-headless-1d702361ee90454e85e712ce264caae9",
+      "creation_utc": "2026-11-26T05:28:18.249032+00:00",
+      "status": "incomplete",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "5B6DC014AB6A44E03CD8BD24A33652D4E236850EE2AE4AEB887B82CB219E19EF",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-1d702361ee90454e85e712ce264caae9-source.zip",
+        "sha256": "0609043C9C1D628F4F2608B3EA59EA7F64EC6C20D5D46C7BAD82310FE01042F1"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-2991f615d7a54242a0958957888f11bf",
+      "name": "verification-headless-2991f615d7a54242a0958957888f11bf",
+      "creation_utc": "2026-11-26T05:18:22.827717+00:00",
+      "status": "passed",
+      "suite": "geography-inputs",
+      "configuration": null,
+      "report_sha256": "5E7C7EB61974176BB55ED091541FD368F5930C1E3EC349144F69DCBCE6CC4228",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-2991f615d7a54242a0958957888f11bf-source.zip",
+        "sha256": "0609043C9C1D628F4F2608B3EA59EA7F64EC6C20D5D46C7BAD82310FE01042F1"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-2c888a555882491191ec525924a567b0",
+      "name": "verification-headless-2c888a555882491191ec525924a567b0",
+      "creation_utc": "2026-11-26T04:53:28.277528+00:00",
+      "status": "incomplete",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "22B1ADEB1523AE7A44F456B3DEC96FB1E0EC239ED5A1D34EF7E6AF64E3B61102",
+      "delivery_mismatches": [
+        "scripts/startup/startup_shell.gd",
+        "scripts/time/activity_policies.gd",
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/calendar_cases.gd",
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": false,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-2c888a555882491191ec525924a567b0-source.zip",
+        "sha256": "A9DB74B9B020F4C768E33B47B4874B7A2BB16DECC1F91BEB3D322E0F5056495E"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-4686e4ca3f3947688849f6cf7528fa65",
+      "name": "verification-headless-4686e4ca3f3947688849f6cf7528fa65",
+      "creation_utc": "2026-11-26T05:01:48.561046+00:00",
+      "status": "passed",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "1034B6FC7257CF93F95AA4782A5F7CCAA6F089FDA87251A7F8A7D13123030767",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/calendar_cases.gd",
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": false,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-4686e4ca3f3947688849f6cf7528fa65-source.zip",
+        "sha256": "47D280BAE9731D3AD623D7E823EB9B5A36D40C1CAEF9D2ABAA2F9979CAE6B07C"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-4eb245e560214c0dbe54c0992b8d01fd",
+      "name": "verification-headless-4eb245e560214c0dbe54c0992b8d01fd",
+      "creation_utc": "2026-11-26T04:55:39.927607+00:00",
+      "status": "incomplete",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "D36435FE9B87A133C361F40E2DCC17F068AA1B78B421D2C0CA8FC2EFB5AD2346",
+      "delivery_mismatches": [
+        "scripts/startup/startup_shell.gd",
+        "scripts/time/activity_policies.gd",
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/calendar_cases.gd",
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": false,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-4eb245e560214c0dbe54c0992b8d01fd-source.zip",
+        "sha256": "7944F5E5DC68BDC513FCF40F6DE0F4EEA5B3D80B87E1912AEA6D115A0CFAC864"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-5a0daba55e4648639762059b89d6ce4f",
+      "name": "verification-headless-5a0daba55e4648639762059b89d6ce4f",
+      "creation_utc": "2026-11-26T05:43:22.330450+00:00",
+      "status": "passed",
+      "suite": "ground-movement",
+      "configuration": null,
+      "report_sha256": "6C33C0F5E4DA3AB89FED2C8C11E6EB0FB04F37E3FDC4930942FEF9C31D05A2FC",
+      "delivery_mismatches": [],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-5a0daba55e4648639762059b89d6ce4f-source.zip",
+        "sha256": "2DE7AA882399585A26C43744CE99D075DCD170FF094FB059599C726C5B20AE27"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-63e3e3f0dc3a46e3a5e0a1a9ad334130",
+      "name": "verification-headless-63e3e3f0dc3a46e3a5e0a1a9ad334130",
+      "creation_utc": "2026-11-26T05:24:36.977759+00:00",
+      "status": "passed",
+      "suite": "publication",
+      "configuration": null,
+      "report_sha256": "9DF946487A737DA94FE037B3BF8A8C9AF7B0CB07CB3DE14F30C578071C6522BF",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-63e3e3f0dc3a46e3a5e0a1a9ad334130-source.zip",
+        "sha256": "0609043C9C1D628F4F2608B3EA59EA7F64EC6C20D5D46C7BAD82310FE01042F1"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-74ea364ac1a14b688f16d10bbc1f50a5",
+      "name": "verification-headless-74ea364ac1a14b688f16d10bbc1f50a5",
+      "creation_utc": "2026-11-26T05:30:34.713196+00:00",
+      "status": "passed",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "1B4D6B1F55D445D300FEE4CCA9FA2625C393699609FDA779EBCA3C251E19E061",
+      "delivery_mismatches": [],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-74ea364ac1a14b688f16d10bbc1f50a5-source.zip",
+        "sha256": "2DE7AA882399585A26C43744CE99D075DCD170FF094FB059599C726C5B20AE27"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-9585be12066d4669b80a97f8af143300",
+      "name": "verification-headless-9585be12066d4669b80a97f8af143300",
+      "creation_utc": "2026-11-26T05:37:26.110990+00:00",
+      "status": "passed",
+      "suite": "geography-inputs",
+      "configuration": null,
+      "report_sha256": "BEBF5B02D22381F5D75C3C865F06149D4B9E50E22907F974837583736D0DA283",
+      "delivery_mismatches": [],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-9585be12066d4669b80a97f8af143300-source.zip",
+        "sha256": "2DE7AA882399585A26C43744CE99D075DCD170FF094FB059599C726C5B20AE27"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-9f2e2b45d3a84ae5b605743e4ca712ee",
+      "name": "verification-headless-9f2e2b45d3a84ae5b605743e4ca712ee",
+      "creation_utc": "2026-11-26T05:25:06.610916+00:00",
+      "status": "passed",
+      "suite": "session",
+      "configuration": null,
+      "report_sha256": "D46D21DD5A8FC08C396E7C1C1AC78C59153044905D2CF4C106C2B77AA7BF0365",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-9f2e2b45d3a84ae5b605743e4ca712ee-source.zip",
+        "sha256": "0609043C9C1D628F4F2608B3EA59EA7F64EC6C20D5D46C7BAD82310FE01042F1"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b19a6d57dec046bfbf29e2cfaf612ca8",
+      "name": "verification-headless-b19a6d57dec046bfbf29e2cfaf612ca8",
+      "creation_utc": "2026-11-26T05:43:00.277789+00:00",
+      "status": "passed",
+      "suite": "session",
+      "configuration": null,
+      "report_sha256": "CEFA4E8042483E17B226F48C04FC2443E3C28751F30E4804D7F29C93789F78FF",
+      "delivery_mismatches": [],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-b19a6d57dec046bfbf29e2cfaf612ca8-source.zip",
+        "sha256": "2DE7AA882399585A26C43744CE99D075DCD170FF094FB059599C726C5B20AE27"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b9680273236447c398192c27d149e8db",
+      "name": "verification-headless-b9680273236447c398192c27d149e8db",
+      "creation_utc": "2026-11-26T05:25:44.544318+00:00",
+      "status": "passed",
+      "suite": "ground-movement",
+      "configuration": null,
+      "report_sha256": "1B87DB746BE621BF53C51D4D4D73DF1F1371E22259165A3899ABA16A80C24892",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-b9680273236447c398192c27d149e8db-source.zip",
+        "sha256": "0609043C9C1D628F4F2608B3EA59EA7F64EC6C20D5D46C7BAD82310FE01042F1"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-ba7749902dbe46ed827b93170e68cc92",
+      "name": "verification-headless-ba7749902dbe46ed827b93170e68cc92",
+      "creation_utc": "2026-11-26T04:59:24.427678+00:00",
+      "status": "passed",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "86C616986D658215B3E25BA37F665ABE6C15479AED93B7570E53A623798D351B",
+      "delivery_mismatches": [
+        "scripts/time/activity_policies.gd",
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/calendar_cases.gd",
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": false,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-ba7749902dbe46ed827b93170e68cc92-source.zip",
+        "sha256": "DCB270BCC26326A766C55F94486E3C4FBA2CF9040413C9152A93C939F99C9945"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-c2b2bb9cd5cf4baf96c539e38b0027d8",
+      "name": "verification-headless-c2b2bb9cd5cf4baf96c539e38b0027d8",
+      "creation_utc": "2026-11-26T04:57:41.145861+00:00",
+      "status": "incomplete",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "7E9A60A81A6C9987CC6F0F39D41C98490C3D6E796CEF1B5F91F5523F2ED13096",
+      "delivery_mismatches": [
+        "scripts/time/activity_policies.gd",
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/calendar_cases.gd",
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": false,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-c2b2bb9cd5cf4baf96c539e38b0027d8-source.zip",
+        "sha256": "6BD7D1ACF5C886515777F606D201EA7149D1903517338192A78479AE1104EF86"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-d1a68a76841b461b8b8d7a78c6c91f2a",
+      "name": "verification-headless-d1a68a76841b461b8b8d7a78c6c91f2a",
+      "creation_utc": "2026-11-26T05:23:29.817435+00:00",
+      "status": "incomplete",
+      "suite": "publication",
+      "configuration": null,
+      "report_sha256": "13FFAF467DC698334B358633A8172DDA55C744BE34E261B8F6D01F11F0C470D9",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-d1a68a76841b461b8b8d7a78c6c91f2a-source.zip",
+        "sha256": "0609043C9C1D628F4F2608B3EA59EA7F64EC6C20D5D46C7BAD82310FE01042F1"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e0756b02f32b4ca69ea1f0bbcb7b682c",
+      "name": "verification-headless-e0756b02f32b4ca69ea1f0bbcb7b682c",
+      "creation_utc": "2026-11-26T05:06:46.830239+00:00",
+      "status": "passed",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "26EE9DE3279CDC45BB962760CFB31D2D6885BA4B1714CF501235330CCD1662BE",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": false,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-e0756b02f32b4ca69ea1f0bbcb7b682c-source.zip",
+        "sha256": "68D1E658AE43B00703B1E7B004E853A55DCBA486EC84A78826956C34C4C5DD84"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e0c152bc5d9648f5a6b6f5844c0848e1",
+      "name": "verification-headless-e0c152bc5d9648f5a6b6f5844c0848e1",
+      "creation_utc": "2026-11-26T05:42:32.244302+00:00",
+      "status": "passed",
+      "suite": "publication",
+      "configuration": null,
+      "report_sha256": "4E9265A1A03F7354F3CCEE5A996289729BC31D59816D31A91C3DC422379E0EBD",
+      "delivery_mismatches": [],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-headless-e0c152bc5d9648f5a6b6f5844c0848e1-source.zip",
+        "sha256": "2DE7AA882399585A26C43744CE99D075DCD170FF094FB059599C726C5B20AE27"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-4fa5d14d8ee84285ae273e8ef41e16af",
+      "name": "verification-rendered-4fa5d14d8ee84285ae273e8ef41e16af",
+      "creation_utc": "2026-11-26T05:11:04.427679+00:00",
+      "status": "passed",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "C8B849DA5B69AFE8D3F9165DE3BC21437440C52478D82A52C805B43BEA1B5096",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-rendered-4fa5d14d8ee84285ae273e8ef41e16af-source.zip",
+        "sha256": "1B0792E294CEF76D535892472DB3879F13DB0B634D959DC87625D71EAF0D3AEF"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-9064f3e3399f4443bb5ffdd2559835bf",
+      "name": "verification-rendered-9064f3e3399f4443bb5ffdd2559835bf",
+      "creation_utc": "2026-11-26T05:20:54.810975+00:00",
+      "status": "passed",
+      "suite": "geography-inputs",
+      "configuration": null,
+      "report_sha256": "72B0B31D8A7C2E74A4B32CE82AA4907650A0B4DFF9F3C3343BDCA8E0D6B5A9E4",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-rendered-9064f3e3399f4443bb5ffdd2559835bf-source.zip",
+        "sha256": "0609043C9C1D628F4F2608B3EA59EA7F64EC6C20D5D46C7BAD82310FE01042F1"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-a995e64b8f784de097386dac74a63b4e",
+      "name": "verification-rendered-a995e64b8f784de097386dac74a63b4e",
+      "creation_utc": "2026-11-26T05:45:55.961039+00:00",
+      "status": "passed",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "43BD95FCB419835689A5449A6C19E3ED9E85CD5934B36CB22A645379988C5285",
+      "delivery_mismatches": [],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-rendered-a995e64b8f784de097386dac74a63b4e-source.zip",
+        "sha256": "2DE7AA882399585A26C43744CE99D075DCD170FF094FB059599C726C5B20AE27"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-b313e05144bb4c43b96b03ef75672c34",
+      "name": "verification-rendered-b313e05144bb4c43b96b03ef75672c34",
+      "creation_utc": "2026-11-26T05:39:56.072344+00:00",
+      "status": "passed",
+      "suite": "geography-inputs",
+      "configuration": null,
+      "report_sha256": "55C61371A35E5F2EA1324580328D450B08A1AC95D2D721225566BDD52861468B",
+      "delivery_mismatches": [],
+      "selected_fixture_mismatches": [],
+      "reported_source_mismatches": [],
+      "review_source_current": true,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-rendered-b313e05144bb4c43b96b03ef75672c34-source.zip",
+        "sha256": "2DE7AA882399585A26C43744CE99D075DCD170FF094FB059599C726C5B20AE27"
+      }
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-bd9982611a80454288f0189bbf195b83",
+      "name": "verification-rendered-bd9982611a80454288f0189bbf195b83",
+      "creation_utc": "2026-11-26T05:08:20.977732+00:00",
+      "status": "passed",
+      "suite": "calendar-clock",
+      "configuration": null,
+      "report_sha256": "04E4D611BB69866FBE247491D57469275D1073C7EED74981C09E565A6900C78E",
+      "delivery_mismatches": [
+        "scripts/time/due_work.gd"
+      ],
+      "selected_fixture_mismatches": [
+        "tests/activity_policy_cases.gd",
+        "tests/activity_policy_inventory.json"
+      ],
+      "reported_source_mismatches": [],
+      "review_source_current": false,
+      "executed_source_archive": {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\verification-rendered-bd9982611a80454288f0189bbf195b83-source.zip",
+        "sha256": "68D1E658AE43B00703B1E7B004E853A55DCBA486EC84A78826956C34C4C5DD84"
+      }
+    }
+  ],
+  "baseline_source_verification": {
+    "ok": true,
+    "entries": 53,
+    "source_hashes": {
+      "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/Game/Formulas/FormulaHelper.cs": "b559a3b665070a7808fe3de0849ab860ecf64c486e0aeab8eaf3e5767ee419dc",
+      "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Scripts/API/DFLocation.cs": "5a9da091c7541052ea2648df6ceaa08318f59c3035a1770cf85a1474af719195"
+    },
+    "content_sha256": "175D5705DEBAE6DEE3347A8B08EFD66C98B5102BE6CE1E46124B67783CBC0B44",
+    "classic_adapters": [
+      {
+        "id": "new-life",
+        "holiday": 1,
+        "region_byte": 255,
+        "day": 1,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "scour-day",
+        "holiday": 2,
+        "region_byte": 25,
+        "day": 2,
+        "regions": [
+          "packs/classic#region-24"
+        ]
+      },
+      {
+        "id": "ovanka",
+        "holiday": 3,
+        "region_byte": 1,
+        "day": 12,
+        "regions": [
+          "packs/classic#region-00"
+        ]
+      },
+      {
+        "id": "south-winds-prayer",
+        "holiday": 4,
+        "region_byte": 255,
+        "day": 15,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "day-of-lights",
+        "holiday": 5,
+        "region_byte": 29,
+        "day": 16,
+        "regions": [
+          "packs/classic#region-28"
+        ]
+      },
+      {
+        "id": "waking-day",
+        "holiday": 6,
+        "region_byte": 5,
+        "day": 18,
+        "regions": [
+          "packs/classic#region-04"
+        ]
+      },
+      {
+        "id": "mad-pelagius",
+        "holiday": 7,
+        "region_byte": 25,
+        "day": 32,
+        "regions": [
+          "packs/classic#region-24"
+        ]
+      },
+      {
+        "id": "othroktide",
+        "holiday": 8,
+        "region_byte": 6,
+        "day": 35,
+        "regions": [
+          "packs/classic#region-05"
+        ]
+      },
+      {
+        "id": "day-of-release",
+        "holiday": 9,
+        "region_byte": 60,
+        "day": 38,
+        "regions": [
+          "packs/classic#region-59"
+        ]
+      },
+      {
+        "id": "hearts-day",
+        "holiday": 10,
+        "region_byte": 255,
+        "day": 46,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "perserverance-day",
+        "holiday": 11,
+        "region_byte": 41,
+        "day": 57,
+        "regions": [
+          "packs/classic#region-40"
+        ]
+      },
+      {
+        "id": "aduros-nau",
+        "holiday": 12,
+        "region_byte": 26,
+        "day": 58,
+        "regions": [
+          "packs/classic#region-25"
+        ]
+      },
+      {
+        "id": "first-harvest",
+        "holiday": 13,
+        "region_byte": 255,
+        "day": 67,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "day-of-waiting",
+        "holiday": 14,
+        "region_byte": 2,
+        "day": 69,
+        "regions": [
+          "packs/classic#region-01"
+        ]
+      },
+      {
+        "id": "flower-day",
+        "holiday": 15,
+        "region_byte": 25,
+        "day": 85,
+        "regions": [
+          "packs/classic#region-24"
+        ]
+      },
+      {
+        "id": "festival-of-blades",
+        "holiday": 16,
+        "region_byte": 1,
+        "day": 86,
+        "regions": [
+          "packs/classic#region-00"
+        ]
+      },
+      {
+        "id": "gardtide",
+        "holiday": 17,
+        "region_byte": 14,
+        "day": 91,
+        "regions": [
+          "packs/classic#region-13"
+        ]
+      },
+      {
+        "id": "day-of-the-dead",
+        "holiday": 18,
+        "region_byte": 18,
+        "day": 103,
+        "regions": [
+          "packs/classic#region-17"
+        ]
+      },
+      {
+        "id": "day-of-shame",
+        "holiday": 19,
+        "region_byte": 20,
+        "day": 110,
+        "regions": [
+          "packs/classic#region-19"
+        ]
+      },
+      {
+        "id": "jesters-day",
+        "holiday": 20,
+        "region_byte": 255,
+        "day": 118,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "second-harvest",
+        "holiday": 21,
+        "region_byte": 255,
+        "day": 127,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "marukhs-day",
+        "holiday": 22,
+        "region_byte": 28,
+        "day": 129,
+        "regions": [
+          "packs/classic#region-27"
+        ]
+      },
+      {
+        "id": "fire-festival",
+        "holiday": 23,
+        "region_byte": 33,
+        "day": 140,
+        "regions": [
+          "packs/classic#region-32"
+        ]
+      },
+      {
+        "id": "fishing-day",
+        "holiday": 24,
+        "region_byte": 31,
+        "day": 150,
+        "regions": [
+          "packs/classic#region-30"
+        ]
+      },
+      {
+        "id": "drigh-rzimb",
+        "holiday": 25,
+        "region_byte": 44,
+        "day": 151,
+        "regions": [
+          "packs/classic#region-43"
+        ]
+      },
+      {
+        "id": "mid-year",
+        "holiday": 26,
+        "region_byte": 255,
+        "day": 166,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "dancing-day",
+        "holiday": 27,
+        "region_byte": 18,
+        "day": 173,
+        "regions": [
+          "packs/classic#region-17"
+        ]
+      },
+      {
+        "id": "tibedetha",
+        "holiday": 28,
+        "region_byte": 35,
+        "day": 174,
+        "regions": [
+          "packs/classic#region-34"
+        ]
+      },
+      {
+        "id": "merchants-festival",
+        "holiday": 29,
+        "region_byte": 255,
+        "day": 190,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "divad-etept",
+        "holiday": 30,
+        "region_byte": 56,
+        "day": 192,
+        "regions": [
+          "packs/classic#region-55"
+        ]
+      },
+      {
+        "id": "suns-rest",
+        "holiday": 31,
+        "region_byte": 255,
+        "day": 200,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "fiery-night",
+        "holiday": 32,
+        "region_byte": 1,
+        "day": 209,
+        "regions": [
+          "packs/classic#region-00"
+        ]
+      },
+      {
+        "id": "maiden-katrica",
+        "holiday": 33,
+        "region_byte": 48,
+        "day": 212,
+        "regions": [
+          "packs/classic#region-47"
+        ]
+      },
+      {
+        "id": "koomu-alazeri",
+        "holiday": 34,
+        "region_byte": 41,
+        "day": 221,
+        "regions": [
+          "packs/classic#region-40"
+        ]
+      },
+      {
+        "id": "feast-of-the-tiger",
+        "holiday": 35,
+        "region_byte": 11,
+        "day": 224,
+        "regions": [
+          "packs/classic#region-10"
+        ]
+      },
+      {
+        "id": "appreciation-day",
+        "holiday": 36,
+        "region_byte": 22,
+        "day": 231,
+        "regions": [
+          "packs/classic#region-21"
+        ]
+      },
+      {
+        "id": "harvest-end",
+        "holiday": 37,
+        "region_byte": 255,
+        "day": 237,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "tales-and-tallow",
+        "holiday": 38,
+        "region_byte": 255,
+        "day": 243,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "khurat",
+        "holiday": 39,
+        "region_byte": 17,
+        "day": 246,
+        "regions": [
+          "packs/classic#region-16"
+        ]
+      },
+      {
+        "id": "riglametha",
+        "holiday": 40,
+        "region_byte": 23,
+        "day": 252,
+        "regions": [
+          "packs/classic#region-22"
+        ]
+      },
+      {
+        "id": "childrens-day",
+        "holiday": 41,
+        "region_byte": 20,
+        "day": 259,
+        "regions": [
+          "packs/classic#region-19"
+        ]
+      },
+      {
+        "id": "dirij-tereur",
+        "holiday": 42,
+        "region_byte": 1,
+        "day": 275,
+        "regions": [
+          "packs/classic#region-00"
+        ]
+      },
+      {
+        "id": "witches-festival",
+        "holiday": 43,
+        "region_byte": 255,
+        "day": 283,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "broken-diamonds",
+        "holiday": 44,
+        "region_byte": 19,
+        "day": 293,
+        "regions": [
+          "packs/classic#region-18"
+        ]
+      },
+      {
+        "id": "emperors-birthday",
+        "holiday": 45,
+        "region_byte": 255,
+        "day": 300,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "serpents-dance",
+        "holiday": 46,
+        "region_byte": 51,
+        "day": 303,
+        "regions": [
+          "packs/classic#region-50"
+        ]
+      },
+      {
+        "id": "moon-festival",
+        "holiday": 47,
+        "region_byte": 60,
+        "day": 308,
+        "regions": [
+          "packs/classic#region-59"
+        ]
+      },
+      {
+        "id": "hel-anseilak",
+        "holiday": 48,
+        "region_byte": 46,
+        "day": 318,
+        "regions": [
+          "packs/classic#region-45"
+        ]
+      },
+      {
+        "id": "warriors-festival",
+        "holiday": 49,
+        "region_byte": 255,
+        "day": 320,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "north-winds-festival",
+        "holiday": 50,
+        "region_byte": 255,
+        "day": 345,
+        "regions": [
+          "*"
+        ]
+      },
+      {
+        "id": "baranth-do",
+        "holiday": 51,
+        "region_byte": 1,
+        "day": 348,
+        "regions": [
+          "packs/classic#region-00"
+        ]
+      },
+      {
+        "id": "chila",
+        "holiday": 52,
+        "region_byte": 45,
+        "day": 354,
+        "regions": [
+          "packs/classic#region-44"
+        ]
+      },
+      {
+        "id": "saturalia",
+        "holiday": 53,
+        "region_byte": 24,
+        "day": 355,
+        "regions": [
+          "packs/classic#region-23"
+        ]
+      }
+    ]
+  },
+  "full_local_audit": {
+    "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\audit.json",
+    "sha256": "5821E8338E83B613208FEC27FEC129051FCFB2AD83E3EA07595482F6ACCF7E6E"
+  },
+  "delivery_source_archive": {
+    "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\delivery-source.zip",
+    "sha256": "2DE7AA882399585A26C43744CE99D075DCD170FF094FB059599C726C5B20AE27"
+  },
+  "tools_archive": {
+    "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\tools-source.zip",
+    "sha256": "3B3DAB172E13983BFF05F12A2EA89BF06D220C1CD4277C6BE714B081368D0109"
+  },
+  "cleanup": {
+    "schema": "imp014-increment3-cleanup-v1",
+    "failures": [],
+    "full_builds_retained": 0,
+    "utc": "2026-11-26T05:59:41.6670545+00:00",
+    "verified_retained_files": 396,
+    "largest_retained_roots": [
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-d3cfeef68f9b4413b85327f7e2b5c08d",
+        "bytes": 217651168
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-c96d811ee25e4a0698354f29bd11ef86",
+        "bytes": 217651088
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-13d636fdec0f426f8ba63113299820b0",
+        "bytes": 217055801
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-17dbac68203440ca92259c5ce685505e",
+        "bytes": 216965485
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cc8b5f15a7814be586b3eae8dc2c719d",
+        "bytes": 216896956
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-65a7606dbe4c409bb0129689dda8d4d5",
+        "bytes": 216229388
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-43a28ee25d824d2eaea8b5476d07674e",
+        "bytes": 216220093
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-034e7e8def8f4d16bb221f106d62ddf1",
+        "bytes": 216109605
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-1b00b3300b91493397fda13f5ca9a900",
+        "bytes": 215807571
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-dccb06ad4e15465691bdf70af6e5d363",
+        "bytes": 215625484
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-ce9c10bf5cc348d0ad4e8708dcd4877d",
+        "bytes": 213522099
+      },
+      {
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp011-view-review-2026-11-23-final",
+        "bytes": 209339669
+      }
+    ],
+    "protected_existing_roots": "Earlier accepted evidence/human storage/unknown other-task roots unchanged",
+    "removed_items": 52118,
+    "retention_logical_bytes": 6563197549,
+    "pre_retention_logical_bytes": 13770293043,
+    "removed_logical_bytes": 7220640940
+  },
+  "cleanup_plan": {
+    "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\cleanup-plan.json",
+    "sha256": "423029004A61D1F19F15284C029936FEFC7ADE2E91F5C5DB3C2B063C6CCD898B"
+  },
+  "cleanup_result": {
+    "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\cleanup-result.json",
+    "sha256": "B087C1BEC9F80289A1E806208EB988530CAEEB3F575E7354A716C351ED336643"
+  },
+  "human_pass": false,
+  "parent_and_joint_gates": "IMP-014/M2 human acceptance; real owners; native TIME/MOVE/CHAR; notices/location history; native SAVE remain open",
+  "cleanup_script": {
+    "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp014-increment3-audit\\cleanup-script.ps1",
+    "sha256": "6BCD787FCDDDEB740A1E5179C560ABFFABD39EB93D7A7BD230914F8610363A5C"
+  }
+}

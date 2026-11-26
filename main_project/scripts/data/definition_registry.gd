@@ -414,6 +414,12 @@ func domain_index(domain: String) -> Dictionary:
 	if not _adapters.has(domain) or not _adapters[domain].adapter.has_method("read_only_index"): return failure("source_unavailable",domain,"Domain index provider unavailable.")
 	return _adapters[domain].adapter.read_only_index(int(_active.ticket)).duplicate(true)
 
+func point_query(domain: String, context: Dictionary) -> Dictionary:
+	# Bound published adapter index, never a whole-catalog detached copy.
+	if _active.is_empty(): return failure("before_readiness",domain,"Actual menu publication required.")
+	if not _adapters.has(domain) or not _adapters[domain].adapter.has_method("point_query"): return failure("source_unavailable",domain,"Point-query provider unavailable.")
+	return _adapters[domain].adapter.point_query(int(_active.ticket),context.duplicate(true)).duplicate(true)
+
 func dispose() -> void:
 	_candidate.clear()
 	_active.clear()

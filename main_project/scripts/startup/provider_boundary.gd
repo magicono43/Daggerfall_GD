@@ -52,7 +52,9 @@ func enable_geography_inputs() -> Dictionary:
 	var candidate := preload("res://scripts/data/geography_inputs.gd").new()
 	candidate.classic = classic
 	var registered := register_content_adapter(candidate,"",[])
-	if registered.ok: geography = candidate
+	if registered.ok:
+		geography = candidate
+		registered = register_content_adapter(preload("res://scripts/data/holiday_definitions.gd").new(),"",[])
 	return registered
 
 func enable_faction_quest_inputs() -> Dictionary:

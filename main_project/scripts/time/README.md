@@ -1,5 +1,9 @@
 # Calendar and clock — IMP-014
 
+Increment 3 adds [activity policy qualification](ACTIVITY_POLICIES.md) and
+[pure regional holiday queries](../rule/HOLIDAYS.md). These extend the accepted
+clock/scheduler contract. Real-owner/physical-interval/notice/SAVE gates remain open.
+
 Increment 2 adds retained chronological due work; see
 [SCHEDULER.md](SCHEDULER.md) for the current scheduling, accounting, gate and
 recovery interfaces. The increment-1 no-required-work contract below remains
