@@ -346,6 +346,11 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	shell.render()
 	var stock: RefCounted = shell.session_shell
 	stock.core.provider = Provider.new()
+	# This asset-independent stock-input fixture replaces DATA with a controlled
+	# non-DATA startup provider. It cannot qualify the required calendar owner;
+	# complete-composition calendar cases separately verify that production path.
+	stock.core.calendar.definitions = null
+	observations.calendar_dependency = "unavailable in asset-independent input fixture; qualified by calendar-clock-v1"
 	stock.core.startup_route_changed("main_menu")
 	check("stock controlled session begins",request(stock.core).kind == "Succeeded" and shell.controller.route == "main_menu")
 	var events: Array = []

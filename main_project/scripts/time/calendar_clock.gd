@@ -1,6 +1,7 @@
 extends RefCounted
-## Sole TIME timestamp writer. No due-work scheduler is installed in increment 1.
+## Sole TIME timestamp writer; due_work retains chronological settlement.
 signal committed(outcome: Dictionary)
+signal settled(outcome: Dictionary)
 const Calendar = preload("res://scripts/time/calendar.gd")
 const Policy = preload("res://scripts/data/calendar_policy.gd")
 const FRACTION_SCALE := 1000000000000 # ns input × rate millionths -> game ms.
@@ -17,6 +18,13 @@ var _ordinary: WeakRef
 var _activities: Dictionary = {}
 var _required_work := false
 var _compatibility := ""
+var scheduler: RefCounted
+var _settlement_hold := 0
+const SETTLEMENT_OWNER := "time:settlement"
+var _scheduled_receipts: Dictionary = {}
+var _content_ticket := -1
+var _definitions_id := 0
+var _restored := false
 
 static func compatibility(policy: Dictionary) -> String:
 	var weekday: Dictionary = policy.weekday
@@ -30,6 +38,7 @@ static func activity_hold_owner(id: String) -> String:
 
 func _init(core: RefCounted) -> void:
 	_core = weakref(core)
+	scheduler = preload("res://scripts/time/due_work.gd").new(self)
 
 func _failure(reason: String, kind := "rejected") -> Dictionary:
 	return {"ok":false,"kind":kind,"reason":reason,"scheduler_ready":false}
@@ -68,11 +77,16 @@ func initialize(ticket: Dictionary, mode: String, restored: Variant = null) -> D
 	_scope = ticket.scope
 	_policy = candidate
 	_compatibility = compatible
+	_content_ticket = definitions.content_ticket()
+	_definitions_id = definitions.get_instance_id()
+	_restored = mode == "load"
 	_timestamp = timestamp
 	_fraction = fraction
 	_receipts.clear()
 	_ordinary_receipts.clear()
 	_activities.clear()
+	scheduler.retire()
+	_scheduled_receipts.clear()
 	_required_work = false
 	return {"ok":true,"timestamp":_timestamp,"elapsed_origin":_timestamp,"fraction":_fraction,"scheduler_ready":false}
 
@@ -97,17 +111,24 @@ func bind_activities(services: Array) -> Dictionary:
 		bindings[id] = weakref(owner)
 	_activities = bindings
 	_required_work = required
+	var declared: Array = services.filter(func(service): return service.get("calendar_due_work",false))
+	if not declared.is_empty() and declared.all(func(service): return service.has("calendar_schedule")):
+		if _restored: return _failure("Scheduler owner capture/restore is not qualified; a clock-only snapshot cannot reconstruct enabled due owners.")
+		for service: Dictionary in services:
+			if service.get("actor_activity") is Dictionary and "motion" in service.actor_activity.get("roles",[]): return _failure("Native TIME/MOVE/CHAR partial-interval reconciliation is not qualified for scheduler profiles.")
+		var scheduled: Dictionary = scheduler.bind(services)
+		if not scheduled.ok: return scheduled
 	return {"ok":true,"scheduler_ready":false}
 
 func query() -> Dictionary:
 	if _scope.is_empty(): return _failure("No calendar session.")
-	var result := {"ok":true,"session":_scope,"timestamp":_timestamp,"fraction":_fraction,"fraction_scale":FRACTION_SCALE,"calendar":Calendar.context(_timestamp,_policy),"rate_units":_policy.rate_units,"rate_scale":Policy.RATE_SCALE,"scheduler_ready":false}
+	var result := {"ok":true,"session":_scope,"timestamp":_timestamp,"fraction":_fraction,"fraction_scale":FRACTION_SCALE,"calendar":Calendar.context(_timestamp,_policy),"rate_units":_policy.rate_units,"rate_scale":Policy.RATE_SCALE,"scheduler_ready":not scheduler.bindings.is_empty(),"settled":not scheduler.active()}
 	result.make_read_only()
 	return result
 
 func capture_snapshot() -> Dictionary:
 	var core: RefCounted = _core.get_ref()
-	if _busy or _required_work or core == null or _scope.is_empty() or core.snapshot().session != _scope or not core.gates.safe or core.gates.simulation() or core.gates.blocked("save") or core.busy(): return _failure("Settled gated save boundary required.")
+	if _busy or _required_work or scheduler.active() or not scheduler.bindings.is_empty() or not _current() or core == null or _scope.is_empty() or core.snapshot().session != _scope or not core.gates.safe or core.gates.simulation() or core.gates.blocked("save") or core.busy(): return _failure("Settled supported owner save boundary required.")
 	return {"ok":true,"state":{"schema":"calendar-clock-state-v1","timestamp":_timestamp,"fraction":_fraction,"fraction_scale":FRACTION_SCALE,"compatibility":_compatibility,"rate_units":_policy.rate_units,"settled":true}}
 
 static func validate_snapshot(value: Variant, compatible: String) -> Dictionary:
@@ -117,7 +138,7 @@ static func validate_snapshot(value: Variant, compatible: String) -> Dictionary:
 
 func _current() -> bool:
 	var core: RefCounted = _core.get_ref()
-	return core != null and not _scope.is_empty() and core.snapshot().session == _scope and core.snapshot().ready and core.gates.safe and not core.busy()
+	return core != null and definitions != null and definitions.get_instance_id() == _definitions_id and definitions.content_ticket() == _content_ticket and not _scope.is_empty() and core.snapshot().session == _scope and core.snapshot().ready and core.gates.safe and not core.busy()
 
 func committing() -> bool:
 	return _busy
@@ -129,28 +150,35 @@ func ordinary(owner: RefCounted, request: Dictionary) -> Dictionary:
 	var core: RefCounted = _core.get_ref()
 	if not core.calendar_source_current(request.provider): return _failure("Retired ordinary provider generation.")
 	var key := "ordinary:"+str(request.interval)
+	if _scheduled_receipts.has(key): return _scheduled_retry(key,request)
+	if scheduler.active(): return scheduler.progress(key,request)
 	if _ordinary_receipts.has(request.interval):
 		var retained: PackedInt64Array = _ordinary_receipts[request.interval]
 		if request.elapsed_ns != retained[0] or request.eligibility != retained[1] or request.provider != retained[2]: return _failure("Identity reused with changed intent.")
 		return _outcome(retained[3],retained[4],retained[5],"eligible-simulation",str(request.interval),retained[0],retained[4]-retained[3])
 	if not core.calendar_interval_current(request): return _failure("Obsolete interval or eligibility generation.")
 	if not core.gates.simulation(): return _failure("Ordinary progression suspended.")
-	if _required_work: return _failure("Required due-work scheduler unavailable.","deferred")
+	if _required_work and scheduler.bindings.is_empty(): return _failure("Required due-work scheduler unavailable.","deferred")
 	var scaled := product(request.elapsed_ns,_policy.rate_units,_fraction)
 	if not scaled.ok or scaled.whole > Calendar.MAX-_timestamp: return _failure("Calendar endpoint overflow.")
+	if not scheduler.bindings.is_empty() and scaled.whole > 0: return scheduler.begin(key,request,scaled.whole,scaled.fraction,"eligible-simulation",owner)
 	return _commit(key,request,scaled.whole,scaled.fraction,"eligible-simulation")
 
 func activity(owner: RefCounted, request: Dictionary) -> Dictionary:
 	if not _current(): return _failure("Stale activity session.")
 	if _busy: return _failure("Clock is owned by another commitment.","busy")
-	if request.size() != 5 or request.get("session") != _scope or not request.get("owner") is String or not request.get("operation") is String or request.operation.is_empty() or request.operation.length() > 160 or not request.get("reason") is String or request.reason.is_empty() or request.reason.length() > 160 or not Calendar.integer(request.get("duration_ms"),1,Calendar.MAX): return _failure("Complete explicit activity request required.")
+	if request.size() not in [5,7] or request.get("session") != _scope or not request.get("owner") is String or not request.get("operation") is String or request.operation.is_empty() or request.operation.length() > 160 or not request.get("reason") is String or request.reason.is_empty() or request.reason.length() > 160 or not Calendar.integer(request.get("duration_ms"),1,Calendar.MAX): return _failure("Complete explicit activity request required.")
+	if request.size() == 7 and (not Calendar.integer(request.get("start"),0,Calendar.MAX) or not Calendar.integer(request.get("endpoint"),0,Calendar.MAX) or request.endpoint <= request.start or request.endpoint-request.start != request.duration_ms): return _failure("Checked forward native endpoints required.")
 	var binding: WeakRef = _activities.get(request.owner)
 	if binding == null or binding.get_ref() != owner: return _failure("Undeclared activity owner.")
 	var key: String = "activity:"+request.owner+":"+request.operation
+	if _scheduled_receipts.has(key): return _scheduled_retry(key,request)
+	if scheduler.active(): return scheduler.progress(key,request)
 	if _receipts.has(key): return _retry(key,request)
+	if request.size() == 7 and request.start != _timestamp: return _failure("Native request start is not the current committed endpoint.")
 	var core: RefCounted = _core.get_ref()
 	if core.gates.blocked_except("simulation",activity_hold_owner(request.owner),_scope): return _failure("Independent suspension blocks activity.")
-	if _required_work: return _failure("Required due-work scheduler unavailable.","deferred")
+	if _required_work and scheduler.bindings.is_empty(): return _failure("Required due-work scheduler unavailable.","deferred")
 	if request.duration_ms > Calendar.MAX-_timestamp: return _failure("Calendar endpoint overflow.")
 	var captured := request.duplicate(true)
 	_busy = true
@@ -161,7 +189,89 @@ func activity(owner: RefCounted, request: Dictionary) -> Dictionary:
 	_busy = false
 	if not monitor.errors.is_empty(): return _failure("Activity authorization callback failed.")
 	if request != captured or typeof(valid) != TYPE_BOOL or not valid or not _current() or core.gates.blocked_except("simulation",activity_hold_owner(captured.owner),_scope) or binding.get_ref() != owner: return _failure("Activity authorization expired.")
+	if not scheduler.bindings.is_empty(): return scheduler.begin(key,request,request.duration_ms,_fraction,request.reason,owner)
 	return _commit(key,request,request.duration_ms,_fraction,request.reason)
+
+func pending() -> bool:
+	return scheduler.active()
+
+func continue_pending(owner: Object, ticket: Dictionary) -> Dictionary:
+	if _busy: return _failure("Clock callback reentrancy.","busy")
+	return scheduler.process(owner,ticket)
+
+func _scheduled_retry(key: String, request: Dictionary) -> Dictionary:
+	if _scheduled_receipts[key] is PackedInt64Array:
+		var metadata: PackedInt64Array = _scheduled_receipts[key]
+		var retained: PackedInt64Array = _ordinary_receipts[request.interval]
+		if request.elapsed_ns != retained[0] or request.eligibility != retained[1] or request.provider != retained[2]: return _failure("Identity reused with changed intent.")
+		return {"ok":true,"kind":"completed" if metadata[0] == 0 else "interrupted","reason":"","session":_scope,"operation":str(request.interval),"old":retained[3],"new":retained[4],"requested_endpoint":retained[3]+metadata[1],"requested_ms":metadata[1],"actual_ms":retained[4]-retained[3],"remaining_ms":metadata[2],"eligible_ns":retained[0],"fraction":retained[5],"target_fraction":metadata[3],"scheduler_ready":true,"required_due_work":true,"settled":true,"continuation":{"session":_scope,"operation":metadata[4],"pass":metadata[5]},"outstanding":metadata[6],"segment":metadata[7],"planning_remaining":0,"reconciliation_required":false,"tail":"consumed" if metadata[0] == 0 else "discarded"}
+	return _scheduled_receipts[key].result.duplicate(true) if _scheduled_receipts[key].request == request else _failure("Identity reused with changed intent.")
+
+func _scheduler_hold(acquire: bool) -> void:
+	var core: RefCounted = _core.get_ref()
+	if acquire:
+		_settlement_hold = core.gates.acquire(SETTLEMENT_OWNER,_scope,["simulation","input","save"])
+	elif _settlement_hold != 0:
+		core.gates.release(_settlement_hold,SETTLEMENT_OWNER)
+		_settlement_hold = 0
+
+func _scheduler_can_advance(request: Dictionary) -> bool:
+	if not _current(): return false
+	var owners: Array = [SETTLEMENT_OWNER]
+	if request.has("owner"): owners.append(activity_hold_owner(request.owner))
+	var exact := {}
+	exact[SETTLEMENT_OWNER] = _settlement_hold
+	return not _core.get_ref().gates.blocked_except_scoped("simulation",owners,_scope,exact)
+
+func _scheduler_authorize_segment(operation: Dictionary) -> bool:
+	var request: Dictionary = operation.request
+	var owner: Object = operation.owner.get_ref()
+	if owner == null or not _current(): return false
+	if request.has("elapsed_ns"):
+		return _ordinary != null and _ordinary.get_ref() == owner and _core.get_ref().calendar_source_current(request.provider)
+	var binding: WeakRef = _activities.get(request.owner)
+	if binding == null or binding.get_ref() != owner: return false
+	var monitor := preload("res://scripts/rule/formula_error_monitor.gd").new()
+	_busy = true
+	OS.add_logger(monitor)
+	var detached := request.duplicate(true)
+	detached.make_read_only()
+	var current: Variant = owner.call("calendar_activity_current",detached)
+	OS.remove_logger(monitor)
+	_busy = false
+	return monitor.errors.is_empty() and typeof(current) == TYPE_BOOL and current and _current() and binding.get_ref() == owner
+
+func _scheduler_segment(operation: Dictionary, endpoint: int) -> void:
+	var previous := _timestamp
+	_timestamp = endpoint
+	# An ordinary chronological boundary is an exact whole-ms consumption point.
+	# The admitted final fractional numerator belongs to the retained backlog,
+	# and is installed only on completion (discarded explicitly on interruption).
+	if operation.request.has("elapsed_ns"): _fraction = 0
+	operation.segment += 1
+	var outcome := _outcome(previous,endpoint,_fraction,operation.reason,str(operation.serial),0,operation.duration)
+	outcome.scheduler_ready = true
+	outcome.settled = false
+	outcome.segment = operation.segment
+	outcome.make_read_only()
+	_busy = true
+	committed.emit(outcome)
+	_busy = false
+
+func _scheduler_finish(operation: Dictionary, result: Dictionary) -> void:
+	# The uncommitted ordinary tail/fraction is explicitly discarded on interruption.
+	if operation.request.has("elapsed_ns"):
+		var request: Dictionary = operation.request
+		_ordinary_receipts[request.interval] = PackedInt64Array([request.elapsed_ns,request.eligibility,request.provider,operation.start,_timestamp,_fraction])
+		_scheduled_receipts[operation.key] = PackedInt64Array([0 if result.kind == "completed" else 1,operation.duration,result.remaining_ms,operation.fraction,operation.serial,result.continuation.pass,result.outstanding,result.segment])
+	else:
+		_scheduled_receipts[operation.key] = {"request":operation.request.duplicate(true),"result":result.duplicate(true)}
+	var notification := result.duplicate(true)
+	notification.make_read_only()
+	_busy = true
+	settled.emit(notification)
+	_busy = false
+	_scheduler_hold(false)
 
 func _retry(key: String, request: Dictionary) -> Dictionary:
 	return _receipts[key].result.duplicate(true) if _receipts[key].request == request else _failure("Identity reused with changed intent.")
@@ -218,6 +328,9 @@ static func product(elapsed: int, rate: int, fraction: int) -> Dictionary:
 
 func retire(scope: String) -> void:
 	if scope != _scope: return
+	_scheduler_hold(false)
+	scheduler.retire()
+	_scheduled_receipts.clear()
 	_scope = ""
 	_policy.clear()
 	_receipts.clear()
@@ -230,5 +343,6 @@ func retire(scope: String) -> void:
 func dispose() -> void:
 	retire(_scope)
 	for connection: Dictionary in committed.get_connections(): committed.disconnect(connection.callable)
+	for connection: Dictionary in settled.get_connections(): settled.disconnect(connection.callable)
 	_ordinary = null
 	definitions = null

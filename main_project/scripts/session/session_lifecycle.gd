@@ -83,7 +83,14 @@ func calendar_interval_current(value: Dictionary) -> bool:
 func calendar_source_current(generation: int) -> bool:
 	return generation == _calendar_provider_serial
 
+func advance_calendar_request(owner: RefCounted, request: Dictionary) -> Dictionary:
+	return calendar.activity(owner,request)
+
 func advance_calendar_frame(owner: RefCounted, seconds: Variant) -> Dictionary:
+	# A held frame resumes only admitted backlog and contributes no fresh delta.
+	if calendar.pending():
+		if calendar.scheduler.operation.failed: return calendar.scheduler.operation.result.duplicate(true)
+		return calendar.continue_pending(owner,calendar.scheduler.ticket())
 	# Quantize stock physics input once to nearest eligible nanosecond. Integer
 	# interval callers have exact split/combine equivalence at this precision.
 	if not (seconds is int or seconds is float) or not is_finite(float(seconds)) or seconds < 0.0 or not is_finite(gates.intended_rate) or gates.intended_rate <= 0.0: return {"ok":false,"reason":"Invalid CORE elapsed/rate."}

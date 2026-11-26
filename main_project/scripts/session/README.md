@@ -242,3 +242,15 @@ interval through CORE, separately from MOVE/CHAR proofs and slow cadence. CORE
 intended rate and DATA calendar rate apply once each at their own boundaries.
 Disposal clears the provider/death-authority references as well as subscriptions.
 Controlled entry/activity checks do not qualify real rest, scheduling or native SAVE.
+
+# IMP-014 increment 2 extension
+
+The [TIME scheduler](../time/SCHEDULER.md) retains one admitted operation across
+bounded passes. CORE supplies exact-session simulation/input/save holds; TIME
+excludes only its exact settlement token and the initiating activity's own scoped
+hold for new chronology. Independent pause/focus/load holds remain effective.
+Stock physics resumes admitted backlog without new elapsed input, stops before
+MOVE on pending/interrupted/final continuation frames, and exposes checked
+`retry_calendar_settlement()` for retained owner failures. Unsettled presentation
+is not labelled ready. Ordinary no-scheduler failure still uses CORE recovery.
+Real TIME/MOVE/CHAR partial-interval composition and native SAVE remain open.

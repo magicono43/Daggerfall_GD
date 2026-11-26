@@ -215,3 +215,11 @@ provider remains unchanged and never advances native calendar time. Maintained
 ground checks also select published `calendar-rate-3`, preserving measured Walk
 speed and physical pose while qualifying independent native calendar accounting.
 This does not close the real TIME/CHAR scheduler/activity joint gate.
+
+# IMP-014 increment 2 qualification boundary
+
+The [native TIME scheduler](../time/SCHEDULER.md) does not replace accepted MOVE/
+CHAR controlled interval proofs. Stock pending/final continuation frames stop
+before physical work; scheduler profiles declaring real MOVE activity reject
+activation until native partial-interval reconciliation is qualified. No MOVE,
+AV or cadence rate change is introduced. Native SAVE and real-owner gates remain.

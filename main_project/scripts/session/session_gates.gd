@@ -50,6 +50,16 @@ func blocked_except(channel: String, owner: String, owner_scope: Variant = null)
 func gameplay_input() -> bool:
 	return ready and safe and not session.is_empty() and not blocked("input")
 
+func blocked_except_scoped(channel: String, owners: Array, scope: String, exact_tokens: Dictionary = {}) -> bool:
+	# Multiple exact-session exclusions are needed for TIME settlement under an
+	# activity's own hold. The legacy two-argument method remains unchanged.
+	for token: int in _holds:
+		var hold: Dictionary = _holds[token]
+		if (hold.scope.is_empty() or hold.scope == session) and channel in hold.channels:
+			if hold.scope != scope or hold.owner not in owners: return true
+			if exact_tokens.has(hold.owner) and token != exact_tokens[hold.owner]: return true
+	return false
+
 func presentation() -> bool:
 	return not blocked("presentation")
 

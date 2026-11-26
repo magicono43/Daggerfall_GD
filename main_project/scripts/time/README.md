@@ -1,4 +1,11 @@
-# Calendar and clock — IMP-014 increment 1
+# Calendar and clock — IMP-014
+
+Increment 2 adds retained chronological due work; see
+[SCHEDULER.md](SCHEDULER.md) for the current scheduling, accounting, gate and
+recovery interfaces. The increment-1 no-required-work contract below remains
+supported. Its future-scheduler descriptions are historical and superseded by
+that extension for explicitly declared controlled scheduler profiles. Real-owner,
+activity-integration and native SAVE qualifications remain open.
 
 TIME's `calendar_clock.gd`, composed as `SessionLifecycle.calendar`, is the only
 native calendar writer. `calendar.gd` supplies pure checked integer conversion.

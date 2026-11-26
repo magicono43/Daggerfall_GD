@@ -264,3 +264,12 @@ their accepted controlled contract; they are neither native timestamps nor a
 second calendar writer. No partially qualified provider replaces them. Real
 TIME/CHAR segment settlement, scheduling, exhaustion and native SAVE joint checks
 remain open under their named owners.
+
+# IMP-014 increment 2 qualification boundary
+
+The [native TIME scheduler](../time/SCHEDULER.md) now has controlled chronological
+work/retention/recovery coverage. It does not replace these accepted controlled
+simulation/game-microsecond providers or deliver the native TIME/MOVE/CHAR
+partial-interval bridge. Scheduler profiles declaring real MOVE activity reject
+activation until original physical proposals, performed proofs, custody and CHAR
+settlement can be reconciled coherently. Native SAVE remains open.

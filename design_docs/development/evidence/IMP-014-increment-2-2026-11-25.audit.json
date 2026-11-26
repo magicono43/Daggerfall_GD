@@ -1,0 +1,2155 @@
+{
+  "schema": "imp014-increment2-audit-v1",
+  "production_and_fixture_hashes": {
+    "scripts/data/calendar_policy.gd": "302996CAE47D1AF7FC357D908A589613C554399A7A56D0D6DE5FB09EAC3DCC49",
+    "scripts/time/calendar_clock.gd": "FCF6A75BBEFCD03E36E96A3725A41E465BE2F2039832B7056A6FDFEA05AE03A9",
+    "tests/scheduler_inventory.json": "8298FBAA6C0ADBD3AC68578AFD853C6BE07528C8AA9DAF7C83347A48D8F39372",
+    "tests/calendar_inventory.json": "EAC413DD617D925AE04058102625B319107C9F5D2C68E1F68D8B30A2D02375A9",
+    "scripts/session/session_gates.gd": "945A1D64A2043BA10ACADDF86A42BFD216F98DB7C6C61420401C0C6FD126F27B",
+    "scripts/startup/startup_shell.gd": "B8C5AEF1CE86767311566B423EA797414E7C021F05899157667DB0C22C2E1B40",
+    "scripts/session/session_shell.gd": "E868383A30A97A7FEB6F5F710189EF4E621215EBE1FF4101194E86B5B258CBD5",
+    "tests/calendar_cases.gd": "774BBEE525E827AE801A44EACDDE429BCD24C201D5BFB4182E73A84B8DE25DAB",
+    "tests/session_cases.gd": "B603789030EBB2E4DE616FDE92B012494E530F5E6410FF4EDB84534A7635F3F3",
+    "tests/ground_cases.gd": "393C5AD82758DA1FA26A2A76A84007A969EC552AB0C6EEEC812CFFBC61A9D609",
+    "scripts/time/due_work.gd": "830F3FF8421091C4150385AD99C28E376DA7E734C0BBD7DFDC224FE9D7F08158",
+    "scripts/session/session_lifecycle.gd": "89590CFB11CE8FE0E7238A003D46319EF554B3056D529373B0703D90F01EE0D1",
+    "tests/scheduler_review.gd": "F0B635328F4E9377AE8F5F05947DA1C97D645ED06654AF2115B3C17B26E92CC8",
+    "tests/action_input_cases.gd": "3D429CF997C02806FF0F8795104D1964B3AEEED3C76B84C8E7A93F9A0E654DBF",
+    "content/time/calendar.json": "21D7280E034CE4D6C992AB5BCE30DDFFE8754CBABCFFC28F316C0DD60D982CDB",
+    "scripts/startup/provider_boundary.gd": "47A2919C53F1B91274CE0F3E0533732ED2CFD794A7ED3608BE051FAD2C1EACD4",
+    "scripts/time/calendar.gd": "9A78C43A686A60115268717E9DAAFD827E03518715EA56F3ECBDC2384DBF39FD",
+    "tests/ground_inventory.json": "63778321D902B43FE3A6C288D7AF445F5240DD24D0874E9F49F52E74D6322F26",
+    "tests/m1_composition_cases.gd": "48B68D9B79FA240906AA4014D8B0D4945DA850CACC79418C5D3DA4468A10DA51",
+    "scripts/time/calendar_crossings.gd": "FB6B6445AD8A9E6CF781E774984E4A442FC01B5CCE74E0FB51F27B00C9446F1B",
+    "tests/scheduler_cases.gd": "61A7918B45D1603656222BF306AF721A121B38C45AC7C4361DF23BA1C4D786C9"
+  },
+  "numeric_precision": {
+    "native": "nonnegative signed-int64 game milliseconds",
+    "fraction": "integer numerator over 10^12 game milliseconds",
+    "eligible": "integer simulation nanoseconds after CORE rate",
+    "stock_float": "quantized once to nearest eligible nanosecond; positive below half-nanosecond rejects",
+    "rate": "positive integer millionths",
+    "fixture_seed": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "initial_git_status": [],
+  "start_utc": "2026-11-26T02:29:46Z",
+  "human_pass": false,
+  "left_uncommitted": true,
+  "changed_files": [
+    " M design_docs/development/DEPENDENCY_GRAPH.md",
+    " M design_docs/development/IMPLEMENTATION_READINESS.md",
+    " M design_docs/development/MILESTONES.md",
+    " M design_docs/development/RUN_ARTIFACT_CLEANUP.md",
+    " M design_docs/development/TASK_BACKLOG.md",
+    " M design_docs/development/tasks/IMP-014.md",
+    " M main_project/scripts/char/ACTIVITY.md",
+    " M main_project/scripts/move/GROUND.md",
+    " M main_project/scripts/session/README.md",
+    " M main_project/scripts/session/session_gates.gd",
+    " M main_project/scripts/session/session_lifecycle.gd",
+    " M main_project/scripts/session/session_shell.gd",
+    " M main_project/scripts/startup/startup_shell.gd",
+    " M main_project/scripts/time/README.md",
+    " M main_project/scripts/time/calendar_clock.gd",
+    " M main_project/tests/README.md",
+    " M main_project/tests/action_input_cases.gd",
+    " M main_project/tests/calendar_cases.gd",
+    " M main_project/tools/calendar_fixture.ps1",
+    "?? design_docs/development/evidence/IMP-014-INCREMENT-2-REVIEW-2026-11-25.md",
+    "?? design_docs/development/evidence/IMP-014-increment-2-2026-11-25.audit.json",
+    "?? design_docs/development/evidence/IMP-014-increment-2-2026-11-25.md",
+    "?? main_project/scripts/time/SCHEDULER.md",
+    "?? main_project/scripts/time/calendar_crossings.gd",
+    "?? main_project/scripts/time/calendar_crossings.gd.uid",
+    "?? main_project/scripts/time/due_work.gd",
+    "?? main_project/scripts/time/due_work.gd.uid",
+    "?? main_project/tests/scheduler_cases.gd",
+    "?? main_project/tests/scheduler_cases.gd.uid",
+    "?? main_project/tests/scheduler_inventory.json",
+    "?? main_project/tests/scheduler_review.gd",
+    "?? main_project/tests/scheduler_review.gd.uid",
+    "?? main_project/tools/review_scheduler.ps1"
+  ],
+  "measurements": {
+    "Review smoke and calendar rendered": {
+      "accounted_frame_memory_bytes": 2327664,
+      "complete_startup_usec": 32653223,
+      "retained_clock_receipts": 10000,
+      "scheduler": {
+        "stream_3001_budget_one_usec": 705172,
+        "stream_3001_memory_bytes": 28524552,
+        "ten_thousand_years_three_occurrences_usec": 3741
+      },
+      "ten_thousand_accounted_frames_usec": 330704,
+      "ten_thousand_queries_usec": 139108
+    },
+    "Calendar headless": {
+      "accounted_frame_memory_bytes": 2327664,
+      "complete_startup_usec": 32384226,
+      "retained_clock_receipts": 10000,
+      "scheduler": {
+        "stream_3001_budget_one_usec": 670575,
+        "stream_3001_memory_bytes": 28523984,
+        "ten_thousand_years_three_occurrences_usec": 531
+      },
+      "ten_thousand_accounted_frames_usec": 308526,
+      "ten_thousand_queries_usec": 133614
+    }
+  },
+  "start_est": "2026-11-25 21:29:46 EST",
+  "excluded_attempts": [
+    {
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "exit": 2,
+      "end_utc": "2026-11-26T03:43:26.0748437Z",
+      "roots": [
+        "verification-rendered-d3cbec0d8e2e46b6a9cdaf26a0bca564"
+      ],
+      "output": "rendered incomplete: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-d3cbec0d8e2e46b6a9cdaf26a0bca564/report.json",
+      "name": "Session rendered",
+      "tool": "verify_rendered.ps1"
+    }
+  ],
+  "remaining_gates": [
+    "Human review and explicit increment-2 acceptance",
+    "Increment 3, parent IMP-014, M2",
+    "Real TIME/MOVE/CHAR native partial-interval reconciliation and custody",
+    "Real QUEST/MAGIC/rest/travel/prison and holiday policies; bulk/coalescing/skip qualification",
+    "Coherent scheduler-owner capture/restore and native SAVE coordination",
+    "WORLD/entry, long-session retention and inherited device/provider gates"
+  ],
+  "baseline_revision": "14fadd3",
+  "superseded_matrix_steps": [
+    {
+      "arguments": [
+        "-Suite",
+        "calendar-clock",
+        "-Fixture",
+        "calendar-clock-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "roots": [
+        "verification-headless-a8bab38d8a484953b1f1427d558c9683"
+      ],
+      "exit": 0,
+      "name": "Calendar headless",
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-a8bab38d8a484953b1f1427d558c9683/report.json",
+      "end_utc": "2026-11-26T02:53:56.854068Z",
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "arguments": [
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-SmokeTest"
+      ],
+      "roots": [
+        "verification-rendered-38b498614c2745df93cabedf0d7f27b0"
+      ],
+      "exit": 0,
+      "name": "Review smoke and calendar rendered",
+      "output": [
+        "Building and verifying the scheduler review; the interactive shell opens after checks pass.",
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-38b498614c2745df93cabedf0d7f27b0/report.json",
+        "Scheduler review closed. Evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-38b498614c2745df93cabedf0d7f27b0/project/tests/.runs/scenario-1/human-review"
+      ],
+      "end_utc": "2026-11-26T02:55:48.0848447Z",
+      "tool": "review_scheduler.ps1"
+    },
+    {
+      "arguments": [
+        "-Configuration",
+        "debug",
+        "-CalendarClock",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "roots": [
+        "export-beb60d7ede444f33b284e6f6d2988058"
+      ],
+      "exit": 0,
+      "name": "Windows debug export",
+      "output": "Windows debug export PASS: headless and rendered startup; evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-beb60d7ede444f33b284e6f6d2988058",
+      "end_utc": "2026-11-26T02:57:56.2367845Z",
+      "tool": "verify_startup_export.ps1"
+    },
+    {
+      "arguments": [
+        "-Configuration",
+        "release",
+        "-CalendarClock",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "roots": [
+        "export-66c8e63cbac247589244a488b51df2c2"
+      ],
+      "exit": 0,
+      "name": "Windows release export",
+      "output": "Windows release export PASS: headless and rendered startup; evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-66c8e63cbac247589244a488b51df2c2",
+      "end_utc": "2026-11-26T02:59:41.5659552Z",
+      "tool": "verify_startup_export.ps1"
+    },
+    {
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "roots": [
+        "verification-headless-3f95d7d0c60c4765bb5e3a37d9f405a7"
+      ],
+      "exit": 0,
+      "name": "Session headless",
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-3f95d7d0c60c4765bb5e3a37d9f405a7/report.json",
+      "end_utc": "2026-11-26T03:00:09.4564855Z",
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "roots": [
+        "verification-rendered-a24562331d1e45f8b4166d27cfd5e327"
+      ],
+      "exit": 0,
+      "name": "Session rendered",
+      "output": "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-a24562331d1e45f8b4166d27cfd5e327/report.json",
+      "end_utc": "2026-11-26T03:00:46.2655267Z",
+      "tool": "verify_rendered.ps1"
+    },
+    {
+      "arguments": [
+        "-Suite",
+        "action-input",
+        "-Fixture",
+        "action-input-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "roots": [
+        "verification-headless-a9c2b967039648178b7a1377a7705ec4"
+      ],
+      "exit": 2,
+      "name": "Action input headless",
+      "output": "headless incomplete: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-a9c2b967039648178b7a1377a7705ec4/report.json",
+      "end_utc": "2026-11-26T03:01:08.562768Z",
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "exit": 0,
+      "end_utc": "2026-11-26T03:02:53.74594Z",
+      "arguments": [
+        "-Suite",
+        "action-input",
+        "-Fixture",
+        "action-input-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-61522a37fb0d4f9197c8e169d5a79ff9/report.json",
+      "roots": [
+        "verification-headless-61522a37fb0d4f9197c8e169d5a79ff9"
+      ],
+      "name": "Action input headless",
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "exit": 0,
+      "end_utc": "2026-11-26T03:03:21.653432Z",
+      "arguments": [
+        "-Suite",
+        "action-input",
+        "-Fixture",
+        "action-input-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "output": "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-b9cb387b835e4b60966f8e02288b1c2e/report.json",
+      "roots": [
+        "verification-rendered-b9cb387b835e4b60966f8e02288b1c2e"
+      ],
+      "name": "Action input rendered",
+      "tool": "verify_rendered.ps1"
+    },
+    {
+      "exit": 0,
+      "end_utc": "2026-11-26T03:06:01.9873133Z",
+      "arguments": [
+        "-Suite",
+        "ground-movement",
+        "-Fixture",
+        "ground-movement-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-InputSequence",
+        "calendar-rate-3",
+        "-TimeoutSeconds",
+        "360"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-fedb7498d247477fb701fa8bcd5c10b7/report.json",
+      "roots": [
+        "verification-headless-fedb7498d247477fb701fa8bcd5c10b7"
+      ],
+      "name": "Ground headless calendar 3x",
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "exit": 0,
+      "end_utc": "2026-11-26T03:08:47.9434152Z",
+      "arguments": [
+        "-Suite",
+        "ground-movement",
+        "-Fixture",
+        "ground-movement-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-InputSequence",
+        "calendar-rate-3",
+        "-TimeoutSeconds",
+        "360"
+      ],
+      "output": "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-7f5437b3e655449ca42f23ef5708e232/report.json",
+      "roots": [
+        "verification-rendered-7f5437b3e655449ca42f23ef5708e232"
+      ],
+      "name": "Ground rendered calendar 3x",
+      "tool": "verify_rendered.ps1"
+    },
+    {
+      "exit": 0,
+      "end_utc": "2026-11-26T03:10:22.7730002Z",
+      "arguments": [
+        "-Suite",
+        "m1-composition",
+        "-Fixture",
+        "m1-composition-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-76be2689a9934b0b8e4484c7f8f6e47b/report.json",
+      "roots": [
+        "verification-headless-76be2689a9934b0b8e4484c7f8f6e47b"
+      ],
+      "name": "Composition headless",
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "exit": 0,
+      "end_utc": "2026-11-26T03:12:09.5844171Z",
+      "arguments": [
+        "-Suite",
+        "m1-composition",
+        "-Fixture",
+        "m1-composition-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "output": "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-e7c6180d00c84496a0ba1ae11f3ccf09/report.json",
+      "roots": [
+        "verification-rendered-e7c6180d00c84496a0ba1ae11f3ccf09"
+      ],
+      "name": "Composition rendered",
+      "tool": "verify_rendered.ps1"
+    },
+    {
+      "end_utc": "2026-11-26T03:15:46.1890042Z",
+      "tool": "verify_headless.ps1",
+      "roots": [
+        "verification-headless-403764821dd64c0881ba285bd3f8e7cb"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-403764821dd64c0881ba285bd3f8e7cb/report.json",
+      "arguments": [
+        "-Suite",
+        "calendar-clock",
+        "-Fixture",
+        "calendar-clock-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "exit": 0,
+      "name": "Calendar headless"
+    },
+    {
+      "end_utc": "2026-11-26T03:17:33.2527222Z",
+      "tool": "review_scheduler.ps1",
+      "roots": [
+        "verification-rendered-6c7164ffee074c3983c3b4cfe9abbc91"
+      ],
+      "output": [
+        "Building and verifying the scheduler review; the interactive shell opens after checks pass.",
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-6c7164ffee074c3983c3b4cfe9abbc91/report.json",
+        "Scheduler review closed. Evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-6c7164ffee074c3983c3b4cfe9abbc91/project/tests/.runs/scenario-1/human-review"
+      ],
+      "arguments": [
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-SmokeTest"
+      ],
+      "exit": 0,
+      "name": "Review smoke and calendar rendered"
+    },
+    {
+      "end_utc": "2026-11-26T03:19:39.2246101Z",
+      "tool": "verify_startup_export.ps1",
+      "roots": [
+        "export-27f0e4258d9943999b0c0162fa0a7b46"
+      ],
+      "output": "Windows debug export PASS: headless and rendered startup; evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-27f0e4258d9943999b0c0162fa0a7b46",
+      "arguments": [
+        "-Configuration",
+        "debug",
+        "-CalendarClock",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "exit": 0,
+      "name": "Windows debug export"
+    },
+    {
+      "end_utc": "2026-11-26T03:21:24.1402087Z",
+      "tool": "verify_startup_export.ps1",
+      "roots": [
+        "export-fffa4237e9b240929dcf7dc60deed7c4"
+      ],
+      "output": "Windows release export PASS: headless and rendered startup; evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-fffa4237e9b240929dcf7dc60deed7c4",
+      "arguments": [
+        "-Configuration",
+        "release",
+        "-CalendarClock",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "exit": 0,
+      "name": "Windows release export"
+    },
+    {
+      "end_utc": "2026-11-26T03:21:46.9002719Z",
+      "tool": "verify_headless.ps1",
+      "roots": [
+        "verification-headless-c26e0278327247f4867a5b1e989b92ca"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-c26e0278327247f4867a5b1e989b92ca/report.json",
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "exit": 0,
+      "name": "Session headless"
+    },
+    {
+      "end_utc": "2026-11-26T03:22:19.1898485Z",
+      "tool": "verify_rendered.ps1",
+      "roots": [
+        "verification-rendered-c41739d2e62c4cc0ab97fbe1ab74b665"
+      ],
+      "output": "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-c41739d2e62c4cc0ab97fbe1ab74b665/report.json",
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "exit": 0,
+      "name": "Session rendered"
+    },
+    {
+      "end_utc": "2026-11-26T03:22:50.9035609Z",
+      "tool": "verify_headless.ps1",
+      "roots": [
+        "verification-headless-31402123a6834a9eb5d030ed8b282886"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-31402123a6834a9eb5d030ed8b282886/report.json",
+      "arguments": [
+        "-Suite",
+        "action-input",
+        "-Fixture",
+        "action-input-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "exit": 0,
+      "name": "Action input headless"
+    },
+    {
+      "end_utc": "2026-11-26T03:23:20.9838591Z",
+      "tool": "verify_rendered.ps1",
+      "roots": [
+        "verification-rendered-e9abadb58e7d4b1096c4b14330a9a38d"
+      ],
+      "output": "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-e9abadb58e7d4b1096c4b14330a9a38d/report.json",
+      "arguments": [
+        "-Suite",
+        "action-input",
+        "-Fixture",
+        "action-input-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "exit": 0,
+      "name": "Action input rendered"
+    },
+    {
+      "end_utc": "2026-11-26T03:26:20.414484Z",
+      "tool": "verify_headless.ps1",
+      "roots": [
+        "verification-headless-4362cf0ad0664f72a1906c02d887e422"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-4362cf0ad0664f72a1906c02d887e422/report.json",
+      "arguments": [
+        "-Suite",
+        "ground-movement",
+        "-Fixture",
+        "ground-movement-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-InputSequence",
+        "calendar-rate-3",
+        "-TimeoutSeconds",
+        "360"
+      ],
+      "exit": 0,
+      "name": "Ground headless calendar 3x"
+    },
+    {
+      "end_utc": "2026-11-26T03:29:21.9714373Z",
+      "tool": "verify_rendered.ps1",
+      "roots": [
+        "verification-rendered-e213c84d8575435e92d33bee4d5aa3ea"
+      ],
+      "output": "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-e213c84d8575435e92d33bee4d5aa3ea/report.json",
+      "arguments": [
+        "-Suite",
+        "ground-movement",
+        "-Fixture",
+        "ground-movement-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-InputSequence",
+        "calendar-rate-3",
+        "-TimeoutSeconds",
+        "360"
+      ],
+      "exit": 0,
+      "name": "Ground rendered calendar 3x"
+    },
+    {
+      "end_utc": "2026-11-26T03:30:59.3364071Z",
+      "tool": "verify_headless.ps1",
+      "roots": [
+        "verification-headless-cdeb97d9611444f6a673e3f21156df39"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-cdeb97d9611444f6a673e3f21156df39/report.json",
+      "arguments": [
+        "-Suite",
+        "m1-composition",
+        "-Fixture",
+        "m1-composition-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "exit": 0,
+      "name": "Composition headless"
+    },
+    {
+      "end_utc": "2026-11-26T03:32:43.3805132Z",
+      "tool": "verify_rendered.ps1",
+      "roots": [
+        "verification-rendered-4a6b5961df984b0586835baf3ce1f953"
+      ],
+      "output": "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-4a6b5961df984b0586835baf3ce1f953/report.json",
+      "arguments": [
+        "-Suite",
+        "m1-composition",
+        "-Fixture",
+        "m1-composition-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "exit": 0,
+      "name": "Composition rendered"
+    },
+    {
+      "arguments": [
+        "-Suite",
+        "calendar-clock",
+        "-Fixture",
+        "calendar-clock-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "exit": 0,
+      "end_utc": "2026-11-26T03:36:43.9992358Z",
+      "roots": [
+        "verification-headless-b904ec7535fa40fb86d056a0dca25d3c"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-b904ec7535fa40fb86d056a0dca25d3c/report.json",
+      "name": "Calendar headless",
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "arguments": [
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-SmokeTest"
+      ],
+      "exit": 0,
+      "end_utc": "2026-11-26T03:38:41.2859839Z",
+      "roots": [
+        "verification-rendered-d2da4e1de3c947aeab8be6b681e70786"
+      ],
+      "output": [
+        "Building and verifying the scheduler review; the interactive shell opens after checks pass.",
+        "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-d2da4e1de3c947aeab8be6b681e70786/report.json",
+        "Scheduler review closed. Evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-d2da4e1de3c947aeab8be6b681e70786/project/tests/.runs/scenario-1/human-review"
+      ],
+      "name": "Review smoke and calendar rendered",
+      "tool": "review_scheduler.ps1"
+    },
+    {
+      "arguments": [
+        "-Configuration",
+        "debug",
+        "-CalendarClock",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "exit": 0,
+      "end_utc": "2026-11-26T03:40:36.9606619Z",
+      "roots": [
+        "export-27bf6b9f80d3499dbc2c66169172c118"
+      ],
+      "output": "Windows debug export PASS: headless and rendered startup; evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-27bf6b9f80d3499dbc2c66169172c118",
+      "name": "Windows debug export",
+      "tool": "verify_startup_export.ps1"
+    },
+    {
+      "arguments": [
+        "-Configuration",
+        "release",
+        "-CalendarClock",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "exit": 0,
+      "end_utc": "2026-11-26T03:42:26.4269704Z",
+      "roots": [
+        "export-2c14a7dc96854c7f8acbf6d946874ab9"
+      ],
+      "output": "Windows release export PASS: headless and rendered startup; evidence: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-2c14a7dc96854c7f8acbf6d946874ab9",
+      "name": "Windows release export",
+      "tool": "verify_startup_export.ps1"
+    },
+    {
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "exit": 0,
+      "end_utc": "2026-11-26T03:42:50.4864579Z",
+      "roots": [
+        "verification-headless-6a3bee3d87444e95bf6c2112bd815af3"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-6a3bee3d87444e95bf6c2112bd815af3/report.json",
+      "name": "Session headless",
+      "tool": "verify_headless.ps1"
+    },
+    {
+      "exit": 0,
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "name": "Session rendered",
+      "roots": [
+        "verification-rendered-018aa47d554c47388bbe0a41207efe52"
+      ],
+      "output": "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-018aa47d554c47388bbe0a41207efe52/report.json",
+      "tool": "verify_rendered.ps1",
+      "end_utc": "2026-11-26T03:45:58.9620482Z"
+    },
+    {
+      "exit": 0,
+      "arguments": [
+        "-Suite",
+        "action-input",
+        "-Fixture",
+        "action-input-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "name": "Action input headless",
+      "roots": [
+        "verification-headless-a38407e77339409f937c4993cee113bf"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-a38407e77339409f937c4993cee113bf/report.json",
+      "tool": "verify_headless.ps1",
+      "end_utc": "2026-11-26T03:46:22.0717692Z"
+    },
+    {
+      "exit": 0,
+      "arguments": [
+        "-Suite",
+        "action-input",
+        "-Fixture",
+        "action-input-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "name": "Action input rendered",
+      "roots": [
+        "verification-rendered-09f28f58c07e4037b11354c8e69a14f1"
+      ],
+      "output": "rendered passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-09f28f58c07e4037b11354c8e69a14f1/report.json",
+      "tool": "verify_rendered.ps1",
+      "end_utc": "2026-11-26T03:47:01.9607591Z"
+    },
+    {
+      "exit": 0,
+      "arguments": [
+        "-Suite",
+        "ground-movement",
+        "-Fixture",
+        "ground-movement-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-InputSequence",
+        "calendar-rate-3",
+        "-TimeoutSeconds",
+        "360"
+      ],
+      "name": "Ground headless calendar 3x",
+      "roots": [
+        "verification-headless-a853dab460214aafbc2cfdb4fa1bddd5"
+      ],
+      "output": "headless passed: C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-a853dab460214aafbc2cfdb4fa1bddd5/report.json",
+      "tool": "verify_headless.ps1",
+      "end_utc": "2026-11-26T03:49:38.1516583Z"
+    }
+  ],
+  "reports": [
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": [
+        "-Suite",
+        "calendar-clock",
+        "-Fixture",
+        "calendar-clock-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "verified_source_files": 16,
+      "name": "Calendar headless",
+      "mode": "headless",
+      "status": "passed",
+      "report_sha256": "5B48FC725B2A1EBD70F2CD4CBF2BBC2C44F3DA6EA5940C612A83618A5627A92D",
+      "configuration": null,
+      "fixture": "calendar-clock-v1",
+      "root": "verification-headless-b1037155b7bc4c64bd253282d6d00540",
+      "executable_sha256": null,
+      "children": [
+        {
+          "fixture": "calendar-clock-v1",
+          "assertions": 344,
+          "reload_assertions": 0,
+          "display": "headless",
+          "mode": "headless",
+          "exit": 0
+        }
+      ],
+      "assertions": 344,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report": "main_project\\tests\\.runs\\verification-headless-b1037155b7bc4c64bd253282d6d00540\\report.json",
+      "pck_sha256": null,
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\verification-headless-b1037155b7bc4c64bd253282d6d00540\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\verification-headless-b1037155b7bc4c64bd253282d6d00540\\executed-runtime-sources.json",
+        "sha256": "606FD5208BD75C5F174826414E0DF9495FAD6EBF013DF1F2EE7244EC42431AA6"
+      }
+    },
+    {
+      "tool": "review_scheduler.ps1",
+      "arguments": [
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-SmokeTest"
+      ],
+      "verified_source_files": 16,
+      "name": "Review smoke and calendar rendered",
+      "mode": "rendered",
+      "status": "passed",
+      "report_sha256": "0FE2A82EA17A9391A43C60CBD1DF7FE38247E69CD4162434697FEFC34E33F9AA",
+      "configuration": null,
+      "fixture": "calendar-clock-v1",
+      "root": "verification-rendered-6d5c8b702a274ee48a952c92614200e9",
+      "executable_sha256": null,
+      "children": [
+        {
+          "fixture": "calendar-clock-v1",
+          "assertions": 351,
+          "reload_assertions": 0,
+          "display": "Windows",
+          "mode": "rendered",
+          "exit": 0
+        }
+      ],
+      "assertions": 351,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report": "main_project\\tests\\.runs\\verification-rendered-6d5c8b702a274ee48a952c92614200e9\\report.json",
+      "pck_sha256": null,
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\verification-rendered-6d5c8b702a274ee48a952c92614200e9\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\verification-rendered-6d5c8b702a274ee48a952c92614200e9\\executed-runtime-sources.json",
+        "sha256": "0DE3190250C7189C851832D98DF313EFDB83B8A88004C6B18A4C2C6FF5DE31F2"
+      }
+    },
+    {
+      "tool": "verify_startup_export.ps1",
+      "arguments": [
+        "-Configuration",
+        "debug",
+        "-CalendarClock",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "verified_source_files": 16,
+      "name": "Windows debug export",
+      "mode": null,
+      "status": "passed",
+      "report_sha256": "5E62BA896CA5F2F3D86145164D863A5FE57FF5C350BB3BCBFCD0411C1A07CEFC",
+      "configuration": "debug",
+      "fixture": "calendar-clock-v1",
+      "root": "export-933e16fd262e442a88366f59cd88d00a",
+      "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+      "children": [
+        {
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-933e16fd262e442a88366f59cd88d00a/build/tests/.runs/headless/result.json",
+          "exit": 0,
+          "mode": "exported-headless",
+          "assertions": 344
+        },
+        {
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-933e16fd262e442a88366f59cd88d00a/build/tests/.runs/rendered/result.json",
+          "exit": 0,
+          "mode": "exported-rendered",
+          "assertions": 351
+        }
+      ],
+      "assertions": 695,
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "report": "main_project\\tests\\.runs\\export-933e16fd262e442a88366f59cd88d00a\\result.json",
+      "pck_sha256": "702B939FD3BF583EEC3F3DBB7EE6907AA716F8871005B5F19F15BBDC1419372F",
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\export-933e16fd262e442a88366f59cd88d00a\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\export-933e16fd262e442a88366f59cd88d00a\\executed-runtime-sources.json",
+        "sha256": "94C79D491E4AEDD24F7C9A1B65AB8B63A1B6A0EFDEF059C2ED17FD7025AB21DD"
+      }
+    },
+    {
+      "tool": "verify_startup_export.ps1",
+      "arguments": [
+        "-Configuration",
+        "release",
+        "-CalendarClock",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2"
+      ],
+      "verified_source_files": 16,
+      "name": "Windows release export",
+      "mode": null,
+      "status": "passed",
+      "report_sha256": "7780B1807FB81CAAD6C9A2377043831893E1678E22443C0FC3B5CC3C72F59EC4",
+      "configuration": "release",
+      "fixture": "calendar-clock-v1",
+      "root": "export-94eb47eef71748b9a5e4adb6e95a8123",
+      "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+      "children": [
+        {
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-94eb47eef71748b9a5e4adb6e95a8123/build/tests/.runs/headless/result.json",
+          "exit": 0,
+          "mode": "exported-headless",
+          "assertions": 344
+        },
+        {
+          "result": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-94eb47eef71748b9a5e4adb6e95a8123/build/tests/.runs/rendered/result.json",
+          "exit": 0,
+          "mode": "exported-rendered",
+          "assertions": 351
+        }
+      ],
+      "assertions": 695,
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "report": "main_project\\tests\\.runs\\export-94eb47eef71748b9a5e4adb6e95a8123\\result.json",
+      "pck_sha256": "92ABB3F9F71ACBDA212CFDD58CF15ABCE039BE27CF5A9FF5DE200BDF7FCAFB99",
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\export-94eb47eef71748b9a5e4adb6e95a8123\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\export-94eb47eef71748b9a5e4adb6e95a8123\\executed-runtime-sources.json",
+        "sha256": "B66163842D228F81057FA9EC84D87517ED049BED51D9C0135B45D72C907532FB"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "verified_source_files": 12,
+      "name": "Session headless",
+      "mode": "headless",
+      "status": "passed",
+      "report_sha256": "630683AAF3381FC89FBAEFC447E6CCC51BD60788678C702B0D1CC682E2A09F1D",
+      "configuration": null,
+      "fixture": "m1-v1",
+      "root": "verification-headless-997ace0138cb4965bf20bedfe7b3f377",
+      "executable_sha256": null,
+      "children": [
+        {
+          "fixture": "IMP-002-session-v1",
+          "assertions": 263,
+          "reload_assertions": 0,
+          "display": "headless",
+          "mode": "headless",
+          "exit": 0
+        }
+      ],
+      "assertions": 263,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report": "main_project\\tests\\.runs\\verification-headless-997ace0138cb4965bf20bedfe7b3f377\\report.json",
+      "pck_sha256": null,
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\verification-headless-997ace0138cb4965bf20bedfe7b3f377\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\verification-headless-997ace0138cb4965bf20bedfe7b3f377\\executed-runtime-sources.json",
+        "sha256": "2F5F0DCCB42C8588392DD3E0C8E13A19D9CABC2F843847C987D4510BBEE8596D"
+      }
+    },
+    {
+      "tool": "verify_rendered.ps1",
+      "arguments": [
+        "-Suite",
+        "session",
+        "-Fixture",
+        "m1-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "verified_source_files": 12,
+      "name": "Session rendered",
+      "mode": "rendered",
+      "status": "passed",
+      "report_sha256": "FDFC471762088CDAC15C40C7AFE6521D8E6D980428DFA0EA60233E3A2A5FB34D",
+      "configuration": null,
+      "fixture": "m1-v1",
+      "root": "verification-rendered-80239060e5284921a45464b9adc703df",
+      "executable_sha256": null,
+      "children": [
+        {
+          "fixture": "IMP-002-session-v1",
+          "assertions": 265,
+          "reload_assertions": 0,
+          "display": "Windows",
+          "mode": "rendered",
+          "exit": 0
+        }
+      ],
+      "assertions": 265,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report": "main_project\\tests\\.runs\\verification-rendered-80239060e5284921a45464b9adc703df\\report.json",
+      "pck_sha256": null,
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\verification-rendered-80239060e5284921a45464b9adc703df\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\verification-rendered-80239060e5284921a45464b9adc703df\\executed-runtime-sources.json",
+        "sha256": "B52DFB9065B54AB076CD5160762014C046D3089448B66C7063CFE7770C57467E"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": [
+        "-Suite",
+        "action-input",
+        "-Fixture",
+        "action-input-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "verified_source_files": 12,
+      "name": "Action input headless",
+      "mode": "headless",
+      "status": "passed",
+      "report_sha256": "7C03C0CFD2B8FA46EEC2CBE68FC014CA675D86ED1CB5767119046B03D71C2310",
+      "configuration": null,
+      "fixture": "action-input-v1",
+      "root": "verification-headless-4277123f4b624a9a92c87f5af08ede9d",
+      "executable_sha256": null,
+      "children": [
+        {
+          "fixture": "action-input-v1",
+          "assertions": 119,
+          "reload_assertions": 0,
+          "display": "headless",
+          "mode": "headless",
+          "exit": 0
+        }
+      ],
+      "assertions": 119,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report": "main_project\\tests\\.runs\\verification-headless-4277123f4b624a9a92c87f5af08ede9d\\report.json",
+      "pck_sha256": null,
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\verification-headless-4277123f4b624a9a92c87f5af08ede9d\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\verification-headless-4277123f4b624a9a92c87f5af08ede9d\\executed-runtime-sources.json",
+        "sha256": "4BACD7DB46A58BFD026C0C4523EB4FC7CF235AABCC3394026587FBAF02EC7DF8"
+      }
+    },
+    {
+      "tool": "verify_rendered.ps1",
+      "arguments": [
+        "-Suite",
+        "action-input",
+        "-Fixture",
+        "action-input-v1",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "verified_source_files": 12,
+      "name": "Action input rendered",
+      "mode": "rendered",
+      "status": "passed",
+      "report_sha256": "9CA3123A26BC4389E04F54558E4A77AB1C3CB75D6597BF229BC0D5050A889364",
+      "configuration": null,
+      "fixture": "action-input-v1",
+      "root": "verification-rendered-37b5316775cc48f58888ebccd8ccf9a6",
+      "executable_sha256": null,
+      "children": [
+        {
+          "fixture": "action-input-v1",
+          "assertions": 124,
+          "reload_assertions": 0,
+          "display": "Windows",
+          "mode": "rendered",
+          "exit": 0
+        }
+      ],
+      "assertions": 124,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report": "main_project\\tests\\.runs\\verification-rendered-37b5316775cc48f58888ebccd8ccf9a6\\report.json",
+      "pck_sha256": null,
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\verification-rendered-37b5316775cc48f58888ebccd8ccf9a6\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\verification-rendered-37b5316775cc48f58888ebccd8ccf9a6\\executed-runtime-sources.json",
+        "sha256": "377F26BCC1C151532EDADCC08F382AC8EDFEBB4D697021D882FA6DE6BCF263CF"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": [
+        "-Suite",
+        "ground-movement",
+        "-Fixture",
+        "ground-movement-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-InputSequence",
+        "calendar-rate-3",
+        "-TimeoutSeconds",
+        "360"
+      ],
+      "verified_source_files": 13,
+      "name": "Ground headless calendar 3x",
+      "mode": "headless",
+      "status": "passed",
+      "report_sha256": "611F095EB3594B46E8515C21E872EF014CF1DE5104CAE27E65755FBCF3C8AE8D",
+      "configuration": null,
+      "fixture": "ground-movement-v1",
+      "root": "verification-headless-7dd8043bdfd0408098359d52421621bd",
+      "executable_sha256": null,
+      "children": [
+        {
+          "fixture": "IMP-012-ground-v1",
+          "assertions": 1197,
+          "reload_assertions": 14,
+          "display": "headless",
+          "mode": "headless",
+          "exit": 0
+        }
+      ],
+      "assertions": 1211,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report": "main_project\\tests\\.runs\\verification-headless-7dd8043bdfd0408098359d52421621bd\\report.json",
+      "pck_sha256": null,
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\verification-headless-7dd8043bdfd0408098359d52421621bd\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\verification-headless-7dd8043bdfd0408098359d52421621bd\\executed-runtime-sources.json",
+        "sha256": "22F4D948CEF0FC5CB3E53E24DE69BB771CFD441C0363C58BE1410633BD013D2E"
+      }
+    },
+    {
+      "tool": "verify_rendered.ps1",
+      "arguments": [
+        "-Suite",
+        "ground-movement",
+        "-Fixture",
+        "ground-movement-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-InputSequence",
+        "calendar-rate-3",
+        "-TimeoutSeconds",
+        "360"
+      ],
+      "verified_source_files": 13,
+      "name": "Ground rendered calendar 3x",
+      "mode": "rendered",
+      "status": "passed",
+      "report_sha256": "CD158E2A52513464C4844503E56E59830C82042B0BFF088E193DD298E1817F30",
+      "configuration": null,
+      "fixture": "ground-movement-v1",
+      "root": "verification-rendered-45e92c42fb6d43b0afd57324771ece09",
+      "executable_sha256": null,
+      "children": [
+        {
+          "fixture": "IMP-012-ground-v1",
+          "assertions": 1198,
+          "reload_assertions": 14,
+          "display": "Windows",
+          "mode": "rendered",
+          "exit": 0
+        }
+      ],
+      "assertions": 1212,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report": "main_project\\tests\\.runs\\verification-rendered-45e92c42fb6d43b0afd57324771ece09\\report.json",
+      "pck_sha256": null,
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\verification-rendered-45e92c42fb6d43b0afd57324771ece09\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\verification-rendered-45e92c42fb6d43b0afd57324771ece09\\executed-runtime-sources.json",
+        "sha256": "7311BDCC0341D175E6CE4DAB2DFB89DF494AA3EE831582E3432A6324AD0A8DD4"
+      }
+    },
+    {
+      "tool": "verify_headless.ps1",
+      "arguments": [
+        "-Suite",
+        "m1-composition",
+        "-Fixture",
+        "m1-composition-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "verified_source_files": 12,
+      "name": "Composition headless",
+      "mode": "headless",
+      "status": "passed",
+      "report_sha256": "E45C24D7B1ECCF24EAEFD52C9D4DAC34AE11E34C6C473EFB609E73E5D51FC412",
+      "configuration": null,
+      "fixture": "m1-composition-v1",
+      "root": "verification-headless-b403e832454442ad802dbe26579bfba1",
+      "executable_sha256": null,
+      "children": [
+        {
+          "fixture": "m1-composition-v1",
+          "assertions": 33,
+          "reload_assertions": 12,
+          "display": "headless",
+          "mode": "headless",
+          "exit": 0
+        }
+      ],
+      "assertions": 45,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report": "main_project\\tests\\.runs\\verification-headless-b403e832454442ad802dbe26579bfba1\\report.json",
+      "pck_sha256": null,
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\verification-headless-b403e832454442ad802dbe26579bfba1\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\verification-headless-b403e832454442ad802dbe26579bfba1\\executed-runtime-sources.json",
+        "sha256": "89C659E87CBD560ADFA05AFAAD1848E04814E59F007C315082FBD9EDB318F0E5"
+      }
+    },
+    {
+      "tool": "verify_rendered.ps1",
+      "arguments": [
+        "-Suite",
+        "m1-composition",
+        "-Fixture",
+        "m1-composition-v1",
+        "-ClassicSource",
+        "C:/Games/Daggerfall/arena2",
+        "-TimeoutSeconds",
+        "240"
+      ],
+      "verified_source_files": 12,
+      "name": "Composition rendered",
+      "mode": "rendered",
+      "status": "passed",
+      "report_sha256": "A7615F7D9A21F53027EA4B9ADAA97E90BB4317C1D34B98659A73E23019013C13",
+      "configuration": null,
+      "fixture": "m1-composition-v1",
+      "root": "verification-rendered-d19fd380433f40d0b8a4b7368942b1b8",
+      "executable_sha256": null,
+      "children": [
+        {
+          "fixture": "m1-composition-v1",
+          "assertions": 34,
+          "reload_assertions": 13,
+          "display": "Windows",
+          "mode": "rendered",
+          "exit": 0
+        }
+      ],
+      "assertions": 47,
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "report": "main_project\\tests\\.runs\\verification-rendered-d19fd380433f40d0b8a4b7368942b1b8\\report.json",
+      "pck_sha256": null,
+      "source_archive": {
+        "path": "main_project\\tests\\.runs\\verification-rendered-d19fd380433f40d0b8a4b7368942b1b8\\executed-runtime-sources.zip",
+        "manifest": "main_project\\tests\\.runs\\verification-rendered-d19fd380433f40d0b8a4b7368942b1b8\\executed-runtime-sources.json",
+        "sha256": "54DA2DDD9AB133666E52CE43B001A0E85ABB5F101AD49A5D7408F60040DAD3FC"
+      }
+    }
+  ],
+  "accepted_baseline": [
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\content\\time\\calendar.json",
+      "current": "21D7280E034CE4D6C992AB5BCE30DDFFE8754CBABCFFC28F316C0DD60D982CDB",
+      "accepted": "21D7280E034CE4D6C992AB5BCE30DDFFE8754CBABCFFC28F316C0DD60D982CDB"
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\scripts\\time\\calendar_clock.gd",
+      "current": "FCF6A75BBEFCD03E36E96A3725A41E465BE2F2039832B7056A6FDFEA05AE03A9",
+      "accepted": "816FA1B2BA64926AEF7EAE341DC7A6450393D4D083EFA69E38B474A09CC69D1F"
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\scripts\\session\\session_lifecycle.gd",
+      "current": "89590CFB11CE8FE0E7238A003D46319EF554B3056D529373B0703D90F01EE0D1",
+      "accepted": "7195ED406C563FAFB0DFA82B219CAAFE339BA0A91592EE8A11F87718FC390076"
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\scripts\\time\\calendar.gd",
+      "current": "9A78C43A686A60115268717E9DAAFD827E03518715EA56F3ECBDC2384DBF39FD",
+      "accepted": "9A78C43A686A60115268717E9DAAFD827E03518715EA56F3ECBDC2384DBF39FD"
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\scripts\\data\\calendar_policy.gd",
+      "current": "302996CAE47D1AF7FC357D908A589613C554399A7A56D0D6DE5FB09EAC3DCC49",
+      "accepted": "302996CAE47D1AF7FC357D908A589613C554399A7A56D0D6DE5FB09EAC3DCC49"
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\scripts\\session\\session_gates.gd",
+      "current": "945A1D64A2043BA10ACADDF86A42BFD216F98DB7C6C61420401C0C6FD126F27B",
+      "accepted": "EF36909011D65C15AE284C2D03C2BD8E2DA0AEFE8A1B6AB486EE5CD8655B8870"
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\scripts\\session\\session_shell.gd",
+      "current": "847C1BB69863499CDE38A6E57744354A4C8983B008D7ABCD1B4AFEF86117976B",
+      "accepted": "7BB5DB5660865D15D90439CA46EF622A393D21D905140AFAF82D34765F9FF1E9"
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\scripts\\startup\\provider_boundary.gd",
+      "current": "47A2919C53F1B91274CE0F3E0533732ED2CFD794A7ED3608BE051FAD2C1EACD4",
+      "accepted": "47A2919C53F1B91274CE0F3E0533732ED2CFD794A7ED3608BE051FAD2C1EACD4"
+    },
+    {
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\scripts\\startup\\startup_shell.gd",
+      "current": "B8C5AEF1CE86767311566B423EA797414E7C021F05899157667DB0C22C2E1B40",
+      "accepted": "C34CC4AAC5B72F9DE11939B4065C1A015A93E4604AE7E371777781BAC1279E73"
+    }
+  ],
+  "review": {
+    "assertions": 6,
+    "sha256": "0F4AB9E2BD79B5252A3C2A8A8A2AED0E3787F780D32BF31F3EAE44C777A6F26A",
+    "human_pass": false,
+    "result": "main_project\\tests\\.runs\\verification-rendered-6d5c8b702a274ee48a952c92614200e9\\project\\tests\\.runs\\scenario-1\\human-review\\result.json",
+    "checklist": "design_docs/development/evidence/IMP-014-INCREMENT-2-REVIEW-2026-11-25.md",
+    "root": "verification-rendered-6d5c8b702a274ee48a952c92614200e9",
+    "retained_result": "main_project\\tests\\.runs\\verification-rendered-6d5c8b702a274ee48a952c92614200e9\\evidence\\project\\scenario-1\\human-review\\result.json",
+    "retained_capture": "main_project\\tests\\.runs\\verification-rendered-6d5c8b702a274ee48a952c92614200e9\\evidence\\project\\scenario-1\\human-review\\scheduler-review.png"
+  },
+  "status": "machine-qualified-human-acceptance-pending",
+  "selected_assertions": 5377,
+  "cleanup": [
+    {
+      "source_archives_verified": 20,
+      "schema": "imp014-increment2-cleanup-v1",
+      "removed_files": 32494,
+      "retained_evidence": 135,
+      "typed_inputs": 121,
+      "removed_bytes": 4893352690,
+      "journal": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\dungeon-cleanup-97c368cd04fe46ad92d92c5852dd6712.json",
+      "roots": [
+        "verification-headless-ab5aca58afe8454790a9bb49a97cfbd3",
+        "verification-headless-98d325f39c49443eb8555b747f4a4e4f",
+        "verification-headless-26003aa107924cba8ba6719ba21130a0",
+        "verification-rendered-38b792d4033e4c2bb6cf4d2002094ba1",
+        "verification-rendered-4f416651166b4183b7ef397ca9503168",
+        "verification-headless-5bb0aa4d98b44760a5146c6e1ba6acc6",
+        "verification-rendered-75815186dabd45508f18ab6aae3b6f96",
+        "verification-headless-a8bab38d8a484953b1f1427d558c9683",
+        "verification-rendered-38b498614c2745df93cabedf0d7f27b0",
+        "export-beb60d7ede444f33b284e6f6d2988058",
+        "export-66c8e63cbac247589244a488b51df2c2",
+        "verification-headless-3f95d7d0c60c4765bb5e3a37d9f405a7",
+        "verification-rendered-a24562331d1e45f8b4166d27cfd5e327",
+        "verification-headless-a9c2b967039648178b7a1377a7705ec4",
+        "verification-headless-61522a37fb0d4f9197c8e169d5a79ff9",
+        "verification-rendered-b9cb387b835e4b60966f8e02288b1c2e",
+        "verification-headless-fedb7498d247477fb701fa8bcd5c10b7",
+        "verification-rendered-7f5437b3e655449ca42f23ef5708e232",
+        "verification-headless-76be2689a9934b0b8e4484c7f8f6e47b",
+        "verification-rendered-e7c6180d00c84496a0ba1ae11f3ccf09"
+      ],
+      "failures": []
+    },
+    {
+      "failures": [],
+      "entrypoint_resources_verified": 36,
+      "typed_inputs": 66,
+      "schema": "imp014-increment2-cleanup-v1",
+      "source_archives_verified": 12,
+      "removed_files": 19983,
+      "journal": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\dungeon-cleanup-ded596f7055843a3a47f584576f1a62f.json",
+      "removed_bytes": 3188044335,
+      "retained_evidence": 92,
+      "roots": [
+        "verification-headless-403764821dd64c0881ba285bd3f8e7cb",
+        "verification-rendered-6c7164ffee074c3983c3b4cfe9abbc91",
+        "export-27f0e4258d9943999b0c0162fa0a7b46",
+        "export-fffa4237e9b240929dcf7dc60deed7c4",
+        "verification-headless-c26e0278327247f4867a5b1e989b92ca",
+        "verification-rendered-c41739d2e62c4cc0ab97fbe1ab74b665",
+        "verification-headless-31402123a6834a9eb5d030ed8b282886",
+        "verification-rendered-e9abadb58e7d4b1096c4b14330a9a38d",
+        "verification-headless-4362cf0ad0664f72a1906c02d887e422",
+        "verification-rendered-e213c84d8575435e92d33bee4d5aa3ea",
+        "verification-headless-cdeb97d9611444f6a673e3f21156df39",
+        "verification-rendered-4a6b5961df984b0586835baf3ce1f953"
+      ]
+    },
+    {
+      "schema": "imp014-increment2-cleanup-v1",
+      "entrypoint_resources_verified": 30,
+      "journal": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\dungeon-cleanup-89785b6dc4454bc9a672c4e5c75d3448.json",
+      "failures": [],
+      "removed_bytes": 2761226451,
+      "typed_inputs": 58,
+      "source_archives_verified": 10,
+      "retained_evidence": 57,
+      "roots": [
+        "verification-headless-b904ec7535fa40fb86d056a0dca25d3c",
+        "verification-rendered-d2da4e1de3c947aeab8be6b681e70786",
+        "export-27bf6b9f80d3499dbc2c66169172c118",
+        "export-2c14a7dc96854c7f8acbf6d946874ab9",
+        "verification-headless-6a3bee3d87444e95bf6c2112bd815af3",
+        "verification-rendered-018aa47d554c47388bbe0a41207efe52",
+        "verification-headless-a38407e77339409f937c4993cee113bf",
+        "verification-rendered-09f28f58c07e4037b11354c8e69a14f1",
+        "verification-headless-a853dab460214aafbc2cfdb4fa1bddd5",
+        "verification-rendered-d3cbec0d8e2e46b6a9cdaf26a0bca564"
+      ],
+      "removed_files": 16856
+    },
+    {
+      "retained_evidence": 92,
+      "failures": [],
+      "journal": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\dungeon-cleanup-234ad5e103dc44f5a252cf3b24c00743.json",
+      "source_archives_verified": 12,
+      "removed_bytes": 3188065193,
+      "entrypoint_resources_verified": 36,
+      "removed_files": 19983,
+      "roots": [
+        "verification-headless-b1037155b7bc4c64bd253282d6d00540",
+        "verification-rendered-6d5c8b702a274ee48a952c92614200e9",
+        "export-933e16fd262e442a88366f59cd88d00a",
+        "export-94eb47eef71748b9a5e4adb6e95a8123",
+        "verification-headless-997ace0138cb4965bf20bedfe7b3f377",
+        "verification-rendered-80239060e5284921a45464b9adc703df",
+        "verification-headless-4277123f4b624a9a92c87f5af08ede9d",
+        "verification-rendered-37b5316775cc48f58888ebccd8ccf9a6",
+        "verification-headless-7dd8043bdfd0408098359d52421621bd",
+        "verification-rendered-45e92c42fb6d43b0afd57324771ece09",
+        "verification-headless-b403e832454442ad802dbe26579bfba1",
+        "verification-rendered-d19fd380433f40d0b8a4b7368942b1b8"
+      ],
+      "typed_inputs": 66,
+      "schema": "imp014-increment2-cleanup-v1"
+    }
+  ],
+  "cleanup_totals": {
+    "roots": 54,
+    "retained_evidence": 376.0,
+    "removed_files": 89316.0,
+    "typed_inputs_and_player_logs": 311.0,
+    "removed_bytes": 14030688669.0,
+    "remaining_owned_builds": 0,
+    "source_archives_verified": 54.0
+  },
+  "retention": {
+    "review": "Active qualification builds and owned reproducible outputs are retained until serial verification ends. Earlier human storage and other-task artifacts are protected. Only exact terminal owned roots will be compacted.",
+    "total_bytes": 6145802050.0,
+    "utc": "2026-11-26T04:25:15.0469258Z",
+    "largest": [
+      {
+        "bytes": 217651168,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-d3cfeef68f9b4413b85327f7e2b5c08d"
+      },
+      {
+        "bytes": 217651088,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-c96d811ee25e4a0698354f29bd11ef86"
+      },
+      {
+        "bytes": 217055801,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-13d636fdec0f426f8ba63113299820b0"
+      },
+      {
+        "bytes": 216965485,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-17dbac68203440ca92259c5ce685505e"
+      },
+      {
+        "bytes": 216896956,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cc8b5f15a7814be586b3eae8dc2c719d"
+      },
+      {
+        "bytes": 216229388,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-65a7606dbe4c409bb0129689dda8d4d5"
+      },
+      {
+        "bytes": 216220093,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-43a28ee25d824d2eaea8b5476d07674e"
+      },
+      {
+        "bytes": 215807571,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-1b00b3300b91493397fda13f5ca9a900"
+      },
+      {
+        "bytes": 215625484,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-dccb06ad4e15465691bdf70af6e5d363"
+      },
+      {
+        "bytes": 213522099,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-ce9c10bf5cc348d0ad4e8708dcd4877d"
+      },
+      {
+        "bytes": 209339669,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\imp011-view-review-2026-11-23-final"
+      },
+      {
+        "bytes": 64616492,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-2e84f6de05364ff29d5ce9611e4b065b"
+      },
+      {
+        "bytes": 64593287,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-6ef31e46a2f64fed9296fa303ff8567b"
+      },
+      {
+        "bytes": 40743183,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-692de3dbe0854b34b9056e99a009e67f"
+      },
+      {
+        "bytes": 40719960,
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-5e7d6fe3492940b3989c9d0e90f0a0ea"
+      }
+    ],
+    "schema": "imp014-increment2-retention-v1"
+  },
+  "retention_threshold_review": {
+    "total_bytes": 9962234829.0,
+    "largest": [
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-66c8e63cbac247589244a488b51df2c2",
+        "bytes": 531309389
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-beb60d7ede444f33b284e6f6d2988058",
+        "bytes": 525217641
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-d3cfeef68f9b4413b85327f7e2b5c08d",
+        "bytes": 217651168
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-c96d811ee25e4a0698354f29bd11ef86",
+        "bytes": 217651088
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-13d636fdec0f426f8ba63113299820b0",
+        "bytes": 217055801
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-17dbac68203440ca92259c5ce685505e",
+        "bytes": 216965485
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cc8b5f15a7814be586b3eae8dc2c719d",
+        "bytes": 216896956
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-65a7606dbe4c409bb0129689dda8d4d5",
+        "bytes": 216229388
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-43a28ee25d824d2eaea8b5476d07674e",
+        "bytes": 216220093
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-75815186dabd45508f18ab6aae3b6f96",
+        "bytes": 216179123
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-38b498614c2745df93cabedf0d7f27b0",
+        "bytes": 216179106
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-4f416651166b4183b7ef397ca9503168",
+        "bytes": 215993428
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-1b00b3300b91493397fda13f5ca9a900",
+        "bytes": 215807571
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-dccb06ad4e15465691bdf70af6e5d363",
+        "bytes": 215625484
+      },
+      {
+        "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-38b792d4033e4c2bb6cf4d2002094ba1",
+        "bytes": 214232441
+      }
+    ],
+    "utc": "2026-11-26T03:07:00.1771725Z",
+    "schema": "imp014-increment2-retention-v1",
+    "review": "Active qualification builds and owned reproducible outputs are retained until serial verification ends. Earlier human storage and other-task artifacts are protected. Only exact terminal owned roots will be compacted."
+  },
+  "tool_source_archive": {
+    "path": "main_project/tests/.runs/imp014-increment2/tool-sources-delivery.zip",
+    "manifest": "main_project/tests/.runs/imp014-increment2/tool-sources-delivery.json",
+    "files": 67,
+    "sha256": "8BEB653C5BBBD93CA62A483E712B46CE58DEA19FB906A9B6D3A8926A27429B9F"
+  },
+  "superseded_tool_source_archives": [
+    "main_project/tests/.runs/imp014-increment2/tool-sources.zip"
+  ],
+  "generated_uid_provenance": [
+    {
+      "path": "scripts/time/calendar_crossings.gd.uid",
+      "from": "main_project\\tests\\.runs\\verification-headless-403764821dd64c0881ba285bd3f8e7cb\\project\\scripts\\time\\calendar_crossings.gd.uid",
+      "sha256": "2ABC43A3299EC8CF794076596DB85A36827FAC2CDEA3219411388DE6758ADD88"
+    },
+    {
+      "path": "scripts/time/due_work.gd.uid",
+      "from": "main_project\\tests\\.runs\\verification-headless-403764821dd64c0881ba285bd3f8e7cb\\project\\scripts\\time\\due_work.gd.uid",
+      "sha256": "B3FDC0D58196F10A264AE6087627D6BE00C1B88B7DAB6CCBF99F3A97A7AC7E7A"
+    },
+    {
+      "path": "tests/scheduler_cases.gd.uid",
+      "from": "main_project\\tests\\.runs\\verification-headless-403764821dd64c0881ba285bd3f8e7cb\\project\\tests\\scheduler_cases.gd.uid",
+      "sha256": "8D017A2AD0457A82FEEA9D63663532579FC2EF36A2852284BCC800C9F8F8F9DD"
+    },
+    {
+      "path": "tests/scheduler_review.gd.uid",
+      "from": "main_project\\tests\\.runs\\verification-headless-403764821dd64c0881ba285bd3f8e7cb\\project\\tests\\scheduler_review.gd.uid",
+      "sha256": "FA3AB1C78B377C9A1F93E972FBB5FD0A329F4BD85381131070C2873C9BBADFD5"
+    }
+  ],
+  "documentation_link_check": {
+    "schema": "imp014-increment2-doc-links-v1",
+    "missing_preexisting": [
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[increment-2 due-work prompt](handoffs/IMP-014-INCREMENT-2-PROMPT.md)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-014-INCREMENT-2-PROMPT.md"
+      },
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[IMP-014 calendar-and-clock prompt](handoffs/IMP-014-INCREMENT-1-PROMPT.md)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-014-INCREMENT-1-PROMPT.md"
+      },
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[ground motor/gait prompt](handoffs/IMP-012-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-012-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[increment-1 handoff](handoffs/IMP-016-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[increment-3 handoff](handoffs/IMP-013-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[increment-2 prompt](handoffs/IMP-013-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[IMP-013 increment-1 handoff](handoffs/IMP-013-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[increment-3 prompt](handoffs/IMP-010-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[layout prompt](handoffs/IMP-010-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[increment-1 prompt](handoffs/IMP-010-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[increment-2 prompt](handoffs/IMP-009-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-009-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/DEPENDENCY_GRAPH.md",
+        "link": "[increment-1 handoff](handoffs/IMP-009-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-009-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-2 due-work prompt](handoffs/IMP-014-INCREMENT-2-PROMPT.md)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-014-INCREMENT-2-PROMPT.md"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[IMP-014 calendar-and-clock prompt](handoffs/IMP-014-INCREMENT-1-PROMPT.md)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-014-INCREMENT-1-PROMPT.md"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[platforms-and-feedback prompt](handoffs/IMP-012-INCREMENT-4-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-012-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[prompt](handoffs/IMP-012-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-012-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-2 handoff](handoffs/IMP-012-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-012-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[ground motor/gait prompt](handoffs/IMP-012-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-012-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[death/projections prompt](handoffs/IMP-016-INCREMENT-4-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[activity/collapse prompt](handoffs/IMP-016-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[vital-mutation prompt](handoffs/IMP-016-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[authoritative actor-state prompt](handoffs/IMP-016-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-3 prompt](handoffs/IMP-013-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-2 prompt](handoffs/IMP-013-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-1 handoff](handoffs/IMP-013-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-3 handoff](handoffs/IMP-061-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-061-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-2 handoff](handoffs/IMP-061-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-061-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[IMP-061 increment-1 assembly prompt](handoffs/IMP-061-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-061-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-3 implementation prompt](handoffs/IMP-011-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-011-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[handoff](handoffs/IMP-011-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-011-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-3 prompt](handoffs/IMP-010-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[layout prompt](handoffs/IMP-010-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-1 prompt](handoffs/IMP-010-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-3 prompt](handoffs/IMP-009-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-009-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-2 prompt](handoffs/IMP-009-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-009-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-1 prompt](handoffs/IMP-009-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-009-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-3 prompt](handoffs/IMP-008-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-008-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-2 prompt](handoffs/IMP-008-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-008-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[IMP-008 classic-adapter handoff](handoffs/IMP-008-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-008-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-4 handoff](handoffs/IMP-007-INCREMENT-4-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-007-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-3 handoff](handoffs/IMP-007-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-007-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/IMPLEMENTATION_READINESS.md",
+        "link": "[increment-2 handoff](handoffs/IMP-007-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-007-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-2 due-work prompt](handoffs/IMP-014-INCREMENT-2-PROMPT.md)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-014-INCREMENT-2-PROMPT.md"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[IMP-014 calendar-and-clock prompt](handoffs/IMP-014-INCREMENT-1-PROMPT.md)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-014-INCREMENT-1-PROMPT.md"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-2 handoff](handoffs/IMP-012-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-012-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[ground motor/gait prompt](handoffs/IMP-012-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-012-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[death/projections prompt](handoffs/IMP-016-INCREMENT-4-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[activity/collapse prompt](handoffs/IMP-016-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[vital-mutation prompt](handoffs/IMP-016-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[IMP-016 increment-1 handoff](handoffs/IMP-016-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-3 handoff](handoffs/IMP-013-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-2 prompt](handoffs/IMP-013-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[IMP-013 increment-1 prompt](handoffs/IMP-013-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-3 handoff](handoffs/IMP-061-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-061-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-2 handoff](handoffs/IMP-061-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-061-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[IMP-061 increment-1 assembly prompt](handoffs/IMP-061-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-061-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-3 implementation prompt](handoffs/IMP-011-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-011-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[handoff](handoffs/IMP-011-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-011-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-3 prompt](handoffs/IMP-010-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[layout prompt](handoffs/IMP-010-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-1 prompt](handoffs/IMP-010-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-3 prompt](handoffs/IMP-009-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-009-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-2 prompt](handoffs/IMP-009-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-009-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[IMP-009 increment-1 prompt](handoffs/IMP-009-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-009-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-3 prompt](handoffs/IMP-008-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-008-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-2 prompt](handoffs/IMP-008-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-008-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[IMP-008 classic-adapter handoff](handoffs/IMP-008-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-008-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-4 handoff](handoffs/IMP-007-INCREMENT-4-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-007-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-3 handoff](handoffs/IMP-007-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-007-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/MILESTONES.md",
+        "link": "[increment-2 handoff](handoffs/IMP-007-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-007-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-2 due-work prompt](handoffs/IMP-014-INCREMENT-2-PROMPT.md)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-014-INCREMENT-2-PROMPT.md"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[IMP-014 calendar-and-clock prompt](handoffs/IMP-014-INCREMENT-1-PROMPT.md)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-014-INCREMENT-1-PROMPT.md"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[platforms-and-feedback prompt](handoffs/IMP-012-INCREMENT-4-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-012-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[prompt](handoffs/IMP-012-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-012-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[handoff](handoffs/IMP-012-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-012-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[ground motor/gait prompt](handoffs/IMP-012-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-012-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[death/projections prompt](handoffs/IMP-016-INCREMENT-4-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[activity/collapse prompt](handoffs/IMP-016-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[vital-mutation prompt](handoffs/IMP-016-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-1 prompt](handoffs/IMP-016-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-016-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[copy/paste placement prompt](handoffs/IMP-013-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-2 prompt](handoffs/IMP-013-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[IMP-013 increment-1 prompt](handoffs/IMP-013-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-013-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-3 handoff](handoffs/IMP-061-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-061-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-2 handoff](handoffs/IMP-061-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-061-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[IMP-061 increment-1 assembly prompt](handoffs/IMP-061-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-061-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-3 implementation prompt](handoffs/IMP-011-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-011-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[handoff](handoffs/IMP-011-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-011-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-3 prompt](handoffs/IMP-010-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[layout prompt](handoffs/IMP-010-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-1 prompt](handoffs/IMP-010-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-010-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-3 prompt](handoffs/IMP-009-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-009-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-2 prompt](handoffs/IMP-009-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-009-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[IMP-009 increment-1 prompt](handoffs/IMP-009-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-009-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-3 prompt](handoffs/IMP-008-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-008-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-2 prompt](handoffs/IMP-008-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-008-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[IMP-008 classic-adapter handoff](handoffs/IMP-008-INCREMENT-1-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-008-INCREMENT-1-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-4 handoff](handoffs/IMP-007-INCREMENT-4-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-007-INCREMENT-4-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-3 handoff](handoffs/IMP-007-INCREMENT-3-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-007-INCREMENT-3-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/TASK_BACKLOG.md",
+        "link": "[increment-2 handoff](handoffs/IMP-007-INCREMENT-2-PROMPT.txt)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-007-INCREMENT-2-PROMPT.txt"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-014.md",
+        "link": "[due-work prompt](../handoffs/IMP-014-INCREMENT-2-PROMPT.md)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-014-INCREMENT-2-PROMPT.md"
+      },
+      {
+        "file": "design_docs/development/tasks/IMP-014.md",
+        "link": "[calendar-and-clock prompt](../handoffs/IMP-014-INCREMENT-1-PROMPT.md)",
+        "resolved": "C:\\Godot\\Projects\\Daggerfall_GD\\design_docs\\development\\handoffs\\IMP-014-INCREMENT-1-PROMPT.md"
+      }
+    ],
+    "links": 1009,
+    "files": 14,
+    "missing_new": []
+  },
+  "final_verification": {
+    "review_human_pass": false,
+    "no_active_engine": true,
+    "diff_check": true,
+    "source_and_report_hashes": true
+  },
+  "timing": {
+    "elapsed_seconds": 6991,
+    "elapsed": "1 hour 56 minutes 31 seconds",
+    "end_est": "2026-11-25 23:26:17 EST",
+    "human_acceptance_pending": true,
+    "end_utc": "2026-11-26T04:26:17Z",
+    "engineering_complete": true
+  }
+}

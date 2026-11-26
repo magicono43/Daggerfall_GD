@@ -1,5 +1,22 @@
 # Verification run artifact cleanup
 
+## 2026-11-25 IMP-014 increment 2
+
+Four exact owned inactive batches compacted **54 roots**, removing **89,316
+files / 14,030,688,669 bytes**. Preserved 376 child reports/logs/captures, 311
+typed-input/player-log files, 54 hash-verified runtime-source archives, entry
+resources and a verified 67-file tool/orchestration archive. Executable/PCK hashes
+were checked before deletion; template junctions were unlinked without following
+installed targets. No task-owned full build, dependency copy or cache remains.
+
+An active-matrix sample of 9,962,234,829 logical bytes triggered retention review.
+Post-cleanup sampled retention is **6,145,802,050 bytes** before small metadata
+writes. Earlier human storage, accepted evidence, unique inputs and uncertain
+other-task roots were protected. See the [execution evidence](evidence/IMP-014-increment-2-2026-11-25.md)
+and [audit](evidence/IMP-014-increment-2-2026-11-25.audit.json) for exact paths,
+journals, source identities and retained review aliases. Rebuild compacted builds
+through the maintained tools; no administrator or security-setting change occurred.
+
 ## 2026-11-25 IMP-014 increment 1
 
 After terminal verification and ordinary engine inactivity, three exact owned

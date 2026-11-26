@@ -1203,3 +1203,16 @@ assertions. Its MOVE/CHAR proof provider remains controlled and independent.
 review overlay. `-SmokeTest` checks those handlers and captures an image without
 claiming human success. See the [numbered review](../../design_docs/development/evidence/IMP-014-INCREMENT-1-REVIEW-2026-11-25.md)
 and [TIME contract](../scripts/time/README.md) for precision and open joint gates.
+
+# IMP-014 increment 2 scheduler selection
+
+`calendar-clock-v1` preserves the accepted calendar inventory and requires the
+additive versioned `scheduler_inventory.json` through `calendar_fixture.ps1`.
+`scheduler_cases.gd` uses controlled owner Objects and real stock CORE/DATA/TIME,
+including actual rendered continuation before physical handoff. Independent
+headless/rendered runners retain their existing `-Suite calendar-clock -Fixture
+calendar-clock-v1 -ClassicSource C:/Games/Daggerfall/arena2` selection. Windows
+debug/release exports use `-CalendarClock` and the complete combined inventory.
+`review_scheduler.ps1` rebuilds the review; `-SmokeTest` never asserts human pass.
+See [the owner contract](../scripts/time/SCHEDULER.md) for counted work, scope,
+precision and deliberately unqualified real-owner/SAVE/physical integrations.

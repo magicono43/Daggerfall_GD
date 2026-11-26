@@ -47,15 +47,40 @@ var _death_movie_ticket: Dictionary = {}
 func advance_calendar(delta: float) -> bool:
 	# Legacy controlled startup fixtures explicitly omit DATA/TIME. A real
 	# composed clock is required before any eligible physical work can follow.
-	if core.calendar.definitions == null or not core.gates.simulation(): return true
+	if core.calendar.definitions == null: return true
+	if not core.calendar.pending() and not core.gates.simulation(): return true
+	if core.calendar.pending() and core.busy(): return false # Load preflight retains backlog; no new input or fatal recovery.
 	if core.calendar.committing(): return false
+	var original_scope: String = core.gates.session
 	var checked: Dictionary = core.advance_calendar_frame(self,delta)
+	# A required owner can retire the scope inside this call. Its stale result
+	# cannot fail the replacement session or donate an old frame to its MOVE.
+	if core.gates.session != original_scope: return false
+	if checked.get("kind") in ["pending-budget","interrupted"]: return false
+	# A continuation frame contains no new eligible physical interval. Even its
+	# final handoff must not apply the current frame's delta to MOVE.
+	if checked.get("required_due_work",false) and checked.ok: return false
+	if checked.get("required_due_work",false) and checked.get("kind") == "failed":
+		var failure: String = checked.get("reason","Required calendar settlement needs owner reconciliation.")
+		if message != failure:
+			message = failure
+			schedule_render()
+		return false # TIME's retained hold remains; only explicit checked retry resumes.
 	if not checked.ok:
 		message = checked.get("reason","Required calendar accounting failed.")
 		core.required_service_lost(core.snapshot().session,"calendar-clock")
 		schedule_render()
 		return false
 	return true
+
+func retry_calendar_settlement() -> Dictionary:
+	if not core.calendar.pending() or not core.calendar.scheduler.operation.failed: return {"ok":false,"kind":"rejected","reason":"No retained calendar failure to reconcile."}
+	var original_scope: String = core.gates.session
+	var result: Dictionary = core.calendar.continue_pending(self,core.calendar.scheduler.ticket())
+	if core.gates.session != original_scope: return result
+	message = result.get("reason","")
+	schedule_render()
+	return result
 
 ## Narrow AV lifetime boundary. Recreated consumers get effective preferences,
 ## prepared resources and a current sequence floor; old callbacks cannot replay.
@@ -515,7 +540,12 @@ func render() -> void:
 		host.label("HUD" if core.gates.hud_visible() else "")
 		var top := windows.top()
 		if top.is_empty():
-			host.label("Session ready.")
+			if core.calendar.pending():
+				host.label("Required calendar settlement is pending.")
+				if core.calendar.scheduler.operation.failed:
+					host.label("Owner reconciliation is required before retry.")
+					host.button("Retry calendar settlement",func(): retry_calendar_settlement())
+			else: host.label("Session ready.")
 			host.button("Pause", pause)
 		elif top.window == "pause":
 			host.label("Paused", 24)
