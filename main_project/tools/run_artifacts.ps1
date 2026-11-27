@@ -184,7 +184,11 @@ function Invoke-ReviewCompaction {
     $report = Get-Content -LiteralPath (Join-Path $rootPath 'report.json') -Raw | ConvertFrom-Json -AsHashtable
     if ($ClosedVerification) {
         $closed = Get-Content -LiteralPath (Join-Path $rootPath 'CLOSED-VERIFICATION.json') -Raw | ConvertFrom-Json
-        if ($closed.schema -cne 'closed-verification-v1' -or $closed.owner -cne 'IMP-015 increment 4' -or $closed.root -cne $rootPath -or $closed.report_sha256 -cne (Get-FileHash -LiteralPath (Join-Path $rootPath 'report.json')).Hash -or $report.status -notin @('passed','failed','incomplete') -or $report.suite -notin @('creation','creation-draft','session','replacements','native','locale-fonts') -or $report.mode -notin @('headless','rendered') -or !(@($report.build.working_tree) -match 'creation_identity|creation_view')) { throw 'Explicit owned closed creation verification receipt required.' }
+        $incrementOwner = $closed.owner -ceq 'IMP-015 increment 4' -and (@($report.build.working_tree) -match 'creation_identity|creation_view')
+        # A checkpoint may start from a clean committed tree. Its explicit receipt
+        # binds authorization and revision instead of requiring old uncommitted files.
+        $checkpointOwner = $closed.owner -ceq 'IMP-015 UI checkpoint' -and $closed.authorization -ceq 'User authorized combined creator regressions and temporary-build cleanup, 2026-11-27' -and $closed.source_revision -ceq $report.build.source_revision
+        if ($closed.schema -cne 'closed-verification-v1' -or !($incrementOwner -or $checkpointOwner) -or $closed.root -cne $rootPath -or $closed.report_sha256 -cne (Get-FileHash -LiteralPath (Join-Path $rootPath 'report.json')).Hash -or $report.status -notin @('passed','failed','incomplete') -or $report.suite -notin @('creation','creation-draft','session','replacements','native','locale-fonts') -or $report.mode -notin @('headless','rendered')) { throw 'Explicit owned closed creation verification receipt required.' }
     } elseif ($report.status -cne 'passed' -or $report.mode -cne 'rendered' -or $report.suite -notin @('creation-draft','creation-popup-preview','calendar-clock','ground-movement')) { throw 'Known passed review preparation required.' }
     if ([IO.Path]::GetFullPath($report.root) -cne $rootPath) { throw 'Report root binding changed.' }
     $project = Assert-RunArtifactPath (Join-Path $rootPath 'project')

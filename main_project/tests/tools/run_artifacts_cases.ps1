@@ -43,6 +43,24 @@ try {
     $wrong=Fixture
     $report=Get-Content "$wrong/report.json" -Raw | ConvertFrom-Json; $report.runtime_project="$base/elsewhere"; $report | ConvertTo-Json -Depth 6 | Set-Content "$wrong/report.json"
     Reject 'foreign project binding rejected' {Invoke-ReviewCompaction -Root $wrong}
+    # A UI checkpoint can start from a clean committed tree. Its receipt still
+    # has to bind the explicit authorization, revision and terminal report.
+    $checkpoint=Fixture
+    $report=Get-Content "$checkpoint/report.json" -Raw | ConvertFrom-Json
+    $report|Add-Member build @{source_revision=('1'*40);working_tree=@()}
+    $report|ConvertTo-Json -Depth 6|Set-Content "$checkpoint/report.json"
+    $closed=@{schema='closed-verification-v1';owner='IMP-015 UI checkpoint';authorization='User authorized combined creator regressions and temporary-build cleanup, 2026-11-27';source_revision=('1'*40);root=$checkpoint;report_sha256=(Get-FileHash "$checkpoint/report.json").Hash}
+    foreach($field in @('owner','source_revision','report_sha256')){
+        $badReceipt=$closed.Clone(); $badReceipt[$field]='invalid'
+        $badReceipt|ConvertTo-Json|Set-Content "$checkpoint/CLOSED-VERIFICATION.json"
+        Reject "checkpoint wrong $field rejected" {Invoke-ReviewCompaction -Root $checkpoint -ClosedVerification}
+        Check "checkpoint wrong $field creates no archive" $false (Test-Path "$checkpoint/review-source.zip")
+    }
+    $closed|ConvertTo-Json|Set-Content "$checkpoint/CLOSED-VERIFICATION.json"
+    $checkpointResult=Invoke-ReviewCompaction -Root $checkpoint -ClosedVerification
+    Check 'clean committed checkpoint compacts' 'compacted' $checkpointResult.status
+    Check 'clean checkpoint copied project removed' $false (Test-Path "$checkpoint/project/project.godot")
+    Check 'clean checkpoint child evidence preserved' $true (Test-Path "$checkpoint/project/tests/.runs/scenario-1/result.json")
     $root=Fixture
     Write-Fixture "$root/project/scripts/owner.gd" 'extends RefCounted'
     Write-Fixture "$root/project/notes.custom" 'unique hand-authored input'

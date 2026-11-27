@@ -1,5 +1,5 @@
 function Get-CreationOptionalMediaNames([string]$ClassicSource) {
-    foreach ($name in @('SPOP.RCI','BUTTONS.RCI','FONT0003.FNT','ANIM0000.VID','ANIM0011.VID','DAG2.VID')) {
+    foreach ($name in @('SPOP.RCI','BUTTONS.RCI','FONT0002.FNT','FONT0003.FNT','BUTN01I0.IMG','BUTN02I0.IMG','PICK00I0.IMG','CHAR02I1.IMG','CUST01I0.IMG','CUST02I0.IMG','CUST03I0.IMG','ANIM0000.VID','ANIM0011.VID','DAG2.VID')) {
         if (Test-Path -LiteralPath (Join-Path $ClassicSource $name) -PathType Leaf) { $name }
     }
 }

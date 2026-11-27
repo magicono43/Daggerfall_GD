@@ -2,6 +2,23 @@ extends RefCounted
 var _draft := ""
 var position := 0
 var history := false
+var report := false
+const Native = preload("res://scripts/ui/creation_native_controls.gd")
+
+func begin(view: RefCounted, method: String) -> void:
+	_draft = view.owner.token().id; position = 0; history = false; report = false
+	var result: Dictionary = view.action("biography-operation",view.navigation.context(),{"operation":"automatic" if method == "automatic" else "initialize"})
+	if result.ok: report = method == "automatic" and complete(view)
+	refresh(view)
+
+func complete(view: RefCounted) -> bool:
+	var value: Dictionary = view.owner.projection().selections.get("biography",{})
+	return not value.is_empty() and value.answers.size() == view.inputs.templates[value.template].questions.size()
+
+func dismiss_report(view: RefCounted) -> void:
+	report = false
+	view.action("next",view.navigation.context())
+	refresh(view)
 
 func refresh(view: RefCounted) -> void:
 	view._render_generation += 1
@@ -28,7 +45,53 @@ func disclosure(view: RefCounted, answer: Dictionary) -> String:
 	return "\n".join(lines)
 
 func render(view: RefCounted, expected: Dictionary, selected: Dictionary) -> void:
-	if _draft != expected.token.id: _draft = expected.token.id; position = 0; history = false
+	if _draft != expected.token.id: _draft = expected.token.id; position = 0; history = false; report = false
+	var value: Dictionary = selected.get("biography",{})
+	if value.is_empty() or history:
+		render_review(view,expected,selected)
+		return
+	if report and selected.get("biography_method") == "automatic":
+		var image: Dictionary = view.shell.host.controller.providers.creation_art.resolve("creation.biography-method")
+		if image.ok:
+			var picture := TextureRect.new(); picture.texture = image.texture; picture.position = Vector2(136,32); picture.size = Vector2(368,336)
+			picture.mouse_filter = Control.MOUSE_FILTER_IGNORE; view._page.add_child(picture)
+	else:
+		var template: Dictionary = view.inputs.templates[value.template]
+		position = clampi(position,0,template.questions.size()-1)
+		var question: Dictionary = template.questions[position]
+		var root := Native.root(view)
+		var prompt := Native.text(view,root,question.text,Rect2(30,23,276,44),"biography.question")
+		prompt.add_theme_constant_override("line_spacing",4)
+		for index in question.answers.size():
+			var answer: Dictionary = question.answers[index]
+			var rect := Rect2(10+149*(index%2),71+24*(index/2),149,24)
+			Native.text(view,root,answer.text,Rect2(rect.position+Vector2(21,5),Vector2(126,18)),"biography.answer")
+			Native.button(view,root,"biography-answer/"+question.id+"/"+answer.id,answer.text,rect,func():
+				var result: Dictionary = view.action("biography-operation",expected,{"operation":"answer","payload":{"question":question.id,"answer":answer.id}})
+				if result.ok:
+					Native.click(view)
+					if position == template.questions.size()-1 and complete(view): report = true
+					else: position = mini(position+1,template.questions.size()-1)
+					refresh(view),report or view.navigation.summary_locked())
+		if not report:
+			var controls := HBoxContainer.new(); view.shell.host.panel.add_child(controls)
+			if selected.get("biography_method") == "automatic" and not complete(view):
+				var automatic := Button.new(); automatic.text = "Choose remaining answers automatically"
+				automatic.disabled = view.navigation.summary_locked(); controls.add_child(automatic)
+				view._bind_button(automatic,"biography-complete-automatic",func():
+					if view.action("biography-operation",expected,{"operation":"automatic"}).ok:
+						Native.click(view); report = complete(view); refresh(view))
+			for item in [["biography-previous","Previous question",-1],["biography-following","Next question",1],["biography-history","Read history",0]]:
+				var button := Button.new(); button.text = item[1]; controls.add_child(button)
+				view._bind_button(button,item[0],func():
+					Native.click(view)
+					if item[2] == 0: history = true
+					else: position = clampi(position+item[2],0,template.questions.size()-1)
+					refresh(view))
+	if report:
+		preload("res://scripts/ui/creation_biography_reputation.gd").render(self,view,expected,value)
+
+func render_review(view: RefCounted, expected: Dictionary, selected: Dictionary) -> void:
 	var value: Dictionary = selected.get("biography",{})
 	if value.is_empty():
 		view._text(view._box(Rect2(20,20,600,240)),"Your biography will retain its template, answers and first-selection random rewards. You can review and revise answers before final summary.")

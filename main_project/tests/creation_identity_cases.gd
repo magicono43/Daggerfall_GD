@@ -64,7 +64,9 @@ func qualify(shell: Control, fixture: Dictionary) -> Array[Dictionary]:
 			var set := provider.face_set(owner.projection().selections)
 			check("identity classic portrait count "+prefix,10,set.faces.size())
 			for index in set.faces.size():
-				check("identity portrait select "+prefix+"/"+str(index),true,provider.cycle_face(owner,owner.token(),1).ok)
+				# Every classic ID remains valid even when the browser skips identical
+				# artwork. Exercise stable-ID validation independently of browse order.
+				check("identity portrait select "+prefix+"/"+str(index),true,owner.edit("face",owner.token(),{"set":set.id,"id":set.faces[index].id}).ok)
 				check("identity classic portrait mapping "+prefix+"/"+str(index),index,owner.projection().validated.face.provenance.definition.classic)
 			check("identity portrait next wrap "+prefix,true,provider.cycle_face(owner,owner.token(),1).ok)
 			check("identity portrait wrapped first "+prefix,"classic-00",owner.projection().selections.face.id)

@@ -59,6 +59,9 @@ func cancel_nested() -> bool:
 		career_view.trait_stage = ""; career_view.trait_category = ""
 		career_view.refresh(self)
 		return true
+	if navigation.step().get("hook") == "biography" and biography_view.report:
+		biography_view.dismiss_report(self)
+		return true
 	if not navigation.summary_locked() and navigation.step().get("hook") == "biography":
 		action("back",navigation.context())
 		return true
@@ -275,6 +278,7 @@ func render() -> void:
 	var art: Dictionary = {"ok":false}
 	var resolver: RefCounted = host.controller.providers.creation_art
 	if resolver != null: art = resolver.resolve(current.art)
+	if hook == "biography" and biography_view.report and owner.projection().selections.get("biography_method") == "automatic": art = resolver.resolve("creation.race")
 	# Native 320×200 layout at a readable 2× scale. The ordinary shell scrolls on
 	# smaller windows. Coordinates position controls only, never select/validate.
 	_page = Control.new()
@@ -366,6 +370,8 @@ func render() -> void:
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook == "race": _buttons.next.hide()
 	if inputs.has_method("validate_career") and hook in ["gender","class_method","class","biography_method"]: _buttons.next.hide()
 	if inputs.has_method("validate_career") and hook == "custom" and selected.has("custom"): _buttons.next.hide()
+	if inputs.has_method("random_name") and hook in ["name","face"]: _buttons.next.hide()
+	if inputs.has_method("biography_operation") and hook == "biography" and not selected.get("biography",{}).is_empty() and not biography_view.history: _buttons.next.hide()
 	var row := HBoxContainer.new()
 	host.panel.add_child(row)
 	for entry in [["back","Back"],["restart","Restart"],["exit","Exit creation"]]:

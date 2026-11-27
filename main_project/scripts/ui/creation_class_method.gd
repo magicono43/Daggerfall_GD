@@ -30,7 +30,8 @@ static func render(view: RefCounted, expected: Dictionary, hook := "class_method
 			var result: Dictionary = view.action("edit",expected,id)
 			if result.ok:
 				art.play_dialog_click(view.shell.host)
-				view.action("next",view.navigation.context()))
+				var advanced: Dictionary = view.action("next",view.navigation.context())
+				if advanced.ok and biography: view.biography_view.begin(view,id))
 		button.disabled = view.navigation.summary_locked()
 		if image.ok:
 			button.add_theme_font_size_override("font_size",7)

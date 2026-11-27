@@ -3,7 +3,12 @@ var acquisitions := 0
 
 func press(shell: Control, view: RefCounted, id: String) -> bool:
 	await shell.get_tree().process_frame; await shell.get_tree().process_frame
-	var button: Button = view._buttons.get(id)
+	if not view.active(): return false
+	if id == "next" and view.navigation.step().hook == "name" and view.inputs.has_method("random_name"): id = "apply-name"
+	elif id == "next" and view.navigation.step().hook == "face" and view._buttons.has("portrait-confirm"): id = "portrait-confirm"
+	var incoming = view._buttons.get(id)
+	if not is_instance_valid(incoming): return false
+	var button: Button = incoming
 	if button == null or button.disabled: return false
 	shell.panel.get_parent().ensure_control_visible(button)
 	button.grab_focus()
@@ -65,10 +70,14 @@ func qualify(shell: Control, fixture: Dictionary) -> Array[Dictionary]:
 	check("biography UI returns to retained template",true,view.action("next",view.navigation.context()).ok)
 	check("biography UI automatic remaining stock handler",true,await press(shell,view,"biography-complete-automatic"))
 	check("biography UI automatic preserves manual first answer","a",view.owner.projection().selections.biography.answers.q1)
+	await press(shell,view,"notice/dismiss")
+	await press(shell,view,"back")
+	await press(shell,view,"biography-previous") # Return from q2 to the first answer.
 	for q in template.questions:
 		check("biography UI stock answer "+q.id,true,await press(shell,view,"biography-answer/"+q.id+"/"+q.answers[0].id))
-		if q != template.questions.back(): await press(shell,view,"biography-following")
 	check("biography UI full manual validates",true,view.owner.section_status("biography").ok)
+	await press(shell,view,"notice/dismiss")
+	await press(shell,view,"back")
 	check("biography UI history stock handler",true,await press(shell,view,"biography-history"))
 	await image(shell,"increment3-history.png")
 	var calls := acquisitions

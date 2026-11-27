@@ -184,6 +184,15 @@ cinematic or native SAVE is created by this increment.
 
 ## Review and remaining integration
 
+The biography method chooser starts automatic generation or initializes manual
+questions directly. The native BIOG00I0 screen advances after each answer across
+twelve questions, retaining normal owner requests and cached outcomes. Completion
+shows a parchment reputation summary before Name. Higher/Lower/Unchanged comes
+from the accepted biography intent's social additions, not starting class standing.
+Dismissal (including Escape) advances to Name; Previous/Next question and history
+remain available for review. Native Name and face OK controls advance through
+normal validation; Random, answers and deliberate confirmations play UI feedback.
+
 Creation navigation stays above the classic art panel. Escape from biography
 returns to method selection with answers/outcomes retained; one held press cannot
 fall through into global Pause or discard. Interactive review uses stock English;
@@ -195,3 +204,5 @@ Biography, affinity, rewards, rolls and allocations use production providers.
 normal New Game never borrows its assigned later providers. Comprehensive polish,
 physical controller/IME results, completed history display/SAVE compatibility,
 runtime modifier/standing/grant consumers, IMP-036 and M2/M3 stay explicitly open.
+
+Navigation correction: Back from Name skips the biography question step when the selected method is automatic, returning to the method chooser without discarding generated outcomes. Manual biography still returns to its question page. This is handled in shared creation navigation so button and Escape paths agree.

@@ -109,9 +109,14 @@ func career_route(expected: Dictionary, method: String) -> Dictionary:
 
 func back(expected: Dictionary) -> Dictionary:
 	if not Draft.same_value(expected,context()): return Draft.failure("stale","Creation control context retired.")
+	var leaving_name: bool = step().get("hook") == "name"
 	if not _editor.is_empty(): _editor = ""
 	elif _position > 0: _position -= 1
 	else: return Draft.failure("first","Already at first creation step.")
+	# Automatic biography has no question page to revisit. Keep its generated
+	# outcome, but return to the method chooser so the player can change routes.
+	if leaving_name and step().get("hook") == "biography" and owner.projection().selections.get("biography_method") == "automatic" and _position > 0:
+		_position -= 1
 	_generation += 1
 	return {"ok":true}
 

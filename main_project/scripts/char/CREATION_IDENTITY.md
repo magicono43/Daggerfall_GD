@@ -93,8 +93,13 @@ Existing biography history and generated rewards do not regenerate after renamin
 Mappings name a stable compatible set. Its ordered entries each have a stable
 portrait ID, image target and explicit classic record (`-1` for a new mod face).
 The baseline declares ten records for each of sixteen race/gender combinations.
-IDs survive display-order changes. Previous/Next wraps over the resolved count;
-an absent selection requires a deliberate press and never silently picks zero.
+IDs survive display-order changes. The face page displays the first face when
+none is selected, without changing the draft. Browsing or pressing its native OK
+explicitly commits a face. Previous/Next wraps over the resolved count, skipping
+consecutive identical resolved pixels while keeping every original ID valid.
+The stock Nord female records zero and one are identical; a mod replacing either
+with distinct art makes it independently browsable. Cached on-demand pixel hashes
+and dimensions determine equivalence, without whole-catalog decoding.
 Compatible upstream mappings retain the selected ID. Missing/incompatible faces
 block completion until the player explicitly chooses a valid replacement.
 

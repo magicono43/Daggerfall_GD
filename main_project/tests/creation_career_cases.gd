@@ -11,11 +11,15 @@ var provider: RefCounted
 func control(shell: Control, text: String, activate := false) -> bool:
 	await shell.get_tree().process_frame
 	await shell.get_tree().process_frame
-	var found := await click(shell,text)
-	if found and activate:
-		var event := InputEventMouseButton.new()
-		event.button_index = MOUSE_BUTTON_LEFT; event.pressed = true; event.double_click = true
-		find_button(shell.panel,text).gui_input.emit(event)
+	var found: bool
+	if activate:
+		var button := find_button(shell.panel,text)
+		found = button != null
+		if found:
+			var event := InputEventMouseButton.new()
+			event.button_index = MOUSE_BUTTON_LEFT; event.pressed = true; event.double_click = true
+			button.gui_input.emit(event)
+	else: found = await click(shell,text)
 	await shell.get_tree().process_frame
 	await shell.get_tree().process_frame
 	return found
@@ -327,7 +331,7 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 	check("career race cancel retains draft",true,view.active())
 	late_yes.call()
 	check("career cancelled race late Yes ignored",false,view.owner.projection().selections.has("race"))
-	check("career cancelled narration stopped",true,view.career_view._audio == null)
+	check("career cancelled race preserves narration",true,view.career_view._narrations.any(func(player): return is_instance_valid(player) and player.playing))
 	await control(shell,"Breton")
 	check("career race No handler",true,await control(shell,"No"))
 	check("career race rejection uncommitted",false,view.owner.projection().selections.has("race"))
@@ -432,6 +436,10 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 	class_name_field.text_changed.emit(class_name_field.text)
 	view.action("next",view.navigation.context())
 	check("career Next commits visible pending name","Étoile 流浪者 2",view.owner.projection().selections.custom.name)
+	# Completion now presents its rejected outcome as a modal parchment notice.
+	# Dismiss it before exercising the underlying trait-menu control.
+	view.cancel_nested()
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
 	check("career custom advantage panel handler",true,await control(shell,"Advantages"))
 	await control(shell,"Add advantage")
 	check("career primary picker opens","category",view.career_view.trait_stage)

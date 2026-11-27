@@ -228,7 +228,7 @@ func resolve(target: String) -> Dictionary:
 	var texture := ImageTexture.create_from_image(bitmap)
 	measurements.textures += 1
 	measurements.rgba_bytes += bitmap.get_width()*bitmap.get_height()*4
-	_textures[target] = {"ok":true,"texture":texture,"provenance":selected.get("provenance",{}).duplicate(true),"target":target,"resolution":selected.get("resolution","replacement")}
+	_textures[target] = {"ok":true,"texture":texture,"pixel_hash":preload("res://scripts/data/actor_input_formats.gd").sha256(bitmap.get_data()),"pixel_size":bitmap.get_size(),"provenance":selected.get("provenance",{}).duplicate(true),"target":target,"resolution":selected.get("resolution","replacement")}
 	return _textures[target].duplicate()
 
 func dispose() -> void:

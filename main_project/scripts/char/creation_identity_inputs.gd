@@ -56,6 +56,7 @@ func cycle_face(owner: RefCounted, expected: Dictionary, direction: int) -> Dict
 	var set := face_set(selected)
 	if set.faces.is_empty(): return Draft.failure("portrait","No compatible portraits are available.")
 	var current: Dictionary = selected.get("face",{})
+	var current_image: Dictionary = portrait(current) if not current.is_empty() else {}
 	var index := -1
 	for n in set.faces.size():
 		if current.get("set") == set.id and current.get("id") == set.faces[n].id: index = n; break
@@ -66,6 +67,11 @@ func cycle_face(owner: RefCounted, expected: Dictionary, direction: int) -> Dict
 		var candidate := {"set":set.id,"id":set.faces[index].id}
 		var image := portrait(candidate)
 		if image.ok:
+			# Preserve IDs and mod replacements, but skip identical resolved artwork
+			# while browsing (classic Nord female records 0/1 are duplicates).
+			if candidate != current and not current_image.get("pixel_hash","").is_empty() and image.get("pixel_hash") == current_image.pixel_hash and image.get("pixel_size") == current_image.get("pixel_size"):
+				index = (index+direction+set.faces.size())%set.faces.size()
+				continue
 			var checked: Dictionary = owner.edit("face",expected,candidate)
 			if checked.ok: return checked
 		if not owner.current(expected): return Draft.failure("stale","Portrait selection retired during resolution.")

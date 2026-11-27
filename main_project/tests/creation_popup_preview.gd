@@ -19,7 +19,7 @@ func capture(shell: Control, path: String) -> void:
 	shell.get_viewport().get_texture().get_image().save_png(path)
 
 func save(path: String) -> Dictionary:
-	var result := {"scope":"focused gender/race popup preview only","ok":checks.all(func(c): return c.expected == c.actual),"count":checks.size(),"checks":checks,"human_pass":false,"engine":Engine.get_version_info()}
+	var result := {"scope":"focused creator UI preview only","ok":checks.all(func(c): return c.expected == c.actual),"count":checks.size(),"checks":checks,"human_pass":false,"engine":Engine.get_version_info()}
 	var output := FileAccess.open(path,FileAccess.WRITE)
 	output.store_string(JSON.stringify(result,"\t")); output.close()
 	return result
@@ -64,6 +64,10 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("male native sprite size",Vector2(32,16),view._buttons["gender/male"].size)
 	check("female native sprite size",Vector2(32,16),view._buttons["gender/female"].size)
 	await capture(shell,str(fixture.sandbox).path_join("gender-popup.png"))
+	if fixture.get("post_class_preview",false):
+		await press(shell,view,"gender/female")
+		await press(shell,view,"choice/list")
+		return await preload("res://tests/creation_background_identity_preview.gd").new().run(self,shell,view,fixture)
 	if fixture.get("custom_sheet_preview",false) or fixture.get("reputation_preview",false) or fixture.get("custom_exit_preview",false) or fixture.get("help_preview",false) or fixture.get("traits_preview",false):
 		await press(shell,view,"gender/male")
 		await press(shell,view,"choice/list")

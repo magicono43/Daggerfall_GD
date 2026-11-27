@@ -1,5 +1,29 @@
 # Verification run artifact cleanup
 
+## 2026-11-27 IMP-015 combined UI checkpoint
+
+Compacted all **16 exact task-owned build roots**, removing **27,362 files /
+4,069,466,558 logical bytes** of copied projects, exports, native copies and
+caches. Independently verified all 16 executed-source ZIP manifests and 2,529
+retained evidence-file hashes. Original child paths, reports (including the two
+incomplete development runs), typed inputs, logs and reviewed captures survive.
+Export template junctions were unlinked without following or changing installed
+targets. No current-task full build/export remains; no external original changed.
+
+Ordinary non-elevated process evidence, exact root/report/revision receipts,
+containment and reparse checks guarded cleanup. Maintained artifact-tool checks
+passed 56 assertions, including explicit clean-committed-checkpoint receipt and
+wrong owner/revision/hash rejection cases. Exact task ledger, source archives,
+compaction journals and the independent audit are linked from the
+[checkpoint evidence](evidence/IMP-015-UI-CHECKPOINT-2026-11-27.md).
+
+Final sample: **8,912,565,756 logical bytes / 117,289 files** (8.30 GiB), without
+following reparse targets; zero inaccessible directories. The 8-GiB trigger was
+reviewed. Largest remaining roots are outside this checkpoint's explicit owned
+ledger and remain protected, including earlier review and audit scopes. This
+sample is not allocated-storage accounting. Exact largest roots and skipped
+links are in `main_project/tests/.runs/imp015-ui-checkpoint-2026-11-27/retention.json`.
+
 ## 2026-11-26 IMP-015 race-popup visual pass
 
 
