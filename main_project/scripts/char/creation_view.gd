@@ -262,6 +262,13 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 			checked = owner.retry(shell.core,_capture)
 			checked.ok = checked.get("kind") in ["pending","Succeeded"]
 		_: return Draft.failure("action","Unsupported creation action.")
+	if checked.ok and id == "next" and inputs.has_method("validate_career") and navigation.step().get("hook") == "questionnaire":
+		if not owner.projection().selections.has("questionnaire"): checked = owner.generate_questionnaire(owner.token())
+		if checked.ok:
+			var questionnaire: Dictionary = owner.projection().selections.questionnaire
+			career_view.question_position = 0
+			while career_view.question_position < 9 and questionnaire.answers.has(questionnaire.questions[career_view.question_position]): career_view.question_position += 1
+			if questionnaire.answers.size() == 10: checked = navigation.next(navigation.context())
 	if checked.ok and checked.get("kind") != "unchanged" and id == "starting-operation" and value in ["generate-attributes","reroll-attributes"]:
 		shell.host.controller.providers.creation_art.play_dice(shell.host)
 	if checked.ok and id in ["next","back","summary-edit"] and inputs.has_method("operate"):
@@ -398,6 +405,7 @@ func render() -> void:
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook in ["race","class"]: _buttons.next.disabled = true
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook == "race": _buttons.next.hide()
 	if inputs.has_method("validate_career") and hook in ["gender","class_method","class","biography_method"]: _buttons.next.hide()
+	if inputs.has_method("validate_career") and hook == "questionnaire": _buttons.next.hide()
 	if inputs.has_method("validate_career") and hook == "custom" and selected.has("custom"): _buttons.next.hide()
 	if inputs.has_method("random_name") and hook in ["name","face"]: _buttons.next.hide()
 	if inputs.has_method("operate") and hook in ["attributes","skills"]: _buttons.next.hide()

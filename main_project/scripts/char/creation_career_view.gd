@@ -5,6 +5,7 @@ const Custom = preload("res://scripts/char/custom_career.gd")
 var candidate := ""
 var candidate_hook := ""
 var question_position := 0
+var questionnaire_runtime: Node
 var custom_tab := 0
 var _narrations: Array[AudioStreamPlayer] = []
 var _draft := ""
@@ -25,6 +26,8 @@ var trait_stage := ""
 var trait_category := ""
 
 func clear() -> void:
+	if is_instance_valid(questionnaire_runtime): questionnaire_runtime.stop(); questionnaire_runtime.queue_free()
+	questionnaire_runtime = null
 	if is_instance_valid(hp_repeat): hp_repeat.stop(); hp_repeat.queue_free()
 	hp_repeat = null
 	custom_keyboard_focus = false
@@ -207,6 +210,12 @@ func _classes(view: RefCounted, expected: Dictionary, selected: Dictionary) -> v
 	if not candidate.is_empty(): _confirm(view,expected,"class",candidate)
 
 func _questions(view: RefCounted, expected: Dictionary, selected: Dictionary) -> void:
+	if selected.has("questionnaire") and view.inputs.sources.questionnaire.ok:
+		preload("res://scripts/ui/creation_questionnaire.gd").render(self,view,expected,selected)
+		return
+	_questions_legacy(view,expected,selected)
+
+func _questions_legacy(view: RefCounted, expected: Dictionary, selected: Dictionary) -> void:
 	var source: Dictionary = view.inputs.sources.questionnaire
 	if not source.ok:
 		view._text(view._box(Rect2(12,16,616,250)),source.reason)

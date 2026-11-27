@@ -16,6 +16,16 @@ later owners. Providers have no live actor/item/spell/quest/faction interfaces.
 
 ## Publication and sources
 
+The native ten-question presentation initializes through the method-selection
+request, not render. It uses the original GFX scroll/CEL flourishes and Ignite
+feedback. Answers still use normal owner edits, and scores are recomputed from
+current retained answers. An application-owned presentation controller waits for
+the current clip before advancing; retirement cancels its callbacks. Separate
+Previous/Next review controls retain approved answer revision. Final Yes/No uses
+the existing recommendation confirmation and direct-list fallback. See the
+[questionnaire polish evidence](../../../design_docs/development/evidence/IMP-015-QUESTIONNAIRE-POLISH-2026-11-27.md)
+for bounded asset profiles, mod target layouts and focused verification.
+
 `data/creation_career.gd` registers `creation-career-v1` before preparation through
 the existing shipped → ordered package → captured loose pipeline. Resources are
 `policy` and `sources`, each with stable record `stock`. Add/replace/patch are

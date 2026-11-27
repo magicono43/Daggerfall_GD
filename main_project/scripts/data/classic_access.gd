@@ -290,6 +290,40 @@ func creation_parchment() -> Dictionary:
 		atlas.blit_rect(tile,Rect2i(0,0,22,22),Vector2i((record%3)*22,(record/3)*22))
 	return {"ok":true,"image":atlas,"provenance":{"source":"SPOP.RCI","sha256":ActorFormats.sha256(bytes),"palette":"ART_PAL.COL","palette_sha256":ActorFormats.sha256(palette_bytes),"layout":"DFU SetBorderTextures row-major nine tiles","alpha_index":0}}
 
+func creation_questionnaire_asset(id: String) -> Dictionary:
+	if not ready() or id not in ["scroll","mask","rogue","mage","warrior"]: return {"ok":false,"reason":"Known published questionnaire asset required."}
+	var codec := preload("res://scripts/data/creation_questionnaire_images.gd").new()
+	if id in ["scroll","mask"]:
+		var background_bytes := _questionnaire_bytes("CHGN00I0.IMG",1048576)
+		var background: Dictionary = preload("res://scripts/data/classic_image.gd").new().decode(background_bytes,"CHGN00I0.IMG",0,0)
+		if not background.ok or not background.has("embedded_palette") or background.width != 320 or background.height != 200: return {"ok":false,"reason":"Questionnaire palette or 320 by 200 background unavailable."}
+		if id == "mask":
+			var image := Image.create(320,200,false,Image.FORMAT_RGBA8)
+			for i in background.indices.size():
+				var color: int = background.indices[i]
+				if color in [160,128,192]: image.set_pixel(i%320,i/320,Color(1 if color == 160 else 0,1 if color == 128 else 0,1 if color == 192 else 0,1))
+			return {"ok":true,"image":image,"provenance":{"source":"CHGN00I0.IMG","sha256":ActorFormats.sha256(background_bytes),"interpretation":"DFU palette entries rogue=160 mage=128 warrior=192"}}
+		var atlas := Image.create(320,1280,false,Image.FORMAT_RGBA8)
+		var hashes := {}
+		for index in 2:
+			var name := "SCRL0"+str(index)+"I0.GFX"
+			var bytes := _questionnaire_bytes(name,1048576)
+			var result: Dictionary = codec.scroll(bytes,background.embedded_palette)
+			if not result.ok: return result
+			atlas.blit_rect(result.image,Rect2i(0,0,320,640),Vector2i(0,index*640)); hashes[name] = ActorFormats.sha256(bytes)
+		return {"ok":true,"image":atlas,"provenance":{"sources":hashes,"palette_sha256":ActorFormats.sha256(background_bytes),"layout":"sixteen vertical 320 by 80 GFX frames"}}
+	var name := id.to_upper()+".CEL"
+	var bytes := _questionnaire_bytes(name,4194304)
+	var decoded: Dictionary = codec.cel(bytes)
+	if decoded.ok: decoded.provenance = {"source":name,"sha256":ActorFormats.sha256(bytes),"frames":decoded.frames,"delay_msec":decoded.delay_msec,"transparency":"RGB 0,0,10; DFU questionnaire","ring_frame":"excluded"}
+	return decoded
+
+func _questionnaire_bytes(name: String, limit: int) -> PackedByteArray:
+	var file := FileAccess.open(_active_source.path_join(name),FileAccess.READ)
+	if file == null: return PackedByteArray()
+	if file.get_length() > limit: file.close(); return PackedByteArray()
+	var result := file.get_buffer(file.get_length()); file.close(); return result
+
 func creation_popup_font(small := false) -> Dictionary:
 	if not ready(): return {"ok":false,"reason":"Published classic source required."}
 	var file := "FONT0002.FNT" if small else "FONT0003.FNT"

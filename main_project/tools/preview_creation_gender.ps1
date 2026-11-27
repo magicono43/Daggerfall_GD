@@ -17,6 +17,7 @@ param(
  [switch]$FacePage,
  [switch]$IdentityChecks,
  [switch]$FinalPages,
+ [switch]$Questionnaire,
  [ValidateSet('attributes','skills','reflexes','summary')][string]$FinalPage='attributes'
 )
 $ErrorActionPreference='Stop'
@@ -59,6 +60,8 @@ $scope+=@('scripts/startup/startup_shell.gd')
 $scope+=@('scripts/ui/creation_custom_sheet.gd','scripts/ui/creation_difficulty_dagger.gd','tests/creation_custom_sheet_preview.gd')
 $scope+=@('scripts/ui/creation_hp_repeat.gd')
 $scope+=@('scripts/char/creation_navigation.gd')
+$scope+=@('tests/creation_questionnaire_codec_cases.gd','tests/fixtures/questionnaire_animation_goldens.json')
+$scope+=@('scripts/data/creation_questionnaire_images.gd','scripts/ui/creation_questionnaire.gd','scripts/ui/creation_questionnaire_runtime.gd','scripts/ui/creation_questionnaire_canvas.gd','scripts/ui/creation_questionnaire_mask.gdshader','tests/creation_questionnaire_preview.gd')
 $scope+=@('scripts/char/creation_starting_view.gd','scripts/ui/creation_allocation_repeat.gd','scripts/ui/creation_native_summary.gd','tests/creation_final_pages_preview.gd')
 $scope+=@('scripts/ui/creation_reputation.gd','tests/creation_reputation_preview.gd')
 $scope+=@('scripts/ui/creation_custom_messages.gd','tests/creation_custom_exit_preview.gd')
@@ -68,7 +71,7 @@ $scope+=@('scripts/ui/creation_help.gd','tests/creation_help_preview.gd')
 $scope+=@('tests/creation_identity_cases.gd','tests/creation_identity_ui_cases.gd','tests/creation_biography_ui_cases.gd','scripts/ui/character_name_field.gd')
 foreach($file in $scope){$report.build.sources[$file]=(Get-FileHash (Join-Path $project $file)).Hash}
 $originals=@{}
-foreach($file in @('CHAR02I0.IMG','CHAR03I0.IMG','CHAR04I0.IMG','CHAR05I0.IMG','CHAR03I1.IMG','CHAR05I1.IMG','BIOG00I0.IMG','CHAR00I0.IMG','CHAR01I0.IMG','FACE12I0.CIF','FONT0002.FNT','CUST01I0.IMG','CUST02I0.IMG','FONT0003.FNT','BUTTONS.RCI','SPOP.RCI','ART_PAL.COL','TMAP00I0.IMG','BUTN01I0.IMG','BUTN02I0.IMG','PICK00I0.IMG','CUST00I0.IMG','CUST08I0.IMG','CHAR02I1.IMG','CUST03I0.IMG','TEXT.RSC')){$originals[$file]=(Get-FileHash (Join-Path $ClassicSource $file)).Hash}
+foreach($file in @('CHGN00I0.IMG','SCRL00I0.GFX','SCRL01I0.GFX','ROGUE.CEL','MAGE.CEL','WARRIOR.CEL','CHAR02I0.IMG','CHAR03I0.IMG','CHAR04I0.IMG','CHAR05I0.IMG','CHAR03I1.IMG','CHAR05I1.IMG','BIOG00I0.IMG','CHAR00I0.IMG','CHAR01I0.IMG','FACE12I0.CIF','FONT0002.FNT','CUST01I0.IMG','CUST02I0.IMG','FONT0003.FNT','BUTTONS.RCI','SPOP.RCI','ART_PAL.COL','TMAP00I0.IMG','BUTN01I0.IMG','BUTN02I0.IMG','PICK00I0.IMG','CUST00I0.IMG','CUST08I0.IMG','CHAR02I1.IMG','CUST03I0.IMG','TEXT.RSC')){$originals[$file]=(Get-FileHash (Join-Path $ClassicSource $file)).Hash}
 foreach($gender in 0..1){foreach($race in 0..7){$file="FACE${gender}${race}I0.CIF";$originals[$file]=(Get-FileHash (Join-Path $ClassicSource $file)).Hash}}
 $priorRoaming=$env:APPDATA;$priorLocal=$env:LOCALAPPDATA;$child=$null
 try{
@@ -80,8 +83,15 @@ try{
  $null=Child @('--headless','--path',$runtime,'--import','--quit-after','60') 'import' 90
  if((Get-Content "$case/import.stderr.log" -Raw) -match 'SCRIPT ERROR|Parse Error'){throw "Preview import reported script errors: $root"}
  foreach($file in $scope){if((Get-FileHash (Join-Path $runtime $file)).Hash -cne $report.build.sources[$file] -or (Get-FileHash (Join-Path $project $file)).Hash -cne $report.build.sources[$file]){throw 'Source changed during preview preparation; rerun.'}}
- @{mode='creation-review';fixture='creation-popup-preview-v1';sandbox=$sandbox.Replace('\','/');classic_source=([IO.Path]::GetFullPath($ClassicSource)).Replace('\','/');popup_preview=$true;final_pages_preview=[bool]$FinalPages;final_page=$FinalPage;class_method_preview=[bool]$ClassMethod;class_picker_preview=[bool]$ClassPicker;custom_sheet_preview=[bool]$CustomSheet;reputation_preview=[bool]$Reputation;custom_exit_preview=[bool]$CustomExit;help_preview=[bool]$HelpMenu;traits_preview=[bool]($Traits -or $Disadvantages);disadvantages_preview=[bool]$Disadvantages;post_class_preview=[bool]($PostClass -or $ManualBiography -or $NamePage -or $FacePage -or $IdentityChecks);manual_biography_preview=[bool]$ManualBiography;name_page_preview=[bool]$NamePage;face_page_preview=[bool]$FacePage;identity_checks_preview=[bool]$IdentityChecks;review_smoke=[bool]$SmokeTest;preview_close_test=[bool]$CloseTest}|ConvertTo-Json|Set-Content "$case/fixture.json"
+ @{mode='creation-review';fixture='creation-popup-preview-v1';sandbox=$sandbox.Replace('\','/');classic_source=([IO.Path]::GetFullPath($ClassicSource)).Replace('\','/');popup_preview=$true;questionnaire_preview=[bool]$Questionnaire;final_pages_preview=[bool]$FinalPages;final_page=$FinalPage;class_method_preview=[bool]$ClassMethod;class_picker_preview=[bool]$ClassPicker;custom_sheet_preview=[bool]$CustomSheet;reputation_preview=[bool]$Reputation;custom_exit_preview=[bool]$CustomExit;help_preview=[bool]$HelpMenu;traits_preview=[bool]($Traits -or $Disadvantages);disadvantages_preview=[bool]$Disadvantages;post_class_preview=[bool]($PostClass -or $ManualBiography -or $NamePage -or $FacePage -or $IdentityChecks);manual_biography_preview=[bool]$ManualBiography;name_page_preview=[bool]$NamePage;face_page_preview=[bool]$FacePage;identity_checks_preview=[bool]$IdentityChecks;review_smoke=[bool]$SmokeTest;preview_close_test=[bool]$CloseTest}|ConvertTo-Json|Set-Content "$case/fixture.json"
  @{owner='IMP-015 focused gender preview';expiry='Until this preview engine closes; preserve evidence then compact.'}|ConvertTo-Json|Set-Content "$root/ACTIVE-HUMAN-REVIEW.json"
+ if($Questionnaire -and $SmokeTest){
+  $codecChild=Child @('--headless','--path',$runtime,'--script','res://tests/creation_questionnaire_codec_cases.gd','--',"--classic-source=$ClassicSource","--output=$sandbox/questionnaire-codecs.json") 'questionnaire-codecs' 60
+  $codecResult=Get-Content "$sandbox/questionnaire-codecs.json" -Raw|ConvertFrom-Json
+  if(!$codecResult.ok){throw "Questionnaire codec checks failed: $root"}
+  if(!(Test-ScriptDiagnostics @("$case/questionnaire-codecs.stdout.log","$case/questionnaire-codecs.stderr.log") '' $codecResult)){throw "Unexpected questionnaire codec diagnostics: $root"}
+  $report.codec_result=$codecResult
+ }
  $arguments=@('--path',$runtime)
  if($CloseTest){$arguments+='--verbose'}
  $arguments+=@('--',"--startup-fixture=$case/fixture.json")

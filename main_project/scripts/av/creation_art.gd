@@ -40,6 +40,12 @@ func declare(providers: RefCounted) -> Dictionary:
 	if not click.ok: return click
 	var dice: Dictionary = media.register_target("creation.dice-roll","audio",[],_sound_baseline.bind({"ordinal":300}))
 	if not dice.ok: return dice
+	var ignite: Dictionary = media.register_target("creation.questionnaire.ignite","audio",[],_sound_baseline.bind({"ordinal":16}))
+	if not ignite.ok: return ignite
+	for id in ["scroll","mask","rogue","mage","warrior"]:
+		var target: String = "creation.questionnaire."+id
+		var declared: Dictionary = media.register_target(target,"image",[],_decode_once.bind(target,classic.creation_questionnaire_asset.bind(id)))
+		if not declared.ok: return declared
 	for item in [["creation.skill-spinner","CHAR03I1.IMG"],["creation.reflex-highlight","CHAR05I1.IMG"]]:
 		var resource: Dictionary = media.register_target(item[0],"image",[],_decode_once.bind(item[0],classic.creation_image.bind(item[1])))
 		if not resource.ok: return resource
