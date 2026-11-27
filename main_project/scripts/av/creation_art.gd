@@ -12,6 +12,7 @@ var _click: Dictionary = {}
 var _class_jingle: Dictionary = {}
 var _click_player: AudioStreamPlayer
 var click_submissions := 0
+var dice_submissions := 0
 var _small_font: FontFile
 var _small_font_prepared := false
 var _popup_font: FontFile
@@ -37,6 +38,11 @@ func declare(providers: RefCounted) -> Dictionary:
 		if not result.ok: return result
 	var click: Dictionary = media.register_target("creation.dialog.click","audio",[],_sound_baseline.bind({"ordinal":360}))
 	if not click.ok: return click
+	var dice: Dictionary = media.register_target("creation.dice-roll","audio",[],_sound_baseline.bind({"ordinal":300}))
+	if not dice.ok: return dice
+	for item in [["creation.skill-spinner","CHAR03I1.IMG"],["creation.reflex-highlight","CHAR05I1.IMG"]]:
+		var resource: Dictionary = media.register_target(item[0],"image",[],_decode_once.bind(item[0],classic.creation_image.bind(item[1])))
+		if not resource.ok: return resource
 	var drums: Dictionary = media.register_target("creation.class-drums","audio",[],_sound_baseline.bind({"ordinal":374}))
 	if not drums.ok: return drums
 	var thumb: Dictionary = media.register_target("creation.scrollbar-thumb","image",[],_scrollbar_thumb_baseline)
@@ -188,6 +194,17 @@ func play_dialog_click(host: Node) -> void:
 func class_jingle() -> Dictionary:
 	if _class_jingle.is_empty(): _class_jingle = media.resolve("creation.class-drums","audio")
 	return _class_jingle.duplicate()
+
+func play_dice(host: Node) -> void:
+	# One host-owned voice per successful roll: overlapping rolls play to completion.
+	var instance: Dictionary = preload("res://scripts/av/replacement_instances.gd").audio(media.resolve("creation.dice-roll","audio"))
+	if not instance.ok: return
+	var player: AudioStreamPlayer = instance.player
+	player.set_meta("creation_dice_voice",true)
+	host.add_child(player)
+	player.finished.connect(player.queue_free)
+	player.play()
+	dice_submissions += 1
 
 func _scrollbar_thumb_baseline() -> Dictionary:
 	# Pinned DFU MIT resources: retain the original five-pixel sliced bevel.

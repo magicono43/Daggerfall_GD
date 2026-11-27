@@ -6,6 +6,9 @@ func press(shell: Control, view: RefCounted, id: String) -> bool:
 	if not view.active(): return false
 	if id == "next" and view.navigation.step().hook == "name" and view.inputs.has_method("random_name"): id = "apply-name"
 	elif id == "next" and view.navigation.step().hook == "face" and view._buttons.has("portrait-confirm"): id = "portrait-confirm"
+	elif id == "next" and view.navigation.step().hook in ["attributes","skills"] and view._buttons.has("allocation-confirm"): id = "allocation-confirm"
+	elif id == "next" and view.navigation.step().hook == "reflexes" and view._buttons.has("reflex-confirm"): id = "reflex-confirm"
+	elif id == "begin" and view._buttons.has("summary/confirm"): id = "summary/confirm"
 	var incoming = view._buttons.get(id)
 	if not is_instance_valid(incoming): return false
 	var button: Button = incoming
@@ -87,7 +90,7 @@ func qualify(shell: Control, fixture: Dictionary) -> Array[Dictionary]:
 	for hook in ["name","face"]:
 		check("biography UI only later "+hook+" assigned",true,view.action("edit",view.navigation.context(),provider.later.fixture.preset[hook]).ok)
 		check("biography UI next later "+hook,true,view.action("next",view.navigation.context()).ok)
-	check("biography UI attributes initial stock generation",true,await press(shell,view,"generate-attributes"))
+	check("biography UI attributes generated on entry",true,view.owner.projection().selections.has("attributes"))
 	check("biography UI attribute stock increment",true,await press(shell,view,"starting/strength/1"))
 	check("biography UI attribute stock refund",true,await press(shell,view,"starting/strength/-1"))
 	check("biography UI Save Roll stock handler",true,await press(shell,view,"save-roll"))
@@ -122,7 +125,7 @@ func qualify(shell: Control, fixture: Dictionary) -> Array[Dictionary]:
 	check("biography UI seven owner-backed previews",7,preview.get("values",{}).size())
 	await image(shell,"increment3-attributes.png")
 	check("biography UI next attributes",true,view.action("next",view.navigation.context()).ok)
-	check("biography UI skills initial stock generation",true,await press(shell,view,"generate-skills"))
+	check("biography UI skills generated on entry",true,view.owner.projection().selections.has("skills"))
 	check("biography UI skills has no Reroll",false,view._buttons.has("reroll-attributes"))
 	check("biography UI skills has no Save Roll",false,view._buttons.has("save-roll"))
 	check("biography UI unfinished skills block Next",false,view.action("next",view.navigation.context()).ok)

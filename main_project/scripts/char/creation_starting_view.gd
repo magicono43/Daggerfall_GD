@@ -1,6 +1,111 @@
 extends RefCounted
-## Stock controls submit exact owner operations; repaint never generates a roll.
+const Native = preload("res://scripts/ui/creation_native_controls.gd")
+const Math = preload("res://scripts/char/starting_rolls.gd")
+var attribute := 0
+var skills := {"primary":0,"major":0,"minor":0}
+var repeat: Node
+var message := ""
+
+func clear() -> void:
+	if is_instance_valid(repeat): repeat.stop()
+	attribute = 0; skills = {"primary":0,"major":0,"minor":0}; message = ""
+
+func evaluation(view: RefCounted, hook: String, selected: Dictionary) -> Dictionary:
+	var value: Dictionary = selected.get(hook,{})
+	if value.is_empty(): return {"ok":false,"reason":"Starting rolls unavailable."}
+	var resolved: Dictionary = view.inputs.career_context(view.owner.projection(),hook)
+	if not resolved.ok: return resolved
+	return Math.attributes(value.roll,resolved.career.attributes,view.inputs.starting.attributes,view.inputs.numeric,resolved.context) if hook == "attributes" else Math.skills(value.roll,resolved.career.tiers,view.inputs.starting.skills,view.inputs.adjustments(view.owner.projection()),resolved.context)
+
+func change(view: RefCounted, hook: String, id: String, direction: int) -> Dictionary:
+	var value: Dictionary = view.owner.projection().selections.get(hook,{}).duplicate(true)
+	if value.is_empty(): return {"ok":false}
+	value.roll.allocated[id] += direction
+	var result: Dictionary = view.action("summary-change",view.navigation.context(),{"section":hook,"value":value}) if view.navigation.step().hook == "summary" else view.action("edit",view.navigation.context(),value)
+	if result.ok: Native.click(view)
+	return result
+
+func image(view: RefCounted, root: Control, target: String, rect: Rect2) -> void:
+	var art: Dictionary = view.shell.host.controller.providers.creation_art.resolve(target)
+	if not art.ok: return
+	var texture := TextureRect.new(); texture.texture = art.texture
+	texture.position = rect.position; texture.size = rect.size
+	texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; texture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(texture)
+
+func arrow(view: RefCounted, root: Control, hook: String, id: String, direction: int, rect: Rect2, disabled: bool) -> void:
+	var key := "starting/"+id+"/"+str(direction)
+	var button := Native.button(view,root,key,"Increase" if direction > 0 else "Decrease",rect,func(): change(view,hook,id,direction),disabled)
+	if not is_instance_valid(repeat):
+		repeat = preload("res://scripts/ui/creation_allocation_repeat.gd").new(); view.shell.host.add_child(repeat)
+	button.gui_input.connect(func(event: InputEvent):
+		if not button.disabled and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed: repeat.begin(view,hook,id,direction,key,button.get_global_transform_with_canvas()*event.position)
+			else: repeat.stop()
+			button.accept_event())
+
 func render(view: RefCounted, expected: Dictionary, hook: String, selected: Dictionary) -> void:
+	var evaluated := evaluation(view,hook,selected)
+	if not evaluated.ok: render_legacy(view,expected,hook,selected); return
+	var root := Native.root(view)
+	draw(view,root,hook,selected,evaluated)
+	if hook == "attributes":
+		for entry in [["reroll-attributes","Reroll",Rect2(263,147,39,22)],["save-roll","Save Roll",Rect2(162,162,71,9)],["load-roll","Load Roll",Rect2(162,171,71,9)]]:
+			Native.button(view,root,entry[0],entry[1],entry[2],func():
+				if view.action("starting-operation",expected,entry[0]).ok and entry[0] != "reroll-attributes": Native.click(view),entry[0] == "load-roll" and selected.attributes.slot.is_empty())
+	Native.button(view,root,"allocation-confirm","OK",Rect2(263,172,39,22),func():
+		if not view.action("next",expected).ok: message = "You must distribute your bonus points."; view.shell.schedule_render()
+		else: Native.click(view))
+	if not message.is_empty(): preload("res://scripts/ui/creation_popup.gd").notice(view,message,func(): message = ""; view.shell.schedule_render(),"allocation")
+
+func draw(view: RefCounted, root: Control, hook: String, selected: Dictionary, evaluated: Dictionary) -> void:
+	var value: Dictionary = selected[hook]
+	if hook == "attributes":
+		for index in Math.Domain.ATTRIBUTES.size():
+			var id: String = Math.Domain.ATTRIBUTES[index]
+			var label := Native.text(view,root,str(evaluated.final[id]),Rect2(8,33+22*index,34,7),"attribute."+id,true)
+			label.set_meta("allocation_value",id)
+			if value.roll.allocated[id] > 0: label.add_theme_color_override("font_color",Color.GREEN)
+			Native.button(view,root,"starting/select/"+id,str(view.inputs.policy.attributes[id].get("label",id.capitalize())),Rect2(7,20+22*index,35,20),func(): attribute = index; Native.click(view); view.shell.schedule_render())
+		var active: String = Math.Domain.ATTRIBUTES[attribute]
+		var y := 21+22*attribute
+		image(view,root,"creation.stat-spinner",Rect2(44,y,15,20))
+		Native.text(view,root,str(evaluated.remaining),Rect2(44,y+7,15,7),"attribute.remaining",true)
+		arrow(view,root,hook,active,1,Rect2(44,y,15,7),evaluated.remaining <= 0 or evaluated.final[active] >= view.inputs.starting.attributes.values[active].cap)
+		arrow(view,root,hook,active,-1,Rect2(44,y+13,15,7),value.roll.allocated[active] <= 0)
+		if view.navigation.step().hook != "summary": derived(view,root,evaluated)
+	else:
+		var resolved: Dictionary = view.inputs.career_context(view.owner.projection(),hook)
+		for tier in Math.TIERS:
+			var top: int = {"primary":32,"major":81,"minor":130}[tier]
+			for index in resolved.career.tiers[tier].size():
+				var id: String = resolved.career.tiers[tier][index]
+				var name: String = view.inputs.policy.skills[id].label
+				Native.text(view,root,name,Rect2(68,top+10*index,106,8),"skill."+id)
+				var label := Native.text(view,root,str(evaluated.final[id]),Rect2(185,top+10*index,14,8),"skill.value."+id,true)
+				label.set_meta("allocation_value",id)
+				if value.roll.allocated[id] > 0: label.add_theme_color_override("font_color",Color.GREEN)
+				Native.button(view,root,"starting/select/"+id,name,Rect2(67,top-1+10*index,133,10),func(): skills[tier] = index; Native.click(view); view.shell.schedule_render())
+			var active: String = resolved.career.tiers[tier][skills[tier]]
+			var y: int = top-1+10*skills[tier]
+			image(view,root,"creation.skill-spinner",Rect2(203,y,37,9))
+			Native.text(view,root,str(evaluated.remaining[tier]),Rect2(214,y+1,15,7),"skill.remaining."+tier,true)
+			arrow(view,root,hook,active,-1,Rect2(203,y,11,9),value.roll.allocated[active] <= 0)
+			arrow(view,root,hook,active,1,Rect2(229,y,11,9),evaluated.remaining[tier] <= 0 or evaluated.final[active] >= view.inputs.starting.skills.limits[active].max)
+
+func derived(view: RefCounted, root: Control, evaluated: Dictionary) -> void:
+	var resolved: Dictionary = view.inputs.career_context(view.owner.projection(),"attributes")
+	var multiplier: Dictionary = resolved.career.get("spell_points",{})
+	if view.owner.projection().selections.get("class_method") == "custom": multiplier = view.inputs.custom_spell_points(resolved.career)
+	multiplier = {"numerator":multiplier.get("numerator",-1),"denominator":multiplier.get("denominator",0)}
+	var preview: Dictionary = view.owner.attribute_preview(view.shell.core,view.owner.token(),evaluated.final,multiplier)
+	if not preview.ok: return
+	for entry in [["damage",83,22],["capacity",103,32],["magicka",112,49],["resistance",121,71],["agility",97,93],["growth",101,110],["healing",122,120]]:
+		var amount: int = preview.values[entry[0]]
+		Native.text(view,root,("+" if amount > 0 and entry[0] in ["damage","agility","growth","healing"] else "")+str(amount),Rect2(entry[1],entry[2],35,7),"derived."+entry[0])
+
+## Stock controls submit exact owner operations; repaint never generates a roll.
+func render_legacy(view: RefCounted, expected: Dictionary, hook: String, selected: Dictionary) -> void:
 	# Original screens contain baked spinners/buttons. Mask inactive hit-like art;
 	# keep the original frame and real, token-guarded controls above the mask.
 	var mask := ColorRect.new()

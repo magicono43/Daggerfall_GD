@@ -116,17 +116,27 @@ func face_page(view: RefCounted, expected: Dictionary, selected: Dictionary) -> 
 		if view.action("next",view.navigation.context()).ok: Native.click(view),view.navigation.summary_locked() or shown.is_empty())
 
 func reflex_page(view: RefCounted, expected: Dictionary, selected: Dictionary) -> void:
-	var column := VBoxContainer.new()
-	view._box(Rect2(16,16,370,320)).add_child(column)
-	view._box(Rect2(392,16,240,322))
-	view._text(view._box(Rect2(16,340,494,54)),"Choose a setting, then continue.")
-	view._text(column,"How quickly do you react in combat?")
-	var parameters: Dictionary = view.inputs.identity.get("reflexes",{}).get(selected.get("reflexes"),{})
-	if parameters.is_empty(): view._text(column,"Required reflex parameters are unavailable. Select a valid option after restoring its definitions.")
-	else: view._text(column,Reflex.explanation(parameters))
+	var root := Native.root(view)
+	var panel := Panel.new(); panel.position = Vector2(33,15); panel.size = Vector2(254,110)
+	var parchment: StyleBox = view.shell.host.controller.providers.creation_art.parchment_style()
+	if parchment == null:
+		var fallback := StyleBoxFlat.new(); fallback.bg_color = Color("957044"); parchment = fallback
+	panel.add_theme_stylebox_override("panel",parchment)
+	root.add_child(panel)
+	var explanation := Native.text(view,panel,view.translated("reflex.explanation","Player reflexes determine the overall speed of the game. If you pick VERY HIGH reflexes, the monsters will move and attack quickly, forcing you to be quick with the controls. VERY LOW reflexes means the monsters will move and attack slowly, allowing you to adopt a more cautious, thoughtful play style. Your character will advance a little slower with a lower reflex setting, and will advance a little faster with a higher reflex setting."),Rect2(15,17,224,84),"reflex.explanation",true)
+	explanation.set_meta("creation_reflex_explanation",true)
+	reflex_picker(view,root,expected,selected,Vector2(127,148))
+	Native.button(view,root,"reflex-confirm","OK",Rect2(263,172,39,22),func():
+		if view.action("next",expected).ok: Native.click(view))
+
+func reflex_picker(view: RefCounted, root: Control, expected: Dictionary, selected: Dictionary, position: Vector2, summary := false) -> void:
+	var art: Dictionary = view.shell.host.controller.providers.creation_art.resolve("creation.reflex-highlight")
+	var chosen: int = Reflex.IDS.find(selected.get("reflexes"))
+	if art.ok and chosen >= 0:
+		var atlas := AtlasTexture.new(); atlas.atlas = art.texture; atlas.region = Rect2(0,chosen*9,66,9)
+		var highlight := TextureRect.new(); highlight.texture = atlas; highlight.position = position+Vector2(0,9*chosen); highlight.size = Vector2(66,9); highlight.mouse_filter = Control.MOUSE_FILTER_IGNORE; root.add_child(highlight)
 	for index in Reflex.IDS.size():
 		var id: String = Reflex.IDS[index]
-		var definition: Dictionary = view.inputs.identity.get("reflexes",{}).get(id,{})
-		view._button("reflex/"+id,str(definition.get("label",id)),Rect2(400,32+index*58,222,50),func(): view.action("edit",expected,id))
-		view._buttons["reflex/"+id].toggle_mode = true
-		view._buttons["reflex/"+id].button_pressed = selected.get("reflexes") == id
+		Native.button(view,root,"reflex/"+id,str(view.inputs.identity.reflexes.get(id,{}).get("label",id)),Rect2(position+Vector2(0,9*index),Vector2(66,9)),func():
+			var result: Dictionary = view.action("summary-change",expected,{"section":"reflexes","value":id}) if summary else view.action("edit",expected,id)
+			if result.ok: Native.click(view))

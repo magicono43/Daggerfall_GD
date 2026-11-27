@@ -184,6 +184,15 @@ cinematic or native SAVE is created by this increment.
 
 ## Review and remaining integration
 
+Native allocation pages display owner-evaluated totals. Positive player-assigned
+allocations are green; their remaining pools and limits remain policy-owned.
+Accepted navigation initializes missing rolls; render and repaint do not draw.
+Successful initial attribute rolls and rerolls play replaceable overlapping dice
+one-shots. Both allocation screens support 150-ms held arrows with fresh owner
+contexts per tick and gesture retirement checks. Overview uses the same permitted
+summary editors for inline allocation, identity and reflex changes. Redistributing
+points temporarily makes capture invalid until all pools are complete again.
+
 The biography method chooser starts automatic generation or initializes manual
 questions directly. The native BIOG00I0 screen advances after each answer across
 twelve questions, retaining normal owner requests and cached outcomes. Completion

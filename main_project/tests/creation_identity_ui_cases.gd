@@ -129,10 +129,8 @@ func qualify(shell: Control, fixture: Dictionary) -> Array[Dictionary]:
 	await name_text(shell,view,"W".repeat(31))
 	await press(shell,view,"next")
 	check("identity UI long summary name unchanged","W".repeat(31),view.owner.projection().selections.name)
-	var name_scroll: ScrollContainer
-	for node in view._page.find_children("*","ScrollContainer",true,false):
-		if node.has_meta("creation_summary_name"): name_scroll = node
-	check("identity UI long summary name scroll available",true,name_scroll != null and name_scroll.get_h_scroll_bar().max_value > name_scroll.get_h_scroll_bar().page)
+	var summary_name: LineEdit = view._editors.get("summary/name")
+	check("identity UI long summary name retained in native editor",true,summary_name != null and summary_name.text == "W".repeat(31) and summary_name.editable)
 	await image(shell,"increment4-long-name.png")
 	view.action("summary-edit",view.navigation.context(),"name")
 	await name_text(shell,view,"Edited Adventurer")

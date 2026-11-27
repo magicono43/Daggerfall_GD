@@ -157,6 +157,7 @@ func open(provider: RefCounted = null) -> Dictionary:
 
 func exit() -> void:
 	career_view.clear()
+	starting_view.clear()
 	navigation.discard()
 	_working.clear()
 	glyph_diagnostics.clear()
@@ -169,6 +170,7 @@ func exit() -> void:
 func restart() -> void:
 	if not active(): return
 	career_view.clear()
+	starting_view.clear()
 	_working.clear()
 	_summary_tab = 0
 	glyph_diagnostics.clear()
@@ -185,6 +187,19 @@ func restart() -> void:
 func action(id: String, expected: Dictionary, value: Variant = null) -> Dictionary:
 	if not active() or shell.windows.top().get("id") != layer or not Draft.same_value(expected,navigation.context()) or shell.core.busy(): return Draft.failure("stale","Creation input context retired.")
 	if not _capture.is_empty() and id not in ["begin","retry","restart","exit"]: return Draft.failure("submitted","This creation is retained for retry. Restart to change submitted choices.")
+	if id == "summary-change":
+		if not value is Dictionary or value.get("section","") not in Draft.SUMMARY_EDITORS or (not value.has("value") and not (value.get("section") == "face" and value.get("direction") in [-1,1])): return Draft.failure("invalid","Supported summary edit required.")
+	if navigation.step().get("hook") == "summary" and id in ["summary-change","begin"]:
+		var summary_name: Control = _editors.get("summary/name")
+		if is_instance_valid(summary_name) and summary_name.composition_owned(): return Draft.failure("composition","Finish text composition before continuing.")
+		if _working.has("summary.name") and not (id == "summary-change" and value.get("section") == "name"):
+			var named: Dictionary = navigation.summary_edit(expected,"name")
+			if not named.ok: return named
+			named = navigation.edit(navigation.context(),_working["summary.name"])
+			if not navigation.next(navigation.context()).ok: navigation.back(navigation.context())
+			if not named.ok: notice = named.reason; shell.schedule_render(); return named
+			_working.erase("summary.name"); expected = navigation.context()
+			_working.name = owner.projection().selections.name
 	if navigation.step().get("hook") == "name" and id in ["edit","next","identity-operation"]:
 		var field: Control = _editors.get("name-field")
 		if is_instance_valid(field) and field.has_method("composition_owned") and field.composition_owned(): return Draft.failure("composition","Finish text composition, then use a separate press to continue.")
@@ -205,6 +220,12 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 			if navigation.step().get("hook") != ("skills" if value == "generate-skills" else "attributes"): return Draft.failure("permission","Use the corresponding starting allocation editor.")
 			checked = inputs.operate(owner,expected.token,str(value)) if inputs.has_method("operate") else Draft.failure("unavailable","Starting operations unavailable.")
 		"edit": checked = navigation.edit(expected,value)
+		"summary-change":
+			checked = navigation.summary_edit(expected,str(value.section))
+			if checked.ok:
+				checked = inputs.cycle_face(owner,owner.token(),int(value.direction)) if value.has("direction") else navigation.edit(navigation.context(),value.value)
+				if not navigation.next(navigation.context()).ok: navigation.back(navigation.context())
+				if checked.ok and value.section == "name": _working.name = owner.projection().selections.name
 		"generate-questionnaire": checked = owner.generate_questionnaire(expected.token)
 		"career-route": checked = navigation.career_route(expected,str(value))
 		"next":
@@ -241,6 +262,14 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 			checked = owner.retry(shell.core,_capture)
 			checked.ok = checked.get("kind") in ["pending","Succeeded"]
 		_: return Draft.failure("action","Unsupported creation action.")
+	if checked.ok and checked.get("kind") != "unchanged" and id == "starting-operation" and value in ["generate-attributes","reroll-attributes"]:
+		shell.host.controller.providers.creation_art.play_dice(shell.host)
+	if checked.ok and id in ["next","back","summary-edit"] and inputs.has_method("operate"):
+		var allocation_hook: String = navigation.step().get("hook","")
+		if allocation_hook in ["attributes","skills"] and not owner.projection().selections.has(allocation_hook):
+			var initial: Dictionary = inputs.operate(owner,owner.token(),"generate-"+allocation_hook)
+			if initial.ok and allocation_hook == "attributes": shell.host.controller.providers.creation_art.play_dice(shell.host)
+			if not initial.ok: checked = initial
 	if checked.ok and inputs.has_method("validate_career") and id in ["next","back","career-route"] and navigation.step().get("hook") == "custom" and not owner.projection().selections.has("custom"):
 		# Enter through an admitted navigation request, never by mutating on render.
 		# Reuse a retained candidate before creating a new blank custom draft.
@@ -250,7 +279,7 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 	notice = "" if checked.ok else str(checked.get("reason","Creation request rejected."))
 	if checked.has("sections"): notice += "\n"+str(checked.sections)
 	if not career_view.custom_exit_message.is_empty(): notice = ""
-	if checked.ok and id in ["edit","next","back","summary-edit","career-route","generate-questionnaire","starting-operation","biography-operation","identity-operation"]:
+	if checked.ok and id in ["edit","next","back","summary-edit","summary-change","career-route","generate-questionnaire","starting-operation","biography-operation","identity-operation"]:
 		# A page/selection handoff is a real input boundary, with the existing
 		# fresh-press quarantine. Keep the same requester-owned gate and scope.
 		shell.windows.replace(layer,"creation",func(_old: Dictionary): return {"ok":true,"data":{"cursor":"visible"}})
@@ -371,6 +400,9 @@ func render() -> void:
 	if inputs.has_method("validate_career") and hook in ["gender","class_method","class","biography_method"]: _buttons.next.hide()
 	if inputs.has_method("validate_career") and hook == "custom" and selected.has("custom"): _buttons.next.hide()
 	if inputs.has_method("random_name") and hook in ["name","face"]: _buttons.next.hide()
+	if inputs.has_method("operate") and hook in ["attributes","skills"]: _buttons.next.hide()
+	if inputs.has_method("random_name") and hook == "reflexes": _buttons.next.hide()
+	if inputs.has_method("random_name") and hook == "summary" and _summary_tab == 0: _buttons.begin.hide()
 	if inputs.has_method("biography_operation") and hook == "biography" and not selected.get("biography",{}).is_empty() and not biography_view.history: _buttons.next.hide()
 	var row := HBoxContainer.new()
 	host.panel.add_child(row)
@@ -424,6 +456,12 @@ func _focus_control(control: Control, generation: int) -> void:
 	if generation == _render_generation and is_instance_valid(control) and control.is_inside_tree(): control.grab_focus()
 
 func _summary(expected: Dictionary, selected: Dictionary) -> void:
+	if inputs.has_method("random_name") and _summary_tab == 0:
+		preload("res://scripts/ui/creation_native_summary.gd").render(self,expected,selected)
+		return
+	_summary_legacy(expected,selected)
+
+func _summary_legacy(expected: Dictionary, selected: Dictionary) -> void:
 	var identity := _box(Rect2(8,0,474,38))
 	var identity_style: StyleBox = identity.get_theme_stylebox("panel")
 	identity_style.set_content_margin(SIDE_TOP,1)
@@ -604,6 +642,8 @@ func _bind_button(button: Button, id: String, callback: Callable) -> void:
 
 func dispose() -> void:
 	career_view.clear()
+	starting_view.clear()
+	if is_instance_valid(starting_view.repeat): starting_view.repeat.queue_free()
 	navigation.discard()
 	if shell.core.retiring.is_connected(_retire): shell.core.retiring.disconnect(_retire)
 	if shell.core.terminal.is_connected(_terminal): shell.core.terminal.disconnect(_terminal)

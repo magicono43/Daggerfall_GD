@@ -18,10 +18,17 @@ static func text(view: RefCounted, parent: Control, value: String, rect: Rect2, 
 		if display.unicode_at(index) not in [10,13,32] and not selected.has_char(display.unicode_at(index)):
 			selected = view._presentation.font() if view._presentation != null else ThemeDB.fallback_font
 			break
-	var label := Sheet.label(parent,display,rect,selected,centered)
+	var label := Label.new()
+	# Configure wrapping before attaching text to the tree; otherwise a long
+	# bitmap prompt can retain its initial single-line minimum width.
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	# The initial unwrapped Label may already have grown to its natural width.
+	label.text = display; Sheet.ink(label,selected)
+	label.add_theme_constant_override("line_spacing",0)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER if centered else HORIZONTAL_ALIGNMENT_LEFT
+	label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	label.position = rect.position; label.size = rect.size
+	parent.add_child(label)
 	return label
 
 static func button(view: RefCounted, parent: Control, id: String, label: String, rect: Rect2, callback: Callable, locked := false) -> Button:

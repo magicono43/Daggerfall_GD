@@ -64,6 +64,10 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("male native sprite size",Vector2(32,16),view._buttons["gender/male"].size)
 	check("female native sprite size",Vector2(32,16),view._buttons["gender/female"].size)
 	await capture(shell,str(fixture.sandbox).path_join("gender-popup.png"))
+	if fixture.get("final_pages_preview",false):
+		await press(shell,view,"gender/female")
+		await press(shell,view,"choice/list")
+		return await preload("res://tests/creation_final_pages_preview.gd").new().run(self,shell,view,fixture)
 	if fixture.get("post_class_preview",false):
 		await press(shell,view,"gender/female")
 		await press(shell,view,"choice/list")
