@@ -23,6 +23,8 @@ func declare(providers: RefCounted) -> Dictionary:
 	if media == null: return {"ok":false,"reason":"Creation art requires the existing media resolver."}
 	var parchment: Dictionary = media.register_target("creation.parchment","image",[],_parchment_baseline)
 	if not parchment.ok: return parchment
+	var method: Dictionary = media.register_target("creation.class-method","image",[],_decode_once.bind("creation.class-method",classic.creation_image.bind("BUTN01I0.IMG")))
+	if not method.ok: return method
 	var click: Dictionary = media.register_target("creation.dialog.click","audio",[],_sound_baseline.bind({"ordinal":360}))
 	if not click.ok: return click
 	for item in [["yes",3],["no",4],["male",6],["female",7]]:

@@ -1,0 +1,42 @@
+extends RefCounted
+## Original BUTN01I0 pixels; native rectangles from DFU CreateCharChooseClassGen.
+static func render(view: RefCounted, expected: Dictionary) -> void:
+	var art: RefCounted = view.shell.host.controller.providers.creation_art
+	var image: Dictionary = art.resolve("creation.class-method")
+	var root := Control.new()
+	root.position = Vector2(136,56)
+	root.size = Vector2(184,144)
+	root.scale = Vector2(2,2)
+	view._page.add_child(root)
+	if image.ok:
+		var background := TextureRect.new()
+		background.texture = image.texture
+		background.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		background.size = root.size
+		background.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		root.add_child(background)
+	for item in [["list","Choose from a list",Rect2(8,41,167,43)],["questionnaire","Answer questions",Rect2(8,100,167,34)]]:
+		var id: String = item[0]
+		var button := Button.new()
+		button.text = view.translated("choice.class_method."+id,item[1])
+		button.tooltip_text = button.text
+		button.set_meta("accessible_label",button.text)
+		root.add_child(button)
+		view._bind_button(button,"choice/"+id,func():
+			if button.disabled or view.shell.core.busy() or not view.active() or not preload("res://scripts/char/creation_draft.gd").same_value(expected,view.navigation.context()): return
+			var result: Dictionary = view.action("edit",expected,id)
+			if result.ok:
+				art.play_dialog_click(view.shell.host)
+				view.action("next",view.navigation.context()))
+		button.disabled = view.navigation.summary_locked()
+		if image.ok:
+			for color in ["font_color","font_hover_color","font_pressed_color","font_disabled_color","font_focus_color"]: button.add_theme_color_override(color,Color.TRANSPARENT)
+			for state in ["normal","hover","pressed","disabled"]: button.add_theme_stylebox_override(state,StyleBoxEmpty.new())
+			var focus := StyleBoxFlat.new()
+			focus.bg_color = Color.TRANSPARENT
+			focus.border_color = preload("res://scripts/ui/creation_popup.gd").TEXT_COLOR
+			focus.set_border_width_all(1)
+			button.add_theme_stylebox_override("focus",focus)
+		button.position = item[2].position
+		button.size = item[2].size

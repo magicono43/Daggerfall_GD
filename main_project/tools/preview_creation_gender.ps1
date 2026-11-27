@@ -1,7 +1,8 @@
 param(
  [string]$ClassicSource='C:/Games/Daggerfall/arena2',
  [string]$Godot='C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe',
- [switch]$SmokeTest
+ [switch]$SmokeTest,
+ [switch]$ClassMethod
 )
 $ErrorActionPreference='Stop'
 if($PSVersionTable.PSVersion.Major -lt 7){throw 'Use PowerShell 7.'}
@@ -36,10 +37,10 @@ $report=[ordered]@{schema=1;mode='rendered';suite='creation-popup-preview';fixtu
 New-Item -ItemType Directory -Force $case,$sandbox|Out-Null
 $report.build.source_revision=(& git -C $project rev-parse HEAD)
 $report.build.working_tree=@(& git -C $project status --short)
-$scope=@('project.godot','content/char/creation.json','scripts/ui/creation_popup.gd','scripts/char/creation_career_view.gd','scripts/char/creation_view.gd','scripts/data/classic_access.gd','scripts/av/creation_art.gd','tests/creation_popup_preview.gd','tests/creation_review.gd')
+$scope=@('project.godot','content/char/creation.json','scripts/ui/creation_popup.gd','scripts/ui/creation_class_method.gd','scripts/char/creation_career_view.gd','scripts/char/creation_view.gd','scripts/data/classic_access.gd','scripts/av/creation_art.gd','tests/creation_popup_preview.gd','tests/creation_review.gd')
 foreach($file in $scope){$report.build.sources[$file]=(Get-FileHash (Join-Path $project $file)).Hash}
 $originals=@{}
-foreach($file in @('FONT0003.FNT','BUTTONS.RCI','SPOP.RCI','ART_PAL.COL','TMAP00I0.IMG','TEXT.RSC')){$originals[$file]=(Get-FileHash (Join-Path $ClassicSource $file)).Hash}
+foreach($file in @('FONT0003.FNT','BUTTONS.RCI','SPOP.RCI','ART_PAL.COL','TMAP00I0.IMG','BUTN01I0.IMG','TEXT.RSC')){$originals[$file]=(Get-FileHash (Join-Path $ClassicSource $file)).Hash}
 $priorRoaming=$env:APPDATA;$priorLocal=$env:LOCALAPPDATA;$child=$null
 try{
  Write-Output 'Preparing a fresh focused preview; full suites and exports are deferred.'
@@ -50,7 +51,7 @@ try{
  $null=Child @('--headless','--path',$runtime,'--import','--quit-after','60') 'import' 90
  if((Get-Content "$case/import.stderr.log" -Raw) -match 'SCRIPT ERROR|Parse Error'){throw "Preview import reported script errors: $root"}
  foreach($file in $scope){if((Get-FileHash (Join-Path $runtime $file)).Hash -cne $report.build.sources[$file] -or (Get-FileHash (Join-Path $project $file)).Hash -cne $report.build.sources[$file]){throw 'Source changed during preview preparation; rerun.'}}
- @{mode='creation-review';fixture='creation-popup-preview-v1';sandbox=$sandbox.Replace('\','/');classic_source=([IO.Path]::GetFullPath($ClassicSource)).Replace('\','/');popup_preview=$true;review_smoke=[bool]$SmokeTest}|ConvertTo-Json|Set-Content "$case/fixture.json"
+ @{mode='creation-review';fixture='creation-popup-preview-v1';sandbox=$sandbox.Replace('\','/');classic_source=([IO.Path]::GetFullPath($ClassicSource)).Replace('\','/');popup_preview=$true;class_method_preview=[bool]$ClassMethod;review_smoke=[bool]$SmokeTest}|ConvertTo-Json|Set-Content "$case/fixture.json"
  @{owner='IMP-015 focused gender preview';expiry='Until this preview engine closes; preserve evidence then compact.'}|ConvertTo-Json|Set-Content "$root/ACTIVE-HUMAN-REVIEW.json"
  $child=Child @('--path',$runtime,'--',"--startup-fixture=$case/fixture.json") 'preview' $(if($SmokeTest){150}else{0})
  $resultPath=if($SmokeTest){"$sandbox/result.json"}else{"$sandbox/preview-state.json"}

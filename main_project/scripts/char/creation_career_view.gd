@@ -38,6 +38,7 @@ func render(view: RefCounted, expected: Dictionary, hook: String, selected: Dict
 	match hook:
 		"race": _race(view,expected,selected)
 		"gender": _gender(view,expected,selected)
+		"class_method": preload("res://scripts/ui/creation_class_method.gd").render(view,expected)
 		"class": _classes(view,expected,selected)
 		"questionnaire": _questions(view,expected,selected)
 		"custom": _custom(view,expected,selected)

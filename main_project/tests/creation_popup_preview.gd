@@ -64,6 +64,9 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("male native sprite size",Vector2(32,16),view._buttons["gender/male"].size)
 	check("female native sprite size",Vector2(32,16),view._buttons["gender/female"].size)
 	await capture(shell,str(fixture.sandbox).path_join("gender-popup.png"))
+	if fixture.get("class_method_preview",false):
+		await press(shell,view,"gender/male")
+		return await class_method(shell,view,fixture)
 	save(str(fixture.sandbox).path_join("preview-state.json"))
 	if not fixture.get("review_smoke",false):
 		while true: await shell.get_tree().process_frame
@@ -104,4 +107,45 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	var retiring: AudioStreamPlayer = view.career_view._narrations.back()
 	await press(shell,view,"exit")
 	check("creation exit releases active narration",false,is_instance_valid(retiring))
+	return save(str(fixture.sandbox).path_join("result.json"))
+
+func class_method(shell: Control, view: RefCounted, fixture: Dictionary) -> Dictionary:
+	shell.get_window().title = "Class method — fast visual preview"
+	check("class method screen reached","class_method",view.navigation.step().hook)
+	check("method redundant Next hidden",false,view._buttons.next.visible)
+	check("method has two choices",true,view._buttons.has("choice/list") and view._buttons.has("choice/questionnaire") and not view._buttons.has("choice/custom"))
+	var art: RefCounted = shell.controller.providers.creation_art
+	check("original method texture resolves",true,art.resolve("creation.class-method").ok)
+	check("list native hit region",Vector2(167,43),view._buttons["choice/list"].size)
+	check("questionnaire native hit region",Vector2(167,34),view._buttons["choice/questionnaire"].size)
+	await capture(shell,str(fixture.sandbox).path_join("class-method.png"))
+	save(str(fixture.sandbox).path_join("preview-state.json"))
+	if not fixture.get("review_smoke",false):
+		while true: await shell.get_tree().process_frame
+	var clicks: int = art.click_submissions
+	var obsolete: Callable = view._buttons["choice/questionnaire"].get_signal_connection_list("pressed")[0].callable
+	await press(shell,view,"choice/list")
+	check("list choice advances","class",view.navigation.step().hook)
+	check("list selection retained","list",view.owner.projection().selections.class_method)
+	check("list click plays once",clicks+1,art.click_submissions)
+	check("class list retains Custom",true,view._buttons.has("preset/custom"))
+	obsolete.call()
+	await settle(shell)
+	check("obsolete method does not change route","class",view.navigation.step().hook)
+	check("obsolete method does not play click",clicks+1,art.click_submissions)
+	await press(shell,view,"preset/custom")
+	check("Custom opens existing editor","custom",view.navigation.step().hook)
+	await press(shell,view,"back")
+	check("Custom Back returns to method","class_method",view.navigation.step().hook)
+	view._buttons["choice/questionnaire"].grab_focus()
+	await settle(shell)
+	var key := InputEventKey.new(); key.keycode = KEY_ENTER; key.pressed = true
+	Input.parse_input_event(key)
+	await settle(shell)
+	key = InputEventKey.new(); key.keycode = KEY_ENTER; key.pressed = false
+	Input.parse_input_event(key)
+	await settle(shell)
+	check("keyboard questionnaire advances","questionnaire",view.navigation.step().hook)
+	check("questionnaire selection retained","questionnaire",view.owner.projection().selections.class_method)
+	check("questionnaire click plays once",clicks+2,art.click_submissions)
 	return save(str(fixture.sandbox).path_join("result.json"))
