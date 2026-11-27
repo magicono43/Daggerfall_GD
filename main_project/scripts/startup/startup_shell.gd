@@ -633,6 +633,12 @@ func run_fixture() -> void:
 	# diagnostics remain visible and a zero-count failure can never satisfy an
 	# inventory; do not cascade into another nil access and wait for timeout.
 	var checks: Dictionary = returned if returned is Dictionary and returned.has("ok") else {"ok":false,"kind":"incomplete","checks":[],"count":0,"engine":Engine.get_version_info(),"display":DisplayServer.get_name(),"fixture":fixture.get("fixture",""),"inputs":fixture.get("inputs",{})}
+	if fixture.get("popup_preview",false) and not fixture.get("review_smoke",false) and checks.ok:
+		# Interactive previews only initialize controls. Let their coroutine stack
+		# unwind; the normal scene tree owns the window and production quit path.
+		suite = null
+		if fixture.get("preview_close_test",false): call_deferred("_notification",NOTIFICATION_WM_CLOSE_REQUEST)
+		return
 	if fixture.get("mode") in ["native","native-library"] and session_shell.music_playback != null:
 		var video_cleanup: Dictionary = await session_shell.video_playback.shutdown()
 		var music_cleanup: Dictionary = await session_shell.music_playback.shutdown()

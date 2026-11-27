@@ -68,7 +68,7 @@ func run(checks: RefCounted, host: Control, view: RefCounted, fixture: Dictionar
 	await capture("class-picker",fixture)
 	suite.save(str(fixture.sandbox).path_join("preview-state.json"))
 	if not fixture.get("review_smoke",false):
-		while true: await shell.get_tree().process_frame
+		return suite.save(str(fixture.sandbox).path_join("preview-state.json"))
 	await mouse(list.buttons[0],false,MOUSE_BUTTON_WHEEL_DOWN)
 	suite.check("mouse wheel scrolls list",1,list.scroll_index)
 	list.set_scroll(0)

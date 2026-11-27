@@ -73,7 +73,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		return await class_method(shell,view,fixture)
 	save(str(fixture.sandbox).path_join("preview-state.json"))
 	if not fixture.get("review_smoke",false):
-		while true: await shell.get_tree().process_frame
+		return save(str(fixture.sandbox).path_join("preview-state.json"))
 	await press(shell,view,"gender/male")
 	check("male activation submits one click",clicks+3,art.click_submissions)
 	check("click uses a nonempty audio stream",true,is_instance_valid(art._click_player) and art._click_player.stream.get_length() > 0)
@@ -125,7 +125,7 @@ func class_method(shell: Control, view: RefCounted, fixture: Dictionary) -> Dict
 	await capture(shell,str(fixture.sandbox).path_join("class-method.png"))
 	save(str(fixture.sandbox).path_join("preview-state.json"))
 	if not fixture.get("review_smoke",false):
-		while true: await shell.get_tree().process_frame
+		return save(str(fixture.sandbox).path_join("preview-state.json"))
 	var clicks: int = art.click_submissions
 	var obsolete: Callable = view._buttons["choice/questionnaire"].get_signal_connection_list("pressed")[0].callable
 	await press(shell,view,"choice/list")
