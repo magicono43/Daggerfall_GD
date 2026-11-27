@@ -1,6 +1,7 @@
 extends RefCounted
 ## Uses the normal shell and actual creation controls; never enables gameplay.
 func run(shell: Control, fixture: Dictionary) -> Dictionary:
+	if fixture.get("presentation_review",false): shell.get_window().title = "IMP-015 increment 4 — Production character creation review"
 	shell.controller.settings.effective["startup/show_setup"] = true
 	shell.controller.select_folder(fixture.classic_source)
 	shell.controller.continue_to_menu("run")
@@ -21,19 +22,25 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 		provider.content = provider.definitions.content_ticket()
 		provider.options = provider.definitions.query("char.creation","flows","stock").record.value.choices
 		provider.prepare()
-	view.open(provider)
+	if fixture.get("presentation_review",false): view.open()
+	else: view.open(provider)
 	view.notice = "CONTROLLED REVIEW: choose the assigned choices on each page. Enter any valid fixture name. Both class routes and both biography methods use explicit assigned outcomes; Begin Game reaches the real stock unavailable-entry response. No playable character or grants are created."
 	if fixture.get("career_review",false): view.notice = "RACE AND CAREER REVIEW: race, gender, eighteen presets, questionnaire and Custom use real production data and mechanics. Biography, name, portrait, allocations and reflexes use explicitly assigned later-stage inputs only. No biography affinity, starting rolls, grants or playable entry is qualified."
 	if fixture.get("biography_review",false): view.notice = "BIOGRAPHY AND STARTING ROLLS REVIEW: all increment-3 biography, attributes and skills use production DATA/CHAR semantics. Only name, portrait and reflexes use assigned later-stage providers. No live grants or playable entry."
+	if fixture.get("presentation_review",false): view.notice = "INCREMENT 4 PRESENTATION REVIEW: every creation choice uses production providers and classic content. Begin Game plays enabled introductory clips, then reports unavailable playable entry. No live actors or grants."
 	shell.session_shell.render()
 	if not fixture.get("review_smoke",false):
 		# Keep the ordinary event loop and window-manager/Pause/Quit handlers alive.
 		while true: await shell.get_tree().process_frame
 	var checks: Array = []
 	checks.append({"scenario":"review opens real creation window","expected":"creation","actual":shell.session_shell.windows.top().get("window")})
-	checks.append({"scenario":"review explicit controlled label","expected":true,"actual":view.controlled})
+	checks.append({"scenario":"review explicit controlled label","expected":not fixture.get("presentation_review",false),"actual":view.controlled})
 	checks.append({"scenario":"review real entry still unavailable","expected":false,"actual":shell.session_shell.core.provider.prepare({},{}).ok})
-	if fixture.get("biography_review",false):
+	if fixture.get("presentation_review",false):
+		checks.append({"scenario":"review real identity provider","expected":true,"actual":view.inputs.has_method("random_name")})
+		checks.append({"scenario":"review fresh Average default","expected":"average","actual":view.owner.projection().selections.get("reflexes")})
+		provider = view.inputs
+	if fixture.get("biography_review",false) or fixture.get("presentation_review",false):
 		checks.append({"scenario":"review stock English biography","expected":false,"actual":provider.templates.biog00t0.questions[0].text.contains("記憶")})
 		checks.append({"scenario":"review excludes localized override","expected":false,"actual":FileAccess.file_exists(str(fixture.sandbox).path_join("user/Overrides/biography-localized.json"))})
 	await shell.get_tree().process_frame

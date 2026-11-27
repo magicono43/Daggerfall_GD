@@ -144,12 +144,18 @@ func source_entries(storage: StartupStorageAdapter, provider: String, root: Stri
 	result.sort_custom(func(a: Dictionary, b: Dictionary): return str(a.source.file) < str(b.source.file))
 	return result
 
-func prepare(mods: RefCounted) -> Dictionary:
-	var started := Time.get_ticks_usec()
+func preparation_gate() -> Dictionary:
+	# Read-only owner gate: callers must reject before staging adjacent owners.
 	if _commit_ticket >= 0:
 		return failure("busy", "definitions", "Menu commit owns the candidate.")
 	if not _active.is_empty():
 		return failure("locked", "definitions", "Published definitions are locked until restart.")
+	return {"ok":true}
+
+func prepare(mods: RefCounted) -> Dictionary:
+	var started := Time.get_ticks_usec()
+	var gate := preparation_gate()
+	if not gate.ok: return gate
 	timings = {"validators":{},"prepare_serial":_serial+1}
 	_started = true
 	_serial += 1

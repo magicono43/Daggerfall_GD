@@ -71,6 +71,9 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	controller.select_folder(fixture.classic_source)
 	controller.continue_to_menu("run")
 	shell.session_shell.synchronize_startup()
+	# Older controlled route checks qualify draft/navigation, not movie duration.
+	# Increment-4 coverage explicitly enables and exercises the real clip sequence.
+	controller.settings.effective["media/creation_videos"] = false
 	shell.render()
 	measurements.complete_composition_usec = Time.get_ticks_usec()-started
 	measurements.initial_startup_usec = shell.startup_elapsed_usec
@@ -99,6 +102,11 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	for index in 1000: definitions.query("char.biography","texts","text-4116")
 	measurements.biography_thousand_point_queries_usec = Time.get_ticks_usec()-biography_queries_started
 	checks.append_array(await preload("res://tests/creation_biography_ui_cases.gd").new().qualify(shell,fixture))
+	var identity_suite := preload("res://tests/creation_identity_cases.gd").new()
+	checks.append_array(await identity_suite.qualify(shell,fixture))
+	measurements.identity = identity_suite.measurements.duplicate(true)
+	checks.append_array(await preload("res://tests/creation_identity_ui_cases.gd").new().qualify(shell,fixture))
+	checks.append_array(await preload("res://tests/creation_cinematic_cases.gd").new().qualify(shell))
 	await publication(shell,fixture,record)
 	check("published creation provenance",true,record.contributors.any(func(source): return source.provider == "@shipped/creation-flow-v1"))
 	check("locked creation publication","locked",definitions.prepare(controller.mods).kind)
@@ -490,8 +498,8 @@ func publication(_shell: Control, fixture: Dictionary, record: Dictionary) -> vo
 	app.start({"executable_dir":sandbox.path_join("publication/executable"),"per_user_dir":sandbox.path_join("publication/user")})
 	app.settings.effective["startup/show_setup"] = true
 	var package := manifest("creation.review")
-	package.capabilities = ["data.creation-flow-v1","data.creation-career-v1","data.creation-starting-v1","data.creation-biography-v1","data.actor-inputs-v1","data.actor-baseline-v1","data.media-v1"]
-	package.content = ["flow.json","media.json","career.json","preset.json","numbers.json","starting.json","history.json"]
+	package.capabilities = ["data.creation-flow-v1","data.creation-career-v1","data.creation-starting-v1","data.creation-biography-v1","data.creation-identity-v1","data.actor-inputs-v1","data.actor-baseline-v1","data.media-v1"]
+	package.content = ["flow.json","media.json","career.json","preset.json","numbers.json","starting.json","history.json","identity.json","portrait.json"]
 	var root: String = app.mods.root.path_join("Mods/creation")
 	preload("res://tests/publication_fixture.gd").write(root.path_join("mod.json"),package)
 	var steps: Dictionary = record.value.steps.duplicate(true)
@@ -520,6 +528,19 @@ func publication(_shell: Control, fixture: Dictionary, record: Dictionary) -> vo
 	image.save_png(root.path_join("art.png"))
 	var media_patch := {"domain":"media.assets","path":"exports","operation":"add","entries":[{"id":"review-art","value":{"schema":"media-declarations-v1","kind":"export","type":"image","file":"art.png","profile":"png-v1"}}]}
 	preload("res://tests/publication_fixture.gd").write(root.path_join("media.json"),media_patch)
+	var identity: Dictionary = _shell.controller.providers.definitions.query("char.identity","policy","stock").record.value.duplicate(true)
+	identity.banks.Breton.sets[0] = ["Package"]
+	identity.banks.Breton.sets[1] = ["Name"]
+	for gender in ["male","female"]: identity.banks.Breton.patterns[gender] = [{"id":"full","weight":1,"parts":[0,1]}]
+	identity.portraits["breton/female"].reverse()
+	identity.portraits["breton/female"].append({"id":"mod-added","classic":-1,"target":"asset.creation.review.portrait-added"})
+	identity.reflexes.low.timer_adjustment = 1234
+	identity.reflexes.low.component_percent = 42
+	identity.reflexes.low.practice_q16 = 12345
+	preload("res://tests/publication_fixture.gd").write(root.path_join("identity.json"),{"domain":"char.identity","path":"policy","operation":"replace","entries":[{"id":"stock","value":identity}]})
+	identity.banks.Breton.sets[0] = ["Loose"]
+	preload("res://tests/publication_fixture.gd").write(app.mods.root.path_join("Overrides/identity.json"),{"domain":"char.identity","path":"policy","operation":"patch","entries":[{"id":"stock","value":{"banks":identity.banks}}]})
+	preload("res://tests/publication_fixture.gd").write(root.path_join("portrait.json"),{"domain":"media.assets","path":"targets","operation":"add","entries":[{"id":"asset.creation.review.portrait-added","value":{"schema":"media-declarations-v1","kind":"target","type":"image","asset":{"provider":"creation.review","key":"review-art"}}}]})
 	steps.race.title = "Loose race title"
 	preload("res://tests/publication_fixture.gd").write(app.mods.root.path_join("Overrides/flow.json"),{"domain":Flow.DOMAIN,"path":"flows","operation":"patch","entries":[{"id":"stock","value":{"steps":steps}}]})
 	app.mods.rescan()
@@ -535,6 +556,18 @@ func publication(_shell: Control, fixture: Dictionary, record: Dictionary) -> vo
 	var published: Dictionary = app.providers.definitions.query(Flow.DOMAIN,"flows","stock")
 	check("loose creation field wins","Loose race title",published.record.value.steps.race.title)
 	check("creation contributors retained",true,published.record.contributors.size() >= 3)
+	var identity_provider := preload("res://scripts/char/creation_identity_inputs.gd").new()
+	identity_provider.definitions = app.providers.definitions
+	identity_provider.content = identity_provider.definitions.content_ticket()
+	identity_provider.art = app.providers.creation_art
+	check("identity package loose production preparation",true,identity_provider.prepare_identity().ok)
+	check("identity package loose bank precedence","Loose",identity_provider.identity.banks.Breton.sets[0][0])
+	check("identity package expanded portrait count",11,identity_provider.face_set({"race":"breton","gender":"female"}).faces.size())
+	check("identity package reordered stable portrait","classic-09",identity_provider.face_set({"race":"breton","gender":"female"}).faces[0].id)
+	var mod_portrait: Dictionary = identity_provider.portrait({"set":"breton/female","id":"mod-added"})
+	check("identity package real PNG portrait replacement",true,mod_portrait.ok and mod_portrait.texture.get_width() == 2)
+	check("identity package coupled reflex override",[1234,42,12345],[identity_provider.identity.reflexes.low.timer_adjustment,identity_provider.identity.reflexes.low.component_percent,identity_provider.identity.reflexes.low.practice_q16])
+	check("identity package contributors retained",true,identity_provider.identity_provenance.size() >= 3)
 	var career_policy: Dictionary = app.providers.definitions.query("char.career","policy","stock")
 	check("career package loose policy precedence",402,int(career_policy.record.value.attribute_total))
 	check("career policy contributors retained",true,career_policy.record.contributors.size() >= 3)

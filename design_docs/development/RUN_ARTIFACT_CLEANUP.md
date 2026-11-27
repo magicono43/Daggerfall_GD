@@ -1,5 +1,13 @@
 # Verification run artifact cleanup
 
+## 2026-11-26 IMP-015 increment 4
+
+After ordinary engine inactivity and exact containment/reparse checks, **39 owned roots** were compacted across development, final verification and exports. Removed **63,995 reproducible files / 10,236,988,973 logical bytes**, preserving 39 hash-verified executed-source archives, 73 frozen tool sources, original child evidence paths, typed inputs and inspected captures. The final collection independently rehashed 7,426 retained files and all 39 archives. No task-owned full project, export, dependency copy or cache remains. Six installed template junctions were unlinked without following or changing their targets. One incomplete development report omitted its executable hash; the executable independently matched the pinned debug template, while its recorded PCK hash matched. The incomplete result was preserved, and its interrupted source archive remains as recovery evidence.
+
+Pre-final-batch retention was **14,128,550,527 logical / 12,642,980,072 allocated unique bytes**; both exceeded 8 GiB and were reviewed. Final sampled retention is **6,907,311,882 logical / 5,300,000,856 allocated unique bytes**, before small final audit writes. Older human/accepted/uncertain roots remain protected; their largest consumers are recorded in the delivery audit. No active or exceptional root, unique input, external classic/reference data, installed dependency or security setting was removed or changed.
+
+See [execution evidence](evidence/IMP-015-increment-4-2026-11-26.md) and the [delivery audit](evidence/IMP-015-increment-4-2026-11-26.audit.json). Human acceptance, parent IMP-015, IMP-036, native SAVE and milestones remain open.
+
 ## 2026-11-26 IMP-015 increment 1
 
 Three completed, explicitly owned batches compacted **32 roots**, removing

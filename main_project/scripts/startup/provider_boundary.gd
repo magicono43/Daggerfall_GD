@@ -53,6 +53,8 @@ func enable_creation() -> Dictionary:
 	biography.classic = classic
 	registered = register_content_adapter(biography,"",[])
 	if not registered.ok: return registered
+	registered = register_content_adapter(preload("res://scripts/data/creation_identity.gd").new(),"",[])
+	if not registered.ok: return registered
 	creation_art = preload("res://scripts/av/creation_art.gd").new()
 	return creation_art.declare(self)
 
@@ -144,7 +146,8 @@ func prepare_content(mods: RefCounted) -> Dictionary:
 	if not _baseline_setup.get("ok",false): return _baseline_setup.duplicate(true)
 	# DATA owns publication locking. Reject a published rebuild before staging
 	# formula candidates or doing any full-catalog preparation.
-	if definitions.content_ticket() >= 0: return definitions.prepare(mods)
+	var gate: Dictionary = definitions.preparation_gate()
+	if not gate.ok: return gate
 	var hooks: Dictionary = formulas.prepare(mods)
 	# An invalid executable selection cannot be published. Reject it before the
 	# expensive full DATA preparation; valid requests still rebuild fresh DATA.

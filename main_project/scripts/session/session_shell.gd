@@ -26,6 +26,7 @@ var _startup_route := ""
 var _synchronizing_startup := false
 var music_playback: Node
 var video_playback: Control
+var creation_cinematics := preload("res://scripts/session/creation_cinematics.gd").new()
 var ambience_requests := preload("res://scripts/av/ambience_requests.gd").new()
 var _media_shutdown_started := false
 var binding_editor: RefCounted
@@ -304,13 +305,19 @@ func synchronize_startup() -> void:
 		video_playback.preferences = host.controller.providers.media_preferences
 		video_playback.ambience = ambience_requests
 		host.add_child(video_playback)
+		video_playback.input_released.connect(func(event: InputEvent):
+			action_input.observe(event)
+			if creation_view != null: creation_view.observe_release(event))
 		core.retiring.connect(video_playback.retire_scope)
 		video_playback.terminal.connect(func(result: Dictionary):
 			if not _death_movie_ticket.is_empty() and result.get("scope",{}).get("operation") == _death_movie_ticket.id:
 				var original := _death_movie_ticket
 				_death_movie_ticket = {}
 				core.complete_presentation(original,result))
+		creation_cinematics.bind(core,video_playback,host.controller.settings)
 	core.provider.death_video = death_movie
+	core.provider.creation_video = creation_cinematics.start
+	core.provider.cancel_creation_video = creation_cinematics.cancel
 	if host.controller.providers.get("preferences") != null and core.preferences == null:
 		core.preferences = host.controller.providers.preferences
 		core.preferences.register_boundary("next_session", core)
@@ -368,6 +375,7 @@ func dispose() -> void:
 	if binding_editor != null: binding_editor.dispose()
 	host.controller.controls.dispose()
 	action_input.dispose()
+	creation_cinematics.dispose()
 	if is_instance_valid(video_playback): video_playback.free()
 	if is_instance_valid(music_playback): music_playback.free()
 	_prompt_owners.clear()
@@ -488,7 +496,10 @@ func render() -> void:
 	if backdrop != null: backdrop.visible = core.gates.session.is_empty() or not windows.top().is_empty()
 	_render_pending = false
 	host.clear()
-	host.label("Daggerfall GD", 30)
+	var showing_creation: bool = creation_view != null and creation_view.active() and windows.top().get("window") == "creation" and not core.busy()
+	var margin: MarginContainer = host.panel.get_parent().get_parent()
+	for side in ["top","bottom"]: margin.add_theme_constant_override("margin_"+side,16 if showing_creation else 36)
+	if not showing_creation: host.label("Daggerfall GD", 30)
 	host.logging_status = Label.new()
 	host.logging_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	host.panel.add_child(host.logging_status)
@@ -659,6 +670,14 @@ func render_settings(top: Dictionary) -> void:
 		schedule_render())
 	var banks: RefCounted = host.controller.providers.get("media_preferences")
 	if banks != null:
+		var intro := CheckButton.new()
+		intro.text = "Character creation introductory videos"
+		intro.button_pressed = host.controller.settings.effective.get("media/creation_videos",true)
+		host.panel.add_child(intro)
+		intro.toggled.connect(func(enabled: bool):
+			var checked: Dictionary = banks.select_creation_videos(enabled)
+			message = banks.creation_videos_message(checked)
+			schedule_render())
 		host.label("MIDI instrument bank (applies to the next playback)")
 		var selector := OptionButton.new()
 		var choices: Array = banks.choices()
@@ -689,6 +708,7 @@ func render_settings(top: Dictionary) -> void:
 			windows.open("discard_settings", core.snapshot().session, {"required_choice": true}))
 
 func request_quit() -> void:
+	if creation_view != null and creation_view.active() and core.busy() and core.snapshot().phase == "preflight": core.cancel(core.ticket())
 	if creation_view != null and creation_view.active(): creation_view.exit()
 	if not quit_phase.is_empty():
 		return

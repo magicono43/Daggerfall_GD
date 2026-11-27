@@ -1,5 +1,12 @@
 # Definition publication — IMP-005 increment 3
 
+IMP-015 increment 4 adds [creation identity](../char/CREATION_IDENTITY.md)
+definitions through this transaction. `preparation_gate()` is DATA's read-only
+busy/locked projection; composition must check it before preparing adjacent
+formula candidates. `prepare()` uses the same gate. A menu reservation or active
+publication rejects without clearing candidates, rebuilding catalogs or changing
+which owner reports the rejection. Reservations and ordered commitment are unchanged.
+
 IMP-015 increment 2 adds `char.career` policy/source publication and cross-owner
 preset/numeric checks through this same transaction. See the
 [creation career contract](../char/CREATION_CAREER.md). Original assets stay

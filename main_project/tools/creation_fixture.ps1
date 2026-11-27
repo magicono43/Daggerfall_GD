@@ -1,3 +1,9 @@
+function Get-CreationOptionalMediaNames([string]$ClassicSource) {
+    foreach ($name in @('SPOP.RCI','ANIM0000.VID','ANIM0011.VID','DAG2.VID')) {
+        if (Test-Path -LiteralPath (Join-Path $ClassicSource $name) -PathType Leaf) { $name }
+    }
+}
+
 function Get-CreationAppearanceNames {
     foreach ($race in 0..7) {
         'SCBG{0:00}I0.IMG' -f $race

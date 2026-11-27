@@ -1,5 +1,14 @@
 # Media replacement resources — IMP-008 increment 2
 
+IMP-015 increment 4 consumes the same resolver for creation portrait/framing PNG
+images and optional native video replacements. Existing portrait targets are
+`creation.portrait.<race>.<gender>.<00..09>`; added portraits use the normal
+`asset.<provider>.<local>` namespace. `creation.parchment` is the optional framing
+target and `creation.intro.0..2` are the ordered creation videos. A selected PNG's
+validated `resource.rgba` is realized once; it need not impersonate the classic
+baseline's direct `image` receipt. Existing missing/invalid-replacement recovery,
+content locking, source provenance and detached metadata remain authoritative.
+
 `media-declarations-v1`, `replacement-codec-v1`, and `static-glb-v1` are the
 initial concrete profiles. DATA owns selection/decoded reusable resources;
 `av/replacement_instances.gd` owns independently editable resources and live

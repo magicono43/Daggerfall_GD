@@ -25,6 +25,10 @@ settings/gdscript/always_track_call_stacks=true
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[internationalization]
+
+locale/include_text_server_data=true
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

@@ -43,6 +43,7 @@ func render(view: RefCounted, expected: Dictionary, hook: String, selected: Dict
 func _list(view: RefCounted, rect: Rect2) -> VBoxContainer:
 	var box: PanelContainer = view._box(rect)
 	var scroll := ScrollContainer.new()
+	scroll.follow_focus = true
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	box.add_child(scroll)
@@ -218,7 +219,7 @@ func _custom(view: RefCounted, expected: Dictionary, selected: Dictionary) -> vo
 			var key: String = Custom.ATTRIBUTES[index]
 			var box: PanelContainer = view._box(Rect2(4,34+index*44,114,44))
 			var column := VBoxContainer.new()
-			var box_style: StyleBoxFlat = box.get_theme_stylebox("panel")
+			var box_style: StyleBox = box.get_theme_stylebox("panel")
 			box_style.content_margin_top = 0
 			box_style.content_margin_bottom = 0
 			column.add_theme_constant_override("separation",0)

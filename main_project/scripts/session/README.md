@@ -1,5 +1,14 @@
 # Session shell interfaces
 
+IMP-015 increment 4 composes a creation-only optional cinematic requester during
+stock new-character preflight. The provider's `creation_video` and
+`cancel_creation_video` hooks retain CORE's exact operation ticket. The sequence
+can report presentation progress only; stock entry still fails truthfully because
+IMP-036 providers are absent. Cancellation/teardown retire the requester before
+playback and reject old callbacks. UI remains sealed to the submitted draft for
+retry; Restart is required for new choices. See
+[the creation contract](../char/CREATION_IDENTITY.md).
+
 IMP-012 increment 3 extends the existing ground consumer to resolved Jump,
 air/landing RULE hooks and an explicit MOVE health-damage consumer. It uses the
 same body, CORE gates, CHAR and camera projection. See [AIR.md](../move/AIR.md).

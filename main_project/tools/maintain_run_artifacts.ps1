@@ -4,6 +4,7 @@ param(
     [string[]]$EvidenceRoots=@(),
     [switch]$CompressEvidence,
     [switch]$ShareArchives,
+    [switch]$ClosedVerification,
     [switch]$Apply,
     [string]$AuditDirectory=''
 )
@@ -40,7 +41,7 @@ foreach($name in $ReviewRoots) {
     if(Protected $path){$record.deferred+=@{path=$path;reason='explicit protection'};continue}
     if(!$Apply){$record.reviews+=@{root=$path;status='candidate-requires-qualified-compaction'};continue}
     try {
-        $result=Invoke-ReviewCompaction -Root $path
+        $result=Invoke-ReviewCompaction -Root $path -ClosedVerification:$ClosedVerification
         $record.reviews+=$result
         if($result.status -ceq 'compacted'){$record.removed_copied_bytes+=$result.removed_bytes}
     } catch { $record.deferred+=@{path=$path;reason=$_.Exception.Message} }

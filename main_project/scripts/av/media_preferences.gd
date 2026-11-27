@@ -12,6 +12,7 @@ func declare_settings(owner: RefCounted) -> void:
 	settings = owner
 	owner.declare(SETTING,"",TYPE_STRING,"live",valid_reference)
 	owner.declare(SKIP_SETTING,"authored",TYPE_STRING,"live",func(value: String): return value in ["authored","any","skip","back"])
+	owner.declare("media/creation_videos",true,TYPE_BOOL,"live")
 
 func valid_reference(value: String) -> bool:
 	if value.is_empty(): return true
@@ -57,6 +58,13 @@ func skip_message(result: Dictionary) -> String:
 	if result.get("application", "") != "accepted" or not result.get("rejected", []).is_empty():
 		return "Cinematic skip preference rejected; previous policy retained."
 	return "Cinematic skip preference saved." if result.ok else "Cinematic skip preference applied, not saved; Retry Save."
+
+func select_creation_videos(enabled: bool) -> Dictionary:
+	return settings.apply({"media/creation_videos":enabled},func(values: Dictionary): return values.size() == 1 and values.get("media/creation_videos") is bool)
+
+func creation_videos_message(result: Dictionary) -> String:
+	if result.get("application","") != "accepted" or not result.get("rejected",[]).is_empty(): return "Introductory video preference rejected; previous choice retained."
+	return "Introductory video preference saved." if result.ok else "Introductory video preference applied, not saved. Retry saving in Settings."
 
 func dispose() -> void:
 	_default.clear()

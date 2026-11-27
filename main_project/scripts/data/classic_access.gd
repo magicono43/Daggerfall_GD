@@ -20,6 +20,9 @@ var _active_source := ""
 var _prepared_source := ""
 var _serial := 0
 var _prepared_ticket := 0
+var _portrait_source := ""
+var _portrait_files: Dictionary = {}
+var _portrait_palette: Dictionary = {}
 
 func same_source(first: String, second: String) -> bool:
 	return first.to_lower() == second.to_lower() if OS.get_name() == "Windows" else first == second
@@ -230,6 +233,16 @@ func death_video_source() -> Dictionary:
 	reader.close()
 	return source
 
+func creation_video_source(index: int) -> Dictionary:
+	const FILES = ["ANIM0000.VID","ANIM0011.VID","DAG2.VID"]
+	if not ready() or index < 0 or index >= FILES.size(): return {"ok":false,"reason":"Published creation clip mapping required."}
+	var reader := MediaReader.new("classic-vid-v1")
+	var checked: Dictionary = reader.initialize(_active_source.path_join(FILES[index]))
+	if not checked.ok: return checked
+	var source: Dictionary = reader.video_source()
+	reader.close()
+	return source
+
 func creation_image(file: String) -> Dictionary:
 	# Optional interface originals, requested only through the active DATA source.
 	# This bounded owner table is not a wildcard path/format interface. Absence or
@@ -262,6 +275,21 @@ func creation_image(file: String) -> Dictionary:
 	if not rgba.ok: return rgba
 	return {"ok":true,"image":Image.create_from_data(rgba.width,rgba.height,false,Image.FORMAT_RGBA8,rgba.rgba),"provenance":{"image":data.provenance,"palette":palette_data.provenance,"alpha_index":0 if file == "CUST08I0.IMG" else -1,"sampling":"nearest","source_identity":data.identity}}
 
+func creation_parchment() -> Dictionary:
+	if not ready(): return {"ok":false,"reason":"Published classic source required."}
+	var bytes := FileAccess.get_file_as_bytes(_active_source.path_join("SPOP.RCI"))
+	if bytes.size() != 9*22*22: return {"ok":false,"reason":"Optional classic parchment requires nine 22×22 tiles."}
+	var codec := preload("res://scripts/data/classic_image.gd").new()
+	var palette_bytes := FileAccess.get_file_as_bytes(_active_source.path_join("ART_PAL.COL"))
+	var palette := codec.palette(palette_bytes)
+	var atlas := Image.create(66,66,false,Image.FORMAT_RGBA8)
+	for record in 9:
+		var rgba := codec.rgba(codec.decode(bytes,"SPOP.RCI",record,0),palette,0)
+		if not rgba.ok: return rgba
+		var tile := Image.create_from_data(22,22,false,Image.FORMAT_RGBA8,rgba.rgba)
+		atlas.blit_rect(tile,Rect2i(0,0,22,22),Vector2i((record%3)*22,(record/3)*22))
+	return {"ok":true,"image":atlas,"provenance":{"source":"SPOP.RCI","sha256":ActorFormats.sha256(bytes),"palette":"ART_PAL.COL","palette_sha256":ActorFormats.sha256(palette_bytes),"layout":"DFU SetBorderTextures row-major nine tiles","alpha_index":0}}
+
 func creation_source(file: String) -> Dictionary:
 	# Bounded read-only source capability, not an arbitrary path reader. Original
 	# map/result bytes are interpreted by the creation DATA adapter before publish.
@@ -293,6 +321,34 @@ func creation_book(id: int) -> Dictionary:
 		if offset < 236+count*4 or offset >= length: return {"ok":false,"reason":"Invalid biography book page offset: "+relative}
 	return {"ok":true,"id":id,"source":relative,"sha256":ActorFormats.sha256(bytes),"price_seed":bytes.decode_u32(0),"page_count":count,"qualification":"Read-only header/page-address metadata; no runtime book reader or possession grant."}
 
+func creation_portrait(file: String, record: int) -> Dictionary:
+	var allowed: Array[String] = []
+	for race in 8:
+		for gender in 2: allowed.append("FACE%d%dI0.CIF" % [gender,race])
+	if not ready() or file not in allowed or record < 0 or record > 9: return {"ok":false,"reason":"Unsupported classic portrait mapping."}
+	if _portrait_source != _active_source:
+		_portrait_source = _active_source
+		_portrait_files.clear(); _portrait_palette.clear()
+	var codec := preload("res://scripts/data/classic_image.gd").new()
+	if not _portrait_files.has(file):
+		var stream := FileAccess.open(_active_source.path_join(file),FileAccess.READ)
+		if stream == null: return {"ok":false,"reason":"Required portrait source missing: "+file}
+		var length := stream.get_length()
+		if length < 1 or length > 2097152: stream.close(); return {"ok":false,"reason":"Portrait source extent is unsupported."}
+		var bytes := stream.get_buffer(length); stream.close()
+		if bytes.size() != length: return {"ok":false,"reason":"Portrait source read incomplete."}
+		_portrait_files[file] = {"bytes":bytes,"sha256":ActorFormats.sha256(bytes)}
+	if _portrait_palette.is_empty():
+		var palette_bytes := FileAccess.get_file_as_bytes(_active_source.path_join("ART_PAL.COL"))
+		_portrait_palette = codec.palette(palette_bytes)
+		_portrait_palette.sha256 = ActorFormats.sha256(palette_bytes)
+	var bytes: PackedByteArray = _portrait_files[file].bytes
+	var decoded := codec.decode(bytes,file,record,0)
+	if not decoded.ok: return decoded
+	var rgba := codec.rgba(decoded,_portrait_palette,0)
+	if not rgba.ok: return rgba
+	return {"ok":true,"image":Image.create_from_data(rgba.width,rgba.height,false,Image.FORMAT_RGBA8,rgba.rgba),"provenance":{"source":file,"record":record,"frame":0,"sha256":_portrait_files[file].sha256,"palette":"ART_PAL.COL","palette_sha256":_portrait_palette.sha256,"alpha_index":0}}
+
 func creation_appearance(file: String) -> Dictionary:
 	# Fixed supported source namespace; no wildcard filesystem discovery. Checking
 	# first frame certifies the mapping only, not the later portrait-selection owner.
@@ -315,6 +371,7 @@ func creation_appearance(file: String) -> Dictionary:
 	return {"ok":true,"source":file,"sha256":ActorFormats.sha256(bytes),"first_frame":{"width":decoded.width,"height":decoded.height},"scope":"Mapping and first frame; full face selection remains CHAR-007."}
 
 func dispose() -> void:
+	_portrait_files.clear(); _portrait_palette.clear(); _portrait_source = ""
 	discard_prepared()
 	for reader: RefCounted in _active.values():
 		reader.close()

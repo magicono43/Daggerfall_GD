@@ -160,11 +160,14 @@ function Test-RunCachePath([string]$Relative) {
 }
 
 function Invoke-ReviewCompaction {
-    param([Parameter(Mandatory)][string]$Root,[Diagnostics.Process]$OwnedChild)
+    param([Parameter(Mandatory)][string]$Root,[Diagnostics.Process]$OwnedChild,[switch]$ClosedVerification)
     $rootPath = Assert-RunArtifactPath $Root
-    if ([IO.Path]::GetDirectoryName($rootPath) -cne [IO.Path]::GetFullPath($script:RunArtifactBase) -or [IO.Path]::GetFileName($rootPath) -notmatch '^verification-rendered-[a-f0-9]{32}$') { throw 'Exact rendered verification root required.' }
+    $rootPattern = if ($ClosedVerification) { '^verification-(headless|rendered)-[a-f0-9]{32}$' } else { '^verification-rendered-[a-f0-9]{32}$' }
+    if ([IO.Path]::GetDirectoryName($rootPath) -cne [IO.Path]::GetFullPath($script:RunArtifactBase) -or [IO.Path]::GetFileName($rootPath) -notmatch $rootPattern) { throw 'Exact recognized verification root required.' }
     $markers = @(Get-ChildItem -LiteralPath $rootPath -File -Filter '*.json')
-    if (@($markers | Where-Object {$_.Name -match 'ACTIVE|RETAIN|KEEP|FAILED'}).Count -or !@($markers | Where-Object {$_.Name -match '^(CLOSED-HUMAN-REVIEW|HUMAN-REVIEW-CLOSED)'}).Count) { throw 'Active, exceptional, failed or unclosed review deferred.' }
+    $closedPattern = if ($ClosedVerification) { '^CLOSED-VERIFICATION\.json$' } else { '^(CLOSED-HUMAN-REVIEW|HUMAN-REVIEW-CLOSED)' }
+    if (@($markers | Where-Object {$_.Name -match 'ACTIVE|RETAIN|KEEP|FAILED'}).Count -or !@($markers | Where-Object {$_.Name -match $closedPattern}).Count) { throw 'Active, exceptional, failed or unclosed review deferred.' }
+    if ($ClosedVerification -and $null -ne $OwnedChild) { throw 'Closed verification requires the independent no-engine activity check.' }
     if ($null -ne $OwnedChild) {
         if (!$OwnedChild.HasExited -or $OwnedChild.ExitCode -ne 0) { throw 'Owned review child has not exited successfully.' }
         $activity = "Owned synchronous child $($OwnedChild.Id) exited 0; launcher admits only its own root after all review children returned."
@@ -172,14 +175,18 @@ function Invoke-ReviewCompaction {
         if (@(Get-Process -Name '*Godot*','Startup*','ffmpeg*' -ErrorAction SilentlyContinue).Count) { throw 'Engine/decoder activity present; batch review cleanup deferred.' }
         $activity = 'No Godot/Startup/FFmpeg process; closed review marker and terminal report checked.'
     }
-    $marker = Join-Path $rootPath 'REVIEW-COMPACTION.json'
+    $marker = Join-Path $rootPath $(if ($ClosedVerification) { 'VERIFICATION-COMPACTION.json' } else { 'REVIEW-COMPACTION.json' })
     if (Test-Path -LiteralPath $marker) {
         $prior = Get-Content -LiteralPath $marker -Raw | ConvertFrom-Json
         if ($prior.status -cne 'compacted' -or (Get-FileHash -LiteralPath $prior.archive).Hash -cne $prior.archive_sha256) { throw 'Incomplete or changed previous compaction; inspect its receipt.' }
         return @{status='already_compacted';root=$rootPath;receipt=$marker}
     }
     $report = Get-Content -LiteralPath (Join-Path $rootPath 'report.json') -Raw | ConvertFrom-Json -AsHashtable
-    if ($report.status -cne 'passed' -or $report.mode -cne 'rendered' -or $report.suite -notin @('creation-draft','calendar-clock','ground-movement') -or [IO.Path]::GetFullPath($report.root) -cne $rootPath) { throw 'Known passed review preparation required.' }
+    if ($ClosedVerification) {
+        $closed = Get-Content -LiteralPath (Join-Path $rootPath 'CLOSED-VERIFICATION.json') -Raw | ConvertFrom-Json
+        if ($closed.schema -cne 'closed-verification-v1' -or $closed.owner -cne 'IMP-015 increment 4' -or $closed.root -cne $rootPath -or $closed.report_sha256 -cne (Get-FileHash -LiteralPath (Join-Path $rootPath 'report.json')).Hash -or $report.status -notin @('passed','failed','incomplete') -or $report.suite -notin @('creation','creation-draft','session','replacements','native') -or $report.mode -notin @('headless','rendered') -or !(@($report.build.working_tree) -match 'creation_identity|creation_view')) { throw 'Explicit owned closed creation verification receipt required.' }
+    } elseif ($report.status -cne 'passed' -or $report.mode -cne 'rendered' -or $report.suite -notin @('creation-draft','calendar-clock','ground-movement')) { throw 'Known passed review preparation required.' }
+    if ([IO.Path]::GetFullPath($report.root) -cne $rootPath) { throw 'Report root binding changed.' }
     $project = Assert-RunArtifactPath (Join-Path $rootPath 'project')
     if ([IO.Path]::GetFullPath($report.runtime_project) -cne $project -or !(Test-Path -LiteralPath "$project/project.godot")) { throw 'Review project binding missing.' }
     foreach ($scenario in $report.scenarios) {

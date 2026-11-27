@@ -4,6 +4,12 @@
 
 # Creation draft and navigation — IMP-015
 
+Increment 4 adds the production name/portrait/reflex provider, original parchment
+presentation and creation-only CORE/AV sequence. See [the identity/presentation
+contract](CREATION_IDENTITY.md). Qualification and human acceptance are tracked
+separately; earlier descriptions assigning these fields are historical. Actual
+entry, grants, native SAVE and milestone gates remain open.
+
 **Increment 3 under qualification, 2026-11-26:** The production provider now
 adds biography and starting rolls; see [its owner/data contract](CREATION_STARTING.md).
 Earlier later-provider/unavailability descriptions below are historical where

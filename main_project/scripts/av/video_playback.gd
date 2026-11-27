@@ -1,6 +1,7 @@
 extends Control
 ## One independently scoped cinematic consumer. Requesters own continuation.
 signal terminal(result: Dictionary)
+signal input_released(event: InputEvent)
 const Native = preload("res://scripts/data/native_media.gd")
 const Classic = preload("res://scripts/data/classic_vid.gd")
 const Images = preload("res://scripts/data/classic_image.gd")
@@ -13,6 +14,9 @@ var ambience: RefCounted
 var _attempt: Dictionary = {}
 var _held: Dictionary = {}
 var _handoff_keys: Dictionary = {}
+
+func owns_scope(scope: Dictionary) -> bool:
+	return _attempt.get("scope",{}) == scope or _ending.get("attempt",{}).get("scope",{}) == scope
 
 func fence_initial_input(keys: Dictionary) -> void:
 	# Transfer only physical input already consumed by the initial sequence.
@@ -67,6 +71,7 @@ func request(target: String, scope: Dictionary, current: Callable, skip := "any"
 		if preferred!="authored": skip = preferred
 	var resolved: Dictionary = media.resolve(target,"video")
 	if not resolved.ok: return resolved
+	if resolved.resource.has("classic_source"): return _classic_source(resolved.resource.classic_source,scope,current,float(resolved.resource.aspect),skip)
 	return admit(resolved.resource,scope,current,skip,resolved.provenance,ambience_gain)
 
 func _begin(scope: Dictionary, current: Callable, skip: String) -> Dictionary:
@@ -375,7 +380,9 @@ func _input(event: InputEvent) -> void:
 	else: return
 	var held: bool = _held.has(key)
 	if event.is_pressed(): _held[key] = true
-	else: _held.erase(key)
+	else:
+		_held.erase(key)
+		input_released.emit(event) # Observation only; covered UI never receives an activation.
 	if _handoff_keys.has(key) or not _ending.is_empty():
 		if event.is_pressed(): _handoff_keys[key] = true
 		else: _handoff_keys.erase(key)

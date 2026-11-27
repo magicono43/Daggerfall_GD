@@ -1,5 +1,16 @@
 # Classic media — IMP-008 increment 1
 
+IMP-015 increment 4 adds bounded published-source capabilities for all ten
+records of the sixteen supported `FACE<gender><race>I0.CIF` sets, using the existing
+codec and `ART_PAL.COL` with transparent index zero. Source bytes/hash and one
+palette are cached for the active source; AV owns realized textures. Optional
+`SPOP.RCI` supplies nine 22×22 parchment tiles. Optional creation clips are exactly
+`ANIM0000.VID`, `ANIM0011.VID`, `DAG2.VID`, read only when requested after admission.
+These are not mandatory startup manifest entries or wildcard filesystem access.
+See [the creation identity contract](../char/CREATION_IDENTITY.md). First-frame
+appearance-mapping qualification below is historical where full portrait coverage
+supersedes it; actor placement, item appearance and SAVE remain separate gates.
+
 IMP-015 increment 2 extends the bounded creation interface with optional
 CUST08I0.IMG (transparent index-zero dagger), read-only province/result input and
 56 first-frame appearance mapping receipts. Eight narration targets use existing

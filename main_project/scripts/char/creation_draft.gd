@@ -168,11 +168,12 @@ func generate_questionnaire(expected: Dictionary) -> Dictionary:
 	var previous: Dictionary = _draft.retained.get("questionnaire",{})
 	return edit("questionnaire",expected,{"questions":_assigned_questions.duplicate(),"answers":previous.get("answers",{}).duplicate(true)})
 
-func edit(section: String, expected: Dictionary, value: Variant) -> Dictionary:
+func edit(section: String, expected: Dictionary, value: Variant, record_name_outcome := false) -> Dictionary:
 	if not current(expected): return failure("stale", "This creation view has retired.")
 	if section not in SECTIONS: return failure("invalid", "Unknown creation section.")
+	if record_name_outcome and section != "name": return failure("invalid","Only a deliberate name suggestion can record an equal-text outcome.")
 	if not plain(value): return failure("invalid","Creation input requires bounded exact value data.")
-	if _draft.selections.has(section) and same_value(_draft.selections[section],value): return {"ok":true,"kind":"unchanged","token":token()}
+	if not record_name_outcome and _draft.selections.has(section) and same_value(_draft.selections[section],value): return {"ok":true,"kind":"unchanged","token":token()}
 	var checked := validate(section,expected,value)
 	if not checked.ok: return checked
 	if _draft.revision >= 1000000000: return failure("overflow", "Creation revision exhausted; restart required.")

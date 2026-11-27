@@ -3,7 +3,8 @@ param(
     [string]$Godot = 'C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe',
     [switch]$SmokeTest,
     [switch]$RaceCareer,
-    [switch]$BiographyRolls
+    [switch]$BiographyRolls,
+    [switch]$Presentation
 )
 $ErrorActionPreference = 'Stop'
 . "$PSScriptRoot/assertion_values.ps1"
@@ -26,6 +27,7 @@ $fixture.sandbox = "$case/human-review"
 $fixture | Add-Member -NotePropertyName review_smoke -NotePropertyValue ([bool]$SmokeTest)
 $fixture | Add-Member -NotePropertyName career_review -NotePropertyValue ([bool]$RaceCareer)
 $fixture | Add-Member -NotePropertyName biography_review -NotePropertyValue ([bool]$BiographyRolls)
+$fixture | Add-Member -NotePropertyName presentation_review -NotePropertyValue ([bool]$Presentation)
 New-Item -ItemType Directory -Force $fixture.sandbox | Out-Null
 $fixture | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath "$case/human-review.json"
 @{owner='IMP-015 creation review';expiry='Close the engine after review, preserve evidence, then compact this reproducible build. Rebuild with review_creation.ps1.'} | ConvertTo-Json | Set-Content -LiteralPath "$($selected.root)/ACTIVE-HUMAN-REVIEW.json"
@@ -61,7 +63,7 @@ try {
 if ($process.ExitCode -ne 0) { throw "Creation review failed: $($fixture.sandbox)" }
 if ($SmokeTest) {
     $result = Get-Content -LiteralPath "$($fixture.sandbox)/result.json" -Raw | ConvertFrom-Json
-    $expectedSmoke = if ($BiographyRolls) { 6 } else { 4 }
+    $expectedSmoke = if ($Presentation) { 8 } elseif ($BiographyRolls) { 6 } else { 4 }
     if (!$result.ok -or !$result.review_smoke -or $result.human_pass -or $result.count -ne $expectedSmoke) { throw 'Creation review smoke failed.' }
     if (!(Test-ScriptDiagnostics @("$($fixture.sandbox)/engine.stdout.log","$($fixture.sandbox)/engine.stderr.log") '' $result)) { throw 'Creation review reported an unexpected engine diagnostic.' }
 }

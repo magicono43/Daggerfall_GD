@@ -1,5 +1,16 @@
 # Native playback — IMP-008 increment 3
 
+IMP-015 increment 4 adds an optional creation sequence through this same consumer,
+using ordered logical targets `creation.intro.0..2`. The baseline supplies bounded
+classic VID source receipts; replacements use the existing native profiles.
+The requester retains its exact CORE preflight ticket and advances only scoped
+terminal results after cleanup. Disabled/missing/failed clips cannot certify
+playable readiness. Creation's video preference is distinct from startup/death.
+The consumer's release-only `input_released` signal lets the shell observe a
+physical release that cinematic input consumed. It clears UI/gameplay quarantine
+without activating covered controls; held-input fences persist across clips.
+See [creation identity/presentation](../char/CREATION_IDENTITY.md) for the boundary.
+
 IMP-012 increment 4 adds the narrow `movement_audio.gd` listener-relative bridge:
 validated classic PCM is prepared at binding, four engine voices consume scoped
 committed cues, and pause/live gain/retirement remain independent of gameplay.

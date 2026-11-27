@@ -2,11 +2,14 @@ extends RefCounted
 ## Mode owners implement these checked entry points. A pending result is completed
 ## through CORE.complete_* with the supplied immutable ticket, never global state.
 var death_video: Callable
+var creation_video: Callable
+var cancel_creation_video: Callable
 func prepare(_ticket: Dictionary, _intent: Dictionary) -> Dictionary:
+	if creation_video.is_valid() and _intent.get("mode") == "new" and _intent.get("selection",{}).get("creation",{}).get("schema") == "creation-submission-v1": return creation_video.call(_ticket,_intent)
 	return {"ok": false, "reason": "Character entry and restore support is unavailable in this build."}
 
 func cancel_preparation(_ticket: Dictionary) -> void:
-	pass
+	if cancel_creation_video.is_valid(): cancel_creation_video.call(_ticket)
 
 func cleanup(_ticket: Dictionary, _scope: String) -> Dictionary:
 	return {"ok": true} # No provider-owned gameplay services in the stock shell yet.
