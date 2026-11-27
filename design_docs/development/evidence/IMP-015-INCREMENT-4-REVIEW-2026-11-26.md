@@ -16,10 +16,19 @@ review window. Interactive questions remain stock English. The ordinary window
 close/Quit handlers work. After closing, allow the launcher to preserve evidence
 and compact its copied build. Changes remain uncommitted for GitHub Desktop review.
 
+**Current presentation note, 2026-11-27:** The native controls below supersede
+the original development-button wording. Full-window/aspect-ratio fitting is
+deliberately deferred to integration with the surrounding game UI, as discussed
+with the user; the current 640×400 preview area is not the final display contract.
+
 1. **Overall presentation and preset route.** Choose a province, read/decline or
    accept its description, select gender and try the questionnaire/direct preset
    branches. Assess original art, parchment, readable controls, focus and flow
-   against the DFU presentation you want. Report visual changes even if mechanics pass.
+   against the DFU presentation you want. In the questionnaire, hold the scroll
+   ends or use the wheel; click an answer or press a/b/c. The original trail and
+   constellation brightness should update, followed by automatic advancement.
+   The final Yes continues; No opens the preset/Custom list. Report visual changes
+   even if mechanics pass.
 2. **Custom career.** Restart and create a custom career. Use the real attribute,
    tier, advantage/disadvantage and advancement editors. Check that the compact
    screen and nested controls remain usable. Complete a legal class and continue.
@@ -37,16 +46,22 @@ and compact its copied build. Changes remain uncommitted for GitHub Desktop revi
    page. Only deliberate Random presses should generate names. Confirm that
    biography/history and allocations do not regenerate. Different suggestions
    are not guaranteed on every click; repeat names are valid.
-6. **Portraits.** The first face requires an explicit Previous/Next choice.
-   Browse the ten compatible faces in both directions and check wraparound.
+6. **Portraits.** The first face is displayed without selecting it; explicit
+   native OK or Previous/Next commits the choice. Browse compatible faces in
+   both directions and check wraparound. The original Nord female records 0/1
+   are identical; browsing skips that consecutive duplicate while retaining all
+   original IDs and distinct replacement art.
    Revisit the page and later edit the face from summary; the chosen face should
    remain visible and selected. Restart to try other race/gender sets.
 7. **Starting allocations.** Exercise attribute Reroll, Save Roll and Load Roll,
    allocate every point, then complete the three skill pools. Revisit and refund
-   a point: completion should block until it is reassigned. Merely navigating
+   a point: completion should block until it is reassigned. Assigned values turn
+   green, and both allocation screens support held arrows at 150 ms. Attribute
+   initial rolls/rerolls play the original dice sound with overlapping voices.
+   Merely navigating
    must not reroll or create a second reward.
 8. **Reflexes.** Confirm fresh Average, try all five settings and inspect the
-   resolved combat/practice explanation. Return to the page and edit from summary.
+   native highlight/explanation. Return to the page and edit from summary.
    The selection should persist; it must not imply increased player movement,
    guaranteed hits or immediate permanent skill gains.
 9. **Final review.** Review the actual name, portrait, reflexes, career, history,
@@ -54,13 +69,14 @@ and compact its copied build. Changes remain uncommitted for GitHub Desktop revi
    skills and reflexes. Race/career/biography changes require Restart. Exact hidden
    biography rewards should remain hidden. Editing the name must preserve history.
 10. **Introductory clips and honest handoff.** On summary, turn introductory
-    videos off and choose Begin Game: entry must report unavailable while retaining
+    videos off and choose native OK: entry must report unavailable while retaining
     choices. Retry retains the original submitted intent; editing now requires
     Restart. Restart and complete another character with videos enabled, then
     review their order and skip each with a fresh press. Holding a skip must not
     skip the next clip or activate another screen. The sequence ends with the same
     truthful unavailable-entry result; it must never claim gameplay has started.
-11. **Window size and navigation.** Resize to 800×600 and 640×480. Check that art
+11. **Window size and navigation in the current development shell.** Resize to
+    800×600 and 640×480. Check that art
     and controls fit horizontally and that scrolling reaches longer material.
     Back/Restart/Exit should remain above the artwork. Try keyboard focus and, if
     available, a physical controller. Report device-specific results separately.

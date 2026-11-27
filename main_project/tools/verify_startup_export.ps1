@@ -130,7 +130,7 @@ if ($CreationDraft -or $CalendarClock) {
     $report.source_revision = (& git -C $project rev-parse HEAD)
     $report.working_tree = @(& git -C $project status --short)
     $report.source_hashes = @{}
-    foreach ($source in Get-ChildItem -LiteralPath $runtimeProject -Recurse -File | Where-Object { $_.FullName.Substring($runtimeProject.Length) -notmatch '[\\/](\.godot|\.runs|bin|\.toolchain)[\\/]' -and $_.Extension -in @('.gd','.uid','.json','.csv','.txt','.ini','.gdextension') }) {
+    foreach ($source in Get-ChildItem -LiteralPath $runtimeProject -Recurse -File | Where-Object { $_.FullName.Substring($runtimeProject.Length) -notmatch '[\\/](\.godot|\.runs|bin|\.toolchain)[\\/]' -and $_.Extension -in @('.gd','.gdshader','.uid','.json','.csv','.txt','.ini','.gdextension') }) {
         $report.source_hashes[[IO.Path]::GetRelativePath($runtimeProject,$source.FullName)] = (Get-FileHash -LiteralPath $source.FullName).Hash
     }
     foreach ($tool in @('verify_startup_export.ps1','calendar_fixture.ps1')) { $report.source_hashes['tools/'+$tool] = (Get-FileHash -LiteralPath "$PSScriptRoot/$tool").Hash }

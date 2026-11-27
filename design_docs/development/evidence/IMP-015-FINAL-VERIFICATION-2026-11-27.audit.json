@@ -1,0 +1,1530 @@
+{
+  "schema": "imp015-final-checkpoint-audit-v1",
+  "status": "passed",
+  "results": [
+    {
+      "count": 3982,
+      "sha256": "A0DB87EE64A588B1901FA3115752CC5FFD3118963C8E69768BF29176472C6C24",
+      "scope": "full headless",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-c0e80736301e4b6b8580e3a6baf213c2/project/tests/.runs/scenario-1/result.json"
+    },
+    {
+      "count": 8,
+      "sha256": "0DDD5032D77439EDFAE18EA1FFE1F60CF1EA5A75121A2621C9655F6C732D97AF",
+      "scope": "full headless fresh process",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-headless-c0e80736301e4b6b8580e3a6baf213c2/project/tests/.runs/scenario-1/reload-result.json"
+    },
+    {
+      "count": 4020,
+      "sha256": "BB09AB43ECBB745EC643818046F2A91453D0B111904FBB59F25417300C79FA6D",
+      "scope": "full rendered",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-222af49312634d54b807af827138488c/project/tests/.runs/scenario-1/result.json"
+    },
+    {
+      "count": 8,
+      "sha256": "825D053926534E1E651ED475BCC9D580297B3A2394C86DC4C730AFDE5CBC0B0F",
+      "scope": "full rendered fresh process",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/verification-rendered-222af49312634d54b807af827138488c/project/tests/.runs/scenario-1/reload-result.json"
+    },
+    {
+      "count": 79,
+      "sha256": "79471697166ADC50ADAFB66C3C1B95D2DE5188D49EE5A26AC157862F1292D5C2",
+      "scope": "focused verification-rendered-d3fb1476dc384b4e9fe7fdd5b30f6a7e",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-d3fb1476dc384b4e9fe7fdd5b30f6a7e\\project\\tests\\.runs\\preview\\storage\\result.json"
+    },
+    {
+      "count": 59,
+      "sha256": "3EC147440C68840C69D402DBB4414D57C855A1736E2FBBA6440B1A552467DA4F",
+      "scope": "focused verification-rendered-a7fbf46c8c77492ab990be882f48d633",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-a7fbf46c8c77492ab990be882f48d633\\project\\tests\\.runs\\preview\\storage\\result.json"
+    },
+    {
+      "count": 55,
+      "sha256": "970199695E05D026192F7016A27567211B6847B24373675B50916A6845531693",
+      "scope": "focused verification-rendered-c9ed7233c9eb4ba1a5843d93f75d5709",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-c9ed7233c9eb4ba1a5843d93f75d5709\\project\\tests\\.runs\\preview\\storage\\result.json"
+    },
+    {
+      "count": 39,
+      "sha256": "6FFA68E323D3ABD15B468D51572176A7FA2CE37A5CF71ACF2C238E5441D09D44",
+      "scope": "independent questionnaire codec boundary",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-c9ed7233c9eb4ba1a5843d93f75d5709\\project\\tests\\.runs\\preview\\storage/questionnaire-codecs.json"
+    },
+    {
+      "count": 3982,
+      "sha256": "50DB95430B7C4443DF48BAFA4221F7FE1A4DBC26927B17C7C4C6D4B5CD414FE5",
+      "scope": "debug export headless",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-6494e2d2cd974fe091a9f9ed377fa7c5/build/tests/.runs/headless/result.json"
+    },
+    {
+      "count": 8,
+      "sha256": "0DDD5032D77439EDFAE18EA1FFE1F60CF1EA5A75121A2621C9655F6C732D97AF",
+      "scope": "debug export headless fresh process",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-6494e2d2cd974fe091a9f9ed377fa7c5/build/tests/.runs/headless/reload-result.json"
+    },
+    {
+      "count": 4020,
+      "sha256": "09CA8641F4E458CF24361218D6A97485C49A05461A7CD251B5A502AC3DF5F94C",
+      "scope": "debug export rendered",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-6494e2d2cd974fe091a9f9ed377fa7c5/build/tests/.runs/rendered/result.json"
+    },
+    {
+      "count": 8,
+      "sha256": "825D053926534E1E651ED475BCC9D580297B3A2394C86DC4C730AFDE5CBC0B0F",
+      "scope": "debug export rendered fresh process",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-6494e2d2cd974fe091a9f9ed377fa7c5/build/tests/.runs/rendered/reload-result.json"
+    },
+    {
+      "count": 3982,
+      "sha256": "2886C5A52904CB3E2599D3AA46D3750D0C7B0FC7E17E9CEF43E3D20C5C5DC656",
+      "scope": "release export headless",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-faf580bf34b74f418c21e9603cf70ecc/build/tests/.runs/headless/result.json"
+    },
+    {
+      "count": 8,
+      "sha256": "0DDD5032D77439EDFAE18EA1FFE1F60CF1EA5A75121A2621C9655F6C732D97AF",
+      "scope": "release export headless fresh process",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-faf580bf34b74f418c21e9603cf70ecc/build/tests/.runs/headless/reload-result.json"
+    },
+    {
+      "count": 4020,
+      "sha256": "3F8EEC862612D059A11129D46793D12D8877FC3E1B8165682A34A1ACBA4AD628",
+      "scope": "release export rendered",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-faf580bf34b74f418c21e9603cf70ecc/build/tests/.runs/rendered/result.json"
+    },
+    {
+      "count": 8,
+      "sha256": "825D053926534E1E651ED475BCC9D580297B3A2394C86DC4C730AFDE5CBC0B0F",
+      "scope": "release export rendered fresh process",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project/tests/.runs/export-faf580bf34b74f418c21e9603cf70ecc/build/tests/.runs/rendered/reload-result.json"
+    },
+    {
+      "count": 27,
+      "sha256": "838B3F4D9547BBF5C21405580AB1649661DEA16E14E0D2219ADA19F4D9921D63",
+      "scope": "focused verification-rendered-31c0fa6c208545b58bbfd0e79f3dc509",
+      "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-31c0fa6c208545b58bbfd0e79f3dc509\\project\\tests\\.runs\\preview\\storage\\preview-state.json"
+    }
+  ],
+  "excluded": [
+    {
+      "status": "incomplete",
+      "reason": "Preserved development/invocation failure; excluded from passing totals.",
+      "report_sha256": "83ABEBCD89880033E1FB33FD5E0FFB5A3A66986D2128DEE5C881B99FEBCCD376",
+      "root": "verification-headless-b89a109962f64f608414eb570ab5c1b7"
+    },
+    {
+      "status": "incomplete",
+      "reason": "Preserved development/invocation failure; excluded from passing totals.",
+      "report_sha256": "690F2C91A5AE473C8B0980711A6F06C968673F5AC0627B489864FF18CADB3DB0",
+      "root": "verification-headless-52a6fd41cac040fe86cb91a8f60b5d68"
+    },
+    {
+      "status": "incomplete",
+      "reason": "Preserved development/invocation failure; excluded from passing totals.",
+      "report_sha256": "67B4E2684585296ACE148E394B439613A807FCC008120E72D5C4AD25A0E525B4",
+      "root": "verification-headless-703336042dce4041bb52b3b3c5842943"
+    },
+    {
+      "status": "failed",
+      "reason": "Preserved development/invocation failure; excluded from passing totals.",
+      "report_sha256": "51554FB78DEAF538F30F37D549FC6CF1A65F69DADDE9B070104847DC89B4B051",
+      "root": "verification-headless-2fc2bd037a184a8ebee3b2ff7a043417"
+    }
+  ],
+  "sources_checked": 4330,
+  "generated_uids": [
+    {
+      "path": "scripts\\char\\creation_view.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\move\\mechanism_collision.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\variant_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_questionnaire_canvas.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\time\\activity_policies.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\move\\mechanism_motion.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\creation_identity.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\pushing_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\loc\\location_assembly.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\platform_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_help_preview.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_difficulty_dagger.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_popup_preview.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\item_spell_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\dungeon_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_background_identity_preview.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\character_name.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_questionnaire_runtime.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\preset_career.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\layout_inputs.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\faction_quest_source_reader.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\creation_navigation.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\placement_physics_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_palette.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\input\\view_cursor.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\custom_career.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\platform_boundary_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\dungeon_marker_schema.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_questionnaire_preview.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_final_pages_preview.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_class_method.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\character_name_field.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\controlled_actor_source.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\dungeon_fixture_geometry.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\controlled_actor_entry.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\item_spell_source_reader.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\dungeon_context_policy.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\mechanism_policy.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\placement_policy.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_career_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_identity_reload.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\classic_font.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_allocation_repeat.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_geometry.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_biography_reputation.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\layout_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\creation_biography_inputs.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_support.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_custom_exit_preview.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\session\\creation_cinematics.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\activity_policy_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\movement_feedback_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\layout_placements.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_custom_sheet_preview.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\controlled_mechanism.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\classic_unknown_action_audit.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\item_spell_inputs.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_environment.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\creation_identity_view.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_help.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\vital_mutation_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\av\\creation_art.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\rule\\air_formulas.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\creation_flow.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\controlled_vital_consumer.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\variant_resolution.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\air_contact_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\creation_biography_view.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\controlled_creation_inputs.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\creation_identity_inputs.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\dungeon_marker_source_audit.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_review.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_questionnaire.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_reputation_preview.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\move\\air_history.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_native_summary.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_markers.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_assembly.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\move\\placement_authority.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\classic_action_axes_audit.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_biography_ui_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\dungeon_context_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_questionnaire_mask.gdshader.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\av\\movement_audio.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_custom_sheet.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_questionnaire_codec_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\translation_preference_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\location_assembly_schema.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\item_spell_formats.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\actor_state_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_traits_preview.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\faction_quest_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\dungeon_context_schema.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_trait_rules.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\actor_formula_callbacks.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\reflex_parameters.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\creation_career_view.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\view_cursor_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_traits.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\air_exhaustion_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\creation_starting_inputs.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\creation_starting.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\dungeon_assembly_schema.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\activity_review.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\variant_reload_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\layout_geometry_frame.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_identity_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\dungeon_marker_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\controlled_preference_consumer.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_hp_repeat.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\move\\movement_feedback.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_popup.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\starting_rolls.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_biography_review_inputs.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_reputation.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\observe_dungeon_context.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\creation_starting_view.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\faction_quest_inputs.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\variant_inputs.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\dungeon_surface_render.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_setup.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_materials.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\starting_roll_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\creation_questionnaire_images.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\view_cursor_reload_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\creation_draft.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\layout_probe.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_picker_preview.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\view_review.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\geography_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\layout_corpus.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\air_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\creation_career.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\dungeon_reload_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_identity_ui_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\vital_records.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\faction_quest_formats.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\air_boundary_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\classic_list_picker.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\layout_formats.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\dungeon_marker_reload_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\layout_reload_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\location_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\placement_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_career_review_inputs.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\compression_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\movement_feedback_policy.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\m1_composition_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\location_doorway_schema.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\dungeon_context_reload_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\creation_biography.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\rule\\regional_holidays.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\av\\movement_audio_preferences.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\biography_feasibility.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\air_retirement_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\biography_evaluator.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_native_controls.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\translation_preference_reload_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\holiday_definitions.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\data\\air_policy.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\char\\creation_inputs.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "scripts\\ui\\creation_custom_messages.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_cinematic_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\biography_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\location_doorway_cases.gd.uid",
+      "root": "export-6494e2d2cd974fe091a9f9ed377fa7c5"
+    },
+    {
+      "path": "tests\\creation_questionnaire_codec_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\move\\movement_feedback.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_biography_ui_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\preset_career.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_identity_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\layout_placements.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\actor_formula_callbacks.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\observe_dungeon_context.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\item_spell_formats.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_allocation_repeat.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\air_retirement_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\layout_formats.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_assembly.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\translation_preference_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\dungeon_assembly_schema.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_custom_exit_preview.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_help_preview.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\dungeon_marker_reload_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_biography_review_inputs.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\controlled_actor_entry.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\layout_inputs.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\av\\movement_audio_preferences.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\dungeon_fixture_geometry.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\controlled_creation_inputs.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_identity_reload.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\vital_mutation_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\creation_identity_view.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\faction_quest_formats.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\dungeon_surface_render.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\controlled_preference_consumer.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\dungeon_context_schema.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\item_spell_inputs.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_geometry.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_career_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\controlled_mechanism.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\creation_biography_view.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\dungeon_reload_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_final_pages_preview.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\geography_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\m1_composition_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_popup_preview.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\creation_identity_inputs.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\creation_starting_view.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\classic_action_axes_audit.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\item_spell_source_reader.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\dungeon_context_reload_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\air_policy.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\translation_preference_reload_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\view_cursor_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\classic_list_picker.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\movement_feedback_policy.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\creation_biography_inputs.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_markers.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_review.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\air_boundary_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\item_spell_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\mechanism_policy.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\creation_career.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_difficulty_dagger.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_setup.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\move\\air_history.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\av\\creation_art.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\av\\movement_audio.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\character_name_field.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_trait_rules.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\layout_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_cinematic_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_picker_preview.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_native_controls.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\air_exhaustion_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\dungeon_context_policy.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\creation_draft.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\variant_inputs.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\location_doorway_schema.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\controlled_vital_consumer.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_native_summary.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\starting_roll_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\session\\creation_cinematics.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\move\\placement_authority.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\variant_resolution.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\creation_questionnaire_images.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\platform_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\activity_review.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\air_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\faction_quest_inputs.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_custom_messages.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\layout_reload_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\loc\\location_assembly.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\creation_starting_inputs.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\view_review.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_support.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\placement_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\move\\mechanism_collision.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\creation_navigation.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\view_cursor_reload_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\faction_quest_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\holiday_definitions.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\activity_policy_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_background_identity_preview.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\air_contact_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\placement_policy.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\location_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\dungeon_marker_source_audit.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_help.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\character_name.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_traits.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_questionnaire_runtime.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\biography_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\creation_starting.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_career_review_inputs.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\creation_identity.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\input\\view_cursor.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\creation_career_view.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\location_doorway_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_identity_ui_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_traits_preview.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\dungeon_marker_schema.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\faction_quest_source_reader.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\starting_rolls.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_reputation_preview.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\dungeon_context_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\reflex_parameters.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\layout_corpus.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\move\\mechanism_motion.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\pushing_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\compression_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_class_method.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\location_assembly_schema.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\actor_state_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_hp_repeat.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\controlled_actor_source.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\platform_boundary_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_reputation.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\movement_feedback_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\variant_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_questionnaire_canvas.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\layout_probe.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\dungeon_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\classic_unknown_action_audit.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\vital_records.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_biography_reputation.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_questionnaire_mask.gdshader.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_palette.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_materials.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\time\\activity_policies.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_popup.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\creation_flow.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\loc\\dungeon_environment.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_custom_sheet.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\dungeon_marker_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_custom_sheet_preview.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\creation_view.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\variant_reload_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\biography_evaluator.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\classic_font.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\creation_inputs.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\rule\\regional_holidays.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\placement_physics_cases.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\layout_geometry_frame.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\custom_career.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\char\\biography_feasibility.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\data\\creation_biography.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\ui\\creation_questionnaire.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "tests\\creation_questionnaire_preview.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    },
+    {
+      "path": "scripts\\rule\\air_formulas.gd.uid",
+      "root": "export-faf580bf34b74f418c21e9603cf70ecc"
+    }
+  ],
+  "archives_verified": 12,
+  "retained_files_verified": 2516,
+  "assertions": 24313,
+  "removed_bytes": 3207423810,
+  "removed_files": 20679,
+  "diagnostics": [
+    {
+      "scope": "verification-headless-c0e80736301e4b6b8580e3a6baf213c2",
+      "known_gpu_conversion_warnings": 0,
+      "unexpected_errors_or_leaks": 0
+    },
+    {
+      "scope": "verification-rendered-222af49312634d54b807af827138488c",
+      "known_gpu_conversion_warnings": 0,
+      "unexpected_errors_or_leaks": 0
+    },
+    {
+      "scope": "verification-rendered-d3fb1476dc384b4e9fe7fdd5b30f6a7e",
+      "known_gpu_conversion_warnings": 0,
+      "unexpected_errors_or_leaks": 0
+    },
+    {
+      "scope": "verification-rendered-a7fbf46c8c77492ab990be882f48d633",
+      "known_gpu_conversion_warnings": 0,
+      "unexpected_errors_or_leaks": 0
+    },
+    {
+      "scope": "verification-rendered-c9ed7233c9eb4ba1a5843d93f75d5709",
+      "known_gpu_conversion_warnings": 0,
+      "unexpected_errors_or_leaks": 0
+    },
+    {
+      "scope": "verification-rendered-c9ed7233c9eb4ba1a5843d93f75d5709/codecs",
+      "known_gpu_conversion_warnings": 0,
+      "unexpected_errors_or_leaks": 0
+    },
+    {
+      "scope": "export-6494e2d2cd974fe091a9f9ed377fa7c5/headless",
+      "known_gpu_conversion_warnings": 0,
+      "unexpected_errors_or_leaks": 0
+    },
+    {
+      "scope": "export-6494e2d2cd974fe091a9f9ed377fa7c5/rendered",
+      "known_gpu_conversion_warnings": 0,
+      "unexpected_errors_or_leaks": 0
+    },
+    {
+      "scope": "export-faf580bf34b74f418c21e9603cf70ecc/headless",
+      "known_gpu_conversion_warnings": 0,
+      "unexpected_errors_or_leaks": 0
+    },
+    {
+      "scope": "export-faf580bf34b74f418c21e9603cf70ecc/rendered",
+      "known_gpu_conversion_warnings": 0,
+      "unexpected_errors_or_leaks": 0
+    },
+    {
+      "scope": "verification-rendered-31c0fa6c208545b58bbfd0e79f3dc509",
+      "known_gpu_conversion_warnings": 0,
+      "unexpected_errors_or_leaks": 0
+    }
+  ],
+  "binaries_checked": 14,
+  "utc": "2026-11-27T22:53:44.7600752Z",
+  "result_count": 17
+}

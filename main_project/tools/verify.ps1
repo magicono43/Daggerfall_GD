@@ -108,7 +108,7 @@ try {
     $report.build.working_tree = @(& git -C $project status --short)
     $report.build.sources = @{}
     foreach ($source in @('scripts','tests','tools','config','content','native/storage','native/media') | ForEach-Object { Get-VerificationSourceFiles "$project/$_" } |
-        Where-Object { $_.FullName -notmatch '[\\/](\.runs|\.toolchain|bin|\.zig-cache|zig-out)[\\/]' -and $_.Extension -in @('.gd','.ps1','.cpp','.hpp','.ini','.gdextension','.json','.txt','.csv','.import','.ttf','.bytes','.py') }) {
+        Where-Object { $_.FullName -notmatch '[\\/](\.runs|\.toolchain|bin|\.zig-cache|zig-out)[\\/]' -and $_.Extension -in @('.gd','.gdshader','.ps1','.cpp','.hpp','.ini','.gdextension','.json','.txt','.csv','.import','.ttf','.bytes','.py') }) {
         $report.build.sources[[IO.Path]::GetRelativePath($project,$source.FullName)] = (Get-FileHash $source.FullName -Algorithm SHA256).Hash
     }
     Copy-VerificationResources $project $runtimeProject

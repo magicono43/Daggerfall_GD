@@ -75,7 +75,7 @@ func qualify(shell: Control, fixture: Dictionary) -> Array[Dictionary]:
 	check("biography UI automatic preserves manual first answer","a",view.owner.projection().selections.biography.answers.q1)
 	await press(shell,view,"notice/dismiss")
 	await press(shell,view,"back")
-	await press(shell,view,"biography-previous") # Return from q2 to the first answer.
+	await press(shell,view,"choice/manual") # Automatic Back now returns to its method chooser.
 	for q in template.questions:
 		check("biography UI stock answer "+q.id,true,await press(shell,view,"biography-answer/"+q.id+"/"+q.answers[0].id))
 	check("biography UI full manual validates",true,view.owner.section_status("biography").ok)
@@ -126,6 +126,7 @@ func qualify(shell: Control, fixture: Dictionary) -> Array[Dictionary]:
 	await image(shell,"increment3-attributes.png")
 	check("biography UI next attributes",true,view.action("next",view.navigation.context()).ok)
 	check("biography UI skills generated on entry",true,view.owner.projection().selections.has("skills"))
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
 	check("biography UI skills has no Reroll",false,view._buttons.has("reroll-attributes"))
 	check("biography UI skills has no Save Roll",false,view._buttons.has("save-roll"))
 	check("biography UI unfinished skills block Next",false,view.action("next",view.navigation.context()).ok)

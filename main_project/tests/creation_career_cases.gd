@@ -24,6 +24,12 @@ func control(shell: Control, text: String, activate := false) -> bool:
 	await shell.get_tree().process_frame
 	return found
 
+func finish_question_animation(shell: Control, view: RefCounted) -> void:
+	var deadline := Time.get_ticks_msec()+5000
+	while is_instance_valid(view.career_view.questionnaire_runtime) and view.career_view.questionnaire_runtime.playing and Time.get_ticks_msec() < deadline:
+		await shell.get_tree().create_timer(0.02).timeout
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
+
 func edit(section: String, value: Variant) -> Dictionary:
 	return owner.edit(section,owner.token(),value)
 
@@ -358,16 +364,17 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 	view.action("edit",view.navigation.context(),"breton"); view.action("next",view.navigation.context())
 	view.action("edit",view.navigation.context(),"male"); view.action("next",view.navigation.context())
 	view.action("edit",view.navigation.context(),"questionnaire"); view.action("next",view.navigation.context())
-	check("career questionnaire start handler",true,await control(shell,"Start questionnaire"))
+	check("career questionnaire initialized on entry",true,view.owner.projection().selections.has("questionnaire"))
 	var original_set: Array = view.owner.projection().selections.questionnaire.questions.duplicate()
 	await capture(shell,"creation-class-questionnaire.png")
 	for index in 10:
 		var question: String = original_set[index]
 		var answer: String = view.inputs.sources.questionnaire.questions[question].answers[index%3]
 		check("career stock answer handler "+str(index),true,await control(shell,answer))
-		if index < 9: check("career stock next question "+str(index),true,await control(shell,"Next question"))
+		await finish_question_animation(shell,view)
+		if index < 9: check("career automatic next question "+str(index),index+1,view.career_view.question_position)
 	check("career UI preserves assigned set",original_set,view.owner.projection().selections.questionnaire.questions)
-	check("career questionnaire review next handler",true,await control(shell,"Next"))
+	check("career final answer opens recommendation","class",view.navigation.step().hook)
 	view.navigation._summary_seen = true # Focused UI permission seam; complete hybrid routes are qualified above.
 	check("career read-only questionnaire confirmation permits exit",false,view.cancel_nested())
 	view.navigation._summary_seen = false
