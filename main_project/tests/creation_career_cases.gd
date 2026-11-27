@@ -419,6 +419,8 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 	check("career HP stock handler",9,view.owner.projection().selections.custom.hit_points_per_level)
 	check("career HP stock contribution",1,view.owner.projection().validated.custom.provenance.evaluation.hp_contribution)
 	check("career custom incomplete Next blocked",false,view.action("next",view.navigation.context()).ok)
+	view.cancel_nested()
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
 	class_name_field = view._editors["custom/name-field"]
 	class_name_field.text = "Étoile 流浪者 2"
 	class_name_field.text_changed.emit(class_name_field.text)

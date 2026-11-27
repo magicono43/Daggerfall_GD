@@ -50,7 +50,7 @@ func _process(_delta: float) -> void:
 		_next_tick = Time.get_ticks_msec()+INTERVAL_MSEC
 
 func _current(view: RefCounted) -> bool:
-	return view.active() and not view.shell.core.busy() and str(view.owner.token().id) == _draft and view.navigation.step().get("hook") == "custom" and not view.navigation.summary_locked() and view.career_view.custom_tab == 0 and view.career_view.skill_slot.is_empty() and (_attribute.is_empty() or preload("res://scripts/char/custom_career.gd").ATTRIBUTES[view.career_view.custom_attribute] == _attribute)
+	return view.active() and not view.shell.core.busy() and str(view.owner.token().id) == _draft and view.navigation.step().get("hook") == "custom" and not view.navigation.summary_locked() and view.career_view.custom_tab == 0 and view.career_view.skill_slot.is_empty() and view.career_view.custom_exit_message.is_empty() and (_attribute.is_empty() or preload("res://scripts/char/custom_career.gd").ATTRIBUTES[view.career_view.custom_attribute] == _attribute)
 
 func _step() -> void:
 	var view: RefCounted = _view.get_ref() if _view != null else null

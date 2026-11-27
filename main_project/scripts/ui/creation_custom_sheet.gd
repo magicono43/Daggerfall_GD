@@ -60,7 +60,7 @@ static func render(career: RefCounted, view: RefCounted, expected: Dictionary, v
 	var root := Control.new(); root.size = Vector2(320,200); root.scale = Vector2(2,2)
 	root.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	view._page.add_child(root)
-	var locked: bool = view.navigation.summary_locked() or not career.skill_slot.is_empty() or career.custom_tab != 0
+	var locked: bool = view.navigation.summary_locked() or not career.skill_slot.is_empty() or career.custom_tab != 0 or not career.custom_exit_message.is_empty()
 	var name_field := LineEdit.new()
 	name_field.text = str(view._working.get("custom.name",value.name))
 	name_field.placeholder_text = "Name your class"; name_field.max_length = 256
@@ -137,7 +137,7 @@ static func render(career: RefCounted, view: RefCounted, expected: Dictionary, v
 				arrow.accept_event())
 	for item in [[4,"Details",74],[1,"Advantages",98],[2,"Disadvantages",122],[3,"Reputation",146]]:
 		button(view,root,"custom/panel/"+str(item[0]),item[1],Rect2(249,item[2],66,22),func(): career.custom_tab = item[0]; art.play_dialog_click(view.shell.host); career.refresh(view),locked)
-	button(view,root,"custom/finish","Exit custom class editor",Rect2(263,172,38,21),func(): view.action("next",expected),locked)
+	button(view,root,"custom/finish","Exit custom class editor",Rect2(263,172,38,21),func(): art.play_dialog_click(view.shell.host); view.action("next",expected),locked)
 	var now := Time.get_ticks_msec()
 	career.dagger_trails = career.dagger_trails.filter(func(trail): return now-int(trail.started) < Dagger.LINGER_MSEC)
 	var y := Dagger.gauge_y(evaluated.difficulty,policy.difficulty)
@@ -148,6 +148,9 @@ static func render(career: RefCounted, view: RefCounted, expected: Dictionary, v
 	var gauge := Dagger.new(); gauge.size = Vector2(320,200); gauge.texture = dagger.texture if dagger.ok else null; gauge.current_y = y; gauge.trails = career.dagger_trails.duplicate(true)
 	gauge.set_meta("creation_difficulty_dagger",true); root.add_child(gauge)
 	if not career.skill_slot.is_empty(): skill_picker(career,view,expected,value,font,art)
+	if not career.custom_exit_message.is_empty():
+		ClassicPopup.notice(view,career.custom_exit_message,func():
+			if current.call(): career.custom_exit_message = ""; career.refresh(view),"custom-exit")
 
 static func skill_picker(career: RefCounted, view: RefCounted, expected: Dictionary, value: Dictionary, font: Font, art: RefCounted) -> void:
 	var options: Array = []

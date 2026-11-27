@@ -47,6 +47,10 @@ func active() -> bool:
 
 func cancel_nested() -> bool:
 	if not active() or shell.core.busy() or not inputs.has_method("validate_career"): return false
+	if not career_view.custom_exit_message.is_empty():
+		career_view.custom_exit_message = ""
+		career_view.refresh(self)
+		return true
 	if career_view.reputation_warning:
 		career_view.reputation_warning = false
 		career_view.refresh(self)
@@ -210,8 +214,10 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 					if not checked.ok: notice = str(checked.get("reason","Name edit rejected.")); shell.schedule_render(); return checked
 					expected = navigation.context()
 			checked = navigation.next(expected)
+			if not checked.ok and inputs.has_method("validate_career") and navigation.step().get("hook") == "custom" and career_view.custom_tab == 0:
+				career_view.custom_exit_message = preload("res://scripts/ui/creation_custom_messages.gd").rejected_exit(self,checked)
 		"back":
-			if navigation.step().get("hook") == "custom" and career_view.custom_tab == 3:
+			if not career_view.custom_exit_message.is_empty() or (navigation.step().get("hook") == "custom" and career_view.custom_tab == 3):
 				cancel_nested(); checked = {"ok":true}
 			else: checked = navigation.back(expected)
 		"summary-edit": checked = navigation.summary_edit(expected,str(value))
@@ -235,6 +241,7 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 		checked = navigation.edit(navigation.context(),candidate)
 	notice = "" if checked.ok else str(checked.get("reason","Creation request rejected."))
 	if checked.has("sections"): notice += "\n"+str(checked.sections)
+	if not career_view.custom_exit_message.is_empty(): notice = ""
 	if checked.ok and id in ["edit","next","back","summary-edit","career-route","generate-questionnaire","starting-operation","biography-operation","identity-operation"]:
 		# A page/selection handoff is a real input boundary, with the existing
 		# fresh-press quarantine. Keep the same requester-owned gate and scope.

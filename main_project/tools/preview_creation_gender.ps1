@@ -6,7 +6,8 @@ param(
  [switch]$ClassPicker,
  [switch]$CloseTest,
  [switch]$CustomSheet,
- [switch]$Reputation
+ [switch]$Reputation,
+ [switch]$CustomExit
 )
 $ErrorActionPreference='Stop'
 if($SmokeTest -and $CloseTest){throw 'Choose SmokeTest or CloseTest, not both.'}
@@ -48,6 +49,7 @@ $scope+=@('scripts/startup/startup_shell.gd')
 $scope+=@('scripts/ui/creation_custom_sheet.gd','scripts/ui/creation_difficulty_dagger.gd','tests/creation_custom_sheet_preview.gd')
 $scope+=@('scripts/ui/creation_hp_repeat.gd')
 $scope+=@('scripts/ui/creation_reputation.gd','tests/creation_reputation_preview.gd')
+$scope+=@('scripts/ui/creation_custom_messages.gd','tests/creation_custom_exit_preview.gd')
 foreach($file in $scope){$report.build.sources[$file]=(Get-FileHash (Join-Path $project $file)).Hash}
 $originals=@{}
 foreach($file in @('FONT0003.FNT','BUTTONS.RCI','SPOP.RCI','ART_PAL.COL','TMAP00I0.IMG','BUTN01I0.IMG','BUTN02I0.IMG','PICK00I0.IMG','CUST00I0.IMG','CUST08I0.IMG','CHAR02I1.IMG','CUST03I0.IMG','TEXT.RSC')){$originals[$file]=(Get-FileHash (Join-Path $ClassicSource $file)).Hash}
@@ -61,7 +63,7 @@ try{
  $null=Child @('--headless','--path',$runtime,'--import','--quit-after','60') 'import' 90
  if((Get-Content "$case/import.stderr.log" -Raw) -match 'SCRIPT ERROR|Parse Error'){throw "Preview import reported script errors: $root"}
  foreach($file in $scope){if((Get-FileHash (Join-Path $runtime $file)).Hash -cne $report.build.sources[$file] -or (Get-FileHash (Join-Path $project $file)).Hash -cne $report.build.sources[$file]){throw 'Source changed during preview preparation; rerun.'}}
- @{mode='creation-review';fixture='creation-popup-preview-v1';sandbox=$sandbox.Replace('\','/');classic_source=([IO.Path]::GetFullPath($ClassicSource)).Replace('\','/');popup_preview=$true;class_method_preview=[bool]$ClassMethod;class_picker_preview=[bool]$ClassPicker;custom_sheet_preview=[bool]$CustomSheet;reputation_preview=[bool]$Reputation;review_smoke=[bool]$SmokeTest;preview_close_test=[bool]$CloseTest}|ConvertTo-Json|Set-Content "$case/fixture.json"
+ @{mode='creation-review';fixture='creation-popup-preview-v1';sandbox=$sandbox.Replace('\','/');classic_source=([IO.Path]::GetFullPath($ClassicSource)).Replace('\','/');popup_preview=$true;class_method_preview=[bool]$ClassMethod;class_picker_preview=[bool]$ClassPicker;custom_sheet_preview=[bool]$CustomSheet;reputation_preview=[bool]$Reputation;custom_exit_preview=[bool]$CustomExit;review_smoke=[bool]$SmokeTest;preview_close_test=[bool]$CloseTest}|ConvertTo-Json|Set-Content "$case/fixture.json"
  @{owner='IMP-015 focused gender preview';expiry='Until this preview engine closes; preserve evidence then compact.'}|ConvertTo-Json|Set-Content "$root/ACTIVE-HUMAN-REVIEW.json"
  $arguments=@('--path',$runtime)
  if($CloseTest){$arguments+='--verbose'}

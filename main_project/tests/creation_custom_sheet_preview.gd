@@ -53,6 +53,8 @@ func run(checks: RefCounted, host: Control, view: RefCounted, fixture: Dictionar
 	suite.check("dagger native neutral Y",115.0,dagger(view).current_y)
 	await move(Vector2(2,2))
 	await capture("custom-blank",fixture)
+	if fixture.get("custom_exit_preview",false):
+		return await preload("res://tests/creation_custom_exit_preview.gd").new().run(suite,shell,view,fixture)
 	if fixture.get("reputation_preview",false):
 		await mouse(view._buttons["custom/panel/3"])
 		return await preload("res://tests/creation_reputation_preview.gd").new().run(suite,shell,view,fixture)
@@ -175,6 +177,7 @@ func run(checks: RefCounted, host: Control, view: RefCounted, fixture: Dictionar
 	await mouse(view._buttons["custom/finish"])
 	suite.check("incomplete sheet Exit stays in editor","custom",view.navigation.step().hook)
 	suite.check("incomplete skills retained","axe",view.owner.projection().selections.custom.tiers.primary[0])
+	await key(KEY_ESCAPE) # Dismiss the completion warning before navigating Back.
 	var retained: Dictionary = view.owner.projection().selections.custom.duplicate(true)
 	await suite.press(shell,view,"back")
 	await suite.press(shell,view,"choice/list")

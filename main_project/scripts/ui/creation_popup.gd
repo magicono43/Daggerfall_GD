@@ -105,14 +105,14 @@ static func choices(view: RefCounted, text: String, options: Array, field: Strin
 		button.size = Vector2(32,16)
 	return root
 
-static func notice(view: RefCounted, text: String, dismiss: Callable) -> void:
+static func notice(view: RefCounted, text: String, dismiss: Callable, field := "message") -> void:
 	var catch_click := Button.new()
 	view._page.add_child(catch_click)
 	view._bind_button(catch_click,"notice/dismiss",dismiss)
 	catch_click.set_meta("accessible_label","Dismiss message")
 	for state in ["normal","hover","pressed","disabled","focus"]: catch_click.add_theme_stylebox_override(state,StyleBoxEmpty.new())
 	catch_click.size = Vector2(640,400)
-	var root := choices(view,text,[],"reputation-balance")
+	var root := choices(view,text,[],field)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	for child: Control in root.find_children("*","Control",true,false): child.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	view._focus = "notice/dismiss"

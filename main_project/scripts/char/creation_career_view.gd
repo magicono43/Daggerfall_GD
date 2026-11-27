@@ -18,12 +18,14 @@ var dagger_trails: Array = []
 var hp_repeat: Node
 var custom_keyboard_focus := false
 var reputation_warning := false
+var custom_exit_message := ""
 
 func clear() -> void:
 	if is_instance_valid(hp_repeat): hp_repeat.stop(); hp_repeat.queue_free()
 	hp_repeat = null
 	custom_keyboard_focus = false
 	reputation_warning = false
+	custom_exit_message = ""
 	candidate = ""
 	candidate_hook = ""
 	question_position = 0
@@ -52,7 +54,7 @@ func refresh(view: RefCounted) -> void:
 func render(view: RefCounted, expected: Dictionary, hook: String, selected: Dictionary) -> void:
 	if _draft != expected.token.id: clear(); _draft = expected.token.id
 	if candidate_hook != hook:
-		candidate = ""; candidate_hook = hook; skill_slot.clear(); reputation_warning = false
+		candidate = ""; candidate_hook = hook; skill_slot.clear(); reputation_warning = false; custom_exit_message = ""
 		if hook != "custom": custom_tab = 0
 	if view.inputs.policy.is_empty() or view.inputs.sources.is_empty():
 		view._text(view._box(Rect2(12,48,616,280)),view.inputs.setup_error)
