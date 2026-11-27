@@ -1,0 +1,88 @@
+extends RefCounted
+## Classic native-pixel message surface; real Buttons retain stock dispatch/focus.
+const TEXT_COLOR = Color8(243,239,44)
+const SHADOW_COLOR = Color8(93,77,12)
+
+static func confirm(view: RefCounted, text: String, yes: Callable, no: Callable, valid: bool) -> void:
+	var art: RefCounted = view.shell.host.controller.providers.creation_art
+	var fallback: Font = view._presentation.font() if view._presentation != null else ThemeDB.fallback_font
+	var font: Font = art.popup_font(fallback) if art != null else fallback
+	if view._presentation != null: font = view._presentation.creation_popup_font(font)
+	var label := Label.new()
+	label.text = view.display_text(text,"race-confirmation")
+	# Classic ASCII metrics stay seven pixels high. A whole-prompt locale-font
+	# recovery avoids enlarging every ASCII row merely by attaching a taller font.
+	for index in label.text.length():
+		if label.text.unicode_at(index) not in [9,10,13,32] and not font.has_char(label.text.unicode_at(index)):
+			font = fallback
+			break
+	label.add_theme_font_override("font",font)
+	label.add_theme_font_size_override("font_size",7)
+	label.add_theme_constant_override("line_spacing",0)
+	label.add_theme_color_override("font_color",TEXT_COLOR)
+	label.add_theme_color_override("font_shadow_color",SHADOW_COLOR)
+	label.add_theme_constant_override("shadow_offset_x",1)
+	label.add_theme_constant_override("shadow_offset_y",1)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	label.set_meta("creation_popup_text",true)
+	var natural := font.get_multiline_string_size(label.text,HORIZONTAL_ALIGNMENT_CENTER,-1,7)
+	var width := clampf(ceilf((natural.x+20)/22)*22,132,308)
+	var paragraph := TextParagraph.new()
+	paragraph.add_string(label.text,font,7)
+	paragraph.width = width-20
+	# Label reserves the font's fallback-aware line height even for all-ASCII text.
+	# Account for that too; TextParagraph alone can undercount a bitmap font row.
+	var text_height := maxf(font.get_height(7)*paragraph.get_line_count(),paragraph.get_size().y)
+	var height := minf(176,ceilf((text_height+20+20)/22)*22)
+	var root := Panel.new()
+	root.set_meta("creation_popup",true)
+	root.position = ((Vector2(640,400)-Vector2(width,height)*2)/2).floor()
+	root.size = Vector2(width,height)
+	root.scale = Vector2(2,2)
+	root.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var parchment: StyleBox = art.parchment_style() if art != null else null
+	if parchment == null:
+		var plain := StyleBoxFlat.new(); plain.bg_color = Color("957044"); parchment = plain
+	root.add_theme_stylebox_override("panel",parchment)
+	view._page.add_child(root)
+	var scroll := ScrollContainer.new()
+	scroll.position = Vector2(10,10)
+	scroll.size = Vector2(width-20,height-40)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
+	root.add_child(scroll)
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(label)
+	for item in [["yes","Yes",yes,-48],["no","No",no,16]]:
+		var button := Button.new()
+		button.text = item[1]
+		button.tooltip_text = item[1]
+		button.position = Vector2(floorf(width/2)+item[3],height-32)
+		button.size = Vector2(32,16)
+		root.add_child(button)
+		view._bind_button(button,"confirm/"+item[0],item[2])
+		button.disabled = view.navigation.summary_locked() or (item[0] == "yes" and not valid)
+		button.set_meta("accessible_label",item[1])
+		var sprite: Dictionary = art.resolve("creation.dialog."+item[0]) if art != null else {"ok":false}
+		if sprite.ok:
+			# Keep the semantic Button label for accessibility; pixels carry the ink.
+			button.add_theme_font_size_override("font_size",7)
+			for color in ["font_color","font_hover_color","font_pressed_color","font_disabled_color","font_focus_color"]: button.add_theme_color_override(color,Color.TRANSPARENT)
+			for state in ["normal","hover","pressed","disabled"]:
+				var style := StyleBoxTexture.new()
+				style.texture = sprite.texture
+				button.add_theme_stylebox_override(state,style)
+			var focus := StyleBoxFlat.new()
+			focus.bg_color = Color.TRANSPARENT
+			focus.border_color = TEXT_COLOR
+			focus.set_border_width_all(1)
+			button.add_theme_stylebox_override("focus",focus)
+			button.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		else:
+			button.add_theme_font_override("font",fallback)
+			button.add_theme_font_size_override("font_size",7)
+			button.add_theme_color_override("font_color",TEXT_COLOR)
+		# Initial stock styles can enlarge a Control before our sprite style binds.
+		button.size = Vector2(32,16)

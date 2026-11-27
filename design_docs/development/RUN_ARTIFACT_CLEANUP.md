@@ -1,5 +1,14 @@
 # Verification run artifact cleanup
 
+## 2026-11-26 IMP-015 race-popup visual pass
+
+
+Compacted **10 exact owned roots**, removing **16,628 reproducible files / 2,780,072,880 logical bytes**. Preserved verified prepared/executed-source archives, frozen tool sources, original child evidence paths, typed inputs, logs and inspected captures. Independently rehashed 2,656 retained files and every archive. All known task-owned copied projects, exports, native copies and caches are removed; installed template junctions were unlinked without following or changing their targets. Incomplete/failed development reports retain their actual status.
+
+Final whole-area retention sample: **7,322,525,485 logical / 5,684,907,360 allocated unique bytes**, before small final metadata writes. This reviews the aligned 8-GiB trigger; earlier accepted/human/uncertain roots remain protected. No external asset, installed tool, authoritative input or security setting changed. Exact cleanup receipts and largest retained roots are recorded in the audit.
+
+See [focused evidence](evidence/IMP-015-RACE-POPUP-POLISH-2026-11-26.md) and [audit](evidence/IMP-015-RACE-POPUP-POLISH-2026-11-26.audit.json).
+
 ## 2026-11-26 IMP-015 increment 4
 
 After ordinary engine inactivity and exact containment/reparse checks, **39 owned roots** were compacted across development, final verification and exports. Removed **63,995 reproducible files / 10,236,988,973 logical bytes**, preserving 39 hash-verified executed-source archives, 73 frozen tool sources, original child evidence paths, typed inputs and inspected captures. The final collection independently rehashed 7,426 retained files and all 39 archives. No task-owned full project, export, dependency copy or cache remains. Six installed template junctions were unlinked without following or changing their targets. One incomplete development report omitted its executable hash; the executable independently matched the pinned debug template, while its recorded PCK hash matched. The incomplete result was preserved, and its interrupted source archive remains as recovery evidence.

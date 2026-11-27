@@ -4,7 +4,8 @@ param(
     [switch]$SmokeTest,
     [switch]$RaceCareer,
     [switch]$BiographyRolls,
-    [switch]$Presentation
+    [switch]$Presentation,
+    [switch]$RacePopup
 )
 $ErrorActionPreference = 'Stop'
 . "$PSScriptRoot/assertion_values.ps1"
@@ -28,6 +29,7 @@ $fixture | Add-Member -NotePropertyName review_smoke -NotePropertyValue ([bool]$
 $fixture | Add-Member -NotePropertyName career_review -NotePropertyValue ([bool]$RaceCareer)
 $fixture | Add-Member -NotePropertyName biography_review -NotePropertyValue ([bool]$BiographyRolls)
 $fixture | Add-Member -NotePropertyName presentation_review -NotePropertyValue ([bool]$Presentation)
+$fixture | Add-Member -NotePropertyName race_popup_review -NotePropertyValue ([bool]$RacePopup)
 New-Item -ItemType Directory -Force $fixture.sandbox | Out-Null
 $fixture | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath "$case/human-review.json"
 @{owner='IMP-015 creation review';expiry='Close the engine after review, preserve evidence, then compact this reproducible build. Rebuild with review_creation.ps1.'} | ConvertTo-Json | Set-Content -LiteralPath "$($selected.root)/ACTIVE-HUMAN-REVIEW.json"
@@ -63,7 +65,7 @@ try {
 if ($process.ExitCode -ne 0) { throw "Creation review failed: $($fixture.sandbox)" }
 if ($SmokeTest) {
     $result = Get-Content -LiteralPath "$($fixture.sandbox)/result.json" -Raw | ConvertFrom-Json
-    $expectedSmoke = if ($Presentation) { 8 } elseif ($BiographyRolls) { 6 } else { 4 }
+    $expectedSmoke = if ($RacePopup) { 10 } elseif ($Presentation) { 8 } elseif ($BiographyRolls) { 6 } else { 4 }
     if (!$result.ok -or !$result.review_smoke -or $result.human_pass -or $result.count -ne $expectedSmoke) { throw 'Creation review smoke failed.' }
     if (!(Test-ScriptDiagnostics @("$($fixture.sandbox)/engine.stdout.log","$($fixture.sandbox)/engine.stderr.log") '' $result)) { throw 'Creation review reported an unexpected engine diagnostic.' }
 }

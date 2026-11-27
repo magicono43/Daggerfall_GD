@@ -1,5 +1,19 @@
 # Fonts and live locale presentation — IMP-007 increment 3
 
+## Creation popup presentation extension, 2026-11-26
+
+The race-confirmation popup uses the explicit classic `FONT0003.FNT` ASCII
+mapping when available. This optional bitmap resource is read through DATA and
+realized/cached in AV; original bytes stay external. It does not redefine the
+three locale roles. A normal `text.fonts:installed` font record with stable ID
+`creation-popup` overrides this popup style through existing package/loose
+publication, SFNT validation, fallback declarations and content locking. No new
+required record or offered locale is introduced. Debug/shell controls keep their
+ordinary roles. If a prompt requires glyphs outside the chosen popup font, UI
+recovers the whole prompt with the current locale body font and existing literal
+glyph diagnostics. Accepted source text is never rewritten. See
+[the focused presentation evidence](../../../design_docs/development/evidence/IMP-015-RACE-POPUP-POLISH-2026-11-26.md).
+
 Identities: **locale-fonts-v1**, **text-presentation-v1**, **text-layout-v1**.
 Catalog/CSV/token/structured-reader identities and lookup precedence are unchanged.
 English is the only offered language. `zz-Test` is a synthetic verification locale;

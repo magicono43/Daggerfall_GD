@@ -495,13 +495,15 @@ func publication(_shell: Control, fixture: Dictionary, record: Dictionary) -> vo
 	app.providers.enable_media_replacements()
 	app.providers.enable_actor_inputs()
 	app.providers.enable_creation()
+	app.providers.enable_locale_fonts()
 	app.start({"executable_dir":sandbox.path_join("publication/executable"),"per_user_dir":sandbox.path_join("publication/user")})
 	app.settings.effective["startup/show_setup"] = true
 	var package := manifest("creation.review")
-	package.capabilities = ["data.creation-flow-v1","data.creation-career-v1","data.creation-starting-v1","data.creation-biography-v1","data.creation-identity-v1","data.actor-inputs-v1","data.actor-baseline-v1","data.media-v1"]
-	package.content = ["flow.json","media.json","career.json","preset.json","numbers.json","starting.json","history.json","identity.json","portrait.json"]
+	package.capabilities = ["data.creation-flow-v1","data.creation-career-v1","data.creation-starting-v1","data.creation-biography-v1","data.creation-identity-v1","data.actor-inputs-v1","data.actor-baseline-v1","data.media-v1","locale-fonts-v1"]
+	package.content = ["flow.json","media.json","career.json","preset.json","numbers.json","starting.json","history.json","identity.json","portrait.json","popup-font.json"]
 	var root: String = app.mods.root.path_join("Mods/creation")
 	preload("res://tests/publication_fixture.gd").write(root.path_join("mod.json"),package)
+	preload("res://tests/publication_fixture.gd").write(root.path_join("popup-font.json"),{"domain":"text.fonts","path":"installed","operation":"add","entries":[{"id":"creation-popup","value":{"schema":"locale-fonts-v1","kind":"font","bundled":"sample-mono","sha256":preload("res://scripts/data/locale_fonts.gd").HASHES["sample-mono"],"license":"SIL OFL 1.1","version":"3.000","fallbacks":["recovery-sans"]}}]})
 	var steps: Dictionary = record.value.steps.duplicate(true)
 	steps.race.title = "Pack race title"
 	var patch := {"domain":Flow.DOMAIN,"path":"flows","operation":"patch","entries":[{"id":"stock","value":{"steps":steps}}]}
@@ -554,6 +556,8 @@ func publication(_shell: Control, fixture: Dictionary, record: Dictionary) -> vo
 		print("CREATION PUBLICATION ISSUES ",app.result.get("issues",[]))
 		app.providers.dispose(); app.storage.adapter.release(); return
 	var published: Dictionary = app.providers.definitions.query(Flow.DOMAIN,"flows","stock")
+	check("popup package font uses normal publication",true,app.providers.presentation.creation_popup_font(null).get_font_name().contains("Inconsolata"))
+	check("popup package font leaves body role unchanged",false,app.providers.presentation.font().get_font_name().contains("Inconsolata"))
 	check("loose creation field wins","Loose race title",published.record.value.steps.race.title)
 	check("creation contributors retained",true,published.record.contributors.size() >= 3)
 	var identity_provider := preload("res://scripts/char/creation_identity_inputs.gd").new()

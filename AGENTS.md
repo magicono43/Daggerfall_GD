@@ -128,6 +128,18 @@ Start with the assigned `design_docs/development/tasks/IMP-NNN.md`. Read its lin
 
 ## Verification and completion
 
+### Iterative UI polish — user preference, 2026-11-26
+
+For small presentation iterations, use the repository's
+[fast-ui-polish skill](.agents/skills/fast-ui-polish/SKILL.md). Default to a focused
+rendered preview and affected control/focus/scrolling checks. Batch broader
+regressions after several approved changes; run exports/comprehensive checks at
+presentation checkpoints. This refines the per-iteration headless/rendered cadence
+below for visual-only changes. Functional/owner-boundary changes need appropriate
+targeted verification, and named acceptance gates remain required at their actual
+checkpoint. Record deferred checks accurately. Do not rerun the full creator and
+both exports, or scan all historical artifacts, for every spacing/color tweak.
+
 - Select checks for the changed behavior and its affected callers; unrelated IMP
   work does not automatically require the dungeon stress suite. Run heavy suites
   and exports one at a time to reduce desktop hitches (user preference discussed

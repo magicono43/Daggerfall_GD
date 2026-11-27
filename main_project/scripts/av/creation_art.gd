@@ -8,6 +8,8 @@ var definitions: RefCounted
 var _textures: Dictionary = {}
 var _baselines: Dictionary = {}
 var _narrations: Dictionary = {}
+var _popup_font: FontFile
+var _popup_font_prepared := false
 const NARRATIONS = ["breton","redguard","nord","dark-elf","high-elf","wood-elf","khajiit","argonian"]
 var measurements := {"requests":0,"baseline_decodes":0,"textures":0,"decode_usec":0,"rgba_bytes":0}
 
@@ -18,6 +20,9 @@ func declare(providers: RefCounted) -> Dictionary:
 	if media == null: return {"ok":false,"reason":"Creation art requires the existing media resolver."}
 	var parchment: Dictionary = media.register_target("creation.parchment","image",[],_parchment_baseline)
 	if not parchment.ok: return parchment
+	for item in [["yes",3],["no",4]]:
+		var button: Dictionary = media.register_target("creation.dialog."+item[0],"image",[],_dialog_button_baseline.bind(item[1]))
+		if not button.ok: return button
 	for target: String in FILES:
 		var checked: Dictionary = media.register_target(target,"image",[],_baseline.bind(target))
 		if not checked.ok: return checked
@@ -54,6 +59,38 @@ func parchment_style() -> StyleBoxTexture:
 
 func _portrait_baseline(file: String, record: int) -> Dictionary:
 	return _decode_once(file+"/"+str(record),classic.creation_portrait.bind(file,record))
+
+func _dialog_button_baseline(record: int) -> Dictionary:
+	return _decode_once("BUTTONS.RCI/"+str(record),classic.creation_dialog_button.bind(record))
+
+func popup_font(fallback: Font) -> Font:
+	if not _popup_font_prepared:
+		_popup_font_prepared = true
+		var source: Dictionary = classic.creation_popup_font()
+		if source.ok:
+			_popup_font = FontFile.new()
+			_popup_font.font_name = "Daggerfall FONT0003"
+			_popup_font.allow_system_fallback = false
+			_popup_font.fixed_size = source.height
+			_popup_font.fixed_size_scale_mode = TextServer.FIXED_SIZE_SCALE_ENABLED
+			_popup_font.set_meta("provenance",source.provenance)
+			# Setting the family name can leave an empty default-size cache first.
+			# Godot's has_char() consults that first cache. Start with only our atlas.
+			_popup_font.clear_size_cache(0)
+			var cache_size := Vector2i(source.height,0)
+			_popup_font.set_texture_image(0,cache_size,0,source.image)
+			_popup_font.set_cache_ascent(0,source.height,source.height)
+			_popup_font.set_cache_descent(0,source.height,0)
+			for code in range(32,127):
+				var index: int = code-33
+				var width: int = source.width-1 if code == 32 else source.widths[index]
+				_popup_font.set_glyph_advance(0,source.height,code,Vector2(width+1,0))
+				_popup_font.set_glyph_offset(0,cache_size,code,Vector2(0,-source.height))
+				_popup_font.set_glyph_size(0,cache_size,code,Vector2(width,source.height) if code != 32 else Vector2.ZERO)
+				_popup_font.set_glyph_uv_rect(0,cache_size,code,Rect2((index%16)*16,(index/16)*16,width,source.height) if code != 32 else Rect2())
+				_popup_font.set_glyph_texture_idx(0,cache_size,code,0)
+	if _popup_font == null: return fallback
+	return _popup_font
 
 func _parchment_baseline() -> Dictionary:
 	return _decode_once("creation.parchment",classic.creation_parchment)
@@ -112,6 +149,8 @@ func resolve(target: String) -> Dictionary:
 	return _textures[target].duplicate()
 
 func dispose() -> void:
+	_popup_font = null
+	_popup_font_prepared = false
 	_textures.clear()
 	_baselines.clear()
 	_narrations.clear()

@@ -290,6 +290,19 @@ func creation_parchment() -> Dictionary:
 		atlas.blit_rect(tile,Rect2i(0,0,22,22),Vector2i((record%3)*22,(record/3)*22))
 	return {"ok":true,"image":atlas,"provenance":{"source":"SPOP.RCI","sha256":ActorFormats.sha256(bytes),"palette":"ART_PAL.COL","palette_sha256":ActorFormats.sha256(palette_bytes),"layout":"DFU SetBorderTextures row-major nine tiles","alpha_index":0}}
 
+func creation_popup_font() -> Dictionary:
+	if not ready(): return {"ok":false,"reason":"Published classic source required."}
+	return preload("res://scripts/data/classic_font.gd").decode(FileAccess.get_file_as_bytes(_active_source.path_join("FONT0003.FNT")))
+
+func creation_dialog_button(record: int) -> Dictionary:
+	if not ready() or record not in [3,4]: return {"ok":false,"reason":"Known classic Yes/No button required."}
+	var codec := preload("res://scripts/data/classic_image.gd").new()
+	var bytes := FileAccess.get_file_as_bytes(_active_source.path_join("BUTTONS.RCI"))
+	var palette_bytes := FileAccess.get_file_as_bytes(_active_source.path_join("ART_PAL.COL"))
+	var rgba := codec.rgba(codec.decode(bytes,"BUTTONS.RCI",record,0),codec.palette(palette_bytes),0)
+	if not rgba.ok: return rgba
+	return {"ok":true,"image":Image.create_from_data(rgba.width,rgba.height,false,Image.FORMAT_RGBA8,rgba.rgba),"provenance":{"source":"BUTTONS.RCI","record":record,"sha256":ActorFormats.sha256(bytes),"palette_sha256":ActorFormats.sha256(palette_bytes)}}
+
 func creation_source(file: String) -> Dictionary:
 	# Bounded read-only source capability, not an arbitrary path reader. Original
 	# map/result bytes are interpreted by the creation DATA adapter before publish.

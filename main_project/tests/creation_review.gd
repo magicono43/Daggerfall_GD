@@ -2,6 +2,7 @@ extends RefCounted
 ## Uses the normal shell and actual creation controls; never enables gameplay.
 func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	if fixture.get("presentation_review",false): shell.get_window().title = "IMP-015 increment 4 — Production character creation review"
+	if fixture.get("race_popup_review",false): shell.get_window().title = "IMP-015 — Race popup visual review"
 	shell.controller.settings.effective["startup/show_setup"] = true
 	shell.controller.select_folder(fixture.classic_source)
 	shell.controller.continue_to_menu("run")
@@ -29,6 +30,12 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	if fixture.get("biography_review",false): view.notice = "BIOGRAPHY AND STARTING ROLLS REVIEW: all increment-3 biography, attributes and skills use production DATA/CHAR semantics. Only name, portrait and reflexes use assigned later-stage providers. No live grants or playable entry."
 	if fixture.get("presentation_review",false): view.notice = "INCREMENT 4 PRESENTATION REVIEW: every creation choice uses production providers and classic content. Begin Game plays enabled introductory clips, then reports unavailable playable entry. No live actors or grants."
 	shell.session_shell.render()
+	if fixture.get("race_popup_review",false):
+		# Deliberately open an uncommitted candidate through its stock control.
+		# This labelled visual preview does not assign any CHAR fact.
+		view.notice = "RACE POPUP REVIEW: opening the Nord confirmation preview. No race is committed. Try No, another province, then Yes."
+		view._buttons["province/nord"].pressed.emit()
+		shell.session_shell.render()
 	if not fixture.get("review_smoke",false):
 		# Keep the ordinary event loop and window-manager/Pause/Quit handlers alive.
 		while true: await shell.get_tree().process_frame
@@ -36,6 +43,9 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	checks.append({"scenario":"review opens real creation window","expected":"creation","actual":shell.session_shell.windows.top().get("window")})
 	checks.append({"scenario":"review explicit controlled label","expected":not fixture.get("presentation_review",false),"actual":view.controlled})
 	checks.append({"scenario":"review real entry still unavailable","expected":false,"actual":shell.session_shell.core.provider.prepare({},{}).ok})
+	if fixture.get("race_popup_review",false):
+		checks.append({"scenario":"popup preview opens stock Nord candidate","expected":"nord","actual":view.career_view.candidate})
+		checks.append({"scenario":"popup preview commits no race","expected":false,"actual":view.owner.projection().selections.has("race")})
 	if fixture.get("presentation_review",false):
 		checks.append({"scenario":"review real identity provider","expected":true,"actual":view.inputs.has_method("random_name")})
 		checks.append({"scenario":"review fresh Average default","expected":"average","actual":view.owner.projection().selections.get("reflexes")})

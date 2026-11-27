@@ -58,7 +58,7 @@ func prepare(resources: Dictionary, ticket: int) -> Dictionary:
 		var roles := {}
 		for role: String in Fonts.ROLES:
 			roles[role] = fonts[value.roles[role]]
-		_staged[value.locale] = {"roles":roles,"offer":value.offer,"coverage":value.coverage}
+		_staged[value.locale] = {"roles":roles,"offer":value.offer,"coverage":value.coverage,"creation_popup":fonts.get("creation-popup")}
 	if not _staged.has("en") or recovery == null:
 		return {"ok":false,"reason":"Readable bundled English recovery unavailable."}
 	_ticket = ticket
@@ -88,6 +88,11 @@ func available(include_synthetic := false) -> Array:
 func font(role := "body", selected := "") -> Font:
 	var id := locale if selected.is_empty() else selected
 	return _loaded.get(id,{}).get("roles",{}).get(role,recovery)
+
+func creation_popup_font(baseline: Font) -> Font:
+	# Optional stable font ID uses ordinary text.fonts publication and locking.
+	var installed: Font = _loaded.get(locale,{}).get("creation_popup")
+	return installed if installed != null else baseline if baseline != null else font()
 
 func bind_view(view: Control) -> void:
 	_views.append(weakref(view))

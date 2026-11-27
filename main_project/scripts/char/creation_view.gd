@@ -332,6 +332,7 @@ func render() -> void:
 	if hook != "summary": _button("next","Next",Rect2(526,344,100,46),func(): action("next",expected))
 	else: _button("begin","Begin Game",Rect2(500,344,130,46),func(): action("begin",expected))
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook in ["race","class"]: _buttons.next.disabled = true
+	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook == "race": _buttons.next.hide()
 	var row := HBoxContainer.new()
 	host.panel.add_child(row)
 	for entry in [["back","Back"],["restart","Restart"],["exit","Exit creation"]]:

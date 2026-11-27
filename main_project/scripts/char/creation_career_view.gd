@@ -70,17 +70,21 @@ func _candidate(view: RefCounted, expected: Dictionary, hook: String, id: String
 
 func _confirm(view: RefCounted, expected: Dictionary, hook: String, id: String) -> void:
 	var read: Dictionary = view.inputs.description(id)
+	if hook == "race":
+		preload("res://scripts/ui/creation_popup.gd").confirm(view,read.text if read.ok else read.reason,func():
+			var result: Dictionary = view.action("edit",expected,id)
+			if result.ok:
+				candidate = ""; stop_narration()
+				view.action("next",view.navigation.context()),func():
+			candidate = ""; stop_narration(); refresh(view),read.ok)
+		return
 	var list := _list(view,Rect2(12,16,616,268))
-	var label: String = view.inputs.policy.races[id].label if hook == "race" else view.inputs.preset(id).get("name",id)
+	var label: String = view.inputs.preset(id).get("name",id)
 	label = view.translated("choice."+hook+"."+id,label)
 	view._text(list,read.text if read.ok else read.reason)
-	if hook == "race":
-		view._text(list,"Benefits: "+view.inputs.race_benefits(id))
-		view._text(list,"Birth identity is retained separately from later transformations. No racial attribute or gender stat modifiers.")
-	else:
-		var career: Dictionary = view.inputs.preset(id)
-		if career.ok: _mechanics(view,list,career)
-		else: view._text(list,career.reason); read = career
+	var career: Dictionary = view.inputs.preset(id)
+	if career.ok: _mechanics(view,list,career)
+	else: view._text(list,career.reason); read = career
 	view._button("confirm/yes","Yes — accept "+label,Rect2(12,290,302,42),func():
 		var result: Dictionary = view.action("edit",expected,id)
 		if result.ok:
