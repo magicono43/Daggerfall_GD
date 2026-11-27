@@ -273,7 +273,7 @@ func render() -> void:
 		_summary(expected,selected)
 	elif inputs.has_method("random_name") and hook in ["name","face","reflexes"]:
 		identity_view.render(self,expected,hook,selected)
-	elif inputs.has_method("validate_career") and hook in ["race","gender","class_method","class","questionnaire","custom"]:
+	elif inputs.has_method("validate_career") and hook in ["race","gender","class_method","biography_method","class","questionnaire","custom"]:
 		career_view.render(self,expected,hook,selected)
 	elif inputs.has_method("operate") and hook in ["attributes","skills"]:
 		starting_view.render(self,expected,hook,selected)
@@ -332,7 +332,7 @@ func render() -> void:
 	else: _button("begin","Begin Game",Rect2(500,344,130,46),func(): action("begin",expected))
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook in ["race","class"]: _buttons.next.disabled = true
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook == "race": _buttons.next.hide()
-	if inputs.has_method("validate_career") and hook in ["gender","class_method"]: _buttons.next.hide()
+	if inputs.has_method("validate_career") and hook in ["gender","class_method","class","biography_method"]: _buttons.next.hide()
 	var row := HBoxContainer.new()
 	host.panel.add_child(row)
 	for entry in [["back","Back"],["restart","Restart"],["exit","Exit creation"]]:

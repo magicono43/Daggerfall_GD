@@ -64,6 +64,10 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("male native sprite size",Vector2(32,16),view._buttons["gender/male"].size)
 	check("female native sprite size",Vector2(32,16),view._buttons["gender/female"].size)
 	await capture(shell,str(fixture.sandbox).path_join("gender-popup.png"))
+	if fixture.get("class_picker_preview",false):
+		await press(shell,view,"gender/male")
+		await press(shell,view,"choice/list")
+		return await preload("res://tests/creation_picker_preview.gd").new().run(self,shell,view,fixture)
 	if fixture.get("class_method_preview",false):
 		await press(shell,view,"gender/male")
 		return await class_method(shell,view,fixture)
@@ -133,7 +137,10 @@ func class_method(shell: Control, view: RefCounted, fixture: Dictionary) -> Dict
 	await settle(shell)
 	check("obsolete method does not change route","class",view.navigation.step().hook)
 	check("obsolete method does not play click",clicks+1,art.click_submissions)
-	await press(shell,view,"preset/custom")
+	var custom_event := InputEventMouseButton.new()
+	custom_event.button_index = MOUSE_BUTTON_LEFT; custom_event.pressed = true; custom_event.double_click = true
+	view._buttons["preset/custom"].gui_input.emit(custom_event)
+	await settle(shell)
 	check("Custom opens existing editor","custom",view.navigation.step().hook)
 	await press(shell,view,"back")
 	check("Custom Back returns to method","class_method",view.navigation.step().hook)

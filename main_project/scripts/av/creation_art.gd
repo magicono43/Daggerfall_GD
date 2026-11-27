@@ -9,6 +9,7 @@ var _textures: Dictionary = {}
 var _baselines: Dictionary = {}
 var _narrations: Dictionary = {}
 var _click: Dictionary = {}
+var _class_jingle: Dictionary = {}
 var _click_player: AudioStreamPlayer
 var click_submissions := 0
 var _popup_font: FontFile
@@ -25,8 +26,15 @@ func declare(providers: RefCounted) -> Dictionary:
 	if not parchment.ok: return parchment
 	var method: Dictionary = media.register_target("creation.class-method","image",[],_decode_once.bind("creation.class-method",classic.creation_image.bind("BUTN01I0.IMG")))
 	if not method.ok: return method
+	for item in [["creation.list-picker","PICK00I0.IMG"],["creation.biography-method","BUTN02I0.IMG"]]:
+		var result: Dictionary = media.register_target(item[0],"image",[],_decode_once.bind(item[0],classic.creation_image.bind(item[1])))
+		if not result.ok: return result
 	var click: Dictionary = media.register_target("creation.dialog.click","audio",[],_sound_baseline.bind({"ordinal":360}))
 	if not click.ok: return click
+	var drums: Dictionary = media.register_target("creation.class-drums","audio",[],_sound_baseline.bind({"ordinal":374}))
+	if not drums.ok: return drums
+	var thumb: Dictionary = media.register_target("creation.scrollbar-thumb","image",[],_scrollbar_thumb_baseline)
+	if not thumb.ok: return thumb
 	for item in [["yes",3],["no",4],["male",6],["female",7]]:
 		var button: Dictionary = media.register_target("creation.dialog."+item[0],"image",[],_dialog_button_baseline.bind(item[1]))
 		if not button.ok: return button
@@ -142,6 +150,23 @@ func play_dialog_click(host: Node) -> void:
 	_click_player.play()
 	click_submissions += 1
 
+func class_jingle() -> Dictionary:
+	if _class_jingle.is_empty(): _class_jingle = media.resolve("creation.class-drums","audio")
+	return _class_jingle.duplicate()
+
+func _scrollbar_thumb_baseline() -> Dictionary:
+	# Pinned DFU MIT resources: retain the original five-pixel sliced bevel.
+	var atlas := Image.create(5,3,false,Image.FORMAT_RGBA8)
+	for index in 3:
+		var file: String = "res://content/ui/classic/VScrollThumb"+["Top","Body","Bottom"][index]+".png"
+		var texture: Texture2D = load(file)
+		if texture == null: return {"ok":false,"reason":"Optional scrollbar thumb unavailable."}
+		var bitmap := texture.get_image()
+		if bitmap.get_size() != Vector2i(5,1): return {"ok":false,"reason":"Pinned scrollbar slice must be 5 by 1."}
+		bitmap.convert(Image.FORMAT_RGBA8)
+		atlas.blit_rect(bitmap,Rect2i(0,0,5,1),Vector2i(0,index))
+	return {"ok":true,"image":atlas,"provenance":{"source":"DFU 1.1.1 Assets/Resources/VScrollThumb{Top,Body,Bottom}.png","license":"MIT","sampling":"nearest"}}
+
 func narration(race: String) -> Dictionary:
 	if race not in NARRATIONS: return {"ok":false,"reason":"Unsupported race narration."}
 	if not _narrations.has(race): _narrations[race] = media.resolve("creation.narration."+race,"audio")
@@ -177,6 +202,7 @@ func dispose() -> void:
 		_click_player.queue_free()
 	_click_player = null
 	_click.clear()
+	_class_jingle.clear()
 	_popup_font = null
 	_popup_font_prepared = false
 	_textures.clear()

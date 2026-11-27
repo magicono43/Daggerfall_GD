@@ -8,10 +8,14 @@ const Draft = preload("res://scripts/char/creation_draft.gd")
 var owner: RefCounted
 var provider: RefCounted
 
-func control(shell: Control, text: String) -> bool:
+func control(shell: Control, text: String, activate := false) -> bool:
 	await shell.get_tree().process_frame
 	await shell.get_tree().process_frame
 	var found := await click(shell,text)
+	if found and activate:
+		var event := InputEventMouseButton.new()
+		event.button_index = MOUSE_BUTTON_LEFT; event.pressed = true; event.double_click = true
+		find_button(shell.panel,text).gui_input.emit(event)
 	await shell.get_tree().process_frame
 	await shell.get_tree().process_frame
 	return found
@@ -333,12 +337,12 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 	await control(shell,"Female")
 	await control(shell,"Choose from a list")
 	check("career stock preset list","class",view.navigation.step().hook)
-	await control(shell,"Warrior")
+	await control(shell,"Warrior",true)
 	check("career direct candidate uncommitted",false,view.owner.projection().selections.has("class"))
 	await capture(shell,"creation-preset-confirmation.png")
-	check("career direct No handler",true,await control(shell,"No — choose again"))
-	await control(shell,"Warrior")
-	check("career preset Yes handler",true,await control(shell,"Yes — accept Warrior"))
+	check("career direct No handler",true,await control(shell,"No"))
+	await control(shell,"Warrior",true)
+	check("career preset Yes handler",true,await control(shell,"Yes"))
 	check("career later biography stays separate","biography_method",view.navigation.step().hook)
 	check("career zero premature actor",0,shell.session_shell.core.actors._actors.size())
 	check("career zero premature session readiness",false,shell.session_shell.core.gates.ready)
@@ -359,7 +363,7 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 	view.navigation._summary_seen = true # Focused UI permission seam; complete hybrid routes are qualified above.
 	check("career read-only questionnaire confirmation permits exit",false,view.cancel_nested())
 	view.navigation._summary_seen = false
-	check("career questionnaire suggestion No handler",true,await control(shell,"No — choose again"))
+	check("career questionnaire suggestion No handler",true,await control(shell,"No"))
 	check("career decline opens direct including Custom",true,find_button(shell.panel,"Custom") != null)
 	check("career decline switches method","list",view.owner.projection().selections.class_method)
 	view.action("back",view.navigation.context())

@@ -1,11 +1,12 @@
 extends RefCounted
 ## Original BUTN01I0 pixels; native rectangles from DFU CreateCharChooseClassGen.
-static func render(view: RefCounted, expected: Dictionary) -> void:
+static func render(view: RefCounted, expected: Dictionary, hook := "class_method") -> void:
+	var biography := hook == "biography_method"
 	var art: RefCounted = view.shell.host.controller.providers.creation_art
-	var image: Dictionary = art.resolve("creation.class-method")
+	var image: Dictionary = art.resolve("creation.biography-method" if biography else "creation.class-method")
 	var root := Control.new()
-	root.position = Vector2(136,56)
-	root.size = Vector2(184,144)
+	root.size = Vector2(184,168 if biography else 144)
+	root.position = (Vector2(640,400)-root.size*2)/2
 	root.scale = Vector2(2,2)
 	view._page.add_child(root)
 	if image.ok:
@@ -16,10 +17,11 @@ static func render(view: RefCounted, expected: Dictionary) -> void:
 		background.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		root.add_child(background)
-	for item in [["list","Choose from a list",Rect2(8,41,167,43)],["questionnaire","Answer questions",Rect2(8,100,167,34)]]:
+	var options := [["automatic","Generate biography automatically",Rect2(8,41,167,54)],["manual","Answer biography questions",Rect2(8,113,167,46)]] if biography else [["list","Choose from a list",Rect2(8,41,167,43)],["questionnaire","Answer questions",Rect2(8,100,167,34)]]
+	for item in options:
 		var id: String = item[0]
 		var button := Button.new()
-		button.text = view.translated("choice.class_method."+id,item[1])
+		button.text = view.translated("choice."+hook+"."+id,item[1])
 		button.tooltip_text = button.text
 		button.set_meta("accessible_label",button.text)
 		root.add_child(button)
@@ -31,6 +33,8 @@ static func render(view: RefCounted, expected: Dictionary) -> void:
 				view.action("next",view.navigation.context()))
 		button.disabled = view.navigation.summary_locked()
 		if image.ok:
+			button.add_theme_font_size_override("font_size",7)
+			button.clip_text = true
 			for color in ["font_color","font_hover_color","font_pressed_color","font_disabled_color","font_focus_color"]: button.add_theme_color_override(color,Color.TRANSPARENT)
 			for state in ["normal","hover","pressed","disabled"]: button.add_theme_stylebox_override(state,StyleBoxEmpty.new())
 			var focus := StyleBoxFlat.new()

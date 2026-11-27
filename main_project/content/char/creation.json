@@ -31,7 +31,7 @@
           "class": {
             "hook": "class",
             "title": "Preset class",
-            "art": ""
+            "art": "creation.race"
           },
           "custom": {
             "hook": "custom",
@@ -41,7 +41,7 @@
           "biography_method": {
             "hook": "biography_method",
             "title": "Biography method",
-            "art": ""
+            "art": "creation.race"
           },
           "biography": {
             "hook": "biography",

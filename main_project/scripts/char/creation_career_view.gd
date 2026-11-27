@@ -8,6 +8,9 @@ var question_position := 0
 var custom_tab := 0
 var _narrations: Array[AudioStreamPlayer] = []
 var _draft := ""
+var picker_selection := -1
+var picker_scroll := 0
+var class_jingle_submissions := 0
 
 func clear() -> void:
 	candidate = ""
@@ -15,6 +18,8 @@ func clear() -> void:
 	question_position = 0
 	custom_tab = 0
 	_draft = ""
+	picker_selection = -1
+	picker_scroll = 0
 	stop_narration()
 
 func stop_narration() -> void:
@@ -39,6 +44,7 @@ func render(view: RefCounted, expected: Dictionary, hook: String, selected: Dict
 		"race": _race(view,expected,selected)
 		"gender": _gender(view,expected,selected)
 		"class_method": preload("res://scripts/ui/creation_class_method.gd").render(view,expected)
+		"biography_method": preload("res://scripts/ui/creation_class_method.gd").render(view,expected,"biography_method")
 		"class": _classes(view,expected,selected)
 		"questionnaire": _questions(view,expected,selected)
 		"custom": _custom(view,expected,selected)
@@ -69,36 +75,23 @@ func _candidate(view: RefCounted, expected: Dictionary, hook: String, id: String
 	candidate = id
 	candidate_hook = hook
 	if hook == "race": narrate(view,id)
+	elif hook == "class":
+		var art: RefCounted = view.shell.host.controller.providers.creation_art
+		if _play_creation_clip(view,art.class_jingle()): class_jingle_submissions += 1
 	refresh(view)
 
 func _confirm(view: RefCounted, expected: Dictionary, hook: String, id: String) -> void:
 	var read: Dictionary = view.inputs.description(id)
-	if hook == "race":
-		preload("res://scripts/ui/creation_popup.gd").confirm(view,read.text if read.ok else read.reason,func():
-			var result: Dictionary = view.action("edit",expected,id)
-			if result.ok:
-				candidate = ""
-				view.action("next",view.navigation.context()),func():
-			candidate = ""; refresh(view),read.ok)
-		return
-	var list := _list(view,Rect2(12,16,616,268))
-	var label: String = view.inputs.preset(id).get("name",id)
-	label = view.translated("choice."+hook+"."+id,label)
-	view._text(list,read.text if read.ok else read.reason)
-	var career: Dictionary = view.inputs.preset(id)
-	if career.ok: _mechanics(view,list,career)
-	else: view._text(list,career.reason); read = career
-	view._button("confirm/yes","Yes — accept "+label,Rect2(12,290,302,42),func():
+	var yes := func():
 		var result: Dictionary = view.action("edit",expected,id)
 		if result.ok:
 			candidate = ""
-			view.action("next",view.navigation.context()))
-	view._buttons["confirm/yes"].disabled = not read.ok or view.navigation.summary_locked()
-	view._button("confirm/no","No — choose again",Rect2(326,290,302,42),func():
+			view.action("next",view.navigation.context())
+	var no := func():
 		candidate = ""
 		if hook == "class" and view.owner.projection().selections.get("class_method") == "questionnaire": view.action("career-route",expected,"list")
-		else: refresh(view))
-	view._buttons["confirm/no"].disabled = view.navigation.summary_locked()
+		else: refresh(view)
+	preload("res://scripts/ui/creation_popup.gd").choices(view,read.text if read.ok else read.reason,[["confirm/yes","Yes",yes,"yes",not read.ok],["confirm/no","No",no,"no",false]],hook+"-confirmation")
 
 func _race(view: RefCounted, expected: Dictionary, selected: Dictionary) -> void:
 	if not candidate.is_empty(): _confirm(view,expected,"race",candidate); return
@@ -145,17 +138,45 @@ func _mechanics(view: RefCounted, parent: Control, career: Dictionary) -> void:
 	view._text(parent,"Effects and racial/class stacking require their runtime owners; this draft applies no live grants.")
 
 func _classes(view: RefCounted, expected: Dictionary, selected: Dictionary) -> void:
-	if not candidate.is_empty(): _confirm(view,expected,"class",candidate); return
 	if selected.get("class_method") == "questionnaire":
 		var read: Dictionary = view.inputs.suggestion(selected.get("questionnaire",{}))
 		if read.ok: _confirm(view,expected,"class",read.id); return
 		view._text(view._box(Rect2(12,16,616,270)),read.reason)
 		view._button("direct-route","Choose directly",Rect2(12,286,240,46),func(): view.action("career-route",expected,"list"))
 		return
-	var list := _list(view,Rect2(100,16,440,316))
+	var entries: Array = []
+	var labels: Array = []
 	for choice: Dictionary in view.inputs.choices("class"):
-		_button(view,list,"preset/"+choice.id,view.translated("choice.class."+choice.id,str(choice.label)),func(): _candidate(view,expected,"class",choice.id))
-	_button(view,list,"preset/custom","Custom",func(): view.action("career-route",expected,"custom"))
+		entries.append(str(choice.id))
+		labels.append(view.translated("choice.class."+choice.id,str(choice.label)))
+	entries.append("custom"); labels.append(view.translated("choice.class.custom","Custom"))
+	var art: RefCounted = view.shell.host.controller.providers.creation_art
+	var image: Dictionary = art.resolve("creation.list-picker")
+	var thumb: Dictionary = art.resolve("creation.scrollbar-thumb")
+	var fallback: Font = view._presentation.font() if view._presentation != null else ThemeDB.fallback_font
+	var font: Font = art.popup_font(fallback)
+	if view._presentation != null: font = view._presentation.creation_popup_font(font)
+	for text: String in labels:
+		for index in text.length():
+			if not font.has_char(text.unicode_at(index)): font = fallback; break
+	var picker := preload("res://scripts/ui/classic_list_picker.gd").new()
+	picker.position = Vector2(120,72); picker.scale = Vector2(2,2)
+	picker.set_meta("creation_list_picker",true)
+	view._page.add_child(picker)
+	picker.configure(labels,font,image.texture if image.ok else null,view.navigation.summary_locked() or not candidate.is_empty(),picker_selection,picker_scroll,thumb.texture if thumb.ok else null)
+	for index in entries.size(): view._buttons["preset/"+entries[index]] = picker.buttons[index]
+	var generation: int = view._render_generation
+	var current := func(): return generation == view._render_generation and view.active() and not view.shell.core.busy() and Draft.same_value(expected,view.navigation.context())
+	picker.item_selected.connect(func(index: int):
+		if not current.call(): return
+		picker_selection = index)
+	picker.scrolled.connect(func(index: int):
+		if current.call(): picker_scroll = index)
+	picker.item_activated.connect(func(index: int):
+		if not current.call() or view.navigation.summary_locked() or not candidate.is_empty(): return
+		if entries[index] == "custom": view.action("career-route",expected,"custom")
+		else: _candidate(view,expected,"class",entries[index]))
+	if not candidate.is_empty(): _confirm(view,expected,"class",candidate)
 
 func _questions(view: RefCounted, expected: Dictionary, selected: Dictionary) -> void:
 	var source: Dictionary = view.inputs.sources.questionnaire
@@ -386,8 +407,11 @@ func _number(view: RefCounted, parent: Control, id: String, title: String, curre
 	_spin(view,row,id,current,minimum,maximum,callback)
 func narrate(view: RefCounted, id: String) -> void:
 	var art: RefCounted = view.shell.host.controller.providers.creation_art
-	var instance: Dictionary = preload("res://scripts/av/replacement_instances.gd").audio(art.narration(id))
-	if not instance.ok: return # Optional audio cannot gate selection.
+	_play_creation_clip(view,art.narration(id))
+
+func _play_creation_clip(view: RefCounted, resource: Dictionary) -> bool:
+	var instance: Dictionary = preload("res://scripts/av/replacement_instances.gd").audio(resource)
+	if not instance.ok: return false # Optional audio cannot gate selection.
 	var player: AudioStreamPlayer = instance.player
 	_narrations.append(player)
 	view.shell.host.add_child(player)
@@ -395,3 +419,4 @@ func narrate(view: RefCounted, id: String) -> void:
 		_narrations.erase(player)
 		player.queue_free(),CONNECT_ONE_SHOT)
 	player.play()
+	return true
