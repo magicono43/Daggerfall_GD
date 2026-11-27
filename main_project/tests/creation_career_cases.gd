@@ -378,7 +378,8 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 	view.action("edit",view.navigation.context(),"breton"); view.action("next",view.navigation.context())
 	view.action("edit",view.navigation.context(),"male"); view.action("next",view.navigation.context())
 	view.action("edit",view.navigation.context(),"custom"); view.action("next",view.navigation.context())
-	check("career custom opens real control",true,await control(shell,"Open custom career"))
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
+	check("career custom opens directly",true,view._editors.has("custom/name-field") and not view._buttons.has("start-custom"))
 	var class_name_field: LineEdit = view._editors["custom/name-field"]
 	class_name_field.text = "Étoile 流浪者"
 	class_name_field.text_changed.emit(class_name_field.text)
@@ -387,27 +388,33 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 	check("career custom name stock handler",true,await control(shell,"Use name"))
 	check("career custom Unicode name owner receives","Étoile 流浪者",view.owner.projection().selections.custom.name)
 	check("career custom missing glyph diagnostic retained",true,view.glyph_diagnostics.any(func(d): return d.kind == "missing_glyph" and d.context.get("field") == "custom.name"))
-	var attribute: SpinBox = metadata(view._page,"attribute/strength")
-	attribute.value = 51
+	view._buttons["attribute/strength"].pressed.emit()
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
+	view._buttons["attribute/up"].pressed.emit()
 	await shell.get_tree().process_frame; await shell.get_tree().process_frame
 	check("career attribute stock handler",51,view.owner.projection().selections.custom.attributes.strength)
 	check("career attribute stock budget",-1,view.owner.projection().validated.custom.provenance.evaluation.attribute_remaining)
-	attribute = metadata(view._page,"attribute/strength"); attribute.value = 50
+	view._buttons["attribute/down"].pressed.emit()
 	await shell.get_tree().process_frame; await shell.get_tree().process_frame
-	select_skill(view,"skill/primary/0","medical")
+	await select_skill(view,"skill/primary/0","medical")
 	await shell.get_tree().process_frame; await shell.get_tree().process_frame
 	check("career skill stock handler","medical",view.owner.projection().selections.custom.tiers.primary[0])
-	var skill_picker: OptionButton = metadata(view._page,"skill/primary/1")
-	check("career stock duplicate skill unavailable",true,skill_picker.is_item_disabled(option_index(skill_picker,"medical")))
-	select_skill(view,"skill/primary/1","etiquette")
+	view._buttons["skill/primary/1"].pressed.emit()
 	await shell.get_tree().process_frame; await shell.get_tree().process_frame
-	select_skill(view,"skill/primary/0","streetwise")
+	check("career stock duplicate skill unavailable",false,view._buttons.has("custom/skill/medical"))
+	view.cancel_nested()
 	await shell.get_tree().process_frame; await shell.get_tree().process_frame
-	skill_picker = metadata(view._page,"skill/primary/1")
-	check("career stock replacement releases old",false,skill_picker.is_item_disabled(option_index(skill_picker,"medical")))
+	await select_skill(view,"skill/primary/1","etiquette")
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
+	await select_skill(view,"skill/primary/0","streetwise")
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
+	view._buttons["skill/primary/1"].pressed.emit()
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
+	check("career stock replacement releases old",true,view._buttons.has("custom/skill/medical"))
+	view.cancel_nested()
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
 	check("career stock replacement no swap","etiquette",view.owner.projection().selections.custom.tiers.primary[1])
-	var hp_field: SpinBox = metadata(view._page,"hp")
-	hp_field.value = 9
+	view._buttons["hp/up"].pressed.emit()
 	await shell.get_tree().process_frame; await shell.get_tree().process_frame
 	check("career HP stock handler",9,view.owner.projection().selections.custom.hit_points_per_level)
 	check("career HP stock contribution",1,view.owner.projection().validated.custom.provenance.evaluation.hp_contribution)
@@ -460,10 +467,12 @@ func option_index(picker: OptionButton, id: String) -> int:
 	return -1
 
 func select_skill(view: RefCounted, action: String, skill: String) -> void:
-	var picker: OptionButton = metadata(view._page,action)
-	var index := option_index(picker,skill)
-	picker.select(index)
-	picker.item_selected.emit(index) # Exercise the stock control's actual signal handler.
+	view._buttons[action].pressed.emit()
+	await view.shell.host.get_tree().process_frame; await view.shell.host.get_tree().process_frame
+	var event := InputEventMouseButton.new()
+	event.button_index = MOUSE_BUTTON_LEFT; event.pressed = true; event.double_click = true
+	view._buttons["custom/skill/"+skill].gui_input.emit(event)
+	await view.shell.host.get_tree().process_frame; await view.shell.host.get_tree().process_frame
 
 func capture(shell: Control, name: String) -> void:
 	if DisplayServer.get_name() == "headless": return

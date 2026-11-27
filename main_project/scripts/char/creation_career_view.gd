@@ -11,13 +11,26 @@ var _draft := ""
 var picker_selection := -1
 var picker_scroll := 0
 var class_jingle_submissions := 0
+var custom_attribute := 0
+var skill_slot: Array = []
+var dagger_points: Variant = null
+var dagger_trails: Array = []
+var hp_repeat: Node
+var custom_keyboard_focus := false
 
 func clear() -> void:
+	if is_instance_valid(hp_repeat): hp_repeat.stop(); hp_repeat.queue_free()
+	hp_repeat = null
+	custom_keyboard_focus = false
 	candidate = ""
 	candidate_hook = ""
 	question_position = 0
 	custom_tab = 0
 	_draft = ""
+	custom_attribute = 0
+	skill_slot.clear()
+	dagger_points = null
+	dagger_trails.clear()
 	picker_selection = -1
 	picker_scroll = 0
 	stop_narration()
@@ -36,7 +49,7 @@ func refresh(view: RefCounted) -> void:
 
 func render(view: RefCounted, expected: Dictionary, hook: String, selected: Dictionary) -> void:
 	if _draft != expected.token.id: clear(); _draft = expected.token.id
-	if candidate_hook != hook: candidate = ""; candidate_hook = hook
+	if candidate_hook != hook: candidate = ""; candidate_hook = hook; skill_slot.clear()
 	if view.inputs.policy.is_empty() or view.inputs.sources.is_empty():
 		view._text(view._box(Rect2(12,48,616,280)),view.inputs.setup_error)
 		return
@@ -213,8 +226,7 @@ func _edit_custom(view: RefCounted, expected: Dictionary, value: Dictionary) -> 
 func _custom(view: RefCounted, expected: Dictionary, selected: Dictionary) -> void:
 	var policy: Dictionary = view.inputs.policy
 	if not selected.has("custom"):
-		var retained: Dictionary = view.owner.projection().retained.get("custom",{}).get("value",{})
-		view._button("start-custom","Open custom career",Rect2(80,270,360,54),func(): _edit_custom(view,expected,retained if not retained.is_empty() else Custom.initial(policy,expected.token.id+"/custom")))
+		view._text(view._box(Rect2(80,120,480,120)),"Custom class could not be prepared. "+view.notice)
 		return
 	var value: Dictionary = selected.custom
 	var evaluated: Dictionary = Custom.evaluate(value,policy,expected.token.id+"/custom")
@@ -225,118 +237,7 @@ func _custom(view: RefCounted, expected: Dictionary, selected: Dictionary) -> vo
 	if custom_tab != 0:
 		_nested_custom(view,expected,value)
 	else:
-		view._text(view._box(Rect2(4,0,190,32)),"Class name")
-		var name_field := LineEdit.new()
-		name_field.text = str(view._working.get("custom.name",value.name))
-		name_field.max_length = 256
-		name_field.placeholder_text = "Name your class"
-		name_field.position = Vector2(196,0)
-		name_field.size = Vector2(302,32)
-		name_field.editable = not view.navigation.summary_locked()
-		view._page.add_child(name_field)
-		view._editors["custom/name-field"] = name_field
-		name_field.focus_entered.connect(func(): view._focus = "custom/name-field")
-		view._button("custom/name","Use name",Rect2(500,0,130,32),func(): var revised := value.duplicate(true); revised.name = name_field.text; _edit_custom(view,expected,revised))
-		view._buttons["custom/name"].disabled = view.navigation.summary_locked()
-		var generation: int = view._render_generation
-		name_field.text_changed.connect(func(text: String):
-			if generation == view._render_generation and Draft.same_value(expected,view.navigation.context()): view._working["custom.name"] = text)
-		name_field.text_submitted.connect(func(text: String):
-			if generation != view._render_generation: return
-			var revised := value.duplicate(true); revised.name = text; _edit_custom(view,expected,revised))
-		for index in 8:
-			var key: String = Custom.ATTRIBUTES[index]
-			var box: PanelContainer = view._box(Rect2(4,34+index*44,114,44))
-			var column := VBoxContainer.new()
-			var box_style: StyleBox = box.get_theme_stylebox("panel")
-			box_style.content_margin_top = 0
-			box_style.content_margin_bottom = 0
-			column.add_theme_constant_override("separation",0)
-			box.add_child(column)
-			var label := Label.new()
-			label.text = key.left(3).to_upper()
-			label.tooltip_text = key.capitalize()+" [%d..%d]" % [policy.attributes[key].min,policy.attributes[key].max]
-			label.add_theme_font_size_override("font_size",12)
-			column.add_child(label)
-			_spin(view,column,"attribute/"+key,int(value.attributes[key]),int(policy.attributes[key].min),int(policy.attributes[key].max),func(number: int): var revised := value.duplicate(true); revised.attributes[key] = number; _edit_custom(view,expected,revised))
-		view._box(Rect2(122,34,236,356))
-		for tier in Custom.COUNTS:
-			var top := 34 if tier == "primary" else 132 if tier == "major" else 230
-			view._text(view._box(Rect2(124,top,232,26)),tier.capitalize()+" skills")
-			for slot in Custom.COUNTS[tier]:
-				var picker := OptionButton.new()
-				picker.position = Vector2(130,top+28+slot*22)
-				picker.size = Vector2(220,24)
-				picker.add_theme_font_size_override("font_size",14)
-				picker.fit_to_longest_item = false
-				picker.clip_text = true
-				picker.add_item("Choose skill")
-				picker.set_item_metadata(0,"")
-				var index := 1
-				for skill in policy.skills:
-					picker.add_item(view.display_text(str(policy.skills[skill].label),"skill."+skill))
-					picker.set_item_metadata(index,skill)
-					var assigned := false
-					for other in Custom.COUNTS:
-						if skill in value.tiers[other]: assigned = true
-					picker.set_item_disabled(index,assigned and value.tiers[tier][slot] != skill)
-					if value.tiers[tier][slot] == skill: picker.select(index)
-					index += 1
-				picker.disabled = view.navigation.summary_locked()
-				view._page.add_child(picker)
-				var action_id: String = "skill/"+tier+"/"+str(slot)
-				view._buttons[action_id] = picker
-				picker.set_meta("creation_action",action_id)
-				picker.focus_entered.connect(func(): view._focus = action_id)
-				picker.item_selected.connect(func(chosen: int):
-					if generation != view._render_generation: return
-					var revised := value.duplicate(true)
-					revised.tiers[tier][slot] = picker.get_item_metadata(chosen)
-					_edit_custom(view,expected,revised))
-		# Source CUST00 positions: keep the central advancement gauge visible.
-		var hp_box: PanelContainer = view._box(Rect2(498,34,132,106))
-		var hp_column := VBoxContainer.new()
-		hp_box.add_child(hp_column)
-		view._text(hp_column,"HP / level")
-		_spin(view,hp_column,"hp",value.hit_points_per_level,int(policy.hp.min),int(policy.hp.max),func(number: int): var revised := value.duplicate(true); revised.hit_points_per_level = number; _edit_custom(view,expected,revised))
-		for entry in [[4,"Details"],[1,"Advantages"],[2,"Disadvantages"],[3,"Reputation"]]:
-			var top: int = 148+(int(entry[0])-1)*48 if entry[0] < 4 else 148
-			if entry[0] == 1: top = 196
-			elif entry[0] == 2: top = 244
-			elif entry[0] == 3: top = 292
-			view._button("custom/panel/"+str(entry[0]),entry[1],Rect2(498,top,132,44),func(): custom_tab = entry[0]; refresh(view))
-			view._buttons["custom/panel/"+str(entry[0])].add_theme_font_size_override("font_size",16)
-		# Mask baked English multiplier labels so configured endpoints remain true.
-		view._text(view._box(Rect2(366,34,128,62)),"Advancement\nmultiplier")
-		view._box(Rect2(366,100,72,290))
-		for item in [[146,"× %.3f" % (float(policy.difficulty.high_milli)/1000.0)],[228,"D = "+str(evaluated.difficulty)],[316,"× %.3f" % (float(policy.difficulty.low_milli)/1000.0)]]:
-			var label := Label.new()
-			label.position = Vector2(370,item[0])
-			label.size = Vector2(66,30)
-			label.text = item[1]
-			label.add_theme_font_size_override("font_size",12)
-			view._page.add_child(label)
-		var art: Dictionary = view.shell.host.controller.providers.creation_art.resolve("creation.dagger")
-		if art.ok:
-			var dagger := TextureRect.new()
-			dagger.texture = art.texture
-			dagger.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-			dagger.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-			dagger.size = Vector2(48,18)
-			var ratio: float = float(evaluated.difficulty-policy.difficulty.min)/float(policy.difficulty.max-policy.difficulty.min)
-			var y := 312.0-ratio*156.0
-			if policy.difficulty.min < 0 and policy.difficulty.max > 0:
-				y = 230.0-74.0*float(evaluated.difficulty)/policy.difficulty.max if evaluated.difficulty >= 0 else 230.0+82.0*float(evaluated.difficulty)/policy.difficulty.min
-			dagger.position = Vector2(440,clampf(y,92.0,372.0))
-			dagger.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			view._page.add_child(dagger)
-		else: view.shell.host.label("Optional difficulty dagger artwork unavailable.",15)
-	view.shell.host.label("Attributes remaining: %d · Reputation remaining: %d · HP contribution: %+d · Difficulty: %d [%d..%d] · Advancement: %.4f" % [evaluated.attribute_remaining,evaluated.reputation_remaining,evaluated.hp_contribution,evaluated.difficulty,policy.difficulty.min,policy.difficulty.max,float(evaluated.advancement.numerator)/evaluated.advancement.denominator],16)
-	view.shell.host.label("Higher advancement multiplier requires more practice. Difficulty outside the legal range remains editable; the dagger position is visually clipped only.",15)
-	var contributions: Array[String] = []
-	for id in value.traits: contributions.append(str(policy.traits[id].label)+" %+d" % policy.traits[id].cost)
-	view.shell.host.label("Trait contributions: "+(", ".join(contributions) if not contributions.is_empty() else "none"),15)
-	if not evaluated.errors.is_empty(): view.shell.host.label("Custom completion: "+" ".join(evaluated.errors),16)
+		preload("res://scripts/ui/creation_custom_sheet.gd").render(self,view,expected,value,evaluated)
 
 func _nested_custom(view: RefCounted, expected: Dictionary, value: Dictionary) -> void:
 	var policy: Dictionary = view.inputs.policy

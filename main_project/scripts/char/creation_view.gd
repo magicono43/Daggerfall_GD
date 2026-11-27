@@ -50,6 +50,10 @@ func cancel_nested() -> bool:
 	if not navigation.summary_locked() and navigation.step().get("hook") == "biography":
 		action("back",navigation.context())
 		return true
+	if not career_view.skill_slot.is_empty():
+		career_view.skill_slot.clear()
+		career_view.refresh(self)
+		return true
 	if not career_view.candidate.is_empty():
 		career_view.candidate = ""
 		career_view.refresh(self)
@@ -213,6 +217,12 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 			checked = owner.retry(shell.core,_capture)
 			checked.ok = checked.get("kind") in ["pending","Succeeded"]
 		_: return Draft.failure("action","Unsupported creation action.")
+	if checked.ok and inputs.has_method("validate_career") and id in ["next","back","career-route"] and navigation.step().get("hook") == "custom" and not owner.projection().selections.has("custom"):
+		# Enter through an admitted navigation request, never by mutating on render.
+		# Reuse a retained candidate before creating a new blank custom draft.
+		var retained: Dictionary = owner.projection().retained.get("custom",{}).get("value",{})
+		var candidate: Dictionary = retained if not retained.is_empty() else preload("res://scripts/char/custom_career.gd").initial(inputs.policy,owner.token().id+"/custom")
+		checked = navigation.edit(navigation.context(),candidate)
 	notice = "" if checked.ok else str(checked.get("reason","Creation request rejected."))
 	if checked.has("sections"): notice += "\n"+str(checked.sections)
 	if checked.ok and id in ["edit","next","back","summary-edit","career-route","generate-questionnaire","starting-operation","biography-operation","identity-operation"]:
@@ -333,6 +343,7 @@ func render() -> void:
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook in ["race","class"]: _buttons.next.disabled = true
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook == "race": _buttons.next.hide()
 	if inputs.has_method("validate_career") and hook in ["gender","class_method","class","biography_method"]: _buttons.next.hide()
+	if inputs.has_method("validate_career") and hook == "custom" and selected.has("custom") and career_view.custom_tab == 0: _buttons.next.hide()
 	var row := HBoxContainer.new()
 	host.panel.add_child(row)
 	for entry in [["back","Back"],["restart","Restart"],["exit","Exit creation"]]:

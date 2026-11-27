@@ -248,7 +248,7 @@ func creation_image(file: String) -> Dictionary:
 	# This bounded owner table is not a wildcard path/format interface. Absence or
 	# malformed optional art does not invalidate required startup or gameplay data.
 	const NAMES = ["CHAR00I0.IMG","CHAR01I0.IMG","CHAR02I0.IMG","CHAR03I0.IMG","CHAR04I0.IMG","CHAR05I0.IMG","TMAP00I0.IMG","CUST00I0.IMG","CUST08I0.IMG","CHGN00I0.IMG","BIOG00I0.IMG"]
-	if not ready() or (file not in NAMES and file not in ["BUTN01I0.IMG","BUTN02I0.IMG","PICK00I0.IMG"]): return {"ok":false,"reason":"Published creation-art source binding unavailable."}
+	if not ready() or (file not in NAMES and file not in ["BUTN01I0.IMG","BUTN02I0.IMG","PICK00I0.IMG","CHAR02I1.IMG"]): return {"ok":false,"reason":"Published creation-art source binding unavailable."}
 	var reader := MediaReader.new("classic-img-v1")
 	var checked: Dictionary = reader.initialize(_active_source.path_join(file))
 	if not checked.ok: return checked
@@ -271,9 +271,9 @@ func creation_image(file: String) -> Dictionary:
 	var palette_data: Dictionary = colors.value.projection()
 	data.ok = true
 	palette_data.ok = true
-	var rgba := preload("res://scripts/data/classic_image.gd").new().rgba(data,palette_data,0 if file == "CUST08I0.IMG" else -1)
+	var rgba := preload("res://scripts/data/classic_image.gd").new().rgba(data,palette_data,0 if file in ["CUST08I0.IMG","CHAR02I1.IMG"] else -1)
 	if not rgba.ok: return rgba
-	return {"ok":true,"image":Image.create_from_data(rgba.width,rgba.height,false,Image.FORMAT_RGBA8,rgba.rgba),"provenance":{"image":data.provenance,"palette":palette_data.provenance,"alpha_index":0 if file == "CUST08I0.IMG" else -1,"sampling":"nearest","source_identity":data.identity}}
+	return {"ok":true,"image":Image.create_from_data(rgba.width,rgba.height,false,Image.FORMAT_RGBA8,rgba.rgba),"provenance":{"image":data.provenance,"palette":palette_data.provenance,"alpha_index":0 if file in ["CUST08I0.IMG","CHAR02I1.IMG"] else -1,"sampling":"nearest","source_identity":data.identity}}
 
 func creation_parchment() -> Dictionary:
 	if not ready(): return {"ok":false,"reason":"Published classic source required."}
