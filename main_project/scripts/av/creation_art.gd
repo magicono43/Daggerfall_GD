@@ -28,6 +28,8 @@ func declare(providers: RefCounted) -> Dictionary:
 	if not method.ok: return method
 	var spinner: Dictionary = media.register_target("creation.stat-spinner","image",[],_decode_once.bind("creation.stat-spinner",classic.creation_image.bind("CHAR02I1.IMG")))
 	if not spinner.ok: return spinner
+	var reputation: Dictionary = media.register_target("creation.reputation","image",[],_decode_once.bind("creation.reputation",classic.creation_image.bind("CUST03I0.IMG")))
+	if not reputation.ok: return reputation
 	for item in [["creation.list-picker","PICK00I0.IMG"],["creation.biography-method","BUTN02I0.IMG"]]:
 		var result: Dictionary = media.register_target(item[0],"image",[],_decode_once.bind(item[0],classic.creation_image.bind(item[1])))
 		if not result.ok: return result

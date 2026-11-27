@@ -60,7 +60,7 @@ static func render(career: RefCounted, view: RefCounted, expected: Dictionary, v
 	var root := Control.new(); root.size = Vector2(320,200); root.scale = Vector2(2,2)
 	root.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	view._page.add_child(root)
-	var locked: bool = view.navigation.summary_locked() or not career.skill_slot.is_empty()
+	var locked: bool = view.navigation.summary_locked() or not career.skill_slot.is_empty() or career.custom_tab != 0
 	var name_field := LineEdit.new()
 	name_field.text = str(view._working.get("custom.name",value.name))
 	name_field.placeholder_text = "Name your class"; name_field.max_length = 256

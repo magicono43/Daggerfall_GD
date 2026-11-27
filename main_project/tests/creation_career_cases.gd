@@ -440,13 +440,23 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 		check("career trait removal owner clear",[],view.owner.projection().selections.custom.traits)
 	await control(shell,"Return to career")
 	check("career custom reputation panel handler",true,await control(shell,"Reputation"))
-	var field: SpinBox = metadata(view._page,"reputation/merchants")
-	field.value = 1
+	var reputation_click := InputEventMouseButton.new()
+	reputation_click.button_index = MOUSE_BUTTON_LEFT; reputation_click.pressed = true
+	reputation_click.position = Vector2(10,47) # Native y=71 maps to +1.
+	view._buttons["reputation/merchants"].gui_input.emit(reputation_click)
 	await shell.get_tree().process_frame
 	await shell.get_tree().process_frame
 	check("career reputation stock handler",1,view.owner.projection().selections.custom.reputation.merchants)
 	check("career nested imbalance completion blocks",false,view.action("next",view.navigation.context()).ok)
 	await control(shell,"Return to career")
+	check("career unbalanced reputation Exit warns",true,view.career_view.reputation_warning)
+	view.cancel_nested()
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
+	reputation_click.position = Vector2(10,52) # Restore zero before leaving.
+	view._buttons["reputation/merchants"].gui_input.emit(reputation_click)
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
+	await control(shell,"Return to career")
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
 	if DisplayServer.get_name() != "headless":
 		await shell.get_tree().process_frame
 		await RenderingServer.frame_post_draw

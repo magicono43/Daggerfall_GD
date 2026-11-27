@@ -6,7 +6,7 @@ const SHADOW_COLOR = Color8(93,77,12)
 static func confirm(view: RefCounted, text: String, yes: Callable, no: Callable, valid: bool) -> void:
 	choices(view,text,[["confirm/yes","Yes",yes,"yes",not valid],["confirm/no","No",no,"no",false]],"race-confirmation")
 
-static func choices(view: RefCounted, text: String, options: Array, field: String) -> void:
+static func choices(view: RefCounted, text: String, options: Array, field: String) -> Panel:
 	var art: RefCounted = view.shell.host.controller.providers.creation_art
 	var fallback: Font = view._presentation.font() if view._presentation != null else ThemeDB.fallback_font
 	var font: Font = art.popup_font(fallback) if art != null else fallback
@@ -38,7 +38,7 @@ static func choices(view: RefCounted, text: String, options: Array, field: Strin
 	# Label reserves the font's fallback-aware line height even for all-ASCII text.
 	# Account for that too; TextParagraph alone can undercount a bitmap font row.
 	var text_height := maxf(font.get_height(7)*paragraph.get_line_count(),paragraph.get_size().y)
-	var height := minf(176,ceilf((text_height+20+20)/22)*22)
+	var height := minf(176,ceilf((text_height+20+(0 if options.is_empty() else 20))/22)*22)
 	var root := Panel.new()
 	root.set_meta("creation_popup",true)
 	root.position = ((Vector2(640,400)-Vector2(width,height)*2)/2).floor()
@@ -52,7 +52,7 @@ static func choices(view: RefCounted, text: String, options: Array, field: Strin
 	view._page.add_child(root)
 	var scroll := ScrollContainer.new()
 	scroll.position = Vector2(10,10)
-	scroll.size = Vector2(width-20,height-40)
+	scroll.size = Vector2(width-20,height-(20 if options.is_empty() else 40))
 	if field == "gender-confirmation":
 		# Center the short prompt/button group, as in the classic gender popup.
 		scroll.size.y = minf(scroll.size.y,text_height+2)
@@ -62,6 +62,9 @@ static func choices(view: RefCounted, text: String, options: Array, field: Strin
 	root.add_child(scroll)
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(label)
+	if options.is_empty():
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	for index in options.size():
 		var item: Array = options[index]
 		var button := Button.new()
@@ -100,3 +103,16 @@ static func choices(view: RefCounted, text: String, options: Array, field: Strin
 			button.add_theme_color_override("font_color",TEXT_COLOR)
 		# Initial stock styles can enlarge a Control before our sprite style binds.
 		button.size = Vector2(32,16)
+	return root
+
+static func notice(view: RefCounted, text: String, dismiss: Callable) -> void:
+	var catch_click := Button.new()
+	view._page.add_child(catch_click)
+	view._bind_button(catch_click,"notice/dismiss",dismiss)
+	catch_click.set_meta("accessible_label","Dismiss message")
+	for state in ["normal","hover","pressed","disabled","focus"]: catch_click.add_theme_stylebox_override(state,StyleBoxEmpty.new())
+	catch_click.size = Vector2(640,400)
+	var root := choices(view,text,[],"reputation-balance")
+	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for child: Control in root.find_children("*","Control",true,false): child.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	view._focus = "notice/dismiss"

@@ -17,11 +17,13 @@ var dagger_points: Variant = null
 var dagger_trails: Array = []
 var hp_repeat: Node
 var custom_keyboard_focus := false
+var reputation_warning := false
 
 func clear() -> void:
 	if is_instance_valid(hp_repeat): hp_repeat.stop(); hp_repeat.queue_free()
 	hp_repeat = null
 	custom_keyboard_focus = false
+	reputation_warning = false
 	candidate = ""
 	candidate_hook = ""
 	question_position = 0
@@ -49,7 +51,9 @@ func refresh(view: RefCounted) -> void:
 
 func render(view: RefCounted, expected: Dictionary, hook: String, selected: Dictionary) -> void:
 	if _draft != expected.token.id: clear(); _draft = expected.token.id
-	if candidate_hook != hook: candidate = ""; candidate_hook = hook; skill_slot.clear()
+	if candidate_hook != hook:
+		candidate = ""; candidate_hook = hook; skill_slot.clear(); reputation_warning = false
+		if hook != "custom": custom_tab = 0
 	if view.inputs.policy.is_empty() or view.inputs.sources.is_empty():
 		view._text(view._box(Rect2(12,48,616,280)),view.inputs.setup_error)
 		return
@@ -234,7 +238,10 @@ func _custom(view: RefCounted, expected: Dictionary, selected: Dictionary) -> vo
 		var display: Dictionary = view._presentation.literal(value.name,"body","","",{"window":"creation","field":"custom.name"})
 		view.glyph_diagnostics.append_array(display.diagnostics)
 		if not display.diagnostics.is_empty(): view.shell.host.label("The current font cannot display part of this name. Unicode is retained. Display preview: "+str(display.text),16)
-	if custom_tab != 0:
+	if custom_tab == 3:
+		preload("res://scripts/ui/creation_custom_sheet.gd").render(self,view,expected,value,evaluated)
+		preload("res://scripts/ui/creation_reputation.gd").render(self,view,expected,value)
+	elif custom_tab != 0:
 		_nested_custom(view,expected,value)
 	else:
 		preload("res://scripts/ui/creation_custom_sheet.gd").render(self,view,expected,value,evaluated)
@@ -264,11 +271,6 @@ func _nested_custom(view: RefCounted, expected: Dictionary, value: Dictionary) -
 			if id.is_empty(): return
 			var revised := value.duplicate(true); revised.traits.append(id); _edit_custom(view,expected,revised))
 		view._text(list,"Conflicts reject the new selection and retain existing choices. No birth-race bans. Runtime effects and stacking remain with their respective owners.")
-	elif custom_tab == 3:
-		view._text(list,"Initial reputation adjustments")
-		for group in Custom.GROUPS:
-			_number(view,list,"reputation/"+group,group.capitalize(),value.reputation[group],int(policy.reputation[group].min),int(policy.reputation[group].max),func(number: int): var revised := value.duplicate(true); revised.reputation[group] = number; _edit_custom(view,expected,revised))
-		view._text(list,"These are initial custom-class adjustments. No live faction standing changes. Required total: "+str(policy.reputation_total))
 	else:
 		view._text(list,"Attributes: redistribute the configured exact total across eight attributes. Assign twelve distinct supported skills: 3 Primary, 3 Major and 6 Minor. Replacement releases the old skill without swapping.")
 		view._text(list,"The HP parameter is not guaranteed health gained on every level. Higher advancement multiplier requires more practice; it does not multiply every reward. Reputation is independent from difficulty.")

@@ -53,6 +53,9 @@ func run(checks: RefCounted, host: Control, view: RefCounted, fixture: Dictionar
 	suite.check("dagger native neutral Y",115.0,dagger(view).current_y)
 	await move(Vector2(2,2))
 	await capture("custom-blank",fixture)
+	if fixture.get("reputation_preview",false):
+		await mouse(view._buttons["custom/panel/3"])
+		return await preload("res://tests/creation_reputation_preview.gd").new().run(suite,shell,view,fixture)
 	suite.save(str(fixture.sandbox).path_join("preview-state.json"))
 	if not fixture.get("review_smoke",false): return suite.save(str(fixture.sandbox).path_join("preview-state.json"))
 	var name_field: LineEdit = view._editors["custom/name-field"]
