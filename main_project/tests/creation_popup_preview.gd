@@ -64,7 +64,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	check("male native sprite size",Vector2(32,16),view._buttons["gender/male"].size)
 	check("female native sprite size",Vector2(32,16),view._buttons["gender/female"].size)
 	await capture(shell,str(fixture.sandbox).path_join("gender-popup.png"))
-	if fixture.get("custom_sheet_preview",false) or fixture.get("reputation_preview",false) or fixture.get("custom_exit_preview",false):
+	if fixture.get("custom_sheet_preview",false) or fixture.get("reputation_preview",false) or fixture.get("custom_exit_preview",false) or fixture.get("help_preview",false):
 		await press(shell,view,"gender/male")
 		await press(shell,view,"choice/list")
 		return await preload("res://tests/creation_custom_sheet_preview.gd").new().run(self,shell,view,fixture)

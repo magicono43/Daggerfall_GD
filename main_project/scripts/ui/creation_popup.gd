@@ -6,17 +6,19 @@ const SHADOW_COLOR = Color8(93,77,12)
 static func confirm(view: RefCounted, text: String, yes: Callable, no: Callable, valid: bool) -> void:
 	choices(view,text,[["confirm/yes","Yes",yes,"yes",not valid],["confirm/no","No",no,"no",false]],"race-confirmation")
 
-static func choices(view: RefCounted, text: String, options: Array, field: String) -> Panel:
+static func choices(view: RefCounted, text: String, options: Array, field: String, title := "") -> Panel:
 	var art: RefCounted = view.shell.host.controller.providers.creation_art
 	var fallback: Font = view._presentation.font() if view._presentation != null else ThemeDB.fallback_font
 	var font: Font = art.popup_font(fallback) if art != null else fallback
 	if view._presentation != null: font = view._presentation.creation_popup_font(font)
 	var label := Label.new()
 	label.text = view.display_text(text,field)
+	var header_text: String = view.display_text(title,field+".title") if not title.is_empty() else ""
 	# Classic ASCII metrics stay seven pixels high. A whole-prompt locale-font
 	# recovery avoids enlarging every ASCII row merely by attaching a taller font.
-	for index in label.text.length():
-		if label.text.unicode_at(index) not in [9,10,13,32] and not font.has_char(label.text.unicode_at(index)):
+	var glyph_text := label.text+header_text
+	for index in glyph_text.length():
+		if glyph_text.unicode_at(index) not in [9,10,13,32] and not font.has_char(glyph_text.unicode_at(index)):
 			font = fallback
 			break
 	label.add_theme_font_override("font",font)
@@ -26,19 +28,22 @@ static func choices(view: RefCounted, text: String, options: Array, field: Strin
 	label.add_theme_color_override("font_shadow_color",SHADOW_COLOR)
 	label.add_theme_constant_override("shadow_offset_x",1)
 	label.add_theme_constant_override("shadow_offset_y",1)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT if not header_text.is_empty() else HORIZONTAL_ALIGNMENT_CENTER
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	label.set_meta("creation_popup_text",true)
 	var natural := font.get_multiline_string_size(label.text,HORIZONTAL_ALIGNMENT_CENTER,-1,7)
+	if not header_text.is_empty(): natural.x = maxf(natural.x,font.get_string_size(header_text,HORIZONTAL_ALIGNMENT_CENTER,-1,7).x)
 	var width := clampf(ceilf((natural.x+20)/22)*22,132,308)
+	if not header_text.is_empty(): width = 308
 	var paragraph := TextParagraph.new()
 	paragraph.add_string(label.text,font,7)
 	paragraph.width = width-20
 	# Label reserves the font's fallback-aware line height even for all-ASCII text.
 	# Account for that too; TextParagraph alone can undercount a bitmap font row.
 	var text_height := maxf(font.get_height(7)*paragraph.get_line_count(),paragraph.get_size().y)
-	var height := minf(176,ceilf((text_height+20+(0 if options.is_empty() else 20))/22)*22)
+	var header_height := 10 if not header_text.is_empty() else 0
+	var height := minf(176,ceilf((text_height+header_height+20+(0 if options.is_empty() else 20))/22)*22)
 	var root := Panel.new()
 	root.set_meta("creation_popup",true)
 	root.position = ((Vector2(640,400)-Vector2(width,height)*2)/2).floor()
@@ -50,9 +55,16 @@ static func choices(view: RefCounted, text: String, options: Array, field: Strin
 		var plain := StyleBoxFlat.new(); plain.bg_color = Color("957044"); parchment = plain
 	root.add_theme_stylebox_override("panel",parchment)
 	view._page.add_child(root)
+	if not header_text.is_empty():
+		var header := label.duplicate() as Label
+		header.text = header_text; header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		header.autowrap_mode = TextServer.AUTOWRAP_OFF
+		header.position = Vector2(10,10); header.size = Vector2(width-20,7)
+		header.set_meta("creation_popup_text",false); header.set_meta("creation_popup_title",true)
+		root.add_child(header)
 	var scroll := ScrollContainer.new()
-	scroll.position = Vector2(10,10)
-	scroll.size = Vector2(width-20,height-(20 if options.is_empty() else 40))
+	scroll.position = Vector2(10,10+header_height)
+	scroll.size = Vector2(width-20,height-(20 if options.is_empty() else 40)-header_height)
 	if field == "gender-confirmation":
 		# Center the short prompt/button group, as in the classic gender popup.
 		scroll.size.y = minf(scroll.size.y,text_height+2)
@@ -63,7 +75,7 @@ static func choices(view: RefCounted, text: String, options: Array, field: Strin
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(label)
 	if options.is_empty():
-		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label.vertical_alignment = VERTICAL_ALIGNMENT_TOP if header_height > 0 else VERTICAL_ALIGNMENT_CENTER
 		label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	for index in options.size():
 		var item: Array = options[index]
@@ -105,14 +117,14 @@ static func choices(view: RefCounted, text: String, options: Array, field: Strin
 		button.size = Vector2(32,16)
 	return root
 
-static func notice(view: RefCounted, text: String, dismiss: Callable, field := "message") -> void:
+static func notice(view: RefCounted, text: String, dismiss: Callable, field := "message", title := "") -> void:
 	var catch_click := Button.new()
 	view._page.add_child(catch_click)
 	view._bind_button(catch_click,"notice/dismiss",dismiss)
 	catch_click.set_meta("accessible_label","Dismiss message")
 	for state in ["normal","hover","pressed","disabled","focus"]: catch_click.add_theme_stylebox_override(state,StyleBoxEmpty.new())
 	catch_click.size = Vector2(640,400)
-	var root := choices(view,text,[],field)
+	var root := choices(view,text,[],field,title)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	for child: Control in root.find_children("*","Control",true,false): child.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	view._focus = "notice/dismiss"

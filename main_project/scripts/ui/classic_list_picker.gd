@@ -87,6 +87,7 @@ func configure(labels: Array, font: Font, image: Texture2D, locked: bool, initia
 			sliced.texture_margin_top = 1; sliced.texture_margin_bottom = 1
 			_bar.add_theme_stylebox_override(state,sliced)
 	add_child(_bar)
+	_bar.visible = labels.size() > ROWS
 	# Adding an unthemed Control may already have expanded it to stock minimums.
 	_bar.size = Vector2(5,82)
 	_bar.value_changed.connect(func(value: float): set_scroll(int(value)))

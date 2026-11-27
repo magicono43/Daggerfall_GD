@@ -135,7 +135,7 @@ static func render(career: RefCounted, view: RefCounted, expected: Dictionary, v
 				if event.pressed: career.hp_repeat.begin(view,direction,arrow.get_global_transform_with_canvas()*event.position)
 				else: career.hp_repeat.stop()
 				arrow.accept_event())
-	for item in [[4,"Details",74],[1,"Advantages",98],[2,"Disadvantages",122],[3,"Reputation",146]]:
+	for item in [[4,"Help",74],[1,"Advantages",98],[2,"Disadvantages",122],[3,"Reputation",146]]:
 		button(view,root,"custom/panel/"+str(item[0]),item[1],Rect2(249,item[2],66,22),func(): career.custom_tab = item[0]; art.play_dialog_click(view.shell.host); career.refresh(view),locked)
 	button(view,root,"custom/finish","Exit custom class editor",Rect2(263,172,38,21),func(): art.play_dialog_click(view.shell.host); view.action("next",expected),locked)
 	var now := Time.get_ticks_msec()

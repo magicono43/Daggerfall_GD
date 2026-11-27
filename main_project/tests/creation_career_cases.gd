@@ -383,7 +383,9 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 	var class_name_field: LineEdit = view._editors["custom/name-field"]
 	class_name_field.text = "Étoile 流浪者"
 	class_name_field.text_changed.emit(class_name_field.text)
-	await control(shell,"Details"); await control(shell,"Return to career")
+	await control(shell,"Help")
+	view.cancel_nested()
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
 	check("career pending name survives nested editor","Étoile 流浪者",view._editors["custom/name-field"].text)
 	check("career custom name stock handler",true,await control(shell,"Use name"))
 	check("career custom Unicode name owner receives","Étoile 流浪者",view.owner.projection().selections.custom.name)
