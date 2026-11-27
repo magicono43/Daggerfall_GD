@@ -16,7 +16,7 @@
           "gender": {
             "hook": "gender",
             "title": "Gender",
-            "art": ""
+            "art": "creation.race"
           },
           "class_method": {
             "hook": "class_method",

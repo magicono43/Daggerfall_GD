@@ -52,7 +52,6 @@ func cancel_nested() -> bool:
 		return true
 	if not career_view.candidate.is_empty():
 		career_view.candidate = ""
-		career_view.stop_narration()
 		career_view.refresh(self)
 		return true
 	if not navigation.summary_locked() and navigation.step().get("hook") == "class" and owner.projection().selections.get("class_method") == "questionnaire":
@@ -333,6 +332,7 @@ func render() -> void:
 	else: _button("begin","Begin Game",Rect2(500,344,130,46),func(): action("begin",expected))
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook in ["race","class"]: _buttons.next.disabled = true
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook == "race": _buttons.next.hide()
+	if inputs.has_method("validate_career") and hook == "gender": _buttons.next.hide()
 	var row := HBoxContainer.new()
 	host.panel.add_child(row)
 	for entry in [["back","Back"],["restart","Restart"],["exit","Exit creation"]]:

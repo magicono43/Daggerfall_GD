@@ -331,7 +331,6 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 	check("career race Yes handler",true,await control(shell,"Yes"))
 	check("career race confirms then gender","gender",view.navigation.step().hook)
 	await control(shell,"Female")
-	await control(shell,"Next")
 	await control(shell,"Choose from a list")
 	# Method labels remain moddable; use the owner's normal validated edit if the
 	# established localization fallback differs, while asserting actual stock route.

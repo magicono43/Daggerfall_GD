@@ -8,6 +8,9 @@ var definitions: RefCounted
 var _textures: Dictionary = {}
 var _baselines: Dictionary = {}
 var _narrations: Dictionary = {}
+var _click: Dictionary = {}
+var _click_player: AudioStreamPlayer
+var click_submissions := 0
 var _popup_font: FontFile
 var _popup_font_prepared := false
 const NARRATIONS = ["breton","redguard","nord","dark-elf","high-elf","wood-elf","khajiit","argonian"]
@@ -20,7 +23,9 @@ func declare(providers: RefCounted) -> Dictionary:
 	if media == null: return {"ok":false,"reason":"Creation art requires the existing media resolver."}
 	var parchment: Dictionary = media.register_target("creation.parchment","image",[],_parchment_baseline)
 	if not parchment.ok: return parchment
-	for item in [["yes",3],["no",4]]:
+	var click: Dictionary = media.register_target("creation.dialog.click","audio",[],_sound_baseline.bind({"ordinal":360}))
+	if not click.ok: return click
+	for item in [["yes",3],["no",4],["male",6],["female",7]]:
 		var button: Dictionary = media.register_target("creation.dialog."+item[0],"image",[],_dialog_button_baseline.bind(item[1]))
 		if not button.ok: return button
 	for target: String in FILES:
@@ -106,7 +111,10 @@ func _decode_once(key: String, reader: Callable) -> Dictionary:
 func _narration_baseline(race: String) -> Dictionary:
 	var read: Dictionary = definitions.query("char.career","policy","stock")
 	if not read.ok: return read
-	var decoded: Dictionary = classic.decode_sound(int(read.record.value.races[race].narration))
+	return _sound_baseline(int(read.record.value.races[race].narration))
+
+func _sound_baseline(selector: Variant) -> Dictionary:
+	var decoded: Dictionary = classic.decode_sound(selector)
 	if not decoded.ok: return decoded
 	var data: Dictionary = decoded.value.projection()
 	var samples := PackedByteArray()
@@ -118,6 +126,19 @@ func _narration_baseline(race: String) -> Dictionary:
 	stream.stereo = false
 	stream.data = samples
 	return {"ok":true,"resource":{"stream":stream,"frames":data.frame_count},"provenance":data.provenance}
+
+func play_dialog_click(host: Node) -> void:
+	# DFU SoundClips.ButtonClick = archive ordinal 360, not numeric record ID 360.
+	# Resolve once through normal mod precedence.
+	# Host ownership keeps the short sound alive across the immediate page handoff.
+	if _click.is_empty(): _click = media.resolve("creation.dialog.click","audio")
+	if not is_instance_valid(_click_player):
+		var instance: Dictionary = preload("res://scripts/av/replacement_instances.gd").audio(_click)
+		if not instance.ok: return
+		_click_player = instance.player
+		host.add_child(_click_player)
+	_click_player.play()
+	click_submissions += 1
 
 func narration(race: String) -> Dictionary:
 	if race not in NARRATIONS: return {"ok":false,"reason":"Unsupported race narration."}
@@ -149,6 +170,11 @@ func resolve(target: String) -> Dictionary:
 	return _textures[target].duplicate()
 
 func dispose() -> void:
+	if is_instance_valid(_click_player):
+		_click_player.stop()
+		_click_player.queue_free()
+	_click_player = null
+	_click.clear()
 	_popup_font = null
 	_popup_font_prepared = false
 	_textures.clear()

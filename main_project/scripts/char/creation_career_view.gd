@@ -6,7 +6,7 @@ var candidate := ""
 var candidate_hook := ""
 var question_position := 0
 var custom_tab := 0
-var _audio: AudioStreamPlayer
+var _narrations: Array[AudioStreamPlayer] = []
 var _draft := ""
 
 func clear() -> void:
@@ -18,8 +18,10 @@ func clear() -> void:
 	stop_narration()
 
 func stop_narration() -> void:
-	if is_instance_valid(_audio): _audio.stop(); _audio.queue_free()
-	_audio = null
+	# Only creation teardown/restart interrupts these independent one-shots.
+	for player in _narrations:
+		if is_instance_valid(player): player.stop(); player.queue_free()
+	_narrations.clear()
 
 func refresh(view: RefCounted) -> void:
 	# Retire local UI candidates immediately, before the deferred repaint. A late
@@ -29,7 +31,7 @@ func refresh(view: RefCounted) -> void:
 
 func render(view: RefCounted, expected: Dictionary, hook: String, selected: Dictionary) -> void:
 	if _draft != expected.token.id: clear(); _draft = expected.token.id
-	if candidate_hook != hook: candidate = ""; candidate_hook = hook; stop_narration()
+	if candidate_hook != hook: candidate = ""; candidate_hook = hook
 	if view.inputs.policy.is_empty() or view.inputs.sources.is_empty():
 		view._text(view._box(Rect2(12,48,616,280)),view.inputs.setup_error)
 		return
@@ -74,9 +76,9 @@ func _confirm(view: RefCounted, expected: Dictionary, hook: String, id: String) 
 		preload("res://scripts/ui/creation_popup.gd").confirm(view,read.text if read.ok else read.reason,func():
 			var result: Dictionary = view.action("edit",expected,id)
 			if result.ok:
-				candidate = ""; stop_narration()
+				candidate = ""
 				view.action("next",view.navigation.context()),func():
-			candidate = ""; stop_narration(); refresh(view),read.ok)
+			candidate = ""; refresh(view),read.ok)
 		return
 	var list := _list(view,Rect2(12,16,616,268))
 	var label: String = view.inputs.preset(id).get("name",id)
@@ -88,11 +90,11 @@ func _confirm(view: RefCounted, expected: Dictionary, hook: String, id: String) 
 	view._button("confirm/yes","Yes — accept "+label,Rect2(12,290,302,42),func():
 		var result: Dictionary = view.action("edit",expected,id)
 		if result.ok:
-			candidate = ""; stop_narration()
+			candidate = ""
 			view.action("next",view.navigation.context()))
 	view._buttons["confirm/yes"].disabled = not read.ok or view.navigation.summary_locked()
 	view._button("confirm/no","No — choose again",Rect2(326,290,302,42),func():
-		candidate = ""; stop_narration()
+		candidate = ""
 		if hook == "class" and view.owner.projection().selections.get("class_method") == "questionnaire": view.action("career-route",expected,"list")
 		else: refresh(view))
 	view._buttons["confirm/no"].disabled = view.navigation.summary_locked()
@@ -119,14 +121,15 @@ func _race(view: RefCounted, expected: Dictionary, selected: Dictionary) -> void
 	if not view.inputs.sources.picker.ok: view.shell.host.label(view.inputs.sources.picker.reason)
 
 func _gender(view: RefCounted, expected: Dictionary, selected: Dictionary) -> void:
-	var list := _list(view,Rect2(108,82,424,220))
-	view._text(list,"Choose Male or Female for the confirmed birth race. Appearance uses that race's supported body/head mapping; face choice follows later.")
+	var options: Array = []
 	for id in ["male","female"]:
 		var fallback: String = id.capitalize()
 		for choice: Dictionary in view.inputs.choices("gender"):
 			if choice.id == id and choice.label != id: fallback = str(choice.label)
-		_button(view,list,"gender/"+id,view.translated("choice.gender."+id,fallback),func(): view.action("edit",expected,id))
-	if selected.has("gender"): view._text(list,"Selected: "+str(selected.gender))
+		options.append(["gender/"+id,view.translated("choice.gender."+id,fallback),func():
+			var result: Dictionary = view.action("edit",expected,id)
+			if result.ok: view.action("next",view.navigation.context()),id,false])
+	preload("res://scripts/ui/creation_popup.gd").choices(view,view.translated("prompt.gender","Select thy character's gender."),options,"gender-confirmation")
 
 func _mechanics(view: RefCounted, parent: Control, career: Dictionary) -> void:
 	view._text(parent,str(career.get("name","Career")))
@@ -381,10 +384,13 @@ func _number(view: RefCounted, parent: Control, id: String, title: String, curre
 	row.add_child(label)
 	_spin(view,row,id,current,minimum,maximum,callback)
 func narrate(view: RefCounted, id: String) -> void:
-	stop_narration()
 	var art: RefCounted = view.shell.host.controller.providers.creation_art
 	var instance: Dictionary = preload("res://scripts/av/replacement_instances.gd").audio(art.narration(id))
 	if not instance.ok: return # Optional audio cannot gate selection.
-	_audio = instance.player
-	view.shell.host.add_child(_audio)
-	_audio.play()
+	var player: AudioStreamPlayer = instance.player
+	_narrations.append(player)
+	view.shell.host.add_child(player)
+	player.finished.connect(func():
+		_narrations.erase(player)
+		player.queue_free(),CONNECT_ONE_SHOT)
+	player.play()

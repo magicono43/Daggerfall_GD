@@ -185,7 +185,7 @@ function Invoke-ReviewCompaction {
     if ($ClosedVerification) {
         $closed = Get-Content -LiteralPath (Join-Path $rootPath 'CLOSED-VERIFICATION.json') -Raw | ConvertFrom-Json
         if ($closed.schema -cne 'closed-verification-v1' -or $closed.owner -cne 'IMP-015 increment 4' -or $closed.root -cne $rootPath -or $closed.report_sha256 -cne (Get-FileHash -LiteralPath (Join-Path $rootPath 'report.json')).Hash -or $report.status -notin @('passed','failed','incomplete') -or $report.suite -notin @('creation','creation-draft','session','replacements','native','locale-fonts') -or $report.mode -notin @('headless','rendered') -or !(@($report.build.working_tree) -match 'creation_identity|creation_view')) { throw 'Explicit owned closed creation verification receipt required.' }
-    } elseif ($report.status -cne 'passed' -or $report.mode -cne 'rendered' -or $report.suite -notin @('creation-draft','calendar-clock','ground-movement')) { throw 'Known passed review preparation required.' }
+    } elseif ($report.status -cne 'passed' -or $report.mode -cne 'rendered' -or $report.suite -notin @('creation-draft','creation-popup-preview','calendar-clock','ground-movement')) { throw 'Known passed review preparation required.' }
     if ([IO.Path]::GetFullPath($report.root) -cne $rootPath) { throw 'Report root binding changed.' }
     $project = Assert-RunArtifactPath (Join-Path $rootPath 'project')
     if ([IO.Path]::GetFullPath($report.runtime_project) -cne $project -or !(Test-Path -LiteralPath "$project/project.godot")) { throw 'Review project binding missing.' }

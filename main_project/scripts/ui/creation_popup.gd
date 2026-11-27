@@ -4,12 +4,15 @@ const TEXT_COLOR = Color8(243,239,44)
 const SHADOW_COLOR = Color8(93,77,12)
 
 static func confirm(view: RefCounted, text: String, yes: Callable, no: Callable, valid: bool) -> void:
+	choices(view,text,[["confirm/yes","Yes",yes,"yes",not valid],["confirm/no","No",no,"no",false]],"race-confirmation")
+
+static func choices(view: RefCounted, text: String, options: Array, field: String) -> void:
 	var art: RefCounted = view.shell.host.controller.providers.creation_art
 	var fallback: Font = view._presentation.font() if view._presentation != null else ThemeDB.fallback_font
 	var font: Font = art.popup_font(fallback) if art != null else fallback
 	if view._presentation != null: font = view._presentation.creation_popup_font(font)
 	var label := Label.new()
-	label.text = view.display_text(text,"race-confirmation")
+	label.text = view.display_text(text,field)
 	# Classic ASCII metrics stay seven pixels high. A whole-prompt locale-font
 	# recovery avoids enlarging every ASCII row merely by attaching a taller font.
 	for index in label.text.length():
@@ -50,22 +53,33 @@ static func confirm(view: RefCounted, text: String, yes: Callable, no: Callable,
 	var scroll := ScrollContainer.new()
 	scroll.position = Vector2(10,10)
 	scroll.size = Vector2(width-20,height-40)
+	if field == "gender-confirmation":
+		# Center the short prompt/button group, as in the classic gender popup.
+		scroll.size.y = minf(scroll.size.y,text_height+2)
+		scroll.position.y = ceilf((height-scroll.size.y-20)/2)
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.follow_focus = true
 	root.add_child(scroll)
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(label)
-	for item in [["yes","Yes",yes,-48],["no","No",no,16]]:
+	for index in options.size():
+		var item: Array = options[index]
 		var button := Button.new()
 		button.text = item[1]
 		button.tooltip_text = item[1]
-		button.position = Vector2(floorf(width/2)+item[3],height-32)
+		button.position = Vector2(floorf(width/2)-48+index*64,height-32)
+		if field == "gender-confirmation": button.position.y = scroll.position.y+scroll.size.y+4
 		button.size = Vector2(32,16)
 		root.add_child(button)
-		view._bind_button(button,"confirm/"+item[0],item[2])
-		button.disabled = view.navigation.summary_locked() or (item[0] == "yes" and not valid)
+		var expected: Dictionary = view.navigation.context()
+		var callback: Callable = item[2]
+		view._bind_button(button,item[0],func():
+			if button.disabled or view.shell.core.busy() or not view.active() or not preload("res://scripts/char/creation_draft.gd").same_value(expected,view.navigation.context()): return
+			if art != null: art.play_dialog_click(view.shell.host)
+			callback.call())
+		button.disabled = view.navigation.summary_locked() or item[4]
 		button.set_meta("accessible_label",item[1])
-		var sprite: Dictionary = art.resolve("creation.dialog."+item[0]) if art != null else {"ok":false}
+		var sprite: Dictionary = art.resolve("creation.dialog."+item[3]) if art != null else {"ok":false}
 		if sprite.ok:
 			# Keep the semantic Button label for accessibility; pixels carry the ink.
 			button.add_theme_font_size_override("font_size",7)

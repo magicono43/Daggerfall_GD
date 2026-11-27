@@ -1,6 +1,7 @@
 extends RefCounted
 ## Uses the normal shell and actual creation controls; never enables gameplay.
 func run(shell: Control, fixture: Dictionary) -> Dictionary:
+	if fixture.get("popup_preview",false): return await preload("res://tests/creation_popup_preview.gd").new().run(shell,fixture)
 	if fixture.get("presentation_review",false): shell.get_window().title = "IMP-015 increment 4 — Production character creation review"
 	if fixture.get("race_popup_review",false): shell.get_window().title = "IMP-015 — Race popup visual review"
 	shell.controller.settings.effective["startup/show_setup"] = true

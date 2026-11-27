@@ -295,7 +295,7 @@ func creation_popup_font() -> Dictionary:
 	return preload("res://scripts/data/classic_font.gd").decode(FileAccess.get_file_as_bytes(_active_source.path_join("FONT0003.FNT")))
 
 func creation_dialog_button(record: int) -> Dictionary:
-	if not ready() or record not in [3,4]: return {"ok":false,"reason":"Known classic Yes/No button required."}
+	if not ready() or record not in [3,4,6,7]: return {"ok":false,"reason":"Known classic confirmation button required."}
 	var codec := preload("res://scripts/data/classic_image.gd").new()
 	var bytes := FileAccess.get_file_as_bytes(_active_source.path_join("BUTTONS.RCI"))
 	var palette_bytes := FileAccess.get_file_as_bytes(_active_source.path_join("ART_PAL.COL"))
