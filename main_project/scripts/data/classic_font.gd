@@ -1,7 +1,7 @@
 extends RefCounted
 ## Read-only FONT000*.FNT bitfields, evidenced by DFU FntFile.cs (MIT).
 ## Only proven ASCII mapping is exposed; other Unicode uses the locale fallback.
-static func decode(bytes: PackedByteArray) -> Dictionary:
+static func decode(bytes: PackedByteArray, source := "FONT0003.FNT") -> Dictionary:
 	if bytes.size() != 8644: return {"ok":false,"reason":"Classic font requires 240 bounded glyphs."}
 	var width := bytes.decode_u16(0)
 	var height := bytes.decode_u16(2)
@@ -17,4 +17,4 @@ static func decode(bytes: PackedByteArray) -> Dictionary:
 			var bits := bytes.decode_u16(offset+y*2)
 			for x in advance:
 				if bits & (1 << (15-x)): atlas.set_pixel((index%16)*16+x,(index/16)*16+y,Color.WHITE)
-	return {"ok":true,"image":atlas,"width":width,"height":height,"widths":widths,"provenance":{"source":"FONT0003.FNT","sha256":preload("res://scripts/data/actor_input_formats.gd").sha256(bytes),"mapping":"ASCII 33..126; synthetic space = fixed width - 1; DFU spacing = 1"}}
+	return {"ok":true,"image":atlas,"width":width,"height":height,"widths":widths,"provenance":{"source":source,"sha256":preload("res://scripts/data/actor_input_formats.gd").sha256(bytes),"mapping":"ASCII 33..126; synthetic space = fixed width - 1; DFU spacing = 1"}}

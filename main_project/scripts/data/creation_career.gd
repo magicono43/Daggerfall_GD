@@ -198,10 +198,13 @@ static func supported_trait(id: String, option: Dictionary) -> bool:
 	var target: Variant = option.get("target")
 	if not category is String or not TARGETS.has(category) or target not in TARGETS[category]: return false
 	var expected_id: String = category if target == "none" else category+"/"+str(target)
-	var expected_conflict := "enemy" if category in ["bonus_to_hit","phobia"] else "weapon" if category in ["expertise","forbidden_weaponry"] else "tolerance" if category in ["immunity","resistance","low_tolerance","critical_weakness"] else ""
-	var singleton: bool = category in ["increased_magery","darkness_powered_magery","light_powered_magery"]
+	# Conflict groups and category singleton policy are authored creation rules.
+	# Identity, target and effect side still retain their supported owner contract.
+	if not option.get("conflict") is String or option.conflict.length() > 64: return false
+	for character: String in option.conflict:
+		if character not in "abcdefghijklmnopqrstuvwxyz0123456789_-": return false
 	var advantage: bool = category in ["acute_hearing","adrenaline_rush","athleticism","bonus_to_hit","expertise","immunity","resistance","increased_magery","rapid_healing","regenerate_health","spell_absorption"]
-	return id == expected_id and option.conflict == expected_conflict and option.singleton == singleton and option.side == ("advantage" if advantage else "disadvantage")
+	return id == expected_id and option.side == ("advantage" if advantage else "disadvantage")
 
 static func source_reason(value: Dictionary) -> String:
 	if value.size() != 6 or not value.get("descriptions") is Dictionary or not value.get("questionnaire") is Dictionary or not value.get("picker") is Dictionary or not value.get("provenance") is Dictionary or not value.get("appearances") is Dictionary: return "Complete creation source binding required."

@@ -21,6 +21,8 @@ var reputation_warning := false
 var custom_exit_message := ""
 var help_topic := ""
 var help_cache: Dictionary = {}
+var trait_stage := ""
+var trait_category := ""
 
 func clear() -> void:
 	if is_instance_valid(hp_repeat): hp_repeat.stop(); hp_repeat.queue_free()
@@ -30,6 +32,7 @@ func clear() -> void:
 	custom_exit_message = ""
 	help_topic = ""
 	help_cache.clear()
+	trait_stage = ""; trait_category = ""
 	candidate = ""
 	candidate_hook = ""
 	question_position = 0
@@ -58,6 +61,7 @@ func refresh(view: RefCounted) -> void:
 func render(view: RefCounted, expected: Dictionary, hook: String, selected: Dictionary) -> void:
 	if _draft != expected.token.id: clear(); _draft = expected.token.id
 	if candidate_hook != hook:
+		trait_stage = ""; trait_category = ""
 		help_topic = ""
 		candidate = ""; candidate_hook = hook; skill_slot.clear(); reputation_warning = false; custom_exit_message = ""
 		if hook != "custom": custom_tab = 0
@@ -251,8 +255,9 @@ func _custom(view: RefCounted, expected: Dictionary, selected: Dictionary) -> vo
 	elif custom_tab == 4:
 		preload("res://scripts/ui/creation_custom_sheet.gd").render(self,view,expected,value,evaluated)
 		preload("res://scripts/ui/creation_help.gd").render(self,view,expected)
-	elif custom_tab != 0:
-		_nested_custom(view,expected,value)
+	elif custom_tab in [1,2]:
+		preload("res://scripts/ui/creation_custom_sheet.gd").render(self,view,expected,value,evaluated)
+		preload("res://scripts/ui/creation_traits.gd").render(self,view,expected,value)
 	else:
 		preload("res://scripts/ui/creation_custom_sheet.gd").render(self,view,expected,value,evaluated)
 

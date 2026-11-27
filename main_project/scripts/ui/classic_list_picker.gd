@@ -13,8 +13,11 @@ var selected := -1
 var scroll_index := 0
 var _body: Control
 var _bar: VScrollBar
+var _rows := ROWS
+var _row_height := 8.0
 
-func configure(labels: Array, font: Font, image: Texture2D, locked: bool, initial := -1, first := 0, thumb: Texture2D = null) -> void:
+func configure(labels: Array, font: Font, image: Texture2D, locked: bool, initial := -1, first := 0, thumb: Texture2D = null, rows := ROWS, font_size := 7) -> void:
+	_rows = clampi(rows,1,12); _row_height = 72.0/_rows
 	size = Vector2(200,128)
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	if image != null:
@@ -30,7 +33,7 @@ func configure(labels: Array, font: Font, image: Texture2D, locked: bool, initia
 	var clip := Control.new()
 	clip.position = Vector2(26,27); clip.size = Vector2(138,72); clip.clip_contents = true
 	add_child(clip)
-	_body = Control.new(); _body.size = Vector2(138,labels.size()*8); clip.add_child(_body)
+	_body = Control.new(); _body.size = Vector2(138,labels.size()*_row_height); clip.add_child(_body)
 	for index in labels.size():
 		var button := Button.new()
 		button.text = labels[index]
@@ -42,7 +45,7 @@ func configure(labels: Array, font: Font, image: Texture2D, locked: bool, initia
 		button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 		button.disabled = locked
 		button.add_theme_font_override("font",font)
-		button.add_theme_font_size_override("font_size",7)
+		button.add_theme_font_size_override("font_size",font_size)
 		button.add_theme_color_override("font_color",NORMAL)
 		button.add_theme_color_override("font_hover_color",HOVER)
 		button.add_theme_color_override("font_pressed_color",SELECTED)
@@ -53,7 +56,7 @@ func configure(labels: Array, font: Font, image: Texture2D, locked: bool, initia
 		button.add_theme_constant_override("shadow_offset_y",1)
 		for state in ["normal","hover","pressed","disabled","focus"]: button.add_theme_stylebox_override(state,StyleBoxEmpty.new())
 		_body.add_child(button)
-		button.position = Vector2(0,index*8); button.size = Vector2(138,8)
+		button.position = Vector2(0,index*_row_height); button.size = Vector2(138,_row_height)
 		buttons.append(button)
 		button.pressed.connect(func(): select_item(index))
 		button.gui_input.connect(func(event: InputEvent):
@@ -67,12 +70,12 @@ func configure(labels: Array, font: Font, image: Texture2D, locked: bool, initia
 					var next := index-1 if event.keycode == KEY_UP else index+1
 					if event.keycode == KEY_HOME: next = 0
 					elif event.keycode == KEY_END: next = buttons.size()-1
-					elif event.keycode == KEY_PAGEUP: next = index-ROWS
-					elif event.keycode == KEY_PAGEDOWN: next = index+ROWS
+					elif event.keycode == KEY_PAGEUP: next = index-_rows
+					elif event.keycode == KEY_PAGEDOWN: next = index+_rows
 					select_item(clampi(next,0,buttons.size()-1),true); button.accept_event())
 	_bar = VScrollBar.new()
 	_bar.position = Vector2(181,23); _bar.size = Vector2(5,82)
-	_bar.min_value = 0; _bar.max_value = maxi(ROWS,labels.size()); _bar.page = ROWS; _bar.step = 1
+	_bar.min_value = 0; _bar.max_value = maxi(_rows,labels.size()); _bar.page = _rows; _bar.step = 1
 	_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE if locked else Control.MOUSE_FILTER_STOP
 	var empty_icon := ImageTexture.create_from_image(Image.create(1,1,false,Image.FORMAT_RGBA8))
 	for icon in ["increment","increment_highlight","increment_pressed","decrement","decrement_highlight","decrement_pressed"]: _bar.add_theme_icon_override(icon,empty_icon)
@@ -87,7 +90,7 @@ func configure(labels: Array, font: Font, image: Texture2D, locked: bool, initia
 			sliced.texture_margin_top = 1; sliced.texture_margin_bottom = 1
 			_bar.add_theme_stylebox_override(state,sliced)
 	add_child(_bar)
-	_bar.visible = labels.size() > ROWS
+	_bar.visible = labels.size() > _rows
 	# Adding an unthemed Control may already have expanded it to stock minimums.
 	_bar.size = Vector2(5,82)
 	_bar.value_changed.connect(func(value: float): set_scroll(int(value)))
@@ -106,8 +109,8 @@ func configure(labels: Array, font: Font, image: Texture2D, locked: bool, initia
 		buttons[initial].set_pressed_no_signal(true)
 
 func set_scroll(index: int) -> void:
-	scroll_index = clampi(index,0,maxi(0,buttons.size()-ROWS))
-	_body.position.y = -scroll_index*8
+	scroll_index = clampi(index,0,maxi(0,buttons.size()-_rows))
+	_body.position.y = -scroll_index*_row_height
 	if _bar != null: _bar.set_value_no_signal(scroll_index)
 	scrolled.emit(scroll_index)
 
@@ -116,6 +119,6 @@ func select_item(index: int, focus := false) -> void:
 	selected = index
 	for row in buttons.size(): buttons[row].set_pressed_no_signal(row == index)
 	if index < scroll_index: set_scroll(index)
-	elif index >= scroll_index+ROWS: set_scroll(index-ROWS+1)
+	elif index >= scroll_index+_rows: set_scroll(index-_rows+1)
 	if focus: buttons[index].grab_focus()
 	item_selected.emit(index)

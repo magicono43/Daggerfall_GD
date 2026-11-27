@@ -12,6 +12,8 @@ var _click: Dictionary = {}
 var _class_jingle: Dictionary = {}
 var _click_player: AudioStreamPlayer
 var click_submissions := 0
+var _small_font: FontFile
+var _small_font_prepared := false
 var _popup_font: FontFile
 var _popup_font_prepared := false
 const NARRATIONS = ["breton","redguard","nord","dark-elf","high-elf","wood-elf","khajiit","argonian"]
@@ -30,7 +32,7 @@ func declare(providers: RefCounted) -> Dictionary:
 	if not spinner.ok: return spinner
 	var reputation: Dictionary = media.register_target("creation.reputation","image",[],_decode_once.bind("creation.reputation",classic.creation_image.bind("CUST03I0.IMG")))
 	if not reputation.ok: return reputation
-	for item in [["creation.list-picker","PICK00I0.IMG"],["creation.biography-method","BUTN02I0.IMG"]]:
+	for item in [["creation.traits","CUST01I0.IMG"],["creation.traits-advantages","CUST02I0.IMG"],["creation.list-picker","PICK00I0.IMG"],["creation.biography-method","BUTN02I0.IMG"]]:
 		var result: Dictionary = media.register_target(item[0],"image",[],_decode_once.bind(item[0],classic.creation_image.bind(item[1])))
 		if not result.ok: return result
 	var click: Dictionary = media.register_target("creation.dialog.click","audio",[],_sound_baseline.bind({"ordinal":360}))
@@ -110,6 +112,35 @@ func popup_font(fallback: Font) -> Font:
 				_popup_font.set_glyph_texture_idx(0,cache_size,code,0)
 	if _popup_font == null: return fallback
 	return _popup_font
+
+func small_font(fallback: Font) -> Font:
+	if not _small_font_prepared:
+		_small_font_prepared = true
+		var source: Dictionary = classic.creation_popup_font(true)
+		if source.ok:
+			_small_font = FontFile.new()
+			_small_font.font_name = "Daggerfall FONT0002"
+			_small_font.allow_system_fallback = false
+			_small_font.fixed_size = source.height
+			_small_font.fixed_size_scale_mode = TextServer.FIXED_SIZE_SCALE_ENABLED
+			_small_font.set_meta("provenance",source.provenance)
+			# Setting the family name can leave an empty default-size cache first.
+			# Godot's has_char() consults that first cache. Start with only our atlas.
+			_small_font.clear_size_cache(0)
+			var cache_size := Vector2i(source.height,0)
+			_small_font.set_texture_image(0,cache_size,0,source.image)
+			_small_font.set_cache_ascent(0,source.height,source.height)
+			_small_font.set_cache_descent(0,source.height,0)
+			for code in range(32,127):
+				var index: int = code-33
+				var width: int = source.width-1 if code == 32 else source.widths[index]
+				_small_font.set_glyph_advance(0,source.height,code,Vector2(width+1,0))
+				_small_font.set_glyph_offset(0,cache_size,code,Vector2(0,-source.height))
+				_small_font.set_glyph_size(0,cache_size,code,Vector2(width,source.height) if code != 32 else Vector2.ZERO)
+				_small_font.set_glyph_uv_rect(0,cache_size,code,Rect2((index%16)*16,(index/16)*16,width,source.height) if code != 32 else Rect2())
+				_small_font.set_glyph_texture_idx(0,cache_size,code,0)
+	if _small_font == null: return fallback
+	return _small_font
 
 func _parchment_baseline() -> Dictionary:
 	return _decode_once("creation.parchment",classic.creation_parchment)
@@ -207,6 +238,8 @@ func dispose() -> void:
 	_click_player = null
 	_click.clear()
 	_class_jingle.clear()
+	_small_font = null
+	_small_font_prepared = false
 	_popup_font = null
 	_popup_font_prepared = false
 	_textures.clear()

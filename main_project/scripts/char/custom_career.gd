@@ -26,7 +26,7 @@ static func conflict(policy: Dictionary, selected: Array, incoming: String) -> S
 		if not id is String or not policy.traits.has(id): return "Unsupported existing option."
 		var old: Dictionary = policy.traits[id]
 		if id == incoming: return "This option is already selected."
-		if old.category == added.category and added.singleton: return "Only one variant of "+str(added.category)+" is permitted."
+		if old.category == added.category and (added.singleton or old.singleton): return "Only one variant of "+str(added.category)+" is permitted."
 		if not added.conflict.is_empty() and added.conflict == old.conflict and added.target == old.target and added.category != old.category: return "Conflicts with "+str(old.label)+". Remove it first."
 	return ""
 

@@ -53,6 +53,9 @@ func run(checks: RefCounted, host: Control, view: RefCounted, fixture: Dictionar
 	suite.check("dagger native neutral Y",115.0,dagger(view).current_y)
 	await move(Vector2(2,2))
 	await capture("custom-blank",fixture)
+	if fixture.get("traits_preview",false):
+		await mouse(view._buttons["custom/panel/"+str(2 if fixture.get("disadvantages_preview",false) else 1)])
+		return await preload("res://tests/creation_traits_preview.gd").new().run(suite,shell,view,fixture)
 	if fixture.get("help_preview",false):
 		await mouse(view._buttons["custom/panel/4"])
 		return await preload("res://tests/creation_help_preview.gd").new().run(suite,shell,view,fixture)

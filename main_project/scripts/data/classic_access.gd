@@ -248,7 +248,7 @@ func creation_image(file: String) -> Dictionary:
 	# This bounded owner table is not a wildcard path/format interface. Absence or
 	# malformed optional art does not invalidate required startup or gameplay data.
 	const NAMES = ["CHAR00I0.IMG","CHAR01I0.IMG","CHAR02I0.IMG","CHAR03I0.IMG","CHAR04I0.IMG","CHAR05I0.IMG","TMAP00I0.IMG","CUST00I0.IMG","CUST08I0.IMG","CHGN00I0.IMG","BIOG00I0.IMG"]
-	if not ready() or (file not in NAMES and file not in ["BUTN01I0.IMG","BUTN02I0.IMG","PICK00I0.IMG","CHAR02I1.IMG","CUST03I0.IMG"]): return {"ok":false,"reason":"Published creation-art source binding unavailable."}
+	if not ready() or (file not in NAMES and file not in ["BUTN01I0.IMG","BUTN02I0.IMG","PICK00I0.IMG","CHAR02I1.IMG","CUST03I0.IMG","CUST01I0.IMG","CUST02I0.IMG"]): return {"ok":false,"reason":"Published creation-art source binding unavailable."}
 	var reader := MediaReader.new("classic-img-v1")
 	var checked: Dictionary = reader.initialize(_active_source.path_join(file))
 	if not checked.ok: return checked
@@ -290,9 +290,10 @@ func creation_parchment() -> Dictionary:
 		atlas.blit_rect(tile,Rect2i(0,0,22,22),Vector2i((record%3)*22,(record/3)*22))
 	return {"ok":true,"image":atlas,"provenance":{"source":"SPOP.RCI","sha256":ActorFormats.sha256(bytes),"palette":"ART_PAL.COL","palette_sha256":ActorFormats.sha256(palette_bytes),"layout":"DFU SetBorderTextures row-major nine tiles","alpha_index":0}}
 
-func creation_popup_font() -> Dictionary:
+func creation_popup_font(small := false) -> Dictionary:
 	if not ready(): return {"ok":false,"reason":"Published classic source required."}
-	return preload("res://scripts/data/classic_font.gd").decode(FileAccess.get_file_as_bytes(_active_source.path_join("FONT0003.FNT")))
+	var file := "FONT0002.FNT" if small else "FONT0003.FNT"
+	return preload("res://scripts/data/classic_font.gd").decode(FileAccess.get_file_as_bytes(_active_source.path_join(file)),file)
 
 func creation_dialog_button(record: int) -> Dictionary:
 	if not ready() or record not in [3,4,6,7]: return {"ok":false,"reason":"Known classic confirmation button required."}

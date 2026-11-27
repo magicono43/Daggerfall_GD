@@ -98,6 +98,24 @@ unsupported IDs, target conflicts, singleton violations and excessive lists reje
 atomically. Skill replacement releases the previous skill without swapping.
 Subtype selection commits only with Add; cancellation cannot charge a placeholder.
 
+Trait-menu polish (2026-11-27): Add opens a category picker; confirming a category
+with variants opens its subtype picker, whose confirmation submits the complete
+candidate. A single click on either displayed line removes a selected trait.
+Picker cancellation leaves owner state unchanged. Conflicts/duplicates are
+silently ignored by the presentation; CHAR still validates every submitted edit.
+The baseline per-side limits remain seven. Mods can replace `limits.advantage`
+and `limits.disadvantage` through `char.career:policy#stock` (0..90).
+Each trait's `conflict` is a bounded lowercase group identifier (letters, digits,
+underscore, hyphen; empty disables membership). Different categories in the same
+nonempty group conflict when their supported effect targets match. Stock groups
+are `enemy`, `weapon` and `tolerance`, matching DFU's pairs. Mods can change group
+membership without changing effect identity. `singleton` controls whether a
+category allows multiple variants; if either variant requires a singleton, the
+pair rejects in either selection order. Duplicate IDs always reject. Stable
+IDs, supported targets/sides, atomic publication and the legal-build witness
+remain validated; changing creation compatibility does not implement new live
+trait effects or define runtime effect stacking.
+
 Unapplied class-name text survives nested editors/backtracking. Use name, Enter
 or Next submits the visible value through the same CHAR validation. Editable text
 retains its original scalars. The existing font owner supplies read-only `?`

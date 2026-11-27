@@ -55,6 +55,10 @@ func cancel_nested() -> bool:
 		career_view.reputation_warning = false
 		career_view.refresh(self)
 		return true
+	if not career_view.trait_stage.is_empty():
+		career_view.trait_stage = ""; career_view.trait_category = ""
+		career_view.refresh(self)
+		return true
 	if not navigation.summary_locked() and navigation.step().get("hook") == "biography":
 		action("back",navigation.context())
 		return true
@@ -218,7 +222,7 @@ func action(id: String, expected: Dictionary, value: Variant = null) -> Dictiona
 			if not checked.ok and inputs.has_method("validate_career") and navigation.step().get("hook") == "custom" and career_view.custom_tab == 0:
 				career_view.custom_exit_message = preload("res://scripts/ui/creation_custom_messages.gd").rejected_exit(self,checked)
 		"back":
-			if not career_view.custom_exit_message.is_empty() or (navigation.step().get("hook") == "custom" and career_view.custom_tab in [3,4]):
+			if not career_view.custom_exit_message.is_empty() or (navigation.step().get("hook") == "custom" and career_view.custom_tab in [1,2,3,4]):
 				cancel_nested(); checked = {"ok":true}
 			else: checked = navigation.back(expected)
 		"summary-edit": checked = navigation.summary_edit(expected,str(value))
@@ -361,7 +365,7 @@ func render() -> void:
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook in ["race","class"]: _buttons.next.disabled = true
 	if inputs.has_method("validate_career") and not career_view.candidate.is_empty() and hook == "race": _buttons.next.hide()
 	if inputs.has_method("validate_career") and hook in ["gender","class_method","class","biography_method"]: _buttons.next.hide()
-	if inputs.has_method("validate_career") and hook == "custom" and selected.has("custom") and career_view.custom_tab in [0,3,4]: _buttons.next.hide()
+	if inputs.has_method("validate_career") and hook == "custom" and selected.has("custom"): _buttons.next.hide()
 	var row := HBoxContainer.new()
 	host.panel.add_child(row)
 	for entry in [["back","Back"],["restart","Restart"],["exit","Exit creation"]]:

@@ -205,7 +205,11 @@ func qualify(shell: Control, fixture: Dictionary) -> Array[Dictionary]:
 	modified = provider.policy.duplicate(true); modified.difficulty.max = modified.difficulty.min
 	check("career equal difficulty rejects",false,Policy.policy_reason(modified).is_empty())
 	modified = provider.policy.duplicate(true); modified.traits["immunity/fire"].conflict = ""
-	check("career unsupported mod conflict rejects",false,Policy.policy_reason(modified).is_empty())
+	check("career mod conflict override validates","",Policy.policy_reason(modified))
+	var relaxed := custom.duplicate(true); relaxed.traits = ["immunity/fire","low_tolerance/fire"]
+	check("career mod conflict override applies",true,Custom.evaluate(relaxed,modified,custom.id).ok)
+	modified.traits["immunity/fire"].conflict = "bad/group"
+	check("career malformed conflict group rejects",false,Policy.policy_reason(modified).is_empty())
 	modified = provider.policy.duplicate(true); modified.difficulty.min = 30; modified.difficulty.max = 40
 	modified.tradeoff_witness = {"hit_points_per_level":30,"traits":["increased_magery/3"]}
 	check("career mod trait-required reachability","",Policy.policy_reason(modified))
@@ -429,19 +433,21 @@ func stock_controls(shell: Control, fixture: Dictionary) -> void:
 	view.action("next",view.navigation.context())
 	check("career Next commits visible pending name","Étoile 流浪者 2",view.owner.projection().selections.custom.name)
 	check("career custom advantage panel handler",true,await control(shell,"Advantages"))
-	var picker: OptionButton = metadata(view._page,"trait-picker/advantage")
-	check("career subtype picker exists",true,picker != null)
-	if picker != null:
-		var before: Dictionary = view.owner.projection()
-		await control(shell,"Add advantage")
-		check("career cancelled subtype no charge",before,view.owner.projection())
-		for index in picker.item_count:
-			if picker.get_item_metadata(index) == "acute_hearing": picker.select(index)
-		check("career trait add stock handler",true,await control(shell,"Add advantage"))
-		check("career trait add owner receives",["acute_hearing"],view.owner.projection().selections.custom.traits)
-		await capture(shell,"creation-traits.png")
-		check("career trait removal stock handler",true,await control(shell,"Remove Acute Hearing (+1)"))
-		check("career trait removal owner clear",[],view.owner.projection().selections.custom.traits)
+	await control(shell,"Add advantage")
+	check("career primary picker opens","category",view.career_view.trait_stage)
+	view.cancel_nested()
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
+	check("career cancelled picker no charge",[],view.owner.projection().selections.custom.traits)
+	await control(shell,"Add advantage")
+	var picker: Control
+	for child in view._page.get_children():
+		if child.get_meta("custom_trait_picker",false): picker = child
+	picker.item_activated.emit(0)
+	await shell.get_tree().process_frame; await shell.get_tree().process_frame
+	check("career trait add owner receives",["acute_hearing"],view.owner.projection().selections.custom.traits)
+	await capture(shell,"creation-traits.png")
+	check("career trait removal stock handler",true,await control(shell,"Remove Acute Hearing"))
+	check("career trait removal owner clear",[],view.owner.projection().selections.custom.traits)
 	await control(shell,"Return to career")
 	check("career custom reputation panel handler",true,await control(shell,"Reputation"))
 	var reputation_click := InputEventMouseButton.new()
