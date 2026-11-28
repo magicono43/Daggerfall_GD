@@ -78,6 +78,16 @@ func declare_air_hook(id: String, builtin: Callable) -> Dictionary:
 	_revision += 1
 	return {"ok":true}
 
+func declare_item_hook(id: String, builtin: Callable) -> Dictionary:
+	var item = preload("res://scripts/rule/item_formulas.gd")
+	if not _editable() or not _contributions.is_empty() or not _candidate.is_empty(): return failure("registration_closed","Declare before preparation.")
+	if id not in item.HOOKS or _hooks.has(id) or not signature(builtin,item.CONTRACT): return failure("invalid_declaration","Expected pure item (Dictionary) -> int hook.")
+	_hooks[id] = builtin
+	_contracts[id] = item.CONTRACT
+	_builtin_owners[id] = builtin.get_object()
+	_revision += 1
+	return {"ok":true}
+
 func stage(provider: String, version: String, entries: Array, integration := "") -> Dictionary:
 	if not _editable():
 		return failure("locked","Formula registrations are reserved or locked until restart.",provider)
@@ -231,6 +241,8 @@ func invoke(hook: String, value: Variant, core: SessionLifecycle, owner: Object,
 	if ground_contract: valid = preload("res://scripts/rule/ground_formulas.gd").valid_input(value)
 	var air_contract: bool = _contracts[hook] == "air-formula-v1"
 	if air_contract: valid = preload("res://scripts/rule/air_formulas.gd").valid_input(hook,value)
+	var item_contract: bool = _contracts[hook] == "item-formula-v1"
+	if item_contract: valid = preload("res://scripts/rule/item_formulas.gd").valid_input(hook,value)
 	if not valid:
 		return failure("invalid_input","Input violates the published " + _contracts[hook] + " domain.","",hook)
 	var selected: Dictionary = _active.winners[hook]
@@ -251,6 +263,7 @@ func invoke(hook: String, value: Variant, core: SessionLifecycle, owner: Object,
 		problem = "invalid_result"
 	elif _disposed or not _context(core,owner,hook,scope,captured):
 		problem = "stale_context"
+	if problem.is_empty() and item_contract and not preload("res://scripts/rule/item_formulas.gd").valid_output(hook,value,output): problem = "invalid_result"
 	if not problem.is_empty():
 		_last_failure = failure(problem,"Selected formula failed; stop operation and recover without fallback.",selected.provider,hook)
 		_last_failure.merge({"session":scope,"operation":captured.duplicate(true),"callback_errors":monitor.errors.duplicate(true),

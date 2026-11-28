@@ -1,0 +1,405 @@
+{
+  "schema": "imp017-increment1-audit-v1",
+  "head": "f35cdca553d2c3c569069412a51a163373d7613f",
+  "status": "increment-1-user-accepted-parent-open",
+  "start_est": "2026-11-27 18:08:47 UTC-05:00",
+  "results": [
+    {
+      "guarded_sources": 134,
+      "fixture": "item-construction-v1",
+      "report": "main_project/tests/.runs/verification-headless-8d84bc4d05914e7c9b62c1f3b6dfafc1/report.json",
+      "mode": "headless",
+      "observations": {
+        "complete_preparation_usec": 20875627,
+        "construction_200_usec": 85761,
+        "preparation": {
+          "intake_usec": 13098709,
+          "prepare_serial": 1,
+          "prepare_usec": 17672971,
+          "projection_usec": 678364,
+          "validators": {
+            "actor.baseline": {
+              "copy_usec": 179,
+              "validate_usec": 18
+            },
+            "actor.inputs": {
+              "copy_usec": 15180,
+              "validate_usec": 1389
+            },
+            "char.biography": {
+              "copy_usec": 67356,
+              "validate_usec": 1093
+            },
+            "char.career": {
+              "copy_usec": 48996,
+              "validate_usec": 2217
+            },
+            "char.creation": {
+              "copy_usec": 9840,
+              "validate_usec": 8
+            },
+            "char.identity": {
+              "copy_usec": 1700,
+              "validate_usec": 2019
+            },
+            "char.starting": {
+              "copy_usec": 17223,
+              "validate_usec": 5753
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 37964,
+              "validate_usec": 28642
+            },
+            "geography.inputs": {
+              "copy_usec": 382611,
+              "validate_usec": 205218
+            },
+            "item-spell.inputs": {
+              "copy_usec": 200841,
+              "validate_usec": 3484
+            },
+            "item.construction": {
+              "copy_usec": 18830,
+              "validate_usec": 844363
+            },
+            "layout.inputs": {
+              "copy_usec": 655824,
+              "validate_usec": 125438
+            },
+            "media.assets": {
+              "copy_usec": 337651,
+              "validate_usec": 10
+            },
+            "mod.preferences": {
+              "copy_usec": 576,
+              "validate_usec": 6
+            },
+            "move.air": {
+              "copy_usec": 232,
+              "validate_usec": 4
+            },
+            "move.feedback": {
+              "copy_usec": 52,
+              "validate_usec": 3
+            },
+            "move.ground": {
+              "copy_usec": 114,
+              "validate_usec": 4
+            },
+            "move.mechanism": {
+              "copy_usec": 76,
+              "validate_usec": 4
+            },
+            "rule.holidays": {
+              "copy_usec": 370274,
+              "validate_usec": 20575
+            },
+            "text.catalogs": {
+              "copy_usec": 176906,
+              "validate_usec": 28
+            },
+            "text.fonts": {
+              "copy_usec": 208,
+              "validate_usec": 23
+            },
+            "time.calendar": {
+              "copy_usec": 45,
+              "validate_usec": 4
+            },
+            "world.variants": {
+              "copy_usec": 619723,
+              "validate_usec": 49418
+            }
+          }
+        },
+        "preview_200_usec": 71061
+      },
+      "suite": "item-construction",
+      "sha256": "E0F919E4E8928834E09A09D7781B178321893B33A1B72D95ECFCFE3C75FD7E7F",
+      "assertions": 125,
+      "status": "passed",
+      "source_hashes_unchanged": true
+    },
+    {
+      "guarded_sources": 134,
+      "fixture": "item-construction-v1",
+      "report": "main_project/tests/.runs/verification-rendered-d03efaea35c844de83e116b26bf2a5b4/report.json",
+      "mode": "rendered",
+      "observations": {
+        "complete_preparation_usec": 20463936,
+        "construction_200_usec": 86115,
+        "preparation": {
+          "intake_usec": 12988336,
+          "prepare_serial": 1,
+          "prepare_usec": 17318373,
+          "projection_usec": 643475,
+          "validators": {
+            "actor.baseline": {
+              "copy_usec": 184,
+              "validate_usec": 19
+            },
+            "actor.inputs": {
+              "copy_usec": 15319,
+              "validate_usec": 1339
+            },
+            "char.biography": {
+              "copy_usec": 68182,
+              "validate_usec": 1446
+            },
+            "char.career": {
+              "copy_usec": 49430,
+              "validate_usec": 2282
+            },
+            "char.creation": {
+              "copy_usec": 8905,
+              "validate_usec": 6
+            },
+            "char.identity": {
+              "copy_usec": 1587,
+              "validate_usec": 1940
+            },
+            "char.starting": {
+              "copy_usec": 17112,
+              "validate_usec": 6600
+            },
+            "faction-quest.inputs": {
+              "copy_usec": 38796,
+              "validate_usec": 28406
+            },
+            "geography.inputs": {
+              "copy_usec": 340407,
+              "validate_usec": 202184
+            },
+            "item-spell.inputs": {
+              "copy_usec": 187187,
+              "validate_usec": 6140
+            },
+            "item.construction": {
+              "copy_usec": 32532,
+              "validate_usec": 861128
+            },
+            "layout.inputs": {
+              "copy_usec": 593151,
+              "validate_usec": 124890
+            },
+            "media.assets": {
+              "copy_usec": 295506,
+              "validate_usec": 11
+            },
+            "mod.preferences": {
+              "copy_usec": 831,
+              "validate_usec": 11
+            },
+            "move.air": {
+              "copy_usec": 434,
+              "validate_usec": 6
+            },
+            "move.feedback": {
+              "copy_usec": 61,
+              "validate_usec": 4
+            },
+            "move.ground": {
+              "copy_usec": 129,
+              "validate_usec": 3
+            },
+            "move.mechanism": {
+              "copy_usec": 76,
+              "validate_usec": 4
+            },
+            "rule.holidays": {
+              "copy_usec": 324974,
+              "validate_usec": 19982
+            },
+            "text.catalogs": {
+              "copy_usec": 171996,
+              "validate_usec": 31
+            },
+            "text.fonts": {
+              "copy_usec": 223,
+              "validate_usec": 22
+            },
+            "time.calendar": {
+              "copy_usec": 46,
+              "validate_usec": 4
+            },
+            "world.variants": {
+              "copy_usec": 572260,
+              "validate_usec": 49400
+            }
+          }
+        },
+        "preview_200_usec": 71662
+      },
+      "suite": "item-construction",
+      "sha256": "127CB45EC3DB31870F877AE02068CA1A3EB46C8FC39A6BC90BEDF2EF7C2923E3",
+      "assertions": 127,
+      "status": "passed",
+      "source_hashes_unchanged": true
+    },
+    {
+      "guarded_sources": 47,
+      "fixture": "item-spell-inputs-v1",
+      "report": "main_project/tests/.runs/verification-headless-a2377a2085cd4e949007dfb58a556b7d/report.json",
+      "mode": "headless",
+      "observations": null,
+      "suite": "item-spell-inputs",
+      "sha256": "78884CE9E5D765A972DF4E0B70308210C9A534913DCDD1F84478B0E58CEA70D2",
+      "assertions": 160,
+      "status": "passed",
+      "source_hashes_unchanged": true
+    },
+    {
+      "guarded_sources": 4,
+      "fixture": "formula-v1",
+      "report": "main_project/tests/.runs/verification-headless-38741e1ee3114481b284f18c19c8da68/report.json",
+      "mode": "headless",
+      "observations": null,
+      "suite": "formula",
+      "sha256": "E9B371AA16F1E938E56F6CAC702C7D676283D6232185E88A08ED158F03F359F9",
+      "assertions": 82,
+      "status": "passed",
+      "source_hashes_unchanged": true
+    },
+    {
+      "guarded_sources": 0,
+      "fixture": "m1-v1",
+      "report": "main_project/tests/.runs/verification-headless-897c2d48e1cb4813b86cc5a1d45fe82d/report.json",
+      "mode": "headless",
+      "observations": null,
+      "suite": "session",
+      "sha256": "4530780019118397BC0BB6C202F54F7266395AD08F2F1CDC9BE6EB52CFCE5327",
+      "assertions": 263,
+      "status": "passed",
+      "source_hashes_unchanged": true
+    }
+  ],
+  "assertions": 757,
+  "production_mismatches": [],
+  "source_hashes": {
+    "scripts/item/construction_owner.gd": "65D182C4F798FD85C256B84A82B8179F1A6B41052B50CEE36A773902FF1DD3A0",
+    "tools/item_construction_fixture.ps1": "ADBE8571425E77576350C4793ABAE524A46A8381809701F9C8286232B0427C2C",
+    "tests/item_construction_cases.gd": "5209EDC3A8E86D5E2B17173F1EAB7979C07D19155EEA07F099621CE09A81FF13",
+    "tools/verify.ps1": "C8AA096EF6D25073412AC813749BE8E2220F45CDC69CAF1F72A2534E4EEDE986",
+    "scripts/rule/formula_registry.gd": "976D20B98BA2A58AAF96EBC22BED6755DE944041A3B196F245E7778201D74851",
+    "content/items/construction.json": "D07059F6A3F1DB954ADD95CF6157FB4F9F6E43863128865FA38D9F4D7FA19E37",
+    "scripts/startup/startup_shell.gd": "40546C27CCB49D9430E2072F8B04F83FABBD3C508265F05CF51433955519DA0A",
+    "scripts/rule/item_formulas.gd": "59404597CFDD23E6CB4640D464EE69147DC1793857C1CA507EF3F355A1E6B17C",
+    "scripts/session/session_lifecycle.gd": "C29F4AC26CD9F388F12C297D1E589386FE87A90A5D3DFE377353B647D71DDCF9",
+    "scripts/startup/provider_boundary.gd": "4C84AD83C70D856A401F16A8A6FD021957A5C25BFEFA88A762E5A0AD407CAFD0",
+    "scripts/data/item_construction.gd": "98098410EE692F564F3375AEA50DAF585513E4B561EB9D47F723CE538B9FF771",
+    "tests/formula_cases.gd": "D265B67AEE2EEFD852435743B27C42DB931E740AAF9ACE5AD27600BAAFFDBF42",
+    "scripts/item/identity_allocator.gd": "1111C8E9590E5D099608B57B0688CFC84CF62B0FAEBA5D5A3C2C12C6C2F8CD2A",
+    "tests/item_construction_inventory.json": "EC0EE1E29A6AA26D5826286DA1BD9900C724CEC12905AEA97551C1428728DF19"
+  },
+  "fixture_reuse": "Headless and final rendered production inputs match exactly. Only rendered diagnostic block/helper changed; final rendered repeats all 125 functional assertions plus two presentation checks.",
+  "deferred": [
+    "combined IMP-017 regression checkpoint",
+    "Windows debug export",
+    "Windows release export",
+    "collections and partial split/merge increment 2",
+    "capacity/tender increment 3",
+    "native persistence increment 4 / IMP-023",
+    "named equipment/loot/reward/trade/creation/milestone gates"
+  ],
+  "cleanup": "main_project/tests/.runs/imp017-increment1-2026-11-27/cleanup-ledger.json",
+  "cleanup_summary": {
+    "removed_bytes": 2993164603.0,
+    "roots": 14,
+    "archives": [
+      {
+        "sha256": "D7D7946636AA2517142594A241B79C95C15B8559105FD05ABCCD44F1E72551C3",
+        "entries": 961,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-4e5c104d9f5346448fb27fd36379973f\\executed-source.zip"
+      },
+      {
+        "sha256": "4D84C33D914E36DC77EEE0C4268757A52E5DA70C03F8C22C9E2B3E937B5F8452",
+        "entries": 961,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-baeefc3a153c41a69df51c545c2b152f\\executed-source.zip"
+      },
+      {
+        "sha256": "C675BA6EFBE4BEF8F28F7E17DFF622B1A7E17881B82D01021E1DFF153EC504D4",
+        "entries": 961,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-7772fee001004c549d96c0621838a881\\executed-source.zip"
+      },
+      {
+        "sha256": "4E55637CBC128125225BE45822E3AB5A69020A01C2D149EB54AAAD1094C73391",
+        "entries": 961,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-ce674ef6a65f4de8a570419acfe3bea8\\executed-source.zip"
+      },
+      {
+        "sha256": "2CA99BCD7D197AEBDB110E38559E79C635666969E64B1B860E2BF266F19DA0AB",
+        "entries": 961,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-26a76333e71f4322953c8dcca41a7d76\\executed-source.zip"
+      },
+      {
+        "sha256": "C789FFAEEFA3755473E50C239E210A1A2DBF11DD8B116C5FF5F464322F94201B",
+        "entries": 963,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e92598b9b6b74f6abf89902e6a01ee42\\executed-source.zip"
+      },
+      {
+        "sha256": "2FDE14CF07037D7CE231AC40FFA2D4F1226B8146F8056AAE946B86689C8865A5",
+        "entries": 963,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-61071473f2324ffe9689a9271b3f54cf\\executed-source.zip"
+      },
+      {
+        "sha256": "D367DB2FF5ED8D244348CB1C16AD07BAA91790473AA52F30A0DB09567A992CF9",
+        "entries": 963,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-8d84bc4d05914e7c9b62c1f3b6dfafc1\\executed-source.zip"
+      },
+      {
+        "sha256": "349A27572CC452EF347915C5EA1DF731C4C3AF3A2FFACEBACC4C2C5BC9F06D6C",
+        "entries": 963,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-414d7c23eed94b7e8d00a3123688c255\\executed-source.zip"
+      },
+      {
+        "sha256": "75BD210F2CEDD13DCBD7352F79997FAA0C55D3BC08AC5352195982A8B2088CB1",
+        "entries": 963,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-a2377a2085cd4e949007dfb58a556b7d\\executed-source.zip"
+      },
+      {
+        "sha256": "522DCE1BFAE1F648309BA9E7132DB8F6D117615ECE41BB084EB0E7330E656512",
+        "entries": 963,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-d03efaea35c844de83e116b26bf2a5b4\\executed-source.zip"
+      },
+      {
+        "sha256": "5B881EFDEBE4911BEB0D2FFAF113D190BFDBA00F0B01B10B6F2BD949C6AA484E",
+        "entries": 963,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-cde9b1a9c0f149219a1cf97d6f5d2740\\executed-source.zip"
+      },
+      {
+        "sha256": "04A8B2D00CE50E133A45166D2901ED24D7299370575DD4EB803C88DDC111E3E9",
+        "entries": 963,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-38741e1ee3114481b284f18c19c8da68\\executed-source.zip"
+      },
+      {
+        "sha256": "C4C8DBBD0BA7C1121D7F52715776B4F7B230CFB76900EE4063A29B70B280026B",
+        "entries": 963,
+        "path": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-897c2d48e1cb4813b86cc5a1d45fe82d\\executed-source.zip"
+      }
+    ],
+    "removed_files": 23946.0,
+    "source_entries": 13472.0,
+    "retained_files": 144.0,
+    "failures": 0
+  },
+  "retention": {
+    "logical_bytes": 9565020439,
+    "task_copied_binaries": 0,
+    "files": 121296,
+    "task_full_builds": 0,
+    "review": "Above 8 GiB reviewed. Largest earlier/unknown/unique roots protected; no broader deletion inferred.",
+    "gib": 8.908,
+    "retained_evidence_reverified": true
+  },
+  "end_est": "2026-11-27 19:01:49 EST (UTC-05:00)",
+  "diff_check": "passed",
+  "acceptance": {
+    "working_tree": "Uncommitted at handoff preparation; use recorded source identities, inspect current repository",
+    "next_implementation_started": false,
+    "date_est": "2026-11-27",
+    "scope": "Delivered increment-1 construction/identity scope only",
+    "statement": "I accept what you have done in increment 1",
+    "next_handoff": "design_docs/development/handoffs/IMP-017-INCREMENT-2-PROMPT.md",
+    "commit": null
+  }
+}

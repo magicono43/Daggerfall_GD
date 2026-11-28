@@ -28,6 +28,7 @@ func scratch(callbacks: Dictionary) -> RefCounted:
 	registry.declare_ground_hook(preload("res://scripts/rule/ground_formulas.gd").new().calculate)
 	registry.declare_air_hook("move.jump-impulse",preload("res://scripts/rule/air_formulas.gd").new().impulse)
 	registry.declare_air_hook("move.landing-damage",preload("res://scripts/rule/air_formulas.gd").new().damage)
+	preload("res://scripts/rule/item_formulas.gd").new().declare(registry)
 	registry.declare_integer_hook(Fixture.HOOK,callbacks.builtin.builtin)
 	return registry
 

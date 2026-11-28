@@ -1,5 +1,12 @@
 # RULE numeric interfaces — IMP-006 increment 1
 
+IMP-017 increment 1 adds [item_formulas.gd](item_formulas.gd) through the existing
+registry and scoped session binding. The
+[construction contract](../../../design_docs/development/ITEM_CONSTRUCTION_CONTRACT.md)
+defines exact material arithmetic, selector distributions, mod hooks, numeric
+domains and failure behavior. ITEM retains generated facts and owns publication;
+queries/inspection neither draw nor allocate. Combat/equipment/SAVE remain pending.
+
 `pcg32.gd.create(initstate, initseq)` takes exactly four little-endian unsigned
 16-bit limbs for each unsigned 64-bit input. Invalid limbs return null. Use
 `unsigned64.gd.from_int` for signed bit patterns or `from_bytes` for little-endian

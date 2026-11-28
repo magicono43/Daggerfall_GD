@@ -1,5 +1,16 @@
 # Formula dispatch — IMP-006 increment 3
 
+## IMP-017 construction hooks
+
+`item-formula-v1` adds pure Dictionary→integer replacements for `item.value`,
+`item.weight`, `item.condition`, `item.material` and `item.category`. These use
+the same MOD validation/order, run lock, CORE consumer/operation checks and
+no-fallback failure path. Weight input/output use millionths of a kilogram;
+selector outputs are validated indices into explicit stable ID maps. Neither
+RNG nor mutable possessions are passed to callbacks. Distribution inspection
+enumerates the selected hooks without live draws. See the
+[construction contract](../../../design_docs/development/ITEM_CONSTRUCTION_CONTRACT.md).
+
 IMP-012 increment 3 adds `air-formula-v1` Dictionary→float hooks
 `move.jump-impulse` and `move.landing-damage` through this same registry and scoped
 consumer binding. [AIR.md](../move/AIR.md) specifies exact inputs, finite/whole

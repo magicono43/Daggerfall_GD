@@ -25,6 +25,7 @@ func _init() -> void:
 	if _baseline_setup.ok: _baseline_setup = formulas.declare_ground_hook(preload("res://scripts/rule/ground_formulas.gd").new().calculate)
 	if _baseline_setup.ok: _baseline_setup = formulas.declare_air_hook("move.jump-impulse",preload("res://scripts/rule/air_formulas.gd").new().impulse)
 	if _baseline_setup.ok: _baseline_setup = formulas.declare_air_hook("move.landing-damage",preload("res://scripts/rule/air_formulas.gd").new().damage)
+	if _baseline_setup.ok: _baseline_setup = preload("res://scripts/rule/item_formulas.gd").new().declare(formulas)
 	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/actor_baseline.gd").new(),"",[])
 	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/ground_policy.gd").new(),"",[])
 	if _baseline_setup.ok: _baseline_setup = register_content_adapter(preload("res://scripts/data/calendar_policy.gd").new(),"",[])
@@ -81,6 +82,11 @@ func enable_faction_quest_inputs() -> Dictionary:
 
 func enable_item_spell_inputs() -> Dictionary:
 	var candidate := preload("res://scripts/data/item_spell_inputs.gd").new()
+	candidate.classic = classic
+	return register_content_adapter(candidate,"",[])
+
+func enable_item_construction() -> Dictionary:
+	var candidate := preload("res://scripts/data/item_construction.gd").new()
 	candidate.classic = classic
 	return register_content_adapter(candidate,"",[])
 

@@ -8,6 +8,7 @@ signal retiring(scope: String)
 var preferences: RefCounted
 var placement: Node # Composed MOVE authority; never a replacement lifecycle.
 var actors: RefCounted # CHAR owns no physical body/pose.
+var items: RefCounted # ITEM privately owns possessions; no automatic grants.
 var creation := preload("res://scripts/char/creation_draft.gd").new() # Runtime CHAR draft, separate from actors and UI instances.
 
 func require_placement(original: Dictionary, layout_ticket: Dictionary) -> bool:
@@ -60,6 +61,8 @@ func _init(material_provider: Callable = Callable()) -> void:
 	randomness = preload("res://scripts/rule/session_randomness.gd").new(gates, material_provider)
 	actors = preload("res://scripts/char/actor_state.gd").new(self)
 	retiring.connect(actors.retire_scope)
+	items = preload("res://scripts/item/construction_owner.gd").new(self)
+	retiring.connect(items.retire_scope)
 
 ## Accounted eligible simulation nanoseconds, after CORE rate. MOVE activity
 ## proofs, slow cadence and wall-clock gaps never feed this single writer path.
@@ -369,6 +372,11 @@ func complete_readiness(value: Dictionary, result: Dictionary) -> bool:
 		_cleanup_scope(_state.session, "failure")
 		return true
 	var formula_bindings := _validate_formula_bindings(result.services)
+	var item_bindings: Dictionary = items.bind_services(_state.session,result.services)
+	if not item_bindings.ok:
+		_commit({"ready":false,"phase":"replacement"},item_bindings.reason)
+		_cleanup_scope(_state.session,"failure")
+		return true
 	if calendar.definitions != null:
 		var calendar_bindings: Dictionary = calendar.bind_activities(result.services)
 		if not calendar_bindings.ok:
@@ -669,6 +677,7 @@ func dispose() -> void:
 	provider = null
 	_death_authority = null
 	actors.dispose()
+	items.dispose()
 	randomness.dispose()
 	_formula_bindings.clear()
 	_vital_bindings.clear()

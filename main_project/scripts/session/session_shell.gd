@@ -218,6 +218,7 @@ func _init(shell: Control, material_provider: Callable = Callable()) -> void:
 	core.calendar.definitions = host.controller.providers.definitions
 	core.bind_calendar_source(self)
 	core.actors.definitions = host.controller.providers.definitions
+	core.items.definitions = host.controller.providers.definitions
 	core.gates.changed.connect(schedule_render)
 	core.state_changed.connect(func(_old: Dictionary, _new: Dictionary, _reason: String): schedule_render())
 	core.terminal.connect(func(result: Dictionary):

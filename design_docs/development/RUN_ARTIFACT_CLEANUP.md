@@ -1,5 +1,27 @@
 # Verification run artifact cleanup
 
+## 2026-11-27 IMP-017 increment 1
+
+Compacted **14 exact owned verification roots**, removing **23,946 files /
+2,993,164,603 logical bytes** of copied projects, native/bank copies, isolated
+runtime state and caches. Verified **13,472 executed-source archive entries**
+and **144 retained child evidence hashes**, plus original root reports/archive
+hashes. Large failed diagnostic JSON is retained losslessly with a verified gzip
+recovery pointer. No task-owned full project, executable/DLL/PCK/bank copy or
+cache remains; original child report/capture paths survive as evidence-only
+skeletons. All owned commands returned before ordinary activity/path/reparse
+checks and deletion. No installed tool, source, classic/reference input or
+pre-existing/uncertain review root was removed.
+
+Exact deletion/source/evidence manifests are under
+`main_project/tests/.runs/imp017-increment1-2026-11-27/cleanup-ledger.json`
+and each owned root's `IMP017-COMPACTION.json`. Final retention sample is
+**9,565,020,439 logical bytes / 121,296 files** (about **8.91 GiB**), excluding
+reparse traversal (none found). The 8-GiB trigger was reviewed; the largest
+remaining roots are pre-existing and outside this task's verified ownership.
+They remain protected rather than being deleted by age or guessed inactivity.
+See [execution evidence](evidence/IMP-017-increment-1-2026-11-27.md).
+
 ## 2026-11-27 IMP-015 combined UI checkpoint
 
 Compacted all **16 exact task-owned build roots**, removing **27,362 files /

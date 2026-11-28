@@ -1,5 +1,34 @@
 # Item baseline provenance — v1
 
+## Construction semantic baseline — IMP-017 increment 1, 2026-11-27
+
+`construction.json` (SHA-256
+`d07059f6a3f1db954add95cf6157fb4f9f6e43863128865fa38d9f4d7fa19e37`)
+adds separate, validated semantics for 106 equipment/arrow templates. The accepted
+288-template reader baseline, mappings, receipts and structural-only lookup gates
+remain unchanged. ITEM owns construction through its separately scoped interface.
+
+Property coefficients/rounding and armor styles follow ITEM-003-A01; selectors
+follow RULE-026-A01. Dye codes, clothing palette and explicit body/resource mappings
+are derived from this same DFU snapshot's ItemBuilder, ItemHelper and
+DaggerfallUnityEnums under PROJECT-DATA-D01 and the existing MIT notice below.
+ItemBuilder.cs SHA-256 is
+`3da8f4278b2b278f2c285546300833b2278a7533f1abbdddf31a23e9e7ba4712`;
+DaggerfallUnityEnums.cs is
+`f93a8e85ec4455175f7c772cb9322e5e0451d5775d7619ceabb6e5ea08edfa9d`.
+
+Intentional differences: explicit neutral arrows retain requested quantity and
+ordinary full template condition (1), rather than DFU's hidden 1–20 draw/zero
+condition. Declared random arrow bounds remain 1–20 and replaceable. Invalid
+body/style/material/provider combinations fail rather than default/clamp. Weapon
+gender is explicit, never a global player lookup. Chain is one native category
+with approved chain properties; raw Chain2 saved-value conversion is not guessed.
+Source archives/records are checked with read-only readers; classic pixels are not
+redistributed here. New materials remain pending combat/equipment/SAVE consumers.
+See [the construction contract](../../../design_docs/development/ITEM_CONSTRUCTION_CONTRACT.md).
+
+## Accepted structural reader baseline
+
 The user authorized DFU packaged-template review and adoption on 2026-11-21,
 and clarified that consistency with Daggerfall is the goal, rather than exact
 parity with original files. This baseline is explicitly **DFU packaged data**.

@@ -1,5 +1,13 @@
 # Item and spell structural inputs — v1
 
+IMP-017 increment 1 adds a separate `item.construction` semantic adapter for 106
+explicitly supported equipment/arrow profiles. The scoped ITEM owner consumes
+those validated profiles plus these published base definitions; it does not
+enable this structural reader's generic `construct`, MAGIC or SAVE gates. All
+288 base templates remain structural definitions. See the
+[construction contract](../../../design_docs/development/ITEM_CONSTRUCTION_CONTRACT.md)
+for property/appearance/provider validation, mod publication and pending consumers.
+
 **Standing policy update, 2026-11-21:** Repository AGENTS.md and
 `PROJECT-DATA-D01` in `design_docs/design/GAMEPLAY_DECISIONS.md` authorize choosing
 suitable original/DFU data and routine corrections for a coherent moddable
