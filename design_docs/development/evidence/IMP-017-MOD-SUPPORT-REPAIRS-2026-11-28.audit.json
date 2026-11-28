@@ -1,0 +1,3297 @@
+{
+  "schema": "imp017-mod-support-repairs-v1",
+  "status": "implemented-and-targeted-verified; user review/parent acceptance open",
+  "started_est": "2026-11-28 02:56:03 UTC-05:00",
+  "completed_est": "2026-11-28 03:27:13 UTC-05:00",
+  "elapsed_seconds": 1870,
+  "source_revision": "c4897dc1df96bb63fe09d1a14a0db479057709a4",
+  "authorization": "User approved the two proposed fixes: Alright, give it a go.",
+  "candidate_sha256": "06256934E6568EE3FBDD06A35CEC9531C7EA6CA133D8FE2685EEA4AEBCB90A49",
+  "candidate_hashes": {
+    "main_project/scripts/data/item_construction.gd": "7F0BE77A9A5E3D175E30B119D0F1EAC254D6ACC9C69E87B5B51A0BBA7FE4FADE",
+    "main_project/scripts/data/item_collections.gd": "6367F4E8E9B450A6AC298B411007DA71B8DB502C76702B39CAF44B45ACC2CA28",
+    "main_project/scripts/item/collections.gd": "FBAA54216BAB78A4A078E4155B818FB5114288C442D4320D5FFED513981EA1F2",
+    "main_project/scripts/item/persistence.gd": "18E0BD97504E065AB0784F0BEAD3009B4E76A1984577C587A0F3B765729D8DDE",
+    "main_project/tests/item_construction_cases.gd": "32A0E9115AB3D690D21D70185CFCE460705AB9F2B68376C3FC3231896A94CF4E",
+    "main_project/tests/item_construction_inventory.json": "7240711AA92C1BE994E90AEADBE99D19091FE30AFC0CF7DCB4A1D81C98F36BB2",
+    "main_project/tests/item_persistence_cases.gd": "3D632F2296FC76BE04E69D4FEA103AA2072D748DF0DD9394ECB3078BA1F94928",
+    "main_project/tests/item_persistence_inventory.json": "A606D04D82E2CF41A3EBBA8053FBC9EC4872A860D3EE958C7785F76803F145C6",
+    "main_project/tools/verify.ps1": "F6A6E706E6C5EB0F13DFBDAD85B1F388DA5D523917F8612029B5CDF2242AB26B",
+    "main_project/tools/verify_headless.ps1": "F2BC95B3BFB26D7516A60DE9DBF1BFDBC844E1D613C9C751BF4159E6548EAA8A",
+    "main_project/tools/verify_rendered.ps1": "0CD6DC7FEE072D6E95A774C2791A60516BAE78A7FD14B449C1ED4EBDC70F7E73",
+    "main_project/tools/verify_startup_export.ps1": "4B6882FBA4D978DEF6528A0963238193CADADB97E420CE2A754AC2DEF43E2262"
+  },
+  "fresh_assertions": 1886,
+  "passing_commands": 8,
+  "development_commands": 1,
+  "findings": {
+    "F2": "Repaired: semantic shape and shared intake properties validated; valid custom semantic records hydrate/reload without intake replay.",
+    "F1": "Repaired: reserved category rejected before publication; valid added category reaches ITEM helpers."
+  },
+  "runs": [
+    {
+      "label": "headless construction",
+      "status": "passed",
+      "root": "main_project/tests/.runs/verification-headless-c79c22c1d0214b7e8dc2841458b383d5",
+      "report_sha256": "8E2E36A8A87ACF514A9740781AA3394E7D560A74DD9679A910970CF7E7459F54",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "reproduction": {
+        "arguments": {
+          "Seed": null,
+          "InputSequence": "",
+          "Fixture": "item-construction-v1",
+          "Scenario": [],
+          "Clock": null,
+          "TimeoutSeconds": 240,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Suite": "item-construction",
+          "ClassicSource": "C:/Games/Daggerfall/arena2"
+        },
+        "command": "./main_project/tools/verify_headless.ps1"
+      },
+      "assertions": 134,
+      "counts": [
+        {
+          "reload": 0,
+          "primary": 134,
+          "mode": "headless"
+        }
+      ],
+      "candidate_differences": [
+        "tests/item_persistence_cases.gd",
+        "tests/item_persistence_inventory.json"
+      ],
+      "source_variant_scope": "Only unexecuted persistence fixture/inventory inputs differ; construction and all four production inputs match.",
+      "child_artifacts": [
+        {
+          "sha256": "354F6B41AFAC0AF85C870C4DDFDBE208E44AD5223AE6D89ABA867D4090718998",
+          "path": "project/tests/.runs/scenario-1/console.stderr.log"
+        },
+        {
+          "sha256": "2D412BB0B980C151BC999078E48F4D8723812455DD74B1DA3CC6FFF4D871E2D6",
+          "path": "project/tests/.runs/scenario-1/console.stdout.log"
+        },
+        {
+          "sha256": "A3C7F000EC00834A8E6ED0C0A43DA8A8574B0BED911297F52316B7E4F0410C0C",
+          "path": "project/tests/.runs/scenario-1/fixture.json"
+        },
+        {
+          "sha256": "D1E20500F15D4CCEBE16577C8DCD0D576FC35586C2D1262004273D9930894AFD",
+          "path": "project/tests/.runs/scenario-1/result.json"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/ARCH3D.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/BLOCKS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/DAGGER.SND"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/MAPS.BSA"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "project/tests/.runs/scenario-1/user/.storage-lease"
+        },
+        {
+          "sha256": "A55DC1D5B141A2D384CF767833F4E21091EC7D60DE797E3184F1FDD338626C8D",
+          "path": "project/tests/.runs/scenario-1/user/logs/Player.log"
+        },
+        {
+          "sha256": "2C5687F68077498EC11FEE05D7D9AA66352E52F60427F6ED7DF64DE2B2599524",
+          "path": "project/tests/.runs/scenario-1/user/Mods/construction/compatibility.json"
+        },
+        {
+          "sha256": "42BF38CFF67538683C041142C3F4844C6EF5325B895E4FD99C138980C2AB2321",
+          "path": "project/tests/.runs/scenario-1/user/Mods/construction/mod.json"
+        },
+        {
+          "sha256": "34BC7928F608555008879560741406F5A0048F9CD48A0FDD9013534AEB7638C3",
+          "path": "project/tests/.runs/scenario-1/user/Mods/construction/policy.json"
+        },
+        {
+          "sha256": "A98DEB4B27150A9AACC63C6A697CCD580130C5AD9B42C6F7B61624CA7FF893B1",
+          "path": "project/tests/.runs/scenario-1/user/Mods/construction/profiles.json"
+        },
+        {
+          "sha256": "36670416D05AEEC1C16EEC9777B51CBCD980801D34B64489B68C03B1EC013997",
+          "path": "project/tests/.runs/scenario-1/user/Overrides/construction.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "project/tests/.runs/scenario-1/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini.backup"
+        }
+      ],
+      "compaction_sha256": "83A6CBEE58E3F1E1BB4C6496C0813F1550C240EB934A4FB351345DCCDAB16DEB",
+      "archive_sha256": "73D3271C9D7277C0E8B6AABCB17BB532E97CFA00200CD4283766568D866E6EA6",
+      "verified_source_entries": 1679,
+      "removed_files": 1717,
+      "removed_logical_bytes": 210581488
+    },
+    {
+      "label": "initial persistence fixture",
+      "status": "development-failure",
+      "root": "main_project/tests/.runs/verification-headless-ebccf5fe85a4416683e6a058a2989e6d",
+      "report_sha256": "DE259EDF646BFB4A34981A93987C798A86123EC2326382D60AEA6B7868B4213A",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "reproduction": {
+        "command": "./main_project/tools/verify_headless.ps1",
+        "arguments": {
+          "Suite": "item-persistence",
+          "InputSequence": "",
+          "TimeoutSeconds": 240,
+          "Scenario": [],
+          "Clock": null,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Fixture": "item-persistence-v1",
+          "Seed": null
+        }
+      },
+      "assertions": 33,
+      "counts": [
+        {
+          "reload": 0,
+          "primary": 33,
+          "mode": "headless"
+        }
+      ],
+      "candidate_differences": [
+        "tests/item_persistence_cases.gd"
+      ],
+      "source_variant_scope": "Development fixture stopped at semantic intake because a clothing template policy conflicted with the charged grant. Production inputs match final.",
+      "child_artifacts": [
+        {
+          "sha256": "354F6B41AFAC0AF85C870C4DDFDBE208E44AD5223AE6D89ABA867D4090718998",
+          "path": "project/tests/.runs/scenario-1/console.stderr.log"
+        },
+        {
+          "sha256": "85508EB4E3E6E7595FC492D0485403DC0C7F85F8AE3CFB49C186EE8436E6DD51",
+          "path": "project/tests/.runs/scenario-1/console.stdout.log"
+        },
+        {
+          "sha256": "9B982ABEBC0FB40421935475D1D5E7A15EC8DF7EDE35C8BE09DA7932888BC78F",
+          "path": "project/tests/.runs/scenario-1/fixture.json"
+        },
+        {
+          "sha256": "C65C9C6CBA1130DE01D5B74CD752188DD63847A928F02A6AFCA6D0DCF2614B62",
+          "path": "project/tests/.runs/scenario-1/result.json"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/ARCH3D.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/BLOCKS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/DAGGER.SND"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/MAPS.BSA"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "project/tests/.runs/scenario-1/user/.storage-lease"
+        },
+        {
+          "sha256": "26585E15887B115996F47418EE856B68A984AD5FEC55AA4D1104EFEC809F4143",
+          "path": "project/tests/.runs/scenario-1/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "project/tests/.runs/scenario-1/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "project/tests/.runs/scenario-1/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "70CAFCCB8EB0D80E8F74B6A9FE7BDC974FA04D19C25DE83C755B356422BE87B4",
+          "path": "project/tests/.runs/scenario-1/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "project/tests/.runs/scenario-1/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini.backup"
+        }
+      ],
+      "compaction_sha256": "0E616359BE09E40287F674AEDCEC8213A5B4F0F4335521FA2CC712C08EF2FAF4",
+      "archive_sha256": "7CF9D084035D56C625CD211E406FEFACD994E833C421E35226E7F61212E12E21",
+      "verified_source_entries": 1679,
+      "removed_files": 1717,
+      "removed_logical_bytes": 210581985
+    },
+    {
+      "label": "headless persistence",
+      "status": "passed",
+      "root": "main_project/tests/.runs/verification-headless-7ada3b5ed4dd4561bd245712b2d7bd4d",
+      "report_sha256": "FB3CFE7F48CBADBE17329EED67F212D3EBFE3399F46BAAA49330AD8B2A80DEB5",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "reproduction": {
+        "arguments": {
+          "Fixture": "item-persistence-v1",
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "InputSequence": "",
+          "Scenario": [],
+          "Suite": "item-persistence",
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "TimeoutSeconds": 240,
+          "Clock": null,
+          "Seed": null
+        },
+        "command": "./main_project/tools/verify_headless.ps1"
+      },
+      "assertions": 198,
+      "counts": [
+        {
+          "reload": 39,
+          "primary": 159,
+          "mode": "headless"
+        }
+      ],
+      "candidate_differences": [
+        "tests/item_persistence_cases.gd"
+      ],
+      "source_variant_scope": "Only the semantic identity negative case uses a different retained in-range item ID; production inputs match. Final rendered and both export modes qualify the refined fixture.",
+      "child_artifacts": [
+        {
+          "sha256": "354F6B41AFAC0AF85C870C4DDFDBE208E44AD5223AE6D89ABA867D4090718998",
+          "path": "project/tests/.runs/scenario-1/console.stderr.log"
+        },
+        {
+          "sha256": "6103F708788787440D6151DB1602A16DDC0610FD7D9EF94CD5280D89268ECE99",
+          "path": "project/tests/.runs/scenario-1/console.stdout.log"
+        },
+        {
+          "sha256": "1733D2B2C7C2E6273E06BB134140124A3A4702139121684B3222E5EEBA9030CA",
+          "path": "project/tests/.runs/scenario-1/fixture.json"
+        },
+        {
+          "sha256": "8B9AAADB29EDD3270E9E1CF886F990F4106441A97936BED61DA3A4739C7E751C",
+          "path": "project/tests/.runs/scenario-1/item-checkpoint.json"
+        },
+        {
+          "sha256": "354F6B41AFAC0AF85C870C4DDFDBE208E44AD5223AE6D89ABA867D4090718998",
+          "path": "project/tests/.runs/scenario-1/reload-console.stderr.log"
+        },
+        {
+          "sha256": "C9D557747196AE629A55828706369E61F80D2688491DB91E67B0B16CDB188377",
+          "path": "project/tests/.runs/scenario-1/reload-console.stdout.log"
+        },
+        {
+          "sha256": "5E7632D0B7F5E1FB35AA8AF285324DE7664E6F07D7C6E7D97854CB234E1B4668",
+          "path": "project/tests/.runs/scenario-1/reload-fixture.json"
+        },
+        {
+          "sha256": "A61B1E265E38005D50643C1A3D8098A94679BDA7FC7BDE3BC713FC306F65F8C1",
+          "path": "project/tests/.runs/scenario-1/result.json"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/ARCH3D.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/BLOCKS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/DAGGER.SND"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/MAPS.BSA"
+        },
+        {
+          "sha256": "AA8A6ECE724735D2810C9283E3817FDEE973C8FC40DC40C3331079A75ADF273A",
+          "path": "project/tests/.runs/scenario-1/relaunch/reload-result.json"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/.storage-lease"
+        },
+        {
+          "sha256": "4656E97EFF54A3E3BFFE8A3C305CF443FA0F41B18671C8260C3D769BF3F20E32",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/settings/settings.ini.backup"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "project/tests/.runs/scenario-1/user/.storage-lease"
+        },
+        {
+          "sha256": "00B3C941840E1067F61859C90EB860165BE1FE8A7FFAB6BE90A39E5B595CD2CF",
+          "path": "project/tests/.runs/scenario-1/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "project/tests/.runs/scenario-1/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "project/tests/.runs/scenario-1/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "project/tests/.runs/scenario-1/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "project/tests/.runs/scenario-1/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini.backup"
+        }
+      ],
+      "compaction_sha256": "8BDF862C7ACFEFF45953D532EE10419173A384BB9F51A9847BF3C53CC09CCAA5",
+      "archive_sha256": "D72D9C99A147FA406AE74E2C99F5BB4DB2B4016FB2828527551C8A8A90D37AF0",
+      "verified_source_entries": 1679,
+      "removed_files": 1717,
+      "removed_logical_bytes": 210582038
+    },
+    {
+      "label": "rendered construction",
+      "status": "passed",
+      "root": "main_project/tests/.runs/verification-rendered-ce6bbb0f356e42c795557cd85a50ee77",
+      "report_sha256": "C1AC65E248A95DB73A007F19DE8B199266EDED27C8D55579B6C8F81BC5BD537E",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "reproduction": {
+        "arguments": {
+          "Seed": null,
+          "Scenario": [],
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Clock": null,
+          "InputSequence": "",
+          "TimeoutSeconds": 240,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Suite": "item-construction",
+          "Fixture": "item-construction-v1"
+        },
+        "command": "./main_project/tools/verify_rendered.ps1"
+      },
+      "assertions": 136,
+      "counts": [
+        {
+          "reload": 0,
+          "primary": 136,
+          "mode": "rendered"
+        }
+      ],
+      "candidate_differences": [],
+      "source_variant_scope": "Final candidate inputs match.",
+      "child_artifacts": [
+        {
+          "sha256": "354F6B41AFAC0AF85C870C4DDFDBE208E44AD5223AE6D89ABA867D4090718998",
+          "path": "project/tests/.runs/scenario-1/console.stderr.log"
+        },
+        {
+          "sha256": "2281222A4601771442EDC1D98E6A5E085FEF849EC34B27EE0E6436EC33B606D9",
+          "path": "project/tests/.runs/scenario-1/console.stdout.log"
+        },
+        {
+          "sha256": "E3F071B81F12CF8AC104AEC5037B30C4F0E72EDE9F659AAAB297421D24CE45E4",
+          "path": "project/tests/.runs/scenario-1/fixture.json"
+        },
+        {
+          "sha256": "7ADEE8EE0D7895859AC39786129C577CA6B70A91CFF78ADD6DDE70FE96A8FCAD",
+          "path": "project/tests/.runs/scenario-1/item-construction-isolation.png"
+        },
+        {
+          "sha256": "FFE244E5DF69FDDF2CEDF3EF65D03CFF2572A2D4BCE9CC4288B887813F75B6C1",
+          "path": "project/tests/.runs/scenario-1/result.json"
+        },
+        {
+          "sha256": "44BF819776BD80915B53C2A85640B6B8A26816A62DA248CC28BB58ED43110D39",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/BestFitNormalShaderRD/c4b1d2e5a1d6f84559f49734aae94706b402e2be89eae7753b8b413800d96d42/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "C859409D55A0909864C6C99EED09AECAEDBD152A15E8F8FCFE9171C582889C6D",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/BlitShaderRD/ae4daaa7a60bb17ebd7e9de5db9422fb448b52ad89776ae7aa53fee442f7cc60/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "DE49E9568BF4D0CE9DBE9710DDDA7ABDB0A5860834136C43A2F438E2A35A1330",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/BokehDofShaderRD/8c692c9cd2f46f54f2c82d9a4a12be5f889d873a3c9698546a6eb5ec0c263647/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "FD4B44A1F39725E39FBB9588677B891C9FA567C2338E8F874A3FA3A03CBE2C63",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasOcclusionShaderRD/606df5c981910bc4bc719cf497719273e80d1f314f65e68820bf8e2111368cdb/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "D08A0497B110BA65CDB473C498D5AB48984A491353BEEE0436BB8CF980A400BA",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasSdfShaderRD/a4f6d732dba9a4cc0c37a1ca52936369e2ee148e9d03efe1b81bfed822adb1eb/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "7570723EA951A5D28DB30F4382CA513F16CCD3F1058FF241B76791AFDEF51884",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "47DE5A9C5B685200290ED0F791E6D06F723C1024468436862B659E68488C66E1",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/89e0c5a264d1558e7bc2ca0dc3d0afd834fbe7b6.d3d12.cache"
+        },
+        {
+          "sha256": "1DA3E50CACFDB4E329C43AD641BE77477CA3A2D1BB019F49866A7450DF8BDB52",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/8f9335de72e837eeead40640cc01fddc5baf5a7c.d3d12.cache"
+        },
+        {
+          "sha256": "2BE9F166EE97C0C2A08B78ED2D591CEB5CF0EFBF596D4E14D40B6CF26B27179D",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/c2f7efc3419efdd79fabd056897820a83f2ac2c9.d3d12.cache"
+        },
+        {
+          "sha256": "286634985581229AA95FF02C3E45D0D178AF6688532FCCFF52F5A3E61A300EB2",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ClusterDebugShaderRD/25eb5280da03a5dfefcf122ab21c9f6184c2a0d8edfb398d0b9e784c99ede8d6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "0554C829180AE52501A264A6532571156AF47AF7AE3FCBE7A3E3DE4F5118A531",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ClusterRenderShaderRD/092c9f39b8c42523662d45db394a8d4f7f068d617876866d55d9fd69e5afb357/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "C8B0C33CE5BC91772C1BB1EEBB9124E31E07D959181DE343CA42BB25D8D7F6E5",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ClusterStoreShaderRD/77e74456f71eccced2f4bd06086f33d4ae56a013ce717690f960759226272eb4/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "EE1F73380258CBDDEA32F341A9F2351831E8B52E20D68E5994173E03CB4B02D7",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CopyShaderRD/c374588e7ae9bf64919d0186bea3104b4f721cc0691d284a9998e1e7d06c5eb8/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "C99763CB42FD0A6CCBAA50E760D1FDC70089EC1A929174C1C417F8B1EAF0D5BF",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CopyToFbShaderRD/72456b3a82af4da12c412275d4c8ffa4a6a5447d9daffeeef86bc16965803813/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "9E1DBDAD25BE1C8DA8113FAE99256BE88B6061021123651BE3A2D7231074A626",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CubeToDpShaderRD/da14e2c9b701a4bd7336b87667bf4f3b4f645de09781824763d2bbceead56c83/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "1E52948F9D7818B91C84F361A48C3711A5464131B98AD92BDA099DBA3D27F5BE",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CubeToOctmapShaderRD/7a5a6871c4fae131d3fef2e125ac23cbe81a1a042028f8c294461282de463c9a/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "A007A27017CEF64F04BFC2C6AF1D595DC446E883AA438237AC92C489B4844843",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/FsrUpscaleShaderRD/a8da3dfed3e309742ca78c4162d15f2ab08af4f694a51407089ecec1d1be54be/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "94F2F68EE3C0B901CA1309237957AA19D2047414AD2CD92B0ED5F9B261910507",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/GiShaderRD/3fa2391092c717dea4bdf7f4f65ccf42ffd4018c158c431a4e234d9fa17737a6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "18E5D739B45A283BB5DD671BCBBE63916294BC5D5ECD1E0E02F9316CE7D7DE79",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/IntegrateDfgShaderRD/4d699e26d43b88b86cb33c2b829767ea8e935055bb48dea880f66eb29760577a/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "564651825C586A312012378AD9011C633822821B9BCFFDF1BFC31389830BEC54",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/LuminanceReduceShaderRD/c759f2761a12e9ff1fa625818963f94aa0ff511eb314a313ea89c615c37dd078/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "EA22550DEAB07382A2B6F1B42B9AD9E4364B10547045400F3C517B757CE8E78E",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/MotionVectorsShaderRD/4d3ba0c01e8b64c74a0f2f0fd20ddc8099d56cfbb3ee9e7dbe6dc3c54c174725/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "B3B66A91F344B82BB382A4F215E63B0EEBB208EB3A89AD90B140F738EC01AE05",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/OctmapDownsamplerShaderRD/17404978f453a0a0388dfb81b2d08f173476d2c3b680e2e6aa35bcf438e24f11/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "061CCA2E06DB8DB47D4B3FA738EED5DC5FF84385B477F8F0543658D0745B6F69",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/OctmapFilterShaderRD/cd03c4ea34362e2724f4d4536156039ee5ca21c31167b8840dfc65dad2d6bb11/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "7EFA6443E29DE471059C63ED9C57BC5D513BF0D1AF6FDE52D2944547317BDCA9",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/OctmapRoughnessShaderRD/8470960c68b74292e24251e3b7e41d28e9a5054dce0cd1d77c2a2a865a10af43/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "424ADEBBB6A7A2456849CF66F35B791F26A24F9A3CEA2EA4223A60E9F8EFF714",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ParticlesCopyShaderRD/ce2b95c8a6b9e21f14c989c3ca095de77d9bb5e86213ae4180fb97cbd2c02a10/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "2409F74B332751AA4F337EBC7755609D043A64B1C3F4EADBEF9F42AF3B30C0B6",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ParticlesShaderRD/f645828ab356b17f1478c77373935ecd2417e1c227a96b62417396293d13970e/07b5904b662900d90454c39c46885098de79aa4c.d3d12.cache"
+        },
+        {
+          "sha256": "1008F20ACB479BD4875BB098230C31BD888390A694FDA0F6F35D37F8269BBBAD",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ResolveShaderRD/58e536c56eaff31a31ef93f224579af7b242a06469b7b0a7736cdeb7e16898b6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "91A25F05515A50805ED99521EB6D9B1843063223B15D3E337087CF7B58E4E615",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/347259af253e6bbec7ad5c69332af5ca731015aa.d3d12.cache"
+        },
+        {
+          "sha256": "9E312E69218A0F13BE2CB6BD12F1FFC6B7EFF5B2FCA0AC6F01D771EBEA035BE2",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/a784797763b72ce058effad41b273eb697df9814.d3d12.cache"
+        },
+        {
+          "sha256": "433C66F86CC3BD13D04FDD7D1C2EB047A0B57C5EA9C857766A402F57F9F62640",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/b600e18e20b53d8932999d48838b29553c586934.d3d12.cache"
+        },
+        {
+          "sha256": "5121FDDBBC344E315F68F03A3CD0DB5B62A2F93CA6EC83FC979BF69BB12A50DC",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionDownsampleShaderRD/f6b46656954490c0153a8a5200455cc0834ec5881821ec7bf328b4c688fc4f6f/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "AFE307C2BE81900DD10B3D59D2D91EBA455A7C5F9E1C06ECCC537811D8DB2EF1",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionFilterShaderRD/fda60a18cb83e7ff26ce7ee2f43dce1d37326b2767d06922b0e5f9356abd1a1e/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "848C418F6DC72AECB6C9743E9F656431839C5DC4CC3071755D517C362EDDBBEA",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionHizShaderRD/4c407c9b5cd4f954c012a0de78629e18a5e9268536eb1d78853c8a247ef0a772/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "F7BC448554A9E53EA4120EE021593A28007DFCBF1688E7E5572A6B7E90E5D758",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionResolveShaderRD/b29422945b4d1600883d0fcf89124633e34efb678505e5bcb9fdb6623fbfb8d4/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "434641FA337A41D7B5E521083C9BB6638828BBEE2355F01ABB6A93ACC58A1F71",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionShaderRD/a2d0cb08973e8562ed3b82d74b6f0f1ecf1dbd2ac788049eaa06925ad6c28bed/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "5F1EA8718A24F203C09EA1E0AFC4EFF4336F0AC32B8F045A1B66183288290A9A",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiDebugProbesShaderRD/05e9a03efe957bf14f0a60730a97ab25e037f5a3f347b3427feb9723fd82fb1c/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "B0F8D3FD1CCF720195B4EA02BE1E671BD2E384ECB220FB1774360E02B2C21478",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiDebugShaderRD/365142e07e83cbbda433d4ed971a1c8413d3a400e8646e2ed2a0f7dda127068a/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "2ED5FB7DC918994E3D8DE66D7AC17EB2877F02DB7B46B7380E1E62A443799EC9",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiDirectLightShaderRD/59245d18d90efd79551ef5eda25bbda9867cb893341a1d23b0f75db5d4490716/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "EBBF95E807FB928154B967D0F78F7EE3EB2714B189F794513A090119BFAD93F7",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiIntegrateShaderRD/f20a6d93247c8e2db82979d4e6477fa070ed91e03db2b1320e32dffabdb4ff23/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "7884B8488E9282CE80B8CF0459351F7EBA63CA9389E74815293FD40ACCEA9EB6",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiPreprocessShaderRD/548b5bca0563ad9662e1e9577ac4921dfc156154487ba331733b0283ce26fcb9/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "B62BE800B78BBB3A7E3DBA539C6306C31F446E3A28F8BB7064051A0CB1A3E4D3",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ShadowFrustumShaderRD/248bc9deb54d10af912f2da1bd4b006bc43cfe08659a206fa573baf48e4050e0/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "425AD4C314F21F940B2346F47FE6D7C81A3D1B6B5CDF49BDBE0ECA794672A6B1",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SkeletonShaderRD/e6bc641e2a094416c99b1294ac5e453c55d24e0b62c1da47c8f7f93ae7877bfa/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "28806F7AA46E7DAEDDF881E6AC7270FFCC08277566EDDC62ADE1150BF3705A26",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SkyShaderRD/25c4162ba5ed1f15e722f73bf07201837a6ae7b301288dd32ff9f71634118d9c/0fa1946a11e1cca806ebfe4b3b4ac7f723d8b701.d3d12.cache"
+        },
+        {
+          "sha256": "8C2DB620BE767F340CB1DF4D778A33DF006B03CAF15813443126FA6563459F84",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SkyShaderRD/25c4162ba5ed1f15e722f73bf07201837a6ae7b301288dd32ff9f71634118d9c/ff1961ca0c4c55a79eb12f819a7b6345801bbbaf.d3d12.cache"
+        },
+        {
+          "sha256": "B5DC322BABD0D65EA97C23B1C11F4BD9199699046C18CEA95F0A1341D0F36AAC",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SmaaBlendingShaderRD/d7b7c8cec00f24f9aa8db356b4df88c5fe032d38ce38673bd520c280c936fb80/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "EF063241244D908BB6808DA344EF5321C3AD30E7C795D03172369A7F014BEB40",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SmaaEdgeDetectionShaderRD/8879d099a2601bd01d4582b1e86a091c5f89a7bc46aecc9e805410f75bcda245/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "F0E0B106CFC3CE7344E5CF122E82BD2A9D76CC51A2DA439669A5EA4A99157184",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SmaaWeightCalculationShaderRD/de1d49d5ff947e8b8382f43a79f57c4cceb02eed6f86d5175093ca63e94052bf/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "62E5838F5C519B4FB7EF3FF98A4BBD59DD461E3B7B68B0ECB0F4DCCDC452088A",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SortShaderRD/d8d77897b86870d358bf870233e14233981c2db9ff06641cd8f405379ac8872f/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "E42CAC2FD26469D67851C60DD18D3314D41E3232008DCBEA7B7585D92DB00D3E",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SpecularMergeShaderRD/70920fc883de48dd253fbc2503dd8f4e65941df0da07e074541df12df090de98/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "391AB1F7393A5D79AABE49A05E24054DD9CC44205487FCF318AA6F59BEB0D21D",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoBlurShaderRD/379e714dbee2f412e6657f0557a56dd9f4a00c93ed1aef7af78b047b59ef4bcb/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "9379373A13067AF421B186F6E99B2BF508A03A394E072977D330FF2C6D41E8F5",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoImportanceMapShaderRD/72382d26e5b22e99ee9ed29670565e78ff7ee01c960072119a5be86db2ee0fc8/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "22809D55552E19EEEB2ADA3713457B9063AE0F17EFAC0CD223FF34F2227351BD",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoInterleaveShaderRD/cb27e637ffea15e2c6c4ae1b2c90deac962dae9481ef866601d8ecb863d6a9b6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "BD0CB5F9A85C10EDF1049AFCB272F2F15D3E3C1D2B58A43CC58868E46138C81E",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoShaderRD/40091d5cef6924b0632dfb92dbf5a6c61f97edd6dd653d20e2c7662009912eed/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "08E81090F417A7BD14055E54D0DB68F60136B34833311FBA6EA40F3310236681",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsEffectsDownsampleShaderRD/d2ccd37f99a0b00eca4ba6f53cddf8d03f02119a69a0b02dc777026129561703/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "4578B705022A4D86D659C8BDDAB2AC72CC75E4C3681E704FAEFCE55C69E30D01",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilBlurShaderRD/4f0d60ba5581090f5efc9941b040e46832bf6864d77d52e8631cea227b5d8279/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "ACF288CCB5F927C9F6560AA3EE584EE138A03FBB92011BE088DF876CEE729591",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilImportanceMapShaderRD/bf370911d6b5be81e5fbf6014d236deb74697ee1b3e2eeb870f5140913d9bee6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "BFDCFD9CB331FCA3021988C99BE9873799BD818D1A07EE0BD6075BB803BA3940",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilInterleaveShaderRD/0f78dde6bc33a0264706f9a466ae77f41b24641381aa171c2b1ee40923f6547c/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "7A165252E2F9FA2959FB449C79C954BCC0F50B8EE40F19F172BF08152F41D1FC",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilShaderRD/17c51ec55574b54c0834b41688f478d19599eb3f90a1230981e06d74d89473e1/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "CF90515E69132CFFA1C2251588AA5F70F622D849A910C68E731A106F0218FCF3",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SubsurfaceScatteringShaderRD/4870fb4fc36514a7031473d566046fc2841628db992f9421056a8dfbc0830d97/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "2D89E63B23F92E20D379F18412F629F631EB4293AB17203AFE69FB850BDAF7AA",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/TaaResolveShaderRD/a1ca2d745847530de0720910ad5bfa2466e0ab33647b7a631f2900d7b4617a60/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "C15AA1A0F6EF229F63DB280C6C1C5FC7150FE3E3EAE8D15DB5EB7C6E279D0409",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/TexBlitShaderRD/fd9c885eab1da0d330a04ebfd7796019cde57f82208202f3bfc96cae74155212/1e8995c9eb0e9b0b053035999de68595c521a33e.d3d12.cache"
+        },
+        {
+          "sha256": "A89E7BFAAA5402FA6AB0359DDA34F287C253D5747B7DC6EE81750415D3D51A25",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/TonemapShaderRD/1b9049fef136690ef56085339cc9ad699de6d63e5d3afa1677201c6dedd6f2a8/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "228D55C484EAAF334D8616468859F91C10E7397276B4855095CB198990FB338B",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VolumetricFogProcessShaderRD/ee9496dfb3b0e489158503ab6e3539129bf5f78706cdb7c9ed4d8701f17f14ec/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "F4E81385C1BE19C55210079012E62940246635014E590F28B6A1227C5F747B03",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VolumetricFogShaderRD/69e78fd970058cf62da4f8df24a6d7f3acd2d0effbade0dc171226be830ee241/3377d4ca9d0fc2e16f62596ee37d619e8e7e3f54.d3d12.cache"
+        },
+        {
+          "sha256": "FF490BEB3701384A27E891B2A0AD7793256C377C4BB68312A5316AA48B28E510",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VoxelGiDebugShaderRD/e7afc074bea566006e261dd7312ae8e5c1a6a22e1eab6aa29b590ca925df679b/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "DB63976736947566A7F591D32749C461CD6D83D8B98DB243162E3311C98BEC25",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VoxelGiShaderRD/cf478b2dd85c8c4b0519274ac94659b26ee34e27a1714122915056a7010b4b7c/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/ARCH3D.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/BLOCKS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/DAGGER.SND"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/MAPS.BSA"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "project/tests/.runs/scenario-1/user/.storage-lease"
+        },
+        {
+          "sha256": "24BD4D80FC1224C5130377E57B1844F77B9B57BE5A85931CC654B9737AC0F401",
+          "path": "project/tests/.runs/scenario-1/user/logs/Player.log"
+        },
+        {
+          "sha256": "2C5687F68077498EC11FEE05D7D9AA66352E52F60427F6ED7DF64DE2B2599524",
+          "path": "project/tests/.runs/scenario-1/user/Mods/construction/compatibility.json"
+        },
+        {
+          "sha256": "42BF38CFF67538683C041142C3F4844C6EF5325B895E4FD99C138980C2AB2321",
+          "path": "project/tests/.runs/scenario-1/user/Mods/construction/mod.json"
+        },
+        {
+          "sha256": "34BC7928F608555008879560741406F5A0048F9CD48A0FDD9013534AEB7638C3",
+          "path": "project/tests/.runs/scenario-1/user/Mods/construction/policy.json"
+        },
+        {
+          "sha256": "A98DEB4B27150A9AACC63C6A697CCD580130C5AD9B42C6F7B61624CA7FF893B1",
+          "path": "project/tests/.runs/scenario-1/user/Mods/construction/profiles.json"
+        },
+        {
+          "sha256": "36670416D05AEEC1C16EEC9777B51CBCD980801D34B64489B68C03B1EC013997",
+          "path": "project/tests/.runs/scenario-1/user/Overrides/construction.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "project/tests/.runs/scenario-1/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini.backup"
+        }
+      ],
+      "compaction_sha256": "1F27C2E5131B79E05CBB059EAB99133490E9EC53BF59C57F16725787F3D3468C",
+      "archive_sha256": "7DE045E3D73A38AA4F7E863CC5D14180A454654E913FBE3B9E23A8D63BEF0799",
+      "verified_source_entries": 1679,
+      "removed_files": 1717,
+      "removed_logical_bytes": 210582025
+    },
+    {
+      "label": "rendered persistence",
+      "status": "passed",
+      "root": "main_project/tests/.runs/verification-rendered-b9fedb02ecdb4f1aab2d131c0692dcc0",
+      "report_sha256": "5DCA2F596790B8CB7857F31720E466C0AEFD2577A5B157EF59947EB15FD34857",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "reproduction": {
+        "arguments": {
+          "Seed": null,
+          "Scenario": [],
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Clock": null,
+          "InputSequence": "",
+          "TimeoutSeconds": 240,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Suite": "item-persistence",
+          "Fixture": "item-persistence-v1"
+        },
+        "command": "./main_project/tools/verify_rendered.ps1"
+      },
+      "assertions": 206,
+      "counts": [
+        {
+          "reload": 43,
+          "primary": 163,
+          "mode": "rendered"
+        }
+      ],
+      "candidate_differences": [],
+      "source_variant_scope": "Final candidate inputs match.",
+      "child_artifacts": [
+        {
+          "sha256": "354F6B41AFAC0AF85C870C4DDFDBE208E44AD5223AE6D89ABA867D4090718998",
+          "path": "project/tests/.runs/scenario-1/console.stderr.log"
+        },
+        {
+          "sha256": "BD3BF2245DDA7735D99AAD789E98F4BCCCD39B6C3E0984F8EC74FE6EAB93DE13",
+          "path": "project/tests/.runs/scenario-1/console.stdout.log"
+        },
+        {
+          "sha256": "055D8355129486E9A0E7423E22A35A8F5A58DAAA1EAEEF6A3D2AB372D522796A",
+          "path": "project/tests/.runs/scenario-1/fixture.json"
+        },
+        {
+          "sha256": "8B9AAADB29EDD3270E9E1CF886F990F4106441A97936BED61DA3A4739C7E751C",
+          "path": "project/tests/.runs/scenario-1/item-checkpoint.json"
+        },
+        {
+          "sha256": "ECCBE234F862B439070AEAED14A2913B82D3D9E54800D6F62C0E0855BCE44C34",
+          "path": "project/tests/.runs/scenario-1/item-persistence.png"
+        },
+        {
+          "sha256": "354F6B41AFAC0AF85C870C4DDFDBE208E44AD5223AE6D89ABA867D4090718998",
+          "path": "project/tests/.runs/scenario-1/reload-console.stderr.log"
+        },
+        {
+          "sha256": "ADBA86638A0DF00F26EA3C0610C49835EE92F9B1929DB4CA00E0DE61DF07A113",
+          "path": "project/tests/.runs/scenario-1/reload-console.stdout.log"
+        },
+        {
+          "sha256": "461815FDE06E78F6A3DC2031415C93B41FE81FDA821EB51C0D955BD5B10E8D5F",
+          "path": "project/tests/.runs/scenario-1/reload-fixture.json"
+        },
+        {
+          "sha256": "14E38DEAB9703E1B7090630AFED06E88E9592A14D094C6AA9E51D25EC76A94BC",
+          "path": "project/tests/.runs/scenario-1/result.json"
+        },
+        {
+          "sha256": "A975D7F42F5D24A95EA96F642B33707E0773CED1A26F99D0F9DFFE213CFB3C1E",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/BestFitNormalShaderRD/c4b1d2e5a1d6f84559f49734aae94706b402e2be89eae7753b8b413800d96d42/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "38114CC5F15DB757ED2B6BDD320F2175AA6B6F1AE899F06B2EA1BB8A38C6B8A5",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/BlitShaderRD/ae4daaa7a60bb17ebd7e9de5db9422fb448b52ad89776ae7aa53fee442f7cc60/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "74261710284EEA08DD0F208DB92D3D26F0FB78C4735A87C1508B6815D1C54C45",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/BokehDofShaderRD/8c692c9cd2f46f54f2c82d9a4a12be5f889d873a3c9698546a6eb5ec0c263647/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "F04B80D756D9E4913FE0556D266F91147993CD10CCB2F0AFFD4BAEBBE6073185",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasOcclusionShaderRD/606df5c981910bc4bc719cf497719273e80d1f314f65e68820bf8e2111368cdb/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "E0ADE00D1DF3BF1F5E255DC26021982503D7418453C0AA2688FF0C5A6C9AA150",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasSdfShaderRD/a4f6d732dba9a4cc0c37a1ca52936369e2ee148e9d03efe1b81bfed822adb1eb/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "B0696BF28F59DF9658C6DD7EEF363D5613D2A1FD3E4236582C61E0725A43D514",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "FB5685A645D9A8D7890A67B459160A76FCB1DD10EC59CA6A93C3FBB0850DD71B",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/89e0c5a264d1558e7bc2ca0dc3d0afd834fbe7b6.d3d12.cache"
+        },
+        {
+          "sha256": "7098116113243A77608FBFB6340BD134CFBE9CDCB5CAB84619A6F06F91A6AE7F",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/8f9335de72e837eeead40640cc01fddc5baf5a7c.d3d12.cache"
+        },
+        {
+          "sha256": "E5D552F0F4BF475EA71C215BF9FA40D98D0D3D7FAFF03AABB4907E2391E0E888",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/c2f7efc3419efdd79fabd056897820a83f2ac2c9.d3d12.cache"
+        },
+        {
+          "sha256": "84313080473878497EF1E6515E2D04F8DBF8616541E8A1B18C5FA3FE4DE4103C",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ClusterDebugShaderRD/25eb5280da03a5dfefcf122ab21c9f6184c2a0d8edfb398d0b9e784c99ede8d6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "B4FC6645BFBDF406183C74FB6617ED356048B829AF499B94563BEB3858E6296D",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ClusterRenderShaderRD/092c9f39b8c42523662d45db394a8d4f7f068d617876866d55d9fd69e5afb357/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "E84695D443449F81105EA79958D588F03DEBB6B6E2E1EAC5EE9339D816BCAD36",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ClusterStoreShaderRD/77e74456f71eccced2f4bd06086f33d4ae56a013ce717690f960759226272eb4/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "789787ADC643FF980DCD82EEF9EE7578B9E2D61E85404296C7906695ECD20340",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CopyShaderRD/c374588e7ae9bf64919d0186bea3104b4f721cc0691d284a9998e1e7d06c5eb8/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "C271DB8EC865334866D48CDCAAF7E0AE02B4AA9D326E6F7E5FE68A4F397BA8F8",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CopyToFbShaderRD/72456b3a82af4da12c412275d4c8ffa4a6a5447d9daffeeef86bc16965803813/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "D36B53C42CBA51BCAC3BEAC13D33F39CBD2CB85579B9C09F812789370F3D1FF5",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CubeToDpShaderRD/da14e2c9b701a4bd7336b87667bf4f3b4f645de09781824763d2bbceead56c83/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "3F6B70AF75466EC0830D2A963F5DF9400E9EF833BD158EEBBD0CC8A920CF1A4D",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CubeToOctmapShaderRD/7a5a6871c4fae131d3fef2e125ac23cbe81a1a042028f8c294461282de463c9a/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "64A103A61FA581AD076F46C0F73B2E467AEDF062B0284C5935E243DBE56762E1",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/FsrUpscaleShaderRD/a8da3dfed3e309742ca78c4162d15f2ab08af4f694a51407089ecec1d1be54be/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "9437918E662E9B101B4E922F052FF5ABB30F0EB574122747A92C75B31642FBF2",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/GiShaderRD/3fa2391092c717dea4bdf7f4f65ccf42ffd4018c158c431a4e234d9fa17737a6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "18E5D739B45A283BB5DD671BCBBE63916294BC5D5ECD1E0E02F9316CE7D7DE79",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/IntegrateDfgShaderRD/4d699e26d43b88b86cb33c2b829767ea8e935055bb48dea880f66eb29760577a/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "C53B39906CC1FB76BD49275BA88502C41C9E997D6BD1DC048B61E27EFBEAED33",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/LuminanceReduceShaderRD/c759f2761a12e9ff1fa625818963f94aa0ff511eb314a313ea89c615c37dd078/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "077A557BDE1DFB345BB8372E7871A8087FFBE978FE4FAEB78F84F8C11EDDD456",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/MotionVectorsShaderRD/4d3ba0c01e8b64c74a0f2f0fd20ddc8099d56cfbb3ee9e7dbe6dc3c54c174725/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "B187EC9926477279B58B6A1476EC6F927A4B18F111978DF0862E6162C8F30E95",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/OctmapDownsamplerShaderRD/17404978f453a0a0388dfb81b2d08f173476d2c3b680e2e6aa35bcf438e24f11/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "D1682F95C8E4385E006C37A229368643D287C96DFC449F7A5ED7985A4C956ED2",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/OctmapFilterShaderRD/cd03c4ea34362e2724f4d4536156039ee5ca21c31167b8840dfc65dad2d6bb11/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "22EA10CC2642680CF016BF6E246E41693833D43A70E019EB34179E2A5A6FB20C",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/OctmapRoughnessShaderRD/8470960c68b74292e24251e3b7e41d28e9a5054dce0cd1d77c2a2a865a10af43/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "CCEFC857D079E8C49A2038C75A9B7D772F2E40D811AA0A1E85C7A631F6BCB592",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ParticlesCopyShaderRD/ce2b95c8a6b9e21f14c989c3ca095de77d9bb5e86213ae4180fb97cbd2c02a10/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "3D8EF842ACD745BF113090C049EEAEFD5F28621A048DF54E46C3575ABD5280A3",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ParticlesShaderRD/f645828ab356b17f1478c77373935ecd2417e1c227a96b62417396293d13970e/07b5904b662900d90454c39c46885098de79aa4c.d3d12.cache"
+        },
+        {
+          "sha256": "77491C67A94A75ADBF73685E253E96C4991688EF9B78129C9F11D386297FE7F6",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ResolveShaderRD/58e536c56eaff31a31ef93f224579af7b242a06469b7b0a7736cdeb7e16898b6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "1632AD0E50B44FEEE20A022C0603A2773EC917DC56704E4BF9B4082821E3D78D",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/347259af253e6bbec7ad5c69332af5ca731015aa.d3d12.cache"
+        },
+        {
+          "sha256": "D62E861768F9F48D970CAFB84EFA1316E420401841D8D13C0AE57BDD421DC8C1",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/a784797763b72ce058effad41b273eb697df9814.d3d12.cache"
+        },
+        {
+          "sha256": "D26528BBE2B7C541C42E40D08D5739CAC6DB34826C9FA38B003B3552CE67CF55",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/b600e18e20b53d8932999d48838b29553c586934.d3d12.cache"
+        },
+        {
+          "sha256": "7C58074F59DE4A57E81BE861EDDA1F5A4187A7F6C7D367B51AAA2CEF46553260",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionDownsampleShaderRD/f6b46656954490c0153a8a5200455cc0834ec5881821ec7bf328b4c688fc4f6f/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "215FCFE433F7BE7B838A4FF3BE791BBD6661E3C1E7A567982913460535F1885F",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionFilterShaderRD/fda60a18cb83e7ff26ce7ee2f43dce1d37326b2767d06922b0e5f9356abd1a1e/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "7CF2F0A50BA96DA5B31ACDE8F6A7623D6277601399D2F8B1AA8F0FE4F58B0A26",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionHizShaderRD/4c407c9b5cd4f954c012a0de78629e18a5e9268536eb1d78853c8a247ef0a772/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "F7BC448554A9E53EA4120EE021593A28007DFCBF1688E7E5572A6B7E90E5D758",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionResolveShaderRD/b29422945b4d1600883d0fcf89124633e34efb678505e5bcb9fdb6623fbfb8d4/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "2A920679DC1452964548F1B3CDCC70FA0920896B646FBD608B5BA0908A953C34",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionShaderRD/a2d0cb08973e8562ed3b82d74b6f0f1ecf1dbd2ac788049eaa06925ad6c28bed/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "4AD0DB0DD0494FC22458189425BC7704C180A7BD289D9628196DABEA398F2EE0",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiDebugProbesShaderRD/05e9a03efe957bf14f0a60730a97ab25e037f5a3f347b3427feb9723fd82fb1c/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "0D243B51E7C1C0EE08E96261156C0294341501757E291304534488B58500A62F",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiDebugShaderRD/365142e07e83cbbda433d4ed971a1c8413d3a400e8646e2ed2a0f7dda127068a/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "5C4A25B09CD9EB7FFD8D7EDA155C70777C504BD079E0C2420D7024BCA0574D0B",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiDirectLightShaderRD/59245d18d90efd79551ef5eda25bbda9867cb893341a1d23b0f75db5d4490716/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "91EB4869B6F2219267B69B11533FDED08DE57B281A1C96412BCD269ABAFAA251",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiIntegrateShaderRD/f20a6d93247c8e2db82979d4e6477fa070ed91e03db2b1320e32dffabdb4ff23/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "9179FD75499E77805A26F9AE70D02E6524109C170C54C119B65194581BB12B3B",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiPreprocessShaderRD/548b5bca0563ad9662e1e9577ac4921dfc156154487ba331733b0283ce26fcb9/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "596DAFB7A90F2C73D26C22024D44B2BB110F7B952A0F05B681CE10E9E87149EC",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ShadowFrustumShaderRD/248bc9deb54d10af912f2da1bd4b006bc43cfe08659a206fa573baf48e4050e0/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "CDE2F1DAAF9C1F61BDAF4E68E067E77469303671FC5EE6EA82F7DD41EBAC2F0B",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SkeletonShaderRD/e6bc641e2a094416c99b1294ac5e453c55d24e0b62c1da47c8f7f93ae7877bfa/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "09A0C48431A51FF29252CDE103B393103DD17E1EA1F5B0718C265AEBD0032D8E",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SkyShaderRD/25c4162ba5ed1f15e722f73bf07201837a6ae7b301288dd32ff9f71634118d9c/0fa1946a11e1cca806ebfe4b3b4ac7f723d8b701.d3d12.cache"
+        },
+        {
+          "sha256": "174E9D6BEF353F6BAEBB4A923DE36691497847EF2D3EE84F656384B40CF7DC2C",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SkyShaderRD/25c4162ba5ed1f15e722f73bf07201837a6ae7b301288dd32ff9f71634118d9c/ff1961ca0c4c55a79eb12f819a7b6345801bbbaf.d3d12.cache"
+        },
+        {
+          "sha256": "2B95B1577BDB946FF47D5A6407AEB81F817FA19F1076DC0E64D7A614D4827582",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SmaaBlendingShaderRD/d7b7c8cec00f24f9aa8db356b4df88c5fe032d38ce38673bd520c280c936fb80/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "695D5E0C91DB2A81C483B630BFE304FABDD27DCF80F6056556A8E3CDC3E4D4C8",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SmaaEdgeDetectionShaderRD/8879d099a2601bd01d4582b1e86a091c5f89a7bc46aecc9e805410f75bcda245/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "8729D9D2D485F8D4FF4D348A760FF921A16727706842AB2FA2CBA408DCDCD421",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SmaaWeightCalculationShaderRD/de1d49d5ff947e8b8382f43a79f57c4cceb02eed6f86d5175093ca63e94052bf/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "21789993A8442B2671F70D41DE1D447CC55779DAAE029EF2E48376F5089A8276",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SortShaderRD/d8d77897b86870d358bf870233e14233981c2db9ff06641cd8f405379ac8872f/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "108B4C18C60A08B4C4BB7DCF759951DA61721BD44A4BA3FCBE5662D8E92945BC",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SpecularMergeShaderRD/70920fc883de48dd253fbc2503dd8f4e65941df0da07e074541df12df090de98/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "C660039381495599C3DF0B19C541B2D463BE7A95AD282F8086134C7409B629C6",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoBlurShaderRD/379e714dbee2f412e6657f0557a56dd9f4a00c93ed1aef7af78b047b59ef4bcb/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "C3BA1252768F9726DA63C8DFB4593CE64C89526B52F45622C27E3650A301A6A9",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoImportanceMapShaderRD/72382d26e5b22e99ee9ed29670565e78ff7ee01c960072119a5be86db2ee0fc8/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "74CE9B43E87FCD0F175D4839B0ACE7D214BC04BB26B1A421080B261BC2CF7E7F",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoInterleaveShaderRD/cb27e637ffea15e2c6c4ae1b2c90deac962dae9481ef866601d8ecb863d6a9b6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "D8B23835B8D26EB06465ED4E5E5B580BFD4CD07D2F3CCE6F74BA07419745D897",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoShaderRD/40091d5cef6924b0632dfb92dbf5a6c61f97edd6dd653d20e2c7662009912eed/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "B38CFCCCDB34B9AA7FA33F20FBD6E6D27345FFC0E4F44B7629090E2BF8FE6607",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsEffectsDownsampleShaderRD/d2ccd37f99a0b00eca4ba6f53cddf8d03f02119a69a0b02dc777026129561703/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "493DFE3C1F30E80A648EB163989F22916E7CFAF663EA5D67447A91F3BC43545E",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilBlurShaderRD/4f0d60ba5581090f5efc9941b040e46832bf6864d77d52e8631cea227b5d8279/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "AF157F363C691031984EFECFEC264F6AAB4C0AB9D0F43B4A01BEED4F8703C00A",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilImportanceMapShaderRD/bf370911d6b5be81e5fbf6014d236deb74697ee1b3e2eeb870f5140913d9bee6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "6A3C6E40711BF9597083881B31AE3CE64F35D9B16836DDEE332F216B55B76CBA",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilInterleaveShaderRD/0f78dde6bc33a0264706f9a466ae77f41b24641381aa171c2b1ee40923f6547c/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "8EECDA853D489E672A0511A187E686D02F2D6CD95819CF97388E93877BD7295D",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilShaderRD/17c51ec55574b54c0834b41688f478d19599eb3f90a1230981e06d74d89473e1/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "201FCF62A3BC4A7C016AEBAE85860C58B015D951526337B29DAF631442747990",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SubsurfaceScatteringShaderRD/4870fb4fc36514a7031473d566046fc2841628db992f9421056a8dfbc0830d97/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "2D89E63B23F92E20D379F18412F629F631EB4293AB17203AFE69FB850BDAF7AA",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/TaaResolveShaderRD/a1ca2d745847530de0720910ad5bfa2466e0ab33647b7a631f2900d7b4617a60/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "7D3208F539D7849A875E222E2BAD369DF2BEB45AD88B6C7210E2157114CCC06F",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/TexBlitShaderRD/fd9c885eab1da0d330a04ebfd7796019cde57f82208202f3bfc96cae74155212/1e8995c9eb0e9b0b053035999de68595c521a33e.d3d12.cache"
+        },
+        {
+          "sha256": "5EE9632199388F8032F40D2AEA7C769614B1047CAF4D20B46219028FAF1491B2",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/TonemapShaderRD/1b9049fef136690ef56085339cc9ad699de6d63e5d3afa1677201c6dedd6f2a8/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "3E0158C25D1A38084F710F964A08EC04AEA7E0FA28F574D3B60F72BEEFF2EC53",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VolumetricFogProcessShaderRD/ee9496dfb3b0e489158503ab6e3539129bf5f78706cdb7c9ed4d8701f17f14ec/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "F4E81385C1BE19C55210079012E62940246635014E590F28B6A1227C5F747B03",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VolumetricFogShaderRD/69e78fd970058cf62da4f8df24a6d7f3acd2d0effbade0dc171226be830ee241/3377d4ca9d0fc2e16f62596ee37d619e8e7e3f54.d3d12.cache"
+        },
+        {
+          "sha256": "59BF137A6467364739E19D74E7DFCEA99EF3BC739057D2A76CC2980CD8B00E05",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VoxelGiDebugShaderRD/e7afc074bea566006e261dd7312ae8e5c1a6a22e1eab6aa29b590ca925df679b/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "DC872DEC4D230093EA96559A33B5E6361A41CD9BB795DC84EFC16CA2A3D0A449",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VoxelGiShaderRD/cf478b2dd85c8c4b0519274ac94659b26ee34e27a1714122915056a7010b4b7c/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/ARCH3D.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/BLOCKS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/DAGGER.SND"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/MAPS.BSA"
+        },
+        {
+          "sha256": "9FC73F437C84226D7B64C1D9A773C3E7601237AEEACCDD1A6E518B64E911BAD4",
+          "path": "project/tests/.runs/scenario-1/relaunch/item-persistence.png"
+        },
+        {
+          "sha256": "9E004722B55BD77521AAA6FA7CA8E6433406569AD65688D1C7861DBAE7CFB589",
+          "path": "project/tests/.runs/scenario-1/relaunch/reload-result.json"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/.storage-lease"
+        },
+        {
+          "sha256": "16BC21780D1125EC91445DC33D23721BC2B838CA879ABD7A395FFF985BC6BBEF",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "project/tests/.runs/scenario-1/relaunch/user/settings/settings.ini.backup"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "project/tests/.runs/scenario-1/user/.storage-lease"
+        },
+        {
+          "sha256": "F70CC3FD36799EAA64581635FBB7470A903AE018DF7229746841E78AE5C7BAE5",
+          "path": "project/tests/.runs/scenario-1/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "project/tests/.runs/scenario-1/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "project/tests/.runs/scenario-1/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "project/tests/.runs/scenario-1/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "project/tests/.runs/scenario-1/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini.backup"
+        }
+      ],
+      "compaction_sha256": "1C41BE18553B3A7EAA0CB9D3AD8323B329E7DFC4BF232E11E4D78A0007053150",
+      "archive_sha256": "F1D3A8578EA47F699CE3C2B5A70F7EDCD57AF6273FA9572D05F74DF1F293BF67",
+      "verified_source_entries": 1679,
+      "removed_files": 1717,
+      "removed_logical_bytes": 210582025
+    },
+    {
+      "label": "headless collections",
+      "status": "passed",
+      "root": "main_project/tests/.runs/verification-headless-dc544e1674644bbcb92c652c2e02dc65",
+      "report_sha256": "4A17DF4EEAC3A33739F302AFCBE580F3321F731EF4655A47BD7110060CD28480",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "reproduction": {
+        "arguments": {
+          "Seed": null,
+          "Scenario": [],
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Clock": null,
+          "InputSequence": "",
+          "TimeoutSeconds": 240,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Suite": "item-collections",
+          "Fixture": "item-collections-v1"
+        },
+        "command": "./main_project/tools/verify_headless.ps1"
+      },
+      "assertions": 200,
+      "counts": [
+        {
+          "reload": 0,
+          "primary": 200,
+          "mode": "headless"
+        }
+      ],
+      "candidate_differences": [],
+      "source_variant_scope": "Final candidate inputs match.",
+      "child_artifacts": [
+        {
+          "sha256": "354F6B41AFAC0AF85C870C4DDFDBE208E44AD5223AE6D89ABA867D4090718998",
+          "path": "project/tests/.runs/scenario-1/console.stderr.log"
+        },
+        {
+          "sha256": "DB1D0D13C793082CB523BD25751E15766BB6B166B7D8FEED550E9BDFE3D2BF39",
+          "path": "project/tests/.runs/scenario-1/console.stdout.log"
+        },
+        {
+          "sha256": "5D0E3719A26B3DEEE0C507241C53B8831E60839807E4AC6DFB0E44CA8053BFF0",
+          "path": "project/tests/.runs/scenario-1/fixture.json"
+        },
+        {
+          "sha256": "984E2B7924A4A0E4030190D7626D082618B5BCBC80BC7749684778DEABB5CEE2",
+          "path": "project/tests/.runs/scenario-1/result.json"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/ARCH3D.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/BLOCKS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/DAGGER.SND"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/MAPS.BSA"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "project/tests/.runs/scenario-1/user/.storage-lease"
+        },
+        {
+          "sha256": "3DBD803FAA8A3E80778203FB393722F037C823803F56E7CC49B3F96A7BBDA784",
+          "path": "project/tests/.runs/scenario-1/user/logs/Player.log"
+        },
+        {
+          "sha256": "4EFB982D312D7C5777132316F1C800C128C5E74112E74386B000E8DF1504A9CA",
+          "path": "project/tests/.runs/scenario-1/user/Mods/collections/mod.json"
+        },
+        {
+          "sha256": "755BB0AB194820B0C2B872C71C79ECA2E92D7F5DBA096BF9C172DBCF47AC6B6E",
+          "path": "project/tests/.runs/scenario-1/user/Mods/collections/policy.json"
+        },
+        {
+          "sha256": "241B246D1FBC45D104F50F7E90F11AA1DEE1AF8D4C286041947F9C18807F506E",
+          "path": "project/tests/.runs/scenario-1/user/Overrides/collections.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "project/tests/.runs/scenario-1/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini.backup"
+        }
+      ],
+      "compaction_sha256": "B40E78097AFE6932D02E095BE80A9FCD4C608BB4DC269407DF7E364BA63C4196",
+      "archive_sha256": "2DD0551FEEFB626FA3D048A3BC57B7CD13AB387F4614A00C78D034E7E30A2D79",
+      "verified_source_entries": 1679,
+      "removed_files": 1717,
+      "removed_logical_bytes": 210582025
+    },
+    {
+      "label": "rendered collections",
+      "status": "passed",
+      "root": "main_project/tests/.runs/verification-rendered-5196914988e541cbb95086ca061a806d",
+      "report_sha256": "1F384ED8B83DC086015C95F106E0D0D19F40B9407D798659C8DC009C9E2A691A",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "reproduction": {
+        "arguments": {
+          "Seed": null,
+          "Scenario": [],
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "Clock": null,
+          "InputSequence": "",
+          "TimeoutSeconds": 240,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "Suite": "item-collections",
+          "Fixture": "item-collections-v1"
+        },
+        "command": "./main_project/tools/verify_rendered.ps1"
+      },
+      "assertions": 204,
+      "counts": [
+        {
+          "reload": 0,
+          "primary": 204,
+          "mode": "rendered"
+        }
+      ],
+      "candidate_differences": [],
+      "source_variant_scope": "Final candidate inputs match.",
+      "child_artifacts": [
+        {
+          "sha256": "354F6B41AFAC0AF85C870C4DDFDBE208E44AD5223AE6D89ABA867D4090718998",
+          "path": "project/tests/.runs/scenario-1/console.stderr.log"
+        },
+        {
+          "sha256": "53DFFC28ECCF764C8F9E87EF4633BC433B403EEA7C137ACD3C137F6B7BDDA8BE",
+          "path": "project/tests/.runs/scenario-1/console.stdout.log"
+        },
+        {
+          "sha256": "A380BD08A28A771BB116FB5EF9C6538BEA2EEE28246410260C2C3587549F82EE",
+          "path": "project/tests/.runs/scenario-1/fixture.json"
+        },
+        {
+          "sha256": "2D305BBFBC77882E984DBCAD1647C6F074758BF6E50DCF05D178D66EA00EF967",
+          "path": "project/tests/.runs/scenario-1/item-collections-transfer.png"
+        },
+        {
+          "sha256": "A02A556DF6F70A06CBD6C66AED33CC2597676CAF632F06108B502FEA0D62BE79",
+          "path": "project/tests/.runs/scenario-1/result.json"
+        },
+        {
+          "sha256": "44BF819776BD80915B53C2A85640B6B8A26816A62DA248CC28BB58ED43110D39",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/BestFitNormalShaderRD/c4b1d2e5a1d6f84559f49734aae94706b402e2be89eae7753b8b413800d96d42/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "2BA28FB946D07C6E2D68575ED911B343E072B10BF70B81085836FF6944D16B0F",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/BlitShaderRD/ae4daaa7a60bb17ebd7e9de5db9422fb448b52ad89776ae7aa53fee442f7cc60/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "0D17DBA900E85BE01BCC517626316C1CD255FFF34DFB6345265D4224D0E19543",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/BokehDofShaderRD/8c692c9cd2f46f54f2c82d9a4a12be5f889d873a3c9698546a6eb5ec0c263647/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "5ECA956F13C00032F4390EC2BC73F3860FCF8C6F7CF2F71FE723F2359FECFFAA",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasOcclusionShaderRD/606df5c981910bc4bc719cf497719273e80d1f314f65e68820bf8e2111368cdb/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "FDD41CE6BCECE2EBC2906E9CC25D30B870A025FD2A95D2367ACCBDCE7D08AB15",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasSdfShaderRD/a4f6d732dba9a4cc0c37a1ca52936369e2ee148e9d03efe1b81bfed822adb1eb/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "ABF863BE1036F00F1A2E3414FD04584379D2F175BA7AFC0EB73A3A089894EF75",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "BD296D2CD6606CA99526D403D1709202CA5B4AC37EE98398529765168E942020",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/89e0c5a264d1558e7bc2ca0dc3d0afd834fbe7b6.d3d12.cache"
+        },
+        {
+          "sha256": "E94A174D003E18C60364B10F65D5F15D9CFEF882F2EC3B8B61AE69C4F95A104E",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/8f9335de72e837eeead40640cc01fddc5baf5a7c.d3d12.cache"
+        },
+        {
+          "sha256": "708328520A813489FA97904FFCA269E06E8BFFF1017568CC3AE536421591E245",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CanvasShaderRD/5454ca85157b6953b76bf324ebe90594c466e36301bf1b3e6adcce117d705c79/c2f7efc3419efdd79fabd056897820a83f2ac2c9.d3d12.cache"
+        },
+        {
+          "sha256": "286634985581229AA95FF02C3E45D0D178AF6688532FCCFF52F5A3E61A300EB2",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ClusterDebugShaderRD/25eb5280da03a5dfefcf122ab21c9f6184c2a0d8edfb398d0b9e784c99ede8d6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "6B256DD77D1737617F52590BDA48D72D4F53D6DC9899AC38EB2DBFBC77BA97DE",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ClusterRenderShaderRD/092c9f39b8c42523662d45db394a8d4f7f068d617876866d55d9fd69e5afb357/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "C8B0C33CE5BC91772C1BB1EEBB9124E31E07D959181DE343CA42BB25D8D7F6E5",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ClusterStoreShaderRD/77e74456f71eccced2f4bd06086f33d4ae56a013ce717690f960759226272eb4/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "7A7B32C2BE7B4C86889CD882730A77AB24BD4AFF51EF0701D63EFC26E81BA76E",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CopyShaderRD/c374588e7ae9bf64919d0186bea3104b4f721cc0691d284a9998e1e7d06c5eb8/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "A7EFA850F24509EDA7BB98E9C8266FA5ACC5360799539289D31681829C816053",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CopyToFbShaderRD/72456b3a82af4da12c412275d4c8ffa4a6a5447d9daffeeef86bc16965803813/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "6D1329C440701F1C5EEBA1CEFB4AEDB96E45FCA57BE7305FC0ECF8B95C70873D",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CubeToDpShaderRD/da14e2c9b701a4bd7336b87667bf4f3b4f645de09781824763d2bbceead56c83/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "1E52948F9D7818B91C84F361A48C3711A5464131B98AD92BDA099DBA3D27F5BE",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/CubeToOctmapShaderRD/7a5a6871c4fae131d3fef2e125ac23cbe81a1a042028f8c294461282de463c9a/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "BE39E42D8207BFF2C6A83534B0F74D2F0D9597EE90C5C289017F377B100C98AA",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/FsrUpscaleShaderRD/a8da3dfed3e309742ca78c4162d15f2ab08af4f694a51407089ecec1d1be54be/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "68FCFD4EEDB0043396895A5C4EB9D16C7D46555BC1878533B6949A4C4055B3A4",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/GiShaderRD/3fa2391092c717dea4bdf7f4f65ccf42ffd4018c158c431a4e234d9fa17737a6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "C5D88DD069A108AB1643B00B8019DE92CACAFE50F6A0B92DC7D04735CCDB69E1",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/IntegrateDfgShaderRD/4d699e26d43b88b86cb33c2b829767ea8e935055bb48dea880f66eb29760577a/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "FA9314EF7F392464024CC7CAED8CC3B65247474BB91A4B19778196CB1BB035E2",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/LuminanceReduceShaderRD/c759f2761a12e9ff1fa625818963f94aa0ff511eb314a313ea89c615c37dd078/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "34EF2B5DA3E0A205FFE268B6D4A10B9C7DD8D221072C0DACCFAFE7CDF08F57BF",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/MotionVectorsShaderRD/4d3ba0c01e8b64c74a0f2f0fd20ddc8099d56cfbb3ee9e7dbe6dc3c54c174725/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "0FFDA7FEDF736128F859E69A666FF3A0574A37B5D1897AD6CA4D0116E6F6FE87",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/OctmapDownsamplerShaderRD/17404978f453a0a0388dfb81b2d08f173476d2c3b680e2e6aa35bcf438e24f11/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "37E5D2E575EF5FA1A57313E85B4DF5B26ACDDDF70E4EE6F3ACF7F36D3941AEA7",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/OctmapFilterShaderRD/cd03c4ea34362e2724f4d4536156039ee5ca21c31167b8840dfc65dad2d6bb11/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "46698AF10302A0E0618A9B657116B00E1C4486C197ED80B98C376C9AD091D8BB",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/OctmapRoughnessShaderRD/8470960c68b74292e24251e3b7e41d28e9a5054dce0cd1d77c2a2a865a10af43/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "6E95F0AC78CF9FC4B63A6FB3B8F2A66DDBDF97E1BCD7DF7EEAE7226C91759C46",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ParticlesCopyShaderRD/ce2b95c8a6b9e21f14c989c3ca095de77d9bb5e86213ae4180fb97cbd2c02a10/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "BDBAB0F80A261C8D84F387AA25F1AEBD24B971BC23D16E19C9B2B54E464AAE73",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ParticlesShaderRD/f645828ab356b17f1478c77373935ecd2417e1c227a96b62417396293d13970e/07b5904b662900d90454c39c46885098de79aa4c.d3d12.cache"
+        },
+        {
+          "sha256": "2965F60F4163640726E342D7AB89581F6634B95E645A50D27FBB19BF12D5B3B5",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ResolveShaderRD/58e536c56eaff31a31ef93f224579af7b242a06469b7b0a7736cdeb7e16898b6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "534009762DED266DFB3B0B179701828F9C9B7F89BBC5D3EDC704261F9644F1A8",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/347259af253e6bbec7ad5c69332af5ca731015aa.d3d12.cache"
+        },
+        {
+          "sha256": "2D72ACA13843DE8BF40FA6B53AD8660004B180A7D8FF40C648F0A18737BDF293",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/a784797763b72ce058effad41b273eb697df9814.d3d12.cache"
+        },
+        {
+          "sha256": "B699A8FFA58AC19166BC53059DD3F061778335ECDF7E87AAA7266C5D20FE6EB8",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SceneForwardClusteredShaderRD/cdfe2a8d86deff48154b1cd0d6e857301f5e37f0d8930754f63ff9c2c85045a6/b600e18e20b53d8932999d48838b29553c586934.d3d12.cache"
+        },
+        {
+          "sha256": "9C2FEFE661B5C1549EA5A4C2634B1BB1A4585EF134F9A11E54954E1E66F3C6E4",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionDownsampleShaderRD/f6b46656954490c0153a8a5200455cc0834ec5881821ec7bf328b4c688fc4f6f/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "5B5B1C65241E070D68A8371633499E657850C38B3DD7C63A549F1FB592D68D01",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionFilterShaderRD/fda60a18cb83e7ff26ce7ee2f43dce1d37326b2767d06922b0e5f9356abd1a1e/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "2097F89417324914C71716CE65A50D20F8908596FCAED32F01D38EB222F138AE",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionHizShaderRD/4c407c9b5cd4f954c012a0de78629e18a5e9268536eb1d78853c8a247ef0a772/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "F7BC448554A9E53EA4120EE021593A28007DFCBF1688E7E5572A6B7E90E5D758",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionResolveShaderRD/b29422945b4d1600883d0fcf89124633e34efb678505e5bcb9fdb6623fbfb8d4/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "434641FA337A41D7B5E521083C9BB6638828BBEE2355F01ABB6A93ACC58A1F71",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ScreenSpaceReflectionShaderRD/a2d0cb08973e8562ed3b82d74b6f0f1ecf1dbd2ac788049eaa06925ad6c28bed/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "70C0C06708F2A2CED64B67143EADFF300BC31A3CAF2710CE57DEDB55F3D9AD4B",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiDebugProbesShaderRD/05e9a03efe957bf14f0a60730a97ab25e037f5a3f347b3427feb9723fd82fb1c/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "B0F8D3FD1CCF720195B4EA02BE1E671BD2E384ECB220FB1774360E02B2C21478",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiDebugShaderRD/365142e07e83cbbda433d4ed971a1c8413d3a400e8646e2ed2a0f7dda127068a/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "2ED5FB7DC918994E3D8DE66D7AC17EB2877F02DB7B46B7380E1E62A443799EC9",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiDirectLightShaderRD/59245d18d90efd79551ef5eda25bbda9867cb893341a1d23b0f75db5d4490716/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "6168EDF9C07BE87D3340F8ACCD4688751E2F32167E1E2B6222DF201BF70A3F78",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiIntegrateShaderRD/f20a6d93247c8e2db82979d4e6477fa070ed91e03db2b1320e32dffabdb4ff23/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "0FE43EE7F6A39AB99E852A406EB6A0ADFF0772003C494CF3A6E871C0DB1675B6",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SdfgiPreprocessShaderRD/548b5bca0563ad9662e1e9577ac4921dfc156154487ba331733b0283ce26fcb9/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "653980E9B21FE81F9603FE27F8F4C59E8D1B3B13F74C79A872D36BAFFC28F348",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/ShadowFrustumShaderRD/248bc9deb54d10af912f2da1bd4b006bc43cfe08659a206fa573baf48e4050e0/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "A31B710F400ED98D2C7F77D8F2682E925BD822044FA6E1A588AF655F2300B522",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SkeletonShaderRD/e6bc641e2a094416c99b1294ac5e453c55d24e0b62c1da47c8f7f93ae7877bfa/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "8092B84ACB525D58A931DD0B719689EB50DAAD815D886365A0227706091F30EB",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SkyShaderRD/25c4162ba5ed1f15e722f73bf07201837a6ae7b301288dd32ff9f71634118d9c/0fa1946a11e1cca806ebfe4b3b4ac7f723d8b701.d3d12.cache"
+        },
+        {
+          "sha256": "CBE7CB49742AF78935ABBD62572A2C72DAE056AAE500DF5C8E938470C5C6338E",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SkyShaderRD/25c4162ba5ed1f15e722f73bf07201837a6ae7b301288dd32ff9f71634118d9c/ff1961ca0c4c55a79eb12f819a7b6345801bbbaf.d3d12.cache"
+        },
+        {
+          "sha256": "8DC28D58543B2DE0C919178328EE302B810672E28F249B9AF9266B8B26599DE6",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SmaaBlendingShaderRD/d7b7c8cec00f24f9aa8db356b4df88c5fe032d38ce38673bd520c280c936fb80/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "1B8B6368829C710559D820968C38C19BC2FFE76644981969B1A521BFE8B5286B",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SmaaEdgeDetectionShaderRD/8879d099a2601bd01d4582b1e86a091c5f89a7bc46aecc9e805410f75bcda245/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "C405C7B3C9999D81DFB986FDBB8B13FDFF3AAE5C126AA668B9EEB6D03EC7C36A",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SmaaWeightCalculationShaderRD/de1d49d5ff947e8b8382f43a79f57c4cceb02eed6f86d5175093ca63e94052bf/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "5CC1426F988BDA9E4B60F640E7A929475816C888F58781A671CEF80783990C12",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SortShaderRD/d8d77897b86870d358bf870233e14233981c2db9ff06641cd8f405379ac8872f/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "9C008E6AC51328D29518D6E14EB0FBB3CD9ED143169B066B2C5259E36AA35F5B",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SpecularMergeShaderRD/70920fc883de48dd253fbc2503dd8f4e65941df0da07e074541df12df090de98/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "1F355C8543613099E93EBA04CF01EB792613DE2E3F3831A05AD6E68BF839F108",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoBlurShaderRD/379e714dbee2f412e6657f0557a56dd9f4a00c93ed1aef7af78b047b59ef4bcb/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "280DEDD847BAAE2856C7A07667BA558EE67F214C090D52761ED7D4E4D7D1D904",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoImportanceMapShaderRD/72382d26e5b22e99ee9ed29670565e78ff7ee01c960072119a5be86db2ee0fc8/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "F070BBE500F6356EBA197EFCCC5E4A6315CBA067E284EFE6C2E8039A41C71B0C",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoInterleaveShaderRD/cb27e637ffea15e2c6c4ae1b2c90deac962dae9481ef866601d8ecb863d6a9b6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "5EE0A06514694B203C5DB99E41C8EA055F8A24267A23DF8904251AB9CEFAFA5B",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsaoShaderRD/40091d5cef6924b0632dfb92dbf5a6c61f97edd6dd653d20e2c7662009912eed/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "BE20375F9174EA1CCC54CAA23A2169F6E381181E7432FBF4BBF124A3854EFC3F",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsEffectsDownsampleShaderRD/d2ccd37f99a0b00eca4ba6f53cddf8d03f02119a69a0b02dc777026129561703/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "5D7335B43ECBAC9DC9F94487319E5F668B07047E60F052FBB62A5820E2EC92C6",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilBlurShaderRD/4f0d60ba5581090f5efc9941b040e46832bf6864d77d52e8631cea227b5d8279/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "9831D3695A62E3E8874E4D6E7233783A2BFE34B4E8827132D7F9764D0BF8EC95",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilImportanceMapShaderRD/bf370911d6b5be81e5fbf6014d236deb74697ee1b3e2eeb870f5140913d9bee6/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "CAD5202BF4A41C635605272FCFF5F33DB13685FED2CEA20BEA51CBFA1CDD4551",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilInterleaveShaderRD/0f78dde6bc33a0264706f9a466ae77f41b24641381aa171c2b1ee40923f6547c/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "D8F11D1C5C3D970C4C8E59351BD26B0786D6D02DDD5997E1D13F6B1809A33DCF",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SsilShaderRD/17c51ec55574b54c0834b41688f478d19599eb3f90a1230981e06d74d89473e1/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "1C141D8093E2DE77D540B7D8DB2D9649071F6F007397717689F8B489F668E866",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/SubsurfaceScatteringShaderRD/4870fb4fc36514a7031473d566046fc2841628db992f9421056a8dfbc0830d97/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "2D89E63B23F92E20D379F18412F629F631EB4293AB17203AFE69FB850BDAF7AA",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/TaaResolveShaderRD/a1ca2d745847530de0720910ad5bfa2466e0ab33647b7a631f2900d7b4617a60/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "7718F2D554B4C5EBCF5EA1CF626711CAE9143D142D4565F53A92F32B60EC2110",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/TexBlitShaderRD/fd9c885eab1da0d330a04ebfd7796019cde57f82208202f3bfc96cae74155212/1e8995c9eb0e9b0b053035999de68595c521a33e.d3d12.cache"
+        },
+        {
+          "sha256": "6A4E9CFD61475EF86F36FA2C74320B7DE4A01DBD9E813C80C7AF9D1E08F35864",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/TonemapShaderRD/1b9049fef136690ef56085339cc9ad699de6d63e5d3afa1677201c6dedd6f2a8/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "602374EE7EADC693317D78C3760097E662B6705797805AAC420932BBBD9F7245",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VolumetricFogProcessShaderRD/ee9496dfb3b0e489158503ab6e3539129bf5f78706cdb7c9ed4d8701f17f14ec/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "F4E81385C1BE19C55210079012E62940246635014E590F28B6A1227C5F747B03",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VolumetricFogShaderRD/69e78fd970058cf62da4f8df24a6d7f3acd2d0effbade0dc171226be830ee241/3377d4ca9d0fc2e16f62596ee37d619e8e7e3f54.d3d12.cache"
+        },
+        {
+          "sha256": "73CA4AB6DB27B6951D3278C78E44A93BD3FFC59E80C838EF68DE9926BD6F29D6",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VoxelGiDebugShaderRD/e7afc074bea566006e261dd7312ae8e5c1a6a22e1eab6aa29b590ca925df679b/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "DB7B15F1A675F52D1524CE89EFD8D8243822F8250679C887757D8CE2059558BF",
+          "path": "project/tests/.runs/scenario-1/engine-roaming/Godot/app_userdata/Daggerfall GD/shader_cache/VoxelGiShaderRD/cf478b2dd85c8c4b0519274ac94659b26ee34e27a1714122915056a7010b4b7c/8305c75c1294a9f00656f0f14344bb8bedcfe4e7.d3d12.cache"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/ARCH3D.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/BLOCKS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/DAGGER.SND"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "project/tests/.runs/scenario-1/locked/ARENA2/MAPS.BSA"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "project/tests/.runs/scenario-1/user/.storage-lease"
+        },
+        {
+          "sha256": "F3ABB3ADABBB64CCDA5E79515330FC48CA25E3C25995D0841C6EAA0707A2DF79",
+          "path": "project/tests/.runs/scenario-1/user/logs/Player.log"
+        },
+        {
+          "sha256": "4EFB982D312D7C5777132316F1C800C128C5E74112E74386B000E8DF1504A9CA",
+          "path": "project/tests/.runs/scenario-1/user/Mods/collections/mod.json"
+        },
+        {
+          "sha256": "755BB0AB194820B0C2B872C71C79ECA2E92D7F5DBA096BF9C172DBCF47AC6B6E",
+          "path": "project/tests/.runs/scenario-1/user/Mods/collections/policy.json"
+        },
+        {
+          "sha256": "241B246D1FBC45D104F50F7E90F11AA1DEE1AF8D4C286041947F9C18807F506E",
+          "path": "project/tests/.runs/scenario-1/user/Overrides/collections.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "project/tests/.runs/scenario-1/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "project/tests/.runs/scenario-1/user/settings/settings.ini.backup"
+        }
+      ],
+      "compaction_sha256": "8F3BA8301A45C2C08E1030F8BF65A96CD88FEC4CFF2F790B2A2EB06343706707",
+      "archive_sha256": "3AA7B9154213B2AE131E0B5154D21E8E1E9A942C26B63A47D9C90E364135E2A0",
+      "verified_source_entries": 1679,
+      "removed_files": 1717,
+      "removed_logical_bytes": 210582025
+    },
+    {
+      "label": "debug persistence export",
+      "status": "passed",
+      "root": "main_project/tests/.runs/export-19fdf76af4494744b496d0cc9ad8bc87",
+      "report_sha256": "D76187EA204E879088643AE9A0EF40B1A345C1ADC9DF31F470617D6FC203EF5E",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "reproduction": {
+        "arguments": {
+          "CreationDraft": false,
+          "RandomnessSession": false,
+          "FormulaFault": false,
+          "DungeonContext": false,
+          "Configuration": "debug",
+          "DependencyPlanning": false,
+          "Randomness": false,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "DungeonMarkers": false,
+          "FormulaExtraError": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "LayoutInputs": false,
+          "VariantInputs": false,
+          "ItemPersistence": true,
+          "GroundMovement": false,
+          "DungeonAssembly": false,
+          "ModDiscovery": false,
+          "ActorState": true,
+          "Formula": false,
+          "DefinitionPublication": false,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "M1Composition": false,
+          "CalendarClock": false
+        },
+        "command": "./main_project/tools/verify_startup_export.ps1"
+      },
+      "assertions": 404,
+      "counts": [
+        {
+          "reload": 39,
+          "primary": 159,
+          "mode": "exported-headless"
+        },
+        {
+          "reload": 43,
+          "primary": 163,
+          "mode": "exported-rendered"
+        }
+      ],
+      "candidate_differences": [],
+      "source_variant_scope": "Final candidate inputs match.",
+      "child_artifacts": [
+        {
+          "sha256": "86270480905E13B76988137A1CB4B73461511134F09A50DD923E60DE8F245314",
+          "path": "build/tests/.runs/headless/fixture.json"
+        },
+        {
+          "sha256": "8B9AAADB29EDD3270E9E1CF886F990F4106441A97936BED61DA3A4739C7E751C",
+          "path": "build/tests/.runs/headless/item-checkpoint.json"
+        },
+        {
+          "sha256": "9E5A95A7511BC935208A0293CF1CB93910CF96397AA8D4116786357BA668B914",
+          "path": "build/tests/.runs/headless/reload-fixture.json"
+        },
+        {
+          "sha256": "FD3A916042135EDF58C7A2DC11B53FFA23C5B71FBFE1B4EC64647881E9BDA9F3",
+          "path": "build/tests/.runs/headless/result.json"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/ARCH3D.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIO.DAT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG00T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG01T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG02T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG03T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG04T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG05T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG06T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG07T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG08T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG09T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG10T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG11T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG12T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG13T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG14T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG15T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG16T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG17T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BLOCKS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS00.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS01.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS02.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS03.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS04.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS05.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS06.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS07.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS08.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS09.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS10.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS11.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS12.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS13.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS14.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS15.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS16.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS17.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS18.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLIMATE.PAK"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/DAGGER.SND"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/FLATS.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/MAGIC.DEF"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/MAPS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/MONSTER.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/PAINT.DAT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/POLITIC.PAK"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/SPELLS.STD"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXT.RSC"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.207"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.233"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.234"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.235"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.236"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.237"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.238"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.239"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.240"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.241"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.242"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.245"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.246"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.247"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.248"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.249"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.250"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.251"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.252"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/WOODS.WLD"
+        },
+        {
+          "sha256": "37A6F378D5603B9207FDBB5E3342960D6D16371451102E1E874DBE3339983E26",
+          "path": "build/tests/.runs/headless/relaunch/reload-result.json"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "build/tests/.runs/headless/relaunch/user/.storage-lease"
+        },
+        {
+          "sha256": "C53639EE604D31A37BD4DC1BF930C567959569DB1DCBC65B2269CFB6BE610078",
+          "path": "build/tests/.runs/headless/relaunch/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "build/tests/.runs/headless/relaunch/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "build/tests/.runs/headless/relaunch/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "build/tests/.runs/headless/relaunch/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "build/tests/.runs/headless/relaunch/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "build/tests/.runs/headless/relaunch/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "build/tests/.runs/headless/relaunch/user/settings/settings.ini.backup"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "build/tests/.runs/headless/user/.storage-lease"
+        },
+        {
+          "sha256": "E3A029E56F61EB18788CC046BEF4E6544F7DC9DF33F7173D599864CA320C91DC",
+          "path": "build/tests/.runs/headless/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "build/tests/.runs/headless/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "build/tests/.runs/headless/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "build/tests/.runs/headless/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "build/tests/.runs/headless/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "build/tests/.runs/headless/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "build/tests/.runs/headless/user/settings/settings.ini.backup"
+        },
+        {
+          "sha256": "36D614D967346283A0D9B2F24A5C0E1D373251040DF7B95593D6ACA356D0CD04",
+          "path": "build/tests/.runs/rendered/fixture.json"
+        },
+        {
+          "sha256": "8B9AAADB29EDD3270E9E1CF886F990F4106441A97936BED61DA3A4739C7E751C",
+          "path": "build/tests/.runs/rendered/item-checkpoint.json"
+        },
+        {
+          "sha256": "ECCBE234F862B439070AEAED14A2913B82D3D9E54800D6F62C0E0855BCE44C34",
+          "path": "build/tests/.runs/rendered/item-persistence.png"
+        },
+        {
+          "sha256": "2EA5988ADED0506DDCC66C917AF1ABFE99C3B74A07ADC587F9322D6B7BB08658",
+          "path": "build/tests/.runs/rendered/reload-fixture.json"
+        },
+        {
+          "sha256": "2B72B127E3236F2D6BBFFA641972347739C6340BA9E46FF72A19627A523201C6",
+          "path": "build/tests/.runs/rendered/result.json"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/ARCH3D.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIO.DAT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG00T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG01T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG02T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG03T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG04T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG05T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG06T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG07T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG08T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG09T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG10T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG11T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG12T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG13T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG14T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG15T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG16T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG17T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BLOCKS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS00.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS01.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS02.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS03.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS04.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS05.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS06.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS07.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS08.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS09.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS10.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS11.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS12.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS13.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS14.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS15.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS16.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS17.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS18.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLIMATE.PAK"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/DAGGER.SND"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/FLATS.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/MAGIC.DEF"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/MAPS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/MONSTER.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/PAINT.DAT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/POLITIC.PAK"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/SPELLS.STD"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXT.RSC"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.207"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.233"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.234"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.235"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.236"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.237"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.238"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.239"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.240"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.241"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.242"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.245"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.246"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.247"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.248"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.249"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.250"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.251"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.252"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/WOODS.WLD"
+        },
+        {
+          "sha256": "9FC73F437C84226D7B64C1D9A773C3E7601237AEEACCDD1A6E518B64E911BAD4",
+          "path": "build/tests/.runs/rendered/relaunch/item-persistence.png"
+        },
+        {
+          "sha256": "FE99D26776167F727DF874AC60658766236C99D88174CBB949C174B565E44D6A",
+          "path": "build/tests/.runs/rendered/relaunch/reload-result.json"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "build/tests/.runs/rendered/relaunch/user/.storage-lease"
+        },
+        {
+          "sha256": "6A08FF7D2E78BCEFFD9468C5D5D0E3FABD54E5FC58A77DF2424EBB2443C7E926",
+          "path": "build/tests/.runs/rendered/relaunch/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "build/tests/.runs/rendered/relaunch/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "build/tests/.runs/rendered/relaunch/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "build/tests/.runs/rendered/relaunch/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "build/tests/.runs/rendered/relaunch/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "build/tests/.runs/rendered/relaunch/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "build/tests/.runs/rendered/relaunch/user/settings/settings.ini.backup"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "build/tests/.runs/rendered/user/.storage-lease"
+        },
+        {
+          "sha256": "FC55283A7D26FCB711930200D099092BC4BC8FAF1F65174C0C4ECCCF5CCC20B9",
+          "path": "build/tests/.runs/rendered/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "build/tests/.runs/rendered/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "build/tests/.runs/rendered/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "build/tests/.runs/rendered/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "build/tests/.runs/rendered/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "build/tests/.runs/rendered/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "build/tests/.runs/rendered/user/settings/settings.ini.backup"
+        }
+      ],
+      "compaction_sha256": "62B9AA89F9707CAEC11B9295CF7B3D3ED338045BECF7964501B61DC7052F7205",
+      "archive_sha256": "D64FA39E470C384C1D5A7F06BB9691C3A9F12B8A3D072EB44F32914049124505",
+      "verified_source_entries": 1679,
+      "removed_files": 2222,
+      "removed_logical_bytes": 527947201
+    },
+    {
+      "label": "release persistence export",
+      "status": "passed",
+      "root": "main_project/tests/.runs/export-f860fb026a35450a9e3a84f3e0d0b7f4",
+      "report_sha256": "1A2F81D73D41825FD36E35E0EE1FF8709280A250373B860AAB39F726476AE43E",
+      "engine": {
+        "build": "official",
+        "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+        "hex": 263938,
+        "major": 4,
+        "minor": 7,
+        "patch": 2,
+        "status": "stable",
+        "string": "4.7.2-stable (official)",
+        "timestamp": 0
+      },
+      "reproduction": {
+        "arguments": {
+          "CreationDraft": false,
+          "RandomnessSession": false,
+          "FormulaFault": false,
+          "DungeonContext": false,
+          "Configuration": "release",
+          "DependencyPlanning": false,
+          "Randomness": false,
+          "ClassicSource": "C:/Games/Daggerfall/arena2",
+          "DungeonMarkers": false,
+          "FormulaExtraError": false,
+          "Templates": "C:\\Users\\Kirk\\AppData\\Roaming/Godot/export_templates/4.7.2.stable",
+          "LayoutInputs": false,
+          "VariantInputs": false,
+          "ItemPersistence": true,
+          "GroundMovement": false,
+          "DungeonAssembly": false,
+          "ModDiscovery": false,
+          "ActorState": true,
+          "Formula": false,
+          "DefinitionPublication": false,
+          "Godot": "C:/Godot/Godot_v4.7.2-stable_win64/Godot_v4.7.2-stable_win64_console.exe",
+          "M1Composition": false,
+          "CalendarClock": false
+        },
+        "command": "./main_project/tools/verify_startup_export.ps1"
+      },
+      "assertions": 404,
+      "counts": [
+        {
+          "reload": 39,
+          "primary": 159,
+          "mode": "exported-headless"
+        },
+        {
+          "reload": 43,
+          "primary": 163,
+          "mode": "exported-rendered"
+        }
+      ],
+      "candidate_differences": [],
+      "source_variant_scope": "Final candidate inputs match.",
+      "child_artifacts": [
+        {
+          "sha256": "F81BA3ED30F90841F005BA28318AAA2E601BE580FAEE58A357DD8AEB37CD75D9",
+          "path": "build/tests/.runs/headless/fixture.json"
+        },
+        {
+          "sha256": "8B9AAADB29EDD3270E9E1CF886F990F4106441A97936BED61DA3A4739C7E751C",
+          "path": "build/tests/.runs/headless/item-checkpoint.json"
+        },
+        {
+          "sha256": "36E330983EA37BF458FC1DA71EBCEABD68688A654EE447620A5DCF661F41B0D6",
+          "path": "build/tests/.runs/headless/reload-fixture.json"
+        },
+        {
+          "sha256": "382D284DD19717C5B384134E10B5F9DFD3E7434C109CAAD3D98E71A7868E8031",
+          "path": "build/tests/.runs/headless/result.json"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/ARCH3D.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIO.DAT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG00T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG01T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG02T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG03T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG04T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG05T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG06T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG07T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG08T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG09T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG10T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG11T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG12T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG13T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG14T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG15T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG16T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BIOG17T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/BLOCKS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS00.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS01.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS02.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS03.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS04.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS05.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS06.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS07.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS08.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS09.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS10.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS11.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS12.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS13.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS14.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS15.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS16.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS17.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLASS18.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/CLIMATE.PAK"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/DAGGER.SND"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/FLATS.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/MAGIC.DEF"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/MAPS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/MONSTER.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/PAINT.DAT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/POLITIC.PAK"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/SPELLS.STD"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXT.RSC"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.207"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.233"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.234"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.235"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.236"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.237"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.238"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.239"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.240"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.241"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.242"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.245"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.246"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.247"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.248"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.249"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.250"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.251"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/TEXTURE.252"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/headless/locked/ARENA2/WOODS.WLD"
+        },
+        {
+          "sha256": "49FF5DA4BB8A2AE470C4AFB41F3C0268B4C2A3230ECC465E9451670DC54BD24E",
+          "path": "build/tests/.runs/headless/relaunch/reload-result.json"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "build/tests/.runs/headless/relaunch/user/.storage-lease"
+        },
+        {
+          "sha256": "B1F30468604F017D6C1757B6EB1C398CE11C9CBBBC74B6BA531943C5946FDA09",
+          "path": "build/tests/.runs/headless/relaunch/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "build/tests/.runs/headless/relaunch/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "build/tests/.runs/headless/relaunch/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "build/tests/.runs/headless/relaunch/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "build/tests/.runs/headless/relaunch/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "build/tests/.runs/headless/relaunch/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "build/tests/.runs/headless/relaunch/user/settings/settings.ini.backup"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "build/tests/.runs/headless/user/.storage-lease"
+        },
+        {
+          "sha256": "5956B47ECB9152DC776AE07E040472479D4D6CF5C77008187125E14E3D1CC79F",
+          "path": "build/tests/.runs/headless/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "build/tests/.runs/headless/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "build/tests/.runs/headless/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "build/tests/.runs/headless/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "build/tests/.runs/headless/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "build/tests/.runs/headless/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "build/tests/.runs/headless/user/settings/settings.ini.backup"
+        },
+        {
+          "sha256": "D84100D5DDC69BA106AF4C4300459E2E081FA0455F70F2A49FAE40C09358AD01",
+          "path": "build/tests/.runs/rendered/fixture.json"
+        },
+        {
+          "sha256": "8B9AAADB29EDD3270E9E1CF886F990F4106441A97936BED61DA3A4739C7E751C",
+          "path": "build/tests/.runs/rendered/item-checkpoint.json"
+        },
+        {
+          "sha256": "ECCBE234F862B439070AEAED14A2913B82D3D9E54800D6F62C0E0855BCE44C34",
+          "path": "build/tests/.runs/rendered/item-persistence.png"
+        },
+        {
+          "sha256": "46F090DC05DC1D1ED8943D9A0A6827E11145DF853A9CF9DB80A921CBC3315CF0",
+          "path": "build/tests/.runs/rendered/reload-fixture.json"
+        },
+        {
+          "sha256": "3EE285E706A0BC7F02348EA2266F40D67F9E3A712784D773D39FD60EF58F16FB",
+          "path": "build/tests/.runs/rendered/result.json"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/ARCH3D.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIO.DAT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG00T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG01T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG02T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG03T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG04T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG05T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG06T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG07T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG08T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG09T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG10T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG11T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG12T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG13T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG14T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG15T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG16T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BIOG17T0.TXT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/BLOCKS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS00.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS01.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS02.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS03.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS04.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS05.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS06.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS07.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS08.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS09.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS10.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS11.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS12.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS13.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS14.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS15.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS16.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS17.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLASS18.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/CLIMATE.PAK"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/DAGGER.SND"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/FLATS.CFG"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/MAGIC.DEF"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/MAPS.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/MONSTER.BSA"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/PAINT.DAT"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/POLITIC.PAK"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/SPELLS.STD"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXT.RSC"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.207"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.233"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.234"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.235"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.236"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.237"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.238"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.239"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.240"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.241"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.242"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.245"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.246"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.247"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.248"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.249"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.250"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.251"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/TEXTURE.252"
+        },
+        {
+          "sha256": "30218097F6611CBAA32BA7D026425FC010A2FF13735FBC9531223C727C11A692",
+          "path": "build/tests/.runs/rendered/locked/ARENA2/WOODS.WLD"
+        },
+        {
+          "sha256": "9FC73F437C84226D7B64C1D9A773C3E7601237AEEACCDD1A6E518B64E911BAD4",
+          "path": "build/tests/.runs/rendered/relaunch/item-persistence.png"
+        },
+        {
+          "sha256": "3C877E273D4E1D4A280FF49F65FD58F319A45A0E43A18724034C04F5527535C4",
+          "path": "build/tests/.runs/rendered/relaunch/reload-result.json"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "build/tests/.runs/rendered/relaunch/user/.storage-lease"
+        },
+        {
+          "sha256": "ED3FB696DC9DEAED633B3456385C4739FF676971A53C73647F04FC5997285B0A",
+          "path": "build/tests/.runs/rendered/relaunch/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "build/tests/.runs/rendered/relaunch/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "build/tests/.runs/rendered/relaunch/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "build/tests/.runs/rendered/relaunch/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "build/tests/.runs/rendered/relaunch/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "build/tests/.runs/rendered/relaunch/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "build/tests/.runs/rendered/relaunch/user/settings/settings.ini.backup"
+        },
+        {
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+          "path": "build/tests/.runs/rendered/user/.storage-lease"
+        },
+        {
+          "sha256": "18474E82D5736D8CCB508BF20025385D26A74944FA9B9BC93950618D31B9F28F",
+          "path": "build/tests/.runs/rendered/user/logs/Player.log"
+        },
+        {
+          "sha256": "24D89B879AA3773F259A6456E53967CB24FAAE41BD2595CCD1DF752068BBF6B3",
+          "path": "build/tests/.runs/rendered/user/Mods/Capacity/mod.json"
+        },
+        {
+          "sha256": "BC3581243309874CE775BB18C5ED29DA204BD3ED6764B5198E955FB0EAD435A4",
+          "path": "build/tests/.runs/rendered/user/Mods/Capacity/profiles.json"
+        },
+        {
+          "sha256": "002EEA659C4086D56C1496FE4B483D6B2FEDC0EF214D8B55237BD24EA1EA2794",
+          "path": "build/tests/.runs/rendered/user/Mods/Capacity/semantics.json"
+        },
+        {
+          "sha256": "94FE023EABEDE65357CC16B908CEF75F871F81D10E94D6C219747DE7EC06F5BF",
+          "path": "build/tests/.runs/rendered/user/settings/mod_profiles.json"
+        },
+        {
+          "sha256": "61E4E7186A305F4CE7113CF9E7F9C2654EE82C8C517DC60DD2971F88FBACABCF",
+          "path": "build/tests/.runs/rendered/user/settings/settings.ini"
+        },
+        {
+          "sha256": "590933EB693C8DF09AF43F0218C18CA5F7A768F9AA2A92966735A20BBEA4042E",
+          "path": "build/tests/.runs/rendered/user/settings/settings.ini.backup"
+        }
+      ],
+      "compaction_sha256": "937EDFEA9CEE4766DCD805A7FB1C927FBC09D091F9C1147848B8A161C703EDE4",
+      "archive_sha256": "9317908B3A4293E0DF6C8953AAC42AEF290EBF67B94D4B983BB34D3CBA1BE056",
+      "verified_source_entries": 1679,
+      "removed_files": 2222,
+      "removed_logical_bytes": 534038977
+    }
+  ],
+  "cleanup": {
+    "archive_verification": "Every retained source ZIP entry independently hashed before deleting runtime payloads.",
+    "owned_roots": 9,
+    "removed_files": 16463.0,
+    "removed_logical_bytes": 2536059789.0,
+    "scope": "Only exact task-owned roots; installed export-template junctions unlinked without traversing their targets; child evidence retained; no global scan."
+  },
+  "limits": "Controlled SAVE/ECON/spatial/modifier/link participants. No full slots/room restore/Session Restored, native actor identity, live equipment/effects/services/quest/loot/trade/bank/spatial-owner or M2 acceptance.",
+  "source_variant_proof": "Independent archive-to-current text comparison: headless persistence differs only by the one documented identity negative-case input substitution; all other bytes agree after line-ending normalization."
+}

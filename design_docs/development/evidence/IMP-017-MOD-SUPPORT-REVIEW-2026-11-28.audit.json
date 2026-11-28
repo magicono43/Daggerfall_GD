@@ -1,0 +1,113 @@
+{
+  "schema": "imp017-mod-support-review-v1",
+  "source_revision": "c4897dc1df96bb63fe09d1a14a0db479057709a4",
+  "started_est": "2026-11-28 02:38:28 UTC-05:00",
+  "completed_est": "2026-11-28 02:50:54 UTC-05:00",
+  "elapsed_seconds": 746,
+  "status": "review-complete; F1/F2 P2 open; no repairs",
+  "findings": [
+    {
+      "priority": 2,
+      "id": "F1",
+      "kind": "published category collides with internal semantic discriminator"
+    },
+    {
+      "priority": 2,
+      "id": "F2",
+      "kind": "preflight accepts malformed constructed record using semantic discriminator"
+    }
+  ],
+  "freshness": {
+    "differences": [
+      {
+        "path": "main_project/scripts/ui/creation_questionnaire_mask.gdshader.uid",
+        "status": "missing-generated-sidecar",
+        "prior_sha256": "E6B664073178D6CC194F4F5BDB7B00ED6DDE9C2B8408B277FD65D65C67A6F4C2"
+      }
+    ],
+    "original_reports_checked": 32,
+    "carried_forward_assertions": 17233,
+    "carried_forward_commands": 32,
+    "checked_inputs": 677,
+    "candidate_sha256": "132FAC7141B957D34B5D7283A9A7678C929E27FF755A102F9BE263DEC178D2B9",
+    "original_report_mismatches": 0
+  },
+  "runs": [
+    {
+      "root": "main_project/tests/.runs/verification-headless-447adfa25afb45348edde1562a8c5825",
+      "report_sha256": "17459D45F06F8BC4B982C6A2F4A3830726893D6E59B1C7C066B2845F1156B51C",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "primary_assertions": 138,
+      "reload_assertions": 36,
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "role": "final focused probe",
+      "compaction_sha256": "E5F08160ECE27025941B9FB89022700D16FED7E7A3F1BAE76E158E2E2B345749",
+      "source_archive_sha256": "F24212A1D1590E95A2AA8811CFEBCED823323A2D2B8CBBD93F11F925F901EC92",
+      "verified_source_entries": 1679,
+      "removed_files": 1717,
+      "removed_logical_bytes": 210571440
+    },
+    {
+      "root": "main_project/tests/.runs/verification-headless-1c79c6eea39d48d8904967b2c12af1f5",
+      "report_sha256": "FEAB10249A4C2C85C73A35DCD899DA8B6E59FDF7D2E5468D9939B9CF85094661",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "primary_assertions": 125,
+      "reload_assertions": 0,
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "role": "initial category probe; superseded by valid-dye/control confirmation",
+      "compaction_sha256": "E0C36B90C9EEDF3DC4595D24B7ABDAF4FA4F6473CCCD41F1B63893168B0BF92F",
+      "source_archive_sha256": "0E015C13BF754D485FEC25A3997BD08B3CBBF75ADBDD1134FA80D5F7183F375C",
+      "verified_source_entries": 1679,
+      "removed_files": 1717,
+      "removed_logical_bytes": 210572268
+    },
+    {
+      "root": "main_project/tests/.runs/verification-headless-ffb9e9eaf4414a07a695319934ae375e",
+      "report_sha256": "B89D71A38496D8FA89C9AEC696268F34326AF04D8A8144D1BF37BCCF5B8E79A3",
+      "engine": "4.7.2.stable.official.ed1daf0bf",
+      "status": "passed",
+      "primary_assertions": 125,
+      "reload_assertions": 0,
+      "source_guard": "Windows read handles sharing READ only held across child: source write opens denied",
+      "role": "final focused probe",
+      "compaction_sha256": "CA3036640F88CF53AD2AD714464C1BC6340B0190D2A2D8C5108B6FAB6A37DD57",
+      "source_archive_sha256": "5FECB1A0D1A820DE5E9F6323E8A3F2AA55A90C8520018A6B99690AF97E94753B",
+      "verified_source_entries": 1679,
+      "removed_files": 1717,
+      "removed_logical_bytes": 210573125
+    }
+  ],
+  "inputs": [
+    {
+      "path": "main_project/tests/.runs/imp017-mod-review-2026-11-28/probe.gd.txt",
+      "sha256": "0A6B51688BF5C5B66EA452A5F215B91622900C93F73334A9B88CC35A16DCA4D9"
+    },
+    {
+      "path": "main_project/tests/.runs/imp017-mod-review-2026-11-28/construction-data.gd.txt",
+      "sha256": "9951CFB0ED858BE5C07E38B7F52A10B48D7C78826BE95635D993732EDA309906"
+    },
+    {
+      "path": "main_project/tests/.runs/imp017-mod-review-2026-11-28/construction-outcome.gd.txt",
+      "sha256": "390B2B66A7F2219FEABCCC6B4378561B566B1C6A1B94B27A9BA44CA7527154A6"
+    },
+    {
+      "path": "main_project/tests/.runs/imp017-mod-review-2026-11-28/run-probe.ps1",
+      "sha256": "56B509CF21595EE6E8D38468DCCE726B21229776D4F50233FF28BACEFB411C21"
+    },
+    {
+      "path": "main_project/tests/.runs/imp017-mod-review-2026-11-28/run-construction-probe.ps1",
+      "sha256": "E2CEC548A1115C3611FB2554227A5A6156FD0932A8AB2C4BBE80F2845306D9BA"
+    },
+    {
+      "path": "main_project/tests/.runs/imp017-mod-review-2026-11-28/compact.ps1",
+      "sha256": "79EFC6B06D47C5ADFB5C1285740CEA359658380035B3F6650E9866D0F21B1549"
+    }
+  ],
+  "final_focused_assertions": 299,
+  "earlier_superseded_assertions": 125,
+  "fresh_evidence": "Real package publication and ITEM outcomes; real CORE load preflight. Controlled requester/SAVE/ECON/spatial/link composition; malformed candidate not published.",
+  "new_rendered_exports": "Not run: no frame/presentation/playback change; prior independent checkpoint evidence reused.",
+  "cleanup": "Three exact owned roots only; no full copied runtime retained. Archive entries independently verified; child evidence retained. No global scan."
+}

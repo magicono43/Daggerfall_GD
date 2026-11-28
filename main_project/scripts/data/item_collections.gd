@@ -102,5 +102,16 @@ static func state_reason(state: Variant, contract: Dictionary) -> String:
 		if not Paths.valid_id(field) or not state.bindings[field] is String: return "Stable owner binding required."
 	return ""
 
+## Shared by semantic grant admission and durable restore. These are per-unit
+## provider properties in microkg, not construction or monetary definitions.
+static func semantic_properties_reason(properties: Variant) -> String:
+	if not properties is Dictionary or properties.size() != 7: return "Complete semantic properties required."
+	for field in ["value","weight_microkg","condition","maximum_condition"]:
+		if not N.integer(properties.get(field),0,1000000000): return "Semantic property outside supported per-unit range."
+	if properties.condition > properties.maximum_condition: return "Semantic condition exceeds its maximum."
+	for field in ["material","style","dye"]:
+		if not properties.get(field) is String or (not properties[field].is_empty() and not Paths.valid_id(properties[field])): return "Semantic property requires an empty or stable key."
+	return ""
+
 static func ordinary_state() -> Dictionary:
 	return {"representation":"homogeneous-per-unit-v1","contents":{},"knowledge":{},"resources":{},"provenance":{},"bindings":{},"expiry":0,"equipped":false,"quest":false,"enchanted":false,"summoned":false}

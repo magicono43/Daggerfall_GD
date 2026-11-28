@@ -1,5 +1,18 @@
 # Verification run artifact cleanup
 
+## 2026-11-28 IMP-017 mod support repairs
+
+Compacted nine exact task-owned verification/export roots after all owned runners
+returned. Removed **16,463 files / 2,536,059,789 logical bytes** of reproducible
+runtime/build payloads. Source ZIP entries were independently hash-verified first;
+reports, fixtures, checkpoints, logs and reviewed captures remain at original
+child paths. Both owned export-template junctions were unlinked without traversing
+their installed targets. No full task-owned build remains. Non-elevated activity,
+absolute containment and no-reparse checks guarded deletion. Earlier/uncertain
+roots, installed tools and external data were protected; no global or allocated
+storage scan was repeated. See [repair evidence](evidence/IMP-017-MOD-SUPPORT-REPAIRS-2026-11-28.md)
+and its companion audit for exact roots, hashes and deletion manifests.
+
 ## 2026-11-28 IMP-017 increment 4
 
 Compacted 53 exact owned completed run roots;

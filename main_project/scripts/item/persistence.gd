@@ -216,7 +216,15 @@ func _record(r: Variant, p: Dictionary) -> Dictionary:
 	else:
 		var profile: Dictionary = authority._profile(r.profile)
 		if not profile.ok or r.get("definition") != profile.key: return failure("missing_definition","Required original definition identity is unavailable: "+r.profile)
-		if r.category != "semantic":
+		if r.category == "semantic":
+			# The category sentinel alone is not a representation contract. Match the
+			# actual semantic intake shape before omitting construction references.
+			if r.kind != r.stack_type or r.identity_category != "stack" or r.has("body") or r.has("visual"): return failure("invalid_record","Conflicting semantic kind/type/identity or construction appearance.")
+			if int(r.weight_nanokg)%1000 != 0: return failure("invalid_units","Semantic weight must retain its exact microkg intake boundary.")
+			var properties := {"value":r.value,"weight_microkg":int(r.weight_nanokg)/1000,"condition":r.condition,"maximum_condition":r.maximum_condition,"material":r.material,"style":r.style,"dye":r.dye}
+			var property_reason := State.semantic_properties_reason(properties)
+			if not property_reason.is_empty(): return failure("invalid_record",property_reason)
+		else:
 			var template: Dictionary = profile.profile
 			if not r.get("body") is String or r.body not in template.bodies or r.kind != template.type or not template.styles.has(r.category) or not template.styles[r.category].has(r.style) or r.dye not in template.dyes or not r.get("visual") is Dictionary: return failure("invalid_reference","Required body/style/visual definition is missing or incompatible.")
 			if r.identity_category != template.identity or r.stack_type != ("arrow" if r.kind == "ammo" else r.kind): return failure("invalid_reference","Required template identity/stack category differs.")
@@ -231,7 +239,7 @@ func _record(r: Variant, p: Dictionary) -> Dictionary:
 			var visual := {"provider":template.visual.provider,"archive":int(template.visual.archives[r.body]),"record":int(template.visual.record)+variant,"variant":variant,"dye_adapter":appearance.record.value.dye_adapters[r.dye]}
 			if not preload("res://scripts/data/actor_input_formats.gd").equal_input(r.visual,visual): return failure("invalid_reference","Visual projection differs from authoritative body/style/dye definitions.")
 		var policy: Dictionary = authority.definitions.query(State.DOMAIN,"policies",r.stack_type)
-		if not policy.ok: return failure("missing_provider","Required stack/state provider unavailable.")
+		if not policy.ok or policy.record.value.kind != "type": return failure("missing_provider","Required stack/state type provider unavailable.")
 		var reason := State.state_reason(r.state,policy.record.value)
 		if not reason.is_empty(): return failure("invalid_state",reason)
 	return {"ok":true}

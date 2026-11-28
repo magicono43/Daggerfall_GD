@@ -35,7 +35,10 @@
     "fresh process no RNG replay",
     "fresh process load index rebuild",
     "fresh process overweight storage retained",
-    "fresh process wagon remains unavailable"
+    "fresh process wagon remains unavailable",
+    "persistence semantic provider declared",
+    "fresh process custom semantic state retained",
+    "fresh process semantic intake not replayed"
   ],
   "headless": [
     "money provider declared early",
@@ -175,7 +178,28 @@
     "reject decimal 1e4",
     "preserve input decimal 1e4",
     "reject decimal 0",
-    "preserve input decimal 0"
+    "preserve input decimal 0",
+    "persistence semantic provider declared",
+    "custom semantic intake succeeds",
+    "custom semantic grant admitted",
+    "custom semantic state survives hydration",
+    "reject constructed record disguised as semantic",
+    "preserve input constructed record disguised as semantic",
+    "reject semantic kind",
+    "preserve input semantic kind",
+    "reject semantic identity",
+    "preserve input semantic identity",
+    "reject semantic appearance",
+    "preserve input semantic appearance",
+    "reject semantic property-range",
+    "preserve input semantic property-range",
+    "reject semantic weight-precision",
+    "preserve input semantic weight-precision",
+    "reject semantic property-key",
+    "preserve input semantic property-key",
+    "reject semantic policy-kind",
+    "preserve input semantic policy-kind",
+    "custom semantic hydration does not repeat intake"
   ],
   "fixture": "item-persistence-v1",
   "reload-rendered": [
@@ -218,7 +242,10 @@
     "restore diagnostic focused",
     "restore diagnostic uses owner query",
     "restore diagnostic focus retained",
-    "item-persistence frame available"
+    "item-persistence frame available",
+    "persistence semantic provider declared",
+    "fresh process custom semantic state retained",
+    "fresh process semantic intake not replayed"
   ],
   "schema": "item-persistence-inventory-v1",
   "rendered": [
@@ -363,6 +390,27 @@
     "restore diagnostic focused",
     "restore diagnostic uses owner query",
     "restore diagnostic focus retained",
-    "item-persistence frame available"
+    "item-persistence frame available",
+    "persistence semantic provider declared",
+    "custom semantic intake succeeds",
+    "custom semantic grant admitted",
+    "custom semantic state survives hydration",
+    "reject constructed record disguised as semantic",
+    "preserve input constructed record disguised as semantic",
+    "reject semantic kind",
+    "preserve input semantic kind",
+    "reject semantic identity",
+    "preserve input semantic identity",
+    "reject semantic appearance",
+    "preserve input semantic appearance",
+    "reject semantic property-range",
+    "preserve input semantic property-range",
+    "reject semantic weight-precision",
+    "preserve input semantic weight-precision",
+    "reject semantic property-key",
+    "preserve input semantic property-key",
+    "reject semantic policy-kind",
+    "preserve input semantic policy-kind",
+    "custom semantic hydration does not repeat intake"
   ]
 }

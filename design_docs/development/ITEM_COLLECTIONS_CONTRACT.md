@@ -122,6 +122,8 @@ from structural records. The provider must supply exactly value, weight_microkg,
 condition, maximum_condition, material, style and dye. Numeric properties are
 nonnegative integers up to 1e9, condition cannot exceed maximum, and weight is
 converted from millionths of a kilogram. Missing properties reject before grant.
+Semantic intake and persistence share `semantic_properties_reason`, so restored
+per-unit properties retain these same supported ranges and stable-key rules.
 The record retains `contents-runtime`, `capacity`, `tender`, `save` consumers
 pending; physical value is not a currency valuation or settlement contract.
 Construction recalculation/appearance/copy helpers reject

@@ -24,6 +24,18 @@ func check(id: String, expected: Variant, actual: Variant) -> void:
 
 class DurableParticipant extends Participant:
 	var economic_credits := 0
+	var semantic_intakes := 0
+	func bindings() -> Array:
+		var services: Array = super.bindings()
+		services[-1].item_contexts.append({"id":"semantic","custody":"controlled-money-owner","pool":["dfu-item-141"],"worn":false,"copy":false,"collections":{"provider":"controlled.persist-semantic-v1","types":["charged"]}})
+		return services
+	func collection_intake(v: Dictionary) -> Dictionary:
+		if v.context != "semantic": return super.collection_intake(v)
+		semantic_intakes += 1
+		return {"ok":true,"properties":{"value":7,"weight_microkg":250000,"condition":3,"maximum_condition":3,"material":"","style":"bottled","dye":"blue"}}
+	func collection_state(v: Dictionary) -> Dictionary:
+		if v.type != "charged": return super.collection_state(v)
+		return {"ok":v.record.state.bindings.is_empty(),"kind":"unsupported_binding"}
 	func item_capacity_context(v: Dictionary) -> Dictionary:
 		var result := super.item_capacity_context(v)
 		if v.binding.wagon == "physical-wagon": result.wagon.wagon = "physical-wagon"
@@ -54,9 +66,14 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	var controller: RefCounted = shell.controller
 	check("money provider declared early",true,controller.providers.declare_item_money_provider("controlled.money-v1",["intake-v1","quote-v1","valuation-v1","recovery-v1"]).ok)
 	check("duplicate money provider rejects",false,controller.providers.declare_item_money_provider("controlled.money-v1",["intake-v1"]).ok)
+	check("persistence semantic provider declared",true,controller.providers.declare_item_collection_semantics("controlled.persist-semantic-v1",["exact-per-unit-v1"]).ok)
 	var package := manifest("capacity.tender")
-	package.content = ["profiles.json"]
-	package.capabilities = ["data."+CT.VERSION]
+	package.content = ["profiles.json","semantics.json"]
+	package.capabilities = ["data."+CT.VERSION,"data.item-collections-v1"]
+	var semantics: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://content/items/collections.json")).entries[0].value.duplicate(true)
+	semantics.merge({"eligible":true,"cap":0,"contents":{"payload":"key"},"provider":"controlled.persist-semantic-v1","restrictions":[],"provenance":{"source":"controlled-persistence-semantic"}},true)
+	var semantic_entries: Array = [{"id":"charged","value":semantics},{"id":"template-dfu-item-131","value":{"schema":"item-collections-v1","kind":"template","type":"arrow","template":"dfu-item-131","eligible":true,"cap":0,"provenance":{"source":"controlled-persistence-policy"}}}]
+	write(controller.mods.root.path_join("Mods/Capacity/semantics.json"),JSON.stringify({"domain":"item.collections","path":"policies","operation":"add","entries":semantic_entries}))
 	var additions: Array = [publish_record("odd","denomination",{"unit":"gold","value":3,"nanokg":150000000}),publish_record("controlled-money","money",{"unit":"gold","order":["odd","gold"],"algorithm":"bounded-exact-search-v1","search_limit":100000,"gold_value":7}),publish_record("letter","letter",{"issuer":"wayrest","unit":"gold-face","provider":"controlled.money-v1","nanokg":100000000}),publish_record("sentinel-rate","rate",{"issuer":"wayrest","institution":"shop","region":"sentinel","face_unit":"gold-face","local_unit":"gold","provider":"controlled.money-v1","numerator":1,"denominator":1,"rounding":"exact-lots-v1"}),publish_record("betony-rate","rate",{"issuer":"wayrest","institution":"shop","region":"betony","face_unit":"gold-face","local_unit":"gold","provider":"controlled.money-v1","numerator":1,"denominator":2,"rounding":"exact-lots-v1"}),publish_record("fine","accounting",{"quantum_nanokg":100000,"display_places":4,"rounding":"nearest-even-v1"}),publish_record("physical-access","access",{"algorithm":"physical-reach-v1","distance_mm":5000,"interior":false,"metric":"euclidean-feet-to-exit-anchor-inclusive-v1"})]
 	write(controller.mods.root.path_join("Mods/Capacity/mod.json"),JSON.stringify(package))
 	additions.append(publish_record("fine-capacity","capacity",{"carried":"char-selected-v1","wagon_kg":2,"accounting":"fine"}))
@@ -104,7 +121,7 @@ func run(shell: Control, fixture: Dictionary) -> Dictionary:
 	core.complete_baseline(core.ticket(),{"ok":true,"services":controlled.bindings()})
 	check("real CORE money requester ready",true,core.snapshot().ready)
 	if not core.snapshot().ready: return terminal(fixture)
-	for id in ["carry","wagon","physical","merchant","stash","volume"]:
+	for id in ["carry","wagon","physical","merchant","stash","volume","semantic"]:
 		storage[id] = item_owner.collections.execute(controlled,operation("create",{"name":id},id)).collection.id
 	check("late money provider rejects",false,controller.providers.declare_item_money_provider("late.money-v1",["intake-v1"]).ok)
 	if fixture.mode.ends_with("_reload"):
@@ -197,6 +214,17 @@ func persistence_checks() -> void:
 	check("invalid capacity capture preserves ITEM",before_malformed_provider,item_owner._possessions)
 	controlled.modifiers = original_modifiers
 	volume_started = Time.get_ticks_usec()
+	var semantic_state := preload("res://scripts/data/item_collections.gd").ordinary_state()
+	semantic_state.contents = {"payload":"mod-reagent"}
+	semantic_state.resources = {"charges":4}
+	semantic_state.knowledge = {"identified":false}
+	semantic_state.provenance = {"source":"controlled-custom"}
+	var semantic_grant: Dictionary = item_owner.collections.execute(controlled,operation("intake",{"type":"charged","profile":"dfu-item-141","quantity":3,"state":semantic_state},"semantic"))
+	check("custom semantic intake succeeds",true,semantic_grant.ok)
+	if not semantic_grant.ok:
+		observations.semantic_grant_failure = semantic_grant
+		return
+	check("custom semantic grant admitted",true,move(semantic_grant.record,"semantic").ok)
 	var captured := snapshot_items()
 	observations.capture_500_usec = Time.get_ticks_usec()-volume_started
 	check("versioned settled capture succeeds",true,captured.ok)
@@ -246,6 +274,31 @@ func persistence_checks() -> void:
 	bad = saved.duplicate(true)
 	bad.possessions[0].material = "missing-material"
 	reject_payload("unresolved material reference",bad)
+	bad = saved.duplicate(true)
+	bad.possessions[0].category = "semantic"
+	bad.possessions[0].material = "missing-material"
+	bad.possessions[0].erase("visual")
+	bad.possessions[0].erase("body")
+	reject_payload("constructed record disguised as semantic",bad)
+	var semantic_index: int = saved.possessions.find(saved.possessions.filter(func(r: Dictionary): return r.stack_type == "charged")[0])
+	for variant in ["kind","identity","appearance","property-range","weight-precision","property-key","policy-kind"]:
+		bad = saved.duplicate(true)
+		var record: Dictionary = bad.possessions[semantic_index]
+		match variant:
+			"kind": record.kind = "ammo"
+			"identity":
+				record.id = exhausted_letter_id.duplicate(true)
+				record.identity_category = "item"
+			"appearance": record.visual = {}
+			"property-range": record.value = 1000000001
+			"weight-precision":
+				record.weight_nanokg += 1
+				record.weight_kg = float(record.weight_nanokg)/1000000000.0
+			"property-key": record.style = "invalid key"
+			"policy-kind":
+				record.kind = "template-dfu-item-131"
+				record.stack_type = record.kind
+		reject_payload("semantic "+variant,bad)
 	bad = saved.duplicate(true)
 	bad.schema = "item-state-v0"
 	reject_payload("unsupported version",bad)
@@ -340,6 +393,9 @@ func persistence_checks() -> void:
 	core.complete_readiness(core.ticket(),{"ok":true,"services":controlled.bindings()})
 	check("controlled coordinator admits restored participants",true,core.snapshot().ready)
 	check("same possession records after restore",saved.possessions,item_owner._possessions.values())
+	var semantic_expected: Dictionary = saved.possessions.filter(func(r: Dictionary): return r.stack_type == "charged")[0]
+	check("custom semantic state survives hydration",semantic_expected,live(semantic_expected.id).record)
+	check("custom semantic hydration does not repeat intake",1,controlled.semantic_intakes)
 	check("multiple references preserve single possession",4,saved.references.size())
 	check("references linked by controlled participants",true,links.calls >= 3)
 	check("same allocator high water after restore",saved.counters,item_owner.counters().identities)
@@ -444,6 +500,9 @@ func reload_checks(checkpoint_path: String) -> void:
 	core.complete_readiness(core.ticket(),{"ok":true,"services":controlled.bindings()})
 	check("fresh process current requester bound",true,core.snapshot().ready)
 	check("fresh process exact possessions",saved.possessions,item_owner._possessions.values())
+	var semantic_expected: Dictionary = saved.possessions.filter(func(r: Dictionary): return r.stack_type == "charged")[0]
+	check("fresh process custom semantic state retained",semantic_expected,live(semantic_expected.id).record)
+	check("fresh process semantic intake not replayed",0,controlled.semantic_intakes)
 	check("fresh process retired high water preserved",saved.counters,item_owner.counters().identities)
 	check("fresh process distinct stacks preserved",2,entries("stash").size())
 	check("fresh process vitals never refilled",original_actor.current,core.actors.projection(scope,"player").record.current)

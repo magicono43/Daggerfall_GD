@@ -55,7 +55,15 @@ explicit participant, and unavailable required owners fail readiness.
 CORE load preflight. It validates bounded plain typed data, v1 schema, exact locked
 DATA compatibility, canonical IDs/counters including retired receipt claims,
 uniqueness, custody, physical quantities, instrument representation and references
-without changing the source or outgoing store. No legacy migration is registered;
+without changing the source or outgoing store.
+
+Nonmonetary semantic records must match the semantic intake representation:
+matching kind/type, stack identity, no constructed body/visual projection, and
+the same bounded per-unit properties and exact microkg boundary used at intake.
+Their stack policy must resolve to a type contract before state validation.
+The `semantic` category string alone cannot waive construction-reference checks.
+
+No legacy migration is registered;
 unsupported versions and required definition/provider differences require an
 explicit future migration. No fallback item or money conversion exists.
 

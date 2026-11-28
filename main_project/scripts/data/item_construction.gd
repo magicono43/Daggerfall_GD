@@ -58,6 +58,7 @@ func validate_record(_id: String, v: Dictionary) -> String:
 		for dye in v.clothing_dyes:
 			if dye not in v.dyes: return "Missing clothing dye."
 		for id in v.categories:
+			if id == "semantic": return "Category 'semantic' is reserved for ITEM semantic intake."
 			var category: Variant = v.categories[id]
 			if not Paths.valid_id(id) or not category is Dictionary or category.size() != 2 or category.get("mode") not in ["leather","chain","material","neutral"] or category.get("dye") not in v.dyes: return "Unsupported category adapter."
 		for id in v.selector.categories:
@@ -77,6 +78,7 @@ func validate_record(_id: String, v: Dictionary) -> String:
 	for body in v.bodies:
 		if not N.integer(v.visual.archives.get(body),0,511): return "Required body archive missing."
 	for category in v.styles:
+		if category == "semantic": return "Category 'semantic' is reserved for ITEM semantic intake."
 		if (v.type == "weapon" and category != "weapon") or (v.type in ["ammo","clothing"] and category != "neutral") or (v.type == "armor" and category in ["weapon","neutral"]): return "Incompatible template/category mapping."
 		if not Paths.valid_id(category) or not v.styles[category] is Dictionary or v.styles[category].is_empty(): return "Compatible style mappings required."
 		for style in v.styles[category]:

@@ -112,6 +112,10 @@ one cannot alter definitions, an instance, another copy or retained decisions.
 | material | builtin.properties-v1 provider, value/weight/condition coefficients, dye, pending_consumers |
 | template | accepted base template key, type, identity category, compatible materials, bodies, dyes, default_dye, category→style→resource-variant maps, visual provider/record/body archives |
 
+Category key `semantic` is reserved for ITEM's semantic-intake representation;
+construction policy categories and template style maps must reject it before
+publication. Other supported added category keys retain their declared adapters.
+
 Supported types are weapon, armor, clothing and ordinary neutral ammo. Coefficients
 are integral 1..1,000,000. Base value and condition are nonnegative integers up
 to 1e9, subject also to the accepted base reader's narrower fields. Base kilograms

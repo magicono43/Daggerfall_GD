@@ -390,12 +390,8 @@ func _intake(owner: Object, request: Dictionary, auth: Dictionary) -> Dictionary
 	var supplied := _provider_result(owner.collection_intake(request.duplicate(true)))
 	if not supplied.ok: return supplied.duplicate(true)
 	var properties: Variant = supplied.get("properties")
-	if not properties is Dictionary or properties.size() != 7: return failure("unsupported_properties")
-	for field in ["value","weight_microkg","condition","maximum_condition"]:
-		if not N.integer(properties.get(field),0,1000000000): return failure("unsupported_properties")
-	if properties.condition > properties.maximum_condition: return failure("unsupported_properties")
-	for field in ["material","style","dye"]:
-		if not properties.get(field) is String or (not properties[field].is_empty() and not Policy.Paths.valid_id(properties[field])): return failure("unsupported_properties")
+	reason = Policy.semantic_properties_reason(properties)
+	if not reason.is_empty(): return failure("unsupported_properties",reason)
 	# Intake is a declared semantic provider grant, never inference from structural
 	# potion/book/gold records. No visuals/currency/effects are fabricated here.
 	var record := {"definition":definition.key,"profile":request.profile,"stack_type":request.type,"kind":request.type,"category":"semantic","material":properties.material,"style":properties.style,"dye":properties.dye,"condition":int(properties.condition),"maximum_condition":int(properties.maximum_condition),"value":int(properties.value),"weight_nanokg":int(properties.weight_microkg)*1000,"weight_kg":float(properties.weight_microkg)/1000000.0,"state":request.state.duplicate(true),"quantity":int(request.quantity),"identity_category":"stack","custody":{"owner":auth.custody,"context":request.context},"revision":1,"pending_consumers":["contents-runtime","capacity","tender","save"]}

@@ -126,7 +126,16 @@
     "template retry retains assigned possession",
     "template retry does not redraw",
     "item-construction-isolation frame available",
-    "rendered diagnostic composition"
+    "rendered diagnostic composition",
+    "reserved category blocks real MOD preparation",
+    "reserved category publishes no DATA",
+    "reserved category diagnosed",
+    "reserved template category contribution rejects",
+    "reserved template rejection preserves source",
+    "published custom category constructs",
+    "custom category recalculates",
+    "custom category appearance accepted",
+    "custom category copy accepted"
   ],
   "schema": "item-construction-inventory-v1",
   "fixture": "item-construction-v1",
@@ -255,6 +264,15 @@
     "explicit multi template pool resolves",
     "template draw retained",
     "template retry retains assigned possession",
-    "template retry does not redraw"
+    "template retry does not redraw",
+    "reserved category blocks real MOD preparation",
+    "reserved category publishes no DATA",
+    "reserved category diagnosed",
+    "reserved template category contribution rejects",
+    "reserved template rejection preserves source",
+    "published custom category constructs",
+    "custom category recalculates",
+    "custom category appearance accepted",
+    "custom category copy accepted"
   ]
 }
