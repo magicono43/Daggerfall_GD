@@ -1,5 +1,14 @@
 # ITEM construction and identity v1
 
+**Increment-3 extension, 2026-11-27:** The same CORE-created authority now owns
+capacity and typed monetary collaborators under the
+[capacity/tender contract](ITEM_CAPACITY_TENDER_CONTRACT.md). Construction retains
+the selected material result as exact `weight_nanokg` (microkg ×1,000), alongside
+the existing kg projection. Monetary definitions/grants use their own actual
+contracts; structural gold records and generic semantic copy do not mint funds.
+The historical construction-only and pending-capacity text below records the
+earlier increment scopes, not current controlled-provider qualification.
+
 **Increment-2 extension, 2026-11-27:** The [collections contract](ITEM_COLLECTIONS_CONTRACT.md)
 extends this accepted baseline with container identities, checked admission and
 collection operations. Ordinary construction now carries explicit per-unit state;

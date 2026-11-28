@@ -1,5 +1,15 @@
 # ITEM collections v1
 
+**Increment-3 extension, 2026-11-27:** Optional capacity/money requester bindings,
+whole-plan physical admission, explicit fitting transfer and typed monetary
+participation are defined in the [capacity/tender contract](ITEM_CAPACITY_TENDER_CONTRACT.md).
+The single possession store, existing whole-entry profile and identity retirement
+rules remain authoritative. New physical records retain exact `weight_nanokg`
+after construction/semantic microkg calculation; compatibility includes that
+physical boundary. Legacy pending generic gold/special-content providers are not
+promoted into currency. Historical increment-2-only pending-capacity statements
+below describe that earlier delivery. Native SAVE and live integrations remain open.
+
 IMP-017 increment 2 extends the CORE-composed ITEM construction authority.
 `core.items.collections` is its owned collaborator. The only possession store
 remains `construction_owner._possessions`; membership indexes hold references,

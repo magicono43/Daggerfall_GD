@@ -71,6 +71,12 @@ division corrects negative remainders to implement mathematical floor.
 | char.healing | floor(value/10)−5 | live Endurance; not complete recovery |
 | char.initial-health | 25+value | career HP-per-level, ordinary level 1 |
 
+IMP-017 increment 3 reads CHAR's coherent selected capacity projection in kg.
+Nonnegative capacity retains the actor hook's supported output domain; ITEM
+checks its own integer accounting conversion and cumulative bounds without
+clamping or rerunning a baseline formula. Real Strength reconciliation and a
+selected capacity replacement are qualified through that consumer boundary.
+
 Callbacks are pure/synchronous and receive no owners, RNG or session objects.
 The existing registry selects one provider in checked MOD order, locks it with
 DATA at actual menu entry, monitors runtime errors and rechecks CORE/owner context

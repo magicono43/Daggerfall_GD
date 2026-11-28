@@ -25,7 +25,7 @@ func retire() -> void:
 	_receipts.clear()
 	_busy = false
 func request_claimed(key: String) -> bool:
-	return _receipts.has(key)
+	return _receipts.has(key) or _authority.get_ref().money.request_claimed(key)
 func failure(kind: String, reason := "") -> Dictionary:
 	return {"ok":false,"kind":kind,"reason":reason}
 func _provider_result(value: Variant) -> Dictionary:
@@ -62,6 +62,13 @@ func _container(owner: Object, request: Dictionary, id: Variant) -> Dictionary:
 	var auth: Dictionary = _authority.get_ref().context(owner,request.merged({"context":c.context},true))
 	if not auth.ok: return auth
 	if not auth.value.has("collections") or auth.value.custody != c.owner: return failure("unauthorized")
+	if auth.value.has("capacity") and auth.value.capacity.kind == "wagon":
+		var capacity: RefCounted = _authority.get_ref().capacity
+		var spatial: Dictionary = capacity._context(owner,request.merged({"context":c.context},true),auth.value.capacity)
+		if not spatial.ok: return spatial
+		if not _authority.get_ref().context(owner,request.merged({"context":c.context},true)).ok: return failure("stale_session")
+		var accessed: Dictionary = capacity.access(auth.value.capacity,spatial)
+		if not accessed.ok: return accessed
 	return {"ok":true,"record":c.duplicate(true),"authorization":auth.value}
 func access(owner: Object, request: Dictionary, record: Dictionary) -> Dictionary:
 	var a: Dictionary = _authority.get_ref().context(owner,request)
@@ -74,6 +81,7 @@ func access(owner: Object, request: Dictionary, record: Dictionary) -> Dictionar
 	return {"ok":true}
 func _policy(record: Dictionary) -> Dictionary:
 	var owner: RefCounted = _authority.get_ref()
+	if record.has("money"): return owner.money.policy(record)
 	var cache_key: String = str(record.get("stack_type",""))+":"+str(record.get("profile",""))
 	if not _policies.has(cache_key):
 		var loaded: Dictionary = owner.definitions.query(Policy.DOMAIN,"policies",record.get("stack_type",""))
@@ -104,9 +112,10 @@ func _compatible(a: Dictionary, b: Dictionary) -> Dictionary:
 func compatibility_key(record: Dictionary, contract: Dictionary = {}) -> Dictionary:
 	# Explicit state key: excludes IDs, revisions, custody and wearer presentation.
 	var result := {}
-	for field in ["definition","profile","stack_type","kind","category","material","style","dye","condition","maximum_condition","value","weight_kg","state"]:
+	for field in ["definition","profile","stack_type","kind","category","material","style","dye","condition","maximum_condition","value","weight_kg","weight_nanokg","state"]:
 		result[field] = record.get(field)
 	result = result.duplicate(true)
+	if record.has("money"): result.money = record.money.duplicate(true)
 	if contract.get("state_rule") == "set-content-v1":
 		for field in contract.contents:
 			if contract.contents[field] == "key-set": result.state.contents[field].sort()
@@ -116,6 +125,7 @@ func _now(owner: Object) -> Dictionary:
 	if not N.integer(value,0,9007199254740991): return failure("provider_failure","Native game milliseconds required.")
 	return {"ok":true,"value":int(value)}
 func _state_check(owner: Object, request: Dictionary, record: Dictionary, action: String) -> Dictionary:
+	if record.has("money"): return _authority.get_ref().money.state_check(owner,request,record,action)
 	var p := _policy(record)
 	if not p.ok: return p
 	var clock := _now(owner)
@@ -212,7 +222,7 @@ func execute(owner: Object, request: Dictionary) -> Dictionary:
 	if not auth.value.has("collections"): return failure("unauthorized")
 	if not Policy.Paths.valid_id(request.get("request","")): return failure("invalid_request")
 	var key: String = str(owner.get_instance_id())+":"+request.context+":"+request.request
-	if authority._receipts.has(key) or authority._generation.has(key): return failure("request_conflict")
+	if authority._receipts.has(key) or authority._generation.has(key) or authority.money.request_claimed(key): return failure("request_conflict")
 	if _receipts.has(key):
 		return _receipts[key].outcome.duplicate(true) if _receipts[key].input == request else failure("request_conflict")
 	if _busy or not authority._begin(request): return failure("busy")
@@ -229,7 +239,7 @@ func _execute(owner: Object, request: Dictionary, auth: Dictionary) -> Dictionar
 	var allowed := ["session","context","request","action"]
 	match action:
 		"create": allowed += ["name"]
-		"insert","transfer": allowed += ["id","quantity","destination","mode","target"]
+		"insert","transfer","transfer_fitting": allowed += ["id","quantity","destination","mode","target"]
 		"split","consume": allowed += ["id","quantity"]
 		"batch": allowed += ["source","destination","batch_mode","mode"]
 		"intake": allowed += ["type","profile","state","quantity"]
@@ -239,6 +249,7 @@ func _execute(owner: Object, request: Dictionary, auth: Dictionary) -> Dictionar
 	if action == "create":
 		if not Policy.Paths.valid_id(request.get("name","")): return failure("invalid_request")
 		for c: Dictionary in _containers.values():
+			if auth.has("capacity") and c.context == request.context and c.owner == auth.custody: return failure("duplicate_capacity_storage")
 			if c.context == request.context and c.owner == auth.custody and c.name == request.name: return failure("duplicate_collection")
 		var allocation: Dictionary = authority._allocator.allocate("container")
 		if not allocation.ok: return allocation
@@ -249,6 +260,14 @@ func _execute(owner: Object, request: Dictionary, auth: Dictionary) -> Dictionar
 		return {"ok":true,"committed":true,"kind":"created","collection":c.duplicate(true)}
 	if action == "intake": return _intake(owner,request,auth)
 	if action == "batch": return _batch(owner,request)
+	if action == "transfer_fitting":
+		var fitted := _maximum_fitting(owner,request)
+		if not fitted.ok: return fitted
+		if fitted.quantity == 0: return failure("admission_rejected")
+		var result := _execute(owner,request.merged({"action":"transfer","quantity":fitted.quantity},true),auth)
+		if result.get("committed",false):
+			result.fitting = {"profile":"bounded_maximum_whole_v1","quantity":fitted.quantity,"requested":request.quantity}
+		return result
 	if not _valid_id(request.get("id")) or not N.integer(request.get("quantity"),1,LIMIT): return failure("invalid_quantity_or_identity")
 	var found: Dictionary = authority.inspect(request.session,request.id)
 	if not found.ok: return found
@@ -292,6 +311,71 @@ func _execute(owner: Object, request: Dictionary, auth: Dictionary) -> Dictionar
 		if not prepared.ok: return prepared
 	return _commit(owner,request,plan,categories,action)
 
+## Pure fitting query uses the exact same plan/admission interfaces. A bounded
+## descending search supports arbitrary declared admission predicates without
+## pretending they are monotonic. Exhaustion is explicit, never a false maximum.
+func maximum_fitting(owner: Object, request: Dictionary) -> Dictionary:
+	var authority: RefCounted = _authority.get_ref()
+	var auth: Dictionary = authority.context(owner,request)
+	if not auth.ok: return auth
+	if not auth.value.has("collections"): return failure("unauthorized")
+	if not authority._begin(request): return failure("busy")
+	return authority._end(_maximum_fitting(owner,request))
+func _maximum_fitting(owner: Object, request: Dictionary) -> Dictionary:
+	var authority: RefCounted = _authority.get_ref()
+	if not _valid_id(request.get("id")) or not N.integer(request.get("quantity"),1,LIMIT): return failure("invalid_quantity_or_identity")
+	var found: Dictionary = authority.inspect(request.session,request.id)
+	if not found.ok: return found
+	var record: Dictionary = found.record
+	var reference_only: bool = record.custody.get("container") == request.get("destination")
+	var access_result := access(owner,request,record)
+	if not access_result.ok: return access_result
+	if not record.custody.has("container"): return failure("missing_membership")
+	var checked := _state_check(owner,request,record,"reference" if reference_only else "transfer")
+	if not checked.ok: return checked
+	var destination := _container(owner,request,request.get("destination"))
+	if not destination.ok: return destination
+	var quantity: int = mini(request.quantity,record.quantity)
+	if request.get("mode") not in ["automatic","target","no_stack"] or (request.mode == "target" and not _valid_id(request.get("target"))): return failure("invalid_mode")
+	if reference_only:
+		if not authority.context(owner,request).ok: return failure("stale_session")
+		return {"ok":true,"quantity":quantity,"profile":"bounded_maximum_whole_v1"}
+	var revision: Variant = owner.collection_revision()
+	if not N.integer(revision,0,9007199254740991): return failure("provider_failure")
+	var capacity_bound := {}
+	if destination.authorization.has("capacity"):
+		var capacity: Dictionary = authority.capacity.projection(owner,request,request.destination)
+		if not capacity.ok: return capacity
+		capacity_bound = capacity
+		var weight: Dictionary = authority.capacity.unit_weight(record,capacity.accounting)
+		if not weight.ok: return weight
+		if weight.value > 0: quantity = mini(quantity,maxi(0,capacity.capacity-capacity.load)/int(weight.value))
+	var attempts := 0
+	while quantity > 0:
+		attempts += 1
+		if attempts > MAX_PLAN_ENTRIES: return failure("fitting_search_limit")
+		var plan := {}
+		var categories: Array = []
+		var trial: Dictionary = request.merged({"action":"transfer","quantity":quantity},true)
+		var prepared := _move_plan(owner,trial,record,destination.record,plan,categories)
+		if prepared.ok: prepared = _admit(owner,trial,plan)
+		if prepared.ok: prepared = authority.capacity.validate(owner,trial,plan)
+		if not authority.context(owner,request).ok: return failure("stale_session")
+		if prepared.ok:
+			var current_access := access(owner,request,record)
+			if not current_access.ok: return current_access
+			var current_state := _state_check(owner,request,record,"transfer")
+			if not current_state.ok: return current_state
+			if not authority.context(owner,request).ok: return failure("stale_session")
+			if owner.collection_revision() != revision: return failure("stale_admission")
+			if not capacity_bound.is_empty():
+				var current: Dictionary = authority.capacity.projection(owner,request,request.destination)
+				if current != capacity_bound: return failure("stale_capacity")
+			return {"ok":true,"quantity":quantity,"profile":"bounded_maximum_whole_v1"}
+		if prepared.get("kind") not in ["admission_rejected","cap_exceeded","unsupported_split","incompatible"]: return prepared
+		quantity -= 1
+	return {"ok":true,"quantity":0,"profile":"bounded_maximum_whole_v1"}
+
 func _intake(owner: Object, request: Dictionary, auth: Dictionary) -> Dictionary:
 	var authority: RefCounted = _authority.get_ref()
 	var revision: Variant = owner.collection_revision()
@@ -314,7 +398,7 @@ func _intake(owner: Object, request: Dictionary, auth: Dictionary) -> Dictionary
 		if not properties.get(field) is String or (not properties[field].is_empty() and not Policy.Paths.valid_id(properties[field])): return failure("unsupported_properties")
 	# Intake is a declared semantic provider grant, never inference from structural
 	# potion/book/gold records. No visuals/currency/effects are fabricated here.
-	var record := {"definition":definition.key,"profile":request.profile,"stack_type":request.type,"kind":request.type,"category":"semantic","material":properties.material,"style":properties.style,"dye":properties.dye,"condition":int(properties.condition),"maximum_condition":int(properties.maximum_condition),"value":int(properties.value),"weight_kg":float(properties.weight_microkg)/1000000.0,"state":request.state.duplicate(true),"quantity":int(request.quantity),"identity_category":"stack","custody":{"owner":auth.custody,"context":request.context},"revision":1,"pending_consumers":["contents-runtime","capacity","tender","save"]}
+	var record := {"definition":definition.key,"profile":request.profile,"stack_type":request.type,"kind":request.type,"category":"semantic","material":properties.material,"style":properties.style,"dye":properties.dye,"condition":int(properties.condition),"maximum_condition":int(properties.maximum_condition),"value":int(properties.value),"weight_nanokg":int(properties.weight_microkg)*1000,"weight_kg":float(properties.weight_microkg)/1000000.0,"state":request.state.duplicate(true),"quantity":int(request.quantity),"identity_category":"stack","custody":{"owner":auth.custody,"context":request.context},"revision":1,"pending_consumers":["contents-runtime","capacity","tender","save"]}
 	var checked := _state_check(owner,request,record,"intake")
 	if not checked.ok: return checked
 	if request.quantity > 1 and not checked.eligible: return failure("ineligible_quantity")
@@ -397,8 +481,10 @@ func _admit(owner: Object, request: Dictionary, plan: Dictionary) -> Dictionary:
 		if not result.ok: return result.duplicate(true)
 		if not authority.context(owner,request).ok: return failure("stale_session")
 	return {"ok":true}
-func _commit(owner: Object, request: Dictionary, plan: Dictionary, categories: Array, kind: String) -> Dictionary:
+func _commit(owner: Object, request: Dictionary, plan: Dictionary, categories: Array, kind: String, guard := Callable()) -> Dictionary:
 	var authority: RefCounted = _authority.get_ref()
+	var capacity_before: Dictionary = authority.capacity.validate(owner,request,plan)
+	if not capacity_before.ok: return capacity_before
 	var revision: Variant = owner.collection_revision()
 	if not N.integer(revision,0,9007199254740991): return failure("provider_failure")
 	var admitted := _admit(owner,request,plan)
@@ -413,6 +499,13 @@ func _commit(owner: Object, request: Dictionary, plan: Dictionary, categories: A
 			if not checked.ok: return checked
 	if not authority.context(owner,request).ok: return failure("stale_session")
 	if owner.collection_revision() != revision: return failure("stale_admission")
+	if guard.is_valid():
+		var guarded := _provider_result(guard.call())
+		if not guarded.ok: return guarded
+		if not authority.context(owner,request).ok: return failure("stale_session")
+	var capacity_after: Dictionary = authority.capacity.validate(owner,request,plan)
+	if not capacity_after.ok: return capacity_after
+	if capacity_after != capacity_before: return failure("stale_capacity")
 	var allocated: Dictionary = authority._allocator.allocate_many(categories)
 	if not allocated.ok: return allocated
 	var finalized := {}

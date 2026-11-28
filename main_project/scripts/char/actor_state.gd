@@ -425,6 +425,15 @@ func reconstruct(scope: String, ticket: Dictionary, input: Dictionary, sources: 
 		if record.breath.get("state") != "owner-pending" or not _number(record.breath.get("reserve"),0,derived.limits.breath) or not record.breath.get("policy") is Dictionary: return _end(fail("Unsupported breath/activity state; explicit migration required."))
 	return _publish(record,derived,sources)
 
+## Narrow selected capacity result; equipment/MAGIC source resolution remains CHAR-owned.
+func capacity_projection(scope: String, actor: String) -> Dictionary:
+	var view := vital_projection(scope,actor)
+	if not view.ok: return view
+	var entry: Dictionary = _actors[actor]
+	var capacity: Dictionary = entry.derived.formulas.capacity
+	if not Formula.integer(capacity.value,0,1000000000000000): return fail("Invalid selected capacity.")
+	return {"ok":true,"session":scope,"actor":actor,"revision":view.revision,"content":view.content,"kg":capacity.value,"formula":capacity.duplicate(true)}
+
 func projection(scope: String, actor: String) -> Dictionary:
 	var core: SessionLifecycle = _core.get_ref()
 	if core == null or core.snapshot().session != scope or not _actors.has(actor) or _actors[actor].record.session != scope: return fail("Unknown or retired actor.","stale")

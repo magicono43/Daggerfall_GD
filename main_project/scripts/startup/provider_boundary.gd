@@ -17,6 +17,7 @@ var variants: RefCounted
 var geography: RefCounted
 var creation_art: RefCounted
 var item_collection_semantics: RefCounted
+var item_capacity_tender: RefCounted
 var _baseline_setup: Dictionary = {}
 
 func _init() -> void:
@@ -92,7 +93,14 @@ func enable_item_construction() -> Dictionary:
 	var registered := register_content_adapter(candidate,"",[])
 	if not registered.ok: return registered
 	item_collection_semantics = preload("res://scripts/data/item_collections.gd").new()
-	return register_content_adapter(item_collection_semantics,"",[])
+	registered = register_content_adapter(item_collection_semantics,"",[])
+	if not registered.ok: return registered
+	item_capacity_tender = preload("res://scripts/data/item_capacity_tender.gd").new()
+	return register_content_adapter(item_capacity_tender,"",[])
+
+func declare_item_money_provider(id: String, rules: Array) -> Dictionary:
+	if item_capacity_tender == null or not definitions.registration_open(): return {"ok":false,"kind":"registration_closed"}
+	return item_capacity_tender.declare_provider(id,rules)
 
 func declare_item_collection_semantics(id: String, rules: Array) -> Dictionary:
 	if item_collection_semantics == null or not definitions.registration_open(): return {"ok":false,"kind":"registration_closed"}

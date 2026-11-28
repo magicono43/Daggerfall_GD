@@ -14,10 +14,14 @@ var _operation: Dictionary = {}
 var _scope := ""
 var _serial := 0
 var collections: RefCounted
+var capacity: RefCounted
+var money: RefCounted
 
 func _init(core: SessionLifecycle) -> void:
 	_core = weakref(core)
 	collections = preload("res://scripts/item/collections.gd").new(self)
+	capacity = preload("res://scripts/item/capacity.gd").new(self)
+	money = preload("res://scripts/item/money.gd").new(self)
 
 func service_binding() -> Dictionary:
 	return {"role":"item-construction","owner":"ITEM","lifetime":"session","required":true,"ready":true,"provider":self,"formula_hooks":Formula.HOOKS.duplicate(),"random_purposes":["loot"]}
@@ -25,6 +29,7 @@ func service_binding() -> Dictionary:
 func bind_services(scope: String, services: Array) -> Dictionary:
 	var pending := {}
 	var custody_claims := {}
+	var capacity_claims := {}
 	var own_service := false
 	for service: Dictionary in services:
 		if service.get("provider") == self: own_service = service == service_binding()
@@ -34,9 +39,17 @@ func bind_services(scope: String, services: Array) -> Dictionary:
 		if pending.has(owner.get_instance_id()): return fail("Duplicate requester binding.")
 		var contexts := {}
 		for raw: Variant in service.item_contexts:
-			if not raw is Dictionary or raw.size() not in [5,6] or not Data.Paths.valid_id(raw.get("id","")) or not Data.Paths.valid_id(raw.get("custody","")) or not Data.keys(raw.get("pool")) or typeof(raw.get("worn")) != TYPE_BOOL or typeof(raw.get("copy")) != TYPE_BOOL or contexts.has(raw.id): return fail("Complete unique context/custody/pool/worn/copy declaration required.")
-			if raw.size() == 6:
+			if not raw is Dictionary or raw.size() not in [5,6,7,8] or not Data.Paths.valid_id(raw.get("id","")) or not Data.Paths.valid_id(raw.get("custody","")) or not Data.keys(raw.get("pool")) or typeof(raw.get("worn")) != TYPE_BOOL or typeof(raw.get("copy")) != TYPE_BOOL or contexts.has(raw.id): return fail("Complete unique context/custody/pool/worn/copy declaration required.")
+			for field in raw:
+				if field not in ["id","custody","pool","worn","copy","collections","capacity","money"]: return fail("Unknown requester field.")
+			if raw.has("collections"):
 				if not raw.has("collections") or not collections.binding_valid(owner,raw.collections): return fail("Complete collection provider contract required.")
+			if raw.has("capacity") and (not raw.has("collections") or not capacity.binding_valid(owner,raw.capacity)): return fail("Complete capacity binding required.")
+			if raw.has("capacity"):
+				var storage_claim: String = raw.capacity.kind+":"+(raw.capacity.actor if raw.capacity.kind == "carried" else raw.capacity.wagon)
+				if capacity_claims.has(storage_claim): return fail("One authoritative storage per actor/wagon required.")
+				capacity_claims[storage_claim] = true
+			if raw.has("money") and (not raw.has("collections") or not money.binding_valid(owner,raw.money)): return fail("Complete money binding required.")
 			var claim: String = raw.custody+":"+raw.id
 			if custody_claims.has(claim): return fail("Conflicting initial custody authority.")
 			custody_claims[claim] = true
@@ -133,7 +146,7 @@ func _calculate(request: Dictionary, authorization: Dictionary) -> Dictionary:
 	var condition: Variant = request.get("condition",calculated.condition)
 	if not N.integer(condition,0,calculated.condition) or (request.has("condition") and not authorization.worn): return fail("Unauthorized/invalid worn condition.")
 	var appearance := {"provider":p.visual.provider,"archive":int(p.visual.archives[body]),"record":int(p.visual.record)+int(p.styles[category][style]),"variant":int(p.styles[category][style]),"dye_adapter":policy.dye_adapters[dye].duplicate(true)}
-	var record := {"definition":loaded.key,"profile":request.profile,"kind":p.type,"category":category,"material":request.get("material",""),"body":body,"style":style,"dye":dye,"quantity":int(quantity),"condition":int(condition),"maximum_condition":calculated.condition,"value":calculated.value,"weight_kg":float(calculated.weight)/1000000.0,"visual":appearance,"identity_category":p.identity,"pending_consumers":["combat","equipment","save"],"state":preload("res://scripts/data/item_collections.gd").ordinary_state(),"stack_type":"arrow" if p.type == "ammo" else p.type}
+	var record := {"definition":loaded.key,"profile":request.profile,"kind":p.type,"category":category,"material":request.get("material",""),"body":body,"style":style,"dye":dye,"quantity":int(quantity),"condition":int(condition),"maximum_condition":calculated.condition,"value":calculated.value,"weight_nanokg":int(calculated.weight)*1000,"weight_kg":float(calculated.weight)/1000000.0,"visual":appearance,"identity_category":p.identity,"pending_consumers":["combat","equipment","save"],"state":preload("res://scripts/data/item_collections.gd").ordinary_state(),"stack_type":"arrow" if p.type == "ammo" else p.type}
 	if quantity > 1:
 		var eligibility: Dictionary = collections._policy(record)
 		if not eligibility.ok: return eligibility
@@ -277,6 +290,8 @@ func retire_scope(scope: String) -> void:
 	_operation.clear()
 	_generation.clear()
 	collections.retire()
+	capacity.retire()
+	money.retire()
 	_allocator = IDs.new() # New native branch only; restore integration remains pending.
 
 func dispose() -> void:

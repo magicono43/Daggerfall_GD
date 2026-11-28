@@ -1,5 +1,34 @@
 # Verification run artifact cleanup
 
+## 2026-11-27 IMP-017 increment 3
+
+Compacted all **17 exact owned verification roots**, removing **29,138 copied/
+cache files / 3,633,886,479 logical bytes**. Verified **23,446 executed-source ZIP
+entries** and **627 retained evidence/input files**, with zero executed
+source/report mismatches and no unavailable superseded tool sources. No owned
+full build remains; original report/input/capture paths survive. Current inputs
+match the nine final reports except an explicitly proved comment-only unit-label
+correction; the audit records both identities and equal ordered executable lines.
+
+All owned commands returned before non-elevated activity, absolute containment
+and no-reparse checks. Unfamiliar/changed payloads were archived; reproducible
+payloads matched authoritative originals before deletion. External classic/
+reference data, installed tools, user work and older/uncertain roots were protected.
+Final metadata sample: **9,809,781,246 logical bytes / 122,467 files** (about
+**9.14 GiB**, not allocated/deduplicated bytes; before small final metadata writes).
+The >8-GiB trigger was reviewed: the largest roots are older unowned rendered
+runs, including `verification-rendered-4356bbc649e047858548df86c0329ba7`,
+`verification-rendered-bcceb5b1b1004383a1e4727e90c50d08` and
+`verification-rendered-5eae2bff7b4542d4ab82fa3702ebf952`. They remain protected;
+no whole-history source audit or blind older-root deletion was performed.
+
+See [execution evidence](evidence/IMP-017-increment-3-2026-11-27.md), the
+[compact audit](evidence/IMP-017-increment-3-2026-11-27.audit.json), and local
+`main_project/tests/.runs/imp017-increment3-2026-11-27/` journals. Nine final
+commands passed **1,526 selected assertions**; increment/parent acceptance,
+increment 4, combined final regressions/exports and real-owner/SAVE/M2 gates
+remain open.
+
 ## 2026-11-27 IMP-017 increment 2
 
 After all owned checks returned, 24 exact task-owned runtimes were compacted:

@@ -1,5 +1,14 @@
 # CHAR actor owner — IMP-016 increments 1–4
 
+IMP-017 increment 3 consumes `capacity_projection(session, actor)`, a narrow
+coherent snapshot of the selected `char.capacity` result in kg, actor/content/
+revision and formula provenance. It copies no retained actor history. The
+nonnegative formula result retains its existing supported output range up to
+1e15; ITEM independently checks quantum conversion/aggregation overflow. Vital
+pool bounds are not an accidental capacity clamp. Strength source reconciliation
+remains here; additional explicit ITEM capacity contributions cannot replay CHAR
+attributes. See [the capacity/tender contract](../../../design_docs/development/ITEM_CAPACITY_TENDER_CONTRACT.md).
+
 IMP-015 increment 1 separately composes the runtime-only [creation draft and
 navigation contract](CREATION.md). The stock New Game action opens that draft;
 the stock session provider still rejects actual fresh entry. Controlled creation

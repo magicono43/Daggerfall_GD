@@ -1,0 +1,99 @@
+{
+  "domain": "item.capacity-tender",
+  "path": "profiles",
+  "operation": "add",
+  "entries": [
+    {
+      "id": "baseline-accounting",
+      "value": {
+        "schema": "item-capacity-tender-v1",
+        "kind": "accounting",
+        "quantum_nanokg": 2500000,
+        "rounding": "nearest-even-v1",
+        "display_places": 4,
+        "provenance": {
+          "source": "ITEM-008-A01",
+          "license": "project-authored"
+        }
+      }
+    },
+    {
+      "id": "baseline-capacity",
+      "value": {
+        "schema": "item-capacity-tender-v1",
+        "kind": "capacity",
+        "carried": "char-selected-v1",
+        "wagon_kg": 750,
+        "accounting": "baseline-accounting",
+        "provenance": {
+          "source": "ITEM-008-A01; RULE-005-A01",
+          "license": "project-authored"
+        }
+      }
+    },
+    {
+      "id": "baseline-access",
+      "value": {
+        "schema": "item-capacity-tender-v1",
+        "kind": "access",
+        "algorithm": "owned-context-v1",
+        "distance_mm": 5000,
+        "interior": false,
+        "metric": "euclidean-feet-to-exit-anchor-inclusive-v1",
+        "provenance": {
+          "source": "ITEM-008-A01; inclusive equality selected engineering boundary",
+          "license": "project-authored"
+        }
+      }
+    },
+    {
+      "id": "gold",
+      "value": {
+        "schema": "item-capacity-tender-v1",
+        "kind": "denomination",
+        "unit": "gold",
+        "value": 1,
+        "nanokg": 2500000,
+        "provenance": {
+          "source": "ITEM-009-A01",
+          "license": "project-authored"
+        }
+      }
+    },
+    {
+      "id": "baseline-money",
+      "value": {
+        "schema": "item-capacity-tender-v1",
+        "kind": "money",
+        "unit": "gold",
+        "order": [
+          "gold"
+        ],
+        "algorithm": "bounded-exact-search-v1",
+        "search_limit": 100000,
+        "gold_value": 1,
+        "provenance": {
+          "source": "ITEM-009-A01; explicit bounded exact subset search",
+          "license": "project-authored"
+        }
+      }
+    },
+    {
+      "id": "weight-dfu-item-131",
+      "value": {
+        "exempt": true,
+        "provenance": {
+          "source": "reference_material/daggerfall-unity-1.1.1-cve-2025/Assets/Resources/ItemTemplates.txt",
+          "field": "hasNoEncumbrance",
+          "sha256": "33f4d2703447f4eb8eeabc7b103d8d946115cffaf6490be78578f97db35693a9",
+          "record": "131",
+          "license": "DFU MIT data; source notice retained in repository"
+        },
+        "schema": "item-capacity-tender-v1",
+        "profile": "dfu-item-131",
+        "nanokg": null,
+        "kind": "weight"
+      }
+    }
+  ]
+}
