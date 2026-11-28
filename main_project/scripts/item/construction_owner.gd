@@ -1,5 +1,5 @@
 extends RefCounted
-## ITEM authority: construction and owned collection collaborator. No native restore.
+## ITEM authority: possessions, collection collaborators and versioned SAVE participant.
 const Data = preload("res://scripts/data/item_construction.gd")
 const Formula = preload("res://scripts/rule/item_formulas.gd")
 const IDs = preload("res://scripts/item/identity_allocator.gd")
@@ -16,12 +16,21 @@ var _serial := 0
 var collections: RefCounted
 var capacity: RefCounted
 var money: RefCounted
+var persistence: RefCounted
 
 func _init(core: SessionLifecycle) -> void:
 	_core = weakref(core)
 	collections = preload("res://scripts/item/collections.gd").new(self)
 	capacity = preload("res://scripts/item/capacity.gd").new(self)
 	money = preload("res://scripts/item/money.gd").new(self)
+	persistence = preload("res://scripts/item/persistence.gd").new(self)
+
+## Durable requester identity comes from CORE-validated exclusive custody claims.
+## Runtime Objects authorize a call, but never identify a retained operation.
+func operation_key(owner: Object, request: Dictionary) -> String:
+	var binding: Dictionary = _contexts.get(owner.get_instance_id(),{})
+	var declared: Dictionary = binding.get("contexts",{}).get(request.get("context"),{})
+	return str(declared.get("custody",""))+":"+str(request.get("context",""))+":"+str(request.get("request",""))
 
 func service_binding() -> Dictionary:
 	return {"role":"item-construction","owner":"ITEM","lifetime":"session","required":true,"ready":true,"provider":self,"formula_hooks":Formula.HOOKS.duplicate(),"random_purposes":["loot"]}
@@ -163,7 +172,7 @@ func construct(owner: Object, request: Dictionary) -> Dictionary:
 	var auth := context(owner,request)
 	if not auth.ok: return auth
 	if not Data.Paths.valid_id(request.get("request","")): return fail("Stable construction request required.")
-	var key: String = str(owner.get_instance_id())+":"+request.context+":"+request.request
+	var key: String = operation_key(owner,request)
 	if collections.request_claimed(key): return fail("Conflicting collection operation identity.","request_conflict")
 	if _receipts.has(key):
 		if _receipts[key].input != request: return fail("Request identity reused with changed inputs.","request_conflict")
@@ -223,7 +232,7 @@ func copy_possession(owner: Object, request: Dictionary, id: Dictionary) -> Dict
 	var auth := context(owner,request)
 	if not auth.ok: return auth
 	if not auth.value.copy or not Data.Paths.valid_id(request.get("request","")): return fail("Copy authorization and request required.","unauthorized")
-	var key: String = str(owner.get_instance_id())+":"+request.context+":"+request.request
+	var key: String = operation_key(owner,request)
 	var input := request.duplicate(true).merged({"source":id.duplicate(true)})
 	if collections.request_claimed(key): return fail("Conflicting collection operation identity.","request_conflict")
 	if _receipts.has(key):
@@ -292,7 +301,7 @@ func retire_scope(scope: String) -> void:
 	collections.retire()
 	capacity.retire()
 	money.retire()
-	_allocator = IDs.new() # New native branch only; restore integration remains pending.
+	_allocator = IDs.new() # Empty replacement scope; prepared hydration restores saved high water.
 
 func dispose() -> void:
 	retire_scope(_scope)
@@ -306,14 +315,14 @@ var _generation: Dictionary = {}
 func generation_projection(owner: Object, request: Dictionary) -> Dictionary:
 	var auth := context(owner,request)
 	if not auth.ok: return auth
-	var key: String = str(owner.get_instance_id())+":"+request.context+":"+str(request.get("request",""))
+	var key: String = operation_key(owner,request)
 	return {"ok":true,"generation":_generation.get(key,{}).duplicate(true)}
 
 func generate(owner: Object, request: Dictionary) -> Dictionary:
 	var auth := context(owner,request)
 	if not auth.ok: return auth
 	if request.size() != 5 or not Data.Paths.valid_id(request.get("request","")) or not N.integer(request.get("level"),-1000000,1000000) or not request.get("body") is String: return fail("Explicit bounded level/body/context/request required.")
-	var key: String = str(owner.get_instance_id())+":"+request.context+":"+request.request
+	var key: String = operation_key(owner,request)
 	if collections.request_claimed(key): return fail("Conflicting collection operation identity.","request_conflict")
 	if _generation.has(key) and _generation[key].input != request: return fail("Conflicting generation request.","request_conflict")
 	if not _begin(request): return fail("Operation busy.","busy")

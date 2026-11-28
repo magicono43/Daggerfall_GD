@@ -1,0 +1,3075 @@
+{
+  "schema": "imp017-increment4-audit-v1",
+  "status": "implemented-and-final-checkpoint-verified; user acceptance open",
+  "source_revision": "c2e60dfe8033aceec64dc82fe66c0b5b21c442cd",
+  "candidate": {
+    "path": "main_project\\tests\\.runs\\imp017-increment4-2026-11-27\\final-candidate.json",
+    "sha256": "132fac7141b957d34b5d7283a9a7678c929e27ff755a102f9be263dec178d2b9",
+    "current_input_differences": [],
+    "render_only_source_equivalence": {
+      "previous": "final-candidate-before-backdrop.json",
+      "scope": "Only restore_diagnostic adds an opaque ColorRect; headless path and non-persistence fixtures do not execute this function. Final debug/release exports and an additional independent rendered persistence command verify the new helper."
+    },
+    "wagon_validation_correction": {
+      "scope": "Only ITEM persistence source-context validation and its own fixture/inventory changed. Non-persistence fixtures do not invoke this participant. Final exports and supplemental independent headless/rendered persistence commands qualify this correction.",
+      "previous": "final-candidate-before-wagon-validation.json"
+    }
+  },
+  "native_storage_sha256": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+  "native_media_sha256": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2",
+  "commands": [
+    {
+      "index": 0,
+      "label": "headless item-persistence final corrections",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "kind": "verification",
+        "arguments": [
+          "-Suite",
+          "item-persistence",
+          "-Fixture",
+          "item-persistence-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "suite": "item-persistence",
+        "script": "main_project/tools/verify_headless.ps1",
+        "fixture": "item-persistence-v1"
+      },
+      "started_utc": "2026-11-28T05:04:59.3399082Z",
+      "ended_utc": "2026-11-28T05:07:29.7620763Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-b9ee40fbfbd64f31b1418b72ef45b685\\report.json",
+          "sha256": "8da1a647734f9bacbd8eebb93d50ed1248feac1918b931e1ddbeac3fd3c8a10f",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "item-persistence",
+              "primary": 138,
+              "reload": 36,
+              "status": "passed"
+            }
+          ],
+          "performance": {
+            "capture_500_usec": 738085,
+            "complete_preparation_usec": 16759011,
+            "hydration_link_rebuild_usec": 96721,
+            "invalid_publication_usec": 20806825,
+            "preflight_usec": 508060,
+            "query_500_entries_100_usec": 21836,
+            "tender_prepare_full_composition_20_usec": 25963,
+            "transfer_500_entries_20_usec": 1619260,
+            "volume_construction_transfer_usec": 14360548
+          }
+        }
+      ],
+      "assertions": 174
+    },
+    {
+      "index": 1,
+      "label": "rendered item-persistence final corrections",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "kind": "verification",
+        "arguments": [
+          "-Suite",
+          "item-persistence",
+          "-Fixture",
+          "item-persistence-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "suite": "item-persistence",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "fixture": "item-persistence-v1"
+      },
+      "started_utc": "2026-11-28T05:07:29.8608170Z",
+      "ended_utc": "2026-11-28T05:10:07.6273504Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-cf51092b14e04863a25cd4f51a418fbf\\report.json",
+          "sha256": "2ca451ce45d944af7cd83be508b5375629eb4f3304fa92921a7270fd2c2d8f6d",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "item-persistence",
+              "primary": 142,
+              "reload": 40,
+              "status": "passed"
+            }
+          ],
+          "performance": {
+            "capture_500_usec": 731851,
+            "complete_preparation_usec": 16959270,
+            "hydration_link_rebuild_usec": 96030,
+            "invalid_publication_usec": 20576038,
+            "preflight_usec": 503453,
+            "query_500_entries_100_usec": 22006,
+            "tender_prepare_full_composition_20_usec": 26284,
+            "transfer_500_entries_20_usec": 1632737,
+            "volume_construction_transfer_usec": 14443525
+          }
+        }
+      ],
+      "assertions": 182
+    },
+    {
+      "index": 2,
+      "label": "headless startup",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "m1-v1",
+        "arguments": [
+          "-Suite",
+          "startup",
+          "-Fixture",
+          "m1-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "startup"
+      },
+      "started_utc": "2026-11-28T03:56:49.245593Z",
+      "ended_utc": "2026-11-28T03:57:18.8586111Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-f090e5925e0848bf91a0994de285658d\\report.json",
+          "sha256": "72a41f0f0ee953147410bbea9150d7f220bd1396d23e45478d9f1112c9cd584d",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "startup",
+              "primary": 84,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 84
+    },
+    {
+      "index": 3,
+      "label": "rendered startup",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "m1-v1",
+        "arguments": [
+          "-Suite",
+          "startup",
+          "-Fixture",
+          "m1-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "startup"
+      },
+      "started_utc": "2026-11-28T03:57:18.9076505Z",
+      "ended_utc": "2026-11-28T03:58:08.6752691Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-4531a0e26d704aefae7672903c910e2a\\report.json",
+          "sha256": "3ff63040a3613622fac5ff39216b684d004f5fac3acd35f99f07f1b520d84ee0",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "startup",
+              "primary": 92,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 92
+    },
+    {
+      "index": 4,
+      "label": "headless session",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "m1-v1",
+        "arguments": [
+          "-Suite",
+          "session",
+          "-Fixture",
+          "m1-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "session"
+      },
+      "started_utc": "2026-11-28T03:58:08.7061698Z",
+      "ended_utc": "2026-11-28T03:58:37.0572098Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-066a8353263f488baaac7e34dbe823ab\\report.json",
+          "sha256": "22cc591537bcd18afc4e7b916b1d38368903be2290f16bea3d9a9a1482d209a4",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "session",
+              "primary": 263,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 263
+    },
+    {
+      "index": 5,
+      "label": "rendered session",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "m1-v1",
+        "arguments": [
+          "-Suite",
+          "session",
+          "-Fixture",
+          "m1-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "session"
+      },
+      "started_utc": "2026-11-28T03:58:37.0916653Z",
+      "ended_utc": "2026-11-28T03:59:10.8908178Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-c2793a11f3134ec59d4dff7e63f29714\\report.json",
+          "sha256": "a7366dddcfffddfb9a9ffa66112ad373c51e03416b817b4aed0e1b372a465394",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "session",
+              "primary": 265,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 265
+    },
+    {
+      "index": 6,
+      "label": "headless m1-composition",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "m1-composition-v1",
+        "arguments": [
+          "-Suite",
+          "m1-composition",
+          "-Fixture",
+          "m1-composition-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "m1-composition"
+      },
+      "started_utc": "2026-11-28T03:59:10.9209793Z",
+      "ended_utc": "2026-11-28T04:01:14.3279226Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-2ec15fb7553e48c39c075fc0dbfd9ea4\\report.json",
+          "sha256": "482508b4d6bdd912196850c93da7f160c3d5b8a9dc151fdb9403827e4a97f59e",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "m1-composition",
+              "primary": 33,
+              "reload": 12,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 45
+    },
+    {
+      "index": 7,
+      "label": "rendered m1-composition",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "m1-composition-v1",
+        "arguments": [
+          "-Suite",
+          "m1-composition",
+          "-Fixture",
+          "m1-composition-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "m1-composition"
+      },
+      "started_utc": "2026-11-28T04:01:14.379083Z",
+      "ended_utc": "2026-11-28T04:03:16.3803443Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-03aa1857546c49b9909847221702e778\\report.json",
+          "sha256": "48794899ef8968ef0a6232c0524ec0a55a09d1ee14d72ac9eccd3e9603bb8e84",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "m1-composition",
+              "primary": 34,
+              "reload": 13,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 47
+    },
+    {
+      "index": 8,
+      "label": "headless actor-state",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "actor-state-v1",
+        "arguments": [
+          "-Suite",
+          "actor-state",
+          "-Fixture",
+          "actor-state-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "actor-state"
+      },
+      "started_utc": "2026-11-28T04:03:16.4081601Z",
+      "ended_utc": "2026-11-28T04:06:20.9722312Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-04facab000c54816ba3a33f8e6137108\\report.json",
+          "sha256": "278c861cb81b7ecca5ccf58e81f18b3d7f6404c6d2f2ef7ef8bcb4c430361213",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "actor-state",
+              "primary": 740,
+              "reload": 527,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 1267
+    },
+    {
+      "index": 9,
+      "label": "rendered actor-state",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "actor-state-v1",
+        "arguments": [
+          "-Suite",
+          "actor-state",
+          "-Fixture",
+          "actor-state-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "actor-state"
+      },
+      "started_utc": "2026-11-28T04:06:21.0010927Z",
+      "ended_utc": "2026-11-28T04:09:25.9963637Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-eb7f31390b37473da4434dcd4756c21c\\report.json",
+          "sha256": "4c80b04179db48af3615dd754d9150ba83bf3f3cb81c522800810ff99ac17217",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "actor-state",
+              "primary": 759,
+              "reload": 533,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 1292
+    },
+    {
+      "index": 10,
+      "label": "headless formula",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "formula-v1",
+        "arguments": [
+          "-Suite",
+          "formula",
+          "-Fixture",
+          "formula-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "formula"
+      },
+      "started_utc": "2026-11-28T04:09:26.0240265Z",
+      "ended_utc": "2026-11-28T04:09:53.4702341Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-17b8e9710cb74f95b29d5476ecf43984\\report.json",
+          "sha256": "2b33af421692c143617bf6dbd1d9fabd9dad42fe7135a564f8db9a812c62dcc4",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "formula",
+              "primary": 82,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 82
+    },
+    {
+      "index": 11,
+      "label": "rendered formula",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "formula-v1",
+        "arguments": [
+          "-Suite",
+          "formula",
+          "-Fixture",
+          "formula-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "formula"
+      },
+      "started_utc": "2026-11-28T04:09:53.5174148Z",
+      "ended_utc": "2026-11-28T04:10:26.2932987Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-25fb15ea79cb439781fb84e8523676d8\\report.json",
+          "sha256": "50774dc27d08bea2a1b01ff5fc3608880b833c64b0b828c038118b0a6d3ddeff",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "formula",
+              "primary": 84,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 84
+    },
+    {
+      "index": 12,
+      "label": "headless ground-movement",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "ground-movement-v1",
+        "arguments": [
+          "-Suite",
+          "ground-movement",
+          "-Fixture",
+          "ground-movement-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "ground-movement"
+      },
+      "started_utc": "2026-11-28T04:10:26.3189476Z",
+      "ended_utc": "2026-11-28T04:13:11.7471026Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-77e3b0ce17aa44589691ef224a609053\\report.json",
+          "sha256": "981b9e654507e7381a585a826b826cf0191dd5bb1550ea3e5405ebea7c34eb11",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "ground-movement",
+              "primary": 1197,
+              "reload": 14,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 1211
+    },
+    {
+      "index": 13,
+      "label": "rendered ground-movement",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "ground-movement-v1",
+        "arguments": [
+          "-Suite",
+          "ground-movement",
+          "-Fixture",
+          "ground-movement-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "ground-movement"
+      },
+      "started_utc": "2026-11-28T04:13:11.772998Z",
+      "ended_utc": "2026-11-28T04:16:18.4035328Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-73c62f036ed04857b06884904d46dad5\\report.json",
+          "sha256": "8a746f3a0c73b72016eeb76c923b52f8e431f34028a080b343e1dab506cc5271",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "ground-movement",
+              "primary": 1198,
+              "reload": 14,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 1212
+    },
+    {
+      "index": 14,
+      "label": "headless creation-draft",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "creation-draft-v1",
+        "arguments": [
+          "-Suite",
+          "creation-draft",
+          "-Fixture",
+          "creation-draft-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "creation-draft"
+      },
+      "started_utc": "2026-11-28T04:16:18.4368875Z",
+      "ended_utc": "2026-11-28T04:18:55.9223927Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-d62c5797d957493dae727de668584268\\report.json",
+          "sha256": "be4172dd3307ef71c905b0699daa4835917e513cb7981f9f8221121581503a78",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "creation-draft",
+              "primary": 3982,
+              "reload": 8,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 3990
+    },
+    {
+      "index": 15,
+      "label": "rendered creation-draft",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "creation-draft-v1",
+        "arguments": [
+          "-Suite",
+          "creation-draft",
+          "-Fixture",
+          "creation-draft-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "creation-draft"
+      },
+      "started_utc": "2026-11-28T04:18:55.952221Z",
+      "ended_utc": "2026-11-28T04:21:46.1659904Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-4aeb85bb5ac54eb7ab34644b716f2182\\report.json",
+          "sha256": "56c3c55def8876dbe2319bbffc1d3f2bc913f7bbf0f8629c0587af6d6a9097e8",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "creation-draft",
+              "primary": 4020,
+              "reload": 8,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 4028
+    },
+    {
+      "index": 16,
+      "label": "headless media",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "media-v1",
+        "arguments": [
+          "-Suite",
+          "media",
+          "-Fixture",
+          "media-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "media"
+      },
+      "started_utc": "2026-11-28T04:21:46.2024269Z",
+      "ended_utc": "2026-11-28T04:22:15.2793958Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-f135906a8d6948a7837dafb31e9d4572\\report.json",
+          "sha256": "87bae682b07293c7301bbe1c9ed8c7efddc1477cf898be97c7d75e6978f96629",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "media",
+              "primary": 119,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 119
+    },
+    {
+      "index": 17,
+      "label": "rendered media",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "media-v1",
+        "arguments": [
+          "-Suite",
+          "media",
+          "-Fixture",
+          "media-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "media"
+      },
+      "started_utc": "2026-11-28T04:22:15.3087691Z",
+      "ended_utc": "2026-11-28T04:22:50.0138182Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-cf68ffeee2ba48a19eabc7ccf0445bd3\\report.json",
+          "sha256": "d0cc08384dd378f94b00e6763d2763fbc16e314262f43ab47b11442661e80dab",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "media",
+              "primary": 136,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 136
+    },
+    {
+      "index": 18,
+      "label": "headless replacements",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "replacements-v1",
+        "arguments": [
+          "-Suite",
+          "replacements",
+          "-Fixture",
+          "replacements-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "replacements"
+      },
+      "started_utc": "2026-11-28T04:22:50.0540755Z",
+      "ended_utc": "2026-11-28T04:23:24.3376895Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-a4f1e92a5f274e82b77c69fe60be4936\\report.json",
+          "sha256": "d1e07d08c485bca5dbc24df23f05537daa8e6da7c127bb481efd41ef05997aa7",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "replacements",
+              "primary": 168,
+              "reload": 10,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 178
+    },
+    {
+      "index": 19,
+      "label": "rendered replacements",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "replacements-v1",
+        "arguments": [
+          "-Suite",
+          "replacements",
+          "-Fixture",
+          "replacements-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "replacements"
+      },
+      "started_utc": "2026-11-28T04:23:24.3645713Z",
+      "ended_utc": "2026-11-28T04:24:20.0721466Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-3288f392dbd64146bb86c9f7ebc8ccdd\\report.json",
+          "sha256": "2329bb7c95305ae15ed18f8b213f7396da9480a0c11e4d3759e52c4477d5057d",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "replacements",
+              "primary": 173,
+              "reload": 10,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 183
+    },
+    {
+      "index": 20,
+      "label": "headless publication",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "publication-v1",
+        "arguments": [
+          "-Suite",
+          "publication",
+          "-Fixture",
+          "publication-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "publication"
+      },
+      "started_utc": "2026-11-28T04:24:20.1000521Z",
+      "ended_utc": "2026-11-28T04:24:54.0103017Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-e47958bfaac94633ba655dea520db6b5\\report.json",
+          "sha256": "cb15a33617127517aa5297b80503198feb959a8687fc3b1957e5575b4cd914c4",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "publication",
+              "primary": 111,
+              "reload": 8,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 119
+    },
+    {
+      "index": 21,
+      "label": "rendered publication",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "publication-v1",
+        "arguments": [
+          "-Suite",
+          "publication",
+          "-Fixture",
+          "publication-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "publication"
+      },
+      "started_utc": "2026-11-28T04:24:54.0409217Z",
+      "ended_utc": "2026-11-28T04:25:45.6879421Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-69156e53ad724048a99f719edfd704b6\\report.json",
+          "sha256": "9c4986b033df024462aaebd96c189e6acfdc6eb1b53e7f912b015899137e0245",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "publication",
+              "primary": 117,
+              "reload": 8,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 125
+    },
+    {
+      "index": 22,
+      "label": "headless item-spell-inputs",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "item-spell-inputs-v1",
+        "arguments": [
+          "-Suite",
+          "item-spell-inputs",
+          "-Fixture",
+          "item-spell-inputs-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "item-spell-inputs"
+      },
+      "started_utc": "2026-11-28T04:25:45.715546Z",
+      "ended_utc": "2026-11-28T04:26:39.0747601Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-e3a13174c05e40cfaa1c441f6132ab59\\report.json",
+          "sha256": "2dbd101aa5170a474667d0622462513a66c30cfa869db535164fa80042cb79f2",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "item-spell-inputs",
+              "primary": 160,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 160
+    },
+    {
+      "index": 23,
+      "label": "rendered item-spell-inputs",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "item-spell-inputs-v1",
+        "arguments": [
+          "-Suite",
+          "item-spell-inputs",
+          "-Fixture",
+          "item-spell-inputs-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "item-spell-inputs"
+      },
+      "started_utc": "2026-11-28T04:26:39.1332776Z",
+      "ended_utc": "2026-11-28T04:27:47.7607208Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-8f8ff8a7cf674078a18c7b673493b8f0\\report.json",
+          "sha256": "da86cbd5787413d7dcea5bc5ecaedf0eca34fbba3e52c95a075ad9190c5ac24a",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "item-spell-inputs",
+              "primary": 162,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 162
+    },
+    {
+      "index": 24,
+      "label": "headless item-construction",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "item-construction-v1",
+        "arguments": [
+          "-Suite",
+          "item-construction",
+          "-Fixture",
+          "item-construction-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "item-construction"
+      },
+      "started_utc": "2026-11-28T04:27:47.7880865Z",
+      "ended_utc": "2026-11-28T04:29:31.807172Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-9af1051f2ce44c46937ab8a83386452d\\report.json",
+          "sha256": "2aa44f032bd20b9a5e4287e9f2aa1faf39679bf5da2a490dce61f26d00224803",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "item-construction",
+              "primary": 125,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 125
+    },
+    {
+      "index": 25,
+      "label": "rendered item-construction",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "item-construction-v1",
+        "arguments": [
+          "-Suite",
+          "item-construction",
+          "-Fixture",
+          "item-construction-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "item-construction"
+      },
+      "started_utc": "2026-11-28T04:29:31.8431504Z",
+      "ended_utc": "2026-11-28T04:31:22.869009Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-2491461179cb4dec9a19df89c7525c37\\report.json",
+          "sha256": "46c18394e5f6bc4e1e016d56fd1c552697840f15d7178d7cdfe2d206a71d87a8",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "item-construction",
+              "primary": 127,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 127
+    },
+    {
+      "index": 26,
+      "label": "headless item-collections",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "item-collections-v1",
+        "arguments": [
+          "-Suite",
+          "item-collections",
+          "-Fixture",
+          "item-collections-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "item-collections"
+      },
+      "started_utc": "2026-11-28T04:31:22.898879Z",
+      "ended_utc": "2026-11-28T04:32:52.8202306Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-ede31e1bf1464f5bbb1a8ad712baa2a8\\report.json",
+          "sha256": "1d7a07844a5fe7a418f72f677138d63b38bc91304ef29e541736edd39348251d",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "item-collections",
+              "primary": 200,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 200
+    },
+    {
+      "index": 27,
+      "label": "rendered item-collections",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "item-collections-v1",
+        "arguments": [
+          "-Suite",
+          "item-collections",
+          "-Fixture",
+          "item-collections-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "item-collections"
+      },
+      "started_utc": "2026-11-28T04:32:52.8623026Z",
+      "ended_utc": "2026-11-28T04:34:25.9401757Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-67f4b4b1000d48f980c3205f6f08c360\\report.json",
+          "sha256": "a915d2bf5220a5b34c501bece91c0ac324ea1e052d4ede1cdf5e15888e888c8c",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "item-collections",
+              "primary": 204,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 204
+    },
+    {
+      "index": 28,
+      "label": "headless item-capacity-tender",
+      "exit": 0,
+      "command": {
+        "mode": "headless",
+        "fixture": "item-capacity-tender-v1",
+        "arguments": [
+          "-Suite",
+          "item-capacity-tender",
+          "-Fixture",
+          "item-capacity-tender-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_headless.ps1",
+        "suite": "item-capacity-tender"
+      },
+      "started_utc": "2026-11-28T04:34:25.9661312Z",
+      "ended_utc": "2026-11-28T04:36:08.4948046Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-headless-e9032662e0264cb588b4fdbf19574abd\\report.json",
+          "sha256": "f884ae161f6082a79e28df097efdb3519e4d0bdece711a8cf274199f0d45f7ed",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "item-capacity-tender",
+              "primary": 180,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 180
+    },
+    {
+      "index": 29,
+      "label": "rendered item-capacity-tender",
+      "exit": 0,
+      "command": {
+        "mode": "rendered",
+        "fixture": "item-capacity-tender-v1",
+        "arguments": [
+          "-Suite",
+          "item-capacity-tender",
+          "-Fixture",
+          "item-capacity-tender-v1",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2",
+          "-TimeoutSeconds",
+          "240"
+        ],
+        "kind": "verification",
+        "script": "main_project/tools/verify_rendered.ps1",
+        "suite": "item-capacity-tender"
+      },
+      "started_utc": "2026-11-28T04:36:08.5222626Z",
+      "ended_utc": "2026-11-28T04:37:56.3009012Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\verification-rendered-5b6efd5703d64c61a23c25aec43fdc32\\report.json",
+          "sha256": "fcb559c25efabb48376b37025772b4a12e8c0a00e6997decaae18a374aac94c9",
+          "status": "passed",
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "counts": [
+            {
+              "scope": "item-capacity-tender",
+              "primary": 185,
+              "reload": 0,
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "assertions": 185
+    },
+    {
+      "index": 30,
+      "label": "export debug",
+      "exit": 0,
+      "command": {
+        "configuration": "debug",
+        "kind": "export",
+        "script": "main_project/tools/verify_startup_export.ps1",
+        "arguments": [
+          "-Configuration",
+          "debug",
+          "-ItemPersistence",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2"
+        ]
+      },
+      "started_utc": "2026-11-28T05:10:08.0592560Z",
+      "ended_utc": "2026-11-28T05:15:01.9873733Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\export-cc5c788a57ba4d00b7d21f1e67fa9138\\result.json",
+          "sha256": "34dec37cdba354aa079e8c00da0e58c15bbc6c5bf989bf5d86368d44422a2612",
+          "status": "passed",
+          "engine": {
+            "build": "official",
+            "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+            "hex": 263938,
+            "major": 4,
+            "minor": 7,
+            "patch": 2,
+            "status": "stable",
+            "string": "4.7.2-stable (official)",
+            "timestamp": 0
+          },
+          "counts": [
+            {
+              "scope": "exported-headless",
+              "primary": 138,
+              "reload": 36,
+              "status": "pass"
+            },
+            {
+              "scope": "exported-rendered",
+              "primary": 142,
+              "reload": 40,
+              "status": "pass"
+            }
+          ],
+          "pck_sha256": "8E4F67FFC2B38FC2DEF4031112E20006B77E562F983C71831018F0945E3611C0",
+          "executable_sha256": "51498B72B3A237F882EBD7D1787F06A4BC1EAF0572DAAB93837ADCFD3CFDC107",
+          "native_sha256": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+          "native_media_sha256": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2"
+        }
+      ],
+      "assertions": 356
+    },
+    {
+      "index": 31,
+      "label": "export release",
+      "exit": 0,
+      "command": {
+        "configuration": "release",
+        "kind": "export",
+        "script": "main_project/tools/verify_startup_export.ps1",
+        "arguments": [
+          "-Configuration",
+          "release",
+          "-ItemPersistence",
+          "-ClassicSource",
+          "C:/Games/Daggerfall/arena2"
+        ]
+      },
+      "started_utc": "2026-11-28T05:15:02.1015176Z",
+      "ended_utc": "2026-11-28T05:19:35.2487513Z",
+      "reports": [
+        {
+          "path": "main_project\\tests\\.runs\\export-5afdbbd9e536470ea4d7733466688fef\\result.json",
+          "sha256": "f120a24b487e98a2c95f58d7a00d613c352010bf29eb42a9ebca09c18819ab1d",
+          "status": "passed",
+          "engine": {
+            "build": "official",
+            "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+            "hex": 263938,
+            "major": 4,
+            "minor": 7,
+            "patch": 2,
+            "status": "stable",
+            "string": "4.7.2-stable (official)",
+            "timestamp": 0
+          },
+          "counts": [
+            {
+              "scope": "exported-headless",
+              "primary": 138,
+              "reload": 36,
+              "status": "pass"
+            },
+            {
+              "scope": "exported-rendered",
+              "primary": 142,
+              "reload": 40,
+              "status": "pass"
+            }
+          ],
+          "pck_sha256": "945DD28F486201165EE72352886B2E7BF7B49454723B8504EE6499B267A02776",
+          "executable_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+          "native_sha256": "1EAB76BB6EFAA64345A7A748960D94F25A7422C1827ECA61C1C3C609906A17F7",
+          "native_media_sha256": "DA957EDC878FFF0116A3AA461CE1BE62A7AEB36EF8151DB1FD13303A950101D2"
+        }
+      ],
+      "assertions": 356
+    }
+  ],
+  "selected_assertions": 17233,
+  "missing_primary_command_indices": [],
+  "real_owners": [
+    "ITEM",
+    "CORE",
+    "CHAR",
+    "DATA",
+    "RULE",
+    "TIME clock capture/reconstruction"
+  ],
+  "controlled_owners": [
+    "SAVE coordinator/transport",
+    "ECON settlement acknowledgment",
+    "equipment/effect/service linking",
+    "wagon spatial/ownership context",
+    "capacity contribution provider"
+  ],
+  "open_gates": [
+    "increment-4 and parent user acceptance",
+    "IMP-022 complete native SAVE publication/slots",
+    "IMP-023 complete-room phased restore/Session Restored",
+    "live equipment/effects/services/loot/trade/banking/entry/world-wagon integration",
+    "native persistent actor identity and complete entry",
+    "M2 and physical-device acceptance"
+  ],
+  "ledger": "main_project\\tests\\.runs\\imp017-increment4-2026-11-27\\checkpoint-progress.json",
+  "completed_utc": "2026-11-28T07:26:58.231467+00:00",
+  "completed_est": "2026-11-28T02:26:58.231467-05:00",
+  "started_est": "2026-11-27T22:06:03-05:00",
+  "cleanup": [
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-860fc7ae6a8f4110a86c5f90c30f3bcb",
+      "status": "compacted",
+      "archive_sha256": "35e9648383d496283264f2136385ca553298350ffa50344cc316882b171fc80c",
+      "removed_bytes": 213808251,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-eca5244934624ea38bcfeaa0c356580a",
+      "status": "compacted",
+      "archive_sha256": "82afb68e6e8c8fab51d246512149dbf196634dcfe782369ce8cef3872d7d2774",
+      "removed_bytes": 213811183,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-37336f1adf9d4a838c37af003e54f61e",
+      "status": "compacted",
+      "archive_sha256": "8062d9577ab796e0ca71f1c2c87f96501a9eb4e0bc48f40823f3e696fb10f58c",
+      "removed_bytes": 213812363,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-f48b484951574f87bc9f820e4c3109ba",
+      "status": "compacted",
+      "archive_sha256": "47c6cd3e73db3b0974c39dd7e5b73bd2f94a9c8b5f5a15f53e4c5f4ddc8fae9b",
+      "removed_bytes": 213817159,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-c2f8f52e16894189a053ea99be9979b4",
+      "status": "compacted",
+      "archive_sha256": "8abb39043ab4ca0759848120adef798a13c422acf3701c3cbc04d1e1be78115e",
+      "removed_bytes": 213820802,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-7d8b108d13d5408db8a70a7c86e966e7",
+      "status": "compacted",
+      "archive_sha256": "f8f07b1747520c532bd003fd65b864829672b487dafdcea8147c15cc0a4c0ecb",
+      "removed_bytes": 213826442,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-675ad9d62ccf461598550b9f68122efa",
+      "status": "compacted",
+      "archive_sha256": "e9cb54e4427b67e9b502a982a9c899f6f2c5377b245fd8ea771a1bff043d230d",
+      "removed_bytes": 213832862,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-09f5ca755bdd4ee08c696df0868e0f8b",
+      "status": "compacted",
+      "archive_sha256": "41c19ffc1bc9a416fcf492a1fa5ad9ea05142d38a21277ab62916bb1466ebffb",
+      "removed_bytes": 213840385,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-395e9baa48d64ba39d496a45970a50b6",
+      "status": "compacted",
+      "archive_sha256": "b7ad3befb4ee3cf431459898c36da4d9fe81e2ee9ebc9439ae527488bb8668e7",
+      "removed_bytes": 213846226,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b2e8158a89ea44b5855e714378fe1c23",
+      "status": "compacted",
+      "archive_sha256": "4320d04cc0af460a367913a5fca6333bbff322278a01ba4fd1f2ca349ee7d3d4",
+      "removed_bytes": 213850768,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-5416a088673748a39d7f8ee2e5ca0114",
+      "status": "compacted",
+      "archive_sha256": "3756dae6cb46ef673211a492bdfeafbed7ad55f8d7cc5c7c6f3733d9211e6d9f",
+      "removed_bytes": 213856524,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-b8b8cdc39f8d448187f2e050fc75a857",
+      "status": "compacted",
+      "archive_sha256": "7776fc682656d02391c94a6492b9393bd661e6fd83f62296167b55dbe576fda1",
+      "removed_bytes": 213856524,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-758492fab9364c2190b950f713d01617",
+      "status": "compacted",
+      "archive_sha256": "305817e02b3bd66973e47af963ab879dd691449209d0348582aa4fb8c148e56d",
+      "removed_bytes": 213857342,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-dfc15d36451647bd9eb4eb89ca2ecb48",
+      "status": "compacted",
+      "archive_sha256": "da5702136b72ccf191c3816df7b84b28d94d41f7ed63484e4a877478f6686bdb",
+      "removed_bytes": 213857342,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b92afeccedf64d99afdd5a4fcdcb4987",
+      "status": "compacted",
+      "archive_sha256": "2c8c82b754c4c11f206c6ebe2ac3dc4e33b578de457a6ad889f9050b30256c74",
+      "removed_bytes": 213850989,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-edfb42c804d04a42b32a33e006e67195",
+      "status": "compacted",
+      "archive_sha256": "6cc2ca456834ec54da59e18d00f9419c84d7f15b39cbb7ac2d19698cfdad9072",
+      "removed_bytes": 213850987,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-5581e8fb2c1b437a9af802fd42425b94",
+      "status": "compacted",
+      "archive_sha256": "e69dd40136efa46a1fa6f2b2d0e86c51893282af6148a26bca5aa8a8cb39d6e9",
+      "removed_bytes": 213851138,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-a2388c739022443a8daaeedd9a736b14",
+      "status": "compacted",
+      "archive_sha256": "fad3d7f1a491bf25d13bcb9d0ebada7d8c2cbdaa5cd77dddca32982e9e58af38",
+      "removed_bytes": 213851139,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-f090e5925e0848bf91a0994de285658d",
+      "status": "compacted",
+      "archive_sha256": "80b85492813b6e7501cc767d88a8062b8fbdf75f588769104946e076e8a085b5",
+      "removed_bytes": 213851139,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-4531a0e26d704aefae7672903c910e2a",
+      "status": "compacted",
+      "archive_sha256": "66f9c6d9a014ecfe5445918aea35ff758e2a6cdd3bd0b045d9177e16d62a4fc6",
+      "removed_bytes": 213851139,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-066a8353263f488baaac7e34dbe823ab",
+      "status": "compacted",
+      "archive_sha256": "604c627d6bfc6c0589f8fa941a677fc77705c97d3a01c1afe2a72c66f12bc316",
+      "removed_bytes": 213851139,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-c2793a11f3134ec59d4dff7e63f29714",
+      "status": "compacted",
+      "archive_sha256": "dc0952842ccc8dbc1745acaa4047c562612ad67266b97159df1c0059a4073b62",
+      "removed_bytes": 213851138,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-2ec15fb7553e48c39c075fc0dbfd9ea4",
+      "status": "compacted",
+      "archive_sha256": "0207c1ce9ec0413a06e7349129d1780c973f4f0a081011e08df750a67dcd83e6",
+      "removed_bytes": 213851140,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-03aa1857546c49b9909847221702e778",
+      "status": "compacted",
+      "archive_sha256": "c4a847c7a5e0bae9254c65822f773becb14947338c4575a349da3845a736d5c5",
+      "removed_bytes": 213851139,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-04facab000c54816ba3a33f8e6137108",
+      "status": "compacted",
+      "archive_sha256": "dd03683f6e6ee9547b0ab1a08bb7b89fd1aab7fdce8398abf9e33ca37ae56143",
+      "removed_bytes": 213851139,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-eb7f31390b37473da4434dcd4756c21c",
+      "status": "compacted",
+      "archive_sha256": "3b3c0c408aa3ed2f43c7c9b62398d9e87f638f1476a4b04643a3e3007cc2dee6",
+      "removed_bytes": 213851138,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-17b8e9710cb74f95b29d5476ecf43984",
+      "status": "compacted",
+      "archive_sha256": "62e35104ce1cfa9c866b24c6433f183801907a1b46e814f0af44fedf37b44cf4",
+      "removed_bytes": 213851138,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-25fb15ea79cb439781fb84e8523676d8",
+      "status": "compacted",
+      "archive_sha256": "a01d64c895ddc10a1271dbda12606b9bad2c7d89707b68eb2cdf35cecb3918ac",
+      "removed_bytes": 213851139,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-77e3b0ce17aa44589691ef224a609053",
+      "status": "compacted",
+      "archive_sha256": "f74f1feb05d8072752b0d661ba292de4f48aa660183d024fa20070d96bc1d001",
+      "removed_bytes": 213851138,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-73c62f036ed04857b06884904d46dad5",
+      "status": "compacted",
+      "archive_sha256": "c1c7585f488146b2739cbfcf50a6cd13ea55bd1ac68a136e958aeef5e853a308",
+      "removed_bytes": 213851139,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-d62c5797d957493dae727de668584268",
+      "status": "compacted",
+      "archive_sha256": "6b24e3827ed6c1879371d7cdddaa63089d08d7c1bbe7c0e238275786721f986b",
+      "removed_bytes": 213851139,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-4aeb85bb5ac54eb7ab34644b716f2182",
+      "status": "compacted",
+      "archive_sha256": "183566fd1abc6f72009c5eadcdbee8f64bf04b97c45688af080edb4a064f4b1d",
+      "removed_bytes": 213851140,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-f135906a8d6948a7837dafb31e9d4572",
+      "status": "compacted",
+      "archive_sha256": "bc74f71701b64fcc6fcb00a36ca69a2dbaca142c5a904d0221ebacf3386ba2c2",
+      "removed_bytes": 213851299,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cf68ffeee2ba48a19eabc7ccf0445bd3",
+      "status": "compacted",
+      "archive_sha256": "52f045791fba714f41ffa7ad43bd704af7f4197a0169389b05e563b0664ac147",
+      "removed_bytes": 213851299,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-a4f1e92a5f274e82b77c69fe60be4936",
+      "status": "compacted",
+      "archive_sha256": "0643afac707eb0e2916e65131afe16e190c8f0adebd5b79083885c84209580dc",
+      "removed_bytes": 213851300,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-3288f392dbd64146bb86c9f7ebc8ccdd",
+      "status": "compacted",
+      "archive_sha256": "20b491baeef793ae9695709e98dec5714e1fe35f985f753006da18c693a0c897",
+      "removed_bytes": 213851302,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e47958bfaac94633ba655dea520db6b5",
+      "status": "compacted",
+      "archive_sha256": "7fbd5ddcf39d106b0971f1c18c93227e51c2773c1b440ea4af1ff6f9d152de2e",
+      "removed_bytes": 213852150,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-69156e53ad724048a99f719edfd704b6",
+      "status": "compacted",
+      "archive_sha256": "cc44983218e146547e008daf7dc9e7a4c6a3785d9a8fcc4dde0175fe4447ef4f",
+      "removed_bytes": 213852149,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e3a13174c05e40cfaa1c441f6132ab59",
+      "status": "compacted",
+      "archive_sha256": "a1cb6b81e1330d4c695bc1c0631344e5536276a8ead5aaa504ce18e4dbd71091",
+      "removed_bytes": 213852149,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-8f8ff8a7cf674078a18c7b673493b8f0",
+      "status": "compacted",
+      "archive_sha256": "51698e40f964b8cd8cacfb876317a6865b2d4f6d1fed76b6dc49a0a38fa287fe",
+      "removed_bytes": 213852148,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-9af1051f2ce44c46937ab8a83386452d",
+      "status": "compacted",
+      "archive_sha256": "c42d8dd73acd99c5a0774ed79ccbb6a11bf4bd68ec02d0c5d7e417c575d59e41",
+      "removed_bytes": 213853505,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-2491461179cb4dec9a19df89c7525c37",
+      "status": "compacted",
+      "archive_sha256": "eaa515db91c6cfa30eb485bcf3dafadb8e4ab0420dd27b7670821110b9e60413",
+      "removed_bytes": 213853504,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-ede31e1bf1464f5bbb1a8ad712baa2a8",
+      "status": "compacted",
+      "archive_sha256": "3aaab252dee2143b689d886198d5d1dddaec1a2aef87a3d893cf61e49ce1ac0a",
+      "removed_bytes": 213853505,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-67f4b4b1000d48f980c3205f6f08c360",
+      "status": "compacted",
+      "archive_sha256": "979239059cad67681f24eee4b26e01ed6f39516b34cf4be08602eb9d5d957d7d",
+      "removed_bytes": 213853504,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-e9032662e0264cb588b4fdbf19574abd",
+      "status": "compacted",
+      "archive_sha256": "0ab0c63c22952656f724e19dd6eee7602c85e5af9cd952f038212b33378a8d86",
+      "removed_bytes": 213853505,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-5b6efd5703d64c61a23c25aec43fdc32",
+      "status": "compacted",
+      "archive_sha256": "440585770cff5073a248250760239e0756cb41f8c09f3e4dfeab1664c7ba8562",
+      "removed_bytes": 213853504,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-39eb874fe69e45cf9d1c97cb525d5c3e",
+      "status": "compacted",
+      "archive_sha256": "cbb27475572a545ce806f2a3b61b9e5e832069d328ab4e6208cb876b2bda6761",
+      "removed_bytes": 531208399,
+      "removed_files": 2224
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-3d0f1f9a2e1b43f19ad813d0c36ccd9e",
+      "status": "compacted",
+      "archive_sha256": "36e4733a6d3673b0a8361c40e0d8bd5532c71f1cf28942275f49f313eddb9783",
+      "removed_bytes": 532946961,
+      "removed_files": 2289
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-001ffcbddc5c4292b998a8523ab6e718",
+      "status": "compacted",
+      "archive_sha256": "edde50e8ef6f35964581a598f552fac4394b60e749964b95f3df42a2aaa21eb7",
+      "removed_bytes": 539038738,
+      "removed_files": 2289
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-cc5c788a57ba4d00b7d21f1e67fa9138",
+      "status": "compacted",
+      "archive_sha256": "c23b4df551fd77963d283a3796481974d2e5ee9699e606705f856fd20a3db47a",
+      "removed_bytes": 532953613,
+      "removed_files": 2289
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\export-5afdbbd9e536470ea4d7733466688fef",
+      "status": "compacted",
+      "archive_sha256": "4635414e6c72c6a5612b8af00db215f61da9d8850e80727a2d1f72cd92bc1c2f",
+      "removed_bytes": 539045388,
+      "removed_files": 2289
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-headless-b9ee40fbfbd64f31b1418b72ef45b685",
+      "status": "compacted",
+      "archive_sha256": "3c3a0382f7b943b62bc903f5a0f1da03b182b1de2e3129dbbab314250265045d",
+      "removed_bytes": 213858415,
+      "removed_files": 1719
+    },
+    {
+      "root": "C:\\Godot\\Projects\\Daggerfall_GD\\main_project\\tests\\.runs\\verification-rendered-cf51092b14e04863a25cd4f51a418fbf",
+      "status": "compacted",
+      "archive_sha256": "99a66831ae18fb2cba76590c6bca8ddc7f5ddf286384696af13636ae2ff5cec2",
+      "removed_bytes": 213858415,
+      "removed_files": 1719
+    }
+  ],
+  "source_reconciliation": {
+    "external_launchers": {
+      "snapshot": "frozen-tools",
+      "identity": "Final candidate SHA-256 manifest; verify.ps1 was unchanged through the matrix, and final exports used the corrected current launcher. Launchers are intentionally excluded from runtime project copies."
+    },
+    "schema": "imp017-source-reconciliation-v1",
+    "status": "passed",
+    "unexpected": [],
+    "commands": [
+      {
+        "command_index": 0,
+        "root": "main_project\\tests\\.runs\\verification-headless-b9ee40fbfbd64f31b1418b72ef45b685",
+        "differences_from_final": []
+      },
+      {
+        "command_index": 1,
+        "root": "main_project\\tests\\.runs\\verification-rendered-cf51092b14e04863a25cd4f51a418fbf",
+        "differences_from_final": []
+      },
+      {
+        "command_index": 2,
+        "root": "main_project\\tests\\.runs\\verification-headless-f090e5925e0848bf91a0994de285658d",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 3,
+        "root": "main_project\\tests\\.runs\\verification-rendered-4531a0e26d704aefae7672903c910e2a",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 4,
+        "root": "main_project\\tests\\.runs\\verification-headless-066a8353263f488baaac7e34dbe823ab",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 5,
+        "root": "main_project\\tests\\.runs\\verification-rendered-c2793a11f3134ec59d4dff7e63f29714",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 6,
+        "root": "main_project\\tests\\.runs\\verification-headless-2ec15fb7553e48c39c075fc0dbfd9ea4",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 7,
+        "root": "main_project\\tests\\.runs\\verification-rendered-03aa1857546c49b9909847221702e778",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 8,
+        "root": "main_project\\tests\\.runs\\verification-headless-04facab000c54816ba3a33f8e6137108",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 9,
+        "root": "main_project\\tests\\.runs\\verification-rendered-eb7f31390b37473da4434dcd4756c21c",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 10,
+        "root": "main_project\\tests\\.runs\\verification-headless-17b8e9710cb74f95b29d5476ecf43984",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 11,
+        "root": "main_project\\tests\\.runs\\verification-rendered-25fb15ea79cb439781fb84e8523676d8",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 12,
+        "root": "main_project\\tests\\.runs\\verification-headless-77e3b0ce17aa44589691ef224a609053",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 13,
+        "root": "main_project\\tests\\.runs\\verification-rendered-73c62f036ed04857b06884904d46dad5",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 14,
+        "root": "main_project\\tests\\.runs\\verification-headless-d62c5797d957493dae727de668584268",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 15,
+        "root": "main_project\\tests\\.runs\\verification-rendered-4aeb85bb5ac54eb7ab34644b716f2182",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "E725799F4B0C7E30191549593906B3F2E2F497BBC37EE82284ACB82ECE9B2C37",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks",
+              "restore_diagnostic"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 16,
+        "root": "main_project\\tests\\.runs\\verification-headless-f135906a8d6948a7837dafb31e9d4572",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "3229D025CBD1DA04EE37779A4EAE073CCFA73A0CE27382B1D715C4B8738CDF50",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 17,
+        "root": "main_project\\tests\\.runs\\verification-rendered-cf68ffeee2ba48a19eabc7ccf0445bd3",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "3229D025CBD1DA04EE37779A4EAE073CCFA73A0CE27382B1D715C4B8738CDF50",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 18,
+        "root": "main_project\\tests\\.runs\\verification-headless-a4f1e92a5f274e82b77c69fe60be4936",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "3229D025CBD1DA04EE37779A4EAE073CCFA73A0CE27382B1D715C4B8738CDF50",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 19,
+        "root": "main_project\\tests\\.runs\\verification-rendered-3288f392dbd64146bb86c9f7ebc8ccdd",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "7EF5E0C34F5E92B59B06CC73A757184982FB406BFE4E3E66F6AC040BCD3AE10E",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "3229D025CBD1DA04EE37779A4EAE073CCFA73A0CE27382B1D715C4B8738CDF50",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "8B0B4390C0BD8BB5503288D9B768EF69BD580BDC29836144F7BBE98282A0ADF7",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 20,
+        "root": "main_project\\tests\\.runs\\verification-headless-e47958bfaac94633ba655dea520db6b5",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "495C1F53CF7F3FEFCBBB620AD5DC719C512B9282C1072A7755D24D5A54C2849A",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "C7AE6C1F740743E90D5432B9139D4FCB99B2D72A2018FAB7CA486959A94C0B10",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "9F052F7C305C9150EBE6D5DD97314A6D895A87A4EDF769B2E1B17538B8F0B8D5",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 21,
+        "root": "main_project\\tests\\.runs\\verification-rendered-69156e53ad724048a99f719edfd704b6",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "495C1F53CF7F3FEFCBBB620AD5DC719C512B9282C1072A7755D24D5A54C2849A",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "C7AE6C1F740743E90D5432B9139D4FCB99B2D72A2018FAB7CA486959A94C0B10",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "9F052F7C305C9150EBE6D5DD97314A6D895A87A4EDF769B2E1B17538B8F0B8D5",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 22,
+        "root": "main_project\\tests\\.runs\\verification-headless-e3a13174c05e40cfaa1c441f6132ab59",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "495C1F53CF7F3FEFCBBB620AD5DC719C512B9282C1072A7755D24D5A54C2849A",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "C7AE6C1F740743E90D5432B9139D4FCB99B2D72A2018FAB7CA486959A94C0B10",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "9F052F7C305C9150EBE6D5DD97314A6D895A87A4EDF769B2E1B17538B8F0B8D5",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 23,
+        "root": "main_project\\tests\\.runs\\verification-rendered-8f8ff8a7cf674078a18c7b673493b8f0",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/money.gd",
+            "executed_sha256": "A267D0FF2D3312D64D0D51FFC7F967DD710A82EEC19E95EEB1C88EBEDC623E0C",
+            "final_sha256": "8BAF4E0741137845739779ED6E169AC677434A53B827868D64D68468F9829AEC",
+            "scope_limit": "Only the complete quote envelope validator was extracted from _quote without changing live admission rules. Final capacity/tender and persistence suites execute the extracted validator.",
+            "differing_functions": [
+              "_quote",
+              "quote_valid"
+            ]
+          },
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "495C1F53CF7F3FEFCBBB620AD5DC719C512B9282C1072A7755D24D5A54C2849A",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "C7AE6C1F740743E90D5432B9139D4FCB99B2D72A2018FAB7CA486959A94C0B10",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "9F052F7C305C9150EBE6D5DD97314A6D895A87A4EDF769B2E1B17538B8F0B8D5",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 24,
+        "root": "main_project\\tests\\.runs\\verification-headless-9af1051f2ce44c46937ab8a83386452d",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "596E5528F7543933E3DBA5EBE0E55DE38AB8DC5A4AF588132F92561C0D55A6FC",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "4E26C716CEBE374B0C1AE4F3645E5E4B53F803B0643FBE12E0809A666DC6ED14",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "9EB1C3C1705F47ADEA14E69443A0297B978E9C572D227433F976DECC94B0EEE8",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 25,
+        "root": "main_project\\tests\\.runs\\verification-rendered-2491461179cb4dec9a19df89c7525c37",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "596E5528F7543933E3DBA5EBE0E55DE38AB8DC5A4AF588132F92561C0D55A6FC",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "4E26C716CEBE374B0C1AE4F3645E5E4B53F803B0643FBE12E0809A666DC6ED14",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "9EB1C3C1705F47ADEA14E69443A0297B978E9C572D227433F976DECC94B0EEE8",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 26,
+        "root": "main_project\\tests\\.runs\\verification-headless-ede31e1bf1464f5bbb1a8ad712baa2a8",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "596E5528F7543933E3DBA5EBE0E55DE38AB8DC5A4AF588132F92561C0D55A6FC",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "4E26C716CEBE374B0C1AE4F3645E5E4B53F803B0643FBE12E0809A666DC6ED14",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "9EB1C3C1705F47ADEA14E69443A0297B978E9C572D227433F976DECC94B0EEE8",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 27,
+        "root": "main_project\\tests\\.runs\\verification-rendered-67f4b4b1000d48f980c3205f6f08c360",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "596E5528F7543933E3DBA5EBE0E55DE38AB8DC5A4AF588132F92561C0D55A6FC",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "4E26C716CEBE374B0C1AE4F3645E5E4B53F803B0643FBE12E0809A666DC6ED14",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "9EB1C3C1705F47ADEA14E69443A0297B978E9C572D227433F976DECC94B0EEE8",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 28,
+        "root": "main_project\\tests\\.runs\\verification-headless-e9032662e0264cb588b4fdbf19574abd",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "596E5528F7543933E3DBA5EBE0E55DE38AB8DC5A4AF588132F92561C0D55A6FC",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "4E26C716CEBE374B0C1AE4F3645E5E4B53F803B0643FBE12E0809A666DC6ED14",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "9EB1C3C1705F47ADEA14E69443A0297B978E9C572D227433F976DECC94B0EEE8",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 29,
+        "root": "main_project\\tests\\.runs\\verification-rendered-5b6efd5703d64c61a23c25aec43fdc32",
+        "differences_from_final": [
+          {
+            "file": "scripts/item/persistence.gd",
+            "executed_sha256": "596E5528F7543933E3DBA5EBE0E55DE38AB8DC5A4AF588132F92561C0D55A6FC",
+            "final_sha256": "EE0D4F7981E250875FD33E514DE4301C89D7B957CCCDFB25C790B24A3DB90689",
+            "scope_limit": "Persistence capture/validation functions are not called by other fixture modes. Final independent persistence suites and both export configurations execute the final implementation.",
+            "differing_functions": [
+              "_publish",
+              "_record",
+              "_settlement",
+              "_source_context"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_cases.gd",
+            "executed_sha256": "4E26C716CEBE374B0C1AE4F3645E5E4B53F803B0643FBE12E0809A666DC6ED14",
+            "final_sha256": "6494E8E088B2572F50666D9673A21D7DB5CEC6F449433E49EBB4D36B155B926D",
+            "scope_limit": "This fixture is not executed by other suite modes. Final independent persistence suites and exports execute all final assertions and the opaque diagnostic.",
+            "differing_functions": [
+              "persistence_checks"
+            ]
+          },
+          {
+            "file": "tests/item_persistence_inventory.json",
+            "executed_sha256": "9EB1C3C1705F47ADEA14E69443A0297B978E9C572D227433F976DECC94B0EEE8",
+            "final_sha256": "481806BE4D1B5B429DCD4E9812DB6AB48634E0D67781B62C47DAFF8FE49E54AD",
+            "scope_limit": "Only persistence mode consumes this exact inventory; its final modes and exports use the complete inventory."
+          }
+        ]
+      },
+      {
+        "command_index": 30,
+        "root": "main_project\\tests\\.runs\\export-cc5c788a57ba4d00b7d21f1e67fa9138",
+        "differences_from_final": []
+      },
+      {
+        "command_index": 31,
+        "root": "main_project\\tests\\.runs\\export-5afdbbd9e536470ea4d7733466688fef",
+        "differences_from_final": []
+      }
+    ],
+    "note": "Every exact executed source is preserved in its root archive. Only declared unexecuted fixture/participant functions, the semantically identical quote validator extraction, and an unused export launcher differ in earlier broad fixtures. Final persistence, tender and export paths must match final source bytes."
+  },
+  "retention": {
+    "schema": "imp017-logical-retention-v1",
+    "utc": "2026-11-28T07:26:46.840505+00:00",
+    "logical_bytes": 11330752719,
+    "files": 126772,
+    "allocated_unique_bytes": null,
+    "allocation_note": "Full read-only allocated scan stopped after excessive runtime; logical file sizes are not allocated or deduplicated storage.",
+    "errors": [],
+    "skipped_reparse": [],
+    "largest": [
+      {
+        "root": "verification-rendered-4356bbc649e047858548df86c0329ba7",
+        "logical_bytes": 231450965,
+        "files": 1833
+      },
+      {
+        "root": "verification-headless-675ad9d62ccf461598550b9f68122efa",
+        "logical_bytes": 220537173,
+        "files": 23
+      },
+      {
+        "root": "verification-rendered-bcceb5b1b1004383a1e4727e90c50d08",
+        "logical_bytes": 217592814,
+        "files": 1691
+      },
+      {
+        "root": "verification-rendered-5eae2bff7b4542d4ab82fa3702ebf952",
+        "logical_bytes": 216972588,
+        "files": 1691
+      },
+      {
+        "root": "verification-rendered-ca9905cfc8a9400e95242b1d7a3adc54",
+        "logical_bytes": 215194099,
+        "files": 1711
+      },
+      {
+        "root": "verification-rendered-5c906db4374640daa52499043ad7ac66",
+        "logical_bytes": 215181687,
+        "files": 1697
+      },
+      {
+        "root": "verification-rendered-ce9c10bf5cc348d0ad4e8708dcd4877d",
+        "logical_bytes": 213522099,
+        "files": 1499
+      },
+      {
+        "root": "imp011-view-review-2026-11-23-final",
+        "logical_bytes": 209339669,
+        "files": 1317
+      },
+      {
+        "root": "imp014-increment3-audit",
+        "logical_bytes": 194553925,
+        "files": 37
+      },
+      {
+        "root": "verification-headless-7d8b108d13d5408db8a70a7c86e966e7",
+        "logical_bytes": 171873390,
+        "files": 23
+      },
+      {
+        "root": "verification-headless-c2f8f52e16894189a053ea99be9979b4",
+        "logical_bytes": 164716261,
+        "files": 23
+      },
+      {
+        "root": "verification-headless-9fa713a5be544e00888a30aa4a83d342",
+        "logical_bytes": 126532648,
+        "files": 22
+      },
+      {
+        "root": "verification-headless-7dafdf2f43f84a658933848ae9b77881",
+        "logical_bytes": 118282673,
+        "files": 15
+      },
+      {
+        "root": "verification-rendered-8f8ff8a7cf674078a18c7b673493b8f0",
+        "logical_bytes": 76078017,
+        "files": 91
+      },
+      {
+        "root": "verification-headless-e3a13174c05e40cfaa1c441f6132ab59",
+        "logical_bytes": 74221246,
+        "files": 24
+      }
+    ],
+    "eight_gib_trigger_reviewed": true,
+    "protection": "Only exact owned completed roots compacted. Older uncertain roots protected."
+  },
+  "post_verification_metadata_cleanup": {
+    "reason": "Unrelated sidecar generated by this task editor parse; initial tree clean. Removed after final verification; no executable source change.",
+    "path": "C:/Godot/Projects/Daggerfall_GD/main_project/scripts/ui/creation_questionnaire_mask.gdshader.uid",
+    "content": "uid://bbwynxmi8limx\n",
+    "sha256": "E6B664073178D6CC194F4F5BDB7B00ED6DDE9C2B8408B277FD65D65C67A6F4C2"
+  },
+  "current_input_differences": [],
+  "cleanup_scope": "Exact owned completed roots only; source ZIPs and original evidence paths retained. Older uncertain roots protected."
+}

@@ -221,7 +221,7 @@ func execute(owner: Object, request: Dictionary) -> Dictionary:
 	if not auth.ok: return auth
 	if not auth.value.has("collections"): return failure("unauthorized")
 	if not Policy.Paths.valid_id(request.get("request","")): return failure("invalid_request")
-	var key: String = str(owner.get_instance_id())+":"+request.context+":"+request.request
+	var key: String = authority.operation_key(owner,request)
 	if authority._receipts.has(key) or authority._generation.has(key) or authority.money.request_claimed(key): return failure("request_conflict")
 	if _receipts.has(key):
 		return _receipts[key].outcome.duplicate(true) if _receipts[key].input == request else failure("request_conflict")

@@ -416,6 +416,30 @@ func content_ticket() -> int:
 	# Constant-cost freshness check; never copy the complete published catalog.
 	return int(_active.get("ticket",-1))
 
+## Durable compatibility, computed only at snapshot/preflight boundaries. Tickets
+## remain process-local freshness guards and must not identify saved content.
+func item_persistence_compatibility() -> Dictionary:
+	if _active.is_empty(): return {"ok":false,"kind":"before_readiness"}
+	var signatures := {}
+	for key: String in _active.resources:
+		if key.get_slice(":",0) not in ["item.construction","item.collections","item.capacity-tender","item-spell.inputs","actor.baseline"]: continue
+		var resource: Dictionary = _active.resources[key]
+		var records := {}
+		for id: String in resource.records:
+			var record: Dictionary = resource.records[id]
+			var fields := {}
+			for field: String in record.fields: fields[field] = _durable_item_source(record.fields[field])
+			var contributors: Array = []
+			for source: Dictionary in record.contributors: contributors.append(_durable_item_source(source))
+			records[id] = {"identity":record.identity,"value":record.value,"winner":_durable_item_source(record.winner),"fields":fields,"contributors":contributors}
+		signatures[key] = JSON.stringify(records,"",true,true).sha256_text()
+	return {"ok":true,"schema":"item-content-v1","resources":signatures}
+
+func _durable_item_source(source: Dictionary) -> Dictionary:
+	# Absolute staging roots and omission tokens identify this publication attempt,
+	# not a package's durable provider identity or the resolved definition bytes.
+	return {"provider":source.get("provider",""),"file":source.get("file",""),"version":source.get("version","")}
+
 func domain_index(domain: String) -> Dictionary:
 	# Optional detached domain projection. A prepared index is never readable via
 	# this boundary before the exact candidate's actual CORE publication.

@@ -11,12 +11,17 @@ func declare_provider(id: String, rules: Array) -> Dictionary:
 	if not Paths.valid_id(id) or _providers.has(id) or rules.is_empty(): return A.fail("invalid_provider")
 	var seen := {}
 	for rule in rules:
-		if rule not in ["intake-v1","quote-v1","valuation-v1"] or seen.has(rule): return A.fail("invalid_provider")
+		if rule not in ["intake-v1","quote-v1","valuation-v1","recovery-v1"] or seen.has(rule): return A.fail("invalid_provider")
 		seen[rule] = true
 	_providers[id] = rules.duplicate()
 	return {"ok":true}
 func supports(id: String, rule: String) -> bool:
 	return rule in _providers.get(id,[])
+
+func persistence_providers() -> Dictionary:
+	var result := _providers.duplicate(true)
+	for rules: Array in result.values(): rules.sort()
+	return result
 func declaration() -> Dictionary:
 	return {"id":VERSION,"domain":DOMAIN,"reference_domains":[DOMAIN,"item.construction"],"operations":["add","replace","patch"],"required_resources":["profiles"],"capabilities":["data."+VERSION],"classic_sources":[]}
 func validate_resource_path(path: String) -> String:

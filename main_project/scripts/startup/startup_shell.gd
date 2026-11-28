@@ -55,7 +55,7 @@ func _ready() -> void:
 	if inputs.is_empty():
 		return
 	# Combined verification retains every ordinary registration; only roots differ.
-	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","creation-draft","creation-draft_reload","creation-review","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","ground-review","ground-movement","ground-movement_reload","actor-state","actor-state_reload","item-construction","item-collections","item-capacity-tender"]
+	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","creation-draft","creation-draft_reload","creation-review","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","ground-review","ground-movement","ground-movement_reload","actor-state","actor-state_reload","item-construction","item-collections","item-persistence","item-persistence_reload","item-capacity-tender"]
 	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 		var resource_sources: Array = []
 		if fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload"]:
@@ -498,7 +498,7 @@ func _process(_delta: float) -> void:
 func fixture_actor_material(_ticket: Dictionary, _mode: String) -> Dictionary:
 	# Pass through the existing CORE constructor seam; no second lifecycle/RNG.
 	var seeds = preload("res://scripts/rule/seed_derivation.gd")
-	if fixture.get("mode") in ["creation-draft","creation-draft_reload","creation-review","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","actor-state","actor-state_reload","item-construction","item-collections","item-capacity-tender"]:
+	if fixture.get("mode") in ["creation-draft","creation-draft_reload","creation-review","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","actor-state","actor-state_reload","item-construction","item-collections","item-persistence","item-persistence_reload","item-capacity-tender"]:
 		var material := PackedByteArray()
 		material.resize(32)
 		return seeds.validate_material(material)
@@ -592,6 +592,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/actor_state_cases.gd"
 	elif fixture.get("mode") == "actor-inputs":
 		script_path = "res://tests/actor_input_cases.gd"
+	elif fixture.get("mode") in ["item-persistence","item-persistence_reload"]:
+		script_path = "res://tests/item_persistence_cases.gd"
 	elif fixture.get("mode") == "item-capacity-tender":
 		script_path = "res://tests/item_capacity_tender_cases.gd"
 	elif fixture.get("mode") == "item-collections":
@@ -655,7 +657,7 @@ func run_fixture() -> void:
 		var music_cleanup: Dictionary = await session_shell.music_playback.shutdown()
 		checks.native_cleanup = {"ok":video_cleanup.ok and music_cleanup.ok,"video":video_cleanup,"music":music_cleanup}
 		checks.ok = checks.ok and checks.native_cleanup.ok
-	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["creation-draft_reload","ground-movement_reload","actor-state_reload","dungeon-assembly_reload", "view-cursor_reload", "binding-config_reload", "m1-composition_reload", "variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
+	var target := str(fixture.sandbox).path_join("reload-result.json" if fixture.get("mode") in ["item-persistence_reload","creation-draft_reload","ground-movement_reload","actor-state_reload","dungeon-assembly_reload", "view-cursor_reload", "binding-config_reload", "m1-composition_reload", "variant-inputs_reload", "layout-inputs_reload", "mods_reload", "planning_reload", "publication_reload", "randomness-session_reload", "locale-fonts_reload", "translation-preferences_reload", "replacements_reload","native_reload"] else "result.json")
 	var file := FileAccess.open(target, FileAccess.WRITE)
 	file.store_string(JSON.stringify(checks, "\t"))
 	file.close()

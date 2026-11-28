@@ -29,7 +29,7 @@ func binding_valid(owner: Object, value: Variant) -> bool:
 		if not p.ok or p.value.provider != value.provider: return false
 	return true
 func _key(owner: Object, request: Dictionary) -> String:
-	return str(owner.get_instance_id())+":"+request.context+":"+request.request
+	return _authority.get_ref().operation_key(owner,request)
 func _response(owner: Object, method: String, request: Dictionary) -> Dictionary:
 	return _authority.get_ref().collections._provider_result(owner.call(method,request.duplicate(true)))
 func policy(record: Dictionary) -> Dictionary:
@@ -116,15 +116,20 @@ func _quote(owner: Object, request: Dictionary, auth: Dictionary) -> Dictionary:
 	var result := _response(owner,"money_quote",request)
 	if not result.ok: return result
 	var q: Variant = result.get("quote")
-	if result.size() != 2 or not q is Dictionary or q.size() != 17: return A.fail("provider_failure")
-	for field in ["id","unit","region","institution","provider"]:
-		if not Data.Paths.valid_id(q.get(field,"")): return A.fail("provider_failure")
-	if q.provider != auth.money.provider or not A.integer(q.get("revision")) or not A.integer(q.get("price")) or not A.integer(q.get("fees")) or not A.integer(q.get("coin_offer")) or q.get("tender") not in ["exact","change"] or typeof(q.get("wagon")) != TYPE_BOOL or not Data.keys(q.get("rates")): return A.fail("provider_failure")
-	for field in ["sources","outputs","change"]:
-		if not q.get(field) is Array: return A.fail("provider_failure")
-	for field in ["recipient","destination"]:
-		if not q.get(field) is Dictionary: return A.fail("provider_failure")
+	if result.size() != 2 or not quote_valid(q,auth.money.provider): return A.fail("provider_failure")
 	return {"ok":true,"quote":q}
+
+## Same complete typed quote envelope for live admission and retained facts.
+static func quote_valid(q: Variant, provider: String) -> bool:
+	if not q is Dictionary or q.size() != 17: return false
+	for field in ["id","unit","region","institution","provider"]:
+		if not Data.Paths.valid_id(q.get(field,"")): return false
+	if q.provider != provider or not A.integer(q.get("revision")) or not A.integer(q.get("price")) or not A.integer(q.get("fees")) or not A.integer(q.get("coin_offer")) or q.get("tender") not in ["exact","change"] or typeof(q.get("wagon")) != TYPE_BOOL or not Data.keys(q.get("rates")): return false
+	for field in ["sources","outputs","change"]:
+		if not q.get(field) is Array: return false
+	for field in ["recipient","destination"]:
+		if not q.get(field) is Dictionary: return false
+	return true
 func _source(owner: Object, request: Dictionary, id: Variant, wagon_allowed: bool) -> Dictionary:
 	var authority: RefCounted = _authority.get_ref()
 	var c: Dictionary = authority.collections._container(owner,request,id)
@@ -295,6 +300,7 @@ func commit(owner: Object, request: Dictionary, accepted: Dictionary) -> Diction
 	if not authority._begin(request): return A.fail("busy")
 	if _receipts.has(key):
 		var previous: Dictionary = _receipts[key]
+		if previous.has("recovery"): return authority._end(A.fail("restored_operation_requires_recovery"))
 		if previous.input != request or previous.accepted != accepted: return authority._end(A.fail("request_conflict"))
 		return authority._end(_acknowledge(owner,key))
 	var prepared := _prepare(owner,request,auth.value)
@@ -308,6 +314,7 @@ func commit(owner: Object, request: Dictionary, accepted: Dictionary) -> Diction
 	result.face_debits = prepared.face_debits.duplicate(true)
 	result.coin_debit = prepared.coin_debit
 	result.change_value = prepared.change_value
+	result.operation = {"custody":auth.value.custody,"context":request.context,"request":request.request,"provider":auth.value.money.provider,"schema":"item-tender-operation-v1"}
 	result.obligations = ["econ-acknowledgment"]
 	_receipts[key] = {"input":request.duplicate(true),"accepted":accepted.duplicate(true),"outcome":result.duplicate(true)}
 	_committed_quotes[quote_key] = key

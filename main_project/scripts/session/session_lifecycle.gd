@@ -357,10 +357,25 @@ func retry_cleanup() -> bool:
 		complete_cleanup(_cleanup.ticket, checked)
 	return true
 
+## Narrow ITEM participant composition during an existing gated load. This does
+## not admit gameplay or implement SAVE's transport/phased room orchestration.
+func bind_item_restore_participants(value: Dictionary, services: Array) -> Dictionary:
+	if _publishing or _finishing: return {"ok":false,"kind":"busy"}
+	if not _matches(value,"initializing") or _operation.intent.mode != "load": return {"ok":false,"kind":"stale_session"}
+	var checked := validate_bindings(services)
+	if not checked.ok: return checked
+	if _operation.has("item_restore_services") and _operation.item_restore_services != services: return {"ok":false,"kind":"request_conflict"}
+	var bound: Dictionary = items.bind_services(_state.session,services)
+	if bound.ok: _operation.item_restore_services = services.duplicate()
+	return bound
+
 func complete_readiness(value: Dictionary, result: Dictionary) -> bool:
 	if _defer_completion("complete_readiness", value, result):
 		return true
 	if not _matches(value, "initializing"):
+		return false
+	if result.get("ok",false) and _operation.has("item_restore_services") and (_operation.item_restore_services != result.get("services") or not items.persistence.restore_ready(value)):
+		diagnostic.emit("Required ITEM restore participant is unresolved; initialization remains gated.")
 		return false
 	if result.get("ok",false) and _operation.has("placement_ticket"):
 		if not is_instance_valid(placement) or not placement.placement_ready(_operation.placement_ticket,_state.session):

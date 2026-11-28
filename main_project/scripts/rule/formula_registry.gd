@@ -226,6 +226,19 @@ func active() -> Dictionary:
 			result.winners[hook] = _active.winners[hook].provider
 	return result
 
+## Snapshot metadata only; callbacks and transient publication tickets stay here.
+func item_persistence_compatibility() -> Dictionary:
+	if _active.is_empty(): return {"ok":false,"kind":"before_readiness"}
+	var result := {}
+	for hook: String in _active.winners:
+		if not hook.begins_with("item.") and hook != "char.capacity": continue
+		var provider: String = _active.winners[hook].provider
+		var version := "builtin-v1"
+		for registration: Dictionary in _active.provenance:
+			if registration.hook == hook and registration.provider == provider: version = str(registration.package.get("version",""))
+		result[hook] = {"provider":provider,"version":version,"contract":_contracts[hook]}
+	return {"ok":true,"hooks":result}
+
 func _context(core: SessionLifecycle, owner: Object, hook: String, scope: String, operation: Dictionary) -> bool:
 	return is_instance_valid(core) and core.formulas == self and (core.formula_owner_valid(scope,owner,hook) or core.actor_formula_valid(scope,owner,hook,operation) or core.creation_formula_valid(owner,hook,operation)) and core._plain_data(operation) and owner.formula_operation_current(operation.duplicate(true)) == true
 

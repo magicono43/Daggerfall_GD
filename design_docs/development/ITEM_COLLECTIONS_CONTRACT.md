@@ -1,5 +1,7 @@
 # ITEM collections v1
 
+**Increment-4 participant extension:** [ITEM persistence v1](ITEM_PERSISTENCE_CONTRACT.md) adds isolated capture, decimal high-water preservation, durable custody/context/request operation identity, exact-load preflight and gated atomic hydration. Earlier statements that native ITEM capture is pending describe prior delivery scopes. Full SAVE/room orchestration and live-owner gates remain with their named tasks.
+
 **Increment-3 extension, 2026-11-27:** Optional capacity/money requester bindings,
 whole-plan physical admission, explicit fitting transfer and typed monetary
 participation are defined in the [capacity/tender contract](ITEM_CAPACITY_TENDER_CONTRACT.md).

@@ -1,5 +1,22 @@
 # Verification run artifact cleanup
 
+## 2026-11-28 IMP-017 increment 4
+
+Compacted 53 exact owned completed run roots;
+removed 93,892 reproducible files / 12,939,859,122 logical bytes.
+Executed source archives and original report hashes were verified before deletion.
+Reports, logs, typed inputs and reviewed captures survive at original child paths.
+Deferred roots: 0; exact reasons and retention metadata are in the
+[execution audit](evidence/IMP-017-increment-4-2026-11-27.audit.json).
+Final logical retention sample: 11,330,752,719 bytes /
+126,772 files. Allocated/deduplicated totals are unavailable:
+the read-only physical allocation scan was stopped after excessive runtime.
+The >8-GiB trigger was reviewed; older uncertain roots remain protected.
+No external classic/reference input or installed tool was changed. All owned
+verification commands had returned before containment/reparse checks and cleanup.
+See [delivery evidence](evidence/IMP-017-increment-4-2026-11-27.md).
+
+
 ## 2026-11-27 IMP-017 increment 3
 
 Compacted all **17 exact owned verification roots**, removing **29,138 copied/

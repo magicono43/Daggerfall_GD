@@ -1216,3 +1216,17 @@ debug/release exports use `-CalendarClock` and the complete combined inventory.
 `review_scheduler.ps1` rebuilds the review; `-SmokeTest` never asserts human pass.
 See [the owner contract](../scripts/time/SCHEDULER.md) for counted work, scope,
 precision and deliberately unqualified real-owner/SAVE/physical integrations.
+
+# IMP-017 persistence participant selection
+
+`item-persistence` / `item-persistence-v1` is independently callable through
+`verify_headless.ps1` and `verify_rendered.ps1`, with an explicit classic source.
+`item_persistence_inventory.json` declares exact primary and fresh-process
+inventories. The runner starts a separate process using the disposable typed
+checkpoint; full record comparisons retain canonical SHA-256 values in compact
+reports. Actual ITEM/CORE/CHAR/DATA/RULE run with controlled transport, reference,
+ECON and spatial/source providers. The rendered diagnostic uses simulated
+activation and owner queries, not physical-device or playable-room testing.
+Windows debug/release exports select `-ItemPersistence` and run both display
+modes plus separate-process reconstruction. See the
+[participant contract](../../design_docs/development/ITEM_PERSISTENCE_CONTRACT.md).

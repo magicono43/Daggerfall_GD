@@ -1,5 +1,7 @@
 # ITEM capacity and tender v1
 
+**Increment-4 participant extension:** [ITEM persistence v1](ITEM_PERSISTENCE_CONTRACT.md) adds isolated capture, decimal high-water preservation, durable custody/context/request operation identity, exact-load preflight and gated atomic hydration. Earlier statements that native ITEM capture is pending describe prior delivery scopes. Full SAVE/room orchestration and live-owner gates remain with their named tasks.
+
 IMP-017 increment 3 extends the existing CORE-owned ITEM authority with
 `capacity` and `money` collaborators. All possessions, including coins and
 letters, remain in `_possessions`; collection indexes contain references.
