@@ -1,5 +1,5 @@
 extends RefCounted
-## ITEM construction only. No insertion, transfer, equipment, use or native restore.
+## ITEM authority: construction and owned collection collaborator. No native restore.
 const Data = preload("res://scripts/data/item_construction.gd")
 const Formula = preload("res://scripts/rule/item_formulas.gd")
 const IDs = preload("res://scripts/item/identity_allocator.gd")
@@ -13,9 +13,11 @@ var _contexts: Dictionary = {}
 var _operation: Dictionary = {}
 var _scope := ""
 var _serial := 0
+var collections: RefCounted
 
 func _init(core: SessionLifecycle) -> void:
 	_core = weakref(core)
+	collections = preload("res://scripts/item/collections.gd").new(self)
 
 func service_binding() -> Dictionary:
 	return {"role":"item-construction","owner":"ITEM","lifetime":"session","required":true,"ready":true,"provider":self,"formula_hooks":Formula.HOOKS.duplicate(),"random_purposes":["loot"]}
@@ -32,7 +34,9 @@ func bind_services(scope: String, services: Array) -> Dictionary:
 		if pending.has(owner.get_instance_id()): return fail("Duplicate requester binding.")
 		var contexts := {}
 		for raw: Variant in service.item_contexts:
-			if not raw is Dictionary or raw.size() != 5 or not Data.Paths.valid_id(raw.get("id","")) or not Data.Paths.valid_id(raw.get("custody","")) or not Data.keys(raw.get("pool")) or typeof(raw.get("worn")) != TYPE_BOOL or typeof(raw.get("copy")) != TYPE_BOOL or contexts.has(raw.id): return fail("Complete unique context/custody/pool/worn/copy declaration required.")
+			if not raw is Dictionary or raw.size() not in [5,6] or not Data.Paths.valid_id(raw.get("id","")) or not Data.Paths.valid_id(raw.get("custody","")) or not Data.keys(raw.get("pool")) or typeof(raw.get("worn")) != TYPE_BOOL or typeof(raw.get("copy")) != TYPE_BOOL or contexts.has(raw.id): return fail("Complete unique context/custody/pool/worn/copy declaration required.")
+			if raw.size() == 6:
+				if not raw.has("collections") or not collections.binding_valid(owner,raw.collections): return fail("Complete collection provider contract required.")
 			var claim: String = raw.custody+":"+raw.id
 			if custody_claims.has(claim): return fail("Conflicting initial custody authority.")
 			custody_claims[claim] = true
@@ -119,7 +123,7 @@ func _calculate(request: Dictionary, authorization: Dictionary) -> Dictionary:
 	dye = request.get("dye",dye)
 	if dye not in p.dyes: return fail("Unsupported explicit dye.")
 	var quantity: Variant = request.get("quantity")
-	if not N.integer(quantity,1,2147483647) or (p.type != "ammo" and quantity != 1): return fail("Explicit supported quantity required.")
+	if not N.integer(quantity,1,2147483647): return fail("Explicit supported quantity required.")
 	var calculated := {}
 	for field in ["value","weight","condition"]:
 		var base: int = int(loaded.base.basePrice) if field == "value" else (int(round(float(loaded.base.baseWeight)*1000000)) if field == "weight" else int(loaded.base.hitPoints))
@@ -129,7 +133,12 @@ func _calculate(request: Dictionary, authorization: Dictionary) -> Dictionary:
 	var condition: Variant = request.get("condition",calculated.condition)
 	if not N.integer(condition,0,calculated.condition) or (request.has("condition") and not authorization.worn): return fail("Unauthorized/invalid worn condition.")
 	var appearance := {"provider":p.visual.provider,"archive":int(p.visual.archives[body]),"record":int(p.visual.record)+int(p.styles[category][style]),"variant":int(p.styles[category][style]),"dye_adapter":policy.dye_adapters[dye].duplicate(true)}
-	return {"ok":true,"record":{"definition":loaded.key,"profile":request.profile,"kind":p.type,"category":category,"material":request.get("material",""),"body":body,"style":style,"dye":dye,"quantity":int(quantity),"condition":int(condition),"maximum_condition":calculated.condition,"value":calculated.value,"weight_kg":float(calculated.weight)/1000000.0,"visual":appearance,"identity_category":p.identity,"pending_consumers":["combat","equipment","save"]}}
+	var record := {"definition":loaded.key,"profile":request.profile,"kind":p.type,"category":category,"material":request.get("material",""),"body":body,"style":style,"dye":dye,"quantity":int(quantity),"condition":int(condition),"maximum_condition":calculated.condition,"value":calculated.value,"weight_kg":float(calculated.weight)/1000000.0,"visual":appearance,"identity_category":p.identity,"pending_consumers":["combat","equipment","save"],"state":preload("res://scripts/data/item_collections.gd").ordinary_state(),"stack_type":"arrow" if p.type == "ammo" else p.type}
+	if quantity > 1:
+		var eligibility: Dictionary = collections._policy(record)
+		if not eligibility.ok: return eligibility
+		if not eligibility.eligible: return fail("Ineligible multiple quantity.")
+	return {"ok":true,"record":record}
 
 func preview(owner: Object, request: Dictionary) -> Dictionary:
 	var auth := context(owner,request)
@@ -142,6 +151,7 @@ func construct(owner: Object, request: Dictionary) -> Dictionary:
 	if not auth.ok: return auth
 	if not Data.Paths.valid_id(request.get("request","")): return fail("Stable construction request required.")
 	var key: String = str(owner.get_instance_id())+":"+request.context+":"+request.request
+	if collections.request_claimed(key): return fail("Conflicting collection operation identity.","request_conflict")
 	if _receipts.has(key):
 		if _receipts[key].input != request: return fail("Request identity reused with changed inputs.","request_conflict")
 		if not _possessions.has(_id_key(_receipts[key].outcome.record.id)): return fail("Committed possession has retired; no regrant.","missing_or_retired")
@@ -154,6 +164,8 @@ func construct(owner: Object, request: Dictionary) -> Dictionary:
 	var allocated := _allocator.allocate(calculated.record.identity_category)
 	if not allocated.ok: return _end(allocated)
 	var record: Dictionary = calculated.record
+	record.state = preload("res://scripts/data/item_collections.gd").ordinary_state()
+	record.stack_type = "arrow" if record.kind == "ammo" else record.kind
 	record.id = allocated.id
 	record.custody = {"owner":auth.value.custody,"context":request.context}
 	record.revision = 1
@@ -176,8 +188,9 @@ func modify(owner: Object, request: Dictionary, id: Dictionary, changes: Diction
 	if not auth.ok: return auth
 	var found := inspect(request.session,id)
 	if not found.ok: return found
-	if found.record.custody != {"owner":auth.value.custody,"context":request.context}: return fail("Foreign custody.","unauthorized")
+	if not collections.access(owner,request,found.record).ok: return fail("Foreign custody.","unauthorized")
 	var record: Dictionary = found.record
+	if record.category == "semantic" or record.state != preload("res://scripts/data/item_collections.gd").ordinary_state(): return fail("Special-state appearance owner required.","unsupported")
 	var loaded := _profile(record.profile)
 	if not loaded.ok: return loaded
 	for field in changes:
@@ -199,6 +212,7 @@ func copy_possession(owner: Object, request: Dictionary, id: Dictionary) -> Dict
 	if not auth.value.copy or not Data.Paths.valid_id(request.get("request","")): return fail("Copy authorization and request required.","unauthorized")
 	var key: String = str(owner.get_instance_id())+":"+request.context+":"+request.request
 	var input := request.duplicate(true).merged({"source":id.duplicate(true)})
+	if collections.request_claimed(key): return fail("Conflicting collection operation identity.","request_conflict")
 	if _receipts.has(key):
 		if _receipts[key].input != input: return fail("Conflicting copy identity.","request_conflict")
 		if not _possessions.has(_id_key(_receipts[key].outcome.record.id)): return fail("Copied possession has retired.","missing_or_retired")
@@ -206,11 +220,13 @@ func copy_possession(owner: Object, request: Dictionary, id: Dictionary) -> Dict
 	var found := inspect(request.session,id)
 	if not found.ok: return found
 	var record: Dictionary = found.record
-	if record.custody != {"owner":auth.value.custody,"context":request.context} or record.profile not in auth.value.pool: return fail("Copy outside authorized custody/pool.","unauthorized")
+	if not collections.access(owner,request,record).ok or record.profile not in auth.value.pool: return fail("Copy outside authorized custody/pool.","unauthorized")
+	if record.category == "semantic" or record.get("state",{}) != preload("res://scripts/data/item_collections.gd").ordinary_state(): return fail("Special-state copy grant unavailable.","unsupported")
 	var allocated := _allocator.allocate(record.identity_category)
 	if not allocated.ok: return allocated
 	record.id = allocated.id
 	record.revision = 1
+	record.custody = {"owner":auth.value.custody,"context":request.context}
 	_possessions[_id_key(record.id)] = record.duplicate(true)
 	var outcome := {"ok":true,"record":record.duplicate(true),"session":_scope,"request":request.request}
 	_receipts[key] = {"input":input,"outcome":outcome.duplicate(true)}
@@ -224,7 +240,8 @@ func retire_identity(owner: Object, request: Dictionary, id: Dictionary) -> Dict
 	if not auth.ok: return auth
 	var found := inspect(request.session,id)
 	if not found.ok: return found
-	if found.record.custody != {"owner":auth.value.custody,"context":request.context}: return fail("Foreign custody.","unauthorized")
+	if not collections.access(owner,request,found.record).ok: return fail("Foreign custody.","unauthorized")
+	if found.record.custody.has("container") or found.record.category == "semantic" or found.record.state != preload("res://scripts/data/item_collections.gd").ordinary_state(): return fail("Use checked collection removal.","unsupported")
 	_possessions.erase(_id_key(id))
 	return {"ok":true,"retired":id.duplicate(true)}
 
@@ -234,11 +251,17 @@ func recalculate(owner: Object, request: Dictionary, id: Dictionary) -> Dictiona
 	var found := inspect(request.session,id)
 	if not found.ok: return found
 	var record: Dictionary = found.record
-	if record.custody != {"owner":auth.value.custody,"context":request.context}: return fail("Foreign custody.","unauthorized")
+	if record.category == "semantic": return fail("Semantic property provider required.","unsupported")
+	if not collections.access(owner,request,record).ok: return fail("Foreign custody.","unauthorized")
 	if not _begin(request): return fail("Operation busy.","busy")
 	var input := {"session":request.session,"context":request.context,"request":request.get("request",""),"profile":record.profile,"body":record.body,"category":record.category,"style":record.style,"dye":record.dye,"quantity":record.quantity,"condition":record.condition}
 	if not record.material.is_empty(): input.material = record.material
-	var calculated := _calculate(input,auth.value.merged({"worn":true},true))
+	# Recalculation of an accessible existing possession is a query, not a new
+	# construction grant. A transfer may place it outside this context's grant pool.
+	var query_authorization: Dictionary = auth.value.duplicate(true)
+	query_authorization.worn = true
+	if record.profile not in query_authorization.pool: query_authorization.pool.append(record.profile)
+	var calculated := _calculate(input,query_authorization)
 	if not calculated.ok: return _end(calculated)
 	# Query only. Reconstruct from original DATA bases while retaining every owned
 	# fact, including current condition. Never replace the item with its template.
@@ -253,6 +276,7 @@ func retire_scope(scope: String) -> void:
 	_contexts.clear()
 	_operation.clear()
 	_generation.clear()
+	collections.retire()
 	_allocator = IDs.new() # New native branch only; restore integration remains pending.
 
 func dispose() -> void:
@@ -275,6 +299,7 @@ func generate(owner: Object, request: Dictionary) -> Dictionary:
 	if not auth.ok: return auth
 	if request.size() != 5 or not Data.Paths.valid_id(request.get("request","")) or not N.integer(request.get("level"),-1000000,1000000) or not request.get("body") is String: return fail("Explicit bounded level/body/context/request required.")
 	var key: String = str(owner.get_instance_id())+":"+request.context+":"+request.request
+	if collections.request_claimed(key): return fail("Conflicting collection operation identity.","request_conflict")
 	if _generation.has(key) and _generation[key].input != request: return fail("Conflicting generation request.","request_conflict")
 	if not _begin(request): return fail("Operation busy.","busy")
 	if not _generation.has(key): _generation[key] = {"input":request.duplicate(true),"decisions":{},"draws":{},"terminal":{}}

@@ -1,5 +1,28 @@
 # Verification run artifact cleanup
 
+## 2026-11-27 IMP-017 increment 2
+
+After all owned checks returned, 24 exact task-owned runtimes were compacted:
+40,848 copied/cache files / 5,127,436,018 logical bytes removed. All 32,760
+executed-source ZIP entries and 910 retained evidence/input files were verified;
+no full task-owned build remains. Reports, typed inputs, logs, original child
+paths and reviewed captures survive. Zero source/report mismatches were found.
+
+Non-elevated process checks, absolute containment and no-reparse checks preceded
+mutation. Earlier/unknown roots, external classic/reference data, installed tools
+and security settings remained protected. Final logical retention was
+9,580,020,607 bytes / 121,798 files (not allocated/deduplicated bytes). The >8-GiB
+review found the largest remaining roots outside this chat’s explicit ownership;
+those remain protected. No whole-history source audit or older-root deletion was
+performed. The initial concurrent metadata sample is not an exact delta baseline.
+
+See [execution evidence](evidence/IMP-017-increment-2-2026-11-27.md), its
+[compact audit](evidence/IMP-017-increment-2-2026-11-27.audit.json), and local
+`main_project/tests/.runs/imp017-increment2-2026-11-27/` journals. Selected checks
+passed 1,161 assertions with explicit prerequisite scope reuse. User acceptance,
+parent completion, later increments, native SAVE and milestone gates remain open.
+
+
 ## 2026-11-27 IMP-017 increment 1
 
 Compacted **14 exact owned verification roots**, removing **23,946 files /

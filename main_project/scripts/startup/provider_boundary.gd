@@ -16,6 +16,7 @@ var layouts: RefCounted
 var variants: RefCounted
 var geography: RefCounted
 var creation_art: RefCounted
+var item_collection_semantics: RefCounted
 var _baseline_setup: Dictionary = {}
 
 func _init() -> void:
@@ -88,7 +89,14 @@ func enable_item_spell_inputs() -> Dictionary:
 func enable_item_construction() -> Dictionary:
 	var candidate := preload("res://scripts/data/item_construction.gd").new()
 	candidate.classic = classic
-	return register_content_adapter(candidate,"",[])
+	var registered := register_content_adapter(candidate,"",[])
+	if not registered.ok: return registered
+	item_collection_semantics = preload("res://scripts/data/item_collections.gd").new()
+	return register_content_adapter(item_collection_semantics,"",[])
+
+func declare_item_collection_semantics(id: String, rules: Array) -> Dictionary:
+	if item_collection_semantics == null or not definitions.registration_open(): return {"ok":false,"kind":"registration_closed"}
+	return item_collection_semantics.declare_provider(id,rules)
 
 func enable_actor_inputs() -> Dictionary:
 	var candidate := preload("res://scripts/data/actor_inputs.gd").new()

@@ -1,7 +1,7 @@
 extends RefCounted
 ## Pure construction arithmetic. No identity, custody, source or mutable item input.
 const CONTRACT := "item-formula-v1"
-const HOOKS := ["item.value","item.weight","item.condition","item.material","item.category"]
+const HOOKS := ["item.value","item.weight","item.condition","item.material","item.category","item.eligible"]
 const Numbers = preload("res://scripts/data/actor_input_formats.gd")
 
 func declare(registry: RefCounted) -> Dictionary:
@@ -12,6 +12,11 @@ func declare(registry: RefCounted) -> Dictionary:
 
 static func valid_input(hook: String, v: Variant) -> bool:
 	if not v is Dictionary: return false
+	if hook == "item.eligible":
+		if v.size() != 4 or typeof(v.get("default")) != TYPE_BOOL or typeof(v.get("template")) not in [TYPE_NIL,TYPE_BOOL] or not v.get("restrictions") is Array or not v.get("state") is Dictionary: return false
+		for flag in ["equipped","quest","enchanted","summoned_nonarrow"]:
+			if typeof(v.state.get(flag)) != TYPE_BOOL: return false
+		return v.state.size() == 4
 	if hook in ["item.material","item.category"]:
 		if v.size() != 3 or not v.get("policy") is Dictionary: return false
 		return Numbers.integer(v.get("level"),-1000000,1000000) and Numbers.integer(v.get("raw"),0,255 if hook == "item.material" else 99) and preload("res://scripts/data/item_construction.gd").selector_reason(v.policy).is_empty()
@@ -23,10 +28,21 @@ static func valid_input(hook: String, v: Variant) -> bool:
 	return Numbers.integer(v.get("base"),0,1000000000)
 
 static func valid_output(hook: String, v: Dictionary, output: Variant) -> bool:
+	if hook == "item.eligible":
+		if typeof(output) != TYPE_INT or output not in [0,1]: return false
+		for flag in v.state:
+			if output == 1 and v.state[flag] and flag.trim_suffix("_nonarrow") not in v.restrictions: return false
+		return true
 	if typeof(output) != TYPE_INT or output < 0 or output > 1000000000000000: return false
 	if hook == "item.material": return output < v.policy.materials.size()
 	if hook == "item.category": return output < v.policy.categories.size()
 	return true
+
+func eligible(v: Dictionary) -> int:
+	var allowed: bool = v.default if v.template == null else v.template
+	for flag in v.state:
+		if v.state[flag] and flag.trim_suffix("_nonarrow") not in v.restrictions: return 0
+	return 1 if allowed else 0
 
 func value(v: Dictionary) -> int:
 	return int(v.base)*int(v.coefficients.value) if v.mode == "material" else int(v.base)*(2 if v.mode == "chain" else 1)

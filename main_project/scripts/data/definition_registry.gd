@@ -13,6 +13,9 @@ var _omission_revision := -1
 var timings: Dictionary = {} # Diagnostic microseconds; no latency acceptance budget.
 var faults: Dictionary = {} # Isolated verification seams, not player settings.
 
+func registration_open() -> bool:
+	return not _started and _active.is_empty()
+
 func validate_adapter(adapter: RefCounted) -> Dictionary:
 	if _started or not _active.is_empty():
 		return failure("registration_closed", "adapters", "Register content adapters before source preparation.")

@@ -2,6 +2,13 @@
 
 ## IMP-017 construction hooks
 
+Increment 2 adds `item.eligible` to `item-formula-v1`: a selected pure
+Dictionary→0/1 replacement with category default, nullable template override,
+declared instance-restriction overrides and explicit state flags. Both true and
+false replacements matter; mandatory restrictions remain output-validated.
+Failure never falls back. ITEM separately owns compatibility, caps, access and
+mutation. See [collections contract](../../../design_docs/development/ITEM_COLLECTIONS_CONTRACT.md).
+
 `item-formula-v1` adds pure Dictionary→integer replacements for `item.value`,
 `item.weight`, `item.condition`, `item.material` and `item.category`. These use
 the same MOD validation/order, run lock, CORE consumer/operation checks and

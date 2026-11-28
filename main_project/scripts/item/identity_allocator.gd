@@ -1,7 +1,7 @@
 extends RefCounted
 ## Unsigned 64-bit monotonic identity, decimal arithmetic only; never RNG wrapping.
 const MAXIMUM := "18446744073709551615"
-var _last := {"item":"0","stack":"0"}
+var _last := {"item":"0","stack":"0","container":"0"}
 var _valid_seed := true
 
 static func valid(value: Variant, zero := false) -> bool:
@@ -39,3 +39,21 @@ func allocate(category: String) -> Dictionary:
 
 func projection() -> Dictionary:
 	return _last.duplicate(true)
+
+## Validate a whole allocation plan before burning any identity.
+func allocate_many(categories: Array) -> Dictionary:
+	var candidate := _last.duplicate()
+	if not _valid_seed: return {"ok":false,"kind":"invalid_identity_state"}
+	var result: Array = []
+	for category in categories:
+		if not candidate.has(category): return {"ok":false,"kind":"invalid_category"}
+		var next := successor(candidate[category])
+		if next.is_empty(): return {"ok":false,"kind":"identity_exhausted"}
+		candidate[category] = next
+		result.append({"category":category,"number":next})
+	_last = candidate
+	return {"ok":true,"ids":result}
+
+static func less(a: Dictionary, b: Dictionary) -> bool:
+	if a.category != b.category: return a.category < b.category
+	return a.number.length() < b.number.length() or (a.number.length() == b.number.length() and a.number < b.number)

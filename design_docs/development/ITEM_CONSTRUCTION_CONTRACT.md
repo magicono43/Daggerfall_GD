@@ -1,5 +1,15 @@
 # ITEM construction and identity v1
 
+**Increment-2 extension, 2026-11-27:** The [collections contract](ITEM_COLLECTIONS_CONTRACT.md)
+extends this accepted baseline with container identities, checked admission and
+collection operations. Ordinary construction now carries explicit per-unit state;
+mod-enabled equipment quantities preserve their declared identity category.
+Current custody is validated after admission. Ordinary authorized copies become
+fresh initial-custody grants awaiting admission; raw retirement cannot bypass
+collection removal. Semantic-state helpers fail rather than substitute equipment
+behavior. The historical increment-1-only statements below describe its accepted
+scope, not the current collection delivery. Native SAVE and live owners remain pending.
+
 IMP-017 increment 1 implements ITEM-001/003 and the construction portion of
 RULE-026. This is a construction service, not a playable inventory. Collections,
 equipment, combat, settlement and native SAVE support remain pending.

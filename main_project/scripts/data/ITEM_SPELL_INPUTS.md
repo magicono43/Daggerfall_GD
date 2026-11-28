@@ -1,5 +1,10 @@
 # Item and spell structural inputs — v1
 
+IMP-017 increment 2 adds locked `item.collections:policies` alongside construction.
+Its explicit defaults, template allow/deny, caps and supported per-unit semantic
+contracts do not enable this reader's generic potion/book/gold providers.
+See [collections contract](../../../design_docs/development/ITEM_COLLECTIONS_CONTRACT.md).
+
 IMP-017 increment 1 adds a separate `item.construction` semantic adapter for 106
 explicitly supported equipment/arrow profiles. The scoped ITEM owner consumes
 those validated profiles plus these published base definitions; it does not

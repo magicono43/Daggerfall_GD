@@ -55,7 +55,7 @@ func _ready() -> void:
 	if inputs.is_empty():
 		return
 	# Combined verification retains every ordinary registration; only roots differ.
-	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","creation-draft","creation-draft_reload","creation-review","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","ground-review","ground-movement","ground-movement_reload","actor-state","actor-state_reload","item-construction"]
+	var ordinary_composition: bool = fixture.is_empty() or fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload","m1-composition","m1-composition_reload","creation-draft","creation-draft_reload","creation-review","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","ground-review","ground-movement","ground-movement_reload","actor-state","actor-state_reload","item-construction","item-collections"]
 	if ordinary_composition or fixture.get("mode") in ["variant-inputs","variant-inputs_reload","layout-inputs","layout-inputs_reload"]:
 		var resource_sources: Array = []
 		if fixture.get("mode") in ["dungeon-assembly","dungeon-assembly_reload"]:
@@ -498,7 +498,7 @@ func _process(_delta: float) -> void:
 func fixture_actor_material(_ticket: Dictionary, _mode: String) -> Dictionary:
 	# Pass through the existing CORE constructor seam; no second lifecycle/RNG.
 	var seeds = preload("res://scripts/rule/seed_derivation.gd")
-	if fixture.get("mode") in ["creation-draft","creation-draft_reload","creation-review","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","actor-state","actor-state_reload","item-construction"]:
+	if fixture.get("mode") in ["creation-draft","creation-draft_reload","creation-review","calendar-clock","calendar-review","calendar-scheduler-review","calendar-activity-review","actor-state","actor-state_reload","item-construction","item-collections"]:
 		var material := PackedByteArray()
 		material.resize(32)
 		return seeds.validate_material(material)
@@ -592,6 +592,8 @@ func run_fixture() -> void:
 		script_path = "res://tests/actor_state_cases.gd"
 	elif fixture.get("mode") == "actor-inputs":
 		script_path = "res://tests/actor_input_cases.gd"
+	elif fixture.get("mode") == "item-collections":
+		script_path = "res://tests/item_collections_cases.gd"
 	elif fixture.get("mode") == "item-construction":
 		script_path = "res://tests/item_construction_cases.gd"
 	elif fixture.get("mode") == "item-spell-inputs":

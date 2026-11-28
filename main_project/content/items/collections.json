@@ -1,0 +1,195 @@
+{
+  "domain": "item.collections",
+  "path": "policies",
+  "operation": "add",
+  "entries": [
+    {
+      "id": "ingredient",
+      "value": {
+        "schema": "item-collections-v1",
+        "kind": "type",
+        "eligible": true,
+        "cap": 0,
+        "representation": "homogeneous-per-unit-v1",
+        "contents": {
+          "substance": "key"
+        },
+        "restrictions": [],
+        "provider": "pending.ingredient-v1",
+        "state_rule": "exact-per-unit-v1",
+        "provenance": {
+          "source": "RULE-025-A01; ITEM-005/006/007",
+          "license": "project-authored",
+          "note": "Explicit defaults; special contents require semantic owner intake, not structural records."
+        }
+      }
+    },
+    {
+      "id": "potion",
+      "value": {
+        "schema": "item-collections-v1",
+        "kind": "type",
+        "eligible": true,
+        "cap": 0,
+        "representation": "homogeneous-per-unit-v1",
+        "contents": {
+          "recipe": "key",
+          "payload": "text",
+          "version": "integer"
+        },
+        "restrictions": [],
+        "provider": "pending.potion-v1",
+        "state_rule": "exact-per-unit-v1",
+        "provenance": {
+          "source": "RULE-025-A01; ITEM-005/006/007",
+          "license": "project-authored",
+          "note": "Explicit defaults; special contents require semantic owner intake, not structural records."
+        }
+      }
+    },
+    {
+      "id": "book",
+      "value": {
+        "schema": "item-collections-v1",
+        "kind": "type",
+        "eligible": true,
+        "cap": 0,
+        "representation": "homogeneous-per-unit-v1",
+        "contents": {
+          "content": "key",
+          "text": "text",
+          "version": "integer"
+        },
+        "restrictions": [],
+        "provider": "pending.book-v1",
+        "state_rule": "exact-per-unit-v1",
+        "provenance": {
+          "source": "RULE-025-A01; ITEM-005/006/007",
+          "license": "project-authored",
+          "note": "Explicit defaults; special contents require semantic owner intake, not structural records."
+        }
+      }
+    },
+    {
+      "id": "gold",
+      "value": {
+        "schema": "item-collections-v1",
+        "kind": "type",
+        "eligible": true,
+        "cap": 0,
+        "representation": "homogeneous-per-unit-v1",
+        "contents": {
+          "currency": "key",
+          "denomination": "key",
+          "face": "integer"
+        },
+        "restrictions": [],
+        "provider": "pending.gold-v1",
+        "state_rule": "exact-per-unit-v1",
+        "provenance": {
+          "source": "RULE-025-A01; ITEM-005/006/007",
+          "license": "project-authored",
+          "note": "Explicit defaults; special contents require semantic owner intake, not structural records."
+        }
+      }
+    },
+    {
+      "id": "arrow",
+      "value": {
+        "schema": "item-collections-v1",
+        "kind": "type",
+        "eligible": true,
+        "cap": 0,
+        "representation": "homogeneous-per-unit-v1",
+        "contents": {},
+        "restrictions": [],
+        "provider": "builtin.ordinary-v1",
+        "state_rule": "exact-per-unit-v1",
+        "provenance": {
+          "source": "RULE-025-A01; ITEM-005/006/007",
+          "license": "project-authored",
+          "note": "Explicit defaults; special contents require semantic owner intake, not structural records."
+        }
+      }
+    },
+    {
+      "id": "oil",
+      "value": {
+        "schema": "item-collections-v1",
+        "kind": "type",
+        "eligible": true,
+        "cap": 0,
+        "representation": "homogeneous-per-unit-v1",
+        "contents": {
+          "substance": "key",
+          "volume": "integer"
+        },
+        "restrictions": [],
+        "provider": "pending.oil-v1",
+        "state_rule": "exact-per-unit-v1",
+        "provenance": {
+          "source": "RULE-025-A01; ITEM-005/006/007",
+          "license": "project-authored",
+          "note": "Explicit defaults; special contents require semantic owner intake, not structural records."
+        }
+      }
+    },
+    {
+      "id": "weapon",
+      "value": {
+        "schema": "item-collections-v1",
+        "kind": "type",
+        "eligible": false,
+        "cap": 0,
+        "representation": "homogeneous-per-unit-v1",
+        "contents": {},
+        "restrictions": [],
+        "provider": "builtin.ordinary-v1",
+        "state_rule": "exact-per-unit-v1",
+        "provenance": {
+          "source": "RULE-025-A01; ITEM-005/006/007",
+          "license": "project-authored",
+          "note": "Explicit defaults; special contents require semantic owner intake, not structural records."
+        }
+      }
+    },
+    {
+      "id": "armor",
+      "value": {
+        "schema": "item-collections-v1",
+        "kind": "type",
+        "eligible": false,
+        "cap": 0,
+        "representation": "homogeneous-per-unit-v1",
+        "contents": {},
+        "restrictions": [],
+        "provider": "builtin.ordinary-v1",
+        "state_rule": "exact-per-unit-v1",
+        "provenance": {
+          "source": "RULE-025-A01; ITEM-005/006/007",
+          "license": "project-authored",
+          "note": "Explicit defaults; special contents require semantic owner intake, not structural records."
+        }
+      }
+    },
+    {
+      "id": "clothing",
+      "value": {
+        "schema": "item-collections-v1",
+        "kind": "type",
+        "eligible": false,
+        "cap": 0,
+        "representation": "homogeneous-per-unit-v1",
+        "contents": {},
+        "restrictions": [],
+        "provider": "builtin.ordinary-v1",
+        "state_rule": "exact-per-unit-v1",
+        "provenance": {
+          "source": "RULE-025-A01; ITEM-005/006/007",
+          "license": "project-authored",
+          "note": "Explicit defaults; special contents require semantic owner intake, not structural records."
+        }
+      }
+    }
+  ]
+}
